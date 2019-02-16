@@ -350,7 +350,7 @@
 }
 
 #tags .turquoise {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-background-color: #40E0D0;
 }
 

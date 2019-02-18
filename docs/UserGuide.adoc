@@ -30,9 +30,10 @@ Follow these steps to start using ePiggy:
 .  Download the latest *`ePiggy.jar`* file from here
 .  Copy the file to the folder which you want to use as the home folder for your Expense Tracker.
 .  Double-click the *`ePiggy.jar`* file to start the app. The GUI will appear and look like this:
-+
-image::Ui.png[width="790"]
-+
+
+image::Ui.png[width="760"]
+_Figure 1. The user interface on application launch_
+
 .  Type in *`USERNAME`* in the text box (the box where it says "Your Username *"). E.g. *`username123`*
 .  Type in *`PASSWORD`* in the text box (the box where it says "Your Password *"). E.g. *`pd123`*
 .  Press *`Register`* button and you are now able to use all the features of the app.
@@ -159,9 +160,8 @@ Sets a total budget of $10000.00 for each year.
 *Notify when budget finishing.* +
 The Expense Tracker will show a warning message to the user when the budget is finishing.
 
-+
-image::BudgetUi.png
-+
+image::BudgetUi.png[Figure 3: Shows budget is finishing]
+_Figure 3: Shows budget is finishing_
 
 === Search for an expense : `search`
 

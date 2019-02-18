@@ -18,27 +18,24 @@ By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+As a student, it is important to start learning how to manage your spendings. Your expenses can be very regular (school fees,
+campus canteen food, school supplies, daily bus rides, etc) but you still need to manage them. ePiggy is specially targeted at students and students’ spending habits. It allows you to manage, analyse and forecast your
+expenses while recommending you ways you can better manage your finance!
+Interested? Click on the Quick Start to get started!
 
 == Quick Start
-
-.  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+Follow these steps to start using ePiggy:
+.  Install Java (version 9 or later) on your computer by going here and downloading the Java SE Runtime Environment for
+   your operating system.
+.  Download the latest *`ePiggy.jar`* file from here
+.  Copy the file to the folder which you want to use as the home folder for your Expense Tracker.
+.  Double-click the *`ePiggy.jar`* file to start the app. The GUI will appear and look like this:
 +
 image::Ui.png[width="790"]
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
-
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
-
-.  Refer to <<Features>> for details of each command.
+.  Type in *`USERNAME`* in the text box (the box where it says "Your Username *"). E.g. *`username123`*
+.  Type in *`PASSWORD`* in the text box (the box where it says "Your Password *"). E.g. *`pd123`*
+.  Press *`Register`* button and you are now able to use all the features of the app.
 
 [[Features]]
 == Features
@@ -56,18 +53,15 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding an expense: `add`
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a new expense record to the Expense Tracker.
+Format: `add n/EXPENSE_NAME $/COST c/CATEGORY [d/DATE] [t/TAG]…`
 
-[TIP]
-A person can have any number of tags (including 0)
+Example:
 
-Examples:
-
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Lunch $/5.00 c/Drink`
+* Adds an expense with its name as "Lunch", cost as "5.00", category as "Drink" and date as the current day by default.
 
 === Listing all persons : `list`
 

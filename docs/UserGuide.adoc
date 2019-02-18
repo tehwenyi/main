@@ -160,7 +160,7 @@ Sets a total budget of $10000.00 for each year.
 *Notify when budget finishing.* +
 The Expense Tracker will show a warning message to the user when the budget is finishing.
 
-image::BudgetUi.png[Figure 3: Shows budget is finishing]
+image::BudgetUi.png[width="760"]
 _Figure 3: Shows budget is finishing_
 
 === Search for an expense : `search`

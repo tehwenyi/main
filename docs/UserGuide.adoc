@@ -160,7 +160,7 @@ Sets a total budget of $10000.00 for each year.
 The Expense Tracker will show a warning message to the user when the budget is finishing.
 
 +
-image::BudgetUi.png[width==]
+image::BudgetUi.png
 +
 
 === Search for an expense : `search`

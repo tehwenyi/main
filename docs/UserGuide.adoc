@@ -20,16 +20,16 @@ By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
 As a student, it is important to start learning how to manage your spendings. Your expenses can be very regular (school fees,
 campus canteen food, school supplies, daily bus rides, etc) but you still need to manage them. ePiggy is specially targeted at students and students’ spending habits. It allows you to manage, analyse and forecast your
-expenses while recommending you ways you can better manage your finance!
+expenses while recommending you ways you can better manage your finance! +
 Interested? Click on the Quick Start to get started!
 
 == Quick Start
-Follow these steps to start using ePiggy:
-.  Install Java (version 9 or later) on your computer by going here and downloading the Java SE Runtime Environment for
-   your operating system.
-.  Download the latest *`ePiggy.jar`* file from here
-.  Copy the file to the folder which you want to use as the home folder for your Expense Tracker.
-.  Double-click the *`ePiggy.jar`* file to start the app. The GUI will appear and look like this:
+Follow these steps to start using ePiggy: +
+*1.* Install Java (version 9 or later) on your computer by going here and downloading the Java SE Runtime Environment for your operating system. +
+*2.* Download the latest *`ePiggy.jar`* file from here +
+*3.* Copy the file to the folder which you want to use as the home folder for your Expense Tracker. +
+*4.*  Double-click the *`ePiggy.jar`* file to start the app. +
+The GUI will appear and look like this:
 
 image::Ui.png[width="760"]
 _Figure 1. The user interface on application launch_
@@ -44,10 +44,10 @@ _Figure 1. The user interface on application launch_
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/EXPENSE_NAME`, `EXPENSE_NAME` is a parameter which can be used as `add n/Chicken Rice`.
+* Items in square brackets are optional e.g `n/EXPENSE_NAME [t/TAG]` can be used as `n/Chicken Rice t/School` or as `n/Chicken Rice`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/school`, `t/hawker t/school` etc.
+* Parameters can be in any order e.g. if the command specifies `n/EXPENSE_NAME $/COST`, `$/COST n/EXPENSE_NAME` is also acceptable.
 ====
 
 === Viewing help : `help`
@@ -84,7 +84,7 @@ Edits the name, cost and category of the 1st expense in the Expense List to ‘p
 * `edit 2 c/food` +
 Edits the category of the 2nd expense in the Expense List to ‘food’.
 
-=== Deleting a person : `delete`
+=== Deleting an expense : `delete`
 
 Deletes the expense at the specified INDEX. The INDEX refers to the number in the displayed Expenses List which is next to
 the name of the expense. +
@@ -273,7 +273,7 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+ePiggy data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]

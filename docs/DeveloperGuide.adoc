@@ -876,14 +876,14 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: Delete person
+=== Use case: View expense entry
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list expenses.
+2.  ePiggy shows list of expenses.
+3.  User requests to view a specific expense in the list.
+4.  ePiggy displays the details of the specified expense.
 +
 Use case ends.
 
@@ -897,9 +897,29 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. ePiggy shows an error message.
 +
 Use case resumes at step 2.
+
+[discrete]
+=== Use case: View report
+
+*MSS*
+
+1.  User requests to view expenditure report of a day/month/year.
+2.  ePiggy shows the expenditure report for that day/month/year.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given date is invalid.
++
+[none]
+** 1a1. ePiggy shows an error message.
++
+Use case ends.
 
 [discrete]
 === Use case: Set budget

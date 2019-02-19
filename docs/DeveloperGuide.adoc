@@ -829,23 +829,51 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
+|`* * *` |user |see my total expenditure till date or by time period |know the total amount I have spent
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* *` |user |see the date of my spending |know when I spend a certain item
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* *` |user |see the percentage of the amount I spent out of my set budget |track my expenses
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* *` |user |receive reminders when I am approaching my budget |cut down on my expenses
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* *` |user |set a monthly budget |know whether I'm keeping to the budget
+
+|`* *` |user |see the statistics of my spendings till date |see my spending habits
+
+|`*` | (fill in here) |(fill in here)
 |=======================================================================
-
-_{More to be added}_
 
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `ePiggy` and the *Actor* is the `user`, unless specified otherwise)
+
+[discrete]
+=== Use case: Edit
+
+*MSS*
+
+1.  User requests to list expenses
+2.  ePiggy shows a list of expenses
+3.  User requests to edit a specific expense in the list
+4.  ePiggy edits the expense
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. ePiggy shows an error message.
++
+Use case resumes at step 2.
 
 [discrete]
 === Use case: Delete person
@@ -872,6 +900,77 @@ Use case ends.
 ** 3a1. AddressBook shows an error message.
 +
 Use case resumes at step 2.
+
+[discrete]
+=== Use case: Set budget
+
+*MSS*
+
+1.  User requests to set budget
+2.  ePiggy sets the input number as the budget
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given amount is invalid.
++
+[none]
+** 3a1. ePiggy shows an error message.
++
+Use case resumes at step 1.
+
+* 1b. User already has a budget set.
++
+[none]
+** 1b1. ePiggy asks if user would like to overwrite old budget.
++
+[none]
+*** 1b1a. ePiggy sets a new budget based on user's new input.
+*** 1b1b. ePiggy keeps the old budget.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Recommend
+
+*MSS*
+
+1.  User requests ePiggy to recommend
+2.  ePiggy recommends future spendings
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The period of expenses is less than a week.
++
+[none]
+** 1a1. ePiggy shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: Forecast
+
+*MSS*
+
+1.  User requests ePiggy to forecast future spendings
+2.  ePiggy gives a forecast of future spendings
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The period of expenses is less than a week.
++
+[none]
+** 1a1. ePiggy shows an error message.
++
+Use case ends.
 
 _{More to be added}_
 

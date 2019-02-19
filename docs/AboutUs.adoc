@@ -14,6 +14,7 @@ image::wenyi.jpeg[width="150", align="left"]
 {empty}[https://github.com/tehwenyi[github]]
 
 Role: Developer, Leader
+
 Responsibilities: UI
 
 '''
@@ -47,5 +48,7 @@ image::default1.png[width="150", align="left"]
 {empty}[https://github.com/rahulb99[github]]
 
 Role: Developer
+
+Responsibilities: Data
 
 '''

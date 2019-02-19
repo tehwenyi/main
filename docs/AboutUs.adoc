@@ -37,14 +37,14 @@ Role: Developer
 
 === Phan Duc Nhat Minh
 image::default1.png[width="150", align="left"]
-{empty}[https://github.com/pdnm[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/pdnm[github]]
 
 Role: Developer
 
 '''
 
-=== Rahul
-image::default1.png[width="150", align="left"]
+=== Rahul Baid
+image::rahul.jpg[width="150", align="left"]
 {empty}[https://github.com/rahulb99[github]]
 
 Role: Developer

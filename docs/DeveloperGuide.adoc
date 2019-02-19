@@ -829,18 +829,20 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
+|`* * *` |user |see my total expenditure till date or by time period |know the total amount I have spent
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* *` |user |see the date of my spending |know when I spend a certain item
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* *` |user |see the percentage of the amount I spent out of my set budget |track my expenses
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* *` |user |receive reminders when I am approaching my budget |cut down on my expenses
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* *` |user |set a monthly budget |know whether I'm keeping to the budget
+
+|`* *` |user |see the statistics of my spendings till date |see my spending habits
+
+|`*` | (fill in here) |(fill in here)
 |=======================================================================
-
-_{More to be added}_
 
 [appendix]
 == Use Cases

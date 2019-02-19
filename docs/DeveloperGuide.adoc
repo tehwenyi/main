@@ -827,6 +827,10 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
+|`* * *` |user |add a new expense record |Track my usage of the expense
+
+|`* * *` |user |delete my expense records |remove the wrong expenses records
+
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
 |`* * *` |user |see my total expenditure till date or by time period |know the total amount I have spent
@@ -840,6 +844,12 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* *` |user |set a monthly budget |know whether I'm keeping to the budget
 
 |`* *` |user |see the statistics of my spendings till date |see my spending habits
+
+|`* *` |new user |create my personal account |make my personal expense records confidential
+
+|`* *` |user |login to my personal account |manage my personal expense records
+
+|`* *` |user |get notification when budget finishing |manage the rest of the budget well
 
 |`*` | (fill in here) |(fill in here)
 |=======================================================================
@@ -989,6 +999,102 @@ Use case ends.
 +
 [none]
 ** 1a1. ePiggy shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: Create new account
+
+*MSS*
+
+1. User requests create a new account
+2. ePiggy requests username and password
+3. ePiggy creates new user account
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Username exists on the database.
++
+[none]
+** 1a1. ePiggy shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: Add new expense record
+
+*MSS*
+
+1. User requests the create a new record.
+2. User enters a add command with the name of item, price, categories and date
+3. ePiggy saves the record.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The name and date are empty.
++
+[none]
+** 2a1. ePiggy shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Delete expense records
+
+*MSS*
+
+1. User requests to delete expense record.
+2. ePiggy requests user to enter delete command.
+2. User enters delete command with index of the expense record.
+4. ePiggy perform delete action
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The period of expenses is less than a week.
++
+[none]
+** 1a1. ePiggy shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: Login
+
+*MSS*
+
+1. ePiggy requests username and password
+2. User enters username and password
+3. User login success.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Username and password do not match.
++
+[none]
+** 1a1. ePiggy shows an error message.
+** 1a2. ePiggy recovers from 1.
++
+Use case ends.
+
+[discrete]
+=== Use case: Notify when budget finishing
+
+*MSS*
+
+1. User budget is finishing soon
+2. ePiggy shows warning message
 +
 Use case ends.
 

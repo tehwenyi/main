@@ -167,7 +167,7 @@ _Figure 3: Shows budget is finishing_
 
 The user can search for any entry(expense) in the list, by specifying either it’s name, category, date added (or range of dates),
 or amount range. +
-Format: `search -[n/c/d/a] [NAME/CATEGORY/DATE RANGE/AMOUNT RANGE]`
+Format: `search -[n/c/d/$] [NAME/CATEGORY/DATE RANGE/AMOUNT RANGE]`
 
 Examples:
 
@@ -177,7 +177,7 @@ Displays all entries with the name “MCDONALDS”.
 Displays all entries with the category specified (in this case, it’s food).
 * `search -d 2019/01/02 2020/12/05` +
 Displays all entries listed in the range 2nd Jan 2019 to 5th Dec 2020.
-* `search -a 250 500` +
+* `search -$ 250 500` +
 Displays all entries listed with the price range of $250 to $500.
 
 ****
@@ -189,7 +189,7 @@ If entry is not found, it displays appropriate error message.
 === Sorting the expenses : `sort`
 
 The user can sort the entries (expenses) in the list, by name, date added, or amount in ascending or descending order. +
-Format: `sort -[n/d/a] -[A/D]`
+Format: `sort -[n/d/$] -[A/D]`
 
 Examples:
 
@@ -197,7 +197,7 @@ Examples:
 Sorts all entries by name (in ascending order).
 * `sort -d -A` +
 Sorts all entries by date in ascending order.
-* `sort -p -D` +
+* `sort -$ -D` +
 Sorts all entries by amount in descending order.
 
 ****

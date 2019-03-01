@@ -9,13 +9,19 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 == Project Team
 
+=== Phan Duc Nhat Minh
+image::default1.png[width="150", align="left"]
+{empty}[https://github.com/pdnm[github]]
+
+Role: Team Leader, Developer
+
+'''
+
 === Teh Wen Yi
 image::wenyi.jpeg[width="150", align="left"]
 {empty}[https://github.com/tehwenyi[github]]
 
-Role: Developer, Leader
-
-Responsibilities: UI
+Role: Developer
 
 '''
 
@@ -30,14 +36,6 @@ Role: Developer
 === Kevin
 image::kevin.jpg[width="150", align="left"]
 {empty}[https://github.com/kev-inc[github]]
-
-Role: Developer
-
-'''
-
-=== Phan Duc Nhat Minh
-image::default1.png[width="150", align="left"]
-{empty}[https://github.com/pdnm[github]]
 
 Role: Developer
 

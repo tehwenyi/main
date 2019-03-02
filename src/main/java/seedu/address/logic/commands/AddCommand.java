@@ -59,7 +59,7 @@ public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to th
             + PREFIX_TAG + "Lunch";
 
     public static final String MESSAGE_SUCCESS = "New expense added: %1$s";
-//    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    //    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     public static final String MESSAGE_DUPLICATE_EXPENSE = "This expense already exists int he address book";
 
     private final Person toAdd;

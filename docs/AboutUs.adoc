@@ -10,7 +10,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Phan Duc Nhat Minh
-image::minh.png[width="150", align="left"]
+image::pdnm.png[width="150", align="left"]
 {empty}[https://github.com/pdnm[github]]
 
 Role: Team Leader, Developer
@@ -18,7 +18,7 @@ Role: Team Leader, Developer
 '''
 
 === Teh Wen Yi
-image::wenyi.jpeg[width="150", align="left"]
+image::tehwenyi.jpeg[width="150", align="left"]
 {empty}[https://github.com/tehwenyi[github]]
 
 Role: Developer
@@ -26,7 +26,7 @@ Role: Developer
 '''
 
 === Wu Yunjun
-image::yunjun.jpg[width="150", align="left"]
+image::yunjun199321.jpg[width="150", align="left"]
 {empty}[https://github.com/yunjun199321[github]]
 
 Role: Developer
@@ -34,7 +34,7 @@ Role: Developer
 '''
 
 === Kevin
-image::kevin.jpg[width="150", align="left"]
+image::kev-inc.jpg[width="150", align="left"]
 {empty}[https://github.com/kev-inc[github]]
 
 Role: Developer
@@ -42,7 +42,7 @@ Role: Developer
 '''
 
 === Rahul Baid
-image::rahul.jpg[width="150", align="left"]
+image::rahulb99.jpg[width="150", align="left"]
 {empty}[https://github.com/rahulb99[github]]
 
 Role: Developer

@@ -30,6 +30,7 @@ ePiggy is an open source project that welcomes contributions from the community.
 
 == Acknowledgements
 
+* The original source of the code (https://github.com/se-edu/addressbook-level4[AddressBook-Level4]) was created by the https://github.com/se-edu/[SE-EDU] initiative.
 * Some parts of this sample application were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
 _Marco Jakob_.
 * Libraries used: https://github.com/TestFX/TestFX[TextFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]

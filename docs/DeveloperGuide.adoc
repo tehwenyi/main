@@ -1067,6 +1067,28 @@ Use case ends.
 Use case ends.
 
 [discrete]
+=== Use case: Sort expense records
+
+*MSS*
+
+1. User requests to sort expense records.
+2. ePiggy requests user to enter sort command.
+2. User enters sort command with specific parameters.
+4. ePiggy sorts and displays the record(s).
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Parameter field is empty.
++
+[none]
+** 1a1. ePiggy lists all the expense records sorted by date added.
++
+Use case ends.
+
+[discrete]
 === Use case: Delete expense records
 
 *MSS*

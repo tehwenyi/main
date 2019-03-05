@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.epiggy.Expense;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -27,7 +28,9 @@ public class ModelManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Expense> filteredExpenses;
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
+    private final SimpleObjectProperty<Expense> selectedExpense = new SimpleObjectProperty<>();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,6 +45,9 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredPersons.addListener(this::ensureSelectedPersonIsValid);
+
+        filteredExpenses = new FilteredList<>(versionedAddressBook.getExpenseList());
+        //TODO
     }
 
     public ModelManager() {
@@ -113,6 +119,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addExpense(Expense expense) {
+        versionedAddressBook.addExpense(expense);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
@@ -128,6 +139,15 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Expense> getFilteredExpenseList() {
+        return filteredExpenses;
     }
 
     @Override
@@ -171,6 +191,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ReadOnlyProperty<Expense> selectedExpenseProperty() {
+        return selectedExpense;
+    }
+
+    @Override
     public Person getSelectedPerson() {
         return selectedPerson.getValue();
     }
@@ -181,6 +206,14 @@ public class ModelManager implements Model {
             throw new PersonNotFoundException();
         }
         selectedPerson.setValue(person);
+    }
+
+    @Override
+    public void setSelectedExpense(Expense expense) {
+        if (expense != null && !filteredExpenses.contains(expense)) {
+            throw new PersonNotFoundException(); //TODO
+        }
+        selectedExpense.setValue(expense);
     }
 
     /**

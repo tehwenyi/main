@@ -5,8 +5,13 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.beans.InvalidationListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -16,6 +21,9 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
+    private final ObservableList<Expense> expenses;
+    private final ObservableList<Item> items;
+    private ObservableValue<Budget> budget;
     private final UniquePersonList persons;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
@@ -27,6 +35,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
+        expenses = FXCollections.observableArrayList();
+        items = FXCollections.observableArrayList();
+        //TODO init budget
         persons = new UniquePersonList();
     }
 
@@ -80,6 +91,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Adds an expense to the expense book.
+     */
+    public void addExpense(Expense expense) {
+        expenses.add(expense);
+        indicateModified();
+    }
+
+    /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -128,6 +147,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Expense> getExpenseList() {
+        return FXCollections.unmodifiableObservableList(expenses);
+    }
+
+    @Override
+    public ObservableList<Item> getItemList() {
+        return FXCollections.unmodifiableObservableList(items);
+    }
+
+    @Override
+    public ObservableValue<Budget> getBudget() {
+        return budget;
     }
 
     @Override

@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.epiggy.Expense;
 import seedu.address.model.person.Person;
 
 /**
@@ -71,6 +72,13 @@ public interface Model {
     void addPerson(Person person);
 
     /**
+     * Adds the given person.
+     * {@code person} must not already exist in the address book.
+     */
+    void addExpense(Expense expense);
+
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -79,6 +87,10 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the filtered expense list */
+    ObservableList<Expense> getFilteredExpenseList();
+
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
@@ -118,6 +130,12 @@ public interface Model {
     ReadOnlyProperty<Person> selectedPersonProperty();
 
     /**
+     * Selected person in the filtered person list.
+     * null if no person is selected.
+     */
+    ReadOnlyProperty<Expense> selectedExpenseProperty();
+
+    /**
      * Returns the selected person in the filtered person list.
      * null if no person is selected.
      */
@@ -127,4 +145,9 @@ public interface Model {
      * Sets the selected person in the filtered person list.
      */
     void setSelectedPerson(Person person);
+
+    /**
+     * Sets the selected expense in the filtered expense list.
+     */
+    void setSelectedExpense(Expense expense);
 }

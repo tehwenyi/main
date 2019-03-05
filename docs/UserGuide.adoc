@@ -170,7 +170,7 @@ _Figure 3: Shows budget is finishing_
 
 The user can search for any entry(expense) in the list, by specifying either it’s name, category, date added (or range of dates),
 or amount range. +
-Format: `search -[n/c/d/$] [NAME/CATEGORY/DATE RANGE/AMOUNT RANGE]`
+Format: `search -[n/t/d/$] [NAME/CATEGORY/DATE RANGE/AMOUNT RANGE]`
 
 Examples:
 

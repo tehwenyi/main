@@ -57,12 +57,12 @@ Format: `help`
 === Adding an expense : `add`
 
 Adds a new expense record to the Expense Tracker. +
-Format: `add n/EXPENSE_NAME $/COST c/CATEGORY [d/DATE] [a/ADDRESS] [t/TAG]…`
+Format: `addExpense n/EXPENSE_NAME $/COST t/CATEGORY [d/DATE] [a/NAME_OF_THE_SHOP] [t/TAG]…`
 
 Example:
 
-* `add n/Chicken rice set $/5 c/Food d/2019-02-21 a/311 Clementi Ave 2 #02_25 t/Lunch`
-* Adds an expense with its name as "Chicken rice set", cost as "5.00", category as "Food", date as "2019-02-21", address as "Clementi Ave 2 #02-25" and tag as "Lunch".
+* `addExpense n/Chicken rice set $/5 t/Food d/HAINAN KITCHEN d/2019-02-21`
+* Adds an expense with its name as "Chicken rice set", cost as "5.00", category as "Food", date as "2019-02-21", name of the shop as "HAINAN KITCHEN".
 
 * `add n/Chicken rice set $/5 c/Food`
 * Adds an expense with its name as "Chicken rice set", cost as "5.00", category as "Food" and date as current date by default.

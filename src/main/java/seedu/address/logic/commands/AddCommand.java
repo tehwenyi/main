@@ -36,10 +36,9 @@ public class AddCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Chicken Rice Set "
             + PREFIX_COST + "15 "
-            + PREFIX_CATEGORY + "Food "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_DATE + "2019-02-21 "
-            + PREFIX_TAG + "Lunch";
+            + PREFIX_TAG + "Food "
+            + PREFIX_ADDRESS + "HAINAN KITCHEN "
+            + PREFIX_DATE + "2019-02-21 ";
 
     public static final String MESSAGE_SUCCESS = "New expense added: %1$s";
     //    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

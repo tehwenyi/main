@@ -1133,6 +1133,16 @@ Use case ends.
 Use case ends.
 
 [discrete]
+=== Use case: Help
+
+*MSS*
+
+1. User requests for help.
+2. ePiggy displays a list of all the commands - brief description and syntax.
++
+Use case ends.
+
+[discrete]
 === Use case: Notify when budget finishing
 
 *MSS*

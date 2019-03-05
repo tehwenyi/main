@@ -1045,6 +1045,28 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
+=== Use case: Search expense records
+
+*MSS*
+
+1. User requests to search for an expense record.
+2. ePiggy requests user to enter search command.
+2. User enters search command with specific parameters.
+4. ePiggy searches and displays the record(s).
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Parameter field is empty.
++
+[none]
+** 1a1. ePiggy lists all the expense records.
++
+Use case ends.
+
+[discrete]
 === Use case: Delete expense records
 
 *MSS*

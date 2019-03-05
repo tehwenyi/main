@@ -1045,6 +1045,50 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
+=== Use case: Search expense records
+
+*MSS*
+
+1. User requests to search for an expense record.
+2. ePiggy requests user to enter search command.
+2. User enters search command with specific parameters.
+4. ePiggy searches and displays the record(s).
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Parameter field is empty.
++
+[none]
+** 1a1. ePiggy lists all the expense records.
++
+Use case ends.
+
+[discrete]
+=== Use case: Sort expense records
+
+*MSS*
+
+1. User requests to sort expense records.
+2. ePiggy requests user to enter sort command.
+2. User enters sort command with specific parameters.
+4. ePiggy sorts and displays the record(s).
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Parameter field is empty.
++
+[none]
+** 1a1. ePiggy lists all the expense records sorted by date added.
++
+Use case ends.
+
+[discrete]
 === Use case: Delete expense records
 
 *MSS*
@@ -1085,6 +1129,16 @@ Use case ends.
 [none]
 ** 1a1. ePiggy shows an error message.
 ** 1a2. ePiggy recovers from 1.
++
+Use case ends.
+
+[discrete]
+=== Use case: Help
+
+*MSS*
+
+1. User requests for help.
+2. ePiggy displays a list of all the commands - brief description and syntax.
 +
 Use case ends.
 

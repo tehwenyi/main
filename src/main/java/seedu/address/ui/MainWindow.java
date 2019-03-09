@@ -199,6 +199,7 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+            // TODO: ADDS isSummary()
 
             return commandResult;
         } catch (CommandException | ParseException e) {

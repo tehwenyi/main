@@ -24,4 +24,9 @@ public class Period {
     public static boolean isValidPeriod(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(timePeriod);
+    }
 }

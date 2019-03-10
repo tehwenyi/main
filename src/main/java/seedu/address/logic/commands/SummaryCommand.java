@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
+import seedu.address.ui.SummaryWindow;
 
 /**
  * Shows summary to the user.
@@ -19,6 +20,17 @@ public class SummaryCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
+        SummaryWindow summaryWindow = new SummaryWindow();
+//        summaryWindow.displayMonthlySummary();
+//        summaryWindow.displayDailySummary();
+        summaryWindow.displayExpensePercentageSummary();
         return new CommandResult(MESSAGE_SUCCESS, false, false, true);
+    }
+
+    /**
+     * Chart will be displayed according to expense display type.
+     */
+    private enum ExpenseDisplyType {
+        MONTHLY_EXPENSE, DAILY_EXPENSE, TOTAL_EXPENSE
     }
 }

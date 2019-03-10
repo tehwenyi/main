@@ -1,56 +1,141 @@
 package seedu.address.ui;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
- * The Summary Window. Provides summary chart to the user.
+ * The Summary Window. Provides summary and chart to the user.
  */
-public class SummaryWindow implements Initializable {
+public class SummaryWindow {
+    /**
+     * Display monthly summary.
+     */
+    public void displayDailySummary() {
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle("Summary");
+        // Creates an Area Chart
+        final NumberAxis xAxis = new NumberAxis(1, 31, 1);
+        final NumberAxis yAxis = new NumberAxis();
+        final AreaChart<Number, Number> areaChart =
+                new AreaChart<Number, Number>(xAxis, yAxis);
+        areaChart.setTitle("Daily Summary");
 
-    public static final String SUMMARY_SCREEN_FXML = "/main/resources/view/ui/SummaryWindow.fxml";
+        XYChart.Series seriesExpense = new XYChart.Series();
+        seriesExpense.setName("Expense");
+        yAxis.setLabel("Expense");
+        xAxis.setLabel("Days");
+//        xAxis.setMinorTickCount(31);
 
-    FXMLLoader loader = new FXMLLoader(getClass().getResource(SUMMARY_SCREEN_FXML));
+        seriesExpense.getData().add(new XYChart.Data(1, 400));
+        seriesExpense.getData().add(new XYChart.Data(2, 1000));
+        seriesExpense.getData().add(new XYChart.Data(3, 500));
+        seriesExpense.getData().add(new XYChart.Data(4, 800));
+        seriesExpense.getData().add(new XYChart.Data(5, 500));
+        seriesExpense.getData().add(new XYChart.Data(6, 1800));
+        seriesExpense.getData().add(new XYChart.Data(7, 1500));
+        seriesExpense.getData().add(new XYChart.Data(8, 1300));
+        seriesExpense.getData().add(new XYChart.Data(9, 1009));
+        seriesExpense.getData().add(new XYChart.Data(10, 2001));
+        seriesExpense.getData().add(new XYChart.Data(11, 3001));
+        seriesExpense.getData().add(new XYChart.Data(12, 401));
 
-    @FXML
-    private TextArea command_text_area;
-    @FXML
-    private AreaChart<?, ?> Expense_area_chart;
-    @FXML
-    private BorderPane default_expense_chart;
+        VBox layout = new VBox();
+        layout.getChildren().add(areaChart);
+        Scene scene = new Scene(layout, 800, 600);
+        areaChart.getData().add(seriesExpense);
+        window.setScene(scene);
+        window.showAndWait();
+    }
+
+    public void displayMonthlySummary() {
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle("Summary");
+        //defining the axes
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        xAxis.setLabel("Months");
+        yAxis.setLabel("Expense");
+
+        //creates the chart
+        final LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
+        lineChart.setTitle("Monthly Expense Summary");
+        XYChart.Series seriesExpense = new XYChart.Series();
+        seriesExpense.setName("Expense");
+
+        seriesExpense.getData().add(new XYChart.Data("Jan", 1230));
+        seriesExpense.getData().add(new XYChart.Data("Feb", 1400));
+        seriesExpense.getData().add(new XYChart.Data("Mar", 1500));
+        seriesExpense.getData().add(new XYChart.Data("Apr", 2004));
+        seriesExpense.getData().add(new XYChart.Data("May", 1112));
+        seriesExpense.getData().add(new XYChart.Data("Jun", 2006));
+        seriesExpense.getData().add(new XYChart.Data("Jul", 1002));
+        seriesExpense.getData().add(new XYChart.Data("Aug", 1005));
+        seriesExpense.getData().add(new XYChart.Data("Sep", 1403));
+        seriesExpense.getData().add(new XYChart.Data("Oct", 1007));
+        seriesExpense.getData().add(new XYChart.Data("Nov", 1209));
+        seriesExpense.getData().add(new XYChart.Data("Dec", 1225));
+
+        XYChart.Series seriesBudget = new XYChart.Series();
+        seriesBudget.setName("Budget");
+        seriesBudget.getData().add(new XYChart.Data("Jan", 1500));
+        seriesBudget.getData().add(new XYChart.Data("Feb", 1500));
+        seriesBudget.getData().add(new XYChart.Data("Mar", 1500));
+        seriesBudget.getData().add(new XYChart.Data("Apr", 1500));
+        seriesBudget.getData().add(new XYChart.Data("May", 1500));
+        seriesBudget.getData().add(new XYChart.Data("Jun", 1500));
+        seriesBudget.getData().add(new XYChart.Data("Jul", 1500));
+        seriesBudget.getData().add(new XYChart.Data("Aug", 1500));
+        seriesBudget.getData().add(new XYChart.Data("Sep", 1500));
+        seriesBudget.getData().add(new XYChart.Data("Oct", 1500));
+        seriesBudget.getData().add(new XYChart.Data("Nov", 1500));
+        seriesBudget.getData().add(new XYChart.Data("Dec", 1500));
+
+        Scene scene = new Scene(lineChart, 800, 600);
+        lineChart.getData().addAll(seriesExpense, seriesBudget);
+
+        window.setScene(scene);
+        window.showAndWait();
+
+    }
 
     /**
-     * Display Summary.
+     * Display the percentage of users spending on each categories of item.
      */
-    public static void display() {
-        SummaryWindow window = new SummaryWindow();
-        window.initialize(null, null);
+    public void displayExpensePercentageSummary() {
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle("Summary");
+        Scene scene = new Scene(new Group());
+        window.setTitle("Imported Fruits");
+        window.setWidth(500);
+        window.setHeight(500);
+
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                        new PieChart.Data("Food", 13),
+                        new PieChart.Data("Daily necessities", 25),
+                        new PieChart.Data("Electronics", 10),
+                        new PieChart.Data("Cosmetics", 22),
+                        new PieChart.Data("Others", 30));
+        final PieChart chart = new PieChart(pieChartData);
+        chart.setTitle("Imported Fruits");
+
+        ((Group) scene.getRoot()).getChildren().add(chart);
+        window.setScene(scene);
+        window.showAndWait();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        XYChart.Series series = new XYChart.Series();
-        series.getData().add(new XYChart.Data(1, 300));
-        series.getData().add(new XYChart.Data(2, 200));
-        series.getData().add(new XYChart.Data(3, 400));
-        series.getData().add(new XYChart.Data(4, 500));
-
-        XYChart.Series series2 = new XYChart.Series();
-        series2.getData().add(new XYChart.Data(1, 1000));
-        series2.getData().add(new XYChart.Data(2, 2000));
-        series2.getData().add(new XYChart.Data(3, 4000));
-        series2.getData().add(new XYChart.Data(4, 5000));
-
-        Expense_area_chart.getData().addAll(series, series2);
-
-
-    }
 }

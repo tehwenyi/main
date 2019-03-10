@@ -1,7 +1,7 @@
 package seedu.address.model.epiggy;
 
-import java.util.Date;
-
+import seedu.address.model.epiggy.item.Date;
+import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.epiggy.item.Price;
 
 /**
@@ -11,16 +11,38 @@ import seedu.address.model.epiggy.item.Price;
 public class Budget {
     private final Price amount;
     private final Date startDate;
-    private final int period;
+    //    private final Date endDate;
+    private final Period period;
 
-    public Budget() {
-        this.amount = new Price(0);
-        this.startDate = new Date();
-        this.period = 0;
-    }
-    public Budget(Price amount, Date startDate, int period) {
+    /**
+     * Represents a Budget in the expense book.
+     * Guarantees: details are present and not null, field values are validated, immutable.
+     */
+    public Budget(Price amount, Period period, Date startDate) {
         this.amount = amount;
         this.startDate = startDate;
         this.period = period;
+        //        this.endDate = calculateEndDate(startDate, period);
+    }
+
+    public Price getPrice() {
+        return this.amount;
+    }
+    public Period getPeriod() {
+        return this.period;
+    }
+    public Date getStartDate() {
+        return this.startDate;
+    }
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("$")
+                .append(getPrice())
+                .append(" for every ")
+                .append(getPeriod())
+                .append(" weeks starting from ")
+                .append(getStartDate());
+        return builder.toString();
     }
 }

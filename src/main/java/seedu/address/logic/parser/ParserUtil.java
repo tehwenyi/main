@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.epiggy.item.Date;
+import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.epiggy.item.Price;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -62,12 +64,39 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String cost} into a {@code Price}.
      * Leading and trailing whitespaces will be trimmed.
      */
     public static Price parseCost(String cost) {
         requireNonNull(cost);
-        return new Price(Integer.parseInt(cost.trim()));
+        String trimmedCost = cost.trim();
+        return new Price(Integer.parseInt(trimmedCost));
+    }
+
+    /**
+     * Parses a {@code String Date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Date(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String period} into a {@code Period}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Period parsePeriod(String period) throws ParseException {
+        requireNonNull(period);
+        String trimmedPeriod = period.trim();
+        if (!Period.isValidPeriod(trimmedPeriod)) {
+            throw new ParseException(Period.MESSAGE_CONSTRAINTS);
+        }
+        return new Period(Integer.parseInt(trimmedPeriod));
     }
 
     /**

@@ -23,10 +23,10 @@ public class SetBudgetCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets a budget for ePiggy. "
             + "Parameters: "
-            + PREFIX_COST + "BUDGET IN DOLLARS"
-            + PREFIX_PERIOD + "TIME PERIOD IN WEEKS"
+            + PREFIX_COST + "BUDGET IN DOLLARS "
+            + PREFIX_PERIOD + "TIME PERIOD IN WEEKS \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_COST + "500.00 "
+            + PREFIX_COST + "500 "
             + PREFIX_PERIOD + "4";
 
     public static final String MESSAGE_SUCCESS = "Budget set for: %1$s";

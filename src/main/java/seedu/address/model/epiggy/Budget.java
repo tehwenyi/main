@@ -25,10 +25,6 @@ public class Budget {
         //        this.endDate = calculateEndDate(startDate, period);
     }
 
-    //    private Date calculateEndDate(Date startDate, Period period) {
-    //
-    //    }
-
     public Price getPrice() { return this.amount; }
     public Period getPeriod() { return this.period; }
     public Date getStartDate() { return this.startDate; }

@@ -13,6 +13,11 @@ public class Budget {
     private final Date startDate;
     private final int period;
 
+    public Budget() {
+        this.amount = new Price(0);
+        this.startDate = new Date();
+        this.period = 0;
+    }
     public Budget(Price amount, Date startDate, int period) {
         this.amount = amount;
         this.startDate = startDate;

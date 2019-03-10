@@ -139,10 +139,10 @@ public class AddressBookTest {
             return FXCollections.unmodifiableObservableList(items);
         }
 
-        @Override
-        public ObservableValue<Budget> getBudget() {
-            return budget;
-        }
+        //        @Override
+        //        public ObservableValue<Budget> getBudget() {
+        //            return budget;
+        // }
 
         @Override
         public ObservableList<Person> getPersonList() {

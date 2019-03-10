@@ -29,7 +29,7 @@ public class SetBudgetCommand extends Command {
             + PREFIX_COST + "500 "
             + PREFIX_PERIOD + "4";
 
-    public static final String MESSAGE_SUCCESS = "Budget set for: %1$s";
+    public static final String MESSAGE_SUCCESS = "Budget is set at: %1$s";
     //    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     // public static final String MESSAGE_DUPLICATE_EXPENSE = "This expense already exists in the address book";
 

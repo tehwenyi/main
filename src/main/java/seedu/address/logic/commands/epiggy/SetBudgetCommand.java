@@ -20,7 +20,6 @@ import seedu.address.model.epiggy.Budget;
 public class SetBudgetCommand extends Command {
     public static final String COMMAND_WORD = "setBudget";
     public static final String COMMAND_ALIAS = "sb";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets a budget for ePiggy. "
             + "Parameters: "

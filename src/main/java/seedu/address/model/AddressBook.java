@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.beans.InvalidationListener;
 //import javafx.beans.value.ObservableObjectValue;
 //import javafx.beans.value.ObservableValue;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
@@ -24,7 +25,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final ObservableList<Expense> expenses;
     private final ObservableList<Item> items;
-    private Budget budget;
+    private SimpleObjectProperty<Budget> budget;
     private final UniquePersonList persons;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
@@ -40,7 +41,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         items = FXCollections.observableArrayList();
         //TODO init budget
         persons = new UniquePersonList();
-        budget = new Budget();
+        budget = new SimpleObjectProperty<>();
     }
 
     public AddressBook() {}
@@ -101,7 +102,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public void setBudget(Budget budget) {
-        this.budget = budget;
+        this.budget.setValue(budget);
         indicateModified();
     }
     /**

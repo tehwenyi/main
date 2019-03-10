@@ -41,7 +41,8 @@ public class Budget {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getPrice())
+        builder.append("$")
+                .append(getPrice())
                 .append(" for every ")
                 .append(getPeriod())
                 .append(" weeks");

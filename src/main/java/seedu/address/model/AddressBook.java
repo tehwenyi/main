@@ -5,7 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.beans.InvalidationListener;
-import javafx.beans.value.ObservableValue;
+//import javafx.beans.value.ObservableObjectValue;
+//import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
@@ -23,7 +24,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final ObservableList<Expense> expenses;
     private final ObservableList<Item> items;
-    private ObservableValue<Budget> budget;
+    private Budget budget;
     private final UniquePersonList persons;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
@@ -39,6 +40,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         items = FXCollections.observableArrayList();
         //TODO init budget
         persons = new UniquePersonList();
+        budget = new Budget();
     }
 
     public AddressBook() {}
@@ -98,6 +100,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         indicateModified();
     }
 
+    public void setBudget(Budget budget) {
+        this.budget = budget;
+        indicateModified();
+    }
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
@@ -157,11 +163,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Item> getItemList() {
         return FXCollections.unmodifiableObservableList(items);
-    }
-
-    @Override
-    public ObservableValue<Budget> getBudget() {
-        return budget;
     }
 
     @Override

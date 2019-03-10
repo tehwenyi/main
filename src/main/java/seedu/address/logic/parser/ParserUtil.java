@@ -63,12 +63,13 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String cost} into a {@code Price}.
      * Leading and trailing whitespaces will be trimmed.
      */
     public static Price parseCost(String cost) {
         requireNonNull(cost);
-        return new Price(Integer.parseInt(cost.trim()));
+        String trimmedCost = cost.trim();
+        return new Price(Integer.parseInt(trimmedCost));
     }
 
     /**
@@ -77,8 +78,11 @@ public class ParserUtil {
      */
     public static Period parsePeriod(String period) throws ParseException {
         requireNonNull(period);
-        String trimmedName = period.trim();
-        return new Period(Integer.parseInt(period.trim()));
+        String trimmedPeriod = period.trim();
+        if (!Period.isValidPeriod(trimmedPeriod)) {
+            throw new ParseException(Period.MESSAGE_CONSTRAINTS);
+        }
+        return new Period(Integer.parseInt(trimmedPeriod));
     }
 
     /**

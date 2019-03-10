@@ -25,4 +25,9 @@ public class Price {
     public static boolean isValidPrice(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(amount);
+    }
 }

@@ -34,4 +34,18 @@ public class Budget {
         this.startDate = new Date();
         this.period = period;
     }
+
+    public Price getPrice() { return this.amount; }
+    public Period getPeriod() { return this.period; }
+    public Date getStartDate() { return this.startDate; }
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Budget: ")
+                .append(getPrice())
+                .append(" for every ")
+                .append(getPeriod())
+                .append(" weeks");
+        return builder.toString();
+    }
 }

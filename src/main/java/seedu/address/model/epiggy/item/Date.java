@@ -8,47 +8,55 @@ import java.util.Calendar;
  */
 public class Date {
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Date should be in the format dd/mm/yyyy, dd.mm.yyyy or dd-mm-yyyy";
+    public static final String VALIDATION_REGEX = "^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[13-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$";
     private final int day;
     private final int month;
     private final int year;
 
-    public Date(int day, int month, int year) {
-        this.day = day;
-        this.month = month;
-        this.year = year;
+    public Date(String date) {
+        this.day = Integer.valueOf(date.substring(0, 2));
+        this.month = Integer.valueOf(date.substring(3, 5));
+        this.year = Integer.valueOf(date.substring(6, 10));
+    }
+
+//    public Date(int day, int month, int year) {
+//        this.day = day;
+//        this.month = month;
+//        this.year = year;
+//    }
+
+    /**
+     * Getter for day
+     * @return day
+     */
+    public int getDay() {
+        return this.day;
     }
 
     /**
-     * Check if given year/month/day is valid
-     * @param day
-     * @param month
-     * @param year
-     * @return true if it is valid date
+     * Getter for month
+     * @return month
      */
-    public static boolean isValidDate(int day, int month, int year) {
-        if (year < 0) {
-            return false;
-        }
-        if ((month < 1) || (month > 12)) {
-            return false;
-        }
-        if ((day < 1) || (day > 31)) {
-            return false;
-        }
-        switch (month) {
-            case 1: return true;
-            case 2: return (isLeap(year) ? day <= 29 : day <= 28);
-            case 3: return true;
-            case 4: return day < 31;
-            case 5: return true;
-            case 6: return day < 31;
-            case 7: return true;
-            case 8: return true;
-            case 9: return day < 31;
-            case 10: return true;
-            case 11: return day < 31;
-            default: return true;
-        }
+    public int getMonth() {
+        return this.month;
+    }
+
+    /**
+     * Getter for year
+     * @return year
+     */
+    public int getYear() {
+        return this.year;
+    }
+
+    /**
+     * Check if given dd mm yy format is valid
+     * @return true if it is valid date format
+     */
+    public static boolean isValidDate(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**
@@ -61,5 +69,16 @@ public class Date {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
         return cal.getActualMaximum(Calendar.DAY_OF_YEAR) > 365;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getDay())
+                .append("/")
+                .append(getMonth())
+                .append("/")
+                .append(getYear());
+        return builder.toString();
     }
 }

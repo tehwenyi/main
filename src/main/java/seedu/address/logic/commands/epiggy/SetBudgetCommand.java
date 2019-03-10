@@ -2,6 +2,7 @@ package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
 
 import seedu.address.logic.CommandHistory;
@@ -10,9 +11,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.epiggy.Budget;
-
-//import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-//import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 /**
  * Sets a budget for the total expenses.
@@ -24,10 +22,12 @@ public class SetBudgetCommand extends Command {
             + ": Sets a budget for ePiggy. "
             + "Parameters: "
             + PREFIX_COST + "BUDGET IN DOLLARS "
-            + PREFIX_PERIOD + "TIME PERIOD IN WEEKS \n"
+            + PREFIX_PERIOD + "TIME PERIOD IN WEEKS "
+            + PREFIX_DATE + "START DATE IN DD/MM/YYYY \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_COST + "500 "
-            + PREFIX_PERIOD + "4";
+            + PREFIX_PERIOD + "4 "
+            + PREFIX_DATE + "04/02/2019";
 
     public static final String MESSAGE_SUCCESS = "Budget is set at: %1$s";
     //    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

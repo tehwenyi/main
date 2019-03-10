@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.epiggy.item.Date;
 import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.epiggy.item.Price;
 import seedu.address.model.person.Address;
@@ -70,6 +71,19 @@ public class ParserUtil {
         requireNonNull(cost);
         String trimmedCost = cost.trim();
         return new Price(Integer.parseInt(trimmedCost));
+    }
+
+    /**
+     * Parses a {@code String Date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Period.MESSAGE_CONSTRAINTS);
+        }
+        return new Date(trimmedDate);
     }
 
     /**

@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.epiggy.item.Price;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -68,6 +69,16 @@ public class ParserUtil {
     public static Price parseCost(String cost) {
         requireNonNull(cost);
         return new Price(Integer.parseInt(cost.trim()));
+    }
+
+    /**
+     * Parses a {@code String period} into a {@code Period}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Period parsePeriod(String period) throws ParseException {
+        requireNonNull(period);
+        String trimmedName = period.trim();
+        return new Period(Integer.parseInt(period.trim()));
     }
 
     /**

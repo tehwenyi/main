@@ -25,10 +25,15 @@ public class Budget {
         //        this.endDate = calculateEndDate(startDate, period);
     }
 
-    public Price getPrice() { return this.amount; }
-    public Period getPeriod() { return this.period; }
-    public Date getStartDate() { return this.startDate; }
-    //    public Date getEndDate() { return this.endDate; }
+    public Price getPrice() {
+        return this.amount;
+    }
+    public Period getPeriod() {
+        return this.period;
+    }
+    public Date getStartDate() {
+        return this.startDate;
+    }
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

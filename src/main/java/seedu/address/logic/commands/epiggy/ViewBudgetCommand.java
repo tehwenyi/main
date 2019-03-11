@@ -1,0 +1,30 @@
+package seedu.address.logic.commands.epiggy;
+
+import static java.util.Objects.requireNonNull;
+
+import javafx.beans.property.SimpleObjectProperty;
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.model.Model;
+import seedu.address.model.epiggy.Budget;
+
+/**
+ * Allows user to view the budget set and its details.
+ */
+public class ViewBudgetCommand extends Command {
+    public static final String COMMAND_WORD = "viewBudget";
+    public static final String COMMAND_ALIAS = "vb";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Views the budget set for ePiggy. ";
+
+    public static final String MESSAGE_SUCCESS = "Budget details shown above.";
+
+    @Override
+    public CommandResult execute(Model model, CommandHistory history) {
+        requireNonNull(model);
+        // The display of budget should be done in model, eg. model.getBudgetDetails
+        SimpleObjectProperty<Budget> budget = model.getBudget();
+        return new CommandResult(MESSAGE_SUCCESS);
+    }
+}

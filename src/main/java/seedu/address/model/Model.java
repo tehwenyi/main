@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.beans.property.ReadOnlyProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.epiggy.Budget;
@@ -79,10 +80,14 @@ public interface Model {
     void addExpense(Expense expense);
 
     /**
-     * Sets the given budget..
+     * Sets the given budget.
      */
     void setBudget(Budget budget);
 
+    /**
+     * Gets the current budget.
+     */
+    SimpleObjectProperty<Budget> getBudget();
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

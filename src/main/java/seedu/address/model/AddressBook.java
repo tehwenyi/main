@@ -101,9 +101,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         indicateModified();
     }
 
+    /**
+     * Sets a budget for ePiggy.
+     */
     public void setBudget(Budget budget) {
         this.budget.setValue(budget);
         indicateModified();
+    }
+
+    /**
+     * Gets the current budget for ePiggy.
+     */
+    public SimpleObjectProperty<Budget> getBudget() {
+        return budget;
     }
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.

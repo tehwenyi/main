@@ -129,6 +129,10 @@ public class ModelManager implements Model {
         versionedAddressBook.setBudget(budget); }
 
     @Override
+    public SimpleObjectProperty<Budget> getBudget() {
+        return versionedAddressBook.getBudget(); }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 

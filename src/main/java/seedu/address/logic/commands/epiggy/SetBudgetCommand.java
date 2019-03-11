@@ -22,7 +22,7 @@ public class SetBudgetCommand extends Command {
             + ": Sets a budget for ePiggy. "
             + "Parameters: "
             + PREFIX_COST + "BUDGET IN DOLLARS "
-            + PREFIX_PERIOD + "TIME PERIOD IN WEEKS "
+            + PREFIX_PERIOD + "TIME PERIOD IN DAYS "
             + PREFIX_DATE + "START DATE IN DD/MM/YYYY \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_COST + "500 "

@@ -6,7 +6,7 @@ package seedu.address.model.epiggy.item;
  */
 public class Period {
     public static final String MESSAGE_CONSTRAINTS =
-            "Time period is in terms of weeks and should only contain whole numbers of at least value 1.";
+            "Time period is in terms of days and should only contain whole numbers of at least value 1.";
     public static final String VALIDATION_REGEX = "\\d+";
     private final int timePeriod;
 

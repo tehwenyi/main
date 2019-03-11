@@ -29,22 +29,20 @@ public class Budget {
         this.endDate = calculateEndDate(startDate, period);
     }
 
-    public Price getPrice() {
-        return this.amount;
-    }
+    public Price getPrice() { return this.amount; }
 
-    public Period getPeriod() {
-        return this.period;
-    }
+    public Period getPeriod() { return this.period; }
 
-    public Date getStartDate() {
-        return this.startDate;
-    }
+    public Date getStartDate() { return this.startDate; }
 
-    public Date getEndDate() {
-        return this.endDate;
-    }
+    public Date getEndDate() { return this.endDate; }
 
+    /**
+     * Calculates the end date = startDate + period (number of days)
+     * @param startDate
+     * @param period
+     * @return endDate
+     */
     private Date calculateEndDate(Date startDate, Period period) {
         // int noOfDays = period.getTimePeriod();
         // LocalDate endDate = (LocalDate)startDate.plus(period, ChronoUnit.WEEKS);

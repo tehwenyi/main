@@ -17,11 +17,11 @@ import javafx.stage.Stage;
 /**
  * The Summary Window. Provides summary and chart to the user.
  */
-public class SummaryWindow {
+public class ReportWindow {
     /**
-     * Display monthly summary.
+     * Display daily summary on area chart.
      */
-    public void displayDailySummary() {
+    public void displayDailyReport() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Summary");
@@ -59,10 +59,14 @@ public class SummaryWindow {
         window.showAndWait();
     }
 
-    public void displayMonthlySummary() {
+    /**
+     * Displays monthly summary on line chart.
+     */
+    public void displayMonthlyReport() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Summary");
+
         //defining the axes
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
@@ -112,16 +116,13 @@ public class SummaryWindow {
     }
 
     /**
-     * Display the percentage of users spending on each categories of item.
+     * Display the proportion of income spent on different categories on pie chart.
      */
-    public void displayExpensePercentageSummary() {
+    public void displayExpensePercentageReport() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Summary");
-        Scene scene = new Scene(new Group());
-        window.setTitle("Imported Fruits");
-        window.setWidth(500);
-        window.setHeight(500);
+        Scene scene = new Scene(new Group(), 800, 600);
 
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
@@ -131,7 +132,7 @@ public class SummaryWindow {
                         new PieChart.Data("Cosmetics", 22),
                         new PieChart.Data("Others", 30));
         final PieChart chart = new PieChart(pieChartData);
-        chart.setTitle("Imported Fruits");
+        chart.setTitle("Percentage of spending on each categories");
 
         ((Group) scene.getRoot()).getChildren().add(chart);
         window.setScene(scene);

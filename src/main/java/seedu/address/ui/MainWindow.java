@@ -83,6 +83,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -122,8 +123,9 @@ public class MainWindow extends UiPart<Stage> {
                 logic::setSelectedPerson);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        expenseListPanel = new ExpenseListPanel(logic.getFilteredExpenseList(), logic.selectedExpenseProperty(),
-            expense -> {}); //TODO
+        expenseListPanel = new ExpenseListPanel(logic.getFilteredExpenseList(),
+                logic.selectedExpenseProperty(), expense -> {
+        }); //TODO
         expenseListPanelPlaceholder.getChildren().add(expenseListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -177,6 +179,19 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Shows summary to user.
+     */
+    @FXML
+    private void handleReport() {
+        helpWindow.hide();
+        try {
+            logic.execute("report");
+        } catch (CommandException | ParseException e) {
+            resultDisplay.setFeedbackToUser(e.getMessage());
+        }
+    }
+
     public ExpenseListPanel getExpenseListPanel() {
         return expenseListPanel;
     }
@@ -199,7 +214,6 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
-            // TODO: ADDS isSummary()
 
             return commandResult;
         } catch (CommandException | ParseException e) {

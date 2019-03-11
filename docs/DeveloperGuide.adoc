@@ -835,6 +835,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |see my total expenditure till date or by time period |know the total amount I have spent
 
+|`* *` |user |see the report of my spending |know how much I spend
+
 |`* *` |user |see the date of my spending |know when I spend a certain item
 
 |`* *` |user |see the percentage of the amount I spent out of my set budget |track my expenses

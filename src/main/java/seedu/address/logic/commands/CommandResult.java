@@ -24,7 +24,7 @@ public class CommandResult {
     /**
      * Summary should be shown to the user.
      */
-    private boolean summary;
+    private boolean showSummary;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -43,7 +43,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.summary = summary;
+        this.showSummary = summary;
     }
 
     /**
@@ -67,7 +67,7 @@ public class CommandResult {
     }
 
     public boolean isSummary() {
-        return summary;
+        return showSummary;
     }
 
     @Override

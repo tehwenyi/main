@@ -178,7 +178,7 @@ Examples:
 Displays all entries with the name “MCDONALDS”.
 * `search -c FOOD` +
 Displays all entries with the category specified (in this case, it’s food).
-* `search -d 2019/01/02 2020/12/05` +
+* `search -d 02/01/2019:05/12/2020` +
 Displays all entries listed in the range 2nd Jan 2019 to 5th Dec 2020.
 * `search -$ 250 500` +
 Displays all entries listed with the price range of $250 to $500.

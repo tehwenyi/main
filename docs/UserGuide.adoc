@@ -57,12 +57,12 @@ Format: `help`
 === Adding an expense : `add`
 
 Adds a new expense record to the Expense Tracker. +
-Format: `add n/EXPENSE_NAME $/COST c/CATEGORY [d/DATE] [a/ADDRESS] [t/TAG]…`
+Format: `addExpense n/EXPENSE_NAME $/COST t/CATEGORY [d/DATE] [a/NAME_OF_THE_SHOP] [t/TAG]…`
 
 Example:
 
-* `add n/Chicken rice set $/5 c/Food d/2019-02-21 a/311 Clementi Ave 2 #02_25 t/Lunch`
-* Adds an expense with its name as "Chicken rice set", cost as "5.00", category as "Food", date as "2019-02-21", address as "Clementi Ave 2 #02-25" and tag as "Lunch".
+* `addExpense n/Chicken rice set $/5 t/Food d/HAINAN KITCHEN d/2019-02-21`
+* Adds an expense with its name as "Chicken rice set", cost as "5.00", category as "Food", date as "2019-02-21", name of the shop as "HAINAN KITCHEN".
 
 * `add n/Chicken rice set $/5 c/Food`
 * Adds an expense with its name as "Chicken rice set", cost as "5.00", category as "Food" and date as current date by default.
@@ -250,19 +250,18 @@ The expenses list should have at least one day’s worth of expenses.
 
 === Generate report : `report`
 
-Generates a report of the given day, month, or year. The report consists of total inflow, total outflow, and proprtion of income
+Generates a report of the given date, month, or year. The report consists of total inflow, total outflow, and proportion of income
 spent on different categories. +
-Format: `report y/YEAR [m/MONTH] [d/DATE]`
+Format: `report`
 
 Examples:
 
-* `report y/2019 m/1 d/25` +
-View the spending records for 25th of January 2019.
-* `report y/2018 m/12` +
-View the spending records for December 2018.
+* `report` +
+View the spending records for current year.
 
 ****
 *Additional Information:* +
+Follows options will be implemented at the next version: +
 MM and DD will be optional arguments. +
 If only YYYY is included, a yearly report will be generated. +
 If YYYY and MM are provided, then a monthly report will be generated. +

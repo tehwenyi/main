@@ -20,6 +20,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.epiggy.AddExpenseCommand;
+import seedu.address.logic.commands.epiggy.ReportCommand;
 import seedu.address.logic.commands.epiggy.SetBudgetCommand;
 import seedu.address.logic.parser.epiggy.AddExpenseCommandParser;
 import seedu.address.logic.parser.epiggy.SetBudgetCommandParser;
@@ -107,6 +108,10 @@ public class AddressBookParser {
         case RedoCommand.COMMAND_WORD:
         case RedoCommand.COMMAND_ALIAS:
             return new RedoCommand();
+
+        case ReportCommand.COMMAND_WORD:
+        case ReportCommand.COMMAND_ALIAS:
+            return new ReportCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

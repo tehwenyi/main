@@ -46,7 +46,7 @@ public class Budget {
     }
 
     private Date calculateEndDate(Date startDate, Period period) {
-        int noOfDays = period.getTimePeriod();
+        // int noOfDays = period.getTimePeriod();
         // LocalDate endDate = (LocalDate)startDate.plus(period, ChronoUnit.WEEKS);
         Calendar calendar = Calendar.getInstance();
         String parseDate = startDate.toString();
@@ -59,7 +59,7 @@ public class Budget {
             e.printStackTrace();
         }
 
-        calendar.add(Calendar.DAY_OF_YEAR, noOfDays);
+        calendar.add(Calendar.DAY_OF_YEAR, period.getTimePeriod());
         return new Date(calendar.getTime().toString());
     }
 

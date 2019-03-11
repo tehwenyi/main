@@ -141,18 +141,18 @@ Creates a new category called `Food`
 
 === Set spending budget : `setBudget`
 
-Sets a total spending budget for a certain time period. The time period will be in terms of weeks, and 1 week is the minimum
+Sets a total spending budget for a certain time period. The time period will be in terms of days, and 1 day is the minimum
 a person can set a budget for. +
 The setBudget command is case sensitive. +
-Format: `setBudget [$/MONEY_WITH_TWO_DECIMAL_PLACES] [t/TIME_PERIOD_IN_WEEKS]`
+Format: `setBudget [$/MONEY_WITH_TWO_DECIMAL_PLACES] [t/TIME_PERIOD_IN_DAYS]`
 
 Examples:
 
-* `setBudget $500.00 t/4` +
-Sets a total budget of $500.00 for each month.
+* `setBudget $500.00 t/7` +
+Sets a total budget of $500.00 for each week.
 
-* `setBudget $10000.00 t/52` +
-Sets a total budget of $10000.00 for each year.
+* `setBudget $10000.00 t/15` +
+Sets a total budget of $10000.00 every 15 days.
 
 ****
 *Additional Information:* +

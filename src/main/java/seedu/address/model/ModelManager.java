@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -122,6 +123,10 @@ public class ModelManager implements Model {
     public void addExpense(Expense expense) {
         versionedAddressBook.addExpense(expense);
     }
+
+    @Override
+    public void setBudget(Budget budget) {
+        versionedAddressBook.setBudget(budget); }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {

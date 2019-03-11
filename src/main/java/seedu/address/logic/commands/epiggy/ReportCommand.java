@@ -30,8 +30,8 @@ public class ReportCommand extends Command {
         requireNonNull(model);
         ReportWindow summaryWindow = new ReportWindow();
         logger.info("Creates Report window");
-
-        ExpenseDisplayType expenseDisplayType = ExpenseDisplayType.MONTHLY_EXPENSE; // set a dummy value. TODO: Changes it when other command done.
+        // set a dummy value. TODO: Changes it when other command done.
+        ExpenseDisplayType expenseDisplayType = ExpenseDisplayType.MONTHLY_EXPENSE;
         switch (expenseDisplayType) {
         case DAILY_EXPENSE:
             summaryWindow.displayDailyReport();

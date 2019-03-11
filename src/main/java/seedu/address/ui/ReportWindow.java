@@ -36,7 +36,6 @@ public class ReportWindow {
         seriesExpense.setName("Expense");
         yAxis.setLabel("Expense");
         xAxis.setLabel("Days");
-//        xAxis.setMinorTickCount(31);
 
         seriesExpense.getData().add(new XYChart.Data(1, 400));
         seriesExpense.getData().add(new XYChart.Data(2, 1000));
@@ -132,9 +131,9 @@ public class ReportWindow {
                         new PieChart.Data("Cosmetics", 22),
                         new PieChart.Data("Others", 30));
         final PieChart chart = new PieChart(pieChartData);
-        chart.setTitle("Percentage of spending on each categories");
-
-        ((Group) scene.getRoot()).getChildren().add(chart);
+        chart.setTitle("Percentage of spending on each categories"); (
+                (Group) scene.getRoot()
+        ).getChildren().add(chart);
         window.setScene(scene);
         window.showAndWait();
     }

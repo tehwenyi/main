@@ -6,7 +6,11 @@
       <file name="/Dummy.txt" timestamp="1552361565846">
         <mark key="[" line="0" column="0" />
       </file>
+      <file name="$USER_HOME$/Desktop/main/src/main/java/seedu/address/logic/commands/HelpCommand.java" timestamp="1552380046553" />
       <file name="$USER_HOME$/Desktop/main/src/main/java/seedu/address/logic/commands/CommandResult.java" timestamp="1552377248654" />
+      <file name="$USER_HOME$/Desktop/main/src/main/java/seedu/address/logic/commands/epiggy/HelpCommand.java" timestamp="1552379952157">
+        <mark key="[" line="1" column="0" />
+      </file>
       <file name="$USER_HOME$/Desktop/main/src/main/java/seedu/address/MainApp.java" timestamp="1552361835086" />
     </filemarks>
     <jumps />

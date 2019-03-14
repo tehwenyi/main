@@ -24,4 +24,14 @@ public class Expense {
     public Date getDate() {
         return date;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(item)
+                .append(" (")
+                .append(date)
+                .append(")");
+        return builder.toString();
+    }
 }

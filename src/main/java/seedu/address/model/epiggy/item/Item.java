@@ -30,4 +30,15 @@ public class Item {
     public Set<Tag> getTags() {
         return tags;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(name)
+                .append(" - $")
+                .append(price)
+                .append(" ")
+                .append(tags);
+        return builder.toString();
+    }
 }

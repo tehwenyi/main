@@ -61,12 +61,32 @@ Format: `addExpense n/EXPENSE_NAME $/COST t/CATEGORY [d/DATE] [a/NAME_OF_THE_SHO
 
 Example:
 
-* `addExpense n/Chicken rice set $/5 t/Food d/HAINAN KITCHEN d/2019-02-21`
-* Adds an expense with its name as "Chicken rice set", cost as "5.00", category as "Food", date as "2019-02-21", name of the shop as "HAINAN KITCHEN".
+* `addExpense n/Chicken rice set $/5 t/Food d/HAINAN KITCHEN d/2019-02-21` +
+Adds an expense with its name as "Chicken rice set", cost as "5.00", category as "Food", date as "2019-02-21", name of the shop as "HAINAN KITCHEN".
 
-* `add n/Chicken rice set $/5 c/Food`
-* Adds an expense with its name as "Chicken rice set", cost as "5.00", category as "Food" and date as current date by default.
+* `add n/Chicken rice set $/5 c/Food` +
+Adds an expense with its name as "Chicken rice set", cost as "5.00", category as "Food" and date as current date by default.
 
+=== Add an autocomplete item : `addItem`
+
+Adds an autocomplete item with fixed cost, category, and tags, for future reference. +
+Autocomplete items will appear when adding a new expense: a list of items will popup after typing *`add n/`* +
+Format: `addItem n/EXPENSE_NAME $/COST c/CATEGORY [t/TAG]`
+
+Examples:
+
+* `addItem n/Chicken-rice $/5 c/Food` +
+Adds an autocomplete item called `Chicken Rice`, that is $5 with the `Food` tag
+
+=== Add expense category : `addCategory`
+
+Adds an expense category. +
+Format: `addCategory c/CATEGORY`
+
+Examples:
+
+* `addCategory c/Food` +
+Creates a new category called `Food`
 === Listing all expenses : `list`
 
 Lists the expense records from newest to oldest. +
@@ -98,16 +118,6 @@ Examples:
 * `delete 1` +
 Deletes the first expense in the Expense List from Expense Tracker.
 
-=== Login to ePiggy : `login`
-
-Logs in to Expense Tracker as an existing user. +
-Format: `login u/USERNAME p/PASSWORD`
-
-Examples:
-
-* `login u/johndoe1990 p/password123` +
-Logs into the johndoe1990 user account.
-
 === Viewing an expense : `view`
 
 View the details of the selected *`INDEX`*. +
@@ -117,54 +127,6 @@ Examples:
 
 * `view 3` +
 View will display more information on item 3 , (eg. tags, entry description, etc.)
-
-=== Add an autocomplete item : `addItem`
-
-Adds an autocomplete item with fixed cost, category, and tags, for future reference. +
-Autocomplete items will appear when adding a new expense: a list of items will popup after typing *`add n/`* +
-Format: `addItem n/EXPENSE_NAME $/COST c/CATEGORY [t/TAG]`
-
-Examples:
-
-* `addItem n/Chicken-rice $/5 c/Food` +
-Adds an autocomplete item called `Chicken Rice`, that is $5 with the `Food` tag
-
-=== Add expense category : `addCategory`
-
-Adds an expense category. +
-Format: `addCategory c/CATEGORY`
-
-Examples:
-
-* `addCategory c/Food` +
-Creates a new category called `Food`
-
-=== Set spending budget : `setBudget`
-
-Sets a total spending budget for a certain time period. The time period will be in terms of days, and 1 day is the minimum
-a person can set a budget for. +
-The setBudget command is case sensitive. +
-Format: `setBudget [$/MONEY_WITH_TWO_DECIMAL_PLACES] [t/TIME_PERIOD_IN_DAYS]`
-
-Examples:
-
-* `setBudget $500.00 t/7` +
-Sets a total budget of $500.00 for each week.
-
-* `setBudget $10000.00 t/15` +
-Sets a total budget of $10000.00 every 15 days.
-
-****
-*Additional Information:* +
-*`MONEY_WITH_TWO_DECIMAL_PLACES`* must be a positive number with two decimal places. +
-*`TIME_PERIOD_IN_WEEKS`* must be a positive whole number.
-****
-
-*Notify when budget finishing.* +
-The Expense Tracker will show a warning message to the user when the budget is finishing.
-
-image::BudgetUi.png[width="760"]
-_Figure 3: Shows budget is finishing_
 
 === Search for an expense : `search`
 
@@ -209,6 +171,34 @@ Sorts the entries, according to the user-specified command. +
 A and D are optional arguments which determine whether user wants the expenses sorted in ascending or
 descending, respectively. Unless otherwise explicitly mentioned, then it will be assumed to be ascending order.
 ****
+
+=== Set spending budget : `setBudget`
+
+Sets a total spending budget for a certain time period. The time period will be in terms of days, and 1 day is the minimum
+a person can set a budget for. +
+The setBudget command is case sensitive. +
+Format: `setBudget [$/MONEY_WITH_TWO_DECIMAL_PLACES] [t/TIME_PERIOD_IN_DAYS]`
+
+Examples:
+
+* `setBudget $500.00 t/7` +
+Sets a total budget of $500.00 for each week.
+
+* `setBudget $10000.00 t/15` +
+Sets a total budget of $10000.00 every 15 days.
+
+****
+*Additional Information:* +
+*`MONEY_WITH_TWO_DECIMAL_PLACES`* must be a positive number with two decimal places. +
+*`TIME_PERIOD_IN_WEEKS`* must be a positive whole number.
+****
+
+*Notify when budget finishing.* +
+The Expense Tracker will show a warning message to the user when the budget is finishing.
+
+image::BudgetUi.png[width="760"]
+_Figure 3: Shows budget is finishing_
+
 
 === Forecast spendings : `forecast`
 
@@ -268,6 +258,34 @@ If YYYY and MM are provided, then a monthly report will be generated. +
 If YYYY, MM and DD are provided, then the daily report will be generated.
 ****
 
+=== Set Savings Goal: `setGoal`
+
+Sets the item and the amount that the user wishes to save up for. +
+Format: `setGoal n/ITEM_NAME $/AMOUNT`
+
+Example:
+
+* `setGoal n/nike shoes $/80` +
+Sets the goal to an $80 Nike shoe
+
+=== View Goal Progress: `viewGoalProgress`
+
+Show details about the goal and the progress of the user with regards to hitting that goal. +
+Format: `viewGoalProgress`
+
+* `viewGoalProgress` +
+Views the progress of the user with regards to hitting that goal.
+
+=== Login to ePiggy : `login`
+
+Logs in to Expense Tracker as an existing user. +
+Format: `login u/USERNAME p/PASSWORD`
+
+Examples:
+
+* `login u/johndoe1990 p/password123` +
+Logs into the johndoe1990 user account.
+
 === Exiting the program : `exit`
 
 Exits the program. +
@@ -296,29 +314,47 @@ Requires multiple accounts in the same network.
 
 == Command Summary
 
-* *Add* `add n/EXPENSE_NAME $/COST c/CATEGORY [d/DATE] [t/TAG]…` +
-e.g. `add n/Lunch $/5.00 c/Drink`
-* *Add Category* `addCategory c/CATEGORY` +
-e.g. `addCategory c/Food`
+* *Help* : `help`
+
+* *Add* `addExpense n/EXPENSE_NAME $/COST t/CATEGORY [d/DATE] [a/NAME_OF_THE_SHOP] [t/TAG]…` +
+e.g. `addExpense n/Chicken rice set $/5 t/Food d/HAINAN KITCHEN d/2019-02-21`
+
 * *Add Item* `addItem n/EXPENSE_NAME $/COST c/CATEGORY [t/TAG]` +
 e.g. `addItem n/Chicken-rice $/5 c/Food`
+
+* *Add Category* `addCategory c/CATEGORY` +
+e.g. `addCategory c/Food`
+
+* *List* : `list`
+
+* *Edit* : `edit INDEX [n/EXPENSE_NAME] [$/COST] [c/CATEGORY] [d/DATE] [t/TAG]…` +
+e.g. `edit 1 n/pen $1 c/supplies`
+
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
+
+* *Search* : `search -[n/t/d/$] [NAME/CATEGORY/DATE RANGE/AMOUNT RANGE]` +
+e.g.`search -n MCDONALDS`
+
+* *Sort* : `sort -[n/d/$] -[A/D]` +
+e.g.`sort -n`
+
+* *Set Budget* : `setBudget [$/MONEY_WITH_TWO_DECIMAL_PLACES] [t/TIME_PERIOD_IN_DAYS]` +
+e.g.`setBudget $500.00 t/7`
+
 * *Forecast* : `forecast [t/TIME_PERIOD_IN_WEEKS]` +
 e.g. `forecast t/2`
-* *Help* : `help`
-* *List* : `list`
+
+* *Recommend* : `recommend`
+
+* *Report* : `report`
+
+* *Set Savings Goal* : `setGoal n/ITEM_NAME $/AMOUNT` +
+e.g. `setGoal n/nike shoes $/80`
+
+* *View Goal Progress* : `viewGoalProgress`
+
 * *Login* `login u/USERNAME p/PASSWORD` +
 e.g. `login u/johndoe1990 p/password123`
-* *Search* : `search -[n/c/d/a] [NAME/CATEGORY/DATE RANGE/AMOUNT RANGE]` +
-e.g.`search -n MCDONALDS`
-* *Set Budget* : `setBudget [$/MONEY_WITH_TWO_DECIMAL_PLACES] [t/TIME_PERIOD_IN_WEEKS]` +
-e.g.`setBudget $500.00 t/4`
-* *Sort* : `sort -[n/d/a] -[A/D]` +
-e.g.`sort -n`
-* *Recommend* : `recommend`
-* *Report* : `report`
-* *View* `view INDEX` +
-e.g. `view 3`
+
+* *Exit* : `exit`

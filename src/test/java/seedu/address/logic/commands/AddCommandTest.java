@@ -26,6 +26,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -154,6 +155,12 @@ public class AddCommandTest {
         public SimpleObjectProperty<Budget> getBudget() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setGoal(Goal goal) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void setSelectedExpense(Expense expense) {
             throw new AssertionError("This method should not be called.");

@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -26,6 +27,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final ObservableList<Expense> expenses;
     private final ObservableList<Item> items;
     private SimpleObjectProperty<Budget> budget;
+    private SimpleObjectProperty<Goal> goal;
     private final UniquePersonList persons;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
@@ -42,6 +44,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         //TODO init budget
         persons = new UniquePersonList();
         budget = new SimpleObjectProperty<>();
+        goal = new SimpleObjectProperty<>();
     }
 
     public AddressBook() {}
@@ -115,6 +118,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     public SimpleObjectProperty<Budget> getBudget() {
         return budget;
     }
+
+    /**
+     * Sets the saving goal for ePiggy.
+     */
+    public void setGoal(Goal goal) {
+        this.goal.setValue(goal);
+        indicateModified();
+    }
+
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.

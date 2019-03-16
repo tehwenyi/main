@@ -1053,7 +1053,7 @@ Use case resumes at step 2.
 
 1. User requests to search for an expense record.
 2. ePiggy requests user to enter search command.
-2. User enters search command with specific parameters.
+3. User enters search command with specific parameters.
 4. ePiggy searches and displays the record(s).
 +
 Use case ends.
@@ -1075,7 +1075,7 @@ Use case ends.
 
 1. User requests to sort expense records.
 2. ePiggy requests user to enter sort command.
-2. User enters sort command with specific parameters.
+3. User enters sort command with specific parameters.
 4. ePiggy sorts and displays the record(s).
 +
 Use case ends.
@@ -1097,7 +1097,7 @@ Use case ends.
 
 1. User requests to delete expense record.
 2. ePiggy requests user to enter delete command.
-2. User enters delete command with index of the expense record.
+3. User enters delete command with index of the expense record.
 4. ePiggy perform delete action
 +
 Use case ends.

@@ -25,6 +25,16 @@ public class Budget {
         this.endDate = calculateEndDate(startDate, period);
     }
 
+    /**
+     * Calculates the end date = startDate + period (number of days)
+     * @param startDate
+     * @param period
+     * @return endDate
+     */
+    private Date calculateEndDate(Date startDate, Period period) {
+        return startDate.addDays(period.getTimePeriod());
+    }
+
     public Price getPrice() {
         return this.amount;
     }
@@ -39,16 +49,6 @@ public class Budget {
 
     public Date getEndDate() {
         return this.endDate;
-    }
-
-    /**
-     * Calculates the end date = startDate + period (number of days)
-     * @param startDate
-     * @param period
-     * @return endDate
-     */
-    private Date calculateEndDate(Date startDate, Period period) {
-        return startDate.addDays(period.getTimePeriod());
     }
 
     @Override

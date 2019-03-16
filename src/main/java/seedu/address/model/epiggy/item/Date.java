@@ -81,6 +81,12 @@ public class Date {
         return addDays(days, month, year);
     }
 
+    /**
+     * Gets the number of days in the month of that year
+     * @param month of the date
+     * @param year of the date
+     * @return Number of days in that month of that year
+     */
     private int getNoOfDaysInMonth(int month, int year) {
         if (month == 2 && isLeap(year)) {
             return daysInMonth.get(month) + 1;

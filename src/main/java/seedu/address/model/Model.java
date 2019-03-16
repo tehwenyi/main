@@ -88,7 +88,7 @@ public interface Model {
     /**
      * Gets the current budget.
      */
-    SimpleObjectProperty<Budget> getBudget();
+    Budget getBudget();
 
     /**
      * Sets the savings goal.

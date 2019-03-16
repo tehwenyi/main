@@ -130,7 +130,7 @@ public class ModelManager implements Model {
         versionedAddressBook.setBudget(budget); }
 
     @Override
-    public SimpleObjectProperty<Budget> getBudget() {
+    public Budget getBudget() {
         return versionedAddressBook.getBudget(); }
 
     @Override

@@ -13,6 +13,8 @@ public class Budget {
     private final Date startDate;
     private final Date endDate;
     private final Period period;
+    private Price remainingAmount;
+    private Period remainingDays;
 
     /**
      * Represents a Budget in the expense book.

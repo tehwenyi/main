@@ -152,7 +152,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public SimpleObjectProperty<Budget> getBudget() {
+        public Budget getBudget() {
             throw new AssertionError("This method should not be called.");
         }
 

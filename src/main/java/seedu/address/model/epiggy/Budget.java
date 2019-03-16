@@ -1,9 +1,5 @@
 package seedu.address.model.epiggy;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import seedu.address.model.epiggy.item.Date;
 import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.epiggy.item.Price;
@@ -52,21 +48,7 @@ public class Budget {
      * @return endDate
      */
     private Date calculateEndDate(Date startDate, Period period) {
-        // int noOfDays = period.getTimePeriod();
-        // LocalDate endDate = (LocalDate)startDate.plus(period, ChronoUnit.WEEKS);
-        Calendar calendar = Calendar.getInstance();
-        String parseDate = startDate.toString();
-        java.util.Date start;
-
-        try {
-            start = new SimpleDateFormat("dd/MM/yyyy").parse(parseDate);
-            calendar.setTime(start);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        calendar.add(Calendar.DAY_OF_YEAR, period.getTimePeriod());
-        return new Date(calendar.getTime().toString());
+        return startDate.addDays(period.getTimePeriod());
     }
 
     @Override
@@ -76,7 +58,7 @@ public class Budget {
                 .append(getPrice())
                 .append(" for every ")
                 .append(getPeriod())
-                .append(" weeks starting from ")
+                .append(" days starting from ")
                 .append(getStartDate())
                 .append(" till ")
                 .append(getEndDate());

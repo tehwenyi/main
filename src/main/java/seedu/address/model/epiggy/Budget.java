@@ -37,6 +37,18 @@ public class Budget {
         return startDate.addDays(period.getTimePeriod());
     }
 
+    private void setRemainingAmount(Price remainingAmount) {
+        this.remainingAmount = remainingAmount;
+    }
+
+    private void setRemainingDays(Period remainingDays) {
+        this.remainingDays = remainingDays;
+    }
+
+    public Price getRemainingAmount() {
+        return remainingAmount;
+    }
+
     public Price getPrice() {
         return this.amount;
     }

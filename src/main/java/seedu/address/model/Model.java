@@ -7,11 +7,11 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.Savings;
-import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.person.Person;
 
 /**

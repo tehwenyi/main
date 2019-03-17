@@ -169,6 +169,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public SimpleObjectProperty<Goal> getGoal() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setGoal(Goal goal) {
             throw new AssertionError("This method should not be called.");
         }

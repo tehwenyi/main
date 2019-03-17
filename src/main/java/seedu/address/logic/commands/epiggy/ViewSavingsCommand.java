@@ -10,6 +10,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.epiggy.Savings;
 
+/**
+ * Allows the user to view the savings recorded in ePiggy.
+ */
 public class ViewSavingsCommand extends Command {
 
     public static final String COMMAND_WORD = "viewSavings";

@@ -15,10 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.epiggy.Allowance;
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Expense;
-import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.*;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -137,7 +134,13 @@ public class ModelManager implements Model {
 
     @Override
     public SimpleObjectProperty<Budget> getBudget() {
-        return versionedAddressBook.getBudget(); }
+        return versionedAddressBook.getBudget();
+    }
+
+    @Override
+    public SimpleObjectProperty<Savings> getSavings() {
+        return versionedAddressBook.getSavings();
+    }
 
     @Override
     public void setGoal(Goal goal) {

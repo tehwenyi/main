@@ -61,6 +61,10 @@ public class AddressBookParser {
         case AddAllowanceCommand.COMMAND_ALIAS:
             return new AddAllowanceCommandParser().parse(arguments);
 
+        case ViewSavingsCommand.COMMAND_WORD:
+        case ViewSavingsCommand.COMMAND_ALIAS:
+            return new ViewSavingsCommand();
+
         case AddCommand.COMMAND_WORD:
         case AddCommand.COMMAND_ALIAS:
             return new AddCommandParser().parse(arguments);

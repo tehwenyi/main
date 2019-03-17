@@ -3,8 +3,8 @@ package seedu.address.model.epiggy;
 public class Savings {
     private float savings;
 
-    public Savings(float savings) {
-        this.savings = savings;
+    public Savings() {
+        this.savings = 0.00f;
     }
 
     public float getSavings() {

@@ -11,10 +11,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
-import seedu.address.model.epiggy.Allowance;
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Expense;
-import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.*;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -29,6 +26,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final ObservableList<Item> items;
     private SimpleObjectProperty<Budget> budget;
     private SimpleObjectProperty<Goal> goal;
+    private SimpleObjectProperty<Savings> savings;
     private final UniquePersonList persons;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
@@ -46,6 +44,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
         budget = new SimpleObjectProperty<>();
         goal = new SimpleObjectProperty<>();
+        savings = new SimpleObjectProperty<>(new Savings());
+
     }
 
     public AddressBook() {}
@@ -102,6 +102,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addExpense(Expense expense) {
         expenses.add(expense);
+        Savings s = savings.get();
+        s.deductSavings(expense.getItem().getPrice().getAmount());
+        savings.set(s);
         indicateModified();
     }
 
@@ -111,7 +114,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addAllowance(Allowance allowance) {
         expenses.add(allowance);
+        Savings s = savings.get();
+        s.addSavings(allowance.getItem().getPrice().getAmount());
+        savings.set(s);
         indicateModified();
+    }
+
+    public SimpleObjectProperty<Savings> getSavings() {
+        return savings;
     }
 
     /**

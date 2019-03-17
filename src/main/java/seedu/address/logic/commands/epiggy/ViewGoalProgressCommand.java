@@ -11,6 +11,9 @@ import seedu.address.model.Model;
 import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.Savings;
 
+/**
+ * Views the amount required to hit the set goal.
+ */
 public class ViewGoalProgressCommand extends Command {
 
     public static final String COMMAND_WORD = "viewGoalProgress";
@@ -28,12 +31,12 @@ public class ViewGoalProgressCommand extends Command {
         SimpleObjectProperty<Savings> savings = model.getSavings();
         SimpleObjectProperty<Goal> goal = model.getGoal();
 
-        float goal_amount = (float) goal.getValue().getAmount().getAmount();
-        float savings_amount = savings.getValue().getSavings();
+        float goalAmount = (float) goal.getValue().getAmount().getAmount();
+        float savingsAmount = savings.getValue().getSavings();
 
-        float diff = goal_amount - savings_amount;
+        float diff = goalAmount - savingsAmount;
 
-        if(diff < 0) {
+        if (diff < 0) {
             return new CommandResult(String.format(MESSAGE_SAVINGS_MORE_THAN_GOAL));
         } else {
             return new CommandResult(String.format(MESSAGE_SAVINGS_LESS_THAN_GOAL, diff));

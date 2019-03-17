@@ -24,6 +24,7 @@ import seedu.address.logic.commands.epiggy.AddExpenseCommand;
 import seedu.address.logic.commands.epiggy.ReportCommand;
 import seedu.address.logic.commands.epiggy.SetBudgetCommand;
 import seedu.address.logic.commands.epiggy.SetGoalCommand;
+import seedu.address.logic.commands.epiggy.ViewSavingsCommand;
 import seedu.address.logic.parser.epiggy.AddAllowanceCommandParser;
 import seedu.address.logic.parser.epiggy.AddExpenseCommandParser;
 import seedu.address.logic.parser.epiggy.SetBudgetCommandParser;

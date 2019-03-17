@@ -73,7 +73,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
     }
 
@@ -116,7 +115,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Gets the current budget for ePiggy.
      */
     public SimpleObjectProperty<Budget> getBudget() {
-        return budget;
+        return this.budget;
     }
 
     /**

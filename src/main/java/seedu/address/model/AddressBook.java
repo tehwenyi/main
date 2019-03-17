@@ -11,6 +11,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
+import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
@@ -101,6 +102,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addExpense(Expense expense) {
         expenses.add(expense);
+        indicateModified();
+    }
+
+    /**
+     * Adds an allowance to the expense book.
+     * @param allowance to be added.
+     */
+    public void addAllowance(Allowance allowance) {
+        expenses.add(allowance);
         indicateModified();
     }
 

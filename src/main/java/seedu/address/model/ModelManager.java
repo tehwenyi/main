@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
@@ -123,6 +124,11 @@ public class ModelManager implements Model {
     @Override
     public void addExpense(Expense expense) {
         versionedAddressBook.addExpense(expense);
+    }
+
+    @Override
+    public void addAllowance(Allowance allowance) {
+        versionedAddressBook.addAllowance(allowance);
     }
 
     @Override

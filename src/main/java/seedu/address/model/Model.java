@@ -7,6 +7,7 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
@@ -79,6 +80,11 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addExpense(Expense expense);
+
+    /**
+     * Adds the given allowance.
+     */
+    void addAllowance(Allowance allowance);
 
     /**
      * Sets the given budget.

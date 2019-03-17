@@ -200,35 +200,15 @@ Sets a total budget of $10000.00 every 15 days.
 ****
 *Additional Information:* +
 *`MONEY_WITH_TWO_DECIMAL_PLACES`* must be a positive number with two decimal places. +
-*`TIME_PERIOD_IN_WEEKS`* must be a positive whole number.
+*`TIME_PERIOD_IN_DAYS`* must be a positive whole number.
 ****
 
-*Notify when budget finishing.* +
-The Expense Tracker will show a warning message to the user when the budget is finishing.
+*Display status of budget.* +
+The Expense Tracker will show the status of the budget whenever a new expense is added.
 
 image::BudgetUi.png[width="760"]
-_Figure 3: Shows budget is finishing_
+_Figure 3: Shows budget status_
 
-
-=== Forecast spendings : `forecast`
-
-Forecasts the user’s spendings in the input time period based on the user’s current spending habits. This is done assuming
-that the user maintains similar spendings in subsequent weeks. User will input the subsequent number of weeks he wishes to
-forecast. +
-Format: `forecast [t/TIME_PERIOD_IN_WEEKS]`
-
-Examples:
-
-* `forecast t/2` +
-Forecasts the total amount of money user spends in the next 2 weeks.
-* `forecast t/52` +
-Forecasts the total amount of money user spends in the next year.
-
-****
-*Additional Information:* +
-`TIME_PERIOD_IN_WEEKS` must be a positive whole number. +
-The expenses list should have at least one day’s worth of expenses.
-****
 
 === Recommend future spendings : `recommend`
 

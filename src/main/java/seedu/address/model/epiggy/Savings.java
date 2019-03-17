@@ -1,5 +1,9 @@
 package seedu.address.model.epiggy;
 
+/**
+ * Represents a saving in the expense book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Savings {
     private float savings;
 

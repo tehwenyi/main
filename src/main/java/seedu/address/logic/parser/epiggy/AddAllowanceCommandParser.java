@@ -3,6 +3,10 @@ package seedu.address.logic.parser.epiggy;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 
+import java.util.Date;
+import java.util.Set;
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.epiggy.AddAllowanceCommand;
 import seedu.address.logic.parser.*;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -12,11 +16,9 @@ import seedu.address.model.epiggy.item.Name;
 import seedu.address.model.epiggy.item.Price;
 import seedu.address.model.tag.Tag;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.Set;
-import java.util.stream.Stream;
-
+/**
+ * Parses input arguments and creates a new AddAllowanceCommand object.
+ */
 public class AddAllowanceCommandParser implements Parser<AddAllowanceCommand> {
     @Override
     public AddAllowanceCommand parse(String args) throws ParseException {

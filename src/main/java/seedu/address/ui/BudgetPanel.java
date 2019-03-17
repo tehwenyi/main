@@ -3,11 +3,14 @@ package seedu.address.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import seedu.address.model.epiggy.Budget;
 
 /**
  * Panel containing the budget status.
@@ -17,15 +20,32 @@ public class BudgetPanel extends UiPart<Region> {
     //private final Logger logger = LogsCenter.getLogger(BudgetPanel.class);
 
     @FXML
-    private ListView<String> budgetView;
+    private ListView<Budget> budgetView;
 
-    public BudgetPanel() {
+    public BudgetPanel(SimpleObjectProperty<Budget> budget) {
         super(FXML);
-        List<String> world = new ArrayList<>();
-        ObservableList<String> string = FXCollections.observableList(world);
-        string.add("Hello");
-        string.add("World");
-        budgetView.setItems(string);
+        List<Budget> listOfBudget = new ArrayList<>();
+        ObservableList<Budget> observableListOfBudget = FXCollections.observableList(listOfBudget);
+        listOfBudget.add(budget.getValue());
+        budgetView.setItems(observableListOfBudget);
+        budgetView.setCellFactory(listView -> new BudgetListViewCell());
+    }
+
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code Budget} using a {@code ExpenseCard}.
+     */
+    class BudgetListViewCell extends ListCell<Budget> {
+        @Override
+        protected void updateItem(Budget budget, boolean empty) {
+            super.updateItem(budget, empty);
+
+            if (empty || budget == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new BudgetCard(budget).getRoot());
+            }
+        }
     }
 
 }

@@ -54,7 +54,7 @@ _Figure 1. The user interface on application launch_
 Lists all the user commands with their syntax and descriptions.
 Format: `help`
 
-=== Adding an expense : `add`
+=== Adding an expense : `addExpense`
 
 Adds a new expense record to the Expense Tracker. +
 Format: `addExpense n/EXPENSE_NAME $/COST t/CATEGORY [d/DATE] [a/NAME_OF_THE_SHOP] [t/TAG]…`
@@ -66,6 +66,16 @@ Adds an expense with its name as "Chicken rice set", cost as "5.00", category as
 
 * `add n/Chicken rice set $/5 c/Food` +
 Adds an expense with its name as "Chicken rice set", cost as "5.00", category as "Food" and date as current date by default.
+
+=== Add an allowance: `addAllowance`
+
+Adds a new allowance record to the Expense Tracker. +
+Format: `addAllowance $/AMOUNT`
+
+Example:
+
+* `addAllowance $/10` +
+Adds an allowance entry of $10 to the expense tracker.
 
 === Add an autocomplete item : `addItem`
 
@@ -258,6 +268,16 @@ If YYYY and MM are provided, then a monthly report will be generated. +
 If YYYY, MM and DD are provided, then the daily report will be generated.
 ****
 
+=== View Savings: `viewSavings`
+
+Show details of the net amount of money recorded in ePiggy. +
+Format: `viewSavings`
+
+Example:
+
+* `viewSavings` +
+View the net amount of money recorded in ePiggy.
+
 === Set Savings Goal: `setGoal`
 
 Sets the item and the amount that the user wishes to save up for. +
@@ -266,7 +286,17 @@ Format: `setGoal n/ITEM_NAME $/AMOUNT`
 Example:
 
 * `setGoal n/nike shoes $/80` +
-Sets the goal to an $80 Nike shoe
+Sets the goal to an $80 Nike shoe.
+
+=== View Savings Goal: `viewGoal`
+
+Show details about the current goal set by the user. +
+Format: `viewGoal`
+
+Example:
+
+* `viewGoal` +
+Views the current goal set by the user.
 
 === View Goal Progress: `viewGoalProgress`
 

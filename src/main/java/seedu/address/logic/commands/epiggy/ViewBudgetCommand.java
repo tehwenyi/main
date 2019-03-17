@@ -23,7 +23,7 @@ public class ViewBudgetCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         // The display of budget should be done in model, eg. model.getBudgetDetails
-        Budget budget = model.getBudget();
+        Budget budget = model.getBudget().getValue();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

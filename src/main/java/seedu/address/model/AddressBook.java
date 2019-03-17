@@ -114,8 +114,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Gets the current budget for ePiggy.
      */
-    public Budget getBudget() {
-        return this.budget.getValue();
+    public SimpleObjectProperty<Budget> getBudget() {
+        return this.budget;
     }
 
     /**

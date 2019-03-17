@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.beans.property.ReadOnlyProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.epiggy.Budget;
@@ -87,7 +88,7 @@ public interface Model {
     /**
      * Gets the current budget.
      */
-    Budget getBudget();
+    SimpleObjectProperty<Budget> getBudget();
 
     /**
      * Sets the savings goal.

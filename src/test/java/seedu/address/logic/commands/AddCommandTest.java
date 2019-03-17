@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
+import javafx.beans.property.SimpleObjectProperty;
+import org.assertj.core.internal.bytebuddy.dynamic.ClassFileLocator;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -151,7 +153,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Budget getBudget() {
+        public SimpleObjectProperty<Budget> getBudget() {
             throw new AssertionError("This method should not be called.");
         }
 

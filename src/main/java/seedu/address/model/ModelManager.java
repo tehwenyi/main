@@ -147,6 +147,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public SimpleObjectProperty<Goal> getGoal() {
+        return versionedAddressBook.getGoal();
+    }
+
+    @Override
     public void setGoal(Goal goal) {
         versionedAddressBook.setGoal(goal);
     }

@@ -16,7 +16,7 @@ import seedu.address.model.epiggy.Savings;
 public class ViewSavingsCommand extends Command {
 
     public static final String COMMAND_WORD = "viewSavings";
-    public static final String COMMAND_ALIAS = "vS";
+    public static final String COMMAND_ALIAS = "vs";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View your savings. ";
 

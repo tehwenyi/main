@@ -103,6 +103,11 @@ public interface Model {
     SimpleObjectProperty<Savings> getSavings();
 
     /**
+     * Get the savings goal.
+     */
+    SimpleObjectProperty<Goal> getGoal();
+
+    /**
      * Sets the savings goal.
      */
     void setGoal(Goal goal);

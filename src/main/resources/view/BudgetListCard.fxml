@@ -25,9 +25,10 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="startDate" text="\$startDate" styleClass="cell_big_label" />
             </HBox>
+            <Label fx:id="startDate" styleClass="cell_small_label" text="\$startDate" />
             <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" />
+            <Label fx:id="period" styleClass="cell_small_label" text="\$period" />
             <Label fx:id="remainingAmount" styleClass="cell_small_label" text="\$remainingAmount" />
             <Label fx:id="remainingDays" styleClass="cell_small_label" text="\$remainingDays" />
         </VBox>

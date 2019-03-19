@@ -1,7 +1,6 @@
 package seedu.address.model.epiggy;
 
-import java.util.Date;
-
+import seedu.address.model.epiggy.item.Date;
 import seedu.address.model.epiggy.item.Item;
 
 /**

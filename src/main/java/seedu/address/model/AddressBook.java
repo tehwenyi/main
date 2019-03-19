@@ -107,11 +107,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         Savings s = savings.get();
         s.deductSavings(expense.getItem().getPrice().getAmount());
         savings.set(s);
-        if (budget.getValue() != null) {
-            Budget b = this.budget.getValue();
-            b.deductRemainingAmount(expense.getItem().getPrice());
-            budget.set(b);
+        if (expense.getDate().isAfter(budget.getValue().getEndDate())) {
+            // create new Budget and make that budget this.budget
+            // add the new budget to the list
         }
+//        if (budget.getValue() != null) {
+//            Budget b = this.budget.getValue();
+//            b.deductRemainingAmount(expense.getItem().getPrice());
+//            budget.set(b);
+//        }
         indicateModified();
     }
 
@@ -135,7 +139,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Sets a budget for ePiggy.
      */
     public void setBudget(Budget budget) {
-        this.budget.setValue(budget);
+        if (budget.getPrice().getAmount() == 0) {
+            this.budget.setValue(budget);
+        } else {
+            // cannot create budget
+        }
         indicateModified();
     }
 

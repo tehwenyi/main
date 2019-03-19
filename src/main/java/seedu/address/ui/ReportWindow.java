@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -24,7 +25,7 @@ public class ReportWindow {
     public void displayDailyReport() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Summary");
+        window.setTitle("Daily Summary");
         // Creates an Area Chart
         final NumberAxis xAxis = new NumberAxis(1, 31, 1);
         final NumberAxis yAxis = new NumberAxis();
@@ -64,7 +65,7 @@ public class ReportWindow {
     public void displayMonthlyReport() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Summary");
+        window.setTitle("Monthly Summary");
 
         //defining the axes
         final CategoryAxis xAxis = new CategoryAxis();
@@ -138,4 +139,49 @@ public class ReportWindow {
         window.showAndWait();
     }
 
+    /**
+     * Displays yearly summary on bar chart.
+     */
+    public void dispalyYearlySummary() {
+        Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle("Bar Chart Sample");
+        final NumberAxis yAxis = new NumberAxis();
+        final CategoryAxis xAxis = new CategoryAxis();
+        final BarChart<String, Number> bc =
+                new BarChart<>(xAxis, yAxis);
+        bc.setTitle("Yearly Summary");
+        yAxis.setLabel("Expense");
+        xAxis.setLabel("Year");
+
+        XYChart.Series series1 = new XYChart.Series();
+        series1.setName("Saving");
+        series1.getData().add(new XYChart.Data("2015", 2521.34));
+        series1.getData().add(new XYChart.Data("2016", 2348.82));
+        series1.getData().add(new XYChart.Data("2017", 1040));
+        series1.getData().add(new XYChart.Data("2018", 3207.15));
+        series1.getData().add(new XYChart.Data("2019", 1320));
+
+        XYChart.Series series2 = new XYChart.Series();
+        series2.setName("Expense");
+        series2.getData().add(new XYChart.Data("2015", 25601.34));
+        series2.getData().add(new XYChart.Data("2016", 20148.82));
+        series2.getData().add(new XYChart.Data("2017", 10000));
+        series2.getData().add(new XYChart.Data("2018", 35407.15));
+        series2.getData().add(new XYChart.Data("2019", 12000));
+
+
+        XYChart.Series series3 = new XYChart.Series();
+        series3.setName("Budget");
+        series3.getData().add(new XYChart.Data("2015", 25610.34));
+        series3.getData().add(new XYChart.Data("2016", 21480.82));
+        series3.getData().add(new XYChart.Data("2017", 10600));
+        series3.getData().add(new XYChart.Data("2018", 35497.15));
+        series3.getData().add(new XYChart.Data("2019", 12500));
+
+        Scene scene = new Scene(bc, 800, 600);
+        bc.getData().addAll(series1, series2, series3);
+        window.setScene(scene);
+        window.showAndWait();
+    }
 }

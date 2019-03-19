@@ -30,6 +30,7 @@ import seedu.address.logic.commands.epiggy.ViewGoalProgressCommand;
 import seedu.address.logic.commands.epiggy.ViewSavingsCommand;
 import seedu.address.logic.parser.epiggy.AddAllowanceCommandParser;
 import seedu.address.logic.parser.epiggy.AddExpenseCommandParser;
+import seedu.address.logic.parser.epiggy.ReportCommandParser;
 import seedu.address.logic.parser.epiggy.SetBudgetCommandParser;
 import seedu.address.logic.parser.epiggy.SetGoalCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -143,7 +144,11 @@ public class AddressBookParser {
 
         case ReportCommand.COMMAND_WORD:
         case ReportCommand.COMMAND_ALIAS:
-            return new ReportCommand();
+            if (arguments.equals("")) {
+                return new ReportCommandParser().parse(" t/MONTHLY");
+            } else {
+                return new ReportCommandParser().parse(arguments);
+            }
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

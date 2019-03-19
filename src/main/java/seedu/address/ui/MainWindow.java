@@ -132,7 +132,7 @@ public class MainWindow extends UiPart<Stage> {
         }); //TODO
         expenseListPanelPlaceholder.getChildren().add(expenseListPanel.getRoot());
 
-        budgetPanel = new BudgetPanel(logic.getBudget());
+        budgetPanel = new BudgetPanel(logic.getBudgetList(), logic::setBudget);
         budgetPanelPlaceholder.getChildren().add(budgetPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -187,13 +187,52 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows summary to user.
+     * Shows daily summary to user.
      */
     @FXML
-    private void handleReport() {
+    private void handleDailyReport() {
         helpWindow.hide();
         try {
-            logic.execute("report");
+            logic.execute("report t/daily");
+        } catch (CommandException | ParseException e) {
+            resultDisplay.setFeedbackToUser(e.getMessage());
+        }
+    }
+
+    /**
+     * Shows monthly summary to user.
+     */
+    @FXML
+    private void handleMonthlyReport() {
+        helpWindow.hide();
+        try {
+            logic.execute("report t/monthly");
+        } catch (CommandException | ParseException e) {
+            resultDisplay.setFeedbackToUser(e.getMessage());
+        }
+    }
+
+    /**
+     * Shows yearly summary to user.
+     */
+    @FXML
+    private void handleYearlyReport() {
+        helpWindow.hide();
+        try {
+            logic.execute("report t/yearly");
+        } catch (CommandException | ParseException e) {
+            resultDisplay.setFeedbackToUser(e.getMessage());
+        }
+    }
+
+    /**
+     * Shows percentage summary to user.
+     */
+    @FXML
+    private void handlePercentageReport() {
+        helpWindow.hide();
+        try {
+            logic.execute("report t/percentage");
         } catch (CommandException | ParseException e) {
             resultDisplay.setFeedbackToUser(e.getMessage());
         }

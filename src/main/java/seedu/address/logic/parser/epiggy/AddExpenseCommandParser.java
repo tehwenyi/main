@@ -43,7 +43,7 @@ public class AddExpenseCommandParser implements Parser<AddExpenseCommand> {
 
         Name name = ParserUtil.parseItemName(argMultimap.getValue(PREFIX_NAME).get());
         Price cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get());
-        Date date = new Date(); //TODO
+        Date date = new Date(); //TODO dummy code right now
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Item item = new Item(name, cost, tagList);

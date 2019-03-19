@@ -131,7 +131,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Creates a new Budget everytime it's needed.
+     * Creates a new Budget every time the budget needs to be updated.
      */
     private void createNewBudgetTillUpdated(Expense expense) {
         // Creates new budgets if the expense date is over the endDate of the current budgets
@@ -213,9 +213,6 @@ public class AddressBook implements ReadOnlyAddressBook {
                     budget.setRemainingDays(new Period((int) diff));
                     System.out.println("CHECK: the long diff and int diff: " + diff + (int) diff);
                 } else {
-                    // Should continue adding budget if expenses > budgeted end date
-                    // TODO Expenses might not be sorted by date though
-                    // There might not be any expenses + there might not be any budget before this
                     return budget;
                 }
             }

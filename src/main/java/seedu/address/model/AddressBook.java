@@ -108,7 +108,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         s.deductSavings(expense.getItem().getPrice().getAmount());
         savings.set(s);
         if (budget.getValue() != null) {
-            budget.getValue().deductRemainingAmount(expense.getItem().getPrice());
+            Budget b = this.budget.getValue();
+            b.deductRemainingAmount(expense.getItem().getPrice());
+            budget.set(b);
         }
         indicateModified();
     }

@@ -9,8 +9,6 @@ import java.util.List;
 
 import java.util.ListIterator;
 import java.util.concurrent.TimeUnit;
-//import javafx.beans.value.ObservableObjectValue;
-//import javafx.beans.value.ObservableValue;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleObjectProperty;
@@ -119,7 +117,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         savings.set(s);
 
         if (!budgetList.isEmpty()) {
-            createNewBudgetTillUpdated(expense);
+            // have to update last budget
+            if (budgetIsNotUpdated()) {
+                createNewBudgetTillUpdated(expense);
+            } else {
+                int latestIndex = budgetList.size() - 1;
+                Budget latestBudget = budgetList.get(latestIndex);
+                latestBudget.deductRemainingAmount(expense.getItem().getPrice());
+                budgetList.set(latestIndex, latestBudget);
+            }
         }
         indicateModified();
     }
@@ -131,17 +137,22 @@ public class AddressBook implements ReadOnlyAddressBook {
         // Creates new budgets if the expense date is over the endDate of the current budgets
         int k = budgetList.size() - 1;
         Budget previousBudget = budgetList.get(k);
-        while (expense.getDate().after(previousBudget.getEndDate())) {
-            System.out.println("Expense's Date is " + expense.getDate() + " while previousBudget date is " + previousBudget.getEndDate());
+        // Continue looping as long as the expense's date is later than the latest budget's end date
+        do {
+            // Sets the remaining days of the previous budget to 0 when creating a new budget
+            previousBudget.setRemainingDays(new Period(0));
+            budgetList.set(k, previousBudget);
+            // Create new budget based on previous budget
             Calendar cal = Calendar.getInstance();
             cal.setTime(previousBudget.getEndDate());
             cal.add(Calendar.DATE, 1);
             Date previousBudgetEndDatePlusOne = cal.getTime();
             Budget b = new Budget(previousBudget.getPrice(), previousBudget.getPeriod(), previousBudgetEndDatePlusOne);
-            budgetList.add(b);
+            // Update the budget based on current expenses
+            budgetList.add(updateToBeAddedBudgetBasedOnExpenses(b));
             previousBudget = budgetList.get(k + 1);
             k++;
-        }
+        } while (budgetIsNotUpdated());
     }
 
     /**
@@ -174,33 +185,70 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Adds a budget to the budgetList.
+     * Only called when there's no budget currently.
      */
     public void addBudget(Budget budget) {
-        SortedList<Expense> sortedExpensesByDate = expenses.sorted(new Comparator<Expense>() {
-            public int compare(Expense e1, Expense e2) {
-                if (e1.getDate() == null || e2.getDate() == null) {
-                    return 0;
-                }
-                return e1.getDate().compareTo(e2.getDate());
-            }
-        });
+        budget = updateToBeAddedBudgetBasedOnExpenses(budget);
+        budgetList.add(budget);
+        if (budgetIsNotUpdated()) {
+            // Create a new budget based on the latest expense
+            createNewBudgetTillUpdated(sortExpensesByDate().get(expenses.size() - 1));
+        }
+        indicateModified();
+    }
+
+    /**
+     * Updated the budget to be added based on the current list of expenses before it is added.
+     */
+    private Budget updateToBeAddedBudgetBasedOnExpenses(Budget budget) {
+        SortedList<Expense> sortedExpensesByDate = sortExpensesByDate();
         ListIterator<Expense> iterator = sortedExpensesByDate.listIterator();
         while (iterator.hasNext()) {
             Expense expense = iterator.next();
             if (expense.getDate().after(budget.getStartDate())) {
-                if (budget.getEndDate().after(expense.getDate())) {
+                if (!budget.getEndDate().before(expense.getDate())) {
                     budget.deductRemainingAmount(expense.getItem().getPrice());
                     long diffInMillies = Math.abs(budget.getEndDate().getTime() - expense.getDate().getTime());
                     long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
                     budget.setRemainingDays(new Period((int) diff));
                     System.out.println("CHECK: the long diff and int diff: " + diff + (int) diff);
                 } else {
-                    break;
+                    // Should continue adding budget if expenses > budgeted end date
+                    // TODO Expenses might not be sorted by date though
+                    // There might not be any expenses + there might not be any budget before this
+                    return budget;
                 }
             }
         }
-        budgetList.add(budget);
-        indicateModified();
+        return budget;
+    }
+
+    /**
+     * Sorts Expenses according to Date.
+     * @return SortedList of Expenses
+     */
+    private SortedList<Expense> sortExpensesByDate() {
+        return expenses.sorted(new Comparator<Expense>() {
+                public int compare(Expense e1, Expense e2) {
+                    if (e1.getDate() == null || e2.getDate() == null) {
+                        return 0;
+                    }
+                    return e1.getDate().compareTo(e2.getDate());
+                }
+            });
+    }
+
+    /**
+     * Checks if the budget is updated according to the Expense List.
+     * Only invoked if there is at least one budget.
+     * @return True if budget is not updated.
+     */
+    private boolean budgetIsNotUpdated() {
+        SortedList<Expense> sortedExpensesByDate = sortExpensesByDate();
+        Expense latestExpense = sortedExpensesByDate.get(sortedExpensesByDate.size() - 1);
+        Date lastBudgetedDate = budgetList.get(budgetList.size() - 1).getEndDate();
+        Date lastExpenseDate = latestExpense.getDate();
+        return (lastExpenseDate.after(lastBudgetedDate));
     }
 
     /**

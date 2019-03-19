@@ -116,6 +116,26 @@ public class Date {
     }
 
     /**
+     * Checks if the dateToCompare is a later date.
+     * @param dateToCompare the date to be compared.
+     * @return True if the dateToCompare is after this.date.
+     */
+    public boolean isAfter(Date dateToCompare) {
+        if (this.getYear() > dateToCompare.getYear()) {
+            return true;
+        } else if (this.getYear() < dateToCompare.getYear()) {
+            return false;
+        } else if (this.getMonth() > dateToCompare.getMonth()) {
+            return true;
+        } else if (this.getMonth() < dateToCompare.getMonth()) {
+            return false;
+        } else if (this.getDay() > dateToCompare.getDay()) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Getter for day
      * @return day
      */

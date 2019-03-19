@@ -7,8 +7,11 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 
 /**
@@ -80,6 +83,11 @@ public interface Model {
     void addExpense(Expense expense);
 
     /**
+     * Adds the given allowance.
+     */
+    void addAllowance(Allowance allowance);
+
+    /**
      * Sets the given budget.
      */
     void setBudget(Budget budget);
@@ -88,6 +96,21 @@ public interface Model {
      * Gets the current budget.
      */
     SimpleObjectProperty<Budget> getBudget();
+
+    /**
+     * Get the current savings.
+     */
+    SimpleObjectProperty<Savings> getSavings();
+
+    /**
+     * Get the savings goal.
+     */
+    SimpleObjectProperty<Goal> getGoal();
+
+    /**
+     * Sets the savings goal.
+     */
+    void setGoal(Goal goal);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

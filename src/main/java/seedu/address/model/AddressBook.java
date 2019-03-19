@@ -11,8 +11,11 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
+import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.Savings;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -26,6 +29,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final ObservableList<Expense> expenses;
     private final ObservableList<Item> items;
     private SimpleObjectProperty<Budget> budget;
+    private SimpleObjectProperty<Goal> goal;
+    private SimpleObjectProperty<Savings> savings;
     private final UniquePersonList persons;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
@@ -42,6 +47,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         //TODO init budget
         persons = new UniquePersonList();
         budget = new SimpleObjectProperty<>();
+        goal = new SimpleObjectProperty<>();
+        savings = new SimpleObjectProperty<>(new Savings());
+
     }
 
     public AddressBook() {}
@@ -70,7 +78,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
     }
 
@@ -98,7 +105,26 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addExpense(Expense expense) {
         expenses.add(expense);
+        Savings s = savings.get();
+        s.deductSavings(expense.getItem().getPrice().getAmount());
+        savings.set(s);
         indicateModified();
+    }
+
+    /**
+     * Adds an allowance to the expense book.
+     * @param allowance to be added.
+     */
+    public void addAllowance(Allowance allowance) {
+        expenses.add(allowance);
+        Savings s = savings.get();
+        s.addSavings(allowance.getItem().getPrice().getAmount());
+        savings.set(s);
+        indicateModified();
+    }
+
+    public SimpleObjectProperty<Savings> getSavings() {
+        return savings;
     }
 
     /**
@@ -113,8 +139,24 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Gets the current budget for ePiggy.
      */
     public SimpleObjectProperty<Budget> getBudget() {
-        return budget;
+        return this.budget;
     }
+
+    /**
+     * Sets the saving goal for ePiggy.
+     */
+    public void setGoal(Goal goal) {
+        this.goal.setValue(goal);
+        indicateModified();
+    }
+
+    /**
+     * Get the saving goal for ePiggy.
+     */
+    public SimpleObjectProperty<Goal> getGoal() {
+        return goal;
+    }
+
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.

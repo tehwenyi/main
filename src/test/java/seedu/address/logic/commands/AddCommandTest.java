@@ -24,8 +24,11 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -136,6 +139,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addAllowance(Allowance allowance) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Expense> getFilteredExpenseList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -154,6 +162,22 @@ public class AddCommandTest {
         public SimpleObjectProperty<Budget> getBudget() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public SimpleObjectProperty<Savings> getSavings() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public SimpleObjectProperty<Goal> getGoal() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setGoal(Goal goal) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void setSelectedExpense(Expense expense) {
             throw new AssertionError("This method should not be called.");

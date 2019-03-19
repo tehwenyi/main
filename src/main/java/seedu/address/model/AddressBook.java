@@ -109,15 +109,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         Savings s = savings.get();
         s.deductSavings(expense.getItem().getPrice().getAmount());
         savings.set(s);
-        if (expense.getDate().isAfter(budget.getValue().getEndDate())) {
-            // create new Budget and make that budget this.budget
-            // add the new budget to the list
+
+        Budget previousBudget = budgetList.get(budgetList.size() - 1);
+        int k = 1;
+        while (expense.getDate().isAfter(previousBudget.getEndDate())) {
+            Budget b = new Budget(previousBudget.getPrice(), previousBudget.getPeriod(), previousBudget.getEndDate().addDays(1));
+            budgetList.add(b);
+            previousBudget = budgetList.get(k);
+            k++;
         }
-//        if (budget.getValue() != null) {
-//            Budget b = this.budget.getValue();
-//            b.deductRemainingAmount(expense.getItem().getPrice());
-//            budget.set(b);
-//        }
         indicateModified();
     }
 
@@ -162,6 +162,23 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public SimpleObjectProperty<Budget> getBudget() {
         return this.budget;
+    }
+
+    /**
+     * Gets the current budget for ePiggy.
+     */
+    public ObservableList<Budget> getBudgetList() {
+        return this.budgetList;
+    }
+
+    /**
+     * Checks if there is already a budget in AddressBook.
+     */
+    public boolean hasBudget() {
+        if (budgetList.isEmpty()) {
+            return false;
+        }
+        return true;
     }
 
     /**

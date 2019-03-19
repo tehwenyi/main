@@ -30,6 +30,7 @@ public class SetBudgetCommand extends Command {
             + PREFIX_DATE + "04/02/2019";
 
     public static final String MESSAGE_SUCCESS = "Budget is set at: %1$s";
+    public static final String MESSAGE_FAIL = "Budget has already been set, if you want to edit your budget please type editBudget";
     //    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     // public static final String MESSAGE_DUPLICATE_EXPENSE = "This expense already exists in the address book";
 
@@ -46,10 +47,12 @@ public class SetBudgetCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
-        model.addBudget(toSet);
-        model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toSet));
+        if (!model.hasBudget()) {
+            model.addBudget(toSet);
+            model.commitAddressBook();
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toSet));
+        }
+        return new CommandResult(MESSAGE_FAIL);
     }
 
     @Override

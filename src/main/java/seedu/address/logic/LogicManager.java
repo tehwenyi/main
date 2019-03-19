@@ -90,6 +90,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Budget> getBudgetList() {
+        return model.getBudgetList();
+    }
+
+    @Override
     public ObservableList<String> getHistory() {
         return history.getHistory();
     }

@@ -41,6 +41,8 @@ public interface Logic {
     ObservableList<Expense> getFilteredExpenseList();
 
     SimpleObjectProperty<Budget> getBudget();
+
+    ObservableList<Budget> getBudgetList();
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
      * The list is ordered from the least recent command to the most recent command.

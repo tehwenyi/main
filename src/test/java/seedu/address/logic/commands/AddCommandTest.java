@@ -169,6 +169,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Budget> getBudgetList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasBudget() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public SimpleObjectProperty<Savings> getSavings() {
             throw new AssertionError("This method should not be called.");
         }

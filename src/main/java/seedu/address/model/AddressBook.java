@@ -28,6 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final ObservableList<Expense> expenses;
     private final ObservableList<Item> items;
+    private final ObservableList<Budget> budgetList;
     private SimpleObjectProperty<Budget> budget;
     private SimpleObjectProperty<Goal> goal;
     private SimpleObjectProperty<Savings> savings;
@@ -44,6 +45,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         expenses = FXCollections.observableArrayList();
         items = FXCollections.observableArrayList();
+        budgetList = FXCollections.observableArrayList();
         persons = new UniquePersonList();
         budget = new SimpleObjectProperty<>(new Budget());
         goal = new SimpleObjectProperty<>();
@@ -144,6 +146,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         } else {
             // cannot create budget
         }
+        indicateModified();
+    }
+
+    /**
+     * Adds a budget to the budgetList.
+     */
+    public void addBudget(Budget budget) {
+        budgetList.add(budget);
         indicateModified();
     }
 

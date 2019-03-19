@@ -93,6 +93,11 @@ public interface Model {
     void setBudget(Budget budget);
 
     /**
+     * Adds a new budget.
+     */
+    void addBudget(Budget budget);
+
+    /**
      * Gets the current budget.
      */
     SimpleObjectProperty<Budget> getBudget();

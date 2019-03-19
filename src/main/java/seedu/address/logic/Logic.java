@@ -93,6 +93,13 @@ public interface Logic {
     void setBudget(Budget budget);
 
     /**
+     * Adds a new budget.
+     *
+     * @see seedu.address.model.Model#addBudget(Budget)
+     */
+    void addBudget(Budget budget);
+
+    /**
      * Sets the selected expense in the filtered person list.
      *
      * @see seedu.address.model.Model#setSelectedExpense(Expense)

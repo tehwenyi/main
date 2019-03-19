@@ -124,6 +124,9 @@ public class AddressBook implements ReadOnlyAddressBook {
                 int latestIndex = budgetList.size() - 1;
                 Budget latestBudget = budgetList.get(latestIndex);
                 latestBudget.deductRemainingAmount(expense.getItem().getPrice());
+                long diffInMillies = Math.abs(latestBudget.getEndDate().getTime() - expense.getDate().getTime());
+                long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+                latestBudget.setRemainingDays(new Period((int) diff));
                 budgetList.set(latestIndex, latestBudget);
             }
         }

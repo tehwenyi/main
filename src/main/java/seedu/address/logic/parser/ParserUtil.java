@@ -96,10 +96,9 @@ public class ParserUtil {
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
         Date parsedDate = null;
-        String trimmedDate = date.trim();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            parsedDate = dateFormat.parse(trimmedDate);
+            parsedDate = dateFormat.parse(date.trim());
         } catch (java.text.ParseException parseException) {
             throw new ParseException("Date should be in the format dd/mm/yyyy.");
         }

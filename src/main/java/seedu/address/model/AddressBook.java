@@ -44,9 +44,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         expenses = FXCollections.observableArrayList();
         items = FXCollections.observableArrayList();
-        //TODO init budget
         persons = new UniquePersonList();
-        budget = new SimpleObjectProperty<>();
+        budget = new SimpleObjectProperty<>(new Budget());
         goal = new SimpleObjectProperty<>();
         savings = new SimpleObjectProperty<>(new Savings());
 
@@ -108,6 +107,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         Savings s = savings.get();
         s.deductSavings(expense.getItem().getPrice().getAmount());
         savings.set(s);
+        if (budget.getValue() != null) {
+            budget.getValue().deductRemainingAmount(expense.getItem().getPrice());
+        }
         indicateModified();
     }
 

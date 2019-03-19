@@ -2,20 +2,25 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
+import java.util.ListIterator;
 import javafx.beans.InvalidationListener;
 //import javafx.beans.value.ObservableObjectValue;
 //import javafx.beans.value.ObservableValue;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.util.InvalidationListenerManager;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.Savings;
+import seedu.address.model.epiggy.item.Date;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -110,13 +115,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         s.deductSavings(expense.getItem().getPrice().getAmount());
         savings.set(s);
 
-        Budget previousBudget = budgetList.get(budgetList.size() - 1);
-        int k = 1;
-        while (expense.getDate().isAfter(previousBudget.getEndDate())) {
-            Budget b = new Budget(previousBudget.getPrice(), previousBudget.getPeriod(), previousBudget.getEndDate().addDays(1));
-            budgetList.add(b);
-            previousBudget = budgetList.get(k);
-            k++;
+        if (!budgetList.isEmpty()) {
+            Budget previousBudget = budgetList.get(budgetList.size() - 1);
+            int k = 1;
+            while (expense.getDate().isAfter(previousBudget.getEndDate())) {
+                // Should do addBudget instead
+                Budget b = new Budget(previousBudget.getPrice(), previousBudget.getPeriod(), previousBudget.getEndDate().addDays(1));
+                budgetList.add(b);
+                previousBudget = budgetList.get(k);
+                k++;
+            }
         }
         indicateModified();
     }
@@ -153,6 +161,26 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a budget to the budgetList.
      */
     public void addBudget(Budget budget) {
+        SortedList<Expense> sortedExpensesByDate = expenses.sorted(new Comparator<Expense>() {
+            public int compare(Expense e1, Expense e2) {
+                if (e1.getDate() == null || e2.getDate() == null) {
+                    return 0;
+                }
+                return e1.getDate().compareTo(e2.getDate());
+            }
+        });
+        ListIterator<Expense> iterator = sortedExpensesByDate.listIterator();
+        while (iterator.hasNext()) {
+            Expense expense = iterator.next();
+            if (expense.getDate().isAfter(budget.getStartDate())) {
+                if (budget.getEndDate().isAfter(expense.getDate())) {
+                    budget.deductRemainingAmount(expense.getItem().getPrice());
+                    budget.setRemainingDays(budget.getEndDate().timePeriodBetween(expense.getDate()));
+                } else {
+                    break;
+                }
+            }
+        }
         budgetList.add(budget);
         indicateModified();
     }

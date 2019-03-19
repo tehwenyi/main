@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
 
 import java.util.logging.Logger;
 
@@ -17,13 +18,40 @@ import seedu.address.ui.ReportWindow;
 public class ReportCommand extends Command {
     public static final String COMMAND_WORD = "report";
     public static final String COMMAND_ALIAS = "rp";
-    public static final String COMMAND_USAGE = COMMAND_WORD
-            + ": Shows report to the user.";
+
+    public static final String COMMAND_USAGE_DAILY = COMMAND_WORD
+            + ": Shows daily report to the user.";
+    public static final String COMMAND_USAGE_MONTHLY = COMMAND_WORD
+            + ": Shows monthly report to the user.";
+    public static final String COMMAND_USAGE_YEARLY = COMMAND_WORD
+            + ": Shows yearly report to the user.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Shows report to the user.\n"
+            + "Parameters: "
+            + PREFIX_PERIOD + "TYPE OF REPORT \n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_PERIOD + "monthly ";
 
     public static final String MESSAGE_SUCCESS = "Showed report.";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
+    private String type = "MONTHLY";
+
+    /**
+     * Constructor with chart type.
+     *
+     * @param type
+     */
+    public ReportCommand(String type) {
+        this.type = type;
+    }
+
+    /**
+     * Default constructor
+     */
+    public ReportCommand() {
+    }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
@@ -31,18 +59,18 @@ public class ReportCommand extends Command {
         ReportWindow summaryWindow = new ReportWindow();
         logger.info("Creates Report window");
         // set a dummy value. TODO: Changes it when other command done.
-        ExpenseDisplayType expenseDisplayType = ExpenseDisplayType.MONTHLY_EXPENSE;
+        ExpenseDisplayType expenseDisplayType = ExpenseDisplayType.valueOf(type);
         switch (expenseDisplayType) {
-        case DAILY_EXPENSE:
+        case DAILY:
             summaryWindow.displayDailyReport();
             break;
-        case MONTHLY_EXPENSE:
+        case MONTHLY:
             summaryWindow.displayMonthlyReport();
             break;
-        case YEARLY_EXPENSE:
-            summaryWindow.displayDailyReport();
+        case YEARLY:
+            summaryWindow.dispalyYearlySummary();
             break;
-        case PERCENTAGE_EXPENSE:
+        case PERCENTAGE:
             summaryWindow.displayExpensePercentageReport();
             break;
         default:
@@ -57,6 +85,6 @@ public class ReportCommand extends Command {
      * Chart will be displayed according to expense display type.
      */
     public enum ExpenseDisplayType {
-        MONTHLY_EXPENSE, DAILY_EXPENSE, TOTAL_EXPENSE, YEARLY_EXPENSE, PERCENTAGE_EXPENSE
+        MONTHLY, DAILY, TOTAL, YEARLY, PERCENTAGE
     }
 }

@@ -9,6 +9,8 @@ import seedu.address.model.epiggy.item.Price;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Budget {
+    public static final String MESSAGE_CONSTRAINTS =
+            "Budgeted amount should be more than $0.";
     private final Price amount;
     private final Date startDate;
     private final Date endDate;

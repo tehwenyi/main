@@ -13,12 +13,15 @@ import seedu.address.model.epiggy.item.Price;
 public class Budget {
     public static final String MESSAGE_CONSTRAINTS =
             "Budgeted amount should be more than $0.";
+    private static final String CURRENT_BUDGET = "Current";
+    private static final String OLD_BUDGET = "Old";
     private final Price amount;
     private final Date startDate;
     private final Date endDate;
     private final Period period;
     private Price remainingAmount;
     private Period remainingDays;
+    private String status = "Something";
 
     /**
      * Represents a Budget in the expense book.
@@ -31,6 +34,7 @@ public class Budget {
         this.endDate = calculateEndDate(startDate, period);
         this.remainingAmount = amount;
         this.remainingDays = period;
+        this.status = CURRENT_BUDGET;
     }
 
     /**
@@ -48,6 +52,7 @@ public class Budget {
         this.endDate = this.startDate;
         this.remainingAmount = amount;
         this.remainingDays = period;
+        this.status = CURRENT_BUDGET;
     }
 
     /**
@@ -71,8 +76,16 @@ public class Budget {
         this.remainingDays = remainingDays;
     }
 
+    public void setStatusToOld () {
+        this.status = OLD_BUDGET;
+    }
+
     public void deductRemainingAmount(Price amountToDeduct) {
         this.remainingAmount = this.remainingAmount.deduct(amountToDeduct);
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     public Price getRemainingAmount() {

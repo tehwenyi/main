@@ -29,22 +29,22 @@ public class BudgetPanel extends UiPart<Region> {
             logger.fine("Budget changed to : '" + newValue + "'");
             setBudget.accept(newValue);
         });
-//        budget.addListener((observable, oldValue, newValue) -> {
-//            logger.fine("Budget changed to: " + newValue);
-//            // Don't modify selection if we are already selecting the selected expense,
-//            // otherwise we would have an infinite loop.
-//            if (Objects.equals(budgetView.getSelectionModel().getSelectedItem(), newValue)) {
-//                return;
-//            }
-//
-//            if (newValue == null) {
-//                budgetView.getSelectionModel().clearSelection();
-//            } else {
-//                int index = budgetView.getItems().indexOf(newValue);
-//                budgetView.scrollTo(index);
-//                budgetView.getSelectionModel().clearAndSelect(index);
-//            }
-//        });
+        //        budget.addListener((observable, oldValue, newValue) -> {
+        //            logger.fine("Budget changed to: " + newValue);
+        //            // Don't modify selection if we are already selecting the selected expense,
+        //            // otherwise we would have an infinite loop.
+        //            if (Objects.equals(budgetView.getSelectionModel().getSelectedItem(), newValue)) {
+        //                return;
+        //            }
+        //
+        //            if (newValue == null) {
+        //                budgetView.getSelectionModel().clearSelection();
+        //            } else {
+        //                int index = budgetView.getItems().indexOf(newValue);
+        //                budgetView.scrollTo(index);
+        //                budgetView.getSelectionModel().clearAndSelect(index);
+        //            }
+        //        });
     }
 
     /**

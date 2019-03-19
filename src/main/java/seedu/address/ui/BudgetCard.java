@@ -23,6 +23,8 @@ public class BudgetCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label budgetTitle;
+    @FXML
     private Label budgetedAmount;
     @FXML
     private Label startDate;
@@ -30,6 +32,8 @@ public class BudgetCard extends UiPart<Region> {
     private Label endDate;
     @FXML
     private Label period;
+    @FXML
+    private Label currentStatus;
     @FXML
     private Label remainingAmount;
     @FXML
@@ -39,10 +43,12 @@ public class BudgetCard extends UiPart<Region> {
         super(FXML);
         this.budget = budget;
         System.out.println(budget);
-        budgetedAmount.setText("Budget: $" + budget.getPrice().toString());
+        budgetTitle.setText(budget.getStatus() + " Budget");
+        budgetedAmount.setText("Amount: $" + budget.getPrice().toString());
         startDate.setText("Start Date: " + budget.getStartDate().toString());
         endDate.setText("End Date: " + budget.getEndDate().toString());
         period.setText("Period of Budget: " + budget.getPeriod().toString() + " days");
+        currentStatus.setText("Status");
         remainingAmount.setText("Amount remaining: $" + budget.getRemainingAmount().toString());
         remainingDays.setText("Days remaining: " + budget.getRemainingDays().toString() + " days");
     }

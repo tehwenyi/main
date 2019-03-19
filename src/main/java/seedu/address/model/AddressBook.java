@@ -143,7 +143,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         // Continue looping as long as the expense's date is later than the latest budget's end date
         do {
             // Sets the remaining days of the previous budget to 0 when creating a new budget
+            // Set the status of the previous budget to old too
             previousBudget.setRemainingDays(new Period(0));
+            previousBudget.setStatusToOld();
             budgetList.set(k, previousBudget);
             // Create new budget based on previous budget
             Calendar cal = Calendar.getInstance();
@@ -245,10 +247,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     private boolean budgetIsNotUpdated() {
         SortedList<Expense> sortedExpensesByDate = sortExpensesByDate();
-        Expense latestExpense = sortedExpensesByDate.get(sortedExpensesByDate.size() - 1);
-        Date lastBudgetedDate = budgetList.get(budgetList.size() - 1).getEndDate();
-        Date lastExpenseDate = latestExpense.getDate();
-        return (lastExpenseDate.after(lastBudgetedDate));
+        if (!sortedExpensesByDate.isEmpty()) {
+            Expense latestExpense = sortedExpensesByDate.get(sortedExpensesByDate.size() - 1);
+            Date lastBudgetedDate = budgetList.get(budgetList.size() - 1).getEndDate();
+            Date lastExpenseDate = latestExpense.getDate();
+            return (lastExpenseDate.after(lastBudgetedDate));
+        }
+        return false;
     }
 
     /**

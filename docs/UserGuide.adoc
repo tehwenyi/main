@@ -232,12 +232,24 @@ The expenses list should have at least one day’s worth of expenses.
 
 Generates a report of the given date, month, or year. The report consists of total inflow, total outflow, and proportion of income
 spent on different categories. +
-Format: `report`
+Format: `report [t/daily] [t/monthly] [t/yearly] [t/percentage]`
 
 Examples:
 
 * `report` +
-View the spending records for current year.
+View the spending records for this year.
+
+* `report t/daily` +
+View the spending records for this month.
+
+* `report t/monthly` +
+View the spending records for current month.
+
+* `report t/yearly` +
+View the spending records for past few years.
+
+* `report t/percentage` +
+View the spending records percentage of this year.
 
 ****
 *Additional Information:* +

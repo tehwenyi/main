@@ -132,8 +132,7 @@ public class ReportWindow {
                         new PieChart.Data("Cosmetics", 22),
                         new PieChart.Data("Others", 30));
         final PieChart chart = new PieChart(pieChartData);
-        chart.setTitle("Percentage of spending on each categories");
-        (
+        chart.setTitle("Percentage of spending on each categories"); (
                 (Group) scene.getRoot()
         ).getChildren().add(chart);
         window.setScene(scene);
@@ -145,15 +144,15 @@ public class ReportWindow {
      */
     public void dispalyYearlySummary() {
         Stage window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Bar Chart Sample");
         final NumberAxis yAxis = new NumberAxis();
         final CategoryAxis xAxis = new CategoryAxis();
         final BarChart<String, Number> bc =
                 new BarChart<>(xAxis, yAxis);
         bc.setTitle("Yearly Summary");
-        xAxis.setLabel("Expense");
-//        xAxis.setTickLabelRotation(90);
-        yAxis.setLabel("Year");
+        yAxis.setLabel("Expense");
+        xAxis.setLabel("Year");
 
         XYChart.Series series1 = new XYChart.Series();
         series1.setName("Saving");

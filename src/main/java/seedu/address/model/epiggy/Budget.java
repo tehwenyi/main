@@ -1,6 +1,8 @@
 package seedu.address.model.epiggy;
 
-import seedu.address.model.epiggy.item.Date;
+import java.util.Calendar;
+import java.util.Date;
+
 import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.epiggy.item.Price;
 
@@ -37,7 +39,11 @@ public class Budget {
      */
     public Budget() {
         this.amount = new Price(0);
-        this.startDate = new Date(01, 01, 2000);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, 2000);
+        cal.set(Calendar.MONTH, Calendar.JANUARY);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        this.startDate = cal.getTime();
         this.period = new Period(0);
         this.endDate = this.startDate;
         this.remainingAmount = amount;
@@ -51,14 +57,17 @@ public class Budget {
      * @return endDate
      */
     private Date calculateEndDate(Date startDate, Period period) {
-        return startDate.addDays(period.getTimePeriod());
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.startDate);
+        cal.add(Calendar.DATE, period.getTimePeriod());
+        return cal.getTime();
     }
 
     private void setRemainingAmount(Price remainingAmount) {
         this.remainingAmount = remainingAmount;
     }
 
-    private void setRemainingDays(Period remainingDays) {
+    public void setRemainingDays(Period remainingDays) {
         this.remainingDays = remainingDays;
     }
 
@@ -70,7 +79,8 @@ public class Budget {
         return remainingAmount;
     }
 
-    public Period getRemainingDays() { return remainingDays; }
+    public Period getRemainingDays() {
+        return remainingDays; }
 
     public Price getPrice() {
         return this.amount;

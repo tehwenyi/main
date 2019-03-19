@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,7 +12,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.item.Date;
 import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.epiggy.item.Price;
 import seedu.address.model.person.Address;
@@ -94,11 +95,15 @@ public class ParserUtil {
      */
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
+        Date parsedDate = null;
         String trimmedDate = date.trim();
-        if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            parsedDate = dateFormat.parse(trimmedDate);
+        } catch (java.text.ParseException parseException) {
+            throw new ParseException("Date should be in the format dd/mm/yyyy.");
         }
-        return new Date(trimmedDate);
+        return parsedDate;
     }
 
     /**

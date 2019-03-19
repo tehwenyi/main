@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
 
+import java.util.Date;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.epiggy.SetBudgetCommand;
@@ -15,7 +16,6 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.item.Date;
 import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.epiggy.item.Price;
 

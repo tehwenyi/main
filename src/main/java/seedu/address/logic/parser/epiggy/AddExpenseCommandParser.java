@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -17,7 +18,6 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.epiggy.Expense;
-import seedu.address.model.epiggy.item.Date;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.epiggy.item.Name;
 import seedu.address.model.epiggy.item.Price;
@@ -43,7 +43,7 @@ public class AddExpenseCommandParser implements Parser<AddExpenseCommand> {
 
         Name name = ParserUtil.parseItemName(argMultimap.getValue(PREFIX_NAME).get());
         Price cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get());
-        Date date = new Date("03/02/2019"); //TODO dummy code right now
+        Date date = new Date(); //TODO dummy code right now
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Item item = new Item(name, cost, tagList);

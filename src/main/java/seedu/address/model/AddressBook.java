@@ -148,11 +148,7 @@ public class AddressBook implements ReadOnlyAddressBook {
             previousBudget.setStatusToOld();
             budgetList.set(k, previousBudget);
             // Create new budget based on previous budget
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(previousBudget.getEndDate());
-            cal.add(Calendar.DATE, 1);
-            Date previousBudgetEndDatePlusOne = cal.getTime();
-            Budget b = new Budget(previousBudget.getPrice(), previousBudget.getPeriod(), previousBudgetEndDatePlusOne);
+            Budget b = new Budget(previousBudget.getPrice(), previousBudget.getPeriod(), previousBudget.getEndDate());
             // Update the budget based on current expenses
             budgetList.add(updateToBeAddedBudgetBasedOnExpenses(b));
             previousBudget = budgetList.get(k + 1);

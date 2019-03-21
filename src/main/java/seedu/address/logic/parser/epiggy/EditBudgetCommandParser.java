@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.epiggy.EditBudgetCommand;
 import seedu.address.logic.commands.epiggy.EditBudgetCommand.EditBudgetDetails;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -17,27 +16,19 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditBudgetCommand object
  */
 public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditBudgetCommand
+     * and returns an EditBudgetCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditBudgetCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_COST, PREFIX_PERIOD, PREFIX_DATE);
-
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
-        }
 
         EditBudgetDetails editBudgetDetails = new EditBudgetDetails();
         if (argMultimap.getValue(PREFIX_COST).isPresent()) {

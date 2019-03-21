@@ -37,6 +37,7 @@ public class UniqueBudgetList implements Iterable<Budget> {
 
     /**
      * Adds a new budget to the list.
+     * Only called when a new budget is added.
      */
     public void add(Budget toAdd) {
         requireNonNull(toAdd);
@@ -50,7 +51,7 @@ public class UniqueBudgetList implements Iterable<Budget> {
      * Gets the last budget on the internal list, which is the previous budget.
      * There must be at least one budget in {@code internalList}
      */
-    public Budget getPreviousBudget() {
+    public Budget getLatestBudget() {
         requireNonNull(internalList);
         return internalList.get(internalList.size() - 1);
     }
@@ -93,9 +94,11 @@ public class UniqueBudgetList implements Iterable<Budget> {
      * {@code target} must exist in the list.
      * The budget identity of {@code editedBudget} must not be the same as another existing budget in the list.
      */
-    public void replacePreviousBudgetWith(Budget editedBudget) {
+    public void replaceLatestBudgetWith(Budget editedBudget) {
         requireAllNonNull(internalList, editedBudget);
 
+        // start date of editedBudget must be after the end date of the previous budget
+        // end date of editedBudget must be before the latestExpense
         int index = internalList.size() - 1;
 //        int index = internalList.indexOf(target);
 //        if (index == -1) {

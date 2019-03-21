@@ -21,13 +21,13 @@ public class SetBudgetCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets a budget for ePiggy. "
             + "Parameters: "
-            + PREFIX_COST + "BUDGET IN DOLLARS "
-            + PREFIX_PERIOD + "TIME PERIOD IN DAYS "
-            + PREFIX_DATE + "START DATE IN DD/MM/YYYY \n"
+            + PREFIX_COST + "BUDGET_IN_DOLLARS "
+            + PREFIX_PERIOD + "TIME_PERIOD_IN_DAYS "
+            + PREFIX_DATE + "START_DATE_IN_DD/MM/YYYY \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_COST + "500 "
-            + PREFIX_PERIOD + "4 "
-            + PREFIX_DATE + "04/02/2019";
+            + PREFIX_PERIOD + "28 "
+            + PREFIX_DATE + "01/02/2019";
 
     public static final String MESSAGE_SUCCESS = "Budget is set at: %1$s";
     public static final String MESSAGE_FAIL = "Budget has already been set,"

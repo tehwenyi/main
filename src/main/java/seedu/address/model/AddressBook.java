@@ -21,6 +21,7 @@ import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.epiggy.UniqueBudgetList;
+import seedu.address.model.epiggy.exceptions.OverlappingBudgetsException;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.person.Person;
@@ -122,12 +123,12 @@ public class AddressBook implements ReadOnlyAddressBook {
             if (budgetIsNotUpdated()) {
                 createNewBudgetTillUpdated(expense);
             } else {
-                Budget latestBudget = budgetList.getPreviousBudget();
+                Budget latestBudget = budgetList.getLatestBudget();
                 latestBudget.deductRemainingAmount(expense.getItem().getPrice());
                 long diffInMillies = Math.abs(latestBudget.getEndDate().getTime() - expense.getDate().getTime());
                 long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
                 latestBudget.setRemainingDays(new Period((int) diff));
-                budgetList.replacePreviousBudgetWith(latestBudget);
+                budgetList.replaceLatestBudgetWith(latestBudget);
             }
         }
         indicateModified();
@@ -138,19 +139,19 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     private void createNewBudgetTillUpdated(Expense expense) {
         // Creates new budgets if the expense date is over the endDate of the current budgets
-        Budget latestBudget = budgetList.getPreviousBudget();
+        Budget latestBudget = budgetList.getLatestBudget();
         // Continue looping as long as the expense's date is later than the latest budget's end date
         do {
             // Sets the remaining days of the previous budget to 0 when creating a new budget
             // Set the status of the previous budget to old too
             latestBudget.setRemainingDays(new Period(0));
             latestBudget.setStatusToOld();
-            budgetList.replacePreviousBudgetWith(latestBudget);
+            budgetList.replaceLatestBudgetWith(latestBudget);
             // Create new budget based on previous budget
             Budget b = new Budget(latestBudget.getPrice(), latestBudget.getPeriod(), latestBudget.getEndDate());
-            // Update the budget based on current expenses
+            // Update the budget based on current expenses and add a new budget
             budgetList.add(updateToBeAddedBudgetBasedOnExpenses(b));
-            latestBudget = budgetList.getPreviousBudget();
+            latestBudget = budgetList.getLatestBudget();
         } while (budgetIsNotUpdated());
     }
 
@@ -220,7 +221,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Sorts Expenses according to Date.
+     * Checks if the budget is valid, then replace the latest budget.
+     */
+    private void replaceLatestBudgetWithCheckedBudget(Budget editedBudget) {
+        SortedList<Expense> expenseSortedList = sortExpensesByDate();
+        Expense latestExpense = expenseSortedList.get(expenseSortedList.size() - 1);
+        if (!editedBudget.getEndDate().after(latestExpense.getDate())) {
+            budgetList.replaceLatestBudgetWith(editedBudget);
+            createNewBudgetTillUpdated(latestExpense);
+        } else {
+            budgetList.replaceLatestBudgetWith(editedBudget);
+        }
+    }
+
+    /**
+     * Sorts Expenses according to Date. Earlier Dates will have lower indexes.
      * @return SortedList of Expenses
      */
     private SortedList<Expense> sortExpensesByDate() {
@@ -243,7 +258,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         SortedList<Expense> sortedExpensesByDate = sortExpensesByDate();
         if (!sortedExpensesByDate.isEmpty()) {
             Expense latestExpense = sortedExpensesByDate.get(sortedExpensesByDate.size() - 1);
-            Date lastBudgetedDate = budgetList.getPreviousBudget().getEndDate();
+            Date lastBudgetedDate = budgetList.getLatestBudget().getEndDate();
             Date lastExpenseDate = latestExpense.getDate();
             return (lastExpenseDate.after(lastBudgetedDate));
         }
@@ -308,7 +323,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setCurrentBudget(Budget editedBudget) {
         requireNonNull(editedBudget);
 
-        budgetList.replacePreviousBudgetWith(editedBudget);
+        replaceLatestBudgetWithCheckedBudget(updateToBeAddedBudgetBasedOnExpenses(editedBudget));
         indicateModified();
     }
 

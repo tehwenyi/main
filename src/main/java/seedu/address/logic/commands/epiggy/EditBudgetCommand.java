@@ -1,6 +1,10 @@
 package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BUDGETS;
 
 import java.util.Date;
@@ -26,11 +30,22 @@ public class EditBudgetCommand extends Command {
     public static final String COMMAND_WORD = "editBudget";
     public static final String COMMAND_ALIAS = "eb";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the current budget. ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the current budget. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: [" + PREFIX_COST + "AMOUNT] "
+            + "[" + PREFIX_PERIOD + "TIME_PERIOD_IN_DAYS] "
+            + "[" + PREFIX_DATE + "START_DATE_IN_DD/MM/YYYY] "
+            + "Example: " + COMMAND_WORD
+            + PREFIX_COST + "200 "
+            + PREFIX_PERIOD + "7";
 
     public static final String MESSAGE_EDIT_BUDGET_SUCCESS = "Current budget updated";
 
     public static final String MESSAGE_NOT_EDITED = "Budget not edited as there are no changes.";
+
+    public static final String MESSAGE_OVERLAPPING_BUDGET = "Budgets should not overlap. "
+            + "Please ensure that the start date of the edited budget "
+            + "is later than the end date of the previous budget.";
 
     private final EditBudgetDetails editBudgetDetails;
 
@@ -46,6 +61,12 @@ public class EditBudgetCommand extends Command {
 
         Budget budgetToEdit = lastShownBudgetList.get(lastShownBudgetList.size() - 1);
         Budget editedBudget = createEditedBudget(budgetToEdit, editBudgetDetails);
+
+        Date endDateOfPreviousBudget = lastShownBudgetList.get(lastShownBudgetList.size() - 2).getEndDate();
+
+        if (endDateOfPreviousBudget.after(editedBudget.getStartDate())) {
+            throw new CommandException(MESSAGE_OVERLAPPING_BUDGET);
+        }
 
         model.setCurrentBudget(editedBudget);
         model.updateFilteredBudgetList(PREDICATE_SHOW_ALL_BUDGETS);

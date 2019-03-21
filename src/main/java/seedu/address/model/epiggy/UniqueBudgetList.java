@@ -60,16 +60,16 @@ public class UniqueBudgetList implements Iterable<Budget> {
         return internalList.size();
     }
 
-//    /**
-//     * Removes the equivalent budget from the list.
-//     * The budget must exist in the list.
-//     */
-//    public void remove(Budget toRemove) {
-//        requireNonNull(toRemove);
-//        if (!internalList.remove(toRemove)) {
-//            throw new PersonNotFoundException();
-//        }
-//    }
+    //    /**
+    //     * Removes the equivalent budget from the list.
+    //     * The budget must exist in the list.
+    //     */
+    //    public void remove(Budget toRemove) {
+    //        requireNonNull(toRemove);
+    //        if (!internalList.remove(toRemove)) {
+    //            throw new PersonNotFoundException();
+    //        }
+    //    }
 
     public void setBudgetList(UniqueBudgetList replacement) {
         requireNonNull(replacement);
@@ -100,14 +100,14 @@ public class UniqueBudgetList implements Iterable<Budget> {
         // start date of editedBudget must be after the end date of the previous budget
         // end date of editedBudget must be before the latestExpense
         int index = internalList.size() - 1;
-//        int index = internalList.indexOf(target);
-//        if (index == -1) {
-//            throw new PersonNotFoundException();
-//        }
-//
-//        if (!target.equals(editedBudget) && contains(editedBudget)) {
-//            throw new DuplicateBudgetException();
-//        }
+        //        int index = internalList.indexOf(target);
+        //        if (index == -1) {
+        //            throw new PersonNotFoundException();
+        //        }
+        //
+        //        if (!target.equals(editedBudget) && contains(editedBudget)) {
+        //            throw new DuplicateBudgetException();
+        //        }
         internalList.set(index, editedBudget);
     }
 

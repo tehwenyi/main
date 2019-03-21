@@ -21,7 +21,7 @@ import seedu.address.model.epiggy.item.Price;
 /**
  * Edits the current budget in ePiggy.
  */
-public class editBudgetCommand extends Command {
+public class EditBudgetCommand extends Command {
 
     public static final String COMMAND_WORD = "editBudget";
     public static final String COMMAND_ALIAS = "eb";
@@ -30,9 +30,11 @@ public class editBudgetCommand extends Command {
 
     public static final String MESSAGE_EDIT_BUDGET_SUCCESS = "Current budget updated";
 
+    public static final String MESSAGE_NOT_EDITED = "Budget not edited as there are no changes.";
+
     private final EditBudgetDetails editBudgetDetails;
 
-    public editBudgetCommand(EditBudgetDetails editBudgetDetails) {
+    public EditBudgetCommand(EditBudgetDetails editBudgetDetails) {
         requireNonNull(editBudgetDetails);
         this.editBudgetDetails = new EditBudgetDetails(editBudgetDetails);
     }

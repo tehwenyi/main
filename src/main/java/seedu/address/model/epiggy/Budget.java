@@ -21,7 +21,7 @@ public class Budget {
     private final Period period;
     private Price remainingAmount;
     private Period remainingDays;
-    private String status = "Something";
+    private String status = null;
 
     /**
      * Represents a Budget in the expense book.
@@ -109,6 +109,22 @@ public class Budget {
 
     public Date getEndDate() {
         return this.endDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Budget)) {
+            return false;
+        }
+
+        Budget b = (Budget) o;
+        return this.amount == b.getPrice()
+                && this.startDate == b.getStartDate()
+                && this.period == b.getPeriod();
     }
 
     @Override

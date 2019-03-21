@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BUDGETS;
 
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.epiggy.item.Price;
+
 
 /**
  * Edits the current budget in ePiggy.
@@ -42,9 +44,7 @@ public class editBudgetCommand extends Command {
 
         Budget budgetToEdit = lastShownBudgetList.get(lastShownBudgetList.size() - 1);
         Budget editedBudget = createEditedBudget(budgetToEdit, editBudgetDetails);
-//
-//        model.setPerson(personToEdit, editedPerson);
-//        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         model.setCurrentBudget(editedBudget);
         model.updateFilteredBudgetList(PREDICATE_SHOW_ALL_BUDGETS);
         model.commitAddressBook();
@@ -100,11 +100,6 @@ public class editBudgetCommand extends Command {
 
         public void setStartDate(Date startDate) {
             this.startDate = startDate;
-        }
-
-
-        public void setEndDate(Date endDate) {
-            this.endDate = endDate;
         }
 
         public void setPeriod(Period period) {

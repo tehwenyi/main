@@ -243,7 +243,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         SortedList<Expense> sortedExpensesByDate = sortExpensesByDate();
         if (!sortedExpensesByDate.isEmpty()) {
             Expense latestExpense = sortedExpensesByDate.get(sortedExpensesByDate.size() - 1);
-            Date lastBudgetedDate = budgetList.get(budgetList.size() - 1).getEndDate();
+            Date lastBudgetedDate = budgetList.getPreviousBudget().getEndDate();
             Date lastExpenseDate = latestExpense.getDate();
             return (lastExpenseDate.after(lastBudgetedDate));
         }
@@ -268,7 +268,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Checks if there is already a budget in AddressBook.
      */
     public boolean hasBudget() {
-        if (budgetList.isEmpty()) {
+        if (budgetList.asUnmodifiableObservableList().isEmpty()) {
             return false;
         }
         return true;
@@ -302,14 +302,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
+     * Replaces the current/previous budget in the list with {@code editedBudget}.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     public void setCurrentBudget(Budget editedBudget) {
         requireNonNull(editedBudget);
 
-        budgetList.setBudget(editedBudget);
+        budgetList.replacePreviousBudgetWith(editedBudget);
         indicateModified();
     }
 

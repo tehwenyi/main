@@ -94,7 +94,7 @@ public class UniqueBudgetList implements Iterable<Budget> {
      * The budget identity of {@code editedBudget} must not be the same as another existing budget in the list.
      */
     public void replacePreviousBudgetWith(Budget editedBudget) {
-        requireNonNull(editedBudget);
+        requireAllNonNull(internalList, editedBudget);
 
         int index = internalList.size() - 1;
 //        int index = internalList.indexOf(target);

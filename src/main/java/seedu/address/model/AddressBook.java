@@ -34,7 +34,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final ObservableList<Expense> expenses;
     private final ObservableList<Item> items;
-    // private final ObservableList<Budget> budgetList;
     private SimpleObjectProperty<Budget> budget;
     private SimpleObjectProperty<Goal> goal;
     private SimpleObjectProperty<Savings> savings;
@@ -172,6 +171,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Sets a budget for ePiggy.
+     * TODO: check if this method is still in use
      */
     public void setBudget(Budget budget) {
         if (budget.getPrice().getAmount() == 0) {
@@ -210,7 +210,6 @@ public class AddressBook implements ReadOnlyAddressBook {
                     long diffInMillies = Math.abs(budget.getEndDate().getTime() - expense.getDate().getTime());
                     long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
                     budget.setRemainingDays(new Period((int) diff));
-                    System.out.println("CHECK: the long diff and int diff: " + diff + (int) diff);
                 } else {
                     return budget;
                 }
@@ -321,7 +320,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setCurrentBudget(Budget editedBudget) {
         requireNonNull(editedBudget);
-
         replaceLatestBudgetWithCheckedBudget(updateToBeAddedBudgetBasedOnExpenses(editedBudget));
         indicateModified();
     }

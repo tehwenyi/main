@@ -39,7 +39,7 @@ public class UniqueBudgetList implements Iterable<Budget> {
     }
 
     /**
-     * Adds a new budget to the list.
+     * Adds a new budget to the top of the list.
      * Only called when a new budget is added.
      * @param toAdd the budget to be added.
      */
@@ -48,7 +48,7 @@ public class UniqueBudgetList implements Iterable<Budget> {
         // if (contains(toAdd)) {
         //     throw new DuplicateBudgetException();
         // }
-        internalList.add(toAdd);
+        internalList.add(0, toAdd);
     }
 
     /**
@@ -58,7 +58,7 @@ public class UniqueBudgetList implements Iterable<Budget> {
      */
     public Budget getLatestBudget() {
         requireNonNull(internalList);
-        return internalList.get(internalList.size() - 1);
+        return internalList.get(0);
     }
 
     /**
@@ -109,19 +109,7 @@ public class UniqueBudgetList implements Iterable<Budget> {
      */
     public void replaceLatestBudgetWith(Budget editedBudget) {
         requireAllNonNull(internalList, editedBudget);
-
-        // start date of editedBudget must be after the end date of the previous budget
-        // end date of editedBudget must be before the latestExpense
-        int index = internalList.size() - 1;
-        //        int index = internalList.indexOf(target);
-        //        if (index == -1) {
-        //            throw new PersonNotFoundException();
-        //        }
-        //
-        //        if (!target.equals(editedBudget) && contains(editedBudget)) {
-        //            throw new DuplicateBudgetException();
-        //        }
-        internalList.set(index, editedBudget);
+        internalList.set(0, editedBudget);
     }
 
     /**

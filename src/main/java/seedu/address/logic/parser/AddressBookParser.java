@@ -19,23 +19,10 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.epiggy.AddAllowanceCommand;
-import seedu.address.logic.commands.epiggy.AddExpenseCommand;
-import seedu.address.logic.commands.epiggy.EditBudgetCommand;
-import seedu.address.logic.commands.epiggy.ReportCommand;
-import seedu.address.logic.commands.epiggy.SetBudgetCommand;
-import seedu.address.logic.commands.epiggy.SetGoalCommand;
-import seedu.address.logic.commands.epiggy.ViewBudgetCommand;
-import seedu.address.logic.commands.epiggy.ViewGoalCommand;
-import seedu.address.logic.commands.epiggy.ViewGoalProgressCommand;
-import seedu.address.logic.commands.epiggy.ViewSavingsCommand;
-import seedu.address.logic.parser.epiggy.AddAllowanceCommandParser;
-import seedu.address.logic.parser.epiggy.AddExpenseCommandParser;
-import seedu.address.logic.parser.epiggy.EditBudgetCommandParser;
-import seedu.address.logic.parser.epiggy.ReportCommandParser;
-import seedu.address.logic.parser.epiggy.SetBudgetCommandParser;
-import seedu.address.logic.parser.epiggy.SetGoalCommandParser;
+import seedu.address.logic.commands.epiggy.*;
+import seedu.address.logic.parser.epiggy.*;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 
 /**
  * Parses user input.
@@ -63,6 +50,10 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
+
+            case FindExpenseCommand.COMMAND_WORD:
+            case FindExpenseCommand.COMMAND_ALIAS:
+                    return new FindExpenseCommandParser().parse(arguments);
 
         case AddExpenseCommand.COMMAND_WORD:
         case AddExpenseCommand.COMMAND_ALIAS:

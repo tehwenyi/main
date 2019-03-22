@@ -180,6 +180,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setExpense(seedu.address.model.epiggy.Expense target, seedu.address.model.epiggy.Expense editedExpense) {
+        requireAllNonNull(target, editedExpense);
+
+        versionedAddressBook.setExpense(target, editedExpense);
+    }
+
+    @Override
     public void setCurrentBudget(Budget editedBudget) {
         requireNonNull(editedBudget);
 
@@ -219,6 +226,12 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredExpensesList(Predicate<seedu.address.model.epiggy.Expense> predicate) {
+        requireNonNull(predicate);
+        filteredExpenses.setPredicate(predicate);
     }
 
     @Override

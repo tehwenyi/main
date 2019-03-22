@@ -75,7 +75,7 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
      * Return true if the {@code Name} of {@code expense} contains {@code nameKeywords}.
      * */
     public boolean containsNameKeywords(String nameKeywords, Expense expense) {
-        assert nameKeywords != null : "nameKeywords should not be null.";
+        assert nameKeywords != null : "nameKeywords should not be null.\n";
         List<String> splitNameKeywords = Arrays.asList(nameKeywords.trim().split("\\s+"));
         Item item = expense.getItem();
         boolean result = splitNameKeywords.stream()
@@ -87,7 +87,7 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
      * Return true if any of the {@code Tag} of {@code expense} contains any element of {@code tagKeywords}.
      * */
     public boolean checkTagKeywords(List<String> tagKeywords, Expense expense) {
-        assert tagKeywords != null : "dateKeywords should not be null.";
+        assert tagKeywords != null : "tagKeywords should not be null.\n";
         List<String> separatedTagKeywordsList = new ArrayList<>();
         for (String tag : tagKeywords) {
             separatedTagKeywordsList.addAll(Arrays.asList(tag.split("\\s+")));
@@ -103,7 +103,7 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
      * Return true if the {@code Cost} of {@code expense} is within the range denoted by {@code costKeywords}.
      * */
     public boolean isWithinCostRange(String costKeywords, Expense expense) {
-        assert costKeywords != null : "costKeywords should not be null.";
+        assert costKeywords != null : "costKeywords should not be null.\n";
         boolean result;
         String[] splitCost = costKeywords.split(":");
         Item item = expense.getItem();
@@ -123,7 +123,7 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
      * Return true if the {@code Date} of {@code expense} is within the range denoted by {@code dateKeywords}.
      * */
     public boolean isWithinDateRange(String dateKeywords, Expense expense) {
-        assert dateKeywords != null : "dateKeywords should not be null.";
+        assert dateKeywords != null : "dateKeywords should not be null.\n";
         boolean result;
         String[] splitDate = dateKeywords.split(":");
         if (splitDate.length == 1) { //if the user only enter a particular date

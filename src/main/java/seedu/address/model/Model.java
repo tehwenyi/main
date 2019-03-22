@@ -158,6 +158,12 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     * Updates the filter of the filtered expense list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredExpenseList(Predicate<seedu.address.model.epiggy.Expense> predicate);
+
+    /**
      * Updates the filter of the filtered budget list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */

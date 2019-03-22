@@ -23,12 +23,15 @@ import seedu.address.model.epiggy.exceptions.DuplicateBudgetException;
  */
 public class UniqueBudgetList implements Iterable<Budget> {
 
+    // TODO: max 10/20 budget per list
     private final ObservableList<Budget> internalList = FXCollections.observableArrayList();
     private final ObservableList<Budget> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent budget as the given argument.
+     * @param toCheck if the budget exists in the internalList already.
+     * @return true if internalList already contains the budget.
      */
     public boolean contains(Budget toCheck) {
         requireNonNull(toCheck);
@@ -38,6 +41,7 @@ public class UniqueBudgetList implements Iterable<Budget> {
     /**
      * Adds a new budget to the list.
      * Only called when a new budget is added.
+     * @param toAdd the budget to be added.
      */
     public void add(Budget toAdd) {
         requireNonNull(toAdd);
@@ -50,12 +54,17 @@ public class UniqueBudgetList implements Iterable<Budget> {
     /**
      * Gets the last budget on the internal list, which is the previous budget.
      * There must be at least one budget in {@code internalList}
+     * @return the latest budget in {@code internalList}.
      */
     public Budget getLatestBudget() {
         requireNonNull(internalList);
         return internalList.get(internalList.size() - 1);
     }
 
+    /**
+     * Gets the size of internal list.
+     * @return the size of {@code internalList}.
+     */
     public int getBudgetListSize() {
         return internalList.size();
     }
@@ -71,6 +80,10 @@ public class UniqueBudgetList implements Iterable<Budget> {
     //        }
     //    }
 
+    /**
+     * Sets internalList to a new list of the same type.
+     * @param replacement list.
+     */
     public void setBudgetList(UniqueBudgetList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -79,19 +92,19 @@ public class UniqueBudgetList implements Iterable<Budget> {
     /**
      * Replaces the contents of this list with {@code budgetList}.
      * {@code budgetList} must not contain duplicate budgetList.
+     * @param newBudgetList to replace.
      */
-    public void setBudgetList(List<Budget> budgetList) {
-        requireAllNonNull(budgetList);
-        if (!budgetsAreUnique(budgetList)) {
+    public void setBudgetList(List<Budget> newBudgetList) {
+        requireAllNonNull(newBudgetList);
+        if (!budgetsAreUnique(newBudgetList)) {
             throw new DuplicateBudgetException();
         }
 
-        internalList.setAll(budgetList);
+        this.internalList.setAll(newBudgetList);
     }
 
     /**
      * Replaces the previous budget in the list with {@code editedBudget}.
-     * {@code target} must exist in the list.
      * The budget identity of {@code editedBudget} must not be the same as another existing budget in the list.
      */
     public void replaceLatestBudgetWith(Budget editedBudget) {

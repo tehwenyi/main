@@ -51,9 +51,9 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-            case FindExpenseCommand.COMMAND_WORD:
-            case FindExpenseCommand.COMMAND_ALIAS:
-                    return new FindExpenseCommandParser().parse(arguments);
+        case FindExpenseCommand.COMMAND_WORD:
+        case FindExpenseCommand.COMMAND_ALIAS:
+            return new FindExpenseCommandParser().parse(arguments);
 
         case AddExpenseCommand.COMMAND_WORD:
         case AddExpenseCommand.COMMAND_ALIAS:

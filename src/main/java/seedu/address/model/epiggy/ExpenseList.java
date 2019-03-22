@@ -109,6 +109,9 @@ public class ExpenseList implements Iterable<seedu.address.model.epiggy.Expense>
         return internalList.hashCode();
     }
 
+    /**
+     * @return size of {@param internalList}
+     */
     public int size() {
         return internalList.size();
     }
@@ -127,4 +130,5 @@ public class ExpenseList implements Iterable<seedu.address.model.epiggy.Expense>
             }
         });
     }
+
 }

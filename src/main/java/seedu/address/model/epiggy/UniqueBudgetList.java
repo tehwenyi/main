@@ -24,6 +24,7 @@ import seedu.address.model.epiggy.exceptions.DuplicateBudgetException;
 public class UniqueBudgetList implements Iterable<Budget> {
 
     // TODO: max 10/20 budget per list
+    private static final int MAXIMUM_SIZE = 20;
     private final ObservableList<Budget> internalList = FXCollections.observableArrayList();
     private final ObservableList<Budget> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -49,6 +50,7 @@ public class UniqueBudgetList implements Iterable<Budget> {
         //     throw new DuplicateBudgetException();
         // }
         internalList.add(0, toAdd);
+        limitSize();
     }
 
     /**
@@ -87,6 +89,7 @@ public class UniqueBudgetList implements Iterable<Budget> {
     public void setBudgetList(UniqueBudgetList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        limitSize();
     }
 
     /**
@@ -101,6 +104,7 @@ public class UniqueBudgetList implements Iterable<Budget> {
         }
 
         this.internalList.setAll(newBudgetList);
+        limitSize();
     }
 
     /**
@@ -110,6 +114,20 @@ public class UniqueBudgetList implements Iterable<Budget> {
     public void replaceLatestBudgetWith(Budget editedBudget) {
         requireAllNonNull(internalList, editedBudget);
         internalList.set(0, editedBudget);
+    }
+
+    /**
+     * Ensures the size of budgetList does not exceed {@code MAXIMUM_SIZE}.
+     * Deletes all budgets after the {@code MAXIMUM_SIZE} has exceeded.
+     */
+    public void limitSize() {
+        requireNonNull(internalList);
+        int budgetListSize = internalList.size();
+        if (budgetListSize > MAXIMUM_SIZE) {
+            for (int i = budgetListSize; i > MAXIMUM_SIZE; i--) {
+                internalList.remove(MAXIMUM_SIZE);
+            }
+        }
     }
 
     /**

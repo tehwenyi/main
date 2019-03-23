@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -42,11 +45,16 @@ public class BudgetCard extends UiPart<Region> {
     public BudgetCard(int displayedIndex, Budget budget) {
         super(FXML);
         this.budget = budget;
-        System.out.println(budget);
         budgetTitle.setText(displayedIndex + ". " + budget.getStatus() + " Budget");
         budgetedAmount.setText("Amount: $" + budget.getPrice().toString());
-        startDate.setText("Start Date: " + budget.getStartDate().toString());
-        endDate.setText("End Date: " + budget.getEndDate().toString());
+
+        DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy (E)");
+        startDate.setText("Start Date: " + dateFormat.format(budget.getStartDate()));
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(budget.getEndDate());
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        endDate.setText("End Date: " + dateFormat.format(calendar.getTime()));
+
         period.setText("Period of Budget: " + budget.getPeriod().toString() + " days");
         currentStatus.setText("Status");
         remainingAmount.setText("Amount remaining: $" + budget.getRemainingAmount().toString());

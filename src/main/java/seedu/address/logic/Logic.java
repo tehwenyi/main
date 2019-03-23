@@ -99,7 +99,7 @@ public interface Logic {
      *
      * @see seedu.address.model.Model#addBudget(Budget)
      */
-    void addBudget(Budget budget);
+    void addBudget(int index, Budget budget);
 
     /**
      * Sets the selected expense in the filtered person list.

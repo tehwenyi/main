@@ -134,8 +134,8 @@ public class LogicManager implements Logic {
         model.setBudget(budget); }
 
     @Override
-    public void addBudget(Budget budget) {
-        model.addBudget(budget); }
+    public void addBudget(int index, Budget budget) {
+        model.addBudget(index, budget); }
 
     @Override
     public ReadOnlyProperty<Expense> selectedExpenseProperty() {

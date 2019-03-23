@@ -24,7 +24,7 @@ import seedu.address.model.epiggy.exceptions.DuplicateBudgetException;
 public class UniqueBudgetList implements Iterable<Budget> {
 
     // TODO: max 10/20 budget per list
-    private static final int MAXIMUM_SIZE = 20;
+    public static final int MAXIMUM_SIZE = 20;
     private final ObservableList<Budget> internalList = FXCollections.observableArrayList();
     private final ObservableList<Budget> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -44,12 +44,12 @@ public class UniqueBudgetList implements Iterable<Budget> {
      * Only called when a new budget is added.
      * @param toAdd the budget to be added.
      */
-    public void add(Budget toAdd) {
+    public void addAtIndex(int index, Budget toAdd) {
         requireNonNull(toAdd);
         // if (contains(toAdd)) {
         //     throw new DuplicateBudgetException();
         // }
-        internalList.add(0, toAdd);
+        internalList.add(index, toAdd);
         limitSize();
     }
 

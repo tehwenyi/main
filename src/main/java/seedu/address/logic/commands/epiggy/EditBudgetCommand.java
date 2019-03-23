@@ -59,10 +59,10 @@ public class EditBudgetCommand extends Command {
         requireNonNull(model);
         List<Budget> lastShownBudgetList = model.getFilteredBudgetList();
 
-        Budget budgetToEdit = lastShownBudgetList.get(lastShownBudgetList.size() - 1);
+        Budget budgetToEdit = lastShownBudgetList.get(0);
         Budget editedBudget = createEditedBudget(budgetToEdit, editBudgetDetails);
 
-        Date endDateOfPreviousBudget = lastShownBudgetList.get(lastShownBudgetList.size() - 2).getEndDate();
+        Date endDateOfPreviousBudget = lastShownBudgetList.get(1).getEndDate();
 
         if (endDateOfPreviousBudget.after(editedBudget.getStartDate())) {
             throw new CommandException(MESSAGE_OVERLAPPING_BUDGET);

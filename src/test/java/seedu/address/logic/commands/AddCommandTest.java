@@ -159,7 +159,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addBudget(Budget budget) {
+        public void addBudget(int index, Budget budget) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -98,7 +98,7 @@ public interface Model {
     /**
      * Adds a new budget.
      */
-    void addBudget(Budget budget);
+    void addBudget(int index, Budget budget);
 
     /**
      * Gets the current budget.

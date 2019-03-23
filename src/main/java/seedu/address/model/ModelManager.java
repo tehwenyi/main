@@ -139,8 +139,8 @@ public class ModelManager implements Model {
         versionedAddressBook.setBudget(budget); }
 
     @Override
-    public void addBudget(Budget budget) {
-        versionedAddressBook.addBudget(budget); }
+    public void addBudget(int index, Budget budget) {
+        versionedAddressBook.addBudget(index, budget); }
 
     @Override
     public SimpleObjectProperty<Budget> getBudget() {

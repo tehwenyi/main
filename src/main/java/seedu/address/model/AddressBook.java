@@ -148,7 +148,7 @@ public class AddressBook implements ReadOnlyAddressBook {
             // Create new budget based on previous budget
             Budget b = new Budget(latestBudget.getPrice(), latestBudget.getPeriod(), latestBudget.getEndDate());
             // Update the budget based on current expenses and add a new budget
-            budgetList.add(updateToBeAddedBudgetBasedOnExpenses(b));
+            budgetList.addAtIndex(0, updateToBeAddedBudgetBasedOnExpenses(b));
             latestBudget = budgetList.getLatestBudget();
         } while (budgetIsNotUpdated());
     }
@@ -184,15 +184,17 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Adds a budget to the budgetList.
-     * Only called when there's no budget currently.
+     * Called by the Command setBudget only.
+     * @param budget to be added into budgetList.
      */
-    public void addBudget(Budget budget) {
+    public void addBudget(int index, Budget budget) {
         budget = updateToBeAddedBudgetBasedOnExpenses(budget);
-        budgetList.add(budget);
-        if (budgetIsNotUpdated()) {
-            // Create a new budget based on the latest expense
-            createNewBudgetTillUpdated(sortExpensesByDate().get(expenses.size() - 1));
-        }
+
+        budgetList.addAtIndex(index, budget);
+        //        if (budgetIsNotUpdated()) {
+        //            // Create a new budget based on the latest expense
+        //            createNewBudgetTillUpdated(sortExpensesByDate().get(expenses.size() - 1));
+        //        }
         indicateModified();
     }
 

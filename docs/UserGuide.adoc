@@ -1,6 +1,7 @@
 = ePiggy - User Guide
 :site-section: UserGuide
 :toc:
+:toclevels: 4
 :toc-title:
 :toc-placement: preamble
 :sectnums:
@@ -18,25 +19,43 @@ By: `Team W17-4`      Since: `Feb 2019`      Licence: `MIT`
 
 == Introduction
 
-As a student, it is important to start learning how to manage your spendings. Your expenses can be very regular (school fees,
-campus canteen food, school supplies, daily bus rides, etc) but you still need to manage them. ePiggy is specially targeted at students and students’ spending habits. It allows you to manage, analyse and forecast your
-expenses while recommending you ways you can better manage your finance! +
+ePiggy is a simplified expense tracker catered towards students. You can use it to record your allowance, your expenses, track your savings, and even plan out what you should eat for recess. It has student-oriented features that makes managing money easier for students.
+
+With ePiggy, we hope to inculcate the habit of managing money from young.
+
 Interested? Click on the Quick Start to get started!
 
+== About
+This user guide provides a comprehensive view on how to set up ePiggy, the features available, and frequently asked questions.
+
 == Quick Start
-Follow these steps to start using ePiggy: +
-*1.* Install Java (version 9 or later) on your computer by going here and downloading the Java SE Runtime Environment for your operating system. +
-*2.* Download the latest *`ePiggy.jar`* file from here +
-*3.* Copy the file to the folder which you want to use as the home folder for your Expense Tracker. +
-*4.*  Double-click the *`ePiggy.jar`* file to start the app. +
-The GUI will appear and look like this:
+Follow these steps to start using ePiggy::
+1. Install Java (version 9 or later) on your computer by going here and downloading the Java SE Runtime Environment for your operating system. +
+2. Download the latest *`ePiggy.jar`* file from here +
+3. Copy the file to the folder which you want to use as the home folder for your Expense Tracker. +
+4. Double-click the *`ePiggy.jar`* file to start the app. +
+5. Type in your username in the text box *`Your Username`*. +
+* E.g *`username123`* +
+6. Type in your password in the text box *`Your Password`*. +
+* E.g. *`pw123`* +
+7. Press the *`Register`* button and you can now use all the features of ePiggy.
+
+====
+*Some sample commands you can try:*
+
+* `addExpense n/Chicken Rice $/4 t/dinner` +
+This command adds a new expense of $4 for Chicken Rice today.
+* `addAllowance $/20` +
+This command adds a new allowance of $20.
+* `setBudget $/500 t/28 d/01/02/2019` +
+This command sets a budget of $500 starting on 1st February, lasting 28 days.
+====
+
+The GUI will appear like this upon launch:
 
 image::Ui.png[width="760"]
-_Figure 1. The user interface on application launch_
+_Figure 1. The user interface upon launch of application_
 
-.  Type in *`USERNAME`* in the text box (the box where it says "Your Username *"). E.g. *`username123`*
-.  Type in *`PASSWORD`* in the text box (the box where it says "Your Password *"). E.g. *`pd123`*
-.  Press *`Register`* button and you are now able to use all the features of the app.
 
 [[Features]]
 == Features
@@ -44,30 +63,36 @@ _Figure 1. The user interface on application launch_
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/EXPENSE_NAME`, `EXPENSE_NAME` is a parameter which can be used as `add n/Chicken Rice`.
-* Items in square brackets are optional e.g `n/EXPENSE_NAME [t/TAG]` can be used as `n/Chicken Rice t/School` or as `n/Chicken Rice`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/school`, `t/hawker t/school` etc.
-* Parameters can be in any order e.g. if the command specifies `n/EXPENSE_NAME $/COST`, `$/COST n/EXPENSE_NAME` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be entered by the user. +
+** E.g. For `addExpense n/EXPENSE_NAME`, `EXPENSE_NAME` is a parameter which can be used as `addExpense n/Chicken Rice`.
+* Items in square brackets are optional. +
+** E.g `n/EXPENSE_NAME [t/TAG]` can be used as `n/Chicken Rice t/School` or as `n/Chicken Rice`.
+* Items with `…`​ after them can be used multiple times including zero times. +
+** E.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/school` (1 time), `t/hawker t/school` (2 times) etc.
+* Parameters can be in any order. +
+** E.g. If the command specifies `n/EXPENSE_NAME $/COST`, `$/COST n/EXPENSE_NAME` is also acceptable.
 ====
 
-=== Viewing help : `help`
-Lists all the user commands with their syntax and descriptions.
+=== Basic Features
+
+==== Viewing help : `help`
+Lists all the user commands with their syntax and descriptions. +
 Format: `help`
 
-=== Adding an expense : `addExpense`
+==== Adding an expense : `addExpense`
 
 Adds a new expense record to the Expense Tracker. +
-Format: `addExpense n/EXPENSE_NAME $/COST t/CATEGORY [d/DATE] [a/NAME_OF_THE_SHOP] [t/TAG]…`
+Format: `addExpense n/EXPENSE_NAME $/COST [d/DATE] [a/NAME_OF_THE_SHOP] [t/TAG]…`
 
-Example:
+Examples:
 
-* `addExpense n/Chicken rice set $/5 t/Food d/HAINAN KITCHEN d/2019-02-21` +
-Adds an expense with its name as "Chicken rice set", cost as "5.00", category as "Food", date as "2019-02-21", name of the shop as "HAINAN KITCHEN".
+* `addExpense n/Chicken rice set $/5 t/Food d/Hainan Kitchen d/21/02/2019` +
+Adds an expense for a $5 chicken rice set, tagged as Food with the date as 21/02/2019 from the shop Hainan Kitchen.
 
-* `add n/Chicken rice set $/5 c/Food` +
-Adds an expense with its name as "Chicken rice set", cost as "5.00", category as "Food" and date as current date by default.
+* `add n/Chicken rice set $/5 t/Food` +
+Adds an expense for a $5 chicken rice set, tagged as Food dated as the current date, by default.
 
-=== Add an allowance: `addAllowance`
+==== Adding an allowance: `addAllowance`
 
 Adds a new allowance record to the Expense Tracker. +
 Format: `addAllowance $/AMOUNT`
@@ -77,47 +102,37 @@ Example:
 * `addAllowance $/10` +
 Adds an allowance entry of $10 to the expense tracker.
 
-=== Add an autocomplete item : `addItem`
+==== Adding an autocomplete item : `addItem`
 
-Adds an autocomplete item with fixed cost, category, and tags, for future reference. +
-Autocomplete items will appear when adding a new expense: a list of items will popup after typing *`add n/`* +
-Format: `addItem n/EXPENSE_NAME $/COST c/CATEGORY [t/TAG]`
+Adds an autocomplete item with a fixed cost, category, and tags, for future reference. +
+Autocomplete items will appear when adding a new expense - a list of items will popup after typing *`add n/`* +
+Format: `addItem n/EXPENSE_NAME $/COST [t/TAG]`
 
 Examples:
 
 * `addItem n/Chicken-rice $/5 c/Food` +
-Adds an autocomplete item called `Chicken Rice`, that is $5 with the `Food` tag
+Adds an autocomplete item Chicken Rice that is $5 tagged as Food.
 
-=== Add expense category : `addCategory`
-
-Adds an expense category. +
-Format: `addCategory c/CATEGORY`
-
-Examples:
-
-* `addCategory c/Food` +
-Creates a new category called `Food`
-=== Listing all expenses : `list`
+==== Listing all expenses : `list`
 
 Lists the expense records from newest to oldest. +
 Format: `list`
 
-=== Editing an expense : `edit`
+==== Editing an expense : `edit`
 
-Edits an existing expense of a specific user at a specific `*INDEX`* . +
+Edits an existing expense in ePiggy at a specific `*INDEX`* . +
 The *`INDEX`* refers to the number in the displayed Expenses List which is next to the name of the expense. Existing values of
-the expense will be changed according to the value of the parameters.
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/EXPENSE_NAME] [$/COST] [c/CATEGORY] [d/DATE] [t/TAG]…`
+the expense will be changed according to the value of the parameters. +
+Format: `edit INDEX [n/EXPENSE_NAME] [$/COST] [d/DATE] [t/TAG]…`
 
 Examples:
 
-* `edit 1 n/pen $1 c/supplies` +
-Edits the name, cost and category of the 1st expense in the Expense List to ‘pen’, ‘$1’ and ‘supplies’ respectively.
-* `edit 2 c/food` +
-Edits the category of the 2nd expense in the Expense List to ‘food’.
+* `edit 1 n/Pen $1 t/Supplies` +
+Edits the name, cost and tag of the first expense in the Expense List to ‘Pen’, ‘$1’ and ‘Supplies’ respectively.
+* `edit 2 t/Food` +
+Edits the tag of the second expense in the Expense List to ‘Food’.
 
-=== Deleting an expense : `delete`
+==== Deleting an expense : `delete`
 
 Deletes the expense at the specified INDEX. The INDEX refers to the number in the displayed Expenses List which is next to
 the name of the expense. +
@@ -128,7 +143,7 @@ Examples:
 * `delete 1` +
 Deletes the first expense in the Expense List from Expense Tracker.
 
-=== Viewing an expense : `view`
+==== Viewing an expense : `view`
 
 View the details of the selected *`INDEX`*. +
 Format: `view INDEX`
@@ -136,34 +151,40 @@ Format: `view INDEX`
 Examples:
 
 * `view 3` +
-View will display more information on item 3 , (eg. tags, entry description, etc.)
+View will display more information on item 3 (eg. tags, entry description, etc.)
 
-=== Search for an expense : `search`
+==== Viewing total savings : `viewSavings`
 
-The user can search for any entry(expense) in the list, by specifying either it’s name, category, date added (or range of dates),
-or amount range. +
-Format: `search -[n/t/d/$] [NAME/CATEGORY/DATE RANGE/AMOUNT RANGE]`
+Show details of the net amount of money recorded in ePiggy. +
+Format: `viewSavings`
+
+=== Filtering and Sorting Data
+
+==== Searching for an expense : `search`
+
+You can search for any expense in the list by specifying either its name, tag, date, range of dates, or range of amount. +
+Format: *`search [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
 
 Examples:
 
-* `search -n MCDONALDS` +
+* `search n/MCDONALDS` +
 Displays all entries with the name “MCDONALDS”.
-* `search -c FOOD` +
-Displays all entries with the category specified (in this case, it’s food).
-* `search -d 02/01/2019:05/12/2020` +
+* `search t/FOOD` +
+Displays all entries with the tag specified (in this case, it’s food).
+* `search d/02/01/2019:05/12/2020` +
 Displays all entries listed in the range 2nd Jan 2019 to 5th Dec 2020.
-* `search -$ 250 500` +
+* `search $/250 500` +
 Displays all entries listed with the price range of $250 to $500.
 
 ****
 *Additional Information:* +
-Searches and displays the entry(expense) along with its information, according to the user-specified command. +
-If entry is not found, it displays appropriate error message.
+Searches and displays the expense along with its information, according to the user-specified command. +
+If the entry is not found, it displays an appropriate error message.
 ****
 
-=== Sorting the expenses : `sort`
+==== Sorting the expenses : `sort`
 
-The user can sort the entries (expenses) in the list, by name, date added, or amount in ascending or descending order. +
+The user can sort the expenses in the list by name, date added, amount in ascending or descending order. +
 Format: `sort -[n/d/$] -[A/D]`
 
 Examples:
@@ -177,62 +198,97 @@ Sorts all entries by amount in descending order.
 
 ****
 *Additional Information:* +
-Sorts the entries, according to the user-specified command. +
-A and D are optional arguments which determine whether user wants the expenses sorted in ascending or
+Sorts the entries according to the user-specified command. +
+A and D are optional arguments which determine whether you want the expenses sorted in ascending or
 descending, respectively. Unless otherwise explicitly mentioned, then it will be assumed to be ascending order.
 ****
 
-=== Set spending budget : `setBudget`
+=== Budgeting
+
+==== Setting the spending budget : `setBudget`
 
 Sets a total spending budget for a certain time period. The time period will be in terms of days, and 1 day is the minimum
 a person can set a budget for. +
-The setBudget command is case sensitive. +
-Format: `setBudget [$/MONEY_WITH_TWO_DECIMAL_PLACES] [t/TIME_PERIOD_IN_DAYS]`
+This command can only be used if there are no budgets set yet. The setBudget command is case sensitive. +
+Format: `setBudget $/AMOUNT t/TIME_PERIOD_IN_DAYS d/START_DATE`
 
 Examples:
 
-* `setBudget $500.00 t/7` +
-Sets a total budget of $500.00 for each week.
+* `setBudget $/500 t/7 d/03/02/2019` +
+Sets a total budget of $500 for each week starting from 03/02/2019.
 
-* `setBudget $10000.00 t/15` +
-Sets a total budget of $10000.00 every 15 days.
+* `setBudget $/10000 t/15 d/01/01/2000` +
+Sets a total budget of $10000 every 15 days starting from 01/01/2000.
 
 ****
 *Additional Information:* +
-*`MONEY_WITH_TWO_DECIMAL_PLACES`* must be a positive number with two decimal places. +
+*`AMOUNT`* must be a positive number. +
 *`TIME_PERIOD_IN_DAYS`* must be a positive whole number.
 ****
 
-*Display status of budget.* +
-The Expense Tracker will show the status of the budget whenever a new expense is added.
+*Display status of budget:* +
+The Expense Tracker will show the status of the current budget whenever a new expense is added. It will display the following information: +
+
+====
+- Status of Budget (Old/Current) +
+- Budgeted Amount($) +
+- Start Date of Budget (date) +
+- End Date of Budget (date) +
+- Period of Budget (days) +
+- Remaining Amount for Budget ($) +
+- Remaining Days before Budget resets (Days) +
+====
 
 image::BudgetUi.png[width="760"]
 _Figure 3: Shows budget status_
 
+==== Editing the spending budget : `editBudget`
 
-=== Recommend future spendings : `recommend`
+Edits the current budget. Budgets are not allowed to overlap, and at least one budget must already be present. +
+The editBudget command is case sensitive. +
+Format: `editBudget [$/AMOUNT] [t/TIME_PERIOD_IN_DAYS]`
 
-Users are required to set a budget before being able to use this command. Recommends the user a daily limit he needs to
-have in order to satisfy the budget and the income the user needs to have if the user intends to maintain current spending
+Examples:
+
+* `editBudget $/1000 t/7 d/01/01/2000` +
+Edits the current budget to $1000 for each week starting from 01/01/2000.
+
+* `editBudget $/200 t/15 d/31/12/2018` +
+Edits the current budget to $200 for every 15 days starting from 31/12/2018.
+
+****
+*Additional Information:* +
+*`AMOUNT`* must be a positive number. +
+*`TIME_PERIOD_IN_DAYS`* must be a positive whole number.
+****
+
+==== Recommend future spendings : `recommend`
+
+You have to set a budget before you can use this command. +
+This command recommends a daily limit you need to
+have in order to satisfy your budget and the income you need to have if you intend to maintain your current spending
 habits. +
 Format: `recommend`
 
 Example:
 
 * `recommend` +
-Recommends the user a daily limit and the income the user needs to achieve to maintain current spending habits
+Recommends a daily limit and the income you need to maintain current spending habits
 while staying below budget.
 
 ****
 *Additional Information:* +
+A budget should be set. +
 The expenses list should have at least one day’s worth of expenses.
 ****
 
-=== Generate report : `report`
+=== Expense Report
+
+==== Generate report : `report`
 
 Generates a report of the given date, month, or year. The report consists of total inflow, total outflow, and proportion of income
 spent on different categories. +
-Format: `report [t/daily] [t/monthly] [t/yearly] [t/percentage]`
+Format: `report [t/DAILY] [t/MONTHLY] [t/YEARLY] [t/PERCENTAGE]`
 
 Examples:
 
@@ -252,25 +308,16 @@ View the spending records for past few years.
 View the spending records percentage of this year.
 
 ****
-*Additional Information:* +
-Follows options will be implemented at the next version: +
+*Following options will be implemented in v2.0:* +
 MM and DD will be optional arguments. +
 If only YYYY is included, a yearly report will be generated. +
 If YYYY and MM are provided, then a monthly report will be generated. +
 If YYYY, MM and DD are provided, then the daily report will be generated.
 ****
 
-=== View Savings: `viewSavings`
+=== Goal Setting
 
-Show details of the net amount of money recorded in ePiggy. +
-Format: `viewSavings`
-
-Example:
-
-* `viewSavings` +
-View the net amount of money recorded in ePiggy.
-
-=== Set Savings Goal: `setGoal`
+==== Setting the savings goal : `setGoal`
 
 Sets the item and the amount that the user wishes to save up for. +
 Format: `setGoal n/ITEM_NAME $/AMOUNT`
@@ -278,27 +325,21 @@ Format: `setGoal n/ITEM_NAME $/AMOUNT`
 Example:
 
 * `setGoal n/nike shoes $/80` +
-Sets the goal to an $80 Nike shoe.
+Sets the goal to a $80 Nike shoe.
 
-=== View Savings Goal: `viewGoal`
+==== Viewing the savings goal : `viewGoal`
 
-Show details about the current goal set by the user. +
+Show details about the current goal set. +
 Format: `viewGoal`
 
-Example:
+==== Viewing the goal progress : `viewGoalProgress`
 
-* `viewGoal` +
-Views the current goal set by the user.
-
-=== View Goal Progress: `viewGoalProgress`
-
-Show details about the goal and the progress of the user with regards to hitting that goal. +
+Show details of the goal and your progress with regards to hitting that goal. +
 Format: `viewGoalProgress`
 
-* `viewGoalProgress` +
-Views the progress of the user with regards to hitting that goal.
+=== Miscellaneous
 
-=== Login to ePiggy : `login`
+==== Logging in to ePiggy : `login`
 
 Logs in to Expense Tracker as an existing user. +
 Format: `login u/USERNAME p/PASSWORD`
@@ -308,23 +349,25 @@ Examples:
 * `login u/johndoe1990 p/password123` +
 Logs into the johndoe1990 user account.
 
-=== Exiting the program : `exit`
+==== Exiting the program : `exit`
 
 Exits the program. +
 Format: `exit`
 
-=== Saving the data
+==== Saving the data
 
-ePiggy data are saved in the hard disk automatically after any command that changes the data. +
+ePiggy's data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
+=== Upcoming Features
+
 // tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+==== Encrypting data files `[coming in v2.0]`
 
 User can enable/disable data encryption to secure their files.
 // end::dataencryption[]
 
-=== Compare between users `[coming in v2.0]`
+==== Compare between users `[coming in v2.0]`
 
 Compares between different users.
 Requires multiple accounts in the same network.
@@ -338,14 +381,14 @@ Requires multiple accounts in the same network.
 
 * *Help* : `help`
 
-* *Add* `addExpense n/EXPENSE_NAME $/COST t/CATEGORY [d/DATE] [a/NAME_OF_THE_SHOP] [t/TAG]…` +
-e.g. `addExpense n/Chicken rice set $/5 t/Food d/HAINAN KITCHEN d/2019-02-21`
+* *Add Expense* : `addExpense n/EXPENSE_NAME $/COST [d/DATE] [a/NAME_OF_THE_SHOP] [t/TAG]…` +
+e.g. `addExpense n/Chicken rice set $/5 t/Food a/HAINAN KITCHEN d/2019-02-21`
 
-* *Add Item* `addItem n/EXPENSE_NAME $/COST c/CATEGORY [t/TAG]` +
-e.g. `addItem n/Chicken-rice $/5 c/Food`
+* *Add Allowance* : `addAllowance $/AMOUNT` +
+e.g. `addAllowance $/10`
 
-* *Add Category* `addCategory c/CATEGORY` +
-e.g. `addCategory c/Food`
+* *Add Item* : `addItem n/EXPENSE_NAME $/COST [t/TAG]` +
+e.g. `addItem n/Chicken-rice $/5 t/Food`
 
 * *List* : `list`
 
@@ -355,17 +398,22 @@ e.g. `edit 1 n/pen $1 c/supplies`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
 
-* *Search* : `search -[n/t/d/$] [NAME/CATEGORY/DATE RANGE/AMOUNT RANGE]` +
+* *View Expense* : `view INDEX` +
+e.g. `view 3`
+
+* *View Savings* : `viewSavings`
+
+* *Search* : `search -[n/t/d/$] [NAME/TAG/DATE RANGE/AMOUNT RANGE]` +
 e.g.`search -n MCDONALDS`
 
 * *Sort* : `sort -[n/d/$] -[A/D]` +
 e.g.`sort -n`
 
-* *Set Budget* : `setBudget [$/MONEY_WITH_TWO_DECIMAL_PLACES] [t/TIME_PERIOD_IN_DAYS]` +
-e.g.`setBudget $500.00 t/7`
+* *Set Budget* : `setBudget $/AMOUNT t/TIME_PERIOD_IN_DAYS $/START_DATE` +
+e.g.`setBudget $500.00 t/7 d/01/02/2019`
 
-* *Forecast* : `forecast [t/TIME_PERIOD_IN_WEEKS]` +
-e.g. `forecast t/2`
+* *Edit Budget* : `editBudget [$/AMOUNT] [t/TIME_PERIOD_IN_DAYS] [$/START_DATE]` +
+e.g.`editBudget $300.00 t/28`
 
 * *Recommend* : `recommend`
 
@@ -374,9 +422,11 @@ e.g. `forecast t/2`
 * *Set Savings Goal* : `setGoal n/ITEM_NAME $/AMOUNT` +
 e.g. `setGoal n/nike shoes $/80`
 
+* *View Savings Goal* : `viewGoal`
+
 * *View Goal Progress* : `viewGoalProgress`
 
-* *Login* `login u/USERNAME p/PASSWORD` +
+* *Login* : `login u/USERNAME p/PASSWORD` +
 e.g. `login u/johndoe1990 p/password123`
 
 * *Exit* : `exit`

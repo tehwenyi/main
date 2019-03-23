@@ -1,6 +1,8 @@
 package seedu.address.model.epiggy;
 
-import seedu.address.model.epiggy.item.Date;
+import java.util.Calendar;
+import java.util.Date;
+
 import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.epiggy.item.Price;
 
@@ -9,12 +11,17 @@ import seedu.address.model.epiggy.item.Price;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Budget {
+    public static final String MESSAGE_CONSTRAINTS =
+            "Budgeted amount should be more than $0.";
+    private static final String CURRENT_BUDGET = "Current";
+    private static final String OLD_BUDGET = "Old";
     private final Price amount;
     private final Date startDate;
     private final Date endDate;
     private final Period period;
     private Price remainingAmount;
     private Period remainingDays;
+    private String status = null;
 
     /**
      * Represents a Budget in the expense book.
@@ -27,6 +34,7 @@ public class Budget {
         this.endDate = calculateEndDate(startDate, period);
         this.remainingAmount = amount;
         this.remainingDays = period;
+        this.status = CURRENT_BUDGET;
     }
 
     /**
@@ -35,11 +43,16 @@ public class Budget {
      */
     public Budget() {
         this.amount = new Price(0);
-        this.startDate = new Date(01, 01, 2000);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, 2000);
+        cal.set(Calendar.MONTH, Calendar.JANUARY);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        this.startDate = cal.getTime();
         this.period = new Period(0);
         this.endDate = this.startDate;
         this.remainingAmount = amount;
         this.remainingDays = period;
+        this.status = CURRENT_BUDGET;
     }
 
     /**
@@ -49,26 +62,38 @@ public class Budget {
      * @return endDate
      */
     private Date calculateEndDate(Date startDate, Period period) {
-        return startDate.addDays(period.getTimePeriod());
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.startDate);
+        cal.add(Calendar.DATE, period.getTimePeriod());
+        return cal.getTime();
     }
 
     private void setRemainingAmount(Price remainingAmount) {
         this.remainingAmount = remainingAmount;
     }
 
-    private void setRemainingDays(Period remainingDays) {
+    public void setRemainingDays(Period remainingDays) {
         this.remainingDays = remainingDays;
+    }
+
+    public void setStatusToOld () {
+        this.status = OLD_BUDGET;
     }
 
     public void deductRemainingAmount(Price amountToDeduct) {
         this.remainingAmount = this.remainingAmount.deduct(amountToDeduct);
     }
 
+    public String getStatus() {
+        return status;
+    }
+
     public Price getRemainingAmount() {
         return remainingAmount;
     }
 
-    public Period getRemainingDays() { return remainingDays; }
+    public Period getRemainingDays() {
+        return remainingDays; }
 
     public Price getPrice() {
         return this.amount;
@@ -84,6 +109,22 @@ public class Budget {
 
     public Date getEndDate() {
         return this.endDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Budget)) {
+            return false;
+        }
+
+        Budget b = (Budget) o;
+        return this.amount == b.getPrice()
+                && this.startDate == b.getStartDate()
+                && this.period == b.getPeriod();
     }
 
     @Override

@@ -90,8 +90,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public void setBudget(Budget budget) {
-        model.setBudget(budget);
+    public ObservableList<Budget> getBudgetList() {
+        return model.getBudgetList();
     }
 
     @Override
@@ -128,6 +128,14 @@ public class LogicManager implements Logic {
     public void setSelectedExpense(Expense expense) {
         model.setSelectedExpense(expense);
     }
+
+    @Override
+    public void setBudget(Budget budget) {
+        model.setBudget(budget); }
+
+    @Override
+    public void addBudget(Budget budget) {
+        model.addBudget(budget); }
 
     @Override
     public ReadOnlyProperty<Expense> selectedExpenseProperty() {

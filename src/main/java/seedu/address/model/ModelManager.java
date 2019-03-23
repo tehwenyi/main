@@ -33,6 +33,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Expense> filteredExpenses;
+    private final FilteredList<Budget> filteredBudget;
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
     private final SimpleObjectProperty<Expense> selectedExpense = new SimpleObjectProperty<>();
 
@@ -51,6 +52,7 @@ public class ModelManager implements Model {
         filteredPersons.addListener(this::ensureSelectedPersonIsValid);
 
         filteredExpenses = new FilteredList<>(versionedAddressBook.getExpenseList());
+        filteredBudget = new FilteredList<>(versionedAddressBook.getBudgetList());
         //TODO
     }
 
@@ -137,8 +139,22 @@ public class ModelManager implements Model {
         versionedAddressBook.setBudget(budget); }
 
     @Override
+    public void addBudget(Budget budget) {
+        versionedAddressBook.addBudget(budget); }
+
+    @Override
     public SimpleObjectProperty<Budget> getBudget() {
         return versionedAddressBook.getBudget();
+    }
+
+    @Override
+    public ObservableList<Budget> getBudgetList() {
+        return versionedAddressBook.getBudgetList();
+    }
+
+    @Override
+    public boolean hasBudget() {
+        return versionedAddressBook.hasBudget();
     }
 
     @Override
@@ -163,6 +179,13 @@ public class ModelManager implements Model {
         versionedAddressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void setCurrentBudget(Budget editedBudget) {
+        requireNonNull(editedBudget);
+
+        versionedAddressBook.setCurrentBudget(editedBudget);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -183,10 +206,25 @@ public class ModelManager implements Model {
         return filteredExpenses;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Budget} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Budget> getFilteredBudgetList() {
+        return filteredBudget;
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredBudgetList(Predicate<Budget> predicate) {
+        requireNonNull(predicate);
+        filteredBudget.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================

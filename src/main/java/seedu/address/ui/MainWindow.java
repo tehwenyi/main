@@ -132,7 +132,7 @@ public class MainWindow extends UiPart<Stage> {
         }); //TODO
         expenseListPanelPlaceholder.getChildren().add(expenseListPanel.getRoot());
 
-        budgetPanel = new BudgetPanel(logic.getBudget(), logic::setBudget);
+        budgetPanel = new BudgetPanel(logic.getBudgetList(), logic::setBudget);
         budgetPanelPlaceholder.getChildren().add(budgetPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

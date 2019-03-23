@@ -39,11 +39,11 @@ public class BudgetCard extends UiPart<Region> {
     @FXML
     private Label remainingDays;
 
-    public BudgetCard(Budget budget) {
+    public BudgetCard(int displayedIndex, Budget budget) {
         super(FXML);
         this.budget = budget;
         System.out.println(budget);
-        budgetTitle.setText(budget.getStatus() + " Budget");
+        budgetTitle.setText(displayedIndex + ". " + budget.getStatus() + " Budget");
         budgetedAmount.setText("Amount: $" + budget.getPrice().toString());
         startDate.setText("Start Date: " + budget.getStartDate().toString());
         endDate.setText("End Date: " + budget.getEndDate().toString());

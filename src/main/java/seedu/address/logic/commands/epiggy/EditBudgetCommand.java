@@ -2,6 +2,7 @@ package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
 
+import static seedu.address.logic.commands.epiggy.SetBudgetCommand.MESSAGE_OVERLAPPING_BUDGET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
@@ -30,6 +31,7 @@ public class EditBudgetCommand extends Command {
     public static final String COMMAND_WORD = "editBudget";
     public static final String COMMAND_ALIAS = "eb";
 
+    // TODO MESSAGE_USAGE should come out
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the current budget. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: [" + PREFIX_COST + "AMOUNT] "
@@ -39,13 +41,14 @@ public class EditBudgetCommand extends Command {
             + PREFIX_COST + "200 "
             + PREFIX_PERIOD + "7";
 
-    public static final String MESSAGE_EDIT_BUDGET_SUCCESS = "Current budget updated";
+    public static final String MESSAGE_EDIT_BUDGET_SUCCESS = "Current budget updated: %1$s";
+    public static final String MESSAGE_EDIT_BUDGET_FAIL = "Only the current budget can be edited."
+            + " There is no current budget to be edited.";
 
-    public static final String MESSAGE_NOT_EDITED = "Budget not edited as there are no changes.";
-
-    public static final String MESSAGE_OVERLAPPING_BUDGET = "Budgets should not overlap. "
-            + "Please ensure that the start date of the edited budget "
-            + "is later than the end date of the previous budget.";
+    public static final String MESSAGE_BUDGET_STATUS_ERROR = "The current budget must remain as the current budget."
+            + " Please add a new budget or delete the current budget if you wish to create a budget of another status.";
+    public static final String MESSAGE_NOT_EDITED = "Budget not edited as there are no changes.\n"
+            + MESSAGE_USAGE;
 
     private final EditBudgetDetails editBudgetDetails;
 
@@ -59,20 +62,36 @@ public class EditBudgetCommand extends Command {
         requireNonNull(model);
         List<Budget> lastShownBudgetList = model.getFilteredBudgetList();
 
-        Budget budgetToEdit = lastShownBudgetList.get(0);
+        int indexOfCurrentBudget = model.getCurrentBudgetIndex();
+        if (indexOfCurrentBudget == -1) {
+            throw new CommandException(MESSAGE_EDIT_BUDGET_FAIL);
+        }
+        Budget budgetToEdit = lastShownBudgetList.get(indexOfCurrentBudget);
         Budget editedBudget = createEditedBudget(budgetToEdit, editBudgetDetails);
 
-        Date endDateOfPreviousBudget = lastShownBudgetList.get(1).getEndDate();
+        if (lastShownBudgetList.size() > 1) {
 
-        if (endDateOfPreviousBudget.after(editedBudget.getStartDate())) {
-            throw new CommandException(MESSAGE_OVERLAPPING_BUDGET);
+            // If the budget is not the latest budget
+            if (indexOfCurrentBudget > 0) {
+                Budget laterBudget = lastShownBudgetList.get(indexOfCurrentBudget - 1);
+                if (editedBudget.getEndDate().after(laterBudget.getStartDate())) {
+                    throw new CommandException(MESSAGE_OVERLAPPING_BUDGET);
+                }
+            }
+            // If the budget is not the earliest budget
+            if (indexOfCurrentBudget < lastShownBudgetList.size() - 1) {
+                Budget earlierBudget = lastShownBudgetList.get(indexOfCurrentBudget + 1);
+                if (editedBudget.getStartDate().before(earlierBudget.getEndDate())) {
+                    throw new CommandException(MESSAGE_OVERLAPPING_BUDGET);
+                }
+            }
         }
 
         model.setCurrentBudget(editedBudget);
         model.updateFilteredBudgetList(PREDICATE_SHOW_ALL_BUDGETS);
         model.commitAddressBook();
         // Need to add the edited budget details in the String below
-        return new CommandResult(String.format(MESSAGE_EDIT_BUDGET_SUCCESS));
+        return new CommandResult(String.format(MESSAGE_EDIT_BUDGET_SUCCESS, editedBudget));
     }
 
     /**

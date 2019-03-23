@@ -59,7 +59,7 @@ public class BudgetPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new BudgetCard(budget).getRoot());
+                setGraphic(new BudgetCard(getIndex() + 1, budget).getRoot());
             }
         }
     }

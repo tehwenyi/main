@@ -153,6 +153,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public int getCurrentBudgetIndex() {
+        return versionedAddressBook.getCurrentBudgetIndex();
+    }
+
+    @Override
     public boolean hasBudget() {
         return versionedAddressBook.hasBudget();
     }

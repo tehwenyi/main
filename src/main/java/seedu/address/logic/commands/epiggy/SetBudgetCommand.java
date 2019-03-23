@@ -2,7 +2,6 @@ package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
 
-import static seedu.address.logic.commands.epiggy.EditBudgetCommand.MESSAGE_OVERLAPPING_BUDGET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
@@ -39,6 +38,9 @@ public class SetBudgetCommand extends Command {
     public static final String MESSAGE_FAIL = "Budget date is too old to be added. "
             + "The budget list can only accommodate a maximum of " + MAXIMUM_SIZE
             + " budgets, please delete one of the old budgets if you wish to add this budget.";
+    public static final String MESSAGE_OVERLAPPING_BUDGET = "Budgets should not overlap. "
+            + "Please ensure that the start date of the edited budget "
+            + "is later than the end date of the previous budget.";
     //    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     // public static final String MESSAGE_DUPLICATE_EXPENSE = "This expense already exists in the address book";
 

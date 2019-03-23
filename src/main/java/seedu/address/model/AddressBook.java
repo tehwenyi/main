@@ -280,6 +280,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Gets the current budget's index.
+     * @return -1 if there is no current budget.
+     */
+    public int getCurrentBudgetIndex() {
+        return this.budgetList.getCurrentBudgetIndex();
+    };
+
+    /**
      * Checks if there is already a budget in AddressBook.
      */
     public boolean hasBudget() {
@@ -322,7 +330,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setCurrentBudget(Budget editedBudget) {
         requireNonNull(editedBudget);
-        replaceLatestBudgetWithCheckedBudget(updateToBeAddedBudgetBasedOnExpenses(editedBudget));
+        int indexOfCurrentBudget = budgetList.getCurrentBudgetIndex();
+        budgetList.replaceAtIndex(indexOfCurrentBudget, updateToBeAddedBudgetBasedOnExpenses(editedBudget));
         indicateModified();
     }
 

@@ -3,6 +3,7 @@ package seedu.address.model.epiggy;
 import static java.util.Objects.requireNonNull;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.epiggy.Budget.CURRENT_BUDGET;
 
 import java.util.Iterator;
 import java.util.List;
@@ -46,10 +47,18 @@ public class UniqueBudgetList implements Iterable<Budget> {
      */
     public void addAtIndex(int index, Budget toAdd) {
         requireNonNull(toAdd);
-        // if (contains(toAdd)) {
-        //     throw new DuplicateBudgetException();
-        // }
         internalList.add(index, toAdd);
+        limitSize();
+    }
+
+    /**
+     * Adds a new budget to the top of the list.
+     * Only called when a new budget is added.
+     * @param toSet the budget to be added.
+     */
+    public void replaceAtIndex(int index, Budget toSet) {
+        requireNonNull(toSet);
+        internalList.set(index, toSet);
         limitSize();
     }
 
@@ -61,6 +70,21 @@ public class UniqueBudgetList implements Iterable<Budget> {
     public Budget getLatestBudget() {
         requireNonNull(internalList);
         return internalList.get(0);
+    }
+
+    /**
+     * Gets the current budget's index.
+     * @return -1 if there is no current budget.
+     */
+    public int getCurrentBudgetIndex() {
+        int index = 0;
+        while (index < internalList.size()) {
+            if (internalList.get(index).getStatus().equals(CURRENT_BUDGET)) {
+                return index;
+            }
+            index++;
+        }
+        return -1;
     }
 
     /**

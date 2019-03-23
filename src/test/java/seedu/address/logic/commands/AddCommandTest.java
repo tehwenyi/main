@@ -174,6 +174,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public int getCurrentBudgetIndex() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasBudget() {
             throw new AssertionError("This method should not be called.");
         }

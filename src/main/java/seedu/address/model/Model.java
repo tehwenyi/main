@@ -111,6 +111,13 @@ public interface Model {
     ObservableList<Budget> getBudgetList();
 
     /**
+     * Gets the current budget's index.
+     * @return -1 if there is no current budget.
+     */
+    int getCurrentBudgetIndex();
+
+
+    /**
      * Get the current savings.
      */
     SimpleObjectProperty<Savings> getSavings();

@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.epiggy.Budget.CURRENT_BUDGET;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -52,8 +53,7 @@ public class UniqueBudgetList implements Iterable<Budget> {
     }
 
     /**
-     * Adds a new budget to the top of the list.
-     * Only called when a new budget is added.
+     * Replaces the budget at index {@code index} with budget {@code toSet}.
      * @param toSet the budget to be added.
      */
     public void replaceAtIndex(int index, Budget toSet) {
@@ -70,6 +70,32 @@ public class UniqueBudgetList implements Iterable<Budget> {
     public Budget getLatestBudget() {
         requireNonNull(internalList);
         return internalList.get(0);
+    }
+
+    /**
+     * Gets the budget on the internal list with the corresponding index.
+     * There must be at least one budget in {@code internalList}
+     * @return the corresponding budget in {@code internalList}.
+     */
+    public Budget getBudgetAtIndex(int index) {
+        requireNonNull(internalList);
+        return internalList.get(index);
+    }
+
+    /**
+     * Gets the index of the budget based on the date.
+     * @return the index of the budget or -1 if the expense date is not in any of the budgets.
+     */
+    public int getBudgetIndexBasedOnDate(Date date) {
+        requireNonNull(internalList);
+
+        for (int i = 0; i < internalList.size(); i++) {
+            Budget toCheck = internalList.get(i);
+            if ((!toCheck.getStartDate().after(date)) && (!toCheck.getEndDate().before(date))) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**

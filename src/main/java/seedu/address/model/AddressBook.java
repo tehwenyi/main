@@ -116,17 +116,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         s.deductSavings(expense.getItem().getPrice().getAmount());
         savings.set(s);
 
-        if (!budgetList.asUnmodifiableObservableList().isEmpty()) {
-            // have to update last budget
-            if (budgetIsNotUpdated()) {
-                createNewBudgetTillUpdated(expense);
-            } else {
-                Budget latestBudget = budgetList.getLatestBudget();
-                latestBudget.deductRemainingAmount(expense.getItem().getPrice());
-                long diffInMillies = Math.abs(latestBudget.getEndDate().getTime() - expense.getDate().getTime());
-                long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-                latestBudget.setRemainingDays(new Period((int) diff));
-                budgetList.replaceLatestBudgetWith(latestBudget);
+        if (budgetList.getBudgetListSize() > 0) {
+            int indexOfBudgetToEdit = budgetList.getBudgetIndexBasedOnDate(expense.getDate());
+            if (indexOfBudgetToEdit >= 0) {
+                Budget budgetToEdit = budgetList.getBudgetAtIndex(indexOfBudgetToEdit);
+                budgetToEdit.setRemainingAmountToInitialAmount();
+                Budget editedBudget = updateToBeAddedBudgetBasedOnExpenses(budgetToEdit);
+                System.out.println(editedBudget);
+
+                budgetList.replaceAtIndex(indexOfBudgetToEdit, editedBudget);
             }
         }
         indicateModified();
@@ -202,9 +200,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Updated the budget to be added based on the current list of expenses before it is added.
      */
     private Budget updateToBeAddedBudgetBasedOnExpenses(Budget budget) {
-        SortedList<Expense> sortedExpensesByDate = sortExpensesByDate();
-        ListIterator<Expense> iterator = sortedExpensesByDate.listIterator();
-
         Date todaysDate = new Date();
         if (todaysDate.after(budget.getEndDate())) {
             budget.setRemainingDays(new Period(0));
@@ -214,6 +209,8 @@ public class AddressBook implements ReadOnlyAddressBook {
             budget.setRemainingDays(new Period((int) Math.ceil(diff)));
         }
 
+        SortedList<Expense> sortedExpensesByDate = sortExpensesByDate();
+        ListIterator<Expense> iterator = sortedExpensesByDate.listIterator();
         while (iterator.hasNext()) {
             Expense expense = iterator.next();
             if (expense.getDate().after(budget.getStartDate())) {

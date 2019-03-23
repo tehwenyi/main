@@ -41,11 +41,11 @@ public class EditBudgetCommand extends Command {
             + PREFIX_COST + "200 "
             + PREFIX_PERIOD + "7";
 
-    public static final String MESSAGE_EDIT_BUDGET_SUCCESS = "Current budget updated: %1$s";
-    public static final String MESSAGE_EDIT_BUDGET_FAIL = "Only the current budget can be edited."
+    private static final String MESSAGE_EDIT_BUDGET_SUCCESS = "Current budget updated: %1$s";
+    private static final String MESSAGE_EDIT_BUDGET_FAIL = "Only the current budget can be edited."
             + " There is no current budget to be edited.";
 
-    public static final String MESSAGE_BUDGET_STATUS_ERROR = "The current budget must remain as the current budget."
+    private static final String MESSAGE_BUDGET_STATUS_ERROR = "The current budget must remain as the current budget."
             + " Please add a new budget or delete the current budget if you wish to create a budget of another status.";
     public static final String MESSAGE_NOT_EDITED = "Budget not edited as there are no changes.\n"
             + MESSAGE_USAGE;
@@ -90,7 +90,6 @@ public class EditBudgetCommand extends Command {
         model.setCurrentBudget(editedBudget);
         model.updateFilteredBudgetList(PREDICATE_SHOW_ALL_BUDGETS);
         model.commitAddressBook();
-        // Need to add the edited budget details in the String below
         return new CommandResult(String.format(MESSAGE_EDIT_BUDGET_SUCCESS, editedBudget));
     }
 

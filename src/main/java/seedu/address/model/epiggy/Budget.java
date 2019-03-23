@@ -94,6 +94,10 @@ public class Budget {
         this.status = OLD_BUDGET;
     }
 
+    public void setRemainingAmountToInitialAmount() {
+        this.remainingAmount = this.amount;
+    }
+
     public void deductRemainingAmount(Price amountToDeduct) {
         this.remainingAmount = this.remainingAmount.deduct(amountToDeduct);
     }
@@ -151,7 +155,12 @@ public class Budget {
                 .append(" days starting from ")
                 .append(getStartDate())
                 .append(" till ")
-                .append(getEndDate());
+                .append(getEndDate())
+                .append(". ")
+                .append(getRemainingDays())
+                .append(" days remaining and $")
+                .append(getRemainingAmount())
+                .append(" remaining.");
         return builder.toString();
     }
 }

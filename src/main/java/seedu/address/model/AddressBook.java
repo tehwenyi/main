@@ -204,14 +204,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     private Budget updateToBeAddedBudgetBasedOnExpenses(Budget budget) {
         SortedList<Expense> sortedExpensesByDate = sortExpensesByDate();
         ListIterator<Expense> iterator = sortedExpensesByDate.listIterator();
+
+        Date todaysDate = new Date();
+        if (todaysDate.after(budget.getEndDate())) {
+            budget.setRemainingDays(new Period(0));
+        } else {
+            long diffInMillies = budget.getEndDate().getTime() - todaysDate.getTime();
+            long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+            budget.setRemainingDays(new Period((int) Math.ceil(diff)));
+        }
+
         while (iterator.hasNext()) {
             Expense expense = iterator.next();
             if (expense.getDate().after(budget.getStartDate())) {
                 if (!budget.getEndDate().before(expense.getDate())) {
                     budget.deductRemainingAmount(expense.getItem().getPrice());
-                    long diffInMillies = Math.abs(budget.getEndDate().getTime() - expense.getDate().getTime());
-                    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-                    budget.setRemainingDays(new Period((int) diff));
                 } else {
                     return budget;
                 }

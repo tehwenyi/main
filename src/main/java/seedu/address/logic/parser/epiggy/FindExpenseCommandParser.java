@@ -16,7 +16,7 @@ import seedu.address.model.epiggy.ExpenseContainsKeywordsPredicate;
 
 //@@author rahulb99
 /**
- * Parses input arguments and creates a new FindExpenseCommand object
+ * Parses input arguments and creates a new FindExpenseCommand object.
  */
 public class FindExpenseCommandParser implements Parser<FindExpenseCommand> {
 

@@ -3,7 +3,9 @@ package seedu.address.model.epiggy;
 import static java.util.Objects.requireNonNull;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.epiggy.Budget.CURRENT_BUDGET;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,12 +25,16 @@ import seedu.address.model.epiggy.exceptions.DuplicateBudgetException;
  */
 public class UniqueBudgetList implements Iterable<Budget> {
 
+    // TODO: max 10/20 budget per list
+    public static final int MAXIMUM_SIZE = 20;
     private final ObservableList<Budget> internalList = FXCollections.observableArrayList();
     private final ObservableList<Budget> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent budget as the given argument.
+     * @param toCheck if the budget exists in the internalList already.
+     * @return true if internalList already contains the budget.
      */
     public boolean contains(Budget toCheck) {
         requireNonNull(toCheck);
@@ -36,79 +42,141 @@ public class UniqueBudgetList implements Iterable<Budget> {
     }
 
     /**
-     * Adds a new budget to the list.
+     * Adds a new budget to the top of the list.
      * Only called when a new budget is added.
+     * @param toAdd the budget to be added.
      */
-    public void add(Budget toAdd) {
+    public void addAtIndex(int index, Budget toAdd) {
         requireNonNull(toAdd);
-        // if (contains(toAdd)) {
-        //     throw new DuplicateBudgetException();
-        // }
-        internalList.add(toAdd);
+        internalList.add(index, toAdd);
+        limitSize();
+    }
+
+    /**
+     * Replaces the budget at index {@code index} with budget {@code toSet}.
+     * @param toSet the budget to be added.
+     */
+    public void replaceAtIndex(int index, Budget toSet) {
+        requireNonNull(toSet);
+        internalList.set(index, toSet);
+        limitSize();
     }
 
     /**
      * Gets the last budget on the internal list, which is the previous budget.
      * There must be at least one budget in {@code internalList}
+     * @return the latest budget in {@code internalList}.
      */
     public Budget getLatestBudget() {
         requireNonNull(internalList);
-        return internalList.get(internalList.size() - 1);
+        return internalList.get(0);
     }
 
+    /**
+     * Gets the budget on the internal list with the corresponding index.
+     * There must be at least one budget in {@code internalList}
+     * @return the corresponding budget in {@code internalList}.
+     */
+    public Budget getBudgetAtIndex(int index) {
+        requireNonNull(internalList);
+        return internalList.get(index);
+    }
+
+    /**
+     * Gets the index of the budget based on the date.
+     * @return the index of the budget or -1 if the expense date is not in any of the budgets.
+     */
+    public int getBudgetIndexBasedOnDate(Date date) {
+        requireNonNull(internalList);
+
+        for (int i = 0; i < internalList.size(); i++) {
+            Budget toCheck = internalList.get(i);
+            if ((!toCheck.getStartDate().after(date)) && (!toCheck.getEndDate().before(date))) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Gets the current budget's index.
+     * @return -1 if there is no current budget.
+     */
+    public int getCurrentBudgetIndex() {
+        int index = 0;
+        while (index < internalList.size()) {
+            if (internalList.get(index).getStatus().equals(CURRENT_BUDGET)) {
+                return index;
+            }
+            index++;
+        }
+        return -1;
+    }
+
+    /**
+     * Gets the size of internal list.
+     * @return the size of {@code internalList}.
+     */
     public int getBudgetListSize() {
         return internalList.size();
     }
 
-    //    /**
-    //     * Removes the equivalent budget from the list.
-    //     * The budget must exist in the list.
-    //     */
-    //    public void remove(Budget toRemove) {
-    //        requireNonNull(toRemove);
-    //        if (!internalList.remove(toRemove)) {
-    //            throw new PersonNotFoundException();
-    //        }
-    //    }
+    /**
+     * Removes the budget with the specific index from the list.
+     * The budget of the index must exist in the list.
+     * @param index of the budget to be removed.
+     */
+    public void remove(int index) {
+        requireNonNull(index);
+        internalList.remove(index, index + 1);
+    }
 
+    /**
+     * Sets internalList to a new list of the same type.
+     * @param replacement list.
+     */
     public void setBudgetList(UniqueBudgetList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        limitSize();
     }
 
     /**
      * Replaces the contents of this list with {@code budgetList}.
      * {@code budgetList} must not contain duplicate budgetList.
+     * @param newBudgetList to replace.
      */
-    public void setBudgetList(List<Budget> budgetList) {
-        requireAllNonNull(budgetList);
-        if (!budgetsAreUnique(budgetList)) {
+    public void setBudgetList(List<Budget> newBudgetList) {
+        requireAllNonNull(newBudgetList);
+        if (!budgetsAreUnique(newBudgetList)) {
             throw new DuplicateBudgetException();
         }
 
-        internalList.setAll(budgetList);
+        this.internalList.setAll(newBudgetList);
+        limitSize();
     }
 
     /**
      * Replaces the previous budget in the list with {@code editedBudget}.
-     * {@code target} must exist in the list.
      * The budget identity of {@code editedBudget} must not be the same as another existing budget in the list.
      */
     public void replaceLatestBudgetWith(Budget editedBudget) {
         requireAllNonNull(internalList, editedBudget);
+        internalList.set(0, editedBudget);
+    }
 
-        // start date of editedBudget must be after the end date of the previous budget
-        // end date of editedBudget must be before the latestExpense
-        int index = internalList.size() - 1;
-        //        int index = internalList.indexOf(target);
-        //        if (index == -1) {
-        //            throw new PersonNotFoundException();
-        //        }
-        //
-        //        if (!target.equals(editedBudget) && contains(editedBudget)) {
-        //            throw new DuplicateBudgetException();
-        //        }
-        internalList.set(index, editedBudget);
+    /**
+     * Ensures the size of budgetList does not exceed {@code MAXIMUM_SIZE}.
+     * Deletes all budgets after the {@code MAXIMUM_SIZE} has exceeded.
+     */
+    public void limitSize() {
+        requireNonNull(internalList);
+        int budgetListSize = internalList.size();
+        if (budgetListSize > MAXIMUM_SIZE) {
+            for (int i = budgetListSize; i > MAXIMUM_SIZE; i--) {
+                internalList.remove(MAXIMUM_SIZE);
+            }
+        }
     }
 
     /**

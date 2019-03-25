@@ -12,4 +12,6 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DELETE_CANCEL = "Delete cancel";
 
+    public static final String MESSAGE_INVALID_BUDGET_DISPLAYED_INDEX = "The budget index provided is invalid.";
+
 }

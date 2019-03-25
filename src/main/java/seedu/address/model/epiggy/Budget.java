@@ -13,8 +13,9 @@ import seedu.address.model.epiggy.item.Price;
 public class Budget {
     public static final String MESSAGE_CONSTRAINTS =
             "Budgeted amount should be more than $0.";
-    private static final String CURRENT_BUDGET = "Current";
+    public static final String CURRENT_BUDGET = "Current";
     private static final String OLD_BUDGET = "Old";
+    private static final String FUTURE_BUDGET = "Future";
     private final Price amount;
     private final Date startDate;
     private final Date endDate;
@@ -22,6 +23,7 @@ public class Budget {
     private Price remainingAmount;
     private Period remainingDays;
     private String status = null;
+    private Date todaysDate = new Date();
 
     /**
      * Represents a Budget in the expense book.
@@ -34,7 +36,13 @@ public class Budget {
         this.endDate = calculateEndDate(startDate, period);
         this.remainingAmount = amount;
         this.remainingDays = period;
-        this.status = CURRENT_BUDGET;
+        if (!todaysDate.before(startDate) && !todaysDate.after(endDate)) {
+            this.status = CURRENT_BUDGET;
+        } else if (todaysDate.before(startDate)) {
+            this.status = FUTURE_BUDGET;
+        } else {
+            this.status = OLD_BUDGET;
+        }
     }
 
     /**
@@ -52,7 +60,13 @@ public class Budget {
         this.endDate = this.startDate;
         this.remainingAmount = amount;
         this.remainingDays = period;
-        this.status = CURRENT_BUDGET;
+        if (!todaysDate.before(startDate) && !todaysDate.after(endDate)) {
+            this.status = CURRENT_BUDGET;
+        } else if (todaysDate.before(startDate)) {
+            this.status = FUTURE_BUDGET;
+        } else {
+            this.status = OLD_BUDGET;
+        }
     }
 
     /**
@@ -78,6 +92,10 @@ public class Budget {
 
     public void setStatusToOld () {
         this.status = OLD_BUDGET;
+    }
+
+    public void setRemainingAmountToInitialAmount() {
+        this.remainingAmount = this.amount;
     }
 
     public void deductRemainingAmount(Price amountToDeduct) {
@@ -137,7 +155,12 @@ public class Budget {
                 .append(" days starting from ")
                 .append(getStartDate())
                 .append(" till ")
-                .append(getEndDate());
+                .append(getEndDate())
+                .append(". ")
+                .append(getRemainingDays())
+                .append(" days remaining and $")
+                .append(getRemainingAmount())
+                .append(" remaining.");
         return builder.toString();
     }
 }

@@ -1,9 +1,14 @@
 package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
+import static seedu.address.model.epiggy.UniqueBudgetList.MAXIMUM_SIZE;
+
+import java.util.Date;
+import java.util.List;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
@@ -30,8 +35,12 @@ public class SetBudgetCommand extends Command {
             + PREFIX_DATE + "01/02/2019";
 
     public static final String MESSAGE_SUCCESS = "Budget is set at: %1$s";
-    public static final String MESSAGE_FAIL = "Budget has already been set,"
-            + "if you want to edit your budget please type editBudget";
+    public static final String MESSAGE_FAIL = "Budget date is too old to be added. "
+            + "The budget list can only accommodate a maximum of " + MAXIMUM_SIZE
+            + " budgets, please delete one of the old budgets if you wish to add this budget.";
+    public static final String MESSAGE_OVERLAPPING_BUDGET = "Budgets should not overlap. "
+            + "Please ensure that the start date of the edited budget "
+            + "is later than the end date of the previous budget.";
     //    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     // public static final String MESSAGE_DUPLICATE_EXPENSE = "This expense already exists in the address book";
 
@@ -48,8 +57,49 @@ public class SetBudgetCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        if (!model.hasBudget()) {
-            model.addBudget(toSet);
+
+        Date startDate = toSet.getStartDate();
+        Date endDate = toSet.getEndDate();
+
+        List<Budget> currentList = model.getFilteredBudgetList();
+        if (currentList.size() == 0) {
+            model.addBudget(0, toSet);
+            model.commitAddressBook();
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toSet));
+        }
+
+        int index = 0;
+        Budget earlierBudget;
+        Budget laterBudget = currentList.get(0);
+        while (index < currentList.size()) {
+            earlierBudget = currentList.get(index);
+            if (index > 0) {
+                laterBudget = currentList.get(index - 1);
+            }
+            // Check for overlaps
+            if (!startDate.after(earlierBudget.getStartDate()) && endDate.after(earlierBudget.getStartDate())) {
+                throw new CommandException(MESSAGE_OVERLAPPING_BUDGET);
+            }
+            if (!startDate.before(earlierBudget.getStartDate()) && !endDate.after(earlierBudget.getEndDate())) {
+                throw new CommandException(MESSAGE_OVERLAPPING_BUDGET);
+            }
+            if (startDate.before(earlierBudget.getEndDate()) && !endDate.before(earlierBudget.getEndDate())) {
+                throw new CommandException(MESSAGE_OVERLAPPING_BUDGET);
+            }
+
+            if (!startDate.before(earlierBudget.getEndDate())) {
+                if (index == 0 || !endDate.after(laterBudget.getStartDate())) {
+                    model.addBudget(index, toSet);
+                    model.commitAddressBook();
+                    return new CommandResult(String.format(MESSAGE_SUCCESS, toSet));
+                } else {
+                    throw new CommandException(MESSAGE_OVERLAPPING_BUDGET);
+                }
+            }
+            index++;
+        }
+        if (index < MAXIMUM_SIZE) {
+            model.addBudget(index, toSet);
             model.commitAddressBook();
             return new CommandResult(String.format(MESSAGE_SUCCESS, toSet));
         }

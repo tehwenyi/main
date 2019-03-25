@@ -98,7 +98,12 @@ public interface Model {
     /**
      * Adds a new budget.
      */
-    void addBudget(Budget budget);
+    void addBudget(int index, Budget budget);
+
+    /**
+     * Deletes the budget at the specific index.
+     */
+    void deleteBudgetAtIndex(int index);
 
     /**
      * Gets the current budget.
@@ -109,6 +114,13 @@ public interface Model {
      * Gets the current budget list.
      */
     ObservableList<Budget> getBudgetList();
+
+    /**
+     * Gets the current budget's index.
+     * @return -1 if there is no current budget.
+     */
+    int getCurrentBudgetIndex();
+
 
     /**
      * Get the current savings.

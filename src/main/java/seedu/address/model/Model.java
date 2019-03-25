@@ -24,9 +24,6 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Budget> PREDICATE_SHOW_ALL_BUDGETS = unused -> true;
 
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Budget> PREDICATE_SHOW_ALL_EXPENSES = unused -> true;
-
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -153,13 +150,6 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
-     * Replaces the given expense {@code target} with {@code editedExpense}.
-     * {@code target} must exist in the address book.
-     * The expense identity of {@code editedExpense} must not be the same as another existing expense in the address book.
-     */
-    void setExpense(seedu.address.model.epiggy.Expense target, seedu.address.model.epiggy.Expense editedExpense);
-
-    /**
      * Replaces the current budget with {@code editedBudget}.
      */
     void setCurrentBudget(Budget editedBudget);
@@ -178,12 +168,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
-
-    /**
-     * Updates the filter of the filtered expense list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredExpensesList(Predicate<seedu.address.model.epiggy.Expense> predicate);
 
     /**
      * Updates the filter of the filtered budget list to filter by the given {@code predicate}.

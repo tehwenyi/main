@@ -37,9 +37,7 @@ import seedu.address.logic.parser.epiggy.EditBudgetCommandParser;
 import seedu.address.logic.parser.epiggy.ReportCommandParser;
 import seedu.address.logic.parser.epiggy.SetBudgetCommandParser;
 import seedu.address.logic.parser.epiggy.SetGoalCommandParser;
-
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
 
 /**
  * Parses user input.
@@ -67,10 +65,6 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-
-        case FindExpenseCommand.COMMAND_WORD:
-        case FindExpenseCommand.COMMAND_ALIAS:
-            return new FindExpenseCommandParser().parse(arguments);
 
         case AddExpenseCommand.COMMAND_WORD:
         case AddExpenseCommand.COMMAND_ALIAS:

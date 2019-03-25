@@ -159,7 +159,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addBudget(Budget budget) {
+        public void addBudget(int index, Budget budget) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteBudgetAtIndex(int index) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -170,6 +175,11 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Budget> getBudgetList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getCurrentBudgetIndex() {
             throw new AssertionError("This method should not be called.");
         }
 

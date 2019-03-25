@@ -2,27 +2,16 @@ package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.item.Period;
-import seedu.address.model.epiggy.item.Price;
-
-import static seedu.address.logic.commands.epiggy.SetBudgetCommand.MESSAGE_OVERLAPPING_BUDGET;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BUDGETS;
-
 
 /**
  * Edits the current budget in ePiggy.

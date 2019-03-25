@@ -15,7 +15,10 @@ public class HelpCommand extends Command {
     public static final String COMMAND_ALIAS = "hp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n";
-    public static final String SHOWING_HELP_MESSAGE = "Opened help window.\n";
+    public static final String SHOWING_HELP_MESSAGE = "Commands List : \n"
+            + "Add : add n/EXPENSE_NAME $/COST c/CATEGORY [d/DATE] [t/TAG]… \n"
+            + "Delete : `delete INDEX \n"
+            + "";
 
     /**
      * Execute `help` command.
@@ -25,7 +28,7 @@ public class HelpCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        return new CommandResult(SHOWING_HELP_MESSAGE, false, false);
     }
 
 }

@@ -15,7 +15,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.util.InvalidationListenerManager;
-import seedu.address.model.epiggy.*;
+import seedu.address.model.epiggy.Allowance;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.Savings;
+import seedu.address.model.epiggy.UniqueBudgetList;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.person.Person;
@@ -27,7 +32,7 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final ExpenseList expenses;
+    private final ObservableList<Expense> expenses;
     private final ObservableList<Item> items;
     private SimpleObjectProperty<Budget> budget;
     private SimpleObjectProperty<Goal> goal;
@@ -44,7 +49,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        expenses = new ExpenseList();
+        expenses = FXCollections.observableArrayList();
         items = FXCollections.observableArrayList();
         budgetList = new UniqueBudgetList();
         persons = new UniquePersonList();
@@ -72,15 +77,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
-        indicateModified();
-    }
-
-    /**
-     * Replaces the contents of the expense list with {@code expenses}.
-     * {@code expenses} can contain duplicate expenses.
-     */
-    public void setExpenses(List<Expense> expenses) {
-        this.expenses.setExpenses(expenses);
         indicateModified();
     }
 
@@ -256,7 +252,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @return SortedList of Expenses
      */
     private SortedList<Expense> sortExpensesByDate() {
-        return expenses.sorted();
+        return expenses.sorted(new Comparator<Expense>() {
+                public int compare(Expense e1, Expense e2) {
+                    if (e1.getDate() == null || e2.getDate() == null) {
+                        return 0;
+                    }
+                    return e1.getDate().compareTo(e2.getDate());
+                }
+            });
     }
 
     /**
@@ -335,20 +338,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given expense {@code target} in the list with {@code editedExpense}.
-     * {@code target} must exist in the expense tracker.
-     * The expense identity of {@code editedExpense}
-     * must not be the same as another existing expense in the expense tracker.
-     */
-    public void setExpense(Expense target, Expense editedExpense) {
-        requireNonNull(editedExpense);
-
-        expenses.setExpense(target, editedExpense);
-        indicateModified();
-
-    }
-
-    /**
      * Replaces the current/previous budget in the list with {@code editedBudget}.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
@@ -400,7 +389,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public ObservableList<Expense> getExpenseList() {
-        return expenses.asUnmodifiableObservableList();
+        return FXCollections.unmodifiableObservableList(expenses);
     }
 
     @Override

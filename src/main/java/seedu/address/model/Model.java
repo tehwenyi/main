@@ -101,6 +101,11 @@ public interface Model {
     void addBudget(int index, Budget budget);
 
     /**
+     * Deletes the budget at the specific index.
+     */
+    void deleteBudgetAtIndex(int index);
+
+    /**
      * Gets the current budget.
      */
     SimpleObjectProperty<Budget> getBudget();

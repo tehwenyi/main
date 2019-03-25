@@ -143,6 +143,11 @@ public class ModelManager implements Model {
         versionedAddressBook.addBudget(index, budget); }
 
     @Override
+    public void deleteBudgetAtIndex(int index) {
+        versionedAddressBook.deleteBudgetAtIndex(index);
+    };
+
+    @Override
     public SimpleObjectProperty<Budget> getBudget() {
         return versionedAddressBook.getBudget();
     }

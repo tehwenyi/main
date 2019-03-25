@@ -121,16 +121,15 @@ public class UniqueBudgetList implements Iterable<Budget> {
         return internalList.size();
     }
 
-    //    /**
-    //     * Removes the equivalent budget from the list.
-    //     * The budget must exist in the list.
-    //     */
-    //    public void remove(Budget toRemove) {
-    //        requireNonNull(toRemove);
-    //        if (!internalList.remove(toRemove)) {
-    //            throw new PersonNotFoundException();
-    //        }
-    //    }
+    /**
+     * Removes the budget with the specific index from the list.
+     * The budget of the index must exist in the list.
+     * @param index of the budget to be removed.
+     */
+    public void remove(int index) {
+        requireNonNull(index);
+        internalList.remove(index, index + 1);
+    }
 
     /**
      * Sets internalList to a new list of the same type.

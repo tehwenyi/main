@@ -27,7 +27,7 @@ public class SortExpenseCommand extends Command {
 
     ArgumentMultimap keywords;
 
-    private SortExpenseCommand(ArgumentMultimap keywords) {
+    public SortExpenseCommand(ArgumentMultimap keywords) {
         assert keywords != null : "keywords should not be null.";
         this.keywords = keywords;
     }

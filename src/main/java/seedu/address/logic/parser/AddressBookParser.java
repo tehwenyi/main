@@ -21,6 +21,9 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.epiggy.AddAllowanceCommand;
 import seedu.address.logic.commands.epiggy.AddExpenseCommand;
+import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
+import seedu.address.logic.commands.epiggy.EditBudgetCommand;
+import seedu.address.logic.commands.epiggy.FindExpenseCommand;
 import seedu.address.logic.commands.epiggy.ReportCommand;
 import seedu.address.logic.commands.epiggy.SetBudgetCommand;
 import seedu.address.logic.commands.epiggy.SetGoalCommand;
@@ -30,6 +33,9 @@ import seedu.address.logic.commands.epiggy.ViewGoalProgressCommand;
 import seedu.address.logic.commands.epiggy.ViewSavingsCommand;
 import seedu.address.logic.parser.epiggy.AddAllowanceCommandParser;
 import seedu.address.logic.parser.epiggy.AddExpenseCommandParser;
+import seedu.address.logic.parser.epiggy.DeleteBudgetCommandParser;
+import seedu.address.logic.parser.epiggy.EditBudgetCommandParser;
+import seedu.address.logic.parser.epiggy.FindExpenseCommandParser;
 import seedu.address.logic.parser.epiggy.ReportCommandParser;
 import seedu.address.logic.parser.epiggy.SetBudgetCommandParser;
 import seedu.address.logic.parser.epiggy.SetGoalCommandParser;
@@ -82,6 +88,10 @@ public class AddressBookParser {
         case EditCommand.COMMAND_ALIAS:
             return new EditCommandParser().parse(arguments);
 
+        case FindExpenseCommand.COMMAND_WORD:
+        case FindExpenseCommand.COMMAND_ALIAS:
+            return new FindExpenseCommandParser().parse(arguments);
+
         case SelectCommand.COMMAND_WORD:
         case SelectCommand.COMMAND_ALIAS:
             return new SelectCommandParser().parse(arguments);
@@ -117,6 +127,14 @@ public class AddressBookParser {
         case SetBudgetCommand.COMMAND_WORD:
         case SetBudgetCommand.COMMAND_ALIAS:
             return new SetBudgetCommandParser().parse(arguments);
+
+        case EditBudgetCommand.COMMAND_WORD:
+        case EditBudgetCommand.COMMAND_ALIAS:
+            return new EditBudgetCommandParser().parse(arguments);
+
+        case DeleteBudgetCommand.COMMAND_WORD:
+        case DeleteBudgetCommand.COMMAND_ALIAS:
+            return new DeleteBudgetCommandParser().parse(arguments);
 
         case ViewBudgetCommand.COMMAND_WORD:
         case ViewBudgetCommand.COMMAND_ALIAS:

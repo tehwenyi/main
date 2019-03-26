@@ -21,6 +21,12 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Budget> PREDICATE_SHOW_ALL_BUDGETS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Budget> PREDICATE_SHOW_ALL_EXPENSES = unused -> true;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -95,7 +101,25 @@ public interface Model {
     /**
      * Adds a new budget.
      */
-    void addBudget(Budget budget);
+    void addBudget(int index, Budget budget);
+
+    /**
+     * Deletes the budget at the specific index.
+     */
+    void deleteBudgetAtIndex(int index);
+
+    /**
+     * Replaces the given expense {@code target} with {@code editedExpense}.
+     * {@code target} must exist in the address book.
+     * The expense identity of {@code editedExpense} must not be the same as another existing expense in the address book.
+     */
+    void setExpense(seedu.address.model.epiggy.Expense target, seedu.address.model.epiggy.Expense editedExpense);
+
+    /**
+     * Updates the filter of the filtered expense list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredExpensesList(Predicate<seedu.address.model.epiggy.Expense> predicate);
 
     /**
      * Gets the current budget.
@@ -106,6 +130,13 @@ public interface Model {
      * Gets the current budget list.
      */
     ObservableList<Budget> getBudgetList();
+
+    /**
+     * Gets the current budget's index.
+     * @return -1 if there is no current budget.
+     */
+    int getCurrentBudgetIndex();
+
 
     /**
      * Get the current savings.
@@ -134,18 +165,31 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Replaces the current budget with {@code editedBudget}.
+     */
+    void setCurrentBudget(Budget editedBudget);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered expense list */
     ObservableList<Expense> getFilteredExpenseList();
 
+    /** Returns an unmodifiable view of the filtered budget list */
+    ObservableList<Budget> getFilteredBudgetList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the filter of the filtered budget list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredBudgetList(Predicate<Budget> predicate);
 
     /**
      * Returns true if the model has previous address book states to restore.

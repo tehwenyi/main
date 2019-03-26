@@ -2,7 +2,6 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -19,8 +18,10 @@ import seedu.address.commons.util.InvalidationListenerManager;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.ExpenseList;
 import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.Savings;
+import seedu.address.model.epiggy.UniqueBudgetList;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.person.Person;
@@ -32,13 +33,13 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final ObservableList<Expense> expenses;
+    private final ExpenseList expenses;
     private final ObservableList<Item> items;
-    private final ObservableList<Budget> budgetList;
     private SimpleObjectProperty<Budget> budget;
     private SimpleObjectProperty<Goal> goal;
     private SimpleObjectProperty<Savings> savings;
     private final UniquePersonList persons;
+    private final UniqueBudgetList budgetList;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     /*
@@ -49,9 +50,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        expenses = FXCollections.observableArrayList();
+        expenses = new ExpenseList();
         items = FXCollections.observableArrayList();
-        budgetList = FXCollections.observableArrayList();
+        budgetList = new UniqueBudgetList();
         persons = new UniquePersonList();
         budget = new SimpleObjectProperty<>(new Budget());
         goal = new SimpleObjectProperty<>();
@@ -77,6 +78,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
+        indicateModified();
+    }
+
+    /**
+     * Replaces the contents of the expense list with {@code expenses}.
+     * {@code expenses} can contain duplicate expenses.
+     */
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses.setExpenses(expenses);
         indicateModified();
     }
 
@@ -116,18 +126,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         s.deductSavings(expense.getItem().getPrice().getAmount());
         savings.set(s);
 
-        if (!budgetList.isEmpty()) {
-            // have to update last budget
-            if (budgetIsNotUpdated()) {
-                createNewBudgetTillUpdated(expense);
-            } else {
-                int latestIndex = budgetList.size() - 1;
-                Budget latestBudget = budgetList.get(latestIndex);
-                latestBudget.deductRemainingAmount(expense.getItem().getPrice());
-                long diffInMillies = Math.abs(latestBudget.getEndDate().getTime() - expense.getDate().getTime());
-                long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-                latestBudget.setRemainingDays(new Period((int) diff));
-                budgetList.set(latestIndex, latestBudget);
+        if (budgetList.getBudgetListSize() > 0) {
+            int indexOfBudgetToEdit = budgetList.getBudgetIndexBasedOnDate(expense.getDate());
+            if (indexOfBudgetToEdit >= 0) {
+                Budget budgetToEdit = budgetList.getBudgetAtIndex(indexOfBudgetToEdit);
+                budgetToEdit.setRemainingAmountToInitialAmount();
+                Budget editedBudget = updateToBeAddedBudgetBasedOnExpenses(budgetToEdit);
+                System.out.println(editedBudget);
+
+                budgetList.replaceAtIndex(indexOfBudgetToEdit, editedBudget);
             }
         }
         indicateModified();
@@ -138,25 +145,19 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     private void createNewBudgetTillUpdated(Expense expense) {
         // Creates new budgets if the expense date is over the endDate of the current budgets
-        int k = budgetList.size() - 1;
-        Budget previousBudget = budgetList.get(k);
+        Budget latestBudget = budgetList.getLatestBudget();
         // Continue looping as long as the expense's date is later than the latest budget's end date
         do {
             // Sets the remaining days of the previous budget to 0 when creating a new budget
             // Set the status of the previous budget to old too
-            previousBudget.setRemainingDays(new Period(0));
-            previousBudget.setStatusToOld();
-            budgetList.set(k, previousBudget);
+            latestBudget.setRemainingDays(new Period(0));
+            latestBudget.setStatusToOld();
+            budgetList.replaceLatestBudgetWith(latestBudget);
             // Create new budget based on previous budget
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(previousBudget.getEndDate());
-            cal.add(Calendar.DATE, 1);
-            Date previousBudgetEndDatePlusOne = cal.getTime();
-            Budget b = new Budget(previousBudget.getPrice(), previousBudget.getPeriod(), previousBudgetEndDatePlusOne);
-            // Update the budget based on current expenses
-            budgetList.add(updateToBeAddedBudgetBasedOnExpenses(b));
-            previousBudget = budgetList.get(k + 1);
-            k++;
+            Budget b = new Budget(latestBudget.getPrice(), latestBudget.getPeriod(), latestBudget.getEndDate());
+            // Update the budget based on current expenses and add a new budget
+            budgetList.addAtIndex(0, updateToBeAddedBudgetBasedOnExpenses(b));
+            latestBudget = budgetList.getLatestBudget();
         } while (budgetIsNotUpdated());
     }
 
@@ -178,6 +179,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Sets a budget for ePiggy.
+     * TODO: check if this method is still in use
      */
     public void setBudget(Budget budget) {
         if (budget.getPrice().getAmount() == 0) {
@@ -190,15 +192,26 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Adds a budget to the budgetList.
-     * Only called when there's no budget currently.
+     * Called by the Command setBudget only.
+     * @param budget to be added into budgetList.
      */
-    public void addBudget(Budget budget) {
+    public void addBudget(int index, Budget budget) {
         budget = updateToBeAddedBudgetBasedOnExpenses(budget);
-        budgetList.add(budget);
-        if (budgetIsNotUpdated()) {
-            // Create a new budget based on the latest expense
-            createNewBudgetTillUpdated(sortExpensesByDate().get(expenses.size() - 1));
-        }
+
+        budgetList.addAtIndex(index, budget);
+        //        if (budgetIsNotUpdated()) {
+        //            // Create a new budget based on the latest expense
+        //            createNewBudgetTillUpdated(sortExpensesByDate().get(expenses.size() - 1));
+        //        }
+        indicateModified();
+    }
+
+    /**
+     * Deletes the budget at the specific index.
+     * @param index of the to be deleted budget.
+     */
+    public void deleteBudgetAtIndex(int index) {
+        budgetList.remove(index);
         indicateModified();
     }
 
@@ -206,6 +219,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Updated the budget to be added based on the current list of expenses before it is added.
      */
     private Budget updateToBeAddedBudgetBasedOnExpenses(Budget budget) {
+        Date todaysDate = new Date();
+        if (todaysDate.after(budget.getEndDate())) {
+            budget.setRemainingDays(new Period(0));
+        } else {
+            long diffInMillies = budget.getEndDate().getTime() - todaysDate.getTime();
+            long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+            budget.setRemainingDays(new Period((int) Math.ceil(diff)));
+        }
+
         SortedList<Expense> sortedExpensesByDate = sortExpensesByDate();
         ListIterator<Expense> iterator = sortedExpensesByDate.listIterator();
         while (iterator.hasNext()) {
@@ -213,10 +235,6 @@ public class AddressBook implements ReadOnlyAddressBook {
             if (expense.getDate().after(budget.getStartDate())) {
                 if (!budget.getEndDate().before(expense.getDate())) {
                     budget.deductRemainingAmount(expense.getItem().getPrice());
-                    long diffInMillies = Math.abs(budget.getEndDate().getTime() - expense.getDate().getTime());
-                    long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-                    budget.setRemainingDays(new Period((int) diff));
-                    System.out.println("CHECK: the long diff and int diff: " + diff + (int) diff);
                 } else {
                     return budget;
                 }
@@ -226,19 +244,40 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Sorts Expenses according to Date.
+     * Checks if the budget is valid, then replace the latest budget.
+     */
+    private void replaceLatestBudgetWithCheckedBudget(Budget editedBudget) {
+        SortedList<Expense> expenseSortedList = sortExpensesByDate();
+        Expense latestExpense = expenseSortedList.get(expenseSortedList.size() - 1);
+        if (!editedBudget.getEndDate().after(latestExpense.getDate())) {
+            budgetList.replaceLatestBudgetWith(editedBudget);
+            createNewBudgetTillUpdated(latestExpense);
+        } else {
+            budgetList.replaceLatestBudgetWith(editedBudget);
+        }
+    }
+
+    /**
+     * Sorts Expenses according to Date. Earlier Dates will have lower indexes.
      * @return SortedList of Expenses
      */
     private SortedList<Expense> sortExpensesByDate() {
-        return expenses.sorted(new Comparator<Expense>() {
-                public int compare(Expense e1, Expense e2) {
-                    if (e1.getDate() == null || e2.getDate() == null) {
-                        return 0;
-                    }
-                    return e1.getDate().compareTo(e2.getDate());
-                }
-            });
+        return expenses.sorted();
     }
+
+    /**
+     * Replaces the given expense {@code target} in the list with {@code editedExpense}.
+     * {@code target} must exist in the expense tracker.
+     * The expense identity of {@code editedExpense}
+     * must not be the same as another existing expense in the expense tracker.
+     */
+    public void setExpense(Expense target, Expense editedExpense) {
+        requireNonNull(editedExpense);
+        expenses.setExpense(target, editedExpense);
+        indicateModified();
+
+    }
+
 
     /**
      * Checks if the budget is updated according to the Expense List.
@@ -249,7 +288,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         SortedList<Expense> sortedExpensesByDate = sortExpensesByDate();
         if (!sortedExpensesByDate.isEmpty()) {
             Expense latestExpense = sortedExpensesByDate.get(sortedExpensesByDate.size() - 1);
-            Date lastBudgetedDate = budgetList.get(budgetList.size() - 1).getEndDate();
+            Date lastBudgetedDate = budgetList.getLatestBudget().getEndDate();
             Date lastExpenseDate = latestExpense.getDate();
             return (lastExpenseDate.after(lastBudgetedDate));
         }
@@ -267,14 +306,22 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Gets the current budget for ePiggy.
      */
     public ObservableList<Budget> getBudgetList() {
-        return this.budgetList;
+        return this.budgetList.asUnmodifiableObservableList();
     }
+
+    /**
+     * Gets the current budget's index.
+     * @return -1 if there is no current budget.
+     */
+    public int getCurrentBudgetIndex() {
+        return this.budgetList.getCurrentBudgetIndex();
+    };
 
     /**
      * Checks if there is already a budget in AddressBook.
      */
     public boolean hasBudget() {
-        if (budgetList.isEmpty()) {
+        if (budgetList.asUnmodifiableObservableList().isEmpty()) {
             return false;
         }
         return true;
@@ -304,6 +351,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
+        indicateModified();
+    }
+
+    /**
+     * Replaces the current/previous budget in the list with {@code editedBudget}.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     */
+    public void setCurrentBudget(Budget editedBudget) {
+        requireNonNull(editedBudget);
+        int indexOfCurrentBudget = budgetList.getCurrentBudgetIndex();
+        budgetList.replaceAtIndex(indexOfCurrentBudget, updateToBeAddedBudgetBasedOnExpenses(editedBudget));
         indicateModified();
     }
 
@@ -348,7 +406,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public ObservableList<Expense> getExpenseList() {
-        return FXCollections.unmodifiableObservableList(expenses);
+        return expenses.asUnmodifiableObservableList();
     }
 
     @Override

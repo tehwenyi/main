@@ -23,10 +23,9 @@ public class CommandBox extends UiPart<Region> {
     private final CommandExecutor commandExecutor;
     private final List<String> history;
     private ListElementPointer historySnapshot;
-    // Commands end with white space
-    private String[] keywords = {"delete/ ", "report ", "list ", "help ", "type/",
-            "yearly", "daily", "monthly", "percentage", "setBudget $/500 p/7 d/03/02/2019",
-            "addExpense n/test1 $/500 t/dinner d/03/02/2019", "addAllowance $/10"};
+    private String[] keywords = { "delete/ ", "report ", "list ", "help ", "type/",
+        "yearly", "daily", "monthly", "percentage", "setBudget $/500 p/7 d/03/02/2019",
+        "addExpense n/test1 $/500 t/dinner d/03/02/2019", "addAllowance $/10"};
     @FXML
     private TextField commandTextField;
 

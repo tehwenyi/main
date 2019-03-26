@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.time.ZoneId;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -143,8 +142,7 @@ public class ReportWindow {
                         new PieChart.Data("Cosmetics", 22),
                         new PieChart.Data("Others", 30));
         final PieChart chart = new PieChart(pieChartData);
-        chart.setTitle("Percentage of spending on each categories");
-        (
+        chart.setTitle("Percentage of spending on each categories"); (
                 (Group) scene.getRoot()
         ).getChildren().add(chart);
         window.setScene(scene);
@@ -255,7 +253,6 @@ public class ReportWindow {
                 int year = budgets.get(i).getStartDate().toInstant().atZone(ZoneId.systemDefault())
                         .toLocalDate().getYear(); // get year from expense
                 InnerData data;
-//                HashMap<Integer, InnerData> map = new HashMap<>();
                 int amount = budgets.get(i).getPrice().getAmount();
                 if (map.containsKey(year)) {
                     // if year data exists
@@ -278,8 +275,6 @@ public class ReportWindow {
 
         TreeMap<Integer, InnerData> tm = new TreeMap<>(map);
         for (Map.Entry<Integer, InnerData> entry : tm.entrySet()) {
-            System.out.println("Key = " + entry.getKey() +
-                    ", Value = " + entry.getValue());
             series2.getData().add(new XYChart.Data(entry.getKey().toString(),
                     entry.getValue().getExpense()));
             series3.getData().add(new XYChart.Data(entry.getKey().toString(),
@@ -292,6 +287,9 @@ public class ReportWindow {
         window.showAndWait();
     }
 
+    /**
+     * Data class for collecting data.
+     */
     class InnerData {
         private int year;
         private int budget;

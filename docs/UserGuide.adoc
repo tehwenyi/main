@@ -189,11 +189,11 @@ Format: `sort -[n/d/$] -[A/D]`
 
 Examples:
 
-* `sort -n` +
+* `sort n/n` +
 Sorts all entries by name (in ascending order).
-* `sort -d` +
+* `sort d/d` +
 Sorts all entries by date in descending order.
-* `sort -$` +
+* `sort $/$` +
 Sorts all entries by amount in ascending order.
 
 === Budgeting

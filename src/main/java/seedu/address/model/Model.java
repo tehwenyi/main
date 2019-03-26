@@ -4,6 +4,7 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.epiggy.*;
 import seedu.address.model.person.Person;
 
@@ -241,4 +242,9 @@ public interface Model {
      * Sets the selected expense in the filtered expense list.
      */
     void setSelectedExpense(Expense expense);
+
+    /**
+     * Sorts the expenses according to the specified {@param keywords}.
+     */
+    void sortExpenses(ArgumentMultimap keywords);
 }

@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -10,11 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.epiggy.Allowance;
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Expense;
-import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.Savings;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.model.epiggy.*;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -245,6 +243,19 @@ public class ModelManager implements Model {
         filteredExpenses.setPredicate(predicate);
     }
 
+    @Override
+    public void sortExpenses(ArgumentMultimap keywords) {
+        if (keywords.getValue(PREFIX_NAME).equals("n")) {
+            versionedAddressBook.sortExpensesByName();
+        }
+        if (keywords.getValue(PREFIX_DATE).equals("d")) {
+            versionedAddressBook.sortExpensesByDate();
+        }
+        if(keywords.getValue(PREFIX_COST).equals("$")) {
+            versionedAddressBook.sortExpensesByAmount();
+        }
+        versionedAddressBook.indicateModified();
+    }
 
     @Override
     public void updateFilteredBudgetList(Predicate<Budget> predicate) {

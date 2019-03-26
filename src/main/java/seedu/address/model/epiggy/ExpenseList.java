@@ -112,13 +112,43 @@ public class ExpenseList implements Iterable<seedu.address.model.epiggy.Expense>
      * Returns list of expenses sorted by date
      * @return SortedList of Expense
      */
-    public SortedList<Expense> sorted() {
+    public SortedList<Expense> sortByDate() {
         return internalList.sorted(new Comparator<Expense>() {
             public int compare(Expense e1, Expense e2) {
                 if (e1.getDate() == null || e2.getDate() == null) {
                     return 0;
                 }
                 return e1.getDate().compareTo(e2.getDate());
+            }
+        });
+    }
+
+    /**
+     * Returns list of expenses sorted by date
+     * @return SortedList of Expense
+     */
+    public SortedList<Expense> sortByName() {
+        return internalList.sorted(new Comparator<Expense>() {
+            public int compare(Expense e1, Expense e2) {
+                if (e1.getItem().getName() == null || e2.getItem().getName() == null) {
+                    return 0;
+                }
+                return e1.getItem().getName().name.compareTo(e2.getItem().getName().name);
+            }
+        });
+    }
+
+    /**
+     * Returns list of expenses sorted by date
+     * @return SortedList of Expense
+     */
+    public SortedList<Expense> sortByAmount() {
+        return internalList.sorted(new Comparator<Expense>() {
+            public int compare(Expense e1, Expense e2) {
+                if (e1.getItem().getPrice() == null || e2.getItem().getPrice()  == null) {
+                    return 0;
+                }
+                return e1.getItem().getPrice().getAmount() < e2.getItem().getPrice().getAmount() ? 1 : -1;
             }
         });
     }

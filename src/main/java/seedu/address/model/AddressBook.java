@@ -253,9 +253,26 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Sorts Expenses according to Date. Earlier Dates will have lower indexes.
      * @return SortedList of Expenses
      */
-    private SortedList<Expense> sortExpensesByDate() {
-        return expenses.sorted();
+    public SortedList<Expense> sortExpensesByDate() {
+        return expenses.sortByDate();
     }
+
+    /**
+     * Sorts Expenses according to Date. Earlier Dates will have lower indexes.
+     * @return SortedList of Expenses
+     */
+    public SortedList<Expense> sortExpensesByName() {
+        return expenses.sortByName();
+    }
+
+    /**
+     * Sorts Expenses according to Date. Earlier Dates will have lower indexes.
+     * @return SortedList of Expenses
+     */
+    public SortedList<Expense> sortExpensesByAmount() {
+        return expenses.sortByAmount();
+    }
+
 
     /**
      * Replaces the given expense {@code target} in the list with {@code editedExpense}.

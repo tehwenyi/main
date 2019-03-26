@@ -249,7 +249,10 @@ public class ModelManager implements Model {
         filteredExpenses.setPredicate(predicate);
     }
 
-    @Override
+    /**
+     * Sorts the expenses according to the keyword.
+     * @param keywords
+     */
     public void sortExpenses(ArgumentMultimap keywords) {
         if (keywords.getValue(PREFIX_NAME).equals("n")) {
             versionedAddressBook.sortExpensesByName();

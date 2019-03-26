@@ -7,7 +7,6 @@ import seedu.address.model.Model;
 
 /**
  * Lists all the commands with their brief description and syntax.
- * TODO: to complete full commands list
  */
 public class HelpCommand extends Command {
 

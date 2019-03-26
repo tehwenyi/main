@@ -3,14 +3,14 @@ package seedu.address.model.epiggy;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
 
 //@@author rahulb99
 
@@ -145,7 +145,7 @@ public class ExpenseList implements Iterable<seedu.address.model.epiggy.Expense>
     public SortedList<Expense> sortByAmount() {
         return internalList.sorted(new Comparator<Expense>() {
             public int compare(Expense e1, Expense e2) {
-                if (e1.getItem().getPrice() == null || e2.getItem().getPrice()  == null) {
+                if (e1.getItem().getPrice() == null || e2.getItem().getPrice() == null) {
                     return 0;
                 }
                 return e1.getItem().getPrice().getAmount() < e2.getItem().getPrice().getAmount() ? 1 : -1;

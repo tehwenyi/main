@@ -9,6 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Expense;
 
 /**
@@ -20,7 +21,7 @@ public class ExpenseCard extends UiPart<Region> {
 
     private static final String FXML = "ExpenseListCard.fxml";
     private static final String[] TAG_COLOR_STYLES =
-        { "turquoise", "orange", "yellow", "green", "black", "blue", "beige", "pink", "white", "grey" };
+        { "turquoise", "orange", "yellow", "green", "black", "blue", "pink", "white", "grey" };
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -51,9 +52,13 @@ public class ExpenseCard extends UiPart<Region> {
         this.expense = expense;
         id.setText(displayedIndex + ". ");
         name.setText(expense.getItem().getName().name);
-        cost.setText(String.format("Cost: %d $", expense.getItem().getPrice().getAmount()));
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
-        date.setText(expense.getDate().toString());
+        if (expense instanceof Allowance) {
+            cost.setText(String.format("Amount: $%d", expense.getItem().getPrice().getAmount()));
+        } else {
+            cost.setText(String.format("Cost: $%d", expense.getItem().getPrice().getAmount()));
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("h:mma, dd MMM YYYY");
+        date.setText(String.format("Added on: %s", formatter.format(expense.getDate())));
         initialiseTags(expense);
     }
 

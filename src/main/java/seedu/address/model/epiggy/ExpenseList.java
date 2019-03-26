@@ -3,21 +3,22 @@ package seedu.address.model.epiggy;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+
 //@@author rahulb99
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A expense is considered unique by comparing using {@code Expense#isSamePerson(Expense)}. As such, adding and updating of
- * persons uses Expense#isSamePerson(Expense) for equality so as to ensure that the expense being added or updated is
+ * A expense is considered unique by comparing using {@code Expense#isSamePerson(Expense)}. As such,
+ * adding and updating of persons uses Expense#isSamePerson(Expense) for equality so as to
+ * ensure that the expense being added or updated is
  * unique in terms of identity in the ExpenseList. However, the removal of a expense uses Expense#equals(Object) so
  * as to ensure that the expense with exactly the same fields will be removed.
  *
@@ -29,16 +30,6 @@ public class ExpenseList implements Iterable<seedu.address.model.epiggy.Expense>
     private final ObservableList<seedu.address.model.epiggy.Expense> internalList = FXCollections.observableArrayList();
     private final ObservableList<seedu.address.model.epiggy.Expense> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
-
-
-//    Not required I guess
-//    /**
-//     * Returns true if the list contains an equivalent expense as the given argument.
-//     */
-//    public boolean contains(seedu.address.model.epiggy.Expense toCheck) {
-//        requireNonNull(toCheck);
-//        return internalList.stream().anyMatch(toCheck::isSameExpense);
-//    }
 
     /**
      * Adds a expense to the list.
@@ -53,7 +44,8 @@ public class ExpenseList implements Iterable<seedu.address.model.epiggy.Expense>
      * {@code target} must exist in the list.
      * The expense identity of {@code editedExpense} must not be the same as another existing expense in the list.
      */
-    public void setExpense(seedu.address.model.epiggy.Expense target, seedu.address.model.epiggy.Expense editedExpense) {
+    public void setExpense(seedu.address.model.epiggy.Expense target,
+                           seedu.address.model.epiggy.Expense editedExpense) {
         requireAllNonNull(target, editedExpense);
 
         int index = internalList.indexOf(target);
@@ -118,7 +110,7 @@ public class ExpenseList implements Iterable<seedu.address.model.epiggy.Expense>
 
     /**
      * Returns list of expenses sorted by date
-     * @return SortedList<Expense>
+     * @return SortedList of Expense
      */
     public SortedList<Expense> sorted() {
         return internalList.sorted(new Comparator<Expense>() {

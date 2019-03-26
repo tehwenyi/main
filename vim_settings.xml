@@ -1,0 +1,34 @@
+<application>
+  <component name="VimSettings">
+    <state version="4" enabled="true" />
+    <globalmarks />
+    <filemarks>
+      <file name="/Dummy.txt" timestamp="1552382386930">
+        <mark key="[" line="0" column="0" />
+      </file>
+      <file name="$USER_HOME$/Desktop/main/src/main/java/seedu/address/logic/commands/HelpCommand.java" timestamp="1552382240810">
+        <mark key="[" line="18" column="0" />
+      </file>
+      <file name="$USER_HOME$/Desktop/main/src/main/java/seedu/address/logic/commands/epiggy/HelpCommand.java" timestamp="1552382273734">
+        <mark key="[" line="21" column="0" />
+      </file>
+      <file name="$USER_HOME$/Desktop/main/src/main/java/seedu/address/logic/parser/epiggy/HelpCommandParser.java" timestamp="1552382122037">
+        <mark key="[" line="2" column="30" />
+      </file>
+      <file name="$USER_HOME$/Desktop/main/docs/UserGuide.adoc" timestamp="1552380411271" />
+    </filemarks>
+    <jumps />
+    <registers />
+    <search>
+      <last-dir>0</last-dir>
+      <show-last>false</show-last>
+    </search>
+    <history>
+      <history-search />
+      <history-cmd />
+      <history-expr />
+      <history-input />
+    </history>
+    <shortcut-conflicts />
+  </component>
+</application>

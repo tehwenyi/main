@@ -52,7 +52,7 @@ public class ExpenseCard extends UiPart<Region> {
         this.expense = expense;
         id.setText(displayedIndex + ". ");
         name.setText(expense.getItem().getName().name);
-        if(expense instanceof Allowance) {
+        if (expense instanceof Allowance) {
             cost.setText(String.format("Amount: $%d", expense.getItem().getPrice().getAmount()));
         } else {
             cost.setText(String.format("Cost: $%d", expense.getItem().getPrice().getAmount()));

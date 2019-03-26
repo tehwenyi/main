@@ -40,9 +40,11 @@ public class ViewGoalCommand extends Command {
         float diff = goalAmount - savingsAmount;
 
         if (diff < 0) {
-            return new CommandResult(String.format(MESSAGE_SUCCESS + MESSAGE_SAVINGS_MORE_THAN_GOAL, goal.getValue()));
+            return new CommandResult(String.format(MESSAGE_SUCCESS +
+                    MESSAGE_SAVINGS_MORE_THAN_GOAL, goal.getValue()));
         } else {
-            return new CommandResult(String.format(MESSAGE_SUCCESS + MESSAGE_SAVINGS_LESS_THAN_GOAL, goal.getValue(), diff));
+            return new CommandResult(String.format(MESSAGE_SUCCESS +
+                    MESSAGE_SAVINGS_LESS_THAN_GOAL, goal.getValue(), diff));
         }
     }
 }

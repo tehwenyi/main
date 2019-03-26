@@ -115,8 +115,7 @@ public interface Model {
      * The expense identity of {@code editedExpense} must not be the same as
      * another existing expense in the address book.
      */
-    void setExpense(seedu.address.model.epiggy.Expense target,
-                    seedu.address.model.epiggy.Expense editedExpense);
+    void setExpense(Expense target, Expense editedExpense);
 
     /**
      * Updates the filter of the filtered expense list to filter by the given {@code predicate}.

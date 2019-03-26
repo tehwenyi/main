@@ -254,6 +254,7 @@ public class ModelManager implements Model {
         if(keywords.getValue(PREFIX_COST).equals("$")) {
             versionedAddressBook.sortExpensesByAmount();
         }
+        versionedAddressBook.getExpenseList();
         versionedAddressBook.indicateModified();
     }
 

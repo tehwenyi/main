@@ -9,6 +9,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.Savings;
 
 /**
  * Views the current goal set.
@@ -20,12 +21,28 @@ public class ViewGoalCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View your goal set. ";
 
-    public static final String MESSAGE_SUCCESS = "Your current goal is: %1$s";
+    public static final String MESSAGE_SUCCESS = "Your current goal is: %1$s\n";
+
+    public static final String MESSAGE_SAVINGS_LESS_THAN_GOAL = "$%2$s more to go!";
+    public static final String MESSAGE_SAVINGS_MORE_THAN_GOAL = "You have reached your savings goal! Congratulations!";
+
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        SimpleObjectProperty<Savings> savings = model.getSavings();
         SimpleObjectProperty<Goal> goal = model.getGoal();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, goal.getValue()));
+
+        float goalAmount = (float) goal.getValue().getAmount().getAmount();
+        float savingsAmount = savings.getValue().getSavings();
+
+        float diff = goalAmount - savingsAmount;
+
+        if (diff < 0) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS + MESSAGE_SAVINGS_MORE_THAN_GOAL, goal.getValue()));
+        } else {
+            return new CommandResult(String.format(MESSAGE_SUCCESS + MESSAGE_SAVINGS_LESS_THAN_GOAL, goal.getValue(), diff));
+        }
     }
 }

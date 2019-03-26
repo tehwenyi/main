@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.logging.Logger;
 
@@ -28,15 +28,15 @@ public class ReportCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows report to the user.\n"
             + "Parameters: "
-            + PREFIX_PERIOD + "TYPE OF REPORT \n"
+            + PREFIX_TYPE + "TYPE OF REPORT \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PERIOD + "monthly ";
+            + PREFIX_TYPE + "monthly ";
 
     public static final String MESSAGE_SUCCESS = "Showed report.";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private String type = "MONTHLY";
+    private String type = "ALL";
 
     /**
      * Constructor with chart type.
@@ -61,20 +61,23 @@ public class ReportCommand extends Command {
         // set a dummy value. TODO: Changes it when other command done.
         ExpenseDisplayType expenseDisplayType = ExpenseDisplayType.valueOf(type);
         switch (expenseDisplayType) {
+        case ALL:
+            summaryWindow.dispalyAllSummary(model);
+            break;
         case DAILY:
-            summaryWindow.displayDailyReport();
+            summaryWindow.displayDailyReport(model);
             break;
         case MONTHLY:
-            summaryWindow.displayMonthlyReport();
+            summaryWindow.displayMonthlyReport(model);
             break;
         case YEARLY:
-            summaryWindow.dispalyYearlySummary();
+            summaryWindow.dispalyYearlySummary(model);
             break;
         case PERCENTAGE:
-            summaryWindow.displayExpensePercentageReport();
+            summaryWindow.displayExpensePercentageReport(model);
             break;
         default:
-            summaryWindow.displayMonthlyReport();
+            summaryWindow.displayMonthlyReport(model);
             break;
         }
 
@@ -85,6 +88,6 @@ public class ReportCommand extends Command {
      * Chart will be displayed according to expense display type.
      */
     public enum ExpenseDisplayType {
-        MONTHLY, DAILY, TOTAL, YEARLY, PERCENTAGE
+        MONTHLY, DAILY, TOTAL, YEARLY, PERCENTAGE, ALL
     }
 }

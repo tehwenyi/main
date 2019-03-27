@@ -130,8 +130,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public void setBudget(Budget budget) {
-        model.setBudget(budget); }
+    public void setCurrentBudget(Budget budget) {
+        model.setCurrentBudget(budget); }
 
     @Override
     public void addBudget(int index, Budget budget) {

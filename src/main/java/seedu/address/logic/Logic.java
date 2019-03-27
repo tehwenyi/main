@@ -88,11 +88,11 @@ public interface Logic {
     void setSelectedPerson(Person person);
 
     /**
-     * Sets the budget.
+     * Sets the current budget.
      *
      * @see seedu.address.model.Model#setBudget(Budget)
      */
-    void setBudget(Budget budget);
+    void setCurrentBudget(Budget budget);
 
     /**
      * Adds a new budget.

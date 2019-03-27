@@ -298,16 +298,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     };
 
     /**
-     * Checks if there is already a budget in AddressBook.
-     */
-    public boolean hasBudget() {
-        if (budgetList.asUnmodifiableObservableList().isEmpty()) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Sets the saving goal for ePiggy.
      */
     public void setGoal(Goal goal) {

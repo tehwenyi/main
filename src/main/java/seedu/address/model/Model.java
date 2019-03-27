@@ -156,11 +156,6 @@ public interface Model {
     void setGoal(Goal goal);
 
     /**
-     * Checks if a budget already exists in AddressBook.
-     */
-    boolean hasBudget();
-
-    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.

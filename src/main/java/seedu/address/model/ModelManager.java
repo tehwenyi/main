@@ -147,10 +147,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setBudget(Budget budget) {
-        versionedAddressBook.setBudget(budget); }
-
-    @Override
     public void addBudget(int index, Budget budget) {
         versionedAddressBook.addBudget(index, budget); }
 
@@ -158,11 +154,6 @@ public class ModelManager implements Model {
     public void deleteBudgetAtIndex(int index) {
         versionedAddressBook.deleteBudgetAtIndex(index);
     };
-
-    @Override
-    public SimpleObjectProperty<Budget> getBudget() {
-        return versionedAddressBook.getBudget();
-    }
 
     @Override
     public ObservableList<Budget> getBudgetList() {

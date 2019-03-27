@@ -33,7 +33,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final ExpenseList expenses;
     private final ObservableList<Item> items;
-    private SimpleObjectProperty<Budget> budget;
     private SimpleObjectProperty<Goal> goal;
     private SimpleObjectProperty<Savings> savings;
     private final UniquePersonList persons;
@@ -52,7 +51,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         items = FXCollections.observableArrayList();
         budgetList = new UniqueBudgetList();
         persons = new UniquePersonList();
-        budget = new SimpleObjectProperty<>(new Budget());
         goal = new SimpleObjectProperty<>();
         savings = new SimpleObjectProperty<>(new Savings());
 
@@ -149,19 +147,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public SimpleObjectProperty<Savings> getSavings() {
         return savings;
-    }
-
-    /**
-     * Sets a budget for ePiggy.
-     * TODO: check if this method is still in use
-     */
-    public void setBudget(Budget budget) {
-        if (budget.getPrice().getAmount() == 0) {
-            this.budget.setValue(budget);
-        } else {
-            // cannot create budget
-        }
-        indicateModified();
     }
 
     /**
@@ -273,13 +258,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         int indexOfCurrentBudget = budgetList.getCurrentBudgetIndex();
         budgetList.replaceAtIndex(indexOfCurrentBudget, updateBudget(editedBudget));
         indicateModified();
-    }
-
-    /**
-     * Gets the current budget for ePiggy.
-     */
-    public SimpleObjectProperty<Budget> getBudget() {
-        return this.budget;
     }
 
     /**

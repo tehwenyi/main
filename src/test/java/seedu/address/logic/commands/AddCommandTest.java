@@ -313,21 +313,6 @@ public class AddCommandTest {
         public void setSelectedPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
-
-        @Override
-        public void setExpense(Expense target, Expense editedExpense) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredExpensesList(Predicate<Expense> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void sortExpenses(ArgumentMultimap keywords) {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**

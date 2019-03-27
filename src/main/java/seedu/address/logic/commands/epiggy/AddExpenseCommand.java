@@ -36,15 +36,10 @@ public class AddExpenseCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        Savings savings = model.getSavings().get();
 
-        if (toAdd.getItem().getPrice().getAmount() > savings.getSavings()) {
-            return new CommandResult(String.format(MESSAGE_INSUFFICIENT_AMOUNT, savings.getSavings()));
-        } else {
-            model.addExpense(toAdd);
+        model.addExpense(toAdd);
 
-            model.commitAddressBook();
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        }
+        model.commitAddressBook();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 }

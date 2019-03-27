@@ -184,8 +184,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         ListIterator<Expense> iterator = sortedExpensesByDate.listIterator();
         while (iterator.hasNext()) {
             Expense expense = iterator.next();
-            if (expense.getDate().after(budget.getStartDate())) {
-                if (!budget.getEndDate().before(expense.getDate())) {
+            if (!expense.getDate().before(budget.getStartDate())) {
+                if (budget.getEndDate().after(expense.getDate())) {
                     if (!(expense instanceof Allowance)) {
                         budget.deductRemainingAmount(expense.getItem().getPrice());
                     }

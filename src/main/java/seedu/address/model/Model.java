@@ -1,15 +1,19 @@
 package seedu.address.model;
 
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.model.epiggy.*;
+import seedu.address.model.epiggy.Allowance;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
-
-import java.nio.file.Path;
-import java.util.function.Predicate;
 
 /**
  * The API of the Model component.
@@ -111,8 +115,7 @@ public interface Model {
      * The expense identity of {@code editedExpense} must not be the same as
      * another existing expense in the address book.
      */
-    void setExpense(seedu.address.model.epiggy.Expense target,
-                    seedu.address.model.epiggy.Expense editedExpense);
+    void setExpense(Expense target, Expense editedExpense);
 
     /**
      * Updates the filter of the filtered expense list to filter by the given {@code predicate}.

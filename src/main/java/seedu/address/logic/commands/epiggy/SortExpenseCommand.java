@@ -25,7 +25,7 @@ public class SortExpenseCommand extends Command {
             + " Example: " + COMMAND_WORD + " n/n";
     public static final String MESSAGE_SUCCESS = "Sorting Expenses...\n";
 
-    ArgumentMultimap keywords;
+    private ArgumentMultimap keywords;
 
     public SortExpenseCommand(ArgumentMultimap keywords) {
         assert keywords != null : "keywords should not be null.";

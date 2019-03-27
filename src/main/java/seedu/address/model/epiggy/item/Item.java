@@ -35,9 +35,9 @@ public class Item {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(name)
-                .append(" - $")
+                .append(": $")
                 .append(price)
-                .append(" ")
+                .append("\nTags: ")
                 .append(tags);
         return builder.toString();
     }

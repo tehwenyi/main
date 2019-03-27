@@ -193,7 +193,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleDailyReport() {
         helpWindow.hide();
         try {
-            logic.execute("report t/daily");
+            logic.execute("report type/daily");
         } catch (CommandException | ParseException e) {
             resultDisplay.setFeedbackToUser(e.getMessage());
         }
@@ -206,7 +206,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleMonthlyReport() {
         helpWindow.hide();
         try {
-            logic.execute("report t/monthly");
+            logic.execute("report type/monthly");
         } catch (CommandException | ParseException e) {
             resultDisplay.setFeedbackToUser(e.getMessage());
         }
@@ -219,7 +219,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleYearlyReport() {
         helpWindow.hide();
         try {
-            logic.execute("report t/yearly");
+            logic.execute("report type/yearly");
         } catch (CommandException | ParseException e) {
             resultDisplay.setFeedbackToUser(e.getMessage());
         }
@@ -232,7 +232,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handlePercentageReport() {
         helpWindow.hide();
         try {
-            logic.execute("report t/percentage");
+            logic.execute("report type/percentage");
         } catch (CommandException | ParseException e) {
             resultDisplay.setFeedbackToUser(e.getMessage());
         }

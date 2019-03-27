@@ -69,9 +69,12 @@ public class ParserUtil {
      * Parses a {@code String cost} into a {@code Price}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static Price parseCost(String cost) {
+    public static Price parseCost(String cost) throws ParseException {
         requireNonNull(cost);
         String trimmedCost = cost.trim();
+        if (!Price.isValidPrice(trimmedCost)) {
+            throw new ParseException(Price.MESSAGE_CONSTRAINTS);
+        }
         return new Price(Integer.parseInt(trimmedCost));
     }
 

@@ -1,7 +1,7 @@
 package seedu.address.logic.parser.epiggy;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.stream.Stream;
 
@@ -32,15 +32,15 @@ public class ReportCommandParser implements Parser<ReportCommand> {
     @Override
     public ReportCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PERIOD);
+                ArgumentTokenizer.tokenize(args, PREFIX_TYPE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_PERIOD)
+        if (!arePrefixesPresent(argMultimap, PREFIX_TYPE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReportCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_PERIOD).isPresent()) {
-            String type = argMultimap.getValue(PREFIX_PERIOD).get();
+        if (argMultimap.getValue(PREFIX_TYPE).isPresent()) {
+            String type = argMultimap.getValue(PREFIX_TYPE).get();
             return new ReportCommand(type.toUpperCase());
         } else {
             return new ReportCommand();

@@ -8,6 +8,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Savings;
 
 /**
  * Adds a person to the toAdd book.
@@ -21,6 +22,11 @@ public class AddExpenseCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New expense added: %1$s";
 
+    public static final String MESSAGE_INSUFFICIENT_AMOUNT = "You have insufficient funds. "
+            + "You have $%1$s available in ePiggy.\n"
+            + "Please check that you have entered the correct amount or updated ePiggy with any new allowances.";
+
+
     private final Expense toAdd;
 
     public AddExpenseCommand(Expense expense) {
@@ -30,10 +36,15 @@ public class AddExpenseCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        Savings savings = model.getSavings().get();
 
-        model.addExpense(toAdd);
+        if (toAdd.getItem().getPrice().getAmount() > savings.getSavings()) {
+            return new CommandResult(String.format(MESSAGE_INSUFFICIENT_AMOUNT, savings.getSavings()));
+        } else {
+            model.addExpense(toAdd);
 
-        model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+            model.commitAddressBook();
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        }
     }
 }

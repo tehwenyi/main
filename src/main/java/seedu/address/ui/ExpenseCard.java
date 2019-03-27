@@ -21,7 +21,7 @@ public class ExpenseCard extends UiPart<Region> {
 
     private static final String FXML = "ExpenseListCard.fxml";
     private static final String[] TAG_COLOR_STYLES =
-        { "turquoise", "orange", "yellow", "green", "black", "blue", "pink", "white", "grey" };
+        { "turquoise", "orange", "yellow", "green", "black", "blue", "pink", "grey" };
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

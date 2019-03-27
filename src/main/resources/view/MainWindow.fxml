@@ -28,9 +28,9 @@
                     <Menu mnemonicParsing="false" text="File">
                         <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit"/>
                     </Menu>
-                    <Menu mnemonicParsing="false" text="Help">
+                    <Menu mnemonicParsing="false" text="How To Use">
                         <MenuItem fx:id="helpMenuItem" mnemonicParsing="false"
-                                  onAction="#handleHelp" text="Help"/>
+                                  onAction="#handleHelp" text="User Manual"/>
                     </Menu>
                     <Menu mnemonicParsing="false" text="Report">
                         <MenuItem fx:id="summaryMenuItem_daily" mnemonicParsing="false"

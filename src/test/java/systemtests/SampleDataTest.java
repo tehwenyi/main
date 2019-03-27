@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.address.model.AddressBook;
@@ -13,6 +14,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
+@Ignore
 public class SampleDataTest extends AddressBookSystemTest {
     /**
      * Returns null to force test app to load data of the file in {@code getDataFileLocation()}.

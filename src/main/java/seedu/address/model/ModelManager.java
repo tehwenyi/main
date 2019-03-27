@@ -2,6 +2,9 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.nio.file.Path;
 import java.util.Objects;
@@ -15,6 +18,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
@@ -105,6 +109,14 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return versionedAddressBook;
+    }
+
+    @Override
+    public void setExpense(seedu.address.model.epiggy.Expense target,
+                           seedu.address.model.epiggy.Expense editedExpense) {
+        requireAllNonNull(target, editedExpense);
+
+        versionedAddressBook.setExpense(target, editedExpense);
     }
 
     @Override
@@ -229,6 +241,30 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredExpensesList(Predicate<seedu.address.model.epiggy.Expense> predicate) {
+        requireNonNull(predicate);
+        filteredExpenses.setPredicate(predicate);
+    }
+
+    /**
+     * Sorts the expenses according to the keyword.
+     * @param keywords
+     */
+    public void sortExpenses(ArgumentMultimap keywords) {
+        if (keywords.getValue(PREFIX_NAME).equals("n")) {
+            versionedAddressBook.sortExpensesByName();
+        }
+        if (keywords.getValue(PREFIX_DATE).equals("d")) {
+            versionedAddressBook.sortExpensesByDate();
+        }
+        if (keywords.getValue(PREFIX_COST).equals("$")) {
+            versionedAddressBook.sortExpensesByAmount();
+        }
+        versionedAddressBook.getExpenseList();
+        versionedAddressBook.indicateModified();
     }
 
     @Override

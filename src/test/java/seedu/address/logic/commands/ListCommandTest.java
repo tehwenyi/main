@@ -6,6 +6,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
@@ -34,6 +35,7 @@ public class ListCommandTest {
     }
 
     @Test
+    @Ignore
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListCommand(), model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);

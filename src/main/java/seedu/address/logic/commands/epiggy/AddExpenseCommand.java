@@ -21,6 +21,11 @@ public class AddExpenseCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New expense added: %1$s";
 
+    public static final String MESSAGE_INSUFFICIENT_AMOUNT = "You have insufficient funds. "
+            + "You have $%1$s available in ePiggy.\n"
+            + "Please check that you have entered the correct amount or updated ePiggy with any new allowances.";
+
+
     private final Expense toAdd;
 
     public AddExpenseCommand(Expense expense) {

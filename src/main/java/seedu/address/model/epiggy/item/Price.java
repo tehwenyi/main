@@ -8,7 +8,7 @@ public class Price {
     // Change message constraints when we change amount from int to float
     public static final String MESSAGE_CONSTRAINTS =
             "Cost should only contain whole numbers of at least value 1.";
-    public static final String VALIDATION_REGEX = "\\d+";
+    public static final String VALIDATION_REGEX = "^0*[1-9]\\d*$";
     private final int amount;
 
     public Price(int amount) {

@@ -41,6 +41,8 @@ public class BudgetCard extends UiPart<Region> {
     private Label remainingAmount;
     @FXML
     private Label remainingDays;
+    @FXML
+    private Label notification;
 
     public BudgetCard(int displayedIndex, Budget budget) {
         super(FXML);
@@ -54,11 +56,21 @@ public class BudgetCard extends UiPart<Region> {
         calendar.setTime(budget.getEndDate());
         calendar.add(Calendar.DAY_OF_MONTH, -1);
         endDate.setText("End Date: " + dateFormat.format(calendar.getTime()));
-
         period.setText("Period of Budget: " + budget.getPeriod().toString() + " days");
+
         currentStatus.setText("Status");
         remainingAmount.setText("Amount remaining: $" + budget.getRemainingAmount().toString());
         remainingDays.setText("Days remaining: " + budget.getRemainingDays().toString() + " days");
+
+        if (budget.getRemainingAmount().getAmount() < 0) {
+            notification.setText("You have exceeded your budget!");
+        } else if (budget.getRemainingAmount().getAmount() < (budget.getPrice().getAmount() / 5)) {
+            notification.setText("You have spent more than 80% of your budget. \n"
+                    + "Please control your expenses!");
+        } else {
+            notification.setText("“Save money and money will save you.”\n"
+                    + "Remember to spend wisely!");
+        }
     }
 
     //    /**

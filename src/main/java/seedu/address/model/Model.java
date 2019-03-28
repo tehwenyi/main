@@ -95,11 +95,6 @@ public interface Model {
     void addAllowance(Allowance allowance);
 
     /**
-     * Sets the given budget.
-     */
-    void setBudget(Budget budget);
-
-    /**
      * Adds a new budget.
      */
     void addBudget(int index, Budget budget);
@@ -122,11 +117,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredExpensesList(Predicate<seedu.address.model.epiggy.Expense> predicate);
-
-    /**
-     * Gets the current budget.
-     */
-    SimpleObjectProperty<Budget> getBudget();
 
     /**
      * Gets the current budget list.
@@ -154,11 +144,6 @@ public interface Model {
      * Sets the savings goal.
      */
     void setGoal(Goal goal);
-
-    /**
-     * Checks if a budget already exists in AddressBook.
-     */
-    boolean hasBudget();
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

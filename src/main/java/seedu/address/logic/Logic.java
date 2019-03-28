@@ -3,7 +3,6 @@ package seedu.address.logic;
 import java.nio.file.Path;
 
 import javafx.beans.property.ReadOnlyProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
@@ -39,8 +38,6 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Expense> getFilteredExpenseList();
-
-    SimpleObjectProperty<Budget> getBudget();
 
     ObservableList<Budget> getBudgetList();
     /**
@@ -88,11 +85,11 @@ public interface Logic {
     void setSelectedPerson(Person person);
 
     /**
-     * Sets the budget.
+     * Sets the current budget.
      *
      * @see seedu.address.model.Model#setBudget(Budget)
      */
-    void setBudget(Budget budget);
+    void setCurrentBudget(Budget budget);
 
     /**
      * Adds a new budget.

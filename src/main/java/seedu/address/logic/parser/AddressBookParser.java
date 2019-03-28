@@ -164,8 +164,7 @@ public class AddressBookParser {
         case ReportCommand.COMMAND_WORD:
         case ReportCommand.COMMAND_ALIAS:
             if (arguments.equals("")) {
-                final String DummyValue = " d/01/01/1970"; //Dummy value for function call
-                return new ReportCommandParser().parse(DummyValue);
+                return new ReportCommandParser().parse("");
             } else {
                 return new ReportCommandParser().parse(arguments);
             }

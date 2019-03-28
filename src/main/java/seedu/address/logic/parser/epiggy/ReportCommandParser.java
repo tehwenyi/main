@@ -33,17 +33,23 @@ public class ReportCommandParser implements Parser<ReportCommand> {
      */
     @Override
     public ReportCommand parse(String args) throws ParseException {
+        LocalDate date;
+        int day = 1, month = 1, year = 1970;
+        String[] type = {"YEAR", "MONTH", "DAY", "ALL"};
+
+        if (args.equals("")){
+            // no parameter found
+            return new ReportCommand(null, type[3]);
+        }
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DATE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReportCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ReportCommand.MESSAGE_USAGE));
         }
-
-        LocalDate date;
-        int day = 1, month = 1, year = 1970;
-        String[] type = {"YEAR", "MONTH", "DAY", "ALL"};
 
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             String dateString = argMultimap.getValue(PREFIX_DATE).get();
@@ -79,7 +85,5 @@ public class ReportCommandParser implements Parser<ReportCommand> {
             date = LocalDate.now(); // useless value
             return new ReportCommand(date, type[3]);
         }
-
-
     }
 }

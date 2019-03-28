@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -27,13 +29,14 @@ import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 
 /**
- * The Summary Window. Provides summary and chart to the user.
+ * Report Window. Provides report and chart to the user.
  */
 public class ReportWindow {
     private final Logger logger = LogsCenter.getLogger(getClass());
+    private Stage window;
 
     /**
-     * A method controls report display.
+     * A method controls report chart display.
      *
      * @param model AddressBook model
      * @param date  User specified date, month or year
@@ -42,6 +45,8 @@ public class ReportWindow {
     public void displayReportController(Model model, LocalDate date, String type) {
         logger.info("Creates Report window");
         ReportDisplayType expenseDisplayType = ReportDisplayType.valueOf(type);
+        window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
         switch (expenseDisplayType) {
         case ALL:
             displayCompleteReport(model);
@@ -59,54 +64,60 @@ public class ReportWindow {
             displayCompleteReport(model);
             break;
         }
+        window.showAndWait();
     }
 
     /**
      * Display daily summary on area chart.
      */
     private void displayReportOnSpecifiedDay(Model model, LocalDate date) {
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
+
         window.setTitle("Report for " + date.toString());
         // Creates an Area Chart
-        final NumberAxis xAxis = new NumberAxis(1, 31, 1);
+        final NumberAxis xAxis = new NumberAxis(0, 24, 1);
         final NumberAxis yAxis = new NumberAxis();
         final AreaChart<Number, Number> areaChart =
                 new AreaChart<Number, Number>(xAxis, yAxis);
-        areaChart.setTitle("Daily Summary");
+        areaChart.setTitle("Report on specified day " + date);
 
         XYChart.Series seriesExpense = new XYChart.Series();
         seriesExpense.setName("Expense");
         yAxis.setLabel("Expense");
         xAxis.setLabel("Days");
+        Calendar cal = Calendar.getInstance();
+        final ObservableList<Expense> expenses = model.getFilteredExpenseList();
+        int[] hours = new int[24];
+        if (!expenses.isEmpty()) {
+            // expense is not empty
+            for (Expense expense : expenses) {
+                Date currentDate = expense.getDate();
 
-        seriesExpense.getData().add(new XYChart.Data(1, 400));
-        seriesExpense.getData().add(new XYChart.Data(2, 1000));
-        seriesExpense.getData().add(new XYChart.Data(3, 500));
-        seriesExpense.getData().add(new XYChart.Data(4, 800));
-        seriesExpense.getData().add(new XYChart.Data(5, 500));
-        seriesExpense.getData().add(new XYChart.Data(6, 1800));
-        seriesExpense.getData().add(new XYChart.Data(7, 1500));
-        seriesExpense.getData().add(new XYChart.Data(8, 1300));
-        seriesExpense.getData().add(new XYChart.Data(9, 1009));
-        seriesExpense.getData().add(new XYChart.Data(10, 2001));
-        seriesExpense.getData().add(new XYChart.Data(11, 3001));
-        seriesExpense.getData().add(new XYChart.Data(12, 401));
+                if (Date.from(date.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
+                        .equals(currentDate)) {
+                    // find specified date
+                    cal.setTime(currentDate);
+                    int hour = cal.get(Calendar.HOUR_OF_DAY);
+                    // hour as index, amount as value
+                    hours[hour] += expense.getItem().getPrice().getAmount();
+                }
+            }
+            for (int i = 0; i < hours.length; i++) {
+
+                seriesExpense.getData().add(new XYChart.Data(i, hours[i]));
+            }
+        }
 
         VBox layout = new VBox();
         layout.getChildren().add(areaChart);
         Scene scene = new Scene(layout, 800, 600);
         areaChart.getData().add(seriesExpense);
         window.setScene(scene);
-        window.showAndWait();
     }
 
     /**
      * Displays monthly summary on line chart.
      */
     private void displayReportOnSpecifiedMonth(Model model, LocalDate date) {
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Monthly Summary");
 
         //defining the axes
@@ -153,16 +164,12 @@ public class ReportWindow {
         lineChart.getData().addAll(seriesExpense, seriesBudget);
 
         window.setScene(scene);
-        window.showAndWait();
-
     }
 
     /**
      * Display the proportion of income spent on different categories on pie chart.
      */
     private void displayExpensePercentageReport(Model model) {
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Summary");
         Scene scene = new Scene(new Group(), 800, 600);
 
@@ -179,15 +186,12 @@ public class ReportWindow {
                 (Group) scene.getRoot()
         ).getChildren().add(chart);
         window.setScene(scene);
-        window.showAndWait();
     }
 
     /**
      * Displays yearly summary on bar chart.
      */
     private void displayReportOnSpecifiedYear(Model model, LocalDate date) {
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Bar Chart Sample");
         final NumberAxis yAxis = new NumberAxis();
         final CategoryAxis xAxis = new CategoryAxis();
@@ -225,16 +229,14 @@ public class ReportWindow {
         Scene scene = new Scene(bc, 800, 600);
         bc.getData().addAll(series1, series2, series3);
         window.setScene(scene);
-        window.showAndWait();
     }
 
     /**
      * Displays all expenses savings and budgets of the user on bar chart.
      */
     private void displayCompleteReport(Model model) {
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("All Summary Report");
+
+        window.setTitle("Complete Report");
         final NumberAxis yAxis = new NumberAxis();
         final CategoryAxis xAxis = new CategoryAxis();
         final BarChart<String, Number> bc =
@@ -247,18 +249,18 @@ public class ReportWindow {
         yAxis.setLabel("Amount");
         xAxis.setLabel("Year");
 
-        HashMap<Integer, InnerData> map = new HashMap<>();
-        // convert expense data into innerData
+        HashMap<Integer, ReportData> map = new HashMap<>();
+        // convert expense data into ReportData
         if (!expenses.isEmpty()) {
             for (int i = 0; i < expenses.size(); i++) {
                 int year = expenses.get(i).getDate().toInstant().atZone(ZoneId.systemDefault())
                         .toLocalDate().getYear(); // get year from expense
-                InnerData data;
+                ReportData data;
 
                 int amount = expenses.get(i).getItem().getPrice().getAmount();
                 if (map.containsKey(year)) {
                     // if year data exists
-                    InnerData temp = map.get(year);
+                    ReportData temp = map.get(year);
                     if (expenses.get(i).getItem().getName().toString().equals("Allowance")) {
                         temp.setSaving(temp.updateValue(temp.getSaving(), amount));
                     } else {
@@ -267,7 +269,7 @@ public class ReportWindow {
                     map.put(year, temp);
                 } else {
                     // year data does not exist
-                    data = new InnerData(year);
+                    data = new ReportData(year);
                     if (expenses.get(i).getItem().getName().toString().equals("Allowance")) {
                         data.setSaving(amount);
                     } else {
@@ -277,21 +279,21 @@ public class ReportWindow {
                 }
             }
         }
-        // convert expense data to innerData
+        // convert expense data to ReportData
         if (!budgets.isEmpty()) {
             for (int i = 0; i < budgets.size(); i++) {
                 int year = budgets.get(i).getStartDate().toInstant().atZone(ZoneId.systemDefault())
                         .toLocalDate().getYear(); // get year from expense
-                InnerData data;
+                ReportData data;
                 int amount = budgets.get(i).getPrice().getAmount();
                 if (map.containsKey(year)) {
                     // if year data exists
-                    InnerData temp = map.get(year);
+                    ReportData temp = map.get(year);
                     temp.setBudget(temp.updateValue(temp.getExpense(), amount));
                     map.put(year, temp);
                 } else {
                     // year data does not exist
-                    data = new InnerData(year);
+                    data = new ReportData(year);
                     data.setBudget(amount);
                     map.put(year, data);
                 }
@@ -306,8 +308,8 @@ public class ReportWindow {
         XYChart.Series series3 = new XYChart.Series();
         series3.setName("Budget");
 
-        TreeMap<Integer, InnerData> tm = new TreeMap<>(map);
-        for (Map.Entry<Integer, InnerData> entry : tm.entrySet()) {
+        TreeMap<Integer, ReportData> tm = new TreeMap<>(map);
+        for (Map.Entry<Integer, ReportData> entry : tm.entrySet()) {
             series1.getData().add(new XYChart.Data(entry.getKey().toString(),
                     entry.getValue().getSaving()));
             series2.getData().add(new XYChart.Data(entry.getKey().toString(),
@@ -319,7 +321,6 @@ public class ReportWindow {
         Scene scene = new Scene(bc, 800, 600);
         bc.getData().addAll(series1, series2, series3);
         window.setScene(scene);
-        window.showAndWait();
     }
 
     /**
@@ -328,55 +329,4 @@ public class ReportWindow {
     private enum ReportDisplayType {
         MONTH, DAY, YEAR, ALL
     }
-
-    /**
-     * Data class for collecting data.
-     */
-    class InnerData {
-        private int year;
-        private int budget;
-        private int expense;
-        private int saving;
-
-        public InnerData(int year) {
-            this.year = year;
-        }
-
-        public int getYear() {
-            return year;
-        }
-
-        public void setYear(int year) {
-            this.year = year;
-        }
-
-        public int getBudget() {
-            return budget;
-        }
-
-        public void setBudget(int budget) {
-            this.budget = budget;
-        }
-
-        public int getExpense() {
-            return expense;
-        }
-
-        public void setExpense(int expense) {
-            this.expense = expense;
-        }
-
-        public int getSaving() {
-            return saving;
-        }
-
-        public void setSaving(int saving) {
-            this.saving = saving;
-        }
-
-        public int updateValue(int original, int newValue) {
-            return original + newValue;
-        }
-    }
-
 }

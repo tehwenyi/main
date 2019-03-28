@@ -1,9 +1,11 @@
 package seedu.address.ui;
 
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +21,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.Model;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
@@ -27,13 +30,44 @@ import seedu.address.model.epiggy.Expense;
  * The Summary Window. Provides summary and chart to the user.
  */
 public class ReportWindow {
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
+    /**
+     * A method controls report display.
+     *
+     * @param model AddressBook model
+     * @param date  User specified date, month or year
+     * @param type  Report display type
+     */
+    public void displayReportController(Model model, LocalDate date, String type) {
+        logger.info("Creates Report window");
+        ReportDisplayType expenseDisplayType = ReportDisplayType.valueOf(type);
+        switch (expenseDisplayType) {
+        case ALL:
+            displayCompleteReport(model);
+            break;
+        case DAY:
+            displayReportOnSpecifiedDay(model, date);
+            break;
+        case MONTH:
+            displayReportOnSpecifiedMonth(model, date);
+            break;
+        case YEAR:
+            displayReportOnSpecifiedYear(model, date);
+            break;
+        default:
+            displayCompleteReport(model);
+            break;
+        }
+    }
+
     /**
      * Display daily summary on area chart.
      */
-    public void displayDailyReport(Model model) {
+    private void displayReportOnSpecifiedDay(Model model, LocalDate date) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Daily Summary");
+        window.setTitle("Report for " + date.toString());
         // Creates an Area Chart
         final NumberAxis xAxis = new NumberAxis(1, 31, 1);
         final NumberAxis yAxis = new NumberAxis();
@@ -70,7 +104,7 @@ public class ReportWindow {
     /**
      * Displays monthly summary on line chart.
      */
-    public void displayMonthlyReport(Model model) {
+    private void displayReportOnSpecifiedMonth(Model model, LocalDate date) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Monthly Summary");
@@ -126,7 +160,7 @@ public class ReportWindow {
     /**
      * Display the proportion of income spent on different categories on pie chart.
      */
-    public void displayExpensePercentageReport(Model model) {
+    private void displayExpensePercentageReport(Model model) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Summary");
@@ -140,7 +174,8 @@ public class ReportWindow {
                         new PieChart.Data("Cosmetics", 22),
                         new PieChart.Data("Others", 30));
         final PieChart chart = new PieChart(pieChartData);
-        chart.setTitle("Percentage of spending on each categories"); (
+        chart.setTitle("Percentage of spending on each categories");
+        (
                 (Group) scene.getRoot()
         ).getChildren().add(chart);
         window.setScene(scene);
@@ -150,7 +185,7 @@ public class ReportWindow {
     /**
      * Displays yearly summary on bar chart.
      */
-    public void dispalyYearlySummary(Model model) {
+    private void displayReportOnSpecifiedYear(Model model, LocalDate date) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Bar Chart Sample");
@@ -194,10 +229,9 @@ public class ReportWindow {
     }
 
     /**
-     * Displays all expenses and budgets of the user on bar chart.
-     * TODO: current modifying method
+     * Displays all expenses savings and budgets of the user on bar chart.
      */
-    public void dispalyAllSummary(Model model) {
+    private void displayCompleteReport(Model model) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("All Summary Report");
@@ -286,6 +320,13 @@ public class ReportWindow {
         bc.getData().addAll(series1, series2, series3);
         window.setScene(scene);
         window.showAndWait();
+    }
+
+    /**
+     * Chart will be displayed according to report display type.
+     */
+    private enum ReportDisplayType {
+        MONTH, DAY, YEAR, ALL
     }
 
     /**

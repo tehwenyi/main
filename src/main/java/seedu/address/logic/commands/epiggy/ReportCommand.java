@@ -1,8 +1,11 @@
 package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
@@ -19,31 +22,30 @@ public class ReportCommand extends Command {
     public static final String COMMAND_WORD = "report";
     public static final String COMMAND_ALIAS = "rp";
 
-    public static final String COMMAND_USAGE_DAILY = COMMAND_WORD
-            + ": Shows daily report to the user.";
-    public static final String COMMAND_USAGE_MONTHLY = COMMAND_WORD
-            + ": Shows monthly report to the user.";
-    public static final String COMMAND_USAGE_YEARLY = COMMAND_WORD
-            + ": Shows yearly report to the user.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows report to the user.\n"
             + "Parameters: "
-            + PREFIX_TYPE + "TYPE OF REPORT \n"
+            + PREFIX_DATE + "GENERATE A REPORT ON SPECIFY DATE, MONTH OR YEAR \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TYPE + "monthly ";
+            + PREFIX_DATE + "21/03/2019\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_DATE + "03/2019\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_DATE + "2019\n";
 
     public static final String MESSAGE_SUCCESS = "Showed report.";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private String type = "ALL";
+    private LocalDate date;
 
     /**
      * Constructor with chart type.
-     *
-     * @param type
+     * @param date
      */
-    public ReportCommand(String type) {
+    public ReportCommand(LocalDate date, String type) {
+        this.date = date;
         this.type = type;
     }
 
@@ -57,37 +59,7 @@ public class ReportCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         ReportWindow summaryWindow = new ReportWindow();
-        logger.info("Creates Report window");
-        // set a dummy value. TODO: Changes it when other command done.
-        ExpenseDisplayType expenseDisplayType = ExpenseDisplayType.valueOf(type);
-        switch (expenseDisplayType) {
-        case ALL:
-            summaryWindow.dispalyAllSummary(model);
-            break;
-        case DAILY:
-            summaryWindow.displayDailyReport(model);
-            break;
-        case MONTHLY:
-            summaryWindow.displayMonthlyReport(model);
-            break;
-        case YEARLY:
-            summaryWindow.dispalyYearlySummary(model);
-            break;
-        case PERCENTAGE:
-            summaryWindow.displayExpensePercentageReport(model);
-            break;
-        default:
-            summaryWindow.displayMonthlyReport(model);
-            break;
-        }
-
+        summaryWindow.displayReportController(model, date, type);
         return new CommandResult(MESSAGE_SUCCESS, false, false, true);
-    }
-
-    /**
-     * Chart will be displayed according to expense display type.
-     */
-    public enum ExpenseDisplayType {
-        MONTHLY, DAILY, TOTAL, YEARLY, PERCENTAGE, ALL
     }
 }

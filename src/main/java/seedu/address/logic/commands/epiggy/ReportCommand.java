@@ -2,10 +2,8 @@ package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;

@@ -35,16 +35,7 @@
                     <Menu mnemonicParsing="false" text="Report">
                         <MenuItem fx:id="summaryMenuItem_daily" mnemonicParsing="false"
                                   onAction="#handleDailyReport"
-                                  text="Daily Report"/>
-                        <MenuItem fx:id="summaryMenuItem_monthly" mnemonicParsing="false"
-                                  onAction="#handleMonthlyReport"
-                                  text="Monthly Report"/>
-                        <MenuItem fx:id="summaryMenuItem_yearly" mnemonicParsing="false"
-                                  onAction="#handleYearlyReport"
-                                  text="Yearly Report"/>
-                        <MenuItem fx:id="summaryMenuItem_percentage" mnemonicParsing="false"
-                                  onAction="#handlePercentageReport"
-                                  text="Percentage Report"/>
+                                  text="Report"/>
                     </Menu>
                 </MenuBar>
 

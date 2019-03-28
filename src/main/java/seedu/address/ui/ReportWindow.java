@@ -43,28 +43,32 @@ public class ReportWindow {
      * @param type  Report display type
      */
     public void displayReportController(Model model, LocalDate date, String type) {
-        logger.info("Creates Report window");
-        ReportDisplayType expenseDisplayType = ReportDisplayType.valueOf(type);
-        window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
-        switch (expenseDisplayType) {
-        case ALL:
-            displayCompleteReport(model);
-            break;
-        case DAY:
-            displayReportOnSpecifiedDay(model, date);
-            break;
-        case MONTH:
-            displayReportOnSpecifiedMonth(model, date);
-            break;
-        case YEAR:
-            displayReportOnSpecifiedYear(model, date);
-            break;
-        default:
-            displayCompleteReport(model);
-            break;
+        try {
+            logger.info("Creates Report window");
+            ReportDisplayType expenseDisplayType = ReportDisplayType.valueOf(type);
+            window = new Stage();
+            window.initModality(Modality.APPLICATION_MODAL);
+            switch (expenseDisplayType) {
+            case ALL:
+                displayCompleteReport(model);
+                break;
+            case DAY:
+                displayReportOnSpecifiedDay(model, date);
+                break;
+            case MONTH:
+                displayReportOnSpecifiedMonth(model, date);
+                break;
+            case YEAR:
+                displayReportOnSpecifiedYear(model, date);
+                break;
+            default:
+                displayCompleteReport(model);
+                break;
+            }
+            window.showAndWait();
+        } catch (Exception e) {
+            throw e;
         }
-        window.showAndWait();
     }
 
     /**
@@ -77,13 +81,13 @@ public class ReportWindow {
         final NumberAxis xAxis = new NumberAxis(0, 24, 1);
         final NumberAxis yAxis = new NumberAxis();
         final AreaChart<Number, Number> areaChart =
-                new AreaChart<Number, Number>(xAxis, yAxis);
-        areaChart.setTitle("Report on specified day " + date);
+                new AreaChart<>(xAxis, yAxis);
+        areaChart.setTitle("Report for date: " + date);
 
         XYChart.Series seriesExpense = new XYChart.Series();
         seriesExpense.setName("Expense");
         yAxis.setLabel("Expense");
-        xAxis.setLabel("Days");
+        xAxis.setLabel("Hours");
         Calendar cal = Calendar.getInstance();
         final ObservableList<Expense> expenses = model.getFilteredExpenseList();
         int[] hours = new int[24];
@@ -93,8 +97,9 @@ public class ReportWindow {
                 Date currentDate = expense.getDate();
 
                 if (Date.from(date.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant())
-                        .equals(currentDate)) {
-                    // find specified date
+                        .equals(currentDate) && !expense.getItem().getName()
+                        .toString().equals("Allowance")) {
+                    // find specified date and expense type is not allowance
                     cal.setTime(currentDate);
                     int hour = cal.get(Calendar.HOUR_OF_DAY);
                     // hour as index, amount as value
@@ -102,8 +107,7 @@ public class ReportWindow {
                 }
             }
             for (int i = 0; i < hours.length; i++) {
-
-                seriesExpense.getData().add(new XYChart.Data(i, hours[i]));
+                seriesExpense.getData().add(new XYChart.Data(i + 1, hours[i]));
             }
         }
 
@@ -119,19 +123,52 @@ public class ReportWindow {
      */
     private void displayReportOnSpecifiedMonth(Model model, LocalDate date) {
         window.setTitle("Monthly Summary");
+        Calendar cal = Calendar.getInstance();
+        Date targetDate = Date.from(date.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+        cal.setTime(targetDate);
 
         //defining the axes
-        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis xAxis = new NumberAxis(1, 31, 1);
         final NumberAxis yAxis = new NumberAxis();
-        xAxis.setLabel("Months");
-        yAxis.setLabel("Expense");
+        xAxis.setLabel("Days");
+        yAxis.setLabel("Amount");
 
         //creates the chart
-        final LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
-        lineChart.setTitle("Monthly Expense Summary");
+        final LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
+        lineChart.setTitle("Report for month: " + date.getMonth().toString()
+                .substring(0, 1).toUpperCase() + date.getMonth().toString().substring(1).toLowerCase()
+                + " " + date.getYear()); // Format chart title.
         XYChart.Series seriesExpense = new XYChart.Series();
         seriesExpense.setName("Expense");
+        XYChart.Series seriesSaving = new XYChart.Series();
+        seriesSaving.setName("Saving");
 
+        final ObservableList<Expense> expenses = model.getFilteredExpenseList();
+        int[] exps = new int[31];
+        int[] savings = new int[31];
+        if (!expenses.isEmpty()) {
+            for (Expense expense : expenses) {
+                LocalDate currentDay = expense.getDate().toInstant().atZone(ZoneId.systemDefault())
+                        .toLocalDate();
+                if (currentDay.getMonthValue() == date.getMonthValue()
+                        && currentDay.getYear() == date.getYear()) {
+                    // same year and same month with the target month
+                    // -1 because getMonthValue from 1 to 12
+                    if (expense.getItem().getName().toString().equals("Allowance")) {
+                        savings[currentDay.getMonthValue() - 1] += expense.getItem().getPrice().getAmount();
+                    } else {
+                        exps[currentDay.getMonthValue() - 1] += expense.getItem().getPrice().getAmount();
+                    }
+                }
+            }
+        }
+        // spot the data into the chart
+        for (int i = 0; i < savings.length; i++) {
+            seriesExpense.getData().add(new XYChart.Data(i + 1, exps[i]));
+            seriesSaving.getData().add(new XYChart.Data(i + 1, savings[i]));
+        }
+
+        /*
         seriesExpense.getData().add(new XYChart.Data("Jan", 1230));
         seriesExpense.getData().add(new XYChart.Data("Feb", 1400));
         seriesExpense.getData().add(new XYChart.Data("Mar", 1500));
@@ -145,8 +182,7 @@ public class ReportWindow {
         seriesExpense.getData().add(new XYChart.Data("Nov", 1209));
         seriesExpense.getData().add(new XYChart.Data("Dec", 1225));
 
-        XYChart.Series seriesBudget = new XYChart.Series();
-        seriesBudget.setName("Budget");
+
         seriesBudget.getData().add(new XYChart.Data("Jan", 1500));
         seriesBudget.getData().add(new XYChart.Data("Feb", 1500));
         seriesBudget.getData().add(new XYChart.Data("Mar", 1500));
@@ -159,9 +195,9 @@ public class ReportWindow {
         seriesBudget.getData().add(new XYChart.Data("Oct", 1500));
         seriesBudget.getData().add(new XYChart.Data("Nov", 1500));
         seriesBudget.getData().add(new XYChart.Data("Dec", 1500));
-
+        */
         Scene scene = new Scene(lineChart, 800, 600);
-        lineChart.getData().addAll(seriesExpense, seriesBudget);
+        lineChart.getData().addAll(seriesExpense, seriesSaving);
 
         window.setScene(scene);
     }
@@ -181,8 +217,7 @@ public class ReportWindow {
                         new PieChart.Data("Cosmetics", 22),
                         new PieChart.Data("Others", 30));
         final PieChart chart = new PieChart(pieChartData);
-        chart.setTitle("Percentage of spending on each categories");
-        (
+        chart.setTitle("Percentage of spending on each categories"); (
                 (Group) scene.getRoot()
         ).getChildren().add(chart);
         window.setScene(scene);
@@ -192,42 +227,65 @@ public class ReportWindow {
      * Displays yearly summary on bar chart.
      */
     private void displayReportOnSpecifiedYear(Model model, LocalDate date) {
-        window.setTitle("Bar Chart Sample");
+        window.setTitle("Bar Chart");
         final NumberAxis yAxis = new NumberAxis();
         final CategoryAxis xAxis = new CategoryAxis();
         final BarChart<String, Number> bc =
                 new BarChart<>(xAxis, yAxis);
-        bc.setTitle("Yearly Summary");
-        yAxis.setLabel("Expense");
-        xAxis.setLabel("Year");
+        bc.setTitle("Report for year: " + date.getYear());
+        yAxis.setLabel("Amount");
+        xAxis.setLabel("Months");
 
-        XYChart.Series series1 = new XYChart.Series();
-        series1.setName("Saving");
-        series1.getData().add(new XYChart.Data("2015", 2521.34));
-        series1.getData().add(new XYChart.Data("2016", 2348.82));
-        series1.getData().add(new XYChart.Data("2017", 1040));
-        series1.getData().add(new XYChart.Data("2018", 3207.15));
-        series1.getData().add(new XYChart.Data("2019", 1320));
+        XYChart.Series seriesSaving = new XYChart.Series();
+        seriesSaving.setName("Saving");
+        XYChart.Series seriesExpense = new XYChart.Series();
+        seriesExpense.setName("Expense");
+        XYChart.Series seriesBudget = new XYChart.Series();
+        seriesBudget.setName("Budget");
 
-        XYChart.Series series2 = new XYChart.Series();
-        series2.setName("Expense");
-        series2.getData().add(new XYChart.Data("2015", 25601.34));
-        series2.getData().add(new XYChart.Data("2016", 20148.82));
-        series2.getData().add(new XYChart.Data("2017", 10000));
-        series2.getData().add(new XYChart.Data("2018", 35407.15));
-        series2.getData().add(new XYChart.Data("2019", 12000));
+        final ObservableList<Budget> budgetList = model.getFilteredBudgetList();
+        final ObservableList<Expense> expenseList = model.getFilteredExpenseList();
 
+        int[] budgets = new int[12];
+        int[] savings = new int[12];
+        int[] expenses = new int[12];
 
-        XYChart.Series series3 = new XYChart.Series();
-        series3.setName("Budget");
-        series3.getData().add(new XYChart.Data("2015", 25610.34));
-        series3.getData().add(new XYChart.Data("2016", 21480.82));
-        series3.getData().add(new XYChart.Data("2017", 10600));
-        series3.getData().add(new XYChart.Data("2018", 35497.15));
-        series3.getData().add(new XYChart.Data("2019", 12500));
+        if (!expenseList.isEmpty()) {
+            for (Expense expense : expenseList) {
+                LocalDate currentDate = expense.getDate().toInstant().atZone(ZoneId.systemDefault())
+                        .toLocalDate();
+                if (currentDate.getYear() == date.getYear()) {
+                    // found the specified year
+                    if (expense.getItem().getName().toString().equals("Allowance")) {
+                        // allowance
+                        savings[currentDate.getMonthValue() - 1] += expense.getItem().getPrice().getAmount();
+                    } else {
+                        // expense
+                        expenses[currentDate.getMonthValue() - 1] += expense.getItem().getPrice().getAmount();
+                    }
+                }
+            }
+        }
+        if (!budgetList.isEmpty()) {
+            for (Budget budget : budgetList) {
+                LocalDate currentDate = budget.getStartDate().toInstant().atZone(ZoneId.systemDefault())
+                        .toLocalDate();
+                if (currentDate.getYear() == date.getYear()) {
+                    budgets[currentDate.getMonthValue() - 1] += budget.getPrice().getAmount();
+                }
+            }
+        }
+
+        String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
+            "Sep", "Oct", "Nov", "Dec"};
+        for (int i = 0; i < expenses.length; i++) {
+            seriesExpense.getData().add(new XYChart.Data(months[i], expenses[i]));
+            seriesBudget.getData().add(new XYChart.Data(months[i], budgets[i]));
+            seriesSaving.getData().add(new XYChart.Data(months[i], savings[i]));
+        }
 
         Scene scene = new Scene(bc, 800, 600);
-        bc.getData().addAll(series1, series2, series3);
+        bc.getData().addAll(seriesBudget, seriesExpense, seriesSaving);
         window.setScene(scene);
     }
 

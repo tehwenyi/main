@@ -193,7 +193,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleDailyReport() {
         helpWindow.hide();
         try {
-            logic.execute("report type/daily");
+            logic.execute("report");
         } catch (CommandException | ParseException e) {
             resultDisplay.setFeedbackToUser(e.getMessage());
         }

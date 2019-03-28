@@ -43,7 +43,12 @@ public class AddExpenseCommandParser implements Parser<AddExpenseCommand> {
 
         Name name = ParserUtil.parseItemName(argMultimap.getValue(PREFIX_NAME).get());
         Price cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get());
-        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        Date date;
+        if (arePrefixesPresent(argMultimap, PREFIX_DATE)) {
+            date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        } else {
+            date = new Date();
+        }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Item item = new Item(name, cost, tagList);

@@ -57,7 +57,7 @@ public class ExpenseCard extends UiPart<Region> {
         } else {
             cost.setText(String.format("Cost: $%d", expense.getItem().getPrice().getAmount()));
         }
-        SimpleDateFormat formatter = new SimpleDateFormat("h:mma, dd MMM YYYY");
+        SimpleDateFormat formatter = new SimpleDateFormat("EEE, MMM d, ''yy");
         date.setText(String.format("Added on: %s", formatter.format(expense.getDate())));
         initialiseTags(expense);
     }

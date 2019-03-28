@@ -15,6 +15,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.epiggy.item.Item;
 
+//@@author rahulb99
 /**
  * TODO: Refactor
  * Tests that a {@code Expense}'s {@code Name, Cost, Category, Date} matches any of the keywords given.
@@ -53,7 +54,7 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
         //if one or more keywords are present
         boolean result = true;
         if (!nameKeywords.equals("")) {
-            result = result && containsNameKeywords(nameKeywords, expense);
+            result = containsNameKeywords(nameKeywords, expense);
         }
 
         if (!costKeywords.equals("")) {
@@ -107,7 +108,7 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
         boolean result;
         String[] splitCost = costKeywords.split(":");
         Item item = expense.getItem();
-        if (splitCost.length == 1) { //if the user enters a particular cost
+        if (splitCost.length == 1) { //if the user enters an exact cost
             double chosenCost = Double.parseDouble(splitCost[0]);
             result = item.getPrice().getAmount() == chosenCost;
         } else { //if the user enters a range of dates
@@ -126,7 +127,7 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
         assert dateKeywords != null : "dateKeywords should not be null.\n";
         boolean result;
         String[] splitDate = dateKeywords.split(":");
-        if (splitDate.length == 1) { //if the user only enter a particular date
+        if (splitDate.length == 1) { //if the user only enter an exact date
             Date chosenDate = new Date(splitDate[0]);
             result = expense.getDate().equals(chosenDate);
         } else { //if the user enter a range of dates

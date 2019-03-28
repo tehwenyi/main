@@ -243,12 +243,14 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //@@author rahulb99
     @Override
     public void updateFilteredExpensesList(Predicate<seedu.address.model.epiggy.Expense> predicate) {
         requireNonNull(predicate);
         filteredExpenses.setPredicate(predicate);
     }
 
+    //@@author rahulb99
     /**
      * Sorts the expenses according to the keyword.
      * @param keywords
@@ -263,6 +265,7 @@ public class ModelManager implements Model {
         if (keywords.getValue(PREFIX_COST).equals("$")) {
             versionedAddressBook.sortExpensesByAmount();
         }
+        logger.fine("sorted");
         versionedAddressBook.getExpenseList();
         versionedAddressBook.indicateModified();
     }

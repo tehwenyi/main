@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
@@ -23,7 +22,6 @@ import javafx.stage.Stage;
 import seedu.address.model.Model;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
-import seedu.address.model.epiggy.Savings;
 
 /**
  * The Summary Window. Provides summary and chart to the user.
@@ -210,19 +208,10 @@ public class ReportWindow {
 
         final ObservableList<Budget> budgets = model.getFilteredBudgetList();
         final ObservableList<Expense> expenses = model.getFilteredExpenseList();
-        final SimpleObjectProperty<Savings> savings = model.getSavings();
 
-        bc.setTitle("Yearly Summary");
-        yAxis.setLabel("Expense");
+        bc.setTitle("Summary");
+        yAxis.setLabel("Amount");
         xAxis.setLabel("Year");
-
-        XYChart.Series series1 = new XYChart.Series();
-        series1.setName("Saving");
-        series1.getData().add(new XYChart.Data("2015", 2521.34));
-        series1.getData().add(new XYChart.Data("2016", 2348.82));
-        series1.getData().add(new XYChart.Data("2017", 1040));
-        series1.getData().add(new XYChart.Data("2018", 3207.15));
-        series1.getData().add(new XYChart.Data("2019", 1320));
 
         HashMap<Integer, InnerData> map = new HashMap<>();
         // convert expense data into innerData
@@ -236,17 +225,24 @@ public class ReportWindow {
                 if (map.containsKey(year)) {
                     // if year data exists
                     InnerData temp = map.get(year);
-                    temp.setExpense(temp.updateValue(temp.getExpense(), amount));
+                    if (expenses.get(i).getItem().getName().toString().equals("Allowance")) {
+                        temp.setSaving(temp.updateValue(temp.getSaving(), amount));
+                    } else {
+                        temp.setExpense(temp.updateValue(temp.getExpense(), amount));
+                    }
                     map.put(year, temp);
                 } else {
                     // year data does not exist
                     data = new InnerData(year);
-                    data.setExpense(amount);
+                    if (expenses.get(i).getItem().getName().toString().equals("Allowance")) {
+                        data.setSaving(amount);
+                    } else {
+                        data.setExpense(amount);
+                    }
                     map.put(year, data);
                 }
             }
         }
-
         // convert expense data to innerData
         if (!budgets.isEmpty()) {
             for (int i = 0; i < budgets.size(); i++) {
@@ -267,6 +263,9 @@ public class ReportWindow {
                 }
             }
         }
+        XYChart.Series series1 = new XYChart.Series();
+        series1.setName("Saving");
+
         XYChart.Series series2 = new XYChart.Series();
         series2.setName("Expense");
 
@@ -275,6 +274,8 @@ public class ReportWindow {
 
         TreeMap<Integer, InnerData> tm = new TreeMap<>(map);
         for (Map.Entry<Integer, InnerData> entry : tm.entrySet()) {
+            series1.getData().add(new XYChart.Data(entry.getKey().toString(),
+                    entry.getValue().getSaving()));
             series2.getData().add(new XYChart.Data(entry.getKey().toString(),
                     entry.getValue().getExpense()));
             series3.getData().add(new XYChart.Data(entry.getKey().toString(),

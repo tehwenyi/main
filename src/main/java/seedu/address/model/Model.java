@@ -7,7 +7,6 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
@@ -134,6 +133,11 @@ public interface Model {
     ObservableList<Budget> getBudgetList();
 
     /**
+     * Gets the Expense list.
+     */
+    ObservableList<Expense> getExpenseList();
+
+    /**
      * Gets the current budget's index.
      * @return -1 if there is no current budget.
      */
@@ -249,5 +253,5 @@ public interface Model {
     /**
      * Sorts the expenses according to the specified {@param keywords}.
      */
-    void sortExpenses(ArgumentMultimap keywords);
+    void sortExpenses(String keyword);
 }

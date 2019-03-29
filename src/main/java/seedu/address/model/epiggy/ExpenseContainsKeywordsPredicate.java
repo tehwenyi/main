@@ -89,9 +89,9 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
      * */
     public boolean checkTagKeywords(List<String> tagKeywords, Expense expense) {
         assert tagKeywords != null : "tagKeywords should not be null.\n";
-        List<String> separatedTagKeywordsList = new ArrayList<>();
+        List<String> TagKeywordsList = new ArrayList<>();
         for (String tag : tagKeywords) {
-            separatedTagKeywordsList.addAll(Arrays.asList(tag.split("\\s+")));
+            TagKeywordsList.addAll(Arrays.asList(tag.split("\\s+")));
         }
         Item item = expense.getItem();
         boolean result = tagKeywords.stream()

@@ -2,9 +2,6 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.nio.file.Path;
 import java.util.Objects;
@@ -16,9 +13,9 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
@@ -170,6 +167,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Expense> getExpenseList() {
+        return versionedAddressBook.getExpenseList();
+    }
+
+    @Override
     public int getCurrentBudgetIndex() {
         return versionedAddressBook.getCurrentBudgetIndex();
     }
@@ -253,20 +255,25 @@ public class ModelManager implements Model {
     //@@author rahulb99
     /**
      * Sorts the expenses according to the keyword.
-     * @param keywords
+     * @param keyword
      */
-    public void sortExpenses(ArgumentMultimap keywords) {
-        if (keywords.getValue(PREFIX_NAME).equals("n")) {
-            versionedAddressBook.sortExpensesByName();
+    public void sortExpenses(String keyword) {
+        SortedList<Expense> sortedExpenses = null;
+        switch(keyword) {
+        case "n": {
+            sortedExpenses = versionedAddressBook.sortExpensesByName();
+            break;
         }
-        if (keywords.getValue(PREFIX_DATE).equals("d")) {
-            versionedAddressBook.sortExpensesByDate();
+        case "d": {
+            sortedExpenses = versionedAddressBook.sortExpensesByDate();
+            break;
         }
-        if (keywords.getValue(PREFIX_COST).equals("$")) {
-            versionedAddressBook.sortExpensesByAmount();
+        case "$": {
+            sortedExpenses = versionedAddressBook.sortExpensesByAmount();
+            break;
+        } default: return;
         }
-        logger.fine("sorted");
-        versionedAddressBook.getExpenseList();
+        logger.fine("sorted list");
         versionedAddressBook.indicateModified();
     }
 

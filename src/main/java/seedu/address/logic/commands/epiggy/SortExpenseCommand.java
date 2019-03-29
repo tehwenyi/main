@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.Model;
 
 
@@ -25,29 +24,21 @@ public class SortExpenseCommand extends Command {
             + " Example: " + COMMAND_WORD + " n/n";
     public static final String MESSAGE_SUCCESS = "Sorting Expenses...\n";
 
-    private ArgumentMultimap keywords;
+    private final String keyword;
 
-    public SortExpenseCommand(ArgumentMultimap keywords) {
-        assert keywords != null : "keywords should not be null.";
-        this.keywords = keywords;
+    public SortExpenseCommand(String keyword) {
+        assert keyword != null : "keywords should not be null.";
+        this.keyword = keyword;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.sortExpenses(keywords);
-        model.getFilteredExpenseList();
+        model.sortExpenses(keyword);
+        model.getExpenseList();
         model.commitAddressBook();
 
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, model.getFilteredExpenseList().size()));
     }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof SortExpenseCommand // instanceof handles nulls
-                && keywords.equals(((SortExpenseCommand) other).keywords)); // state check
-    }
-
 }

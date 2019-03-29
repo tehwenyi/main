@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Date;
 import java.util.function.Predicate;
 
 import javafx.beans.property.ReadOnlyProperty;
@@ -98,6 +99,11 @@ public interface Model {
      * Adds a new budget.
      */
     void addBudget(int index, Budget budget);
+
+    /**
+     * Checks if there are any overlapping budgets.
+     */
+    boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget);
 
     /**
      * Deletes the budget at the specific index.

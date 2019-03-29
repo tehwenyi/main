@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.nio.file.Path;
+import java.util.Date;
 import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -149,6 +150,13 @@ public class ModelManager implements Model {
     @Override
     public void addBudget(int index, Budget budget) {
         versionedAddressBook.addBudget(index, budget); }
+
+    /**
+     * Checks if there are any overlapping budgets.
+     */
+    public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
+        return versionedAddressBook.budgetsOverlap(startDate, endDate, earlierBudget);
+    }
 
     @Override
     public void deleteBudgetAtIndex(int index) {

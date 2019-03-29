@@ -1,9 +1,10 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -17,9 +18,12 @@ import org.junit.rules.ExpectedException;
 
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.AddressBook;
@@ -32,9 +36,9 @@ import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.epiggy.BudgetBuilder;
 
-public class AddCommandTest {
+public class SetBudgetCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
@@ -44,56 +48,59 @@ public class AddCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullBudget_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddCommand(null);
+        new SetBudgetCommand(null);
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_budgetAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingBudgetAdded modelStub = new ModelStubAcceptingBudgetAdded();
+        Budget validBudget = new BudgetBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub, commandHistory);
+        CommandResult commandResult = new SetBudgetCommand(validBudget).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(SetBudgetCommand.MESSAGE_SUCCESS, validBudget), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validBudget), modelStub.budgetsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateBudget_throwsCommandException() throws Exception {
+        Budget validBudget = new BudgetBuilder().build();
+        // Person validPerson = new PersonBuilder().build();
+        SetBudgetCommand setBudgetCommand = new SetBudgetCommand(validBudget);
+        ModelStub modelStub = new ModelStubWithBudget(validBudget);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_EXPENSE);
-        addCommand.execute(modelStub, commandHistory);
+        thrown.expectMessage(SetBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
+        setBudgetCommand.execute(modelStub, commandHistory);
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Budget twenty = new BudgetBuilder().withAmount("20").build();
+        Budget fifty = new BudgetBuilder().withAmount("50").build();
+        // Person alice = new PersonBuilder().withName("Alice").build();
+        // Person bob = new PersonBuilder().withName("Bob").build();
+        SetBudgetCommand addTwentyCommand = new SetBudgetCommand(twenty);
+        SetBudgetCommand addFiftyCommand = new SetBudgetCommand(fifty);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addTwentyCommand.equals(addTwentyCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        SetBudgetCommand addTwentyCommandCopy = new SetBudgetCommand(twenty);
+        assertTrue(addTwentyCommand.equals(addTwentyCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addTwentyCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addTwentyCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different budgets -> returns false
+        assertFalse(addTwentyCommand.equals(addFiftyCommand));
     }
 
     /**
@@ -309,48 +316,51 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single person.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithBudget extends ModelStub {
+        final ArrayList<Budget> budgets = new ArrayList<>();
+        private AddressBook addressBook = new AddressBook();
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithBudget(Budget budget) {
+            requireNonNull(budget);
+            budgets.add(budget);
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public ObservableList<Budget> getFilteredBudgetList() {
+            return FXCollections.observableArrayList(budgets);
+        }
+
+        @Override
+        public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
+            return addressBook.budgetsOverlap(startDate, endDate, earlierBudget);
         }
     }
 
     /**
      * A Model stub that always accept the person being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingBudgetAdded extends ModelStub {
+        final ArrayList<Budget> budgetsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public void addBudget(int index, Budget toAdd) {
+            budgetsAdded.add(index, toAdd);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public ObservableList<Budget> getFilteredBudgetList() {
+            return FXCollections.observableArrayList(budgetsAdded);
+        }
+
+        @Override
+        public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
+            requireAllNonNull(startDate, endDate, earlierBudget);
+            return false;
         }
 
         @Override
         public void commitAddressBook() {
             // called by {@code AddCommand#execute()}
         }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
     }
-
 }

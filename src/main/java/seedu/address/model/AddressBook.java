@@ -213,6 +213,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Checks if there are any overlapping budgets.
+     */
+    public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
+        if (!startDate.after(earlierBudget.getStartDate()) && endDate.after(earlierBudget.getStartDate())) {
+            return true;
+        }
+        if (!startDate.before(earlierBudget.getStartDate()) && !endDate.after(earlierBudget.getEndDate())) {
+            return true;
+        }
+        if (startDate.before(earlierBudget.getEndDate()) && !endDate.before(earlierBudget.getEndDate())) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Sorts Expenses according to Date. Earlier Dates will have lower indexes.
      * @return SortedList of Expenses
      */

@@ -34,10 +34,12 @@ public class ReportCommandParser implements Parser<ReportCommand> {
     @Override
     public ReportCommand parse(String args) throws ParseException {
         LocalDate date;
-        int day = 1, month = 1, year = 1970;
+        int day = 1;
+        int month = 1;
+        int year = 1970;
         String[] type = {"YEAR", "MONTH", "DAY", "ALL"};
 
-        if (args.equals("")){
+        if (args.equals("")) {
             // no parameter found
             return new ReportCommand(null, type[3]);
         }
@@ -77,7 +79,7 @@ public class ReportCommandParser implements Parser<ReportCommand> {
                     throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                             ReportCommand.MESSAGE_USAGE));
                 }
-            } catch (Exception e){
+            } catch (Exception e) {
                 throw new ParseException(String.format(FORMAT_ERROR_MESSAGE,
                         ReportCommand.MESSAGE_USAGE));
             }

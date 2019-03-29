@@ -1,5 +1,9 @@
 package seedu.address.model.epiggy.item;
 
+import static java.util.Objects.requireNonNull;
+
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a Price.
  * Guarantees: immutable}
@@ -13,6 +17,13 @@ public class Price {
 
     public Price(int amount) {
         this.amount = amount;
+    }
+
+    // Constructor for test purposes
+    public Price (String price) {
+        requireNonNull(price);
+        checkArgument(isValidPrice(price), MESSAGE_CONSTRAINTS);
+        amount = Integer.parseInt(price);
     }
 
     public Price deduct(Price amountToDeduct) {

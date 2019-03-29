@@ -1,5 +1,9 @@
 package seedu.address.model.epiggy.item;
 
+import static java.util.Objects.requireNonNull;
+
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a time period.
  * Guarantees: immutable
@@ -12,6 +16,12 @@ public class Period {
 
     public Period(int timePeriod) {
         this.timePeriod = timePeriod;
+    }
+
+    public Period(String period) {
+        requireNonNull(period);
+        checkArgument(isValidPeriod(period), MESSAGE_CONSTRAINTS);
+        timePeriod = Integer.parseInt(period);
     }
 
     public int getTimePeriod() {

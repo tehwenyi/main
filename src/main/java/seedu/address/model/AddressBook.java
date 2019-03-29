@@ -118,9 +118,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addExpense(Expense expense) {
         expenses.add(expense);
+
         Savings s = savings.get();
         s.deductSavings(expense.getItem().getPrice().getAmount());
-        savings.set(s);
+        this.savings.setValue(new Savings(s));
 
         if (budgetList.getBudgetListSize() > 0) {
             int indexOfBudgetToEdit = budgetList.getBudgetIndexBasedOnDate(expense.getDate());
@@ -141,7 +142,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         expenses.add(allowance);
         Savings s = savings.get();
         s.addSavings(allowance.getItem().getPrice().getAmount());
-        savings.set(s);
+        this.savings.setValue(new Savings(s));
         indicateModified();
     }
 

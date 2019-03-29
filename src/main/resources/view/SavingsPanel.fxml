@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label text="Current Savings:" />
+      <Label fx:id="currentSavings" text="\$0.00" />
+      <Label text="Current savings goal:" />
+      <Label fx:id="goalName" text="item name" />
+      <Label fx:id="goalPrice" text="\$0.00" />
+      <Label fx:id="amountDifference" text="\$0.00 left to go!" />
+   </children>
+</VBox>

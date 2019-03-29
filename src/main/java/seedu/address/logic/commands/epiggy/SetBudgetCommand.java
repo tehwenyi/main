@@ -76,17 +76,9 @@ public class SetBudgetCommand extends Command {
             if (index > 0) {
                 laterBudget = currentList.get(index - 1);
             }
-            // Check for overlaps
-            if (!startDate.after(earlierBudget.getStartDate()) && endDate.after(earlierBudget.getStartDate())) {
+            if (model.budgetsOverlap(startDate, endDate, earlierBudget)) {
                 throw new CommandException(MESSAGE_OVERLAPPING_BUDGET);
             }
-            if (!startDate.before(earlierBudget.getStartDate()) && !endDate.after(earlierBudget.getEndDate())) {
-                throw new CommandException(MESSAGE_OVERLAPPING_BUDGET);
-            }
-            if (startDate.before(earlierBudget.getEndDate()) && !endDate.before(earlierBudget.getEndDate())) {
-                throw new CommandException(MESSAGE_OVERLAPPING_BUDGET);
-            }
-
             if (!startDate.before(earlierBudget.getEndDate())) {
                 if (index == 0 || !endDate.after(laterBudget.getStartDate())) {
                     model.addBudget(index, toSet);

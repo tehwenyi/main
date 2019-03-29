@@ -203,14 +203,14 @@ Sorts all entries by amount in ascending order.
 Sets a total spending budget for a certain time period. The time period will be in terms of days, and 1 day is the minimum
 a person can set a budget for. +
 This command can only be used if there are no budgets set yet. The setBudget command is case sensitive. +
-Format: `setBudget $/AMOUNT t/TIME_PERIOD_IN_DAYS d/START_DATE`
+Format: `setBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS d/START_DATE`
 
 Examples:
 
-* `setBudget $/500 t/7 d/03/02/2019` +
+* `setBudget $/500 p/7 d/03/02/2019` +
 Sets a total budget of $500 for each week starting from 03/02/2019.
 
-* `setBudget $/10000 t/15 d/01/01/2000` +
+* `setBudget $/10000 p/15 d/01/01/2000` +
 Sets a total budget of $10000 every 15 days starting from 01/01/2000.
 
 ****
@@ -239,15 +239,26 @@ _Figure 3: Shows budget status_
 
 Edits the current budget. Budgets are not allowed to overlap, and at least one budget must already be present. +
 The editBudget command is case sensitive. +
-Format: `editBudget [$/AMOUNT] [t/TIME_PERIOD_IN_DAYS]`
+Format: `editBudget [$/AMOUNT] [p/TIME_PERIOD_IN_DAYS]`
 
 Examples:
 
-* `editBudget $/1000 t/7 d/01/01/2000` +
+* `editBudget $/1000 p/7 d/01/01/2000` +
 Edits the current budget to $1000 for each week starting from 01/01/2000.
 
-* `editBudget $/200 t/15 d/31/12/2018` +
-Edits the current budget to $200 for every 15 days starting from 31/12/2018.
+* `editBudget $/200 p/15` +
+Edits the current budget to $200 for every 15 days starting from the budget's initial start date.
+
+==== Editing the spending budget : `deleteBudget`
+
+Deletes the budget at the specified INDEX. The INDEX refers to the number in the displayed Budget List which is next to
+the status of the budget. +
+Format: `deleteBudget INDEX`
+
+Examples:
+
+* `delete 1` +
+Deletes the first budget in the Budget List.
 
 ****
 *Additional Information:* +
@@ -402,11 +413,14 @@ e.g.`search -n MCDONALDS`
 * *Sort* : `sort -[n/d/$] -[A/D]` +
 e.g.`sort -n`
 
-* *Set Budget* : `setBudget $/AMOUNT t/TIME_PERIOD_IN_DAYS $/START_DATE` +
+* *Set Budget* : `setBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS $/START_DATE` +
 e.g.`setBudget $500.00 t/7 d/01/02/2019`
 
-* *Edit Budget* : `editBudget [$/AMOUNT] [t/TIME_PERIOD_IN_DAYS] [$/START_DATE]` +
+* *Edit Budget* : `editBudget [$/AMOUNT] [p/TIME_PERIOD_IN_DAYS] [$/START_DATE]` +
 e.g.`editBudget $300.00 t/28`
+
+* *Delete Budget* : `deleteBudget INDEX` +
+e.g.`deleteBudget 2`
 
 * *Recommend* : `recommend`
 

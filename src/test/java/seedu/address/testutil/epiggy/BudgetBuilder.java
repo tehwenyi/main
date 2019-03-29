@@ -45,7 +45,7 @@ public class BudgetBuilder {
     /**
      * Sets the {@code Period} of the {@code Budget} that we are building.
      */
-    public BudgetBuilder withAddress(String days) {
+    public BudgetBuilder withPeriod(String days) {
         this.days = new Period(days);
         return this;
     }
@@ -53,7 +53,7 @@ public class BudgetBuilder {
     /**
      * Sets the {@code Date} of the {@code Budget} that we are building.
      */
-    public BudgetBuilder withPhone(String startDate) {
+    public BudgetBuilder withDate(String startDate) {
         this.startDate = new Date(startDate);
         return this;
     }

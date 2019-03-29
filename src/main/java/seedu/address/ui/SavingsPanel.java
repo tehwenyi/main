@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,8 +10,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.Savings;
 
-import java.util.logging.Logger;
-
+/**
+ * Panel containing savings information.
+ */
 public class SavingsPanel extends UiPart<Region> {
 
     private static final String FXML = "SavingsPanel.fxml";
@@ -39,7 +42,7 @@ public class SavingsPanel extends UiPart<Region> {
         });
 
         currentSavings.setText(savings.getValue().toString());
-        if(goal.getValue() == null) {
+        if (goal.getValue() == null) {
             currentGoal.setText("(None set)");
             amountDifference.setText("$0.00");
         } else {

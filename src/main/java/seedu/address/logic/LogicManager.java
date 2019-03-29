@@ -84,8 +84,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Budget> getBudgetList() {
-        return model.getBudgetList();
+    public ObservableList<Budget> getFilteredBudgetList() {
+        return model.getFilteredBudgetList();
     }
 
     @Override

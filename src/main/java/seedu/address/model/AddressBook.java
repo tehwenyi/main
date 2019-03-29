@@ -78,6 +78,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setBudgetList(List<Budget> budgets) {
+        this.budgetList.setBudgetList(budgets);
+        indicateModified();
+    }
+
+    /**
      * Replaces the contents of the expense list with {@code expenses}.
      * {@code expenses} can contain duplicate expenses.
      */
@@ -92,6 +101,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setPersons(newData.getPersonList());
+        setBudgetList(newData.getBudgetList());
     }
 
     //// person-level operations
@@ -277,13 +287,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Gets the current budget for ePiggy.
-     */
-    public ObservableList<Budget> getBudgetList() {
-        return this.budgetList.asUnmodifiableObservableList();
-    }
-
-    /**
      * Gets the current budget's index.
      * @return -1 if there is no current budget.
      */
@@ -348,7 +351,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return budgetList.asUnmodifiableObservableList() + " budgets";
         // TODO: refine later
     }
 
@@ -365,6 +368,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Item> getItemList() {
         return FXCollections.unmodifiableObservableList(items);
+    }
+
+    /**
+     * Gets the current budget list for ePiggy.
+     */
+    @Override
+    public ObservableList<Budget> getBudgetList() {
+        return budgetList.asUnmodifiableObservableList();
     }
 
     @Override

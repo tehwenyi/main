@@ -213,11 +213,6 @@ public class SetBudgetCommandTest {
         }
 
         @Override
-        public ObservableList<Budget> getBudgetList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public int getCurrentBudgetIndex() {
             throw new AssertionError("This method should not be called.");
         }

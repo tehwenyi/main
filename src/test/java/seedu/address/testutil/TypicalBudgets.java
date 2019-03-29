@@ -46,10 +46,10 @@ public class TypicalBudgets {
 
     // TODO
     // Manually added - Budget's details found in {@code CommandTestUtil}
-    public static final Budget TEN = new BudgetBuilder().withAmount(VALID_NAME_AMY)
-            .withDate(VALID_EMAIL_AMY).withPeriod(VALID_ADDRESS_AMY).build();
-    public static final Budget ELEVEN = new BudgetBuilder().withAmount(VALID_NAME_BOB)
-            .withDate(VALID_EMAIL_BOB).withPeriod(VALID_ADDRESS_BOB).build();
+//    public static final Budget TEN = new BudgetBuilder().withAmount(VALID_NAME_AMY)
+//            .withDate(VALID_EMAIL_AMY).withPeriod(VALID_ADDRESS_AMY).build();
+//    public static final Budget ELEVEN = new BudgetBuilder().withAmount(VALID_NAME_BOB)
+//            .withDate(VALID_EMAIL_BOB).withPeriod(VALID_ADDRESS_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -58,7 +58,7 @@ public class TypicalBudgets {
     /**
      * Returns an {@code AddressBook} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
+    public static AddressBook getTypicalEPiggy() {
         AddressBook ab = new AddressBook();
         int i = 0;
         for (Budget budget : getTypicalBudgets()) {

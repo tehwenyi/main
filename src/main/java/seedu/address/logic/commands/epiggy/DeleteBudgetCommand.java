@@ -49,4 +49,11 @@ public class DeleteBudgetCommand extends Command {
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DELETE_BUDGET_SUCCESS, budgetToDelete));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeleteBudgetCommand // instanceof handles nulls
+                && targetIndex.equals(((DeleteBudgetCommand) other).targetIndex)); // state check
+    }
 }

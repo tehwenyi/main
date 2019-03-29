@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.nio.file.Path;
 
 import javafx.beans.property.ReadOnlyProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
@@ -11,6 +12,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 
 /**
@@ -40,6 +43,11 @@ public interface Logic {
     ObservableList<Expense> getFilteredExpenseList();
 
     ObservableList<Budget> getBudgetList();
+
+    ObservableValue<Savings> getSavings();
+
+    ObservableValue<Goal> getGoal();
+
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
      * The list is ordered from the least recent command to the most recent command.

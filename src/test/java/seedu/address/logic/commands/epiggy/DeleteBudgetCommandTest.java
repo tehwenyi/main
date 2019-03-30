@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.epiggy;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -50,7 +49,8 @@ public class DeleteBudgetCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredBudgetList().size() + 1);
         DeleteBudgetCommand deleteBudgetCommand = new DeleteBudgetCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteBudgetCommand, model, commandHistory, Messages.MESSAGE_INVALID_BUDGET_DISPLAYED_INDEX);
+        assertCommandFailure(deleteBudgetCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_BUDGET_DISPLAYED_INDEX);
     }
 
     @Test
@@ -80,7 +80,8 @@ public class DeleteBudgetCommandTest {
 
         DeleteBudgetCommand deleteBudgetCommand = new DeleteBudgetCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteBudgetCommand, model, commandHistory, Messages.MESSAGE_INVALID_BUDGET_DISPLAYED_INDEX);
+        assertCommandFailure(deleteBudgetCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_BUDGET_DISPLAYED_INDEX);
     }
 
     @Test
@@ -109,7 +110,8 @@ public class DeleteBudgetCommandTest {
         DeleteBudgetCommand deleteBudgetCommand = new DeleteBudgetCommand(outOfBoundIndex);
 
         // execution failed -> address book state not added into model
-        assertCommandFailure(deleteBudgetCommand, model, commandHistory, Messages.MESSAGE_INVALID_BUDGET_DISPLAYED_INDEX);
+        assertCommandFailure(deleteBudgetCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_BUDGET_DISPLAYED_INDEX);
 
         // single address book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);

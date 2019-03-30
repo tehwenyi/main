@@ -94,7 +94,7 @@ public class Budget {
         this.status = OLD_BUDGET;
     }
 
-    public void setRemainingAmountToInitialAmount() {
+    public void resetRemainingAmount() {
         this.remainingAmount = this.amount;
     }
 

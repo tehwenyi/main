@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Date;
 import java.util.function.Predicate;
 
 import javafx.beans.property.ReadOnlyProperty;
@@ -94,14 +95,14 @@ public interface Model {
     void addAllowance(Allowance allowance);
 
     /**
-     * Sets the given budget.
-     */
-    void setBudget(Budget budget);
-
-    /**
      * Adds a new budget.
      */
     void addBudget(int index, Budget budget);
+
+    /**
+     * Checks if there are any overlapping budgets.
+     */
+    boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget);
 
     /**
      * Deletes the budget at the specific index.
@@ -121,11 +122,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredExpensesList(Predicate<seedu.address.model.epiggy.Expense> predicate);
-
-    /**
-     * Gets the current budget.
-     */
-    SimpleObjectProperty<Budget> getBudget();
 
     /**
      * Gets the current budget list.
@@ -158,11 +154,6 @@ public interface Model {
      * Sets the savings goal.
      */
     void setGoal(Goal goal);
-
-    /**
-     * Checks if a budget already exists in AddressBook.
-     */
-    boolean hasBudget();
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

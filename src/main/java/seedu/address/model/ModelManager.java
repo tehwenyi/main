@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Date;
 import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -144,22 +145,20 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setBudget(Budget budget) {
-        versionedAddressBook.setBudget(budget); }
-
-    @Override
     public void addBudget(int index, Budget budget) {
         versionedAddressBook.addBudget(index, budget); }
+
+    /**
+     * Checks if there are any overlapping budgets.
+     */
+    public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
+        return versionedAddressBook.budgetsOverlap(startDate, endDate, earlierBudget);
+    }
 
     @Override
     public void deleteBudgetAtIndex(int index) {
         versionedAddressBook.deleteBudgetAtIndex(index);
     };
-
-    @Override
-    public SimpleObjectProperty<Budget> getBudget() {
-        return versionedAddressBook.getBudget();
-    }
 
     @Override
     public ObservableList<Budget> getBudgetList() {
@@ -174,11 +173,6 @@ public class ModelManager implements Model {
     @Override
     public int getCurrentBudgetIndex() {
         return versionedAddressBook.getCurrentBudgetIndex();
-    }
-
-    @Override
-    public boolean hasBudget() {
-        return versionedAddressBook.hasBudget();
     }
 
     @Override

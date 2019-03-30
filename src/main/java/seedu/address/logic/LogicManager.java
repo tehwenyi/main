@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javafx.beans.property.ReadOnlyProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -18,6 +18,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -85,13 +87,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public SimpleObjectProperty<Budget> getBudget() {
-        return model.getBudget();
+    public ObservableList<Budget> getBudgetList() {
+        return model.getBudgetList();
     }
 
     @Override
-    public ObservableList<Budget> getBudgetList() {
-        return model.getBudgetList();
+    public ObservableValue<Savings> getSavings() {
+        return model.getSavings();
+    }
+
+    @Override
+    public ObservableValue<Goal> getGoal() {
+        return model.getGoal();
     }
 
     @Override
@@ -130,8 +137,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public void setBudget(Budget budget) {
-        model.setBudget(budget); }
+    public void setCurrentBudget(Budget budget) {
+        model.setCurrentBudget(budget); }
 
     @Override
     public void addBudget(int index, Budget budget) {

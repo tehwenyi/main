@@ -252,7 +252,7 @@ public class ModelManager implements Model {
      * @param keyword
      */
     public void sortExpenses(String keyword) {
-        SortedList<Expense> sortedExpenses = null;
+        SortedList<Expense> sortedExpenses;
         switch(keyword) {
         case "n": {
             sortedExpenses = versionedAddressBook.sortExpensesByName();
@@ -270,6 +270,7 @@ public class ModelManager implements Model {
         FilteredList<Expense> fl = new FilteredList<>(sortedExpenses);
         fl.setPredicate(PREDICATE_SHOW_ALL_EXPENSES);
         logger.fine("sorted list");
+        versionedAddressBook.getExpenseList();
         versionedAddressBook.indicateModified();
     }
 

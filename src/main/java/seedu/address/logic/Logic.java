@@ -42,7 +42,7 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Expense> getFilteredExpenseList();
 
-    ObservableList<Budget> getBudgetList();
+    ObservableList<Budget> getFilteredBudgetList();
 
     ObservableValue<Savings> getSavings();
 

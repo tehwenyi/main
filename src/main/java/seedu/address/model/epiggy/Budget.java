@@ -90,10 +90,6 @@ public class Budget {
         this.remainingDays = remainingDays;
     }
 
-    public void setStatusToOld () {
-        this.status = OLD_BUDGET;
-    }
-
     public void resetRemainingAmount() {
         this.remainingAmount = this.amount;
     }

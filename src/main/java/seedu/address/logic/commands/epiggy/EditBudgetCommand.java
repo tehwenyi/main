@@ -1,7 +1,6 @@
 package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.logic.commands.epiggy.SetBudgetCommand.MESSAGE_OVERLAPPING_BUDGET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
@@ -19,8 +18,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.epiggy.item.Cost;
+import seedu.address.model.epiggy.item.Period;
 
 
 /**
@@ -100,7 +99,7 @@ public class EditBudgetCommand extends Command {
     private static Budget createEditedBudget(Budget budgetToEdit, EditBudgetDetails editBudgetDetails) {
         assert budgetToEdit != null;
 
-        Cost updatedAmount = editBudgetDetails.getAmount().orElse(budgetToEdit.getPrice());
+        Cost updatedAmount = editBudgetDetails.getAmount().orElse(budgetToEdit.getCost());
         Date updatedStartDate = editBudgetDetails.getStartDate().orElse((budgetToEdit.getStartDate()));
         Period updatedPeriod = editBudgetDetails.getPeriod().orElse(budgetToEdit.getPeriod());
 

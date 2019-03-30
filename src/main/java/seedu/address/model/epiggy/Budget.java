@@ -113,7 +113,7 @@ public class Budget {
     public Period getRemainingDays() {
         return remainingDays; }
 
-    public Cost getPrice() {
+    public Cost getCost() {
         return this.amount;
     }
 
@@ -140,7 +140,7 @@ public class Budget {
         }
 
         Budget b = (Budget) o;
-        return this.amount == b.getPrice()
+        return this.amount == b.getCost()
                 && this.startDate == b.getStartDate()
                 && this.period == b.getPeriod();
     }
@@ -149,7 +149,7 @@ public class Budget {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("$")
-                .append(getPrice())
+                .append(getCost())
                 .append(" for ")
                 .append(getPeriod())
                 .append(" days starting from ")

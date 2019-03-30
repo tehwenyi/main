@@ -12,8 +12,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.epiggy.item.Cost;
+import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -72,7 +72,7 @@ public class ParserUtil {
     public static Cost parseCost(String cost) throws ParseException {
         requireNonNull(cost);
         String trimmedCost = cost.trim();
-        if (!Cost.isValidPrice(trimmedCost)) {
+        if (!Cost.isValidCost(trimmedCost)) {
             throw new ParseException(Cost.MESSAGE_CONSTRAINTS);
         }
         return new Cost(Double.parseDouble(trimmedCost));

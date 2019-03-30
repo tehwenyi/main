@@ -253,7 +253,7 @@ public class ReportWindow {
                 int year = budgets.get(i).getStartDate().toInstant().atZone(ZoneId.systemDefault())
                         .toLocalDate().getYear(); // get year from expense
                 InnerData data;
-                double amount = budgets.get(i).getPrice().getAmount();
+                double amount = budgets.get(i).getCost().getAmount();
                 if (map.containsKey(year)) {
                     // if year data exists
                     InnerData temp = map.get(year);

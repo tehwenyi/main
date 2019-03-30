@@ -1,5 +1,8 @@
 package seedu.address.model.epiggy.item;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a Cost.
  * Guarantees: immutable
@@ -13,6 +16,12 @@ public class Cost {
         this.amount = amount;
     }
 
+    public Cost(String amount) {
+        requireNonNull(amount);
+        checkArgument(isValidCost(amount), MESSAGE_CONSTRAINTS);
+        this.amount = Double.parseDouble(amount);
+    }
+
     public Cost deduct(Cost amountToDeduct) {
         return new Cost(this.amount - amountToDeduct.getAmount());
     }
@@ -22,9 +31,9 @@ public class Cost {
     }
 
     /**
-     * Returns true if a given string is a valid price.
+     * Returns true if a given string is a valid Cost.
      */
-    public static boolean isValidPrice(String test) {
+    public static boolean isValidCost(String test) {
         try {
             double d = Double.parseDouble(test);
             return d >= 0.;

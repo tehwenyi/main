@@ -232,7 +232,7 @@ public class ReportWindow {
                         .toLocalDate().getYear(); // get year from expense
                 InnerData data;
 
-                int amount = expenses.get(i).getItem().getPrice().getAmount();
+                double amount = expenses.get(i).getItem().getCost().getAmount();
                 if (map.containsKey(year)) {
                     // if year data exists
                     InnerData temp = map.get(year);
@@ -253,7 +253,7 @@ public class ReportWindow {
                 int year = budgets.get(i).getStartDate().toInstant().atZone(ZoneId.systemDefault())
                         .toLocalDate().getYear(); // get year from expense
                 InnerData data;
-                int amount = budgets.get(i).getPrice().getAmount();
+                double amount = budgets.get(i).getPrice().getAmount();
                 if (map.containsKey(year)) {
                     // if year data exists
                     InnerData temp = map.get(year);
@@ -292,8 +292,8 @@ public class ReportWindow {
      */
     class InnerData {
         private int year;
-        private int budget;
-        private int expense;
+        private double budget;
+        private double expense;
         private int saving;
 
         public InnerData(int year) {
@@ -308,19 +308,19 @@ public class ReportWindow {
             this.year = year;
         }
 
-        public int getBudget() {
+        public double getBudget() {
             return budget;
         }
 
-        public void setBudget(int budget) {
+        public void setBudget(double budget) {
             this.budget = budget;
         }
 
-        public int getExpense() {
+        public double getExpense() {
             return expense;
         }
 
-        public void setExpense(int expense) {
+        public void setExpense(double expense) {
             this.expense = expense;
         }
 
@@ -332,7 +332,7 @@ public class ReportWindow {
             this.saving = saving;
         }
 
-        public int updateValue(int original, int newValue) {
+        public double updateValue(double original, double newValue) {
             return original + newValue;
         }
     }

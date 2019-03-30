@@ -17,7 +17,7 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.item.Period;
-import seedu.address.model.epiggy.item.Price;
+import seedu.address.model.epiggy.item.Cost;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -37,7 +37,7 @@ public class SetBudgetCommandParser implements Parser<SetBudgetCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetBudgetCommand.MESSAGE_USAGE));
         }
 
-        Price budgetAmount = ParserUtil.parseBudgetAmount(argMultimap.getValue(PREFIX_COST).get());
+        Cost budgetAmount = ParserUtil.parseBudgetAmount(argMultimap.getValue(PREFIX_COST).get());
         Period period = ParserUtil.parsePeriod(argMultimap.getValue(PREFIX_PERIOD).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
 

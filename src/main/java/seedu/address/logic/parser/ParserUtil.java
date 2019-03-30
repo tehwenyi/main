@@ -13,7 +13,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.item.Period;
-import seedu.address.model.epiggy.item.Price;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -66,30 +66,30 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String cost} into a {@code Price}.
+     * Parses a {@code String cost} into a {@code Cost}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static Price parseCost(String cost) throws ParseException {
+    public static Cost parseCost(String cost) throws ParseException {
         requireNonNull(cost);
         String trimmedCost = cost.trim();
-        if (!Price.isValidPrice(trimmedCost)) {
-            throw new ParseException(Price.MESSAGE_CONSTRAINTS);
+        if (!Cost.isValidPrice(trimmedCost)) {
+            throw new ParseException(Cost.MESSAGE_CONSTRAINTS);
         }
-        return new Price(Integer.parseInt(trimmedCost));
+        return new Cost(Double.parseDouble(trimmedCost));
     }
 
     /**
-     * Parses a {@code String budgetAmount} into a {@code Price}.
+     * Parses a {@code String budgetAmount} into a {@code Cost}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static Price parseBudgetAmount(String cost) throws ParseException {
+    public static Cost parseBudgetAmount(String cost) throws ParseException {
         requireNonNull(cost);
         String trimmedCost = cost.trim();
         int budgetAmount = Integer.parseInt(trimmedCost);
         if (budgetAmount <= 0) {
             throw new ParseException(Budget.MESSAGE_CONSTRAINTS);
         }
-        return new Price(budgetAmount);
+        return new Cost(budgetAmount);
     }
 
     /**

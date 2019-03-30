@@ -120,7 +120,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         expenses.add(expense);
 
         Savings s = savings.get();
-        s.deductSavings(expense.getItem().getPrice().getAmount());
+        s.deductSavings(expense.getItem().getCost().getAmount());
         this.savings.setValue(new Savings(s));
 
         if (budgetList.getBudgetListSize() > 0) {
@@ -141,7 +141,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addAllowance(Allowance allowance) {
         expenses.add(allowance);
         Savings s = savings.get();
-        s.addSavings(allowance.getItem().getPrice().getAmount());
+        s.addSavings(allowance.getItem().getCost().getAmount());
         this.savings.setValue(new Savings(s));
         indicateModified();
     }
@@ -188,7 +188,7 @@ public class AddressBook implements ReadOnlyAddressBook {
             if (!expense.getDate().before(budget.getStartDate())) {
                 if (budget.getEndDate().after(expense.getDate())) {
                     if (!(expense instanceof Allowance)) {
-                        budget.deductRemainingAmount(expense.getItem().getPrice());
+                        budget.deductRemainingAmount(expense.getItem().getCost());
                     }
                 } else {
                     return budget;

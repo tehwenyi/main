@@ -20,7 +20,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.item.Period;
-import seedu.address.model.epiggy.item.Price;
+import seedu.address.model.epiggy.item.Cost;
 
 
 /**
@@ -100,7 +100,7 @@ public class EditBudgetCommand extends Command {
     private static Budget createEditedBudget(Budget budgetToEdit, EditBudgetDetails editBudgetDetails) {
         assert budgetToEdit != null;
 
-        Price updatedAmount = editBudgetDetails.getAmount().orElse(budgetToEdit.getPrice());
+        Cost updatedAmount = editBudgetDetails.getAmount().orElse(budgetToEdit.getPrice());
         Date updatedStartDate = editBudgetDetails.getStartDate().orElse((budgetToEdit.getStartDate()));
         Period updatedPeriod = editBudgetDetails.getPeriod().orElse(budgetToEdit.getPeriod());
 
@@ -112,7 +112,7 @@ public class EditBudgetCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditBudgetDetails {
-        private Price amount;
+        private Cost amount;
         private Date startDate;
         private Period period;
 
@@ -135,7 +135,7 @@ public class EditBudgetCommand extends Command {
             return CollectionUtil.isAnyNonNull(amount, startDate, period);
         }
 
-        public void setAmount(Price amount) {
+        public void setAmount(Cost amount) {
             this.amount = amount;
         }
 
@@ -147,7 +147,7 @@ public class EditBudgetCommand extends Command {
             this.period = period;
         }
 
-        public Optional<Price> getAmount() {
+        public Optional<Cost> getAmount() {
             return Optional.ofNullable(amount);
         }
 

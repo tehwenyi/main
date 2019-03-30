@@ -174,7 +174,7 @@ Displays all entries with the tag specified (in this case, it’s food).
 * `search d/02/01/2019:05/12/2020` +
 Displays all entries listed in the range 2nd Jan 2019 to 5th Dec 2020.
 * `search $/250:500` +
-Displays all entries listed with the price range of $250 to $500.
+Displays all entries listed with the cost range of $250 to $500.
 
 ****
 *Additional Information:* +

@@ -18,9 +18,9 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.epiggy.item.Name;
-import seedu.address.model.epiggy.item.Price;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,7 +42,7 @@ public class AddExpenseCommandParser implements Parser<AddExpenseCommand> {
         }
 
         Name name = ParserUtil.parseItemName(argMultimap.getValue(PREFIX_NAME).get());
-        Price cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get());
+        Cost cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get());
         Date date = new Date();
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());

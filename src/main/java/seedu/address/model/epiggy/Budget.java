@@ -3,8 +3,8 @@ package seedu.address.model.epiggy;
 import java.util.Calendar;
 import java.util.Date;
 
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Period;
-import seedu.address.model.epiggy.item.Price;
 
 /**
  * Represents a Budget in the expense book.
@@ -16,11 +16,11 @@ public class Budget {
     public static final String CURRENT_BUDGET = "Current";
     private static final String OLD_BUDGET = "Old";
     private static final String FUTURE_BUDGET = "Future";
-    private final Price amount;
+    private final Cost amount;
     private final Date startDate;
     private final Date endDate;
     private final Period period;
-    private Price remainingAmount;
+    private Cost remainingAmount;
     private Period remainingDays;
     private String status = null;
     private Date todaysDate = new Date();
@@ -29,7 +29,7 @@ public class Budget {
      * Represents a Budget in the expense book.
      * Guarantees: details are present and not null, field values are validated, immutable.
      */
-    public Budget(Price amount, Period period, Date startDate) {
+    public Budget(Cost amount, Period period, Date startDate) {
         this.amount = amount;
         this.startDate = startDate;
         this.period = period;
@@ -50,7 +50,7 @@ public class Budget {
      * Guarantees: details are present and not null, field values are validated, immutable.
      */
     public Budget() {
-        this.amount = new Price(0);
+        this.amount = new Cost(0);
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, 2000);
         cal.set(Calendar.MONTH, Calendar.JANUARY);
@@ -82,7 +82,7 @@ public class Budget {
         return cal.getTime();
     }
 
-    private void setRemainingAmount(Price remainingAmount) {
+    private void setRemainingAmount(Cost remainingAmount) {
         this.remainingAmount = remainingAmount;
     }
 
@@ -98,7 +98,7 @@ public class Budget {
         this.remainingAmount = this.amount;
     }
 
-    public void deductRemainingAmount(Price amountToDeduct) {
+    public void deductRemainingAmount(Cost amountToDeduct) {
         this.remainingAmount = this.remainingAmount.deduct(amountToDeduct);
     }
 
@@ -106,14 +106,14 @@ public class Budget {
         return status;
     }
 
-    public Price getRemainingAmount() {
+    public Cost getRemainingAmount() {
         return remainingAmount;
     }
 
     public Period getRemainingDays() {
         return remainingDays; }
 
-    public Price getPrice() {
+    public Cost getPrice() {
         return this.amount;
     }
 

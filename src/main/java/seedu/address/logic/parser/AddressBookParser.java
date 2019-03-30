@@ -159,7 +159,7 @@ public class AddressBookParser {
         case ReportCommand.COMMAND_WORD:
         case ReportCommand.COMMAND_ALIAS:
             if (arguments.equals("")) {
-                return new ReportCommandParser().parse(" t/MONTHLY");
+                return new ReportCommandParser().parse("");
             } else {
                 return new ReportCommandParser().parse(arguments);
             }

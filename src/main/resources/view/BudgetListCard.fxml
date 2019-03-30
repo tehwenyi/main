@@ -13,13 +13,14 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
 <HBox fx:id="cardPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
-  <GridPane HBox.hgrow="ALWAYS">
+  <GridPane prefHeight="271.0" prefWidth="302.0" HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
     </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105.0" prefHeight="180.0" prefWidth="150.0" GridPane.columnIndex="0">
+    <VBox alignment="CENTER_LEFT" minHeight="105.0" prefHeight="284.9998779296875" prefWidth="323.0" GridPane.columnIndex="0">
       <HBox alignment="CENTER_LEFT" spacing="5.0" />
       <Label fx:id="budgetTitle" styleClass="cell_big_label" text="\$">
         <minWidth>
@@ -27,25 +28,30 @@
           <Double fx:value="-Infinity" />
         </minWidth>
       </Label>
-      <Label fx:id="budgetedAmount" styleClass="cell_small_label" text="\$budgetedAmount" textFill="#9f9f9f" />
-      <Label fx:id="startDate" styleClass="cell_small_label" text="\$startDate">
+      <Label fx:id="budgetedAmount" prefWidth="182.0" styleClass="cell_small_label" text="\$budgetedAmount" textFill="#9f9f9f" />
+      <Label fx:id="startDate" prefWidth="182.0" styleClass="cell_small_label" text="\$startDate">
         <textFill>
           <Color blue="0.625" green="0.625" red="0.625" fx:id="x1" />
         </textFill>
       </Label>
-      <padding>
-        <Insets bottom="5.0" left="15.0" right="5.0" top="5.0" />
-      </padding>
-      <Label fx:id="endDate" styleClass="cell_small_label" text="\$endDate" textFill="$x1" />
-      <Label fx:id="period" styleClass="cell_small_label" text="\$period" textFill="$x1" />
+      <Label fx:id="endDate" prefWidth="182.0" styleClass="cell_small_label" text="\$endDate" textFill="$x1" />
+      <Label fx:id="period" prefWidth="196.0" styleClass="cell_small_label" text="\$period" textFill="$x1" />
       <Label fx:id="currentStatus" styleClass="cell_big_label">
         <minWidth>
           <!-- Ensures that the label text is never truncated -->
           <Double fx:value="-Infinity" />
         </minWidth>
       </Label>
-      <Label fx:id="remainingAmount" styleClass="cell_small_label" text="\$remainingAmount" />
-      <Label fx:id="remainingDays" styleClass="cell_small_label" text="\$remainingDays" />
+      <Label fx:id="remainingAmount" prefWidth="174.0" styleClass="cell_small_label" text="\$remainingAmount" />
+      <Label fx:id="remainingDays" prefWidth="166.0" styleClass="cell_small_label" text="\$remainingDays" />
+      <padding>
+        <Insets bottom="5.0" left="15.0" right="5.0" top="5.0" />
+      </padding>
+      <Label fx:id="notification" alignment="CENTER" blendMode="SRC_OVER" contentDisplay="BOTTOM" labelFor="$notification" prefHeight="94.0" prefWidth="282.0" styleClass="cell_small_label" text="\$notification" textAlignment="CENTER" textFill="WHITE" textOverrun="ELLIPSIS" wrapText="true">
+        <font>
+          <Font name="Lucida Sans Regular" size="15.0" />
+        </font>
+      </Label>
     </VBox>
   </GridPane>
 </HBox>

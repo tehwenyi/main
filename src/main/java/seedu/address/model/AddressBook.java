@@ -78,6 +78,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setBudgetList(List<Budget> budgets) {
+        this.budgetList.setBudgetList(budgets);
+        indicateModified();
+    }
+
+    /**
      * Replaces the contents of the expense list with {@code expenses}.
      * {@code expenses} can contain duplicate expenses.
      */
@@ -92,6 +101,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setPersons(newData.getPersonList());
+        setBudgetList(newData.getBudgetList());
     }
 
     //// person-level operations
@@ -120,7 +130,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         expenses.add(expense);
 
         Savings s = savings.get();
-        s.deductSavings(expense.getItem().getPrice().getAmount());
+        s.deductSavings(expense.getItem().getCost().getAmount());
         this.savings.setValue(new Savings(s));
 
         if (budgetList.getBudgetListSize() > 0) {
@@ -141,7 +151,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addAllowance(Allowance allowance) {
         expenses.add(allowance);
         Savings s = savings.get();
-        s.addSavings(allowance.getItem().getPrice().getAmount());
+        s.addSavings(allowance.getItem().getCost().getAmount());
         this.savings.setValue(new Savings(s));
         indicateModified();
     }
@@ -188,7 +198,7 @@ public class AddressBook implements ReadOnlyAddressBook {
             if (!expense.getDate().before(budget.getStartDate())) {
                 if (budget.getEndDate().after(expense.getDate())) {
                     if (!(expense instanceof Allowance)) {
-                        budget.deductRemainingAmount(expense.getItem().getPrice());
+                        budget.deductRemainingAmount(expense.getItem().getCost());
                     }
                 } else {
                     return budget;
@@ -278,13 +288,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Gets the current budget for ePiggy.
-     */
-    public ObservableList<Budget> getBudgetList() {
-        return this.budgetList.asUnmodifiableObservableList();
-    }
-
-    /**
      * Gets the current budget's index.
      * @return -1 if there is no current budget.
      */
@@ -349,7 +352,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return budgetList.asUnmodifiableObservableList() + " budgets";
         // TODO: refine later
     }
 
@@ -366,6 +369,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Item> getItemList() {
         return FXCollections.unmodifiableObservableList(items);
+    }
+
+    /**
+     * Gets the current budget list for ePiggy.
+     */
+    @Override
+    public ObservableList<Budget> getBudgetList() {
+        return budgetList.asUnmodifiableObservableList();
     }
 
     @Override

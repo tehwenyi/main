@@ -14,8 +14,8 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Name;
-import seedu.address.model.epiggy.item.Price;
 
 /**
  * Parses input arguments and creates a new SetGoalCommand object
@@ -34,9 +34,9 @@ public class SetGoalCommandParser implements Parser<SetGoalCommand> {
         }
 
         Name name = ParserUtil.parseItemName(argMultimap.getValue(PREFIX_NAME).get());
-        Price price = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get());
+        Cost cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get());
 
-        Goal goal = new Goal(name, price);
+        Goal goal = new Goal(name, cost);
 
         return new SetGoalCommand(goal);
     }

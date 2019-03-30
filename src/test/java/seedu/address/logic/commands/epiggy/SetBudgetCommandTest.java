@@ -7,8 +7,10 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.function.Predicate;
 
@@ -69,6 +71,44 @@ public class SetBudgetCommandTest {
         // Person validPerson = new PersonBuilder().build();
         SetBudgetCommand setBudgetCommand = new SetBudgetCommand(validBudget);
         ModelStub modelStub = new ModelStubWithBudget(validBudget);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(SetBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
+        setBudgetCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_overlappingStartDate_throwsCommandException() throws Exception {
+        Budget validBudget = new BudgetBuilder().build();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(validBudget.getEndDate());
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        String endDate = simpleDateFormat.format(calendar.getTime());
+        Budget overlappingBudget = new BudgetBuilder().withDate(endDate).build();
+
+        SetBudgetCommand setBudgetCommand = new SetBudgetCommand(validBudget);
+        ModelStub modelStub = new ModelStubWithBudget(overlappingBudget);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(SetBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
+        setBudgetCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_overlappingEndDate_throwsCommandException() throws Exception {
+        Budget validBudget = new BudgetBuilder().build();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(validBudget.getStartDate());
+        calendar.add(Calendar.DAY_OF_MONTH, 1 - Integer.parseInt(BudgetBuilder.DEFAULT_PERIOD));
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        String startDate = simpleDateFormat.format(calendar.getTime());
+        Budget overlappingBudget = new BudgetBuilder().withDate(startDate).build();
+
+        SetBudgetCommand setBudgetCommand = new SetBudgetCommand(validBudget);
+        ModelStub modelStub = new ModelStubWithBudget(overlappingBudget);
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(SetBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
@@ -177,11 +217,6 @@ public class SetBudgetCommandTest {
 
         @Override
         public void deleteBudgetAtIndex(int index) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Budget> getBudgetList() {
             throw new AssertionError("This method should not be called.");
         }
 

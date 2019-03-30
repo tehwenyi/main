@@ -34,10 +34,10 @@ public class ViewGoalCommand extends Command {
         SimpleObjectProperty<Savings> savings = model.getSavings();
         SimpleObjectProperty<Goal> goal = model.getGoal();
 
-        float goalAmount = (float) goal.getValue().getAmount().getAmount();
-        float savingsAmount = savings.getValue().getSavings();
+        double goalAmount = goal.getValue().getAmount().getAmount();
+        double savingsAmount = savings.getValue().getSavings();
 
-        float diff = goalAmount - savingsAmount;
+        double diff = goalAmount - savingsAmount;
 
         if (diff < 0) {
             return new CommandResult(String.format(MESSAGE_SUCCESS

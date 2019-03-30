@@ -48,7 +48,7 @@ public class BudgetCard extends UiPart<Region> {
         super(FXML);
         this.budget = budget;
         budgetTitle.setText(displayedIndex + ". " + budget.getStatus() + " Budget");
-        budgetedAmount.setText("Amount: $" + budget.getPrice().toString());
+        budgetedAmount.setText("Amount: $" + budget.getCost().toString());
 
         DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy (E)");
         startDate.setText("Start Date: " + dateFormat.format(budget.getStartDate()));
@@ -64,7 +64,7 @@ public class BudgetCard extends UiPart<Region> {
 
         if (budget.getRemainingAmount().getAmount() < 0) {
             notification.setText("You have exceeded your budget!");
-        } else if (budget.getRemainingAmount().getAmount() < (budget.getPrice().getAmount() / 5)) {
+        } else if (budget.getRemainingAmount().getAmount() < (budget.getCost().getAmount() / 5)) {
             notification.setText("You have spent more than 80% of your budget. \n"
                     + "Please control your expenses!");
         } else {

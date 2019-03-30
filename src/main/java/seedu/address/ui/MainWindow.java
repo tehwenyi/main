@@ -132,7 +132,7 @@ public class MainWindow extends UiPart<Stage> {
         savingsPanel = new SavingsPanel(logic.getSavings(), logic.getGoal());
         savingsPanelPlaceholder.getChildren().add(savingsPanel.getRoot());
 
-        budgetPanel = new BudgetPanel(logic.getBudgetList(), logic::setCurrentBudget);
+        budgetPanel = new BudgetPanel(logic.getFilteredBudgetList(), logic::setCurrentBudget);
         budgetPanelPlaceholder.getChildren().add(budgetPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -193,7 +193,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleDailyReport() {
         helpWindow.hide();
         try {
-            logic.execute("report type/daily");
+            logic.execute("report");
         } catch (CommandException | ParseException e) {
             resultDisplay.setFeedbackToUser(e.getMessage());
         }

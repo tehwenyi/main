@@ -110,12 +110,12 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
         Item item = expense.getItem();
         if (splitCost.length == 1) { //if the user enters an exact cost
             double chosenCost = Double.parseDouble(splitCost[0]);
-            result = item.getPrice().getAmount() == chosenCost;
+            result = item.getCost().getAmount() == chosenCost;
         } else { //if the user enters a range of dates
             double lowerBound = Double.parseDouble(splitCost[0]);
             double higherBound = Double.parseDouble(splitCost[1]);
-            result = lowerBound <= item.getPrice().getAmount()
-                    && item.getPrice().getAmount() <= higherBound;
+            result = lowerBound <= item.getCost().getAmount()
+                    && item.getCost().getAmount() <= higherBound;
         }
         return result;
     }

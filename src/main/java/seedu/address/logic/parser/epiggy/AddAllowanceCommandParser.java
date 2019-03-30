@@ -15,9 +15,9 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.epiggy.Allowance;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.epiggy.item.Name;
-import seedu.address.model.epiggy.item.Price;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,7 +34,7 @@ public class AddAllowanceCommandParser implements Parser<AddAllowanceCommand> {
         }
 
         Name name = new Name("Allowance");
-        Price cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get());
+        Cost cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get());
         Date date = new Date(); //TODO dummy code right now
         Set<Tag> tagList = Set.of(new Tag("Allowance"));
 

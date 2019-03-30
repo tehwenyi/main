@@ -19,7 +19,6 @@ import org.junit.rules.ExpectedException;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.epiggy.Budget;
@@ -123,7 +122,7 @@ public class AddressBookTest {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Expense> expenses = FXCollections.observableArrayList();
         private final ObservableList<Item> items = FXCollections.observableArrayList();
-        private ObservableValue<Budget> budget; //TODO
+        private ObservableList<Budget> budgets; //TODO
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -147,6 +146,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Budget> getBudgetList() {
+            return budgets;
         }
 
         @Override

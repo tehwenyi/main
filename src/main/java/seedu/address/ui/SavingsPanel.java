@@ -32,12 +32,12 @@ public class SavingsPanel extends UiPart<Region> {
 
         savings.addListener(observable -> {
             currentSavings.setText(savings.getValue().toString());
-            float diff = goal.getValue().getAmount().getAmount() - savings.getValue().getSavings();
+            double diff = goal.getValue().getAmount().getAmount() - savings.getValue().getSavings();
             amountDifference.setText("$" + diff);
         });
         goal.addListener(observable -> {
             currentGoal.setText(goal.getValue().toString());
-            float diff = goal.getValue().getAmount().getAmount() - savings.getValue().getSavings();
+            double diff = goal.getValue().getAmount().getAmount() - savings.getValue().getSavings();
             amountDifference.setText("$" + diff);
         });
 
@@ -47,7 +47,7 @@ public class SavingsPanel extends UiPart<Region> {
             amountDifference.setText("$0.00");
         } else {
             currentGoal.setText(goal.getValue().toString());
-            float diff = goal.getValue().getAmount().getAmount() - savings.getValue().getSavings();
+            double diff = goal.getValue().getAmount().getAmount() - savings.getValue().getSavings();
             amountDifference.setText("$" + diff);
         }
 

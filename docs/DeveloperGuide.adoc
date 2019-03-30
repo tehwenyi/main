@@ -1031,7 +1031,7 @@ Use case ends.
 *MSS*
 
 1. User requests the create a new record.
-2. User enters a add command with the name of item, price, categories and date
+2. User enters a add command with the name of item, cost, categories and date
 3. ePiggy saves the record.
 +
 Use case ends.

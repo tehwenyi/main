@@ -18,10 +18,9 @@ public class SortExpenseCommand extends Command {
     public static final String COMMAND_WORD = "sortExpense";
     public static final String COMMAND_ALIAS = "sE";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + " : Sorts the expenses as specified by the user. "
-            + " The keywordss do not need to be in order.\n"
-            + " Parameters: -[n/d/$]...\n"
-            + " Example: " + COMMAND_WORD + " n/n";
+            + " : Sorts the expenses as specified by the user. \n"
+            + " Parameters: -[n/d/$]/...\n"
+            + " Example: " + COMMAND_WORD + " n/";
     public static final String MESSAGE_SUCCESS = "Sorting Expenses...\n";
 
     private final String keyword;

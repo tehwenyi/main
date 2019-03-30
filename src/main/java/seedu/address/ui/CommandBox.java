@@ -25,7 +25,7 @@ public class CommandBox extends UiPart<Region> {
     private ListElementPointer historySnapshot;
     private String[] keywords = { "delete/ ", "report ", "list ", "help ", "type/",
         "yearly", "daily", "monthly", "percentage", "setBudget $/500 p/7 d/03/02/2019",
-        "addExpense n/test1 $/500 t/dinner d/03/02/2019", "addAllowance $/10"};
+        "addExpense n/test1 $/500 t/dinner d/03/02/2019", "addAllowance $/10", "sE n/"};
     @FXML
     private TextField commandTextField;
 

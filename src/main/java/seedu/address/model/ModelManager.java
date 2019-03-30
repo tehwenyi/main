@@ -273,6 +273,9 @@ public class ModelManager implements Model {
             break;
         } default: return;
         }
+        FilteredList<Expense> fl = new FilteredList<>(sortedExpenses);
+        fl.setPredicate(PREDICATE_SHOW_ALL_EXPENSES);
+        getFilteredExpenseList();
         logger.fine("sorted list");
         versionedAddressBook.indicateModified();
     }

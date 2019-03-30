@@ -264,7 +264,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Sorts Expenses according to Date. Earlier Dates will have lower indexes.
+     * Sorts Expenses according to Name (alphabetically).
      * @return SortedList of Expenses
      */
     public SortedList<Expense> sortExpensesByName() {
@@ -272,7 +272,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Sorts Expenses according to Date. Earlier Dates will have lower indexes.
+     * Sorts Expenses according to Amount. Higher amounts will have lower indexes.
      * @return SortedList of Expenses
      */
     public SortedList<Expense> sortExpensesByAmount() {

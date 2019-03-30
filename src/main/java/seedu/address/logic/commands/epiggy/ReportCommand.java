@@ -23,7 +23,7 @@ public class ReportCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows report to the user.\n"
             + "Parameters: "
-            + PREFIX_DATE + "GENERATE A REPORT ON SPECIFY DATE, MONTH OR YEAR \n"
+            + PREFIX_DATE + "SPECIFY DATE, MONTH OR YEAR \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DATE + "21/03/2019\n"
             + "Example: " + COMMAND_WORD + " "

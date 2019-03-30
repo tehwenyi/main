@@ -48,6 +48,7 @@ public class ReportWindow {
             ReportDisplayType expenseDisplayType = ReportDisplayType.valueOf(type);
             window = new Stage();
             window.initModality(Modality.APPLICATION_MODAL);
+            window.setTitle("Report");
             switch (expenseDisplayType) {
             case ALL:
                 displayCompleteReport(model);
@@ -76,7 +77,6 @@ public class ReportWindow {
      */
     private void displayReportOnSpecifiedDay(Model model, LocalDate date) {
 
-        window.setTitle("Report for " + date.toString());
         // Creates an Area Chart
         final NumberAxis xAxis = new NumberAxis(0, 24, 1);
         final NumberAxis yAxis = new NumberAxis();
@@ -122,7 +122,6 @@ public class ReportWindow {
      * Displays monthly summary on line chart.
      */
     private void displayReportOnSpecifiedMonth(Model model, LocalDate date) {
-        window.setTitle("Monthly Summary");
         Calendar cal = Calendar.getInstance();
         Date targetDate = Date.from(date.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
         cal.setTime(targetDate);
@@ -168,34 +167,6 @@ public class ReportWindow {
             seriesSaving.getData().add(new XYChart.Data(i + 1, savings[i]));
         }
 
-        /*
-        seriesExpense.getData().add(new XYChart.Data("Jan", 1230));
-        seriesExpense.getData().add(new XYChart.Data("Feb", 1400));
-        seriesExpense.getData().add(new XYChart.Data("Mar", 1500));
-        seriesExpense.getData().add(new XYChart.Data("Apr", 2004));
-        seriesExpense.getData().add(new XYChart.Data("May", 1112));
-        seriesExpense.getData().add(new XYChart.Data("Jun", 2006));
-        seriesExpense.getData().add(new XYChart.Data("Jul", 1002));
-        seriesExpense.getData().add(new XYChart.Data("Aug", 1005));
-        seriesExpense.getData().add(new XYChart.Data("Sep", 1403));
-        seriesExpense.getData().add(new XYChart.Data("Oct", 1007));
-        seriesExpense.getData().add(new XYChart.Data("Nov", 1209));
-        seriesExpense.getData().add(new XYChart.Data("Dec", 1225));
-
-
-        seriesBudget.getData().add(new XYChart.Data("Jan", 1500));
-        seriesBudget.getData().add(new XYChart.Data("Feb", 1500));
-        seriesBudget.getData().add(new XYChart.Data("Mar", 1500));
-        seriesBudget.getData().add(new XYChart.Data("Apr", 1500));
-        seriesBudget.getData().add(new XYChart.Data("May", 1500));
-        seriesBudget.getData().add(new XYChart.Data("Jun", 1500));
-        seriesBudget.getData().add(new XYChart.Data("Jul", 1500));
-        seriesBudget.getData().add(new XYChart.Data("Aug", 1500));
-        seriesBudget.getData().add(new XYChart.Data("Sep", 1500));
-        seriesBudget.getData().add(new XYChart.Data("Oct", 1500));
-        seriesBudget.getData().add(new XYChart.Data("Nov", 1500));
-        seriesBudget.getData().add(new XYChart.Data("Dec", 1500));
-        */
         Scene scene = new Scene(lineChart, 800, 600);
         lineChart.getData().addAll(seriesExpense, seriesSaving);
 
@@ -206,7 +177,6 @@ public class ReportWindow {
      * Display the proportion of income spent on different categories on pie chart.
      */
     private void displayExpensePercentageReport(Model model) {
-        window.setTitle("Summary");
         Scene scene = new Scene(new Group(), 800, 600);
 
         ObservableList<PieChart.Data> pieChartData =
@@ -227,7 +197,6 @@ public class ReportWindow {
      * Displays yearly summary on bar chart.
      */
     private void displayReportOnSpecifiedYear(Model model, LocalDate date) {
-        window.setTitle("Bar Chart");
         final NumberAxis yAxis = new NumberAxis();
         final CategoryAxis xAxis = new CategoryAxis();
         final BarChart<String, Number> bc =
@@ -294,7 +263,6 @@ public class ReportWindow {
      */
     private void displayCompleteReport(Model model) {
 
-        window.setTitle("Complete Report");
         final NumberAxis yAxis = new NumberAxis();
         final CategoryAxis xAxis = new CategoryAxis();
         final BarChart<String, Number> bc =

@@ -23,6 +23,13 @@ public class MainMenuHandle extends NodeHandle<Node> {
     }
 
     /**
+     * Opens the {@code ReportWindow} using the menu bar in {@code MainWindow}.
+     */
+    public void openReportWindowUsingMenu() {
+        clickOnMenuItemsSequentially("Report", "Completed Report");
+    }
+
+    /**
      * Opens the {@code HelpWindow} by pressing the shortcut key associated
      * with the menu bar in {@code MainWindow}.
      */

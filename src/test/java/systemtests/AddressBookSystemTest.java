@@ -68,7 +68,7 @@ public abstract class AddressBookSystemTest {
         mainWindowHandle = setupHelper.setupMainWindowHandle();
 
         waitUntilBrowserLoaded(getBrowserPanel());
-        assertApplicationStartingStateIsCorrect();
+        assertApplicationStartingStateIsCorrect(); // remove this line if displayList removed
     }
 
     @After

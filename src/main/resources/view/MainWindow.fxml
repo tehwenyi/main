@@ -35,7 +35,7 @@
                     <Menu mnemonicParsing="false" text="Report">
                         <MenuItem fx:id="summaryMenuItem_daily" mnemonicParsing="false"
                                   onAction="#handleDailyReport"
-                                  text="Report"/>
+                                  text="Completed Report"/>
                     </Menu>
                 </MenuBar>
 

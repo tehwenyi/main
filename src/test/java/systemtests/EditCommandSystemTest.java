@@ -134,7 +134,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
          */
         showAllPersons();
         index = INDEX_FIRST_PERSON;
-//        selectPerson(index);
+        //        selectPerson(index);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
         // this can be misleading: card selection actually remains unchanged but the
@@ -271,7 +271,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
         if (expectedSelectedCardIndex != null) {
-//            assertSelectedCardChanged(expectedSelectedCardIndex);
+        //            assertSelectedCardChanged(expectedSelectedCardIndex);
         } else {
             assertSelectedCardUnchanged();
         }

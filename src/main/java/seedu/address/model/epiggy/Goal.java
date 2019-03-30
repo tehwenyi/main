@@ -1,7 +1,7 @@
 package seedu.address.model.epiggy;
 
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Name;
-import seedu.address.model.epiggy.item.Price;
 
 /**
  * Represents a Goal in the expense book.
@@ -9,9 +9,9 @@ import seedu.address.model.epiggy.item.Price;
  */
 public class Goal {
     private final Name name;
-    private final Price amount;
+    private final Cost amount;
 
-    public Goal(Name name, Price amount) {
+    public Goal(Name name, Cost amount) {
         this.name = name;
         this.amount = amount;
     }
@@ -20,7 +20,7 @@ public class Goal {
         return name;
     }
 
-    public Price getAmount() {
+    public Cost getAmount() {
         return amount;
     }
 

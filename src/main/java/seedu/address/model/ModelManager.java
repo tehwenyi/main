@@ -164,11 +164,6 @@ public class ModelManager implements Model {
     };
 
     @Override
-    public ObservableList<Budget> getBudgetList() {
-        return versionedAddressBook.getBudgetList();
-    }
-
-    @Override
     public int getCurrentBudgetIndex() {
         return versionedAddressBook.getCurrentBudgetIndex();
     }

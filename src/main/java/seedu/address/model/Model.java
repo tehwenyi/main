@@ -125,11 +125,6 @@ public interface Model {
     void updateFilteredExpensesList(Predicate<seedu.address.model.epiggy.Expense> predicate);
 
     /**
-     * Gets the current budget list.
-     */
-    ObservableList<Budget> getBudgetList();
-
-    /**
      * Gets the current budget's index.
      * @return -1 if there is no current budget.
      */

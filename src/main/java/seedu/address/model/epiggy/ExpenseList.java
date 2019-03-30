@@ -145,10 +145,10 @@ public class ExpenseList implements Iterable<seedu.address.model.epiggy.Expense>
     public SortedList<Expense> sortByAmount() {
         return internalList.sorted(new Comparator<Expense>() {
             public int compare(Expense e1, Expense e2) {
-                if (e1.getItem().getPrice() == null || e2.getItem().getPrice() == null) {
+                if (e1.getItem().getCost() == null || e2.getItem().getCost() == null) {
                     return 0;
                 }
-                return e1.getItem().getPrice().getAmount() < e2.getItem().getPrice().getAmount() ? 1 : -1;
+                return e1.getItem().getCost().getAmount() < e2.getItem().getCost().getAmount() ? 1 : -1;
             }
         });
     }

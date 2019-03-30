@@ -5,21 +5,25 @@ package seedu.address.model.epiggy;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Savings {
-    private float savings;
+    private double savings;
 
     public Savings() {
         this.savings = 0.00f;
     }
 
-    public float getSavings() {
+    public Savings(Savings savings) {
+        this.savings = savings.getSavings();
+    }
+
+    public double getSavings() {
         return savings;
     }
 
-    public void addSavings(float increment) {
+    public void addSavings(double increment) {
         savings += increment;
     }
 
-    public void deductSavings(float decrement) {
+    public void deductSavings(double decrement) {
         savings -= decrement;
     }
 

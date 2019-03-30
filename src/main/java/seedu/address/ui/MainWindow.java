@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
     private ExpenseListPanel expenseListPanel;
+    private SavingsPanel savingsPanel;
     private BudgetPanel budgetPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -48,7 +49,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane savingsPanelPlaceholder;
 
     @FXML
     private StackPane expenseListPanelPlaceholder;
@@ -123,16 +124,15 @@ public class MainWindow extends UiPart<Stage> {
         browserPanel = new BrowserPanel(logic.selectedPersonProperty());
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.selectedPersonProperty(),
-                logic::setSelectedPerson);
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
         expenseListPanel = new ExpenseListPanel(logic.getFilteredExpenseList(),
                 logic.selectedExpenseProperty(), expense -> {
         }); //TODO
         expenseListPanelPlaceholder.getChildren().add(expenseListPanel.getRoot());
 
-        budgetPanel = new BudgetPanel(logic.getBudgetList(), logic::setCurrentBudget);
+        savingsPanel = new SavingsPanel(logic.getSavings(), logic.getGoal());
+        savingsPanelPlaceholder.getChildren().add(savingsPanel.getRoot());
+
+        budgetPanel = new BudgetPanel(logic.getFilteredBudgetList(), logic::setCurrentBudget);
         budgetPanelPlaceholder.getChildren().add(budgetPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

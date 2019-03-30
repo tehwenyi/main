@@ -6,15 +6,24 @@ package seedu.address.ui;
  */
 public class ReportData {
     private int year;
-    private int budget;
-    private int expense;
-    private int saving;
+    private double budget;
+    private double expense;
+    private double allowance;
+
 
     public ReportData(int year) {
         this.year = year;
     }
 
-    public int getYear() {
+    public double getAllowance() {
+        return allowance;
+    }
+
+    public void setAllowance(double allowance) {
+        this.allowance = allowance;
+    }
+
+    public double getYear() {
         return year;
     }
 
@@ -22,31 +31,23 @@ public class ReportData {
         this.year = year;
     }
 
-    public int getBudget() {
+    public double getBudget() {
         return budget;
     }
 
-    public void setBudget(int budget) {
+    public void setBudget(double budget) {
         this.budget = budget;
     }
 
-    public int getExpense() {
+    public double getExpense() {
         return expense;
     }
 
-    public void setExpense(int expense) {
+    public void setExpense(double expense) {
         this.expense = expense;
     }
 
-    public int getSaving() {
-        return saving;
-    }
-
-    public void setSaving(int saving) {
-        this.saving = saving;
-    }
-
-    public int updateValue(int original, int newValue) {
+    public double updateValue(double original, double newValue) {
         return original + newValue;
     }
 }

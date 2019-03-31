@@ -5,7 +5,6 @@
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
-    id 'com.github.johnrengelman.shadow' version '5.0.0'
     id 'java'
     id 'jacoco'
     id 'checkstyle'
@@ -78,7 +77,8 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'ePiggy.jar'
+    baseName = 'ePiggy'
 
     destinationDir = file("${buildDir}/jar/")
 }

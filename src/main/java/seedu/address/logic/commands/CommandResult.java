@@ -11,11 +11,20 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
+    /**
+     * Help information should be shown to the user.
+     */
     private final boolean showHelp;
 
-    /** The application should exit. */
+    /**
+     * The application should exit.
+     */
     private final boolean exit;
+
+    /**
+     * Summary should be shown to the user.
+     */
+    private boolean showSummary;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -24,6 +33,17 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     * TODO: TO ADD SUMMARY BUTTON TO THE GUI.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean summary) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.showSummary = summary;
     }
 
     /**
@@ -44,6 +64,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isSummary() {
+        return showSummary;
     }
 
     @Override

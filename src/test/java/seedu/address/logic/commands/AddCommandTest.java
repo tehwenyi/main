@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -15,14 +16,21 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.beans.property.ReadOnlyProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.epiggy.Allowance;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -60,7 +68,7 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_EXPENSE);
         addCommand.execute(modelStub, commandHistory);
     }
 
@@ -128,6 +136,61 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addExpense(Expense expense) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAllowance(Allowance allowance) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyProperty<Expense> selectedExpenseProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addBudget(int index, Budget budget) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void deleteBudgetAtIndex(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getCurrentBudgetIndex() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public SimpleObjectProperty<Savings> getSavings() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public SimpleObjectProperty<Goal> getGoal() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setGoal(Goal goal) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSelectedExpense(Expense expense) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -153,12 +216,42 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setCurrentBudget(Budget editedBudget) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+        public ObservableList<Budget> getFilteredBudgetList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Expense> getFilteredExpenseList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredBudgetList(Predicate<Budget> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredExpensesList(Predicate<Expense> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortExpenses(ArgumentMultimap keywords) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -189,6 +282,11 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyProperty<Person> selectedPersonProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setExpense(Expense target, Expense editedExpense) {
             throw new AssertionError("This method should not be called.");
         }
 

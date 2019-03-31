@@ -2,8 +2,12 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.nio.file.Path;
+import java.util.Date;
 import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -15,6 +19,12 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.model.epiggy.Allowance;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -27,7 +37,10 @@ public class ModelManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Expense> filteredExpenses;
+    private final FilteredList<Budget> filteredBudget;
     private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
+    private final SimpleObjectProperty<Expense> selectedExpense = new SimpleObjectProperty<>();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,6 +55,10 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredPersons.addListener(this::ensureSelectedPersonIsValid);
+
+        filteredExpenses = new FilteredList<>(versionedAddressBook.getExpenseList());
+        filteredBudget = new FilteredList<>(versionedAddressBook.getBudgetList());
+        //TODO
     }
 
     public ModelManager() {
@@ -96,6 +113,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setExpense(seedu.address.model.epiggy.Expense target,
+                           seedu.address.model.epiggy.Expense editedExpense) {
+        requireAllNonNull(target, editedExpense);
+
+        versionedAddressBook.setExpense(target, editedExpense);
+    }
+
+    @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return versionedAddressBook.hasPerson(person);
@@ -113,10 +138,63 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addExpense(Expense expense) {
+        versionedAddressBook.addExpense(expense);
+    }
+
+    @Override
+    public void addAllowance(Allowance allowance) {
+        versionedAddressBook.addAllowance(allowance);
+    }
+
+    @Override
+    public void addBudget(int index, Budget budget) {
+        versionedAddressBook.addBudget(index, budget); }
+
+    /**
+     * Checks if there are any overlapping budgets.
+     */
+    public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
+        return versionedAddressBook.budgetsOverlap(startDate, endDate, earlierBudget);
+    }
+
+    @Override
+    public void deleteBudgetAtIndex(int index) {
+        versionedAddressBook.deleteBudgetAtIndex(index);
+    };
+
+    @Override
+    public int getCurrentBudgetIndex() {
+        return versionedAddressBook.getCurrentBudgetIndex();
+    }
+
+    @Override
+    public SimpleObjectProperty<Savings> getSavings() {
+        return versionedAddressBook.getSavings();
+    }
+
+    @Override
+    public SimpleObjectProperty<Goal> getGoal() {
+        return versionedAddressBook.getGoal();
+    }
+
+    @Override
+    public void setGoal(Goal goal) {
+        versionedAddressBook.setGoal(goal);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         versionedAddressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void setCurrentBudget(Budget editedBudget) {
+        requireNonNull(editedBudget);
+
+        versionedAddressBook.setCurrentBudget(editedBudget);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -130,10 +208,58 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Expense> getFilteredExpenseList() {
+        return filteredExpenses;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Budget} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Budget> getFilteredBudgetList() {
+        return filteredBudget;
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredExpensesList(Predicate<seedu.address.model.epiggy.Expense> predicate) {
+        requireNonNull(predicate);
+        filteredExpenses.setPredicate(predicate);
+    }
+
+    /**
+     * Sorts the expenses according to the keyword.
+     * @param keywords
+     */
+    public void sortExpenses(ArgumentMultimap keywords) {
+        if (keywords.getValue(PREFIX_NAME).equals("n")) {
+            versionedAddressBook.sortExpensesByName();
+        }
+        if (keywords.getValue(PREFIX_DATE).equals("d")) {
+            versionedAddressBook.sortExpensesByDate();
+        }
+        if (keywords.getValue(PREFIX_COST).equals("$")) {
+            versionedAddressBook.sortExpensesByAmount();
+        }
+        versionedAddressBook.getExpenseList();
+        versionedAddressBook.indicateModified();
+    }
+
+    @Override
+    public void updateFilteredBudgetList(Predicate<Budget> predicate) {
+        requireNonNull(predicate);
+        filteredBudget.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================
@@ -171,6 +297,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ReadOnlyProperty<Expense> selectedExpenseProperty() {
+        return selectedExpense;
+    }
+
+    @Override
     public Person getSelectedPerson() {
         return selectedPerson.getValue();
     }
@@ -181,6 +312,14 @@ public class ModelManager implements Model {
             throw new PersonNotFoundException();
         }
         selectedPerson.setValue(person);
+    }
+
+    @Override
+    public void setSelectedExpense(Expense expense) {
+        if (expense != null && !filteredExpenses.contains(expense)) {
+            throw new PersonNotFoundException(); //TODO
+        }
+        selectedExpense.setValue(expense);
     }
 
     /**

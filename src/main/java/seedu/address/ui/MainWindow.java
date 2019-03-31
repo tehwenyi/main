@@ -33,6 +33,9 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
+    private ExpenseListPanel expenseListPanel;
+    private SavingsPanel savingsPanel;
+    private BudgetPanel budgetPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -46,7 +49,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane savingsPanelPlaceholder;
+
+    @FXML
+    private StackPane expenseListPanelPlaceholder;
+
+    @FXML
+    private StackPane budgetPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -79,6 +88,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -114,9 +124,16 @@ public class MainWindow extends UiPart<Stage> {
         browserPanel = new BrowserPanel(logic.selectedPersonProperty());
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.selectedPersonProperty(),
-                logic::setSelectedPerson);
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        expenseListPanel = new ExpenseListPanel(logic.getFilteredExpenseList(),
+                logic.selectedExpenseProperty(), expense -> {
+        }); //TODO
+        expenseListPanelPlaceholder.getChildren().add(expenseListPanel.getRoot());
+
+        savingsPanel = new SavingsPanel(logic.getSavings(), logic.getGoal());
+        savingsPanelPlaceholder.getChildren().add(savingsPanel.getRoot());
+
+        budgetPanel = new BudgetPanel(logic.getFilteredBudgetList(), logic::setCurrentBudget);
+        budgetPanelPlaceholder.getChildren().add(budgetPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -134,6 +151,7 @@ public class MainWindow extends UiPart<Stage> {
     private void setWindowDefaultSize(GuiSettings guiSettings) {
         primaryStage.setHeight(guiSettings.getWindowHeight());
         primaryStage.setWidth(guiSettings.getWindowWidth());
+
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
@@ -168,8 +186,60 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    /**
+     * Shows daily summary to user.
+     */
+    @FXML
+    private void handleDailyReport() {
+        helpWindow.hide();
+        try {
+            logic.execute("report");
+        } catch (CommandException | ParseException e) {
+            resultDisplay.setFeedbackToUser(e.getMessage());
+        }
+    }
+
+    /**
+     * Shows monthly summary to user.
+     */
+    @FXML
+    private void handleMonthlyReport() {
+        helpWindow.hide();
+        try {
+            logic.execute("report type/monthly");
+        } catch (CommandException | ParseException e) {
+            resultDisplay.setFeedbackToUser(e.getMessage());
+        }
+    }
+
+    /**
+     * Shows yearly summary to user.
+     */
+    @FXML
+    private void handleYearlyReport() {
+        helpWindow.hide();
+        try {
+            logic.execute("report type/yearly");
+        } catch (CommandException | ParseException e) {
+            resultDisplay.setFeedbackToUser(e.getMessage());
+        }
+    }
+
+    /**
+     * Shows percentage summary to user.
+     */
+    @FXML
+    private void handlePercentageReport() {
+        helpWindow.hide();
+        try {
+            logic.execute("report type/percentage");
+        } catch (CommandException | ParseException e) {
+            resultDisplay.setFeedbackToUser(e.getMessage());
+        }
+    }
+
+    public ExpenseListPanel getExpenseListPanel() {
+        return expenseListPanel;
     }
 
     /**

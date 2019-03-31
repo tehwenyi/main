@@ -292,32 +292,24 @@ The expenses list should have at least one day’s worth of expenses.
 
 Generates a report of the given date, month, or year. The report consists of total inflow, total outflow, and proportion of income
 spent on different categories. +
-Format: `report [t/DAILY] [t/MONTHLY] [t/YEARLY] [t/PERCENTAGE]`
+Format: `report [t/DD/MM/YYYY]` +
+Format: `report [t/MM/YYYY]` +
+Format: `report [t/YYYY]` +
+Format: `report`
 
 Examples:
 
 * `report` +
-View the spending records for this year.
+View the completed report.
 
-* `report t/daily` +
-View the spending records for this month.
+* `report t/21/03/2019` +
+View the daily report of 21 Mar 2019.
 
-* `report t/monthly` +
-View the spending records for current month.
+* `report t/03/2019` +
+View the monthly report of Mar 2019.
 
-* `report t/yearly` +
-View the spending records for past few years.
-
-* `report t/percentage` +
-View the spending records percentage of this year.
-
-****
-*Following options will be implemented in v2.0:* +
-MM and DD will be optional arguments. +
-If only YYYY is included, a yearly report will be generated. +
-If YYYY and MM are provided, then a monthly report will be generated. +
-If YYYY, MM and DD are provided, then the daily report will be generated.
-****
+* `report t/2019` +
+View the yearly report of 2019.
 
 === Goal Setting
 

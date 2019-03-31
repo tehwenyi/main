@@ -200,7 +200,7 @@ Sorts all entries by amount in ascending order.
 
 ==== Setting the spending budget : `addBudget`
 
-Sets a total spending budget for a certain time period. The time period will be in terms of days, and 1 day is the minimum
+Sets a total expenses budget for a certain time period. The time period will be in terms of days, and 1 day is the minimum
 a person can set a budget for. +
 This command can only be used if there are no budgets set yet. The addBudget command is case sensitive. +
 Format: `addBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS d/START_DATE`
@@ -208,15 +208,14 @@ Format: `addBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS d/START_DATE`
 Examples:
 
 * `addBudget $/500 p/7 d/03/02/2019` +
-Sets a total budget of $500 for each week starting from 03/02/2019.
+Sets a total budget of $500 for each week starting from 3rd February 2019.
 
 * `addBudget $/10000 p/15 d/01/01/2000` +
-Sets a total budget of $10000 every 15 days starting from 01/01/2000.
+Sets a total budget of $10000 every 15 days starting from 1st January 2000.
 
 ****
 *Additional Information:* +
-*`AMOUNT`* must be a positive number. +
-*`TIME_PERIOD_IN_DAYS`* must be a positive whole number.
+Budget does not take into account allowances as budget only accounts for expenses.
 ****
 
 *Display status of budget:* +
@@ -249,9 +248,14 @@ Edits the current budget to $1000 for each week starting from 01/01/2000.
 * `editBudget $/200 p/15` +
 Edits the current budget to $200 for every 15 days starting from the budget's initial start date.
 
+****
+*Additional Information:* +
+Budget does not take into account allowances as budget only accounts for expenses.
+****
+
 ==== Editing the spending budget : `deleteBudget`
 
-Deletes the budget at the specified INDEX. The INDEX refers to the number in the displayed Budget List which is next to
+Deletes the budget at the specified `INDEX`. The `INDEX` refers to the number in the displayed Budget List which is next to
 the status of the budget. +
 Format: `deleteBudget INDEX`
 
@@ -262,8 +266,7 @@ Deletes the first budget in the Budget List.
 
 ****
 *Additional Information:* +
-*`AMOUNT`* must be a positive number. +
-*`TIME_PERIOD_IN_DAYS`* must be a positive whole number.
+Budget does not take into account allowances as budget only accounts for expenses.
 ****
 
 ==== Recommend future spendings : `recommend`

@@ -25,10 +25,6 @@ public class BudgetPanel extends UiPart<Region> {
         super(FXML);
         budgetView.setItems(budgetList);
         budgetView.setCellFactory(listView -> new BudgetListViewCell());
-        budgetView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            logger.fine("Budget changed to : '" + newValue + "'");
-            setCurrentBudget.accept(newValue);
-        });
         //        budget.addListener((observable, oldValue, newValue) -> {
         //            logger.fine("Budget changed to: " + newValue);
         //            // Don't modify selection if we are already selecting the selected expense,

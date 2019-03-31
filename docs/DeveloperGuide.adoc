@@ -28,7 +28,7 @@ developers of all levels, allowing them to learn more about the behind the scene
 
 If you want to learn how you can make *_ePiggy_* even better, start here! +
 
-===== Callouts
+*Callouts* +
 
 Callouts are boxes with icons to point out some information. These are the 3 callouts used throughout this developer guide:
 
@@ -43,7 +43,7 @@ This represents a *warning*. A warning denotes something of crucial importance, 
 
 {empty} +
 
-== In this Developer Guide:
+*In this Developer Guide:*
 
 toc::[]
 

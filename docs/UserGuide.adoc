@@ -21,7 +21,7 @@ By: `Team A+ for CS2103T`       Since: `Feb 2019`      Last Updated: `April 2019
 
 == Introduction
 
-image::userguideintroduction.gif[width="100"]
+image::userguideintroduction.gif[width="200", role="center"]
 
 Welcome to *_ePiggy_*! *_ePiggy_* is a desktop application designed to inculcate good spending habits in students. +
 Managing money is made much simpler for you with a simple interface and simple commands!

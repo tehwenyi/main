@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javafx.beans.property.ReadOnlyProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -15,6 +16,10 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -77,6 +82,26 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Expense> getFilteredExpenseList() {
+        return model.getFilteredExpenseList();
+    }
+
+    @Override
+    public ObservableList<Budget> getFilteredBudgetList() {
+        return model.getFilteredBudgetList();
+    }
+
+    @Override
+    public ObservableValue<Savings> getSavings() {
+        return model.getSavings();
+    }
+
+    @Override
+    public ObservableValue<Goal> getGoal() {
+        return model.getGoal();
+    }
+
+    @Override
     public ObservableList<String> getHistory() {
         return history.getHistory();
     }
@@ -104,5 +129,23 @@ public class LogicManager implements Logic {
     @Override
     public void setSelectedPerson(Person person) {
         model.setSelectedPerson(person);
+    }
+
+    @Override
+    public void setSelectedExpense(Expense expense) {
+        model.setSelectedExpense(expense);
+    }
+
+    @Override
+    public void setCurrentBudget(Budget budget) {
+        model.setCurrentBudget(budget); }
+
+    @Override
+    public void addBudget(int index, Budget budget) {
+        model.addBudget(index, budget); }
+
+    @Override
+    public ReadOnlyProperty<Expense> selectedExpenseProperty() {
+        return model.selectedExpenseProperty();
     }
 }

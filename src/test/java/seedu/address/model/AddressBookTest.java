@@ -21,6 +21,9 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -117,14 +120,37 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Expense> expenses = FXCollections.observableArrayList();
+        private final ObservableList<Item> items = FXCollections.observableArrayList();
+        private ObservableList<Budget> budgets; //TODO
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
 
         @Override
+        public ObservableList<Expense> getExpenseList() {
+            return FXCollections.unmodifiableObservableList(expenses);
+        }
+
+        @Override
+        public ObservableList<Item> getItemList() {
+            return FXCollections.unmodifiableObservableList(items);
+        }
+
+        //        @Override
+        //        public ObservableValue<Budget> getBudget() {
+        //            return budget;
+        // }
+
+        @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Budget> getBudgetList() {
+            return budgets;
         }
 
         @Override

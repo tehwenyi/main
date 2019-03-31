@@ -2,13 +2,18 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.item.Cost;
+import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -48,6 +53,73 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static seedu.address.model.epiggy.item.Name parseItemName(String name) {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        return new seedu.address.model.epiggy.item.Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String cost} into a {@code Cost}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Cost parseCost(String cost) throws ParseException {
+        requireNonNull(cost);
+        String trimmedCost = cost.trim();
+        if (!Cost.isValidCost(trimmedCost)) {
+            throw new ParseException(Cost.MESSAGE_CONSTRAINTS);
+        }
+        return new Cost(Double.parseDouble(trimmedCost));
+    }
+
+    /**
+     * Parses a {@code String budgetAmount} into a {@code Cost}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Cost parseBudgetAmount(String cost) throws ParseException {
+        requireNonNull(cost);
+        String trimmedCost = cost.trim();
+        int budgetAmount = Integer.parseInt(trimmedCost);
+        if (budgetAmount <= 0) {
+            throw new ParseException(Budget.MESSAGE_CONSTRAINTS);
+        }
+        return new Cost(budgetAmount);
+    }
+
+    /**
+     * Parses a {@code String Date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        Date parsedDate = null;
+        // TODO add more forms of setting date eg. dd.mm.yyyy
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            parsedDate = dateFormat.parse(date.trim());
+        } catch (java.text.ParseException parseException) {
+            throw new ParseException("Date should be in the format dd/mm/yyyy.");
+        }
+        return parsedDate;
+    }
+
+    /**
+     * Parses a {@code String period} into a {@code Period}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Period parsePeriod(String period) throws ParseException {
+        requireNonNull(period);
+        String trimmedPeriod = period.trim();
+        if (!Period.isValidPeriod(trimmedPeriod)) {
+            throw new ParseException(Period.MESSAGE_CONSTRAINTS);
+        }
+        return new Period(Integer.parseInt(trimmedPeriod));
     }
 
     /**

@@ -17,13 +17,14 @@ endif::[]
 
 image::userguide.png[width="600"]
 
-By: `Team A+ for CS2103T`       Since: `Feb 2019`      Licence: `MIT`
+By: `Team A+ for CS2103T`       Since: `Feb 2019`      Last Updated: `April 2019`     Licence: `MIT`
 
 == Introduction
 
-ePiggy is a simplified expense tracker catered towards students. You can use it to record your allowance, your expenses, track your savings, and even plan out what you should eat for recess. It has student-oriented features that makes managing money easier for students.
-
-With ePiggy, we hope to inculcate the habit of managing money from young.
+ePiggy is a desktop application designed to inculcate good spending habits in students. +
+ePiggy hopes to make managing money much simpler for you with a simple interface and simple commands!
+At the same time, ePiggy offers everything you need to cultivate good spending habits before
+entering the workforce, from tracking expenses and managing budgets to setting goals! +
 
 Interested? Click on the Quick Start to get started!
 
@@ -31,33 +32,24 @@ Interested? Click on the Quick Start to get started!
 This user guide provides a comprehensive view on how to set up ePiggy, the features available, and frequently asked questions.
 
 == Quick Start
-Follow these steps to start using ePiggy::
-1. Install Java (version 9 or later) on your computer by going here and downloading the Java SE Runtime Environment for your operating system. +
+To start using ePiggy, simply follow these steps::
+1. Ensure you have Java version `9` or later installed on your computer. +
 2. Download the latest *`ePiggy.jar`* file from link:{repoURL}/releases[here]. +
 3. Copy the file to the folder which you want to use as the home folder for your Expense Tracker. +
 4. Double-click the *`ePiggy.jar`* file to start the app. +
-5. Type in your username in the text box *`Your Username`*. +
-* E.g *`username123`* +
-6. Type in your password in the text box *`Your Password`*. +
-* E.g. *`pw123`* +
-7. Press the *`Register`* button and you can now use all the features of ePiggy.
+5. The GUI will appear as per below upon launch.
 
-====
+image::Ui.png[width="760"]
+_Figure 1. The user interface upon launch of application_
+
 *Some sample commands you can try:*
 
 * `addExpense n/Chicken Rice $/4 t/dinner` +
 This command adds a new expense of $4 for Chicken Rice today.
 * `addAllowance $/20` +
 This command adds a new allowance of $20.
-* `addBudget $/500 t/28 d/01/02/2019` +
-This command sets a budget of $500 starting on 1st February, lasting 28 days.
-====
-
-The GUI will appear like this upon launch:
-
-image::Ui.png[width="760"]
-_Figure 1. The user interface upon launch of application_
-
+* `addBudget $/500 p/28 d/01/02/2019` +
+This command adds a budget of $500 from 1st February 2019 to 28th February 2019 (28 days).
 
 [[Features]]
 == Features

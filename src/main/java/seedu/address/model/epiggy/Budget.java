@@ -23,7 +23,7 @@ public class Budget {
     private Cost remainingAmount;
     private Period remainingDays;
     private String status = null;
-    private Date todaysDate = new Date();
+    private Date todaysDate;
 
     /**
      * Represents a Budget in the expense book.
@@ -36,6 +36,7 @@ public class Budget {
         this.endDate = calculateEndDate(startDate, period);
         this.remainingAmount = amount;
         this.remainingDays = period;
+        this.todaysDate = new Date();
         if (!todaysDate.before(startDate) && !todaysDate.after(endDate)) {
             this.status = CURRENT_BUDGET;
         } else if (todaysDate.before(startDate)) {

@@ -135,7 +135,7 @@ public class UniqueBudgetList implements Iterable<Budget> {
      * Sets internalList to a new list of the same type.
      * @param replacement list.
      */
-    public void setBudgetList(UniqueBudgetList replacement) {
+    public void addBudgetList(UniqueBudgetList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
         limitSize();
@@ -146,7 +146,7 @@ public class UniqueBudgetList implements Iterable<Budget> {
      * {@code budgetList} must not contain duplicate budgetList.
      * @param newBudgetList to replace.
      */
-    public void setBudgetList(List<Budget> newBudgetList) {
+    public void addBudgetList(List<Budget> newBudgetList) {
         requireAllNonNull(newBudgetList);
         if (!budgetsAreUnique(newBudgetList)) {
             throw new DuplicateBudgetException();

@@ -111,6 +111,11 @@ public interface Model {
     void deleteBudgetAtIndex(int index);
 
     /**
+     * Deletes the expense at the specific index.
+     */
+    void deleteExpenseAtIndex(int index);
+
+    /**
      * Replaces the given expense {@code target} with {@code editedExpense}.
      * {@code target} must exist in the address book.
      * The expense identity of {@code editedExpense} must not be the same as

@@ -13,7 +13,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2103-AY1819S2-W17-4/main
 
 By: `Team W17-4`      Since: `Feb 2019`      Licence: `MIT`
 
@@ -31,7 +31,7 @@ This user guide provides a comprehensive view on how to set up ePiggy, the featu
 == Quick Start
 Follow these steps to start using ePiggy::
 1. Install Java (version 9 or later) on your computer by going here and downloading the Java SE Runtime Environment for your operating system. +
-2. Download the latest *`ePiggy.jar`* file from here +
+2. Download the latest *`ePiggy.jar`* file from link:{repoURL}/releases[here]. +
 3. Copy the file to the folder which you want to use as the home folder for your Expense Tracker. +
 4. Double-click the *`ePiggy.jar`* file to start the app. +
 5. Type in your username in the text box *`Your Username`*. +

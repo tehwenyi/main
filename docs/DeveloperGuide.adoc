@@ -304,6 +304,26 @@ As long as the `Budget` object created does not overlap with any existing `Budge
 ** Pros: Easy to make recurring monthly budgets.
 ** Cons: Could cause users to miss out on certain dates if they want budgets that are recurring (eg. sets a budget from 1st March to 30th March and 1st April to 30th April – 31st March is missed out).
 
+// tag::deletebudget[]
+=== Delete budget feature
+*_ePiggy_* allows the user to delete any budget, using the displayed `index` of the specific budget.
+
+* `deleteBudget 2`
+
+The above command deletes the `Budget` with the displayed `index` of #2. +
+The `Budget` to be deleted is identified by its displayed `index` and subsequently deleted. +
+
+==== Current Implementation
+The command’s current implementation retrieves the `budgetList` from `AddressBook` and removes the
+budget at the zero-based version of the displayed `index`. +
+A `listener` has been added to `budgetList`, so the order in which the budgets are displayed is the same
+as the order of the budgets in `budgetList`. Furthermore, the indexes are unique. +
+Hence, if the `index` input by the user is negative or greater than the size of `budgetList`, this would indicate that the budget specified does not exist. The user will receive a feedback that the `index` specified is invalid.
+
+[TIP]
+The sequence diagram for the `delete` command can be found with the structure of the logic component
+<<DeveloperGuide.adoc#Design-Logic, here>>.
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation

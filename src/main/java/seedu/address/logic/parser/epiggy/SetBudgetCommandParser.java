@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
 import java.util.Date;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.epiggy.SetBudgetCommand;
+import seedu.address.logic.commands.epiggy.AddBudgetCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -22,19 +22,19 @@ import seedu.address.model.epiggy.item.Period;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class SetBudgetCommandParser implements Parser<SetBudgetCommand> {
+public class SetBudgetCommandParser implements Parser<AddBudgetCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the SetBudgetCommand
-     * and returns an SetBudgetCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddBudgetCommand
+     * and returns an AddBudgetCommand object for execution.
      */
-    public SetBudgetCommand parse(String args) throws ParseException {
+    public AddBudgetCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_COST, PREFIX_PERIOD, PREFIX_DATE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_COST, PREFIX_PERIOD, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetBudgetCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBudgetCommand.MESSAGE_USAGE));
         }
 
         Cost budgetAmount = ParserUtil.parseBudgetAmount(argMultimap.getValue(PREFIX_COST).get());
@@ -43,7 +43,7 @@ public class SetBudgetCommandParser implements Parser<SetBudgetCommand> {
 
         Budget budget = new Budget(budgetAmount, period, date);
 
-        return new SetBudgetCommand(budget);
+        return new AddBudgetCommand(budget);
     }
 
     /**

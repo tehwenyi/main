@@ -25,7 +25,7 @@ import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
 import seedu.address.logic.commands.epiggy.EditBudgetCommand;
 import seedu.address.logic.commands.epiggy.FindExpenseCommand;
 import seedu.address.logic.commands.epiggy.ReportCommand;
-import seedu.address.logic.commands.epiggy.SetBudgetCommand;
+import seedu.address.logic.commands.epiggy.AddBudgetCommand;
 import seedu.address.logic.commands.epiggy.SetGoalCommand;
 import seedu.address.logic.commands.epiggy.SortExpenseCommand;
 import seedu.address.logic.commands.epiggy.ViewGoalCommand;
@@ -128,8 +128,8 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_ALIAS:
             return new HelpCommand();
 
-        case SetBudgetCommand.COMMAND_WORD:
-        case SetBudgetCommand.COMMAND_ALIAS:
+        case AddBudgetCommand.COMMAND_WORD:
+        case AddBudgetCommand.COMMAND_ALIAS:
             return new SetBudgetCommandParser().parse(arguments);
 
         case EditBudgetCommand.COMMAND_WORD:

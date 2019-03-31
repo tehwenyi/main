@@ -67,6 +67,15 @@ public class ExpenseList implements Iterable<seedu.address.model.epiggy.Expense>
         }
     }
 
+    /**
+     * Removes the expense with the specific index from the list.
+     * The expense of the index must exist in the list.
+     * @param index of the expense to be removed.
+     */
+    public void remove(int index) {
+        internalList.remove(index, index + 1);
+    }
+
 
     /**
      * Replaces the contents of this list with {@code expenses}.

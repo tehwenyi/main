@@ -161,7 +161,12 @@ public class ModelManager implements Model {
     @Override
     public void deleteBudgetAtIndex(int index) {
         versionedAddressBook.deleteBudgetAtIndex(index);
-    };
+    }
+
+    @Override
+    public void deleteExpenseAtIndex(int index) {
+        versionedAddressBook.deleteExpenseAtIndex(index);
+    }
 
     @Override
     public int getCurrentBudgetIndex() {

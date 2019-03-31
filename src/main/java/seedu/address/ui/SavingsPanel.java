@@ -32,8 +32,10 @@ public class SavingsPanel extends UiPart<Region> {
 
         savings.addListener(observable -> {
             currentSavings.setText(savings.getValue().toString());
-            double diff = goal.getValue().getAmount().getAmount() - savings.getValue().getSavings();
-            amountDifference.setText("$" + diff);
+            if (goal.getValue() != null) {
+                double diff = goal.getValue().getAmount().getAmount() - savings.getValue().getSavings();
+                amountDifference.setText("$" + diff);
+            }
         });
         goal.addListener(observable -> {
             currentGoal.setText(goal.getValue().toString());

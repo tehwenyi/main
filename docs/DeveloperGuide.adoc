@@ -1,8 +1,8 @@
 = ePiggy - Developer Guide
 :site-section: DeveloperGuide
 :toc:
-:toc-title: *In this Developer Guide:*
-:toc-placement: preamble
+:toc-title:
+:toc-placement: macro
 :sectnums:
 :imagesDir: images
 :stylesDir: stylesheets
@@ -42,6 +42,8 @@ This represents a *tip*. A tip denotes something that is often handy, and good f
 This represents a *warning*. A warning denotes something of crucial importance, and you should be extremely cautious when reading the statement.
 
 {empty} +
+
+== In this Developer Guide:
 
 toc::[]
 

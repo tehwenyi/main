@@ -95,7 +95,7 @@ public interface Logic {
     /**
      * Sets the current budget.
      *
-     * @see seedu.address.model.Model#setBudget(Budget)
+     * @see seedu.address.model.Model#addBudget(Budget)
      */
     void setCurrentBudget(Budget budget);
 

@@ -321,12 +321,12 @@ public class ReportWindow {
                 if (map.containsKey(year)) {
                     // if year data exists
                     ReportData temp = map.get(year);
-                    temp.setBudget(temp.updateValue(temp.getBudget(), amount));
+                    temp.addBudget(temp.updateValue(temp.getBudget(), amount));
                     map.put(year, temp);
                 } else {
                     // year data does not exist
                     data = new ReportData(year);
-                    data.setBudget(amount);
+                    data.addBudget(amount);
                     map.put(year, data);
                 }
             }

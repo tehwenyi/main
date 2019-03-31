@@ -47,7 +47,7 @@ Follow these steps to start using ePiggy::
 This command adds a new expense of $4 for Chicken Rice today.
 * `addAllowance $/20` +
 This command adds a new allowance of $20.
-* `setBudget $/500 t/28 d/01/02/2019` +
+* `addBudget $/500 t/28 d/01/02/2019` +
 This command sets a budget of $500 starting on 1st February, lasting 28 days.
 ====
 
@@ -198,19 +198,19 @@ Sorts all entries by amount in ascending order.
 
 === Budgeting
 
-==== Setting the spending budget : `setBudget`
+==== Setting the spending budget : `addBudget`
 
 Sets a total spending budget for a certain time period. The time period will be in terms of days, and 1 day is the minimum
 a person can set a budget for. +
-This command can only be used if there are no budgets set yet. The setBudget command is case sensitive. +
-Format: `setBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS d/START_DATE`
+This command can only be used if there are no budgets set yet. The addBudget command is case sensitive. +
+Format: `addBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS d/START_DATE`
 
 Examples:
 
-* `setBudget $/500 p/7 d/03/02/2019` +
+* `addBudget $/500 p/7 d/03/02/2019` +
 Sets a total budget of $500 for each week starting from 03/02/2019.
 
-* `setBudget $/10000 p/15 d/01/01/2000` +
+* `addBudget $/10000 p/15 d/01/01/2000` +
 Sets a total budget of $10000 every 15 days starting from 01/01/2000.
 
 ****
@@ -413,8 +413,8 @@ e.g.`search -n MCDONALDS`
 * *Sort* : `sort -[n/d/$] -[A/D]` +
 e.g.`sort -n`
 
-* *Set Budget* : `setBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS $/START_DATE` +
-e.g.`setBudget $500.00 t/7 d/01/02/2019`
+* *Set Budget* : `addBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS $/START_DATE` +
+e.g.`addBudget $500.00 t/7 d/01/02/2019`
 
 * *Edit Budget* : `editBudget [$/AMOUNT] [p/TIME_PERIOD_IN_DAYS] [$/START_DATE]` +
 e.g.`editBudget $300.00 t/28`

@@ -1,7 +1,7 @@
 = ePiggy - Developer Guide
 :site-section: DeveloperGuide
 :toc:
-:toc-title:
+:toc-title: *In this Developer Guide:*
 :toc-placement: preamble
 :sectnums:
 :imagesDir: images
@@ -16,6 +16,35 @@ endif::[]
 :repoURL: https://github.com/CS2103-AY1819S2-W17-4/main
 
 By: `A+ for 2103T Team`      Since: `Feb 2019`      Licence: `MIT`
+
+== Introduction
+
+Welcome to *_ePiggy_*! *_Heart²_* is a desktop software intended to make the job of wedding planning agencies simpler.
+It provides simple yet powerful features to efficiently manage clients' and agency companies' profiles.
+Users can find suitable vendors providing wedding services for couples using just a few keystrokes with our enterprise feature set.
+
+This developer guide is a self-contained resource designed to align all developers around a common vision. It helps
+developers of all levels learn more about the workings behind the scenes and how to make use of them effectively.
+
+So if you want to know how to make *_Heart²_* even better, here's where you start!
+ +
+
+===== Callouts
+
+Callouts are boxes with icons to point out some information. These are the 3 callouts used throughout this developer guide:
+
+[NOTE]
+This represents a *note*. A note indicates important, additional information. Be sure to read these notes as they might be applicable to you!
+
+[TIP]
+This represents a *tip*. A tip denotes something that is often handy, and good for you to know. Tips are often less crucial, and you can choose to skip them.
+
+[WARNING]
+This represents a *warning*. A warning denotes something of crucial importance, and you should be extremely cautious when reading the statement.
+
+{empty} +
+
+toc::[]
 
 == Setting up
 

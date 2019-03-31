@@ -18,9 +18,9 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.epiggy.item.Name;
-import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -50,12 +50,11 @@ public class AddExpenseCommandParser implements Parser<AddExpenseCommand> {
         } else {
             date = new Date();
         }
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-            Item item = new Item(name, cost, tagList);
-            Expense expense = new Expense(item, date);
-
-            return new AddExpenseCommand(expense);
+        Item item = new Item(name, cost, tagList);
+        Expense expense = new Expense(item, date);
+        return new AddExpenseCommand(expense);
     }
 
     /**

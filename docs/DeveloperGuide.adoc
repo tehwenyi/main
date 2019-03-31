@@ -19,15 +19,14 @@ By: `A+ for 2103T Team`      Since: `Feb 2019`      Licence: `MIT`
 
 == Introduction
 
-Welcome to *_ePiggy_*! *_Heart²_* is a desktop software intended to make the job of wedding planning agencies simpler.
-It provides simple yet powerful features to efficiently manage clients' and agency companies' profiles.
-Users can find suitable vendors providing wedding services for couples using just a few keystrokes with our enterprise feature set.
+Welcome to *_ePiggy_*! *ePiggy* is a desktop application designed to inculcate good spending habits in students
+through allowing them to track their finances. It includes everything from tracking expenses, managing budgets
+to setting goals. +
 
-This developer guide is a self-contained resource designed to align all developers around a common vision. It helps
-developers of all levels learn more about the workings behind the scenes and how to make use of them effectively.
+This developer guide is a self-contained resource designed to align potential developers to a common vision. It guides
+developers of all levels, allowing them to learn more about the behind the scenes workings and how to make use of them effectively.
 
-So if you want to know how to make *_Heart²_* even better, here's where you start!
- +
+If you want to learn how you can make *_ePiggy_* even better, start here! +
 
 ===== Callouts
 

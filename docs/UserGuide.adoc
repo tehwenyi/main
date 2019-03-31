@@ -15,7 +15,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103-AY1819S2-W17-4/main
 
-image::userguide.png[width="700"]
+image::userguide.png[width="400"]
 
 By: `Team A+ for CS2103T`      Since: `Feb 2019`      Licence: `MIT`
 

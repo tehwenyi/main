@@ -276,7 +276,7 @@ The budget will compute the end date and provide a status based on the local dat
 
 Adding of overlapping budgets are not allowed in ePiggy.
 [NOTE]
-A budget is considered overlapping if *any* of the dates *in between (inclusive)* one budget’s start *and* end dates is the *same* as the dates *in between (inclusive)* another budget’s start *and* end dates.
+A `budget` is considered overlapping if *any* of the dates *in between (inclusive)* one `budget`’s start *and* end dates is the *same* as the dates *in between (inclusive)* another `budget`’s start *and* end dates.
 
 ==== Current Implementation
 Given below is a sequence diagram of how the `addBudget` command works: +
@@ -286,7 +286,7 @@ image::addBudgetSequenceDiagram.png[width="800"]
 Figure: Add Budget Command Sequence Diagram +
 
 The command is first parsed into `AddBudgetCommandParser`, which separates the arguments into their respective fields. A new `Budget` is created and parsed into `AddBudgetCommand`. +
-As long as the `Budget` object created does not overlap with any existing `Budget` objects, the `Budget` will be added with Model#addBudget() and saved into the AddressBook storage. +
+As long as the `Budget` object created does not overlap with any existing `Budget` objects, the `Budget` will be added with `Model#addBudget()` and saved into the AddressBook storage. +
 
 *Example usage scenario:* +
 1. User launches application and enters `addBudget $/500 p/31 d/01/03/2019`. +
@@ -303,6 +303,60 @@ As long as the `Budget` object created does not overlap with any existing `Budge
 * *Alternative 2* : the `addBudget` command requires the `amount`, `start date` and `end date` of the budget.
 ** Pros: Easy to make recurring monthly budgets.
 ** Cons: Could cause users to miss out on certain dates if they want budgets that are recurring (eg. sets a budget from 1st March to 30th March and 1st April to 30th April – 31st March is missed out).
+
+// tag::editbudget[]
+=== Edit budget feature
+ePiggy allows the user to edit the `current budget`, with any of the specified parameters in `addBudget`. +
+
+* `editBudget $/300`
+* `editBudget $/400 p/7`
+
+The above commands edit the current budget to $300 and $400 with a period of 7 days respectively. +
+Similarly to the `addBudget` command, budgets’ dates should not overlap each other.  Hence, the budget cannot be edited
+such that the edited budget overlaps with another budget. +
+
+[NOTE]
+A `budget` is considered overlapping if *any* of the dates *in between (inclusive)* one `budget`’s start *and* end dates is the
+*same* as the dates *in between (inclusive)* another `budget`’s start *and* end dates.
+
+[TIP]
+If the current budget is edited until it is no longer a current budget, it can no longer be edited. Instead, simply add a new current
+budget using the `addBudget` command.
+
+==== Current Implementation
+The command’s current implementation uses part of the legacy implementation to update the budget. The arguments are first parsed into
+`EditBudgetCommandParser`, which separates the arguments into their respective fields. +
+An `EditBudgetDescriptor` object is then created to temporarily hold this new information. +
+
+[NOTE]
+The prefixes applicable to `editBudget` are `$/`, `p/` and `d/`. At least one of them must
+follow the `editBudget` command word.
+
+Afterwards, a `budget` object is created from the `EditBudgetDescriptor` object. Then, the `budget` object is passed into address book
+through `Model.#setCurrentBudget()`, which will replace the current `budget` with the new `budget` passed in. +
+Since only the current `budget` can be edited, the `editBudget` command will first check if a current `budget` is present in `AddressBook`’s
+`budgetList` through `Model#getCurrentBudgetIndex()`. If the current `budget` does not exist, the command will feedback to the user that the
+command entered is invalid. +
+
+==== Design Considerations
+===== Aspect: Should we use a boolean `hasCurrentBudget` method or use the `index` of the current `budget` to verify if a current `budget` exists?
+* *Alternative 1* (current choice): +
+The `index` of the current `budget` is returned to the `editBudgetCommand`. If the returned integer is `-1`, it means that there is no current `budget`
+present. The index is then used to retrieve the current budget.
+
+** Pros: No additional method implementations required. The methods `Model#getFilteredBudgetList().get()` are sufficient to get the current budget.
+
+** Cons: Calculations are done in the `editBudget` command’s `execute` method.
+
+* *Alternative 2*: +
+Using a boolean `hasCurrentBudget` method to check if a current `budget` exists in `budgetList`, then another `getCurrentBudget` method to get the current `budget`.
+
+** Pros: Code will be written in `AddressBook` rather than at `editBudget` command and can be easily used for other commands.
+
+** Cons: Will need to implement additional methods. Reduces the abstraction has the current `budget` is exposed to the entire project as it is a public method.
+
+After much consideration, we decided to choose option 1 as other commands should not need to access the current `budget` specifically. Hence, it will be better
+to have a greater level of abstraction. +
 
 // tag::deletebudget[]
 === Delete budget feature

@@ -21,9 +21,9 @@ By: `Team A+ for CS2103T`       Since: `Feb 2019`      Last Updated: `April 2019
 
 == Introduction
 
-ePiggy is a desktop application designed to inculcate good spending habits in students. +
-ePiggy hopes to make managing money much simpler for you with a simple interface and simple commands!
-At the same time, ePiggy offers everything you need to cultivate good spending habits before
+Welcome to *_ePiggy_*! *_ePiggy_* is a desktop application designed to inculcate good spending habits in students. +
+Managing money is made much simpler for you with a simple interface and simple commands!
+At the same time, *_ePiggy_* offers everything you need to cultivate good spending habits before
 entering the workforce, from tracking expenses and managing budgets to setting goals! +
 
 Interested? Click on the Quick Start to get started!
@@ -55,7 +55,7 @@ This command adds a budget of $500 from 1st February 2019 to 28th February 2019 
 == Features
 
 ====
-*Command Format*
+[white maroon-background]*Command Format*
 
 * Words in `UPPER_CASE` are the parameters to be entered by the user. +
 ** E.g. For `addExpense n/EXPENSE_NAME`, `EXPENSE_NAME` is a parameter which can be used as `addExpense n/Chicken Rice`.

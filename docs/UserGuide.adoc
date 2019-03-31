@@ -55,7 +55,7 @@ This command adds a budget of $500 from 1st February 2019 to 28th February 2019 
 == Features
 
 ====
-[white maroon-background]*Command Format*
+*Command Format*
 
 * Words in `UPPER_CASE` are the parameters to be entered by the user. +
 ** E.g. For `addExpense n/EXPENSE_NAME`, `EXPENSE_NAME` is a parameter which can be used as `addExpense n/Chicken Rice`.

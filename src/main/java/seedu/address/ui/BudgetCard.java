@@ -67,6 +67,8 @@ public class BudgetCard extends UiPart<Region> {
         } else if (budget.getRemainingAmount().getAmount() < (budget.getCost().getAmount() / 5)) {
             notification.setText("You have spent more than 80% of your budget. \n"
                     + "Please control your expenses!");
+        } else if (budget.getRemainingAmount().getAmount() == 0) {
+            notification.setText("You have $0 left of your budget.");
         } else {
             notification.setText("“Save money and money will save you.”\n"
                     + "Remember to spend wisely!");

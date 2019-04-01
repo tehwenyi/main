@@ -8,7 +8,6 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
@@ -132,6 +131,19 @@ public interface Model {
     void updateFilteredExpensesList(Predicate<seedu.address.model.epiggy.Expense> predicate);
 
     /**
+<<<<<<< HEAD
+     * Gets the current budget list.
+     */
+    ObservableList<Budget> getBudgetList();
+
+    /**
+     * Gets the Expense list.
+     */
+    ObservableList<Expense> getExpenseList();
+
+    /**
+=======
+>>>>>>> 8083632d0f8f287afe6b8a7985e25ad145ba8dc5
      * Gets the current budget's index.
      * @return -1 if there is no current budget.
      */
@@ -227,7 +239,7 @@ public interface Model {
      * Returns the selected person in the filtered person list.
      * null if no person is selected.
      */
-    Person getSelectedPerson();
+    Expense getSelectedExpense();
 
     /**
      * Sets the selected person in the filtered person list.
@@ -242,5 +254,5 @@ public interface Model {
     /**
      * Sorts the expenses according to the specified {@param keywords}.
      */
-    void sortExpenses(ArgumentMultimap keywords);
+    void sortExpenses(String keyword);
 }

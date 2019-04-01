@@ -22,7 +22,7 @@ import seedu.address.model.epiggy.item.Period;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class SetBudgetCommandParser implements Parser<AddBudgetCommand> {
+public class AddBudgetCommandParser implements Parser<AddBudgetCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddBudgetCommand

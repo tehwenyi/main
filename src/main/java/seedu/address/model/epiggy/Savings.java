@@ -11,6 +11,10 @@ public class Savings {
         this.savings = 0.00f;
     }
 
+    public Savings(double savings) {
+        this.savings = savings;
+    }
+
     public Savings(Savings savings) {
         this.savings = savings.getSavings();
     }

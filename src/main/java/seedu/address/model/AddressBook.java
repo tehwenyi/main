@@ -18,6 +18,7 @@ import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.ExpenseList;
 import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.ReadOnlyEPiggy;
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.epiggy.UniqueBudgetList;
 import seedu.address.model.epiggy.item.Item;
@@ -29,7 +30,7 @@ import seedu.address.model.person.UniquePersonList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class AddressBook implements ReadOnlyEPiggy {
 
     private final ExpenseList expenses;
     private final ObservableList<Item> items;
@@ -61,7 +62,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public AddressBook(ReadOnlyEPiggy toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -98,9 +99,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyEPiggy newData) {
         requireNonNull(newData);
-        setPersons(newData.getPersonList());
+        setExpenses(newData.getExpenseList());
+        setGoal(newData.getGoal().get());
+        setSavings(newData.getSavings().get());
         addBudgetList(newData.getBudgetList());
     }
 
@@ -134,14 +137,21 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.savings.setValue(new Savings(s));
 
         if (budgetList.getBudgetListSize() > 0) {
-            int indexOfBudgetToEdit = budgetList.getBudgetIndexBasedOnDate(expense.getDate());
-            if (indexOfBudgetToEdit >= 0) {
-                Budget budgetToEdit = budgetList.getBudgetAtIndex(indexOfBudgetToEdit);
-                Budget editedBudget = updateBudget(budgetToEdit);
-                budgetList.replaceAtIndex(indexOfBudgetToEdit, editedBudget);
-            }
+            updateBudgetList(expense);
         }
         indicateModified();
+    }
+
+    /**
+     * Updates the budgetList. Called every time an expense is added, edited or deleted.
+     */
+    private void updateBudgetList(Expense expense) {
+        int indexOfBudgetToEdit = budgetList.getBudgetIndexBasedOnDate(expense.getDate());
+        if (indexOfBudgetToEdit >= 0) {
+            Budget budgetToEdit = budgetList.getBudgetAtIndex(indexOfBudgetToEdit);
+            Budget editedBudget = updateBudget(budgetToEdit);
+            budgetList.replaceAtIndex(indexOfBudgetToEdit, editedBudget);
+        }
     }
 
     /**
@@ -158,6 +168,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public SimpleObjectProperty<Savings> getSavings() {
         return savings;
+    }
+
+    public void setSavings(Savings savings) {
+        this.savings.setValue(savings);
     }
 
     /**
@@ -178,6 +192,16 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void deleteBudgetAtIndex(int index) {
         budgetList.remove(index);
+        indicateModified();
+    }
+
+    /**
+     * Deletes the expense {@code toDelete}.
+     * @param toDelete the expense to be deleted.
+     */
+    public void deleteExpense(Expense toDelete) {
+        expenses.remove(toDelete);
+        updateBudgetList(toDelete);
         indicateModified();
     }
 
@@ -273,6 +297,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setExpense(Expense target, Expense editedExpense) {
         requireNonNull(editedExpense);
         expenses.setExpense(target, editedExpense);
+        updateBudgetList(editedExpense);
         indicateModified();
     }
 

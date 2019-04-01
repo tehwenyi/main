@@ -24,12 +24,12 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.ReadOnlyEPiggy;
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -166,6 +166,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteExpense(Expense toDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public int getCurrentBudgetIndex() {
             throw new AssertionError("This method should not be called.");
         }
@@ -191,12 +196,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setAddressBook(ReadOnlyEPiggy newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyEPiggy getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -343,7 +348,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyEPiggy getAddressBook() {
             return new AddressBook();
         }
     }

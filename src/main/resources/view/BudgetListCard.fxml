@@ -47,9 +47,10 @@
       <padding>
         <Insets bottom="5.0" left="15.0" right="5.0" top="5.0" />
       </padding>
-      <Label fx:id="notification" alignment="CENTER" blendMode="SRC_OVER" contentDisplay="BOTTOM" labelFor="$notification" prefHeight="94.0" prefWidth="282.0" styleClass="cell_small_label" text="\$notification" textAlignment="CENTER" textFill="WHITE" textOverrun="ELLIPSIS" wrapText="true">
+      <Label text="Reminder:" />
+      <Label fx:id="notification" alignment="CENTER" blendMode="SRC_OVER" contentDisplay="TOP" labelFor="$notification" prefHeight="67.0" prefWidth="282.0" styleClass="cell_small_label" text="\$notification" textAlignment="CENTER" textFill="WHITE" textOverrun="ELLIPSIS" wrapText="true">
         <font>
-          <Font name="Lucida Sans Regular" size="15.0" />
+          <Font name="Lobster1.4" size="15.0" />
         </font>
       </Label>
     </VBox>

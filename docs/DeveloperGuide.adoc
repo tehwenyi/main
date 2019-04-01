@@ -378,6 +378,56 @@ Hence, if the `index` input by the user is negative or greater than the size of 
 The sequence diagram for the `delete` command can be found with the structure of the logic component
 <<DeveloperGuide.adoc#Design-Logic, here>>.
 
+//tag::findexpense[]
+=== Find Expense feature
+*_ePiggy_* allows the user to filter specific expenses by entering multiple keywords. Expenses that satisfy
+all the keywords are displayed in the expense list panel.
+
+* `findExpense n/Nasi Lemak $/4.00 d/2019/04/01 t/lunch`
+
+The above command finds expense(s) with the `Name` Nasi Lemak, `Cost` of $4.00, purchased on
+`Date` 1st April, 2019 and tagged with `Tag` lunch.
+
+[NOTE]
+`Date` format is `YYYY/MM/DD`.
+
+[TIP]
+All keywords in this command are optional, provided that there is at least one input keyword. For
+example, suppose we wabt to filter out all `Expense` s with `Cost` between $1 and $10.5 (both inclusive),
+then the command should be just `findExpense $/1:10.5`.
+Similarly for other type of keywords.
+
+==== Current Implementation
+Given below is a UML sequence diagram of how the `findExpense` command works along with a step-by-step
+explanation.
+
+image::fEuml.png[witdh="800"]
+
+Figure: FindExpenseCommand UML Sequence Diagram +
+
+Step 1: User enters `findExpense n/Nasi Lemak $/4.00 d/2019/04/01 t/lunch`. The command is
+received by `AddressBookParser` which then creates `FindExpenseCommandParser` object and and calls
+`FindExpenseCommandParser#parse()` method. +
+
+Step 2: `FindExpenseCommandParser#parse()` first checks if input is invalid and throws a
+`ParseException` otherwise it calls `ArgumentTokenizer#tokenize()` to tokenize the `String` input
+ into keywords and store them in an `ArgumentMultimap` Object. +
+
+Step 3: `FindExpenseCommandParser#parse()` method then creates an `ExpenseContainsKeywordsPredicate`
+Object. It implements `Predicate<Expense>` interface. It performs the filtering of expenses. +
+
+Step 4: A `FindExpenseCommand` object is created with `ExpenseContainsKeywordsPredicate` as parameter and
+returned to `LogicManager`. +
+
+Step 5: `LogicManager` calls `FindCommand#execute()`,which then calls `Model#updateFilteredExpenseList()`
+method to update the predicate of `FilteredList<Expense>`. `FilteredList` now contains only a set of
+expenses which was filtered by the new predicate. +
+
+Step 6: Expense List panel is updated by filtered set of expenses. A `CommandResult` is then created and
+returned to `LogicManager`.
+
+
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation

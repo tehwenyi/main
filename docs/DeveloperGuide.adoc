@@ -426,7 +426,46 @@ expenses which was filtered by the new predicate. +
 Step 6: Expense List panel is updated by filtered set of expenses. A `CommandResult` is then created and
 returned to `LogicManager`.
 
+=======
+// tag::setGoal[]
+=== Set Goal feature
+This command allows users to set a savings goal that they would like to save up to. +
+It requires the user to specify the name of the goal, as well as the amount they would like to hit.
 
+* `setGoal n/Nintendo Switch $/499`
+
+The command above sets a goal with the name `Nintendo Switch` and with the amount `$499`
+
+==== Current Implementation
+The command is first parsed into `SetGoalCommandParser`, which separates the arguments into their respective fields. A new `Goal` is created and parsed into `SetGoalCommand`.
+`Goal` will then be set with `Model#setGoal()` and saved into the ePiggy `Storage`.
+
+*Example usage scenario:* +
+1.	User launches application and enters `setGoal n/Nintendo Switch $/499`. +
+2.	`SetGoalCommandParser` takes in the arguments and parses the command to create the appropriate `Goal`. +
+3.	The `SetGoalCommand` is passed back to the `LogicManager`, and the method `execute()` is called. `Goal` is then set to the `model`.
+
+// tag::viewGoal[]
+=== View Goal feature
+This command allows users to view their goal set, as well as to check how much more the user has to save in order to reach the goal. +
+
+* `viewGoal`
+
+Based on the amount of savings the user has, the command will output 2 different types of messages.
+
+Firstly, the command will first output the current goal that the user has set.
+
+Next, if the user has not reached the goal amount (savings less than goal), it will output the difference of the savings and the goal, indicating how much more the user has to save to reach the goal. +
+However, if the user has reached the goal amount (savings greater than goal), it will output a message congratulating the user for reaching their goal.
+
+==== Current Implementation
+The command will first obtain the current `savings` and current `goal` from the `model` that the user has set. +
+Taking `goal` minus `savings`,  the result is stored in a temporary float `diff`. +
+If `diff` is positive, `diff` is passed to `CommandResult`, and the amount is displayed to show the user how much more they have to save.
+If `diff` is negative, the congratulation message is passed to `CommandResult`.
+
+[NOTE]
+If a goal has not been set by the user, the command will use a default goal which has an empty name and $0 for the amount.
 
 // tag::undoredo[]
 === Undo/Redo feature

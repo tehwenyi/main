@@ -32,14 +32,21 @@ It can be used on both Windows and Mac.
 == Summary of contributions
 
 === Major Enhancements
-Added the `budget` feature of ePiggy. The `budget` feature allows users to set a limit on their spendings for a specified time period and provide reminders when they are going to or have exceeded the limit. +
-It pushes users to be more aware of the amount they spend per time period so that they can better manage their expenses. +
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+Added the `budget` feature of ePiggy. +
+
+* *What it does:*
+The `budget` feature allows users to set a limit on their spendings for a specified time period and provide reminders when they are going to or have exceeded the limit. +
+
+* *Justification:*
+It urges users to be more aware of the amount they spend per time period so that they can better manage their expenses and avoid splurging. It is also a good habit we hope to inculcate in users before they enter the
+workforce and deal with larger sums of money. +
+
+* *Highlights:*
+** Deciding the information necessary in a budget was a challenge.
+** This enhancement was built from scratch. It is completely new and hence required the creation of many new objects including `budget`, `period`, `uniqueBudgetList` and a new `budgetPanel` for the UI. This enhancement required the familiarity with
+almost all the different areas of the code (`commons`, `logic`, `model`, `ui`).
+** For this enhancement, the UI is important as the purpose is to constantly remind users of the remaining amount they can spend. It was challenging to make the UI simple and concise for our target users whilst conveying the crucial information.
 
 === Minor Enhancements
 * *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.

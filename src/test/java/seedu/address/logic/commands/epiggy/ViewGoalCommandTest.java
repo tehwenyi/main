@@ -1,14 +1,13 @@
 package seedu.address.logic.commands.epiggy;
 
+import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 
 import java.nio.file.Path;
 import java.util.Date;
 import java.util.function.Predicate;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -28,32 +27,42 @@ import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.epiggy.GoalBuilder;
+import seedu.address.testutil.epiggy.SavingsBuilder;
 
-public class SetGoalCommandTest {
+public class ViewGoalCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void constructor_nullGoal_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        new SetGoalCommand(null);
+    public void execute_viewSuccessful_savingsLessThanGoal() throws Exception {
+        Goal validGoal = new GoalBuilder().build();
+        Savings validSavings = new SavingsBuilder().withSavings(100).build();
+        double diff = validGoal.getAmount().getAmount() - validSavings.getSavings();
+        ModelStubWithGoalAndSavings modelStub = new ModelStubWithGoalAndSavings(validGoal, validSavings);
+        CommandResult commandResult = new ViewGoalCommand().execute(modelStub, commandHistory);
+
+        assertEquals(String.format(ViewGoalCommand.MESSAGE_SUCCESS
+                + ViewGoalCommand.MESSAGE_SAVINGS_LESS_THAN_GOAL, validGoal, diff), commandResult.getFeedbackToUser());
+        assertEquals(validGoal, modelStub.goal.get());
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_goalAcceptedByModel_setSuccessful() throws Exception {
-        ModelStubAcceptingGoal modelStub = new ModelStubAcceptingGoal();
+    public void execute_viewSuccessful_savingsMoreThanGoal() throws Exception {
         Goal validGoal = new GoalBuilder().build();
-        CommandResult commandResult = new SetGoalCommand(validGoal).execute(modelStub, commandHistory);
+        Savings validSavings = new SavingsBuilder().build();
+        ModelStubWithGoalAndSavings modelStub = new ModelStubWithGoalAndSavings(validGoal, validSavings);
+        CommandResult commandResult = new ViewGoalCommand().execute(modelStub, commandHistory);
 
-        assertEquals(String.format(SetGoalCommand.MESSAGE_SUCCESS, validGoal), commandResult.getFeedbackToUser());
+        assertEquals(String.format(ViewGoalCommand.MESSAGE_SUCCESS
+                + ViewGoalCommand.MESSAGE_SAVINGS_MORE_THAN_GOAL, validGoal), commandResult.getFeedbackToUser());
         assertEquals(validGoal, modelStub.goal.get());
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
-
     }
+
+
 
     private class ModelStub implements Model {
 
@@ -263,14 +272,15 @@ public class SetGoalCommandTest {
         }
     }
 
+    private class ModelStubWithGoalAndSavings extends ModelStub {
 
-
-    private class ModelStubAcceptingGoal extends ModelStub {
         final SimpleObjectProperty<Goal> goal = new SimpleObjectProperty<>();
+        final SimpleObjectProperty<Savings> savings = new SimpleObjectProperty<>();
 
-        @Override
-        public void setGoal(Goal goal) {
+        ModelStubWithGoalAndSavings(Goal goal, Savings savings) {
+            requireNonNull(goal);
             this.goal.setValue(goal);
+            this.savings.setValue(savings);
         }
 
         @Override
@@ -279,8 +289,8 @@ public class SetGoalCommandTest {
         }
 
         @Override
-        public void commitAddressBook() {
-            // Called by {@code SetCommand#execute()}
+        public SimpleObjectProperty<Savings> getSavings() {
+            return this.savings;
         }
     }
 }

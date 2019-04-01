@@ -23,11 +23,13 @@ public class CommandBox extends UiPart<Region> {
     private final CommandExecutor commandExecutor;
     private final List<String> history;
     private ListElementPointer historySnapshot;
+
     private String[] keywords = { "addExpense n/ $/ t/ d/", "deleteExpense ", "editExpense",
         "report d/", "list ", "help ", "edit ", "search ", "sort ", "exit", "view ",
         "editBudget $/ p/ d/", "percentage", "addBudget $/ p/ d/",
         "addAllowance $/", "deleteBudget ", "setGoal n/ $/",
-        "viewGoal", "viewSavings "};
+        "viewGoal", "viewSavings ", "sE n/"};
+
     @FXML
     private TextField commandTextField;
 

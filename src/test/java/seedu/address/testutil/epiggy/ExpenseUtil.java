@@ -36,9 +36,7 @@ public class ExpenseUtil {
         sb.append(PREFIX_NAME + expense.getItem().getName().name + " ");
         sb.append(PREFIX_COST + expense.getItem().getCost().toString() + " ");
         sb.append(PREFIX_DATE + expense.getDate().toString() + " ");
-        expense.getItem().getTags().stream().forEach(
-                s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
+        expense.getItem().getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
         return sb.toString();
     }
 

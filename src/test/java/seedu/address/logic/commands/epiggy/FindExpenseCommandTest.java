@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
@@ -35,6 +36,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.ExpenseContainsKeywordsPredicate;
 
+@Ignore
 /**
  * Contains integration tests (interaction with the Model) for {@code FindExpenseCommand}.
  */

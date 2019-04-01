@@ -3,15 +3,17 @@ package seedu.address.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.model.epiggy.ReadOnlyEPiggy;
+
 /**
  * {@code AddressBook} that keeps track of its own history.
  */
 public class VersionedAddressBook extends AddressBook {
 
-    private final List<ReadOnlyAddressBook> addressBookStateList;
+    private final List<ReadOnlyEPiggy> addressBookStateList;
     private int currentStatePointer;
 
-    public VersionedAddressBook(ReadOnlyAddressBook initialState) {
+    public VersionedAddressBook(ReadOnlyEPiggy initialState) {
         super(initialState);
 
         addressBookStateList = new ArrayList<>();

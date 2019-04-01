@@ -1,13 +1,20 @@
 package seedu.address.logic.commands.epiggy;
 
+import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
+
+import java.nio.file.Path;
+import java.util.Date;
+import java.util.function.Predicate;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
@@ -18,12 +25,6 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.epiggy.*;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.epiggy.GoalBuilder;
-
-import java.nio.file.Path;
-import java.util.Date;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
 
 public class SetGoalCommandTest {
 

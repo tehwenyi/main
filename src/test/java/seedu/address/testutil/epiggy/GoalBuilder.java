@@ -4,6 +4,9 @@ import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Name;
 
+/**
+ * A utility class to help with building Goal objects.
+ */
 public class GoalBuilder {
 
     public static final String DEFAULT_NAME = "Adidas Shoes";
@@ -15,21 +18,6 @@ public class GoalBuilder {
     public GoalBuilder() {
         name = new Name(DEFAULT_NAME);
         cost = new Cost(DEFAULT_COST);
-    }
-
-    public GoalBuilder(Goal toCopy) {
-        name = toCopy.getName();
-        cost = toCopy.getAmount();
-    }
-
-    public GoalBuilder withName(String name) {
-        this.name = new Name(name);
-        return this;
-    }
-
-    public GoalBuilder withCost(String cost) {
-        this.cost = new Cost(cost);
-        return this;
     }
 
     public Goal build() {

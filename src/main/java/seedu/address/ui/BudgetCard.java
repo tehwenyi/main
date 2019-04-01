@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.awt.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -10,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.epiggy.Budget;

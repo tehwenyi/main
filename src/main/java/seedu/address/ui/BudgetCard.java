@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.awt.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -9,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.epiggy.Budget;
@@ -64,14 +66,18 @@ public class BudgetCard extends UiPart<Region> {
 
         if (budget.getRemainingAmount().getAmount() < 0) {
             notification.setText("You have exceeded your budget!");
+            notification.setStyle("-fx-font-weight: bold; -fx-border-color: white; -fx-text-fill: white; -fx-background-color: crimson;");
         } else if (budget.getRemainingAmount().getAmount() < (budget.getCost().getAmount() / 5)) {
             notification.setText("You have spent more than 80% of your budget. \n"
                     + "Please control your expenses!");
+            notification.setStyle("-fx-font-weight: bold; -fx-border-color: white; -fx-text-fill: white; -fx-background-color: coral;");
         } else if (budget.getRemainingAmount().getAmount() == 0) {
             notification.setText("You have $0 left of your budget.");
+            notification.setStyle("-fx-font-weight: bold; -fx-border-color: white; -fx-text-fill: white; -fx-background-color: palevioletred;");
         } else {
             notification.setText("“Save money and money will save you.”\n"
                     + "Remember to spend wisely!");
+            notification.setStyle("-fx-font-weight: bold; -fx-border-color: white; -fx-text-fill: white; -fx-background-color: thistle;");
         }
     }
 

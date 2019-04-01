@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -75,6 +76,7 @@ public class LogicManagerTest {
         assertHistoryCorrect(listCommand);
     }
 
+    @Ignore
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() throws Exception {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub

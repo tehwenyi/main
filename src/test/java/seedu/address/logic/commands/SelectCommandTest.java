@@ -20,10 +20,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-@Ignore
 /**
  * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
  */
+@Ignore
 public class SelectCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());

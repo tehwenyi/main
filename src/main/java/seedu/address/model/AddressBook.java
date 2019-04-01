@@ -137,14 +137,21 @@ public class AddressBook implements ReadOnlyEPiggy {
         this.savings.setValue(new Savings(s));
 
         if (budgetList.getBudgetListSize() > 0) {
-            int indexOfBudgetToEdit = budgetList.getBudgetIndexBasedOnDate(expense.getDate());
-            if (indexOfBudgetToEdit >= 0) {
-                Budget budgetToEdit = budgetList.getBudgetAtIndex(indexOfBudgetToEdit);
-                Budget editedBudget = updateBudget(budgetToEdit);
-                budgetList.replaceAtIndex(indexOfBudgetToEdit, editedBudget);
-            }
+            updateBudgetList(expense);
         }
         indicateModified();
+    }
+
+    /**
+     * Updates the budgetList. Called every time an expense is added, edited or deleted.
+     */
+    private void updateBudgetList(Expense expense) {
+        int indexOfBudgetToEdit = budgetList.getBudgetIndexBasedOnDate(expense.getDate());
+        if (indexOfBudgetToEdit >= 0) {
+            Budget budgetToEdit = budgetList.getBudgetAtIndex(indexOfBudgetToEdit);
+            Budget editedBudget = updateBudget(budgetToEdit);
+            budgetList.replaceAtIndex(indexOfBudgetToEdit, editedBudget);
+        }
     }
 
     /**
@@ -194,6 +201,7 @@ public class AddressBook implements ReadOnlyEPiggy {
      */
     public void deleteExpense(Expense toDelete) {
         expenses.remove(toDelete);
+        updateBudgetList(toDelete);
         Savings s = savings.get();
         if (toDelete instanceof Allowance) {
             s.deductSavings(toDelete.getItem().getCost().getAmount());
@@ -296,6 +304,7 @@ public class AddressBook implements ReadOnlyEPiggy {
     public void setExpense(Expense target, Expense editedExpense) {
         requireNonNull(editedExpense);
         expenses.setExpense(target, editedExpense);
+        updateBudgetList(editedExpense);
         indicateModified();
     }
 

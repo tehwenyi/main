@@ -43,7 +43,6 @@ It urges users to be more aware of the amount they spend per time period so that
 workforce and deal with larger sums of money. +
 
 * *Highlights:*
-** Deciding the information necessary in a budget was a challenge.
 ** This enhancement was built from scratch. It is completely new and hence required the creation of many new objects including `budget`, `period`, `uniqueBudgetList` and a new `budgetPanel` for the UI. This enhancement required the familiarity with
 almost all the different areas of the code (`commons`, `logic`, `model`, `ui`).
 ** For this enhancement, the UI is important as the purpose is to constantly remind users of the remaining amount they can spend. It was challenging to make the UI simple and concise for our target users whilst conveying the crucial information.
@@ -56,22 +55,25 @@ almost all the different areas of the code (`commons`, `logic`, `model`, `ui`).
 === Other Contributions
 * *Other contributions*:
 
-** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 ** Enhancements to existing features:
 *** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
 *** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Standardised and beautified the User Guide
+**** Designed and added the header and images across the user guide to suit our target user
+**** Standardised the language and formatting of the user guide
+*** Standardised and beautified the Developer Guide
+**** Designed and added the header
+**** Standardised the language and formatting of the user guide
 ** Community:
+*** PRs contributed:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
 ** Tools:
+*** Created the *.jar file for ePiggy
 *** Integrated a third party library (Natty) to the project (https://github.com[#42])
 *** Integrated a new Github plugin (CircleCI) to the team repo
-
+** All code contributed:
+**** View the codes I contributed here
 _{you can add/remove categories in the list above}_
 
 == Contributions to the User Guide

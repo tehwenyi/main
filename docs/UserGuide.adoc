@@ -81,14 +81,14 @@ Format: `help`
 ==== Adding an expense : `addExpense`
 
 Adds a new expense record to the Expense Tracker. +
-Format: `addExpense n/EXPENSE_NAME $/COST [d/DATE] [a/NAME_OF_THE_SHOP] [t/TAG]…`
+Format: `addExpense n/EXPENSE_NAME $/COST [d/DATE] [t/TAG]…`
 
 Examples:
 
-* `addExpense n/Chicken rice set $/5 t/Food d/Hainan Kitchen d/21/02/2019` +
-Adds an expense for a $5 chicken rice set, tagged as Food with the date as 21/02/2019 from the shop Hainan Kitchen.
+* `addExpense n/Chicken rice set $/5 t/Food d/21/02/2019` +
+Adds an expense for a $5 chicken rice set, tagged as Food with the date as 21/02/2019.
 
-* `add n/Chicken rice set $/5 t/Food` +
+* `addExpense n/Chicken rice set $/5 t/Food` +
 Adds an expense for a $5 chicken rice set, tagged as Food dated as the current date, by default.
 
 ==== Adding an allowance: `addAllowance`
@@ -103,33 +103,33 @@ Adds an allowance entry of $10 to the expense tracker.
 
 ==== Listing all expenses : `list`
 
-Lists the expense records from newest to oldest. +
+Lists the expense records from newest to oldest. Use this to return to the default view after search/sort commands +
 Format: `list`
 
-==== Editing an expense : `edit`
+==== Editing an expense : `editExpense`
 
 Edits an existing expense in ePiggy at a specific `*INDEX`* . +
 The *`INDEX`* refers to the number in the displayed Expenses List which is next to the name of the expense. Existing values of
 the expense will be changed according to the value of the parameters. +
-Format: `edit INDEX [n/EXPENSE_NAME] [$/COST] [d/DATE] [t/TAG]…`
+Format: `editExpense INDEX [n/EXPENSE_NAME] [$/COST] [d/DATE] [t/TAG]…`
 
 Examples:
 
-* `edit 1 n/Pen $1 t/Supplies` +
+* `editExpense 1 n/Pen $1 t/Supplies` +
 Edits the name, cost and tag of the first expense in the Expense List to ‘Pen’, ‘$1’ and ‘Supplies’ respectively.
-* `edit 2 t/Food` +
+* `editExpense 2 t/Food` +
 Edits the tag of the second expense in the Expense List to ‘Food’.
 
-==== Deleting an expense : `delete`
+==== Deleting an expense : `deleteExpense`
 
 Deletes the expense at the specified INDEX. The INDEX refers to the number in the displayed Expenses List which is next to
 the name of the expense. +
-Format: `delete INDEX`
+Format: `deleteExpense INDEX`
 
 Examples:
 
-* `delete 1` +
-Deletes the first expense in the Expense List from Expense Tracker.
+* `deleteExpense 1` +
+Deletes the first expense in the displaying expense list from Expense Tracker.
 
 ==== Viewing an expense : `view`
 

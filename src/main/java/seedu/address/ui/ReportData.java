@@ -35,7 +35,7 @@ public class ReportData {
         return budget;
     }
 
-    public void addBudget(double budget) {
+    public void setBudget(double budget) {
         this.budget = budget;
     }
 

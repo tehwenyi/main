@@ -20,11 +20,7 @@ import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.epiggy.Allowance;
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Expense;
-import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.Savings;
+import seedu.address.model.epiggy.*;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.epiggy.GoalBuilder;
 import seedu.address.testutil.epiggy.SavingsBuilder;
@@ -162,12 +158,12 @@ public class ViewGoalCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setAddressBook(ReadOnlyEPiggy newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyEPiggy getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 

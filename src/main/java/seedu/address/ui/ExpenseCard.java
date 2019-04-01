@@ -55,7 +55,7 @@ public class ExpenseCard extends UiPart<Region> {
         name.setText(expense.getItem().getName().name);
         DecimalFormat df = new DecimalFormat("#.##");
         if (expense instanceof Allowance) {
-            cost.setText("Cost: " + df.format(expense.getItem().getCost().getAmount()));
+            cost.setText("Amount: " + df.format(expense.getItem().getCost().getAmount()));
         } else {
             cost.setText("Cost: " + df.format(expense.getItem().getCost().getAmount()));
         }

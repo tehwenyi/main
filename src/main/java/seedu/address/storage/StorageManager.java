@@ -7,9 +7,10 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.epiggy.ReadOnlyEPiggy;
+import seedu.address.storage.epiggy.EPiggyStorage;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -17,13 +18,13 @@ import seedu.address.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private EPiggyStorage ePiggyStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(EPiggyStorage ePiggyStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.ePiggyStorage = ePiggyStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -48,36 +49,36 @@ public class StorageManager implements Storage {
     // ================ AddressBook methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getEPiggyFilePath() {
+        return ePiggyStorage.getEPiggyFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyEPiggy> readEPiggy() throws DataConversionException, IOException {
+        return readEPiggy(ePiggyStorage.getEPiggyFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyEPiggy> readEPiggy(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return ePiggyStorage.readEPiggy(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveEPiggy(ReadOnlyEPiggy ePiggy) throws IOException {
+        saveEPiggy(ePiggy, ePiggyStorage.getEPiggyFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveEPiggy(ReadOnlyEPiggy ePiggy, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        ePiggyStorage.saveEPiggy(ePiggy, filePath);
     }
 
     @Override
-    public void backupAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        logger.fine("Creating a backup file: " + getAddressBookFilePath() + ".backup");
-        addressBookStorage.backupAddressBook(addressBook);
+    public void backupEPiggy(ReadOnlyEPiggy ePiggy) throws IOException {
+        logger.fine("Creating a backup file: " + getEPiggyFilePath() + ".backup");
+        ePiggyStorage.backupEPiggy(ePiggy);
     }
 
 }

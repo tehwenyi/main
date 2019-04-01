@@ -62,7 +62,7 @@ public class JsonSerializableEPiggy {
             }
         }
         addressBook.setGoal(goal.toModelType());
-        // addressBook.setSavings(savings.toModelType());
+        addressBook.setSavings(savings.toModelType());
         return addressBook;
     }
 }

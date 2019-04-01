@@ -77,6 +77,11 @@ _Figure 1. The user interface upon launch of application_
 
 === Basic Features
 
+==== Auto complete :
+Enter the first few letters of the command or tag, and then press `Tab` key on the keyboard to auto complete the command. +
+If the auto complete command is not what you want, delete some letters and press `Tab` again. Another command will show. +
+Example: enter letter 'a' and then press `Tab`, the addExpense will show.
+
 ==== Viewing help : `help`
 Lists all the user commands with their syntax and descriptions. +
 Format: `help`
@@ -340,16 +345,6 @@ Format: `viewGoalProgress`
 
 === Miscellaneous
 
-==== Logging in to ePiggy : `login`
-
-Logs in to Expense Tracker as an existing user. +
-Format: `login u/USERNAME p/PASSWORD`
-
-Examples:
-
-* `login u/johndoe1990 p/password123` +
-Logs into the johndoe1990 user account.
-
 ==== Exiting the program : `exit`
 
 Exits the program. +
@@ -372,6 +367,18 @@ User can enable/disable data encryption to secure their files.
 
 Compares between different users.
 Requires multiple accounts in the same network.
+
+==== Login to ePiggy `[coming in v2.0]`
+
+Login to ePiggy as an existing user. +
+
+==== Logout to ePiggy `[coming in v2.0]`
+
+Logout ePiggy. +
+
+==== Register to ePiggy `[coming in v2.0]`
+
+Register a new user in ePiggy. +
 
 == FAQ
 
@@ -421,7 +428,8 @@ e.g.`deleteBudget 2`
 
 * *Recommend* : `recommend`
 
-* *Report* : `report`
+* *Report* : `report d/DD/MM/YYYY` +
+e.g. `report d/21/03/2019`
 
 * *Set Savings Goal* : `setGoal n/ITEM_NAME $/AMOUNT` +
 e.g. `setGoal n/nike shoes $/80`

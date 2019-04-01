@@ -458,6 +458,59 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+// tag:Report[]
+=== Report feature
+This command allows users to view the report within a user-input period of time. +
+This command requires users to specify the `date`, `month` or `year` of the report in the command. +
+
+* `report d/DD/MM/YYYY` +
+
+The above command shows a report on specified date. +
+
+* `report d/MM/YYYY` +
+
+The above command shows a report on specified month. +
+
+* `report d/YYYY` +
+
+The above command shows a report on specified year. +
+
+* `report` +
+
+The above command shows a completed report from first day of user launches the ePiggy. +
+
+Commands with different format of tag `d/` will generate a report with different charts. +
+
+Eg: `report d/21/03/2019` +
+
+The above report command will generate a report of 21 Mar 2019 with AreaChart.
+
+[NOTE]
+Only last tag `d/` is used to generate a report if multiply of `d/` appear.
+
+==== Current Implementation
+
+The command is first parsed into `ReportCommandParser`, which separates the arguments into their respective fields. A new `localDate` object is created and `type` of the report are generated according to the date format of `d/`. The `model`, `localDate` and `type` are parsed into `ReportCommand`. +
+The reportCommand will initialize `ReportWindow` and the method `displayReportController` of the object `ReportWindow` will be invoked. +
+The `displayReportController` method will select a specified type of report to display the report.
+
+*Example usage scenario:* +
+1. User launches application and enters `Report d/21/03/2019`. +
+2. `ReportCommandParser` takes in the arguments and parses the command to create the appropriate `localDate`. +
+3. The `ReportCommand` is passed back to the `LogicManager`, and the method `execute()` is called. The `ReportWindow` is initialized. +
+4. The method `displayReportController` is called and report will show.
+
+==== Design Considerations
+*Aspect: How to make report more readable?* +
+
+* *Alternative 1 (current choice)*: the `report` command uses a chart to display different data of expenses, budgets and allowances.
+** Pros: Easy to know how much a user have spend on that date, that month or that year. Easy to compare with previous month or year.
+** Cons: The details of the expenses, budgets and allowances cannot show in the chart.
+
+* *Alternative 2* : Show the records of expenses, budgets and allowances in details line by line.
+** Pros: User can know the details of each records.
+** Cons: Report feature becomes extra because list command can do the same thing.
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 

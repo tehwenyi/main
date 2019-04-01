@@ -26,43 +26,25 @@ import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.epiggy.GoalBuilder;
 import seedu.address.testutil.epiggy.SavingsBuilder;
 
-public class ViewGoalCommandTest {
+public class ViewSavingsCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_viewSuccessful_savingsLessThanGoal() throws Exception {
-        Goal validGoal = new GoalBuilder().build();
-        Savings validSavings = new SavingsBuilder().withSavings(100).build();
-        double diff = validGoal.getAmount().getAmount() - validSavings.getSavings();
-        ModelStubWithGoalAndSavings modelStub = new ModelStubWithGoalAndSavings(validGoal, validSavings);
-        CommandResult commandResult = new ViewGoalCommand().execute(modelStub, commandHistory);
-
-        assertEquals(String.format(ViewGoalCommand.MESSAGE_SUCCESS
-                + ViewGoalCommand.MESSAGE_SAVINGS_LESS_THAN_GOAL, validGoal, diff), commandResult.getFeedbackToUser());
-        assertEquals(validGoal, modelStub.goal.get());
-        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
-    }
-
-    @Test
-    public void execute_viewSuccessful_savingsMoreThanGoal() throws Exception {
-        Goal validGoal = new GoalBuilder().build();
+    public void execute_viewSuccessful() throws Exception {
         Savings validSavings = new SavingsBuilder().build();
-        ModelStubWithGoalAndSavings modelStub = new ModelStubWithGoalAndSavings(validGoal, validSavings);
-        CommandResult commandResult = new ViewGoalCommand().execute(modelStub, commandHistory);
+        ModelStubWithSavings modelStub = new ModelStubWithSavings(validSavings);
+        CommandResult commandResult = new ViewSavingsCommand().execute(modelStub, commandHistory);
 
-        assertEquals(String.format(ViewGoalCommand.MESSAGE_SUCCESS
-                + ViewGoalCommand.MESSAGE_SAVINGS_MORE_THAN_GOAL, validGoal), commandResult.getFeedbackToUser());
-        assertEquals(validGoal, modelStub.goal.get());
+        assertEquals(String.format(ViewSavingsCommand.MESSAGE_SUCCESS, validSavings),
+                commandResult.getFeedbackToUser());
+        assertEquals(validSavings, modelStub.getSavings().get());
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
-
-
 
     private class ModelStub implements Model {
 
@@ -272,21 +254,12 @@ public class ViewGoalCommandTest {
         }
     }
 
-    private class ModelStubWithGoalAndSavings extends ModelStub {
-
-        final SimpleObjectProperty<Goal> goal = new SimpleObjectProperty<>();
+    private class ModelStubWithSavings extends ModelStub {
         final SimpleObjectProperty<Savings> savings = new SimpleObjectProperty<>();
 
-        ModelStubWithGoalAndSavings(Goal goal, Savings savings) {
-            requireNonNull(goal);
+        ModelStubWithSavings(Savings savings) {
             requireNonNull(savings);
-            this.goal.setValue(goal);
             this.savings.setValue(savings);
-        }
-
-        @Override
-        public SimpleObjectProperty<Goal> getGoal() {
-            return this.goal;
         }
 
         @Override

@@ -21,6 +21,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.epiggy.JsonEPiggyStorage;
 
 @Ignore
 /**
@@ -36,7 +37,7 @@ public class MainWindowCloseTest extends GuiUnitTest {
 
     @Before
     public void setUp() throws Exception {
-        JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(temporaryFolder.newFile().toPath());
+        JsonEPiggyStorage jsonAddressBookStorage = new JsonEPiggyStorage(temporaryFolder.newFile().toPath());
         JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.newFile().toPath());
         StorageManager storageManager = new StorageManager(jsonAddressBookStorage, jsonUserPrefsStorage);
         FxToolkit.setupStage(stage -> {

@@ -19,6 +19,8 @@ import org.junit.rules.TemporaryFolder;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.epiggy.ReadOnlyEPiggy;
+import seedu.address.storage.epiggy.JsonEPiggyStorage;
 
 public class JsonAddressBookStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
@@ -35,8 +37,8 @@ public class JsonAddressBookStorageTest {
         readAddressBook(null);
     }
 
-    private java.util.Optional<ReadOnlyAddressBook> readAddressBook(String filePath) throws Exception {
-        return new JsonAddressBookStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+    private java.util.Optional<ReadOnlyEPiggy> readAddressBook(String filePath) throws Exception {
+        return new JsonEPiggyStorage(Paths.get(filePath)).readEPiggy(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -76,24 +78,24 @@ public class JsonAddressBookStorageTest {
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.getRoot().toPath().resolve("TempAddressBook.json");
         AddressBook original = getTypicalAddressBook();
-        JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
+        JsonEPiggyStorage jsonAddressBookStorage = new JsonEPiggyStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyAddressBook readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        jsonAddressBookStorage.saveEPiggy(original, filePath);
+        ReadOnlyEPiggy readBack = jsonAddressBookStorage.readEPiggy(filePath).get();
         assertEquals(original, new AddressBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
         original.removePerson(ALICE);
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
-        readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        jsonAddressBookStorage.saveEPiggy(original, filePath);
+        readBack = jsonAddressBookStorage.readEPiggy(filePath).get();
         assertEquals(original, new AddressBook(readBack));
 
         // Save and read without specifying file path
         original.addPerson(IDA);
-        jsonAddressBookStorage.saveAddressBook(original); // file path not specified
-        readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
+        jsonAddressBookStorage.saveEPiggy(original); // file path not specified
+        readBack = jsonAddressBookStorage.readEPiggy().get(); // file path not specified
         assertEquals(original, new AddressBook(readBack));
 
     }
@@ -107,10 +109,10 @@ public class JsonAddressBookStorageTest {
     /**
      * Saves {@code addressBook} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) {
+    private void saveAddressBook(ReadOnlyEPiggy addressBook, String filePath) {
         try {
-            new JsonAddressBookStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+            new JsonEPiggyStorage(Paths.get(filePath))
+                    .saveEPiggy(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

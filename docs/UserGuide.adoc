@@ -109,17 +109,6 @@ Example:
 * `addAllowance $/10` +
 Adds an allowance entry of $10 to the expense tracker.
 
-==== Adding an autocomplete item : `addItem`
-
-Adds an autocomplete item with a fixed cost, category, and tags, for future reference. +
-Autocomplete items will appear when adding a new expense - a list of items will popup after typing *`add n/`* +
-Format: `addItem n/EXPENSE_NAME $/COST [t/TAG]`
-
-Examples:
-
-* `addItem n/Chicken-rice $/5 c/Food` +
-Adds an autocomplete item Chicken Rice that is $5 tagged as Food.
-
 ==== Listing all expenses : `list`
 
 Lists the expense records from newest to oldest. +

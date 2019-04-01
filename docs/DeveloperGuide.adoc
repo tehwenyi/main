@@ -1033,7 +1033,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |see my total expenditure till date or by time period |know the total amount I have spent
 
-|`* *` |user |see the report of my spending |know how much I spend
+|`* *` |user |see the report of my spending on specified year|know how much I spend on that year
 
 |`* *` |user |see the date of my spending |know when I spend a certain item
 
@@ -1050,6 +1050,10 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* *` |user |login to my personal account |manage my personal expense records
 
 |`* *` |user |get notification when budget finishing |manage the rest of the budget well
+
+|`* *` |user |see the report of my spending on specified date |know how much I spend on that day
+
+|`* *` |user |see the report of my spending on specified month of the year |know how much I spend on that month of the year
 
 |`*` | (fill in here) |(fill in here)
 |=======================================================================

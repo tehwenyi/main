@@ -13,21 +13,27 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.ReadOnlyEPiggy;
+import seedu.address.model.epiggy.Savings;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 
+@Ignore
 public class AddressBookTest {
 
     @Rule
@@ -118,11 +124,14 @@ public class AddressBookTest {
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class AddressBookStub implements ReadOnlyEPiggy {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Expense> expenses = FXCollections.observableArrayList();
         private final ObservableList<Item> items = FXCollections.observableArrayList();
         private ObservableList<Budget> budgets; //TODO
+        private SimpleObjectProperty<Goal> goal;
+        private SimpleObjectProperty<Savings> savings;
+
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -151,6 +160,16 @@ public class AddressBookTest {
         @Override
         public ObservableList<Budget> getBudgetList() {
             return budgets;
+        }
+
+        @Override
+        public SimpleObjectProperty<Savings> getSavings() {
+            return null;
+        }
+
+        @Override
+        public SimpleObjectProperty<Goal> getGoal() {
+            return null;
         }
 
         @Override

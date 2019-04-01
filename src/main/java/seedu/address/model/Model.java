@@ -13,6 +13,7 @@ import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.ReadOnlyEPiggy;
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 
@@ -62,10 +63,10 @@ public interface Model {
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setAddressBook(ReadOnlyEPiggy addressBook);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyEPiggy getAddressBook();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

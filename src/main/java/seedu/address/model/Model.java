@@ -238,7 +238,7 @@ public interface Model {
      * Returns the selected person in the filtered person list.
      * null if no person is selected.
      */
-    Person getSelectedPerson();
+    Expense getSelectedExpense();
 
     /**
      * Sets the selected person in the filtered person list.

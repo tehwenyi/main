@@ -325,8 +325,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Person getSelectedPerson() {
-        return selectedPerson.getValue();
+    public Expense getSelectedExpense() {
+        return selectedExpense.getValue();
     }
 
     @Override

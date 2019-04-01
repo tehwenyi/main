@@ -81,8 +81,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setBudgetList(List<Budget> budgets) {
-        this.budgetList.setBudgetList(budgets);
+    public void addBudgetList(List<Budget> budgets) {
+        this.budgetList.addBudgetList(budgets);
         indicateModified();
     }
 
@@ -101,7 +101,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setPersons(newData.getPersonList());
-        setBudgetList(newData.getBudgetList());
+        addBudgetList(newData.getBudgetList());
     }
 
     //// person-level operations
@@ -162,7 +162,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Adds a budget to the budgetList.
-     * Called by the Command setBudget only.
+     * Called by the Command addBudget only.
      * @param budget to be added into budgetList.
      */
     public void addBudget(int index, Budget budget) {
@@ -178,6 +178,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void deleteBudgetAtIndex(int index) {
         budgetList.remove(index);
+        indicateModified();
+    }
+
+    /**
+     * Deletes the expense {@code toDelete}.
+     * @param toDelete the expense to be deleted.
+     */
+    public void deleteExpense(Expense toDelete) {
+        expenses.remove(toDelete);
         indicateModified();
     }
 

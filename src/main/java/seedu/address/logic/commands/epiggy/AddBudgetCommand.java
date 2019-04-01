@@ -20,9 +20,9 @@ import seedu.address.model.epiggy.Budget;
 /**
  * Sets a budget for the total expenses.
  */
-public class SetBudgetCommand extends Command {
-    public static final String COMMAND_WORD = "setBudget";
-    public static final String COMMAND_ALIAS = "sb";
+public class AddBudgetCommand extends Command {
+    public static final String COMMAND_WORD = "addBudget";
+    public static final String COMMAND_ALIAS = "ab";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets a budget for ePiggy. "
             + "Parameters: "
@@ -49,7 +49,7 @@ public class SetBudgetCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public SetBudgetCommand(Budget budget) {
+    public AddBudgetCommand(Budget budget) {
         requireNonNull(budget);
         toSet = budget;
     }
@@ -101,7 +101,7 @@ public class SetBudgetCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SetBudgetCommand // instanceof handles nulls
-                && toSet.equals(((SetBudgetCommand) other).toSet));
+                || (other instanceof AddBudgetCommand // instanceof handles nulls
+                && toSet.equals(((AddBudgetCommand) other).toSet));
     }
 }

@@ -38,7 +38,7 @@ import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.epiggy.BudgetBuilder;
 
-public class SetBudgetCommandTest {
+public class AddBudgetCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
@@ -50,7 +50,7 @@ public class SetBudgetCommandTest {
     @Test
     public void constructor_nullBudget_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new SetBudgetCommand(null);
+        new AddBudgetCommand(null);
     }
 
     @Test
@@ -58,9 +58,9 @@ public class SetBudgetCommandTest {
         ModelStubAcceptingBudgetAdded modelStub = new ModelStubAcceptingBudgetAdded();
         Budget validBudget = new BudgetBuilder().build();
 
-        CommandResult commandResult = new SetBudgetCommand(validBudget).execute(modelStub, commandHistory);
+        CommandResult commandResult = new AddBudgetCommand(validBudget).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(SetBudgetCommand.MESSAGE_SUCCESS, validBudget), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddBudgetCommand.MESSAGE_SUCCESS, validBudget), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validBudget), modelStub.budgetsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
@@ -69,12 +69,12 @@ public class SetBudgetCommandTest {
     public void execute_duplicateBudget_throwsCommandException() throws Exception {
         Budget validBudget = new BudgetBuilder().build();
         // Person validPerson = new PersonBuilder().build();
-        SetBudgetCommand setBudgetCommand = new SetBudgetCommand(validBudget);
+        AddBudgetCommand addBudgetCommand = new AddBudgetCommand(validBudget);
         ModelStub modelStub = new ModelStubWithBudget(validBudget);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(SetBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
-        setBudgetCommand.execute(modelStub, commandHistory);
+        thrown.expectMessage(AddBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
+        addBudgetCommand.execute(modelStub, commandHistory);
     }
 
     @Test
@@ -88,12 +88,12 @@ public class SetBudgetCommandTest {
         String endDate = simpleDateFormat.format(calendar.getTime());
         Budget overlappingBudget = new BudgetBuilder().withDate(endDate).build();
 
-        SetBudgetCommand setBudgetCommand = new SetBudgetCommand(validBudget);
+        AddBudgetCommand addBudgetCommand = new AddBudgetCommand(validBudget);
         ModelStub modelStub = new ModelStubWithBudget(overlappingBudget);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(SetBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
-        setBudgetCommand.execute(modelStub, commandHistory);
+        thrown.expectMessage(AddBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
+        addBudgetCommand.execute(modelStub, commandHistory);
     }
 
     @Test
@@ -107,12 +107,12 @@ public class SetBudgetCommandTest {
         String startDate = simpleDateFormat.format(calendar.getTime());
         Budget overlappingBudget = new BudgetBuilder().withDate(startDate).build();
 
-        SetBudgetCommand setBudgetCommand = new SetBudgetCommand(validBudget);
+        AddBudgetCommand addBudgetCommand = new AddBudgetCommand(validBudget);
         ModelStub modelStub = new ModelStubWithBudget(overlappingBudget);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(SetBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
-        setBudgetCommand.execute(modelStub, commandHistory);
+        thrown.expectMessage(AddBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
+        addBudgetCommand.execute(modelStub, commandHistory);
     }
 
     @Test
@@ -121,14 +121,14 @@ public class SetBudgetCommandTest {
         Budget fifty = new BudgetBuilder().withAmount("50").build();
         // Person alice = new PersonBuilder().withName("Alice").build();
         // Person bob = new PersonBuilder().withName("Bob").build();
-        SetBudgetCommand addTwentyCommand = new SetBudgetCommand(twenty);
-        SetBudgetCommand addFiftyCommand = new SetBudgetCommand(fifty);
+        AddBudgetCommand addTwentyCommand = new AddBudgetCommand(twenty);
+        AddBudgetCommand addFiftyCommand = new AddBudgetCommand(fifty);
 
         // same object -> returns true
         assertTrue(addTwentyCommand.equals(addTwentyCommand));
 
         // same values -> returns true
-        SetBudgetCommand addTwentyCommandCopy = new SetBudgetCommand(twenty);
+        AddBudgetCommand addTwentyCommandCopy = new AddBudgetCommand(twenty);
         assertTrue(addTwentyCommand.equals(addTwentyCommandCopy));
 
         // different types -> returns false
@@ -217,6 +217,11 @@ public class SetBudgetCommandTest {
 
         @Override
         public void deleteBudgetAtIndex(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteExpense(Expense toDelete) {
             throw new AssertionError("This method should not be called.");
         }
 

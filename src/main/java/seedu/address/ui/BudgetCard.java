@@ -73,7 +73,7 @@ public class BudgetCard extends UiPart<Region> {
                     + "Please control your expenses!");
             notification.setStyle("-fx-font-weight: bold; -fx-border-color: tomato; "
                     + "-fx-text-fill: white; -fx-background-color: coral;");
-        } else if (budget.getRemainingAmount().getAmount() == 0) {
+        } else if (budget.getRemainingAmount().getAmount() == 0.00) {
             notification.setText("You have $0 left of your budget.");
             notification.setStyle("-fx-font-weight: bold; -fx-border-color: orchid; "
                     + "-fx-text-fill: white; -fx-background-color: mediumorchid;");

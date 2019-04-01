@@ -66,18 +66,22 @@ public class BudgetCard extends UiPart<Region> {
 
         if (budget.getRemainingAmount().getAmount() < 0) {
             notification.setText("You have exceeded your budget!");
-            notification.setStyle("-fx-font-weight: bold; -fx-border-color: white; -fx-text-fill: white; -fx-background-color: crimson;");
+            notification.setStyle("-fx-font-weight: bold; -fx-border-color: firebrick;"
+                    + "-fx-text-fill: white; -fx-background-color: crimson;");
         } else if (budget.getRemainingAmount().getAmount() < (budget.getCost().getAmount() / 5)) {
             notification.setText("You have spent more than 80% of your budget. \n"
                     + "Please control your expenses!");
-            notification.setStyle("-fx-font-weight: bold; -fx-border-color: white; -fx-text-fill: white; -fx-background-color: coral;");
+            notification.setStyle("-fx-font-weight: bold; -fx-border-color: tomato; "
+                    + "-fx-text-fill: white; -fx-background-color: coral;");
         } else if (budget.getRemainingAmount().getAmount() == 0) {
             notification.setText("You have $0 left of your budget.");
-            notification.setStyle("-fx-font-weight: bold; -fx-border-color: white; -fx-text-fill: white; -fx-background-color: palevioletred;");
+            notification.setStyle("-fx-font-weight: bold; -fx-border-color: orchid; "
+                    + "-fx-text-fill: white; -fx-background-color: mediumorchid;");
         } else {
             notification.setText("“Save money and money will save you.”\n"
                     + "Remember to spend wisely!");
-            notification.setStyle("-fx-font-weight: bold; -fx-border-color: white; -fx-text-fill: white; -fx-background-color: thistle;");
+            notification.setStyle("-fx-font-weight: bold; -fx-border-color: thistle;"
+                    + "-fx-text-fill: white; -fx-background-color: plum;");
         }
     }
 

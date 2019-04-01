@@ -165,7 +165,7 @@ Format: `viewSavings`
 ==== Searching for an expense : `search`
 
 You can search for any expense in the list by specifying either its name, tag, date, range of dates, or range of amount. +
-Format: *`search [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
+Format: *`findExpense [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
 
 Examples:
 
@@ -173,7 +173,7 @@ Examples:
 Displays all entries with the name “MCDONALDS”.
 * `search t/FOOD` +
 Displays all entries with the tag specified (in this case, it’s food).
-* `search d/02/01/2019:05/12/2020` +
+* `search d/2019/01/02:2020/12/05` +
 Displays all entries listed in the range 2nd Jan 2019 to 5th Dec 2020.
 * `search $/250:500` +
 Displays all entries listed with the cost range of $250 to $500.
@@ -187,15 +187,15 @@ If the entry is not found, it displays an appropriate error message.
 ==== Sorting the expenses : `sort`
 
 The user can sort the expenses in the list by name, date added, amount in ascending or descending order. +
-Format: `sort -[n/d/$] -[A/D]`
+Format: `sort -[n/d/$]/`
 
 Examples:
 
-* `sort n/n` +
+* `sort n/` +
 Sorts all entries by name (in ascending order).
-* `sort d/d` +
+* `sort d/` +
 Sorts all entries by date in descending order.
-* `sort $/$` +
+* `sort $/` +
 Sorts all entries by amount in ascending order.
 
 === Budgeting

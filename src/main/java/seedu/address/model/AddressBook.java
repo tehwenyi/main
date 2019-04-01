@@ -18,6 +18,7 @@ import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.ExpenseList;
 import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.ReadOnlyEPiggy;
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.epiggy.UniqueBudgetList;
 import seedu.address.model.epiggy.item.Item;
@@ -29,7 +30,7 @@ import seedu.address.model.person.UniquePersonList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class AddressBook implements ReadOnlyEPiggy {
 
     private final ExpenseList expenses;
     private final ObservableList<Item> items;
@@ -61,7 +62,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public AddressBook(ReadOnlyEPiggy toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -98,9 +99,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyEPiggy newData) {
         requireNonNull(newData);
-        setPersons(newData.getPersonList());
+        setExpenses(newData.getExpenseList());
+        setGoal(newData.getGoal().get());
+        setSavings(newData.getSavings().get());
         addBudgetList(newData.getBudgetList());
     }
 
@@ -160,6 +163,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return savings;
     }
 
+    public void setSavings(Savings savings) {
+        this.savings.setValue(savings);
+    }
+
     /**
      * Adds a budget to the budgetList.
      * Called by the Command addBudget only.
@@ -182,11 +189,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Deletes the expense at the specific index.
-     * @param index of the to be deleted budget.
+     * Deletes the expense {@code toDelete}.
+     * @param toDelete the expense to be deleted.
      */
-    public void deleteExpenseAtIndex(int index) {
-        expenses.remove(index);
+    public void deleteExpense(Expense toDelete) {
+        expenses.remove(toDelete);
         indicateModified();
     }
 

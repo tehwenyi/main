@@ -56,7 +56,6 @@ public class ModelManager implements Model {
 
         filteredExpenses = new FilteredList<>(versionedEPiggy.getExpenseList());
         filteredBudget = new FilteredList<>(versionedEPiggy.getBudgetList());
-        //TODO
     }
 
     public ModelManager() {
@@ -255,7 +254,7 @@ public class ModelManager implements Model {
     //@@author rahulb99
     /**
      * Sorts the expenses according to the keyword.
-     * @param keyword
+     * @param keyword input arguments.
      */
     public void sortExpenses(String keyword) {
         SortedList<Expense> sortedExpenses;
@@ -398,7 +397,7 @@ public class ModelManager implements Model {
     @Override
     public String toString() {
         return "ModelManager{"
-                + "versionedAddressBook=" + versionedAddressBook
+                + "versionedAddressBook=" + versionedEPiggy
                 + ", userPrefs=" + userPrefs
                 + ", filteredPersons=" + filteredPersons
                 + ", filteredExpenses=" + filteredExpenses

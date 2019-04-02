@@ -9,7 +9,7 @@
 
 
 == Overview
-[yellow]#This portfolio aims to document# my contributions to *_ePiggy_*.
+This portfolio aims to document my contributions to *_ePiggy_*.
 
 *_ePiggy_* Github link: https://github.com/CS2103-AY1819S2-W17-4/main
 

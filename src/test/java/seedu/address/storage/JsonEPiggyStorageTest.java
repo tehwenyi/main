@@ -23,6 +23,7 @@ import seedu.address.model.EPiggy;
 import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.storage.epiggy.JsonEPiggyStorage;
 
+@Ignore
 public class JsonEPiggyStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonEPiggyStorageTest");
 

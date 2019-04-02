@@ -11,7 +11,7 @@ We are a team of Year 2 Computer Science undergraduates based in http://www.comp
 
 === Phan Duc Nhat Minh
 image::pdnm.png[width="150", align="left"]
-{empty}[https://github.com/pdnm[github]]
+{empty}[https://github.com/pdnm[github]] [<<pdnm#, portfolio>>]
 
 Role: Team Leader, Developer
 
@@ -31,7 +31,7 @@ Responsibilities: `budget` feature, documentations
 
 === Wu Yunjun
 image::yunjun199321.png[width="150", align="left"]
-{empty}[https://github.com/yunjun199321[github]]
+{empty}[https://github.com/yunjun199321[github]] [<<yunjun199321#, portfolio>>]
 
 Role: Developer, Java Guru
 
@@ -41,7 +41,7 @@ Responsibilities: `report` feature, `autocomplete` feature
 
 === Kevin
 image::kev-inc.png[width="150", align="left"]
-{empty}[https://github.com/kev-inc[github]]
+{empty}[https://github.com/kev-inc[github]] [<<kev-inc#, portfolio>>]
 
 Role: Developer
 
@@ -51,7 +51,7 @@ Responsibilities: Storage, `goal` and `savings` features
 
 === Rahul Baid
 image::rahulb99.png[width="150", align="left"]
-{empty}[https://github.com/rahulb99[github]]
+{empty}[https://github.com/rahulb99[github]] [<<rahul99#, portfolio>>]
 
 Role: Developer
 

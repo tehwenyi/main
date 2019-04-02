@@ -309,6 +309,11 @@ public class AddressBook implements ReadOnlyEPiggy {
         indicateModified();
     }
 
+    /**
+     * Calculates the new savings amount when the setExpense function is used.
+     * @param oldExp
+     * @param newExp
+     */
     public void recalculateSavings(Expense oldExp, Expense newExp) {
         Savings s = savings.get();
         double diff = newExp.getItem().getCost().getAmount() - oldExp.getItem().getCost().getAmount();

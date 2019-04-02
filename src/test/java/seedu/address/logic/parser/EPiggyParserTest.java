@@ -34,11 +34,11 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
-public class AddressBookParserTest {
+public class EPiggyParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final EPiggyParser parser = new EPiggyParser();
 
     @Test
     public void parseCommand_add() throws Exception {

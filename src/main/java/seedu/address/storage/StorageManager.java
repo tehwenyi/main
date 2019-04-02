@@ -7,13 +7,14 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.epiggy.ReadOnlyEPiggy;
+
 import seedu.address.storage.epiggy.EPiggyStorage;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of EPiggy data in local storage.
  */
 public class StorageManager implements Storage {
 
@@ -46,7 +47,7 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ EPiggy methods ==============================
 
     @Override
     public Path getEPiggyFilePath() {

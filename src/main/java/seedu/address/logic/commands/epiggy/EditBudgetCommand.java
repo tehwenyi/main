@@ -88,7 +88,7 @@ public class EditBudgetCommand extends Command {
 
         model.setCurrentBudget(editedBudget);
         model.updateFilteredBudgetList(PREDICATE_SHOW_ALL_BUDGETS);
-        model.commitAddressBook();
+        model.commitEPiggy();
         return new CommandResult(String.format(MESSAGE_EDIT_BUDGET_SUCCESS, editedBudget));
     }
 

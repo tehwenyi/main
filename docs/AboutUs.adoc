@@ -35,7 +35,7 @@ Role: Developer
 
 === Kevin
 image::kev-inc.png[width="150", align="left"]
-{empty}[https://github.com/kev-inc[github]] [<<kevin#, portfolio]
+{empty}[https://github.com/kev-inc[github]] [<<kevin#, portfolio>>]
 
 Role: Developer
 

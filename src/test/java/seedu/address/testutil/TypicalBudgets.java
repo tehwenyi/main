@@ -28,12 +28,34 @@ public class TypicalBudgets {
             .withDate("04/15/2019").withPeriod("5").build();
     public static final Budget SEVEN = new BudgetBuilder().withAmount("12000")
             .withDate("04/20/2019").withPeriod("365").build();
-
-    // Manually added
     public static final Budget EIGHT = new BudgetBuilder().withAmount("90")
             .withDate("02/01/2019").withPeriod("3").build();
     public static final Budget NINE = new BudgetBuilder().withAmount("12")
             .withDate("01/31/2019").withPeriod("1").build();
+
+    // Other budgets
+    public static final Budget TEN = new BudgetBuilder().withAmount("10")
+            .withPeriod("1").withDate("02/04/2020").build();
+    public static final Budget ELEVEN = new BudgetBuilder().withAmount("30")
+            .withPeriod("1").withDate("02/05/2020").build();
+    public static final Budget TWELVE = new BudgetBuilder().withAmount("50")
+            .withDate("02/06/2020").withPeriod("1").build();
+    public static final Budget THIRTEEN = new BudgetBuilder().withAmount("15")
+            .withDate("02/07/2020").withPeriod("1").build();
+    public static final Budget FOURTEEN = new BudgetBuilder().withAmount("20")
+            .withDate("02/08/2020").withPeriod("1").build();
+    public static final Budget FIFTEEN = new BudgetBuilder().withAmount("9")
+            .withDate("02/09/2020").withPeriod("1").build();
+    public static final Budget SIXTEEN = new BudgetBuilder().withAmount("15")
+            .withDate("02/10/2020").withPeriod("1").build();
+    public static final Budget SEVENTEEN = new BudgetBuilder().withAmount("90")
+            .withDate("02/11/2020").withPeriod("1").build();
+    public static final Budget EIGHTEEN = new BudgetBuilder().withAmount("12")
+            .withDate("02/12/2020").withPeriod("1").build();
+    public static final Budget NINETEEN = new BudgetBuilder().withAmount("12")
+            .withDate("02/13/2020").withPeriod("1").build();
+    public static final Budget TWENTY = new BudgetBuilder().withAmount("12")
+            .withDate("02/14/2020").withPeriod("1").build();
 
     // TODO
     // Manually added - Budget's details found in {@code CommandTestUtil}
@@ -60,6 +82,11 @@ public class TypicalBudgets {
     }
 
     public static List<Budget> getTypicalBudgets() {
-        return new ArrayList<>(Arrays.asList(ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN));
+        return new ArrayList<>(Arrays.asList(ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE));
+    }
+
+    public static List<Budget> getMaximumNumberOfBudgets() {
+        return new ArrayList<>(Arrays.asList(ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, ELEVEN,
+                TWELVE, THIRTEEN, FOURTEEN, FIFTEEN, SIXTEEN, SEVENTEEN, EIGHTEEN, NINETEEN, TWENTY));
     }
 }

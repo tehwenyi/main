@@ -56,7 +56,6 @@ public class ModelManager implements Model {
 
         filteredExpenses = new FilteredList<>(versionedEPiggy.getExpenseList());
         filteredBudget = new FilteredList<>(versionedEPiggy.getBudgetList());
-        //TODO
     }
 
     public ModelManager() {
@@ -255,7 +254,7 @@ public class ModelManager implements Model {
     //@@author rahulb99
     /**
      * Sorts the expenses according to the keyword.
-     * @param keyword
+     * @param keyword input arguments.
      */
     public void sortExpenses(String keyword) {
         SortedList<Expense> sortedExpenses;
@@ -274,7 +273,8 @@ public class ModelManager implements Model {
         } default: return;
         }
         FilteredList<Expense> fl = new FilteredList<>(sortedExpenses);
-        fl.setPredicate(PREDICATE_SHOW_ALL_EXPENSES);
+        filteredExpenses.clear();
+        filteredExpenses.addAll(fl);
         logger.fine("sorted list");
         versionedEPiggy.getExpenseList();
         versionedEPiggy.indicateModified();
@@ -395,4 +395,16 @@ public class ModelManager implements Model {
                 && Objects.equals(selectedPerson.get(), other.selectedPerson.get());
     }
 
+    @Override
+    public String toString() {
+        return "ModelManager{"
+                + "versionedAddressBook=" + versionedEPiggy
+                + ", userPrefs=" + userPrefs
+                + ", filteredPersons=" + filteredPersons
+                + ", filteredExpenses=" + filteredExpenses
+                + ", filteredBudget=" + filteredBudget
+                + ", selectedPerson=" + selectedPerson
+                + ", selectedExpense=" + selectedExpense
+                + '}';
+    }
 }

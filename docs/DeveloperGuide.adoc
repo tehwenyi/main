@@ -15,7 +15,9 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103-AY1819S2-W17-4/main
 
-By: `A+ for 2103T Team`      Since: `Feb 2019`      Licence: `MIT`
+image::developerguide.png[width="600"]
+
+By: `Team A+ for 2103T`      Since: `Feb 2019`      Last Updated: `April 2019`      Licence: `MIT`
 
 == Introduction
 
@@ -459,6 +461,8 @@ The command is first parsed into `SetGoalCommandParser`, which separates the arg
 ** Pros: Gives user freedom to set more than 1 goal.
 ** Cons: Makes ePiggy more complicated, not suitable for younger age groups.
 
+// end::setGoal[]
+
 // tag::viewGoal[]
 === View Goal feature
 This command allows users to view their goal set, as well as to check how much more the user has to save in order to reach the goal. +
@@ -480,6 +484,8 @@ If `diff` is negative, the congratulation message is passed to `CommandResult`.
 
 [NOTE]
 If a goal has not been set by the user, the command will use a default goal which has an empty name and $0 for the amount.
+
+// end::viewGoal[]
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -561,7 +567,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag:Report[]
+// tag::report[]
 === Report feature
 This command allows users to view the report within a user-input period of time. +
 This command requires users to specify the `date`, `month` or `year` of the report in the command. +
@@ -613,6 +619,7 @@ The `displayReportController` method will select a specified type of report to d
 * *Alternative 2* : Show the records of expenses, budgets and allowances in details line by line.
 ** Pros: User can know the details of each records.
 ** Cons: Report feature becomes extra because list command can do the same thing.
+// end::report[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption

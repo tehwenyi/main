@@ -92,4 +92,13 @@ public class CommandResult {
         return Objects.hash(feedbackToUser, showHelp, exit);
     }
 
+    @Override
+    public String toString() {
+        return "CommandResult{"
+                + "feedbackToUser='" + feedbackToUser + '\''
+                + ", showHelp=" + showHelp
+                + ", exit=" + exit
+                + ", showSummary=" + showSummary
+                + '}';
+    }
 }

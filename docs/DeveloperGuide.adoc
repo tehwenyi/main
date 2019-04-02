@@ -426,7 +426,6 @@ expenses which was filtered by the new predicate. +
 Step 6: Expense List panel is updated by filtered set of expenses. A `CommandResult` is then created and
 returned to `LogicManager`.
 
-=======
 // tag::setGoal[]
 === Set Goal feature
 This command allows users to set a savings goal that they would like to save up to. +

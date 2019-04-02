@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.getTypicalEPiggyBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalEPiggy;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -79,7 +79,7 @@ public class JsonEPiggyStorageTest {
     @Test
     public void readAndSaveEPiggyBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.getRoot().toPath().resolve("TempEPiggyBook.json");
-        EPiggy original = getTypicalEPiggyBook();
+        EPiggy original = getTypicalEPiggy();
         JsonEPiggyStorage jsonEPiggyBookStorage = new JsonEPiggyStorage(filePath);
 
         // Save in new file and read back

@@ -26,27 +26,27 @@ public class JsonSerializableEPiggyTest {
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
-        JsonSerializableEPiggyBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
-                JsonSerializableEPiggyBook.class).get();
+        JsonSerializableEPiggy dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
+                JsonSerializableEPiggy.class).get();
         EPiggy EPiggyFromFile = dataFromFile.toModelType();
-        EPiggy typicalPersonsEPiggy = TypicalPersons.getTypicalEPiggyBook();
+        EPiggy typicalPersonsEPiggy = TypicalPersons.getTypicalEPiggy();
         assertEquals(EPiggyFromFile, typicalPersonsEPiggy);
     }
 
     @Test
     public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
-        JsonSerializableEPiggyBook dataFromFile = JsonUtil.readJsonFile(INVALID_PERSON_FILE,
-                JsonSerializableEPiggyBook.class).get();
+        JsonSerializableEPiggy dataFromFile = JsonUtil.readJsonFile(INVALID_PERSON_FILE,
+                JsonSerializableEPiggy.class).get();
         thrown.expect(IllegalValueException.class);
         dataFromFile.toModelType();
     }
 
     @Test
     public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
-        JsonSerializableEPiggyBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
-                JsonSerializableEPiggyBook.class).get();
+        JsonSerializableEPiggy dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
+                JsonSerializableEPiggy.class).get();
         thrown.expect(IllegalValueException.class);
-        thrown.expectMessage(JsonSerializableEPiggyBook.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(JsonSerializableEPiggy.MESSAGE_DUPLICATE_PERSON);
         dataFromFile.toModelType();
     }
 

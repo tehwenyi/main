@@ -25,6 +25,14 @@ Role: Developer
 
 '''
 
+=== Rahul Baid
+image::rahulb99.png[width="150", align="left"]
+{empty}[https://github.com/rahulb99[github]] [<<rahul#, portfolio>>]
+
+Role: Developer
+
+'''
+
 === Wu Yunjun
 image::yunjun199321.png[width="150", align="left"]
 {empty}[https://github.com/yunjun199321[github]]
@@ -38,15 +46,5 @@ image::kev-inc.png[width="150", align="left"]
 {empty}[https://github.com/kev-inc[github]]
 
 Role: Developer
-
-'''
-
-=== Rahul Baid
-image::rahulb99.png[width="150", align="left"]
-{empty}[https://github.com/rahulb99[github]]
-
-Role: Developer
-
-Responsibilities: Data
 
 '''

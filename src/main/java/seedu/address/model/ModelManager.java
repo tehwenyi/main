@@ -273,7 +273,8 @@ public class ModelManager implements Model {
         } default: return;
         }
         FilteredList<Expense> fl = new FilteredList<>(sortedExpenses);
-        fl.setPredicate(PREDICATE_SHOW_ALL_EXPENSES);
+        filteredExpenses.clear();
+        filteredExpenses.addAll(fl);
         logger.fine("sorted list");
         versionedEPiggy.getExpenseList();
         versionedEPiggy.indicateModified();

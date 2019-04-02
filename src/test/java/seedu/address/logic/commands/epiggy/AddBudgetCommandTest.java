@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -26,16 +27,18 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.ReadOnlyEPiggy;
+
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.TypicalBudgets;
 import seedu.address.testutil.epiggy.BudgetBuilder;
 
 public class AddBudgetCommandTest {
@@ -54,7 +57,7 @@ public class AddBudgetCommandTest {
     }
 
     @Test
-    public void execute_budgetAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_budgetAcceptedByModelWithEmptyBudgetList_addSuccessful() throws Exception {
         ModelStubAcceptingBudgetAdded modelStub = new ModelStubAcceptingBudgetAdded();
         Budget validBudget = new BudgetBuilder().build();
 
@@ -62,6 +65,17 @@ public class AddBudgetCommandTest {
 
         assertEquals(String.format(AddBudgetCommand.MESSAGE_SUCCESS, validBudget), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validBudget), modelStub.budgetsAdded);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+    }
+
+    @Test
+    public void execute_budgetAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubWithBudgetAcceptingBudgetAdded modelStub = new ModelStubWithBudgetAcceptingBudgetAdded();
+        Budget validBudget = new BudgetBuilder().build();
+
+        CommandResult commandResult = new AddBudgetCommand(validBudget).execute(modelStub, commandHistory);
+
+        assertEquals(String.format(AddBudgetCommand.MESSAGE_SUCCESS, validBudget), commandResult.getFeedbackToUser());
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
@@ -113,6 +127,16 @@ public class AddBudgetCommandTest {
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
         addBudgetCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_budgetTooOld_throwsCommandException() throws Exception {
+        Budget validBudget = new BudgetBuilder().withDate("01/01/2010").build();
+        ModelStubWithMaximumNumberOfBudgets modelStub = new ModelStubWithMaximumNumberOfBudgets();
+        CommandResult commandResult = new AddBudgetCommand(validBudget).execute(modelStub, commandHistory);
+
+        assertEquals(AddBudgetCommand.MESSAGE_FAIL, commandResult.getFeedbackToUser());
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
@@ -182,12 +206,12 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getEPiggyFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setEPiggyFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -257,12 +281,12 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyEPiggy newData) {
+        public void setEPiggy(ReadOnlyEPiggy newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyEPiggy getAddressBook() {
+        public ReadOnlyEPiggy getEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -317,27 +341,27 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canRedoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -367,7 +391,7 @@ public class AddBudgetCommandTest {
      */
     private class ModelStubWithBudget extends ModelStub {
         final ArrayList<Budget> budgets = new ArrayList<>();
-        private AddressBook addressBook = new AddressBook();
+        private EPiggy EPiggy = new EPiggy();
 
         ModelStubWithBudget(Budget budget) {
             requireNonNull(budget);
@@ -381,7 +405,7 @@ public class AddBudgetCommandTest {
 
         @Override
         public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
-            return addressBook.budgetsOverlap(startDate, endDate, earlierBudget);
+            return EPiggy.budgetsOverlap(startDate, endDate, earlierBudget);
         }
     }
 
@@ -408,7 +432,72 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitEPiggy() {
+            // called by {@code AddCommand#execute()}
+        }
+    }
+
+    /**
+     * A Model stub that contains a single budget that always accept the person being added.
+     */
+    private class ModelStubWithBudgetAcceptingBudgetAdded extends ModelStub {
+        final ArrayList<Budget> budgetsAdded = new ArrayList<>();
+
+        ModelStubWithBudgetAcceptingBudgetAdded() {
+            Budget budget = new BudgetBuilder().withDate("12/12/2019").build();
+            budgetsAdded.add(budget);
+        }
+
+        @Override
+        public void addBudget(int index, Budget toAdd) {
+            budgetsAdded.add(index, toAdd);
+        }
+
+        @Override
+        public ObservableList<Budget> getFilteredBudgetList() {
+            return FXCollections.observableArrayList(budgetsAdded);
+        }
+
+        @Override
+        public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
+            requireAllNonNull(startDate, endDate, earlierBudget);
+            return false;
+        }
+
+        @Override
+        public void commitEPiggy() {
+            // called by {@code AddCommand#execute()}
+        }
+    }
+
+    /**
+     * A Model stub that contains a single budget that always accept the person being added.
+     */
+    private class ModelStubWithMaximumNumberOfBudgets extends ModelStub {
+        private List<Budget> budgetsAdded = new ArrayList<>();
+
+        ModelStubWithMaximumNumberOfBudgets() {
+            budgetsAdded = TypicalBudgets.getMaximumNumberOfBudgets();
+        }
+
+        @Override
+        public void addBudget(int index, Budget toAdd) {
+            // Empty as it does not add any budget
+        }
+
+        @Override
+        public ObservableList<Budget> getFilteredBudgetList() {
+            return FXCollections.observableArrayList(budgetsAdded);
+        }
+
+        @Override
+        public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
+            requireAllNonNull(startDate, endDate, earlierBudget);
+            return false;
+        }
+
+        @Override
+        public void commitEPiggy() {
             // called by {@code AddCommand#execute()}
         }
     }

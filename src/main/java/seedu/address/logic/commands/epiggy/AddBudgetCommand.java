@@ -64,7 +64,7 @@ public class AddBudgetCommand extends Command {
         List<Budget> currentList = model.getFilteredBudgetList();
         if (currentList.size() == 0) {
             model.addBudget(0, toSet);
-            model.commitAddressBook();
+            model.commitEPiggy();
             return new CommandResult(String.format(MESSAGE_SUCCESS, toSet));
         }
 
@@ -82,7 +82,7 @@ public class AddBudgetCommand extends Command {
             if (!startDate.before(earlierBudget.getEndDate())) {
                 if (index == 0 || !endDate.after(laterBudget.getStartDate())) {
                     model.addBudget(index, toSet);
-                    model.commitAddressBook();
+                    model.commitEPiggy();
                     return new CommandResult(String.format(MESSAGE_SUCCESS, toSet));
                 } else {
                     throw new CommandException(MESSAGE_OVERLAPPING_BUDGET);
@@ -92,7 +92,7 @@ public class AddBudgetCommand extends Command {
         }
         if (index < MAXIMUM_SIZE) {
             model.addBudget(index, toSet);
-            model.commitAddressBook();
+            model.commitEPiggy();
             return new CommandResult(String.format(MESSAGE_SUCCESS, toSet));
         }
         return new CommandResult(MESSAGE_FAIL);

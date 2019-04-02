@@ -59,6 +59,14 @@ public class BudgetBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Date} of the {@code Budget} that we are building.
+     */
+    public BudgetBuilder withDate(Date startDate) {
+        this.startDate = startDate;
+        return this;
+    }
+
     public Budget build() {
         return new Budget(amount, days, startDate);
     }

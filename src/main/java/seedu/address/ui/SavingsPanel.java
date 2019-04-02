@@ -25,6 +25,9 @@ public class SavingsPanel extends UiPart<Region> {
     private Label currentGoal;
 
     @FXML
+    private Label amountDifferenceTitle;
+
+    @FXML
     private Label amountDifference;
 
     public SavingsPanel(ObservableValue<Savings> savings, ObservableValue<Goal> goal) {
@@ -32,15 +35,31 @@ public class SavingsPanel extends UiPart<Region> {
 
         savings.addListener(observable -> {
             currentSavings.setText(savings.getValue().toString());
-            if (goal.getValue() != null) {
+            if (goal.getValue() == null) {
+                currentGoal.setText("(None set)");
+                amountDifference.setText("$0.00");
+            } else {
+                currentGoal.setText(goal.getValue().toString());
                 double diff = goal.getValue().getAmount().getAmount() - savings.getValue().getSavings();
-                amountDifference.setText("$" + diff);
+                if (diff > 0) {
+                    amountDifferenceTitle.setVisible(true);
+                    amountDifference.setText("$" + diff);
+                } else {
+                    amountDifferenceTitle.setVisible(false);
+                    amountDifference.setText("Congratulations!\nYou've reached your\nsavings goal!");
+                }
             }
         });
         goal.addListener(observable -> {
             currentGoal.setText(goal.getValue().toString());
             double diff = goal.getValue().getAmount().getAmount() - savings.getValue().getSavings();
-            amountDifference.setText("$" + diff);
+            if (diff > 0) {
+                amountDifferenceTitle.setVisible(true);
+                amountDifference.setText("$" + diff);
+            } else {
+                amountDifferenceTitle.setVisible(false);
+                amountDifference.setText("Congratulations!\nYou've reached your\nsavings goal!");
+            }
         });
 
         currentSavings.setText(savings.getValue().toString());
@@ -50,7 +69,13 @@ public class SavingsPanel extends UiPart<Region> {
         } else {
             currentGoal.setText(goal.getValue().toString());
             double diff = goal.getValue().getAmount().getAmount() - savings.getValue().getSavings();
-            amountDifference.setText("$" + diff);
+            if (diff > 0) {
+                amountDifferenceTitle.setVisible(true);
+                amountDifference.setText("$" + diff);
+            } else {
+                amountDifferenceTitle.setVisible(false);
+                amountDifference.setText("Congratulations!\nYou've reached your\nsavings goal!");
+            }
         }
 
 

@@ -33,13 +33,16 @@ This portfolio aims to document my contributions to *_ePiggy_*.
 
 === Major Enhancements
 
-Added the `budget` feature of ePiggy. +
+Added the entire `budget` feature of ePiggy. +
 
 * *What it does:*
-The `budget` feature allows users to set a limit on their spendings for a specified time period and provide reminders when they are going to or have exceeded the limit. +
+Allows users to set a limit on their spendings for a specified time period and provide reminders when they are going to or have exceeded the limit. +
+Unlike typical expense trackers where only one budget is set, ePiggy's `budget` feature consists of a list of budgets. This is because the purpose of ePiggy is to inculcate good spending habits in our users, so users should be able to track their previous spendings.
+Being able to view their budget history and plan future budgets would fuel this purpose. +
+The `budget` feature is visible on the GUI and comprises of 3 commands: `addBudget`, `editBudget` and `deleteBudget`.
 
 * *Justification:*
-It urges users to be more aware of the amount they spend per time period so that they can better manage their expenses and avoid splurging. It is also a good habit we hope to inculcate in users before they enter the
+The `budget` feature urges users to be more aware of the amount they spend per time period so that they can better manage their expenses and avoid splurging. It is also a good habit we hope to inculcate in users before they enter the
 workforce and deal with larger sums of money. +
 
 * *Highlights:*
@@ -48,23 +51,29 @@ almost all the different aspects of the code (`commons`, `logic`, `model`, `ui`)
 ** Typically, expense trackers only have one budget but I decided it would be better to have a list of budgets instead, so that users can view their budget history and plan future budgets. This is due to the purpose of ePiggy, which is to inculcate
 good spending habits in our users. Hence, users should be able to track their previous spendings.
 ** For this enhancement, the UI is important as the purpose is to constantly remind users of the remaining amount they can spend. It was challenging to make the UI simple and concise for our target users whilst conveying the crucial information.
+* *Functional code contributed:* link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/AddBudgetCommand.java[Add Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/EditBudgetCommand.java[Edit Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/DeleteBudgetCommand.java[Delete Budget]
+* *Test code contributed*: link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/AddBudgetCommandTest.java[Add Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/DeleteBudgetCommandTest.java[Delete Budget]
 
 // ability to write code, explain and justify design choices, solve a user problem/fulfil a user need
 
 === Minor Enhancements
-* *Minor enhancement*:
+* *Minor enhancement 1*:
+Added the UI component for the `budget` feature.
 
+* *What it does:*
+Allows users to view all the details and real-time status of the budgets they have added on the GUI. The status of the budgets will update whenever an expense is added, edited or deleted.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Justification:*
+*_ePiggy_*'s target audience are students, who may be as young as seven years old. Hence, having a simple and concise GUI to engage them while conveying all the crucial information is very important. +
+
+* *Functional code contributed*: [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetPanel.java[Budget Panel]] | [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetCard.java[Budget Card]] _{give links to collated code files}_
+* *Test code contributed*:
 
 === Other Contributions
 * *Other contributions*:
 
 ** Project Management:
-*** Did refactoring of AddressBook to EPiggy 
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Managed the refactoring of AddressBook to EPiggy
 ** Documentation:
 *** Standardised and beautified the User Guide
 **** Designed and added the header and images across the user guide to suit our target user

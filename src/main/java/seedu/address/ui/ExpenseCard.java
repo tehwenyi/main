@@ -60,7 +60,7 @@ public class ExpenseCard extends UiPart<Region> {
             cost.setText("Cost: " + df.format(expense.getItem().getCost().getAmount()));
         }
         SimpleDateFormat formatter = new SimpleDateFormat("EEE, MMM d, ''yy");
-        date.setText(String.format("Added on: %s", formatter.format(expense.getDate())));
+        date.setText(String.format("Added on: %s \n", formatter.format(expense.getDate())));
         initialiseTags(expense);
     }
 

@@ -395,4 +395,16 @@ public class ModelManager implements Model {
                 && Objects.equals(selectedPerson.get(), other.selectedPerson.get());
     }
 
+    @Override
+    public String toString() {
+        return "ModelManager{"
+                + "versionedAddressBook=" + versionedAddressBook
+                + ", userPrefs=" + userPrefs
+                + ", filteredPersons=" + filteredPersons
+                + ", filteredExpenses=" + filteredExpenses
+                + ", filteredBudget=" + filteredBudget
+                + ", selectedPerson=" + selectedPerson
+                + ", selectedExpense=" + selectedExpense
+                + '}';
+    }
 }

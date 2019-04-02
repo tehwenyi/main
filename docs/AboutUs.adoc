@@ -41,7 +41,7 @@ Responsibilities: `sort` feature, `find` feature, data
 
 === Wu Yunjun
 image::yunjun199321.png[width="150", align="left"]
-{empty}[https://github.com/yunjun199321[github]] [<<yunjun199321#, portfolio>>]
+{empty}[https://github.com/yunjun199321[github]] [<<WuYunjun#, portfolio>>]
 
 Role: Developer, Java Guru
 

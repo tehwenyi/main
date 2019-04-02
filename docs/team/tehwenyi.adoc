@@ -5,6 +5,7 @@
 
 == PROJECT: ePiggy
 
+image::projectportfolioheader.png[width="600"]
 ---
 
 == Introduction

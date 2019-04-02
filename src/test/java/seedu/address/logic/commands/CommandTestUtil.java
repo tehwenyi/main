@@ -16,16 +16,18 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.epiggy.EditBudgetCommand;
 import seedu.address.logic.commands.epiggy.EditExpenseCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.model.AddressBook;
+import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.ExpenseContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.epiggy.EditBudgetDetailsBuilder;
 import seedu.address.testutil.epiggy.EditExpenseDescriptorBuilder;
 
 /**
@@ -60,13 +62,20 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
 
     public static final String VALID_TAG_FOOD = "food";
-    public static final String VALID_TAG_FRIENDS = "friend";
-    public static final String VALID_DATE_2018 = "07/10/2018";
-    public static final String VALID_DATE_2019 = "20/03/2019";
+    public static final String VALID_TAG_FRIENDS = "friends";
+    public static final String VALID_DATE_2018 = "10/07/2018";
+    public static final String VALID_DATE_2019 = "03/20/2019";
     public static final String VALID_NAME_BOWLING = "bowling at West Bowl centre";
     public static final String VALID_COST_BOWLING = "4.80";
     public static final String VALID_NAME_IPHONE = "IPhone XR from challenger";
     public static final String VALID_COST_IPHONE = "1799.00";
+
+    public static final String VALID_AMOUNT_ONE = "500";
+    public static final String VALID_AMOUNT_TWO = "1000";
+    public static final String VALID_PERIOD_ONE = "7";
+    public static final String VALID_PERIOD_TWO = "28";
+    public static final String VALID_DATE_ONE = "03/03/2019";
+    public static final String VALID_DATE_TWO = "02/01/2019";
 
     public static final String NAME_DESC_BOWLING = " " + PREFIX_NAME + VALID_NAME_BOWLING;
     public static final String NAME_DESC_IPHONE = " " + PREFIX_NAME + VALID_NAME_IPHONE;
@@ -87,6 +96,9 @@ public class CommandTestUtil {
     public static final EditExpenseCommand.EditExpenseDescriptor DESC_BOWLING;
     public static final EditExpenseCommand.EditExpenseDescriptor DESC_IPHONE;
 
+    public static final EditBudgetCommand.EditBudgetDetails DESC_ONE;
+    public static final EditBudgetCommand.EditBudgetDetails DESC_TWO;
+
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
@@ -96,6 +108,10 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_FRIENDS).build();
         DESC_IPHONE = new EditExpenseDescriptorBuilder().withName(VALID_NAME_IPHONE)
                 .withCost(VALID_COST_IPHONE).withDate(VALID_DATE_2019).build();
+        DESC_ONE = new EditBudgetDetailsBuilder().withAmount(VALID_AMOUNT_ONE).withPeriod(VALID_PERIOD_ONE)
+                .withDate(VALID_DATE_ONE).build();
+        DESC_TWO = new EditBudgetDetailsBuilder().withAmount(VALID_AMOUNT_TWO).withPeriod(VALID_PERIOD_TWO)
+                .withDate(VALID_DATE_TWO).build();
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
@@ -145,7 +161,7 @@ public class CommandTestUtil {
             String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        EPiggy expectedEPiggy = new EPiggy(actualModel.getEPiggy());
         List<Expense> expectedFilteredList = new ArrayList<>(actualModel.getFilteredExpenseList());
         Expense expectedSelectedExpense = actualModel.getSelectedExpense();
 
@@ -156,7 +172,7 @@ public class CommandTestUtil {
             throw new AssertionError("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
-            assertEquals(expectedAddressBook, actualModel.getAddressBook());
+            assertEquals(expectedEPiggy, actualModel.getEPiggy());
             assertEquals(expectedFilteredList, actualModel.getFilteredExpenseList());
             assertEquals(expectedSelectedExpense, actualModel.getSelectedExpense());
             assertEquals(expectedCommandHistory, actualCommandHistory);
@@ -198,7 +214,7 @@ public class CommandTestUtil {
     public static void deleteFirstPerson(Model model) {
         Expense firstExpense = model.getFilteredExpenseList().get(0);
         model.deleteExpense(firstExpense);
-        model.commitAddressBook();
+        model.commitEPiggy();
     }
 
 }

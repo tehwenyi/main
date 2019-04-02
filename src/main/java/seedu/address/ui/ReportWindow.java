@@ -38,7 +38,7 @@ public class ReportWindow {
     /**
      * A method controls report chart display.
      *
-     * @param model AddressBook model
+     * @param model EPiggy model
      * @param date  User specified date, month or year
      * @param type  Report display type
      */

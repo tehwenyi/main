@@ -21,9 +21,11 @@ By: `Team A+ for CS2103T`       Since: `Feb 2019`      Last Updated: `April 2019
 
 == Introduction
 
-ePiggy is a desktop application designed to inculcate good spending habits in students. +
-ePiggy hopes to make managing money much simpler for you with a simple interface and simple commands!
-At the same time, ePiggy offers everything you need to cultivate good spending habits before
+image::userguideintroduction.gif[width="200", role="center"]
+
+Welcome to *_ePiggy_*! *_ePiggy_* is a desktop application designed to inculcate good spending habits in students. +
+Managing money is made much simpler for you with a simple interface and simple commands!
+At the same time, *_ePiggy_* offers everything you need to cultivate good spending habits before
 entering the workforce, from tracking expenses and managing budgets to setting goals! +
 
 Interested? Click on the Quick Start to get started!
@@ -159,15 +161,20 @@ Examples:
 Displays all entries with the name “MCDONALDS”.
 * `search t/FOOD` +
 Displays all entries with the tag specified (in this case, it’s food).
+* `search d/2019/01/02` +
+Displays all entries listed on 2nd Jan 2019.
 * `search d/2019/01/02:2020/12/05` +
 Displays all entries listed in the range 2nd Jan 2019 to 5th Dec 2020.
+* `search $/250` +
+Displays all entries listed with the cost range of $250.
 * `search $/250:500` +
 Displays all entries listed with the cost range of $250 to $500.
 
 ****
 *Additional Information:* +
 Searches and displays the expense along with its information, according to the user-specified command. +
-If the entry is not found, it displays an appropriate error message.
+If the entry is not found, it displays an appropriate error message. +
+Date format is `yyyy/MM/dd` .
 ****
 
 ==== Sorting the expenses : `sort`
@@ -359,6 +366,17 @@ Logout ePiggy. +
 
 Register a new user in ePiggy. +
 // end::v2.0[]
+
+
+==== Share feature `[coming in v2.0]`
+
+Allows you to share your expenses with anyone, by sending them an email
+including an attachment of your personal `ePiggy` data in CSV format. +
+
+
+==== Recommend future spendings : `recommend`
+
+Recommends a daily limit you need to have in order to satisfy your budget and the income you need to have if you intend to maintain your current spending habits. +
 
 == FAQ
 

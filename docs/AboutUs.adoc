@@ -15,13 +15,27 @@ image::pdnm.png[width="150", align="left"]
 
 Role: Team Leader, Developer
 
+Responsibilities: basic features
+
 '''
 
 === Teh Wen Yi
 image::tehwenyi.png[width="150", align="left"]
-{empty}[https://github.com/tehwenyi[github]]
+{empty}[https://github.com/tehwenyi[github]] [<<wenyi#, portfolio>>]
 
 Role: Developer
+
+Responsibilities: `budget` feature, documentation
+
+'''
+
+=== Rahul Baid
+image::rahulb99.png[width="150", align="left"]
+{empty}[https://github.com/rahulb99[github]] [<<rahul#, portfolio>>]
+
+Role: Developer
+
+Responsibilities: `sort` feature, `find` feature, data
 
 '''
 
@@ -30,7 +44,9 @@ image::yunjun199321.png[width="150", align="left"]
 {empty}[https://github.com/yunjun199321[github]]
 [https://cs2103-ay1819s2-w17-4.github.io/team/WuYunjun.html[portfolio]]
 
-Role: Developer
+Role: Developer, Java Guru
+
+Responsibilities: `report` feature, `autocomplete` feature
 
 '''
 
@@ -40,14 +56,6 @@ image::kev-inc.png[width="150", align="left"]
 
 Role: Developer
 
-'''
-
-=== Rahul Baid
-image::rahulb99.png[width="150", align="left"]
-{empty}[https://github.com/rahulb99[github]]
-
-Role: Developer
-
-Responsibilities: Data
+Responsibilities: Storage, `goal` and `savings` features
 
 '''

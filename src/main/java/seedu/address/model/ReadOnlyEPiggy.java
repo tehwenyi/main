@@ -1,15 +1,20 @@
-package seedu.address.model.epiggy;
+package seedu.address.model;
 
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.Savings;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.person.Person;
 
 /**
- * Unmodifiable view of an epiggy.
+ * Unmodifiable view of an address book
  */
 public interface ReadOnlyEPiggy extends Observable {
+
     /**
      * Returns an unmodifiable view of the persons list.
      * This list will not contain any duplicate persons.

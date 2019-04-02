@@ -21,7 +21,7 @@ import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.ReadOnlyEPiggy;
+
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -32,7 +32,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook versionedAddressBook;
+    private final VersionedEPiggy versionedEPiggy;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Expense> filteredExpenses;
@@ -41,7 +41,7 @@ public class ModelManager implements Model {
     private final SimpleObjectProperty<Expense> selectedExpense = new SimpleObjectProperty<>();
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given ePiggy and userPrefs.
      */
     public ModelManager(ReadOnlyEPiggy ePiggy, ReadOnlyUserPrefs userPrefs) {
         super();
@@ -49,18 +49,18 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + ePiggy + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedAddressBook(ePiggy);
+        versionedEPiggy = new VersionedEPiggy(ePiggy);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredPersons = new FilteredList<>(versionedEPiggy.getPersonList());
         filteredPersons.addListener(this::ensureSelectedPersonIsValid);
 
-        filteredExpenses = new FilteredList<>(versionedAddressBook.getExpenseList());
-        filteredBudget = new FilteredList<>(versionedAddressBook.getBudgetList());
+        filteredExpenses = new FilteredList<>(versionedEPiggy.getExpenseList());
+        filteredBudget = new FilteredList<>(versionedEPiggy.getBudgetList());
         //TODO
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new EPiggy(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -88,26 +88,26 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getEPiggyFilePath() {
+        return userPrefs.getEPiggyFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setEPiggyFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setEPiggyFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== EPiggy ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyEPiggy addressBook) {
-        versionedAddressBook.resetData(addressBook);
+    public void setEPiggy(ReadOnlyEPiggy ePiggy) {
+        versionedEPiggy.resetData(ePiggy);
     }
 
     @Override
-    public ReadOnlyEPiggy getAddressBook() {
-        return versionedAddressBook;
+    public ReadOnlyEPiggy getEPiggy() {
+        return versionedEPiggy;
     }
 
     @Override
@@ -115,106 +115,106 @@ public class ModelManager implements Model {
                            seedu.address.model.epiggy.Expense editedExpense) {
         requireAllNonNull(target, editedExpense);
 
-        versionedAddressBook.setExpense(target, editedExpense);
+        versionedEPiggy.setExpense(target, editedExpense);
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return versionedAddressBook.hasPerson(person);
+        return versionedEPiggy.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        versionedAddressBook.removePerson(target);
+        versionedEPiggy.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        versionedAddressBook.addPerson(person);
+        versionedEPiggy.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void addExpense(Expense expense) {
-        versionedAddressBook.addExpense(expense);
+        versionedEPiggy.addExpense(expense);
     }
 
     @Override
     public void addAllowance(Allowance allowance) {
-        versionedAddressBook.addAllowance(allowance);
+        versionedEPiggy.addAllowance(allowance);
     }
 
     @Override
     public void addBudget(int index, Budget budget) {
-        versionedAddressBook.addBudget(index, budget); }
+        versionedEPiggy.addBudget(index, budget); }
 
     /**
      * Checks if there are any overlapping budgets.
      */
     public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
-        return versionedAddressBook.budgetsOverlap(startDate, endDate, earlierBudget);
+        return versionedEPiggy.budgetsOverlap(startDate, endDate, earlierBudget);
     }
 
     @Override
     public void deleteBudgetAtIndex(int index) {
-        versionedAddressBook.deleteBudgetAtIndex(index);
+        versionedEPiggy.deleteBudgetAtIndex(index);
     }
 
     @Override
     public void deleteExpense(Expense toDelete) {
-        versionedAddressBook.deleteExpense(toDelete);
+        versionedEPiggy.deleteExpense(toDelete);
     }
 
     @Override
     public ObservableList<Budget> getBudgetList() {
-        return versionedAddressBook.getBudgetList();
+        return versionedEPiggy.getBudgetList();
     }
 
     @Override
     public ObservableList<Expense> getExpenseList() {
-        return versionedAddressBook.getExpenseList();
+        return versionedEPiggy.getExpenseList();
     }
 
     @Override
     public int getCurrentBudgetIndex() {
-        return versionedAddressBook.getCurrentBudgetIndex();
+        return versionedEPiggy.getCurrentBudgetIndex();
     }
 
     @Override
     public SimpleObjectProperty<Savings> getSavings() {
-        return versionedAddressBook.getSavings();
+        return versionedEPiggy.getSavings();
     }
 
     @Override
     public SimpleObjectProperty<Goal> getGoal() {
-        return versionedAddressBook.getGoal();
+        return versionedEPiggy.getGoal();
     }
 
     @Override
     public void setGoal(Goal goal) {
-        versionedAddressBook.setGoal(goal);
+        versionedEPiggy.setGoal(goal);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        versionedAddressBook.setPerson(target, editedPerson);
+        versionedEPiggy.setPerson(target, editedPerson);
     }
 
     @Override
     public void setCurrentBudget(Budget editedBudget) {
         requireNonNull(editedBudget);
 
-        versionedAddressBook.setCurrentBudget(editedBudget);
+        versionedEPiggy.setCurrentBudget(editedBudget);
     }
 
     //=========== Filtered Person List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedEPiggy}
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
@@ -223,7 +223,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedEPiggy}
      */
     @Override
     public ObservableList<Expense> getFilteredExpenseList() {
@@ -232,7 +232,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Budget} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedEPiggy}
      */
     @Override
     public ObservableList<Budget> getFilteredBudgetList() {
@@ -261,23 +261,23 @@ public class ModelManager implements Model {
         SortedList<Expense> sortedExpenses;
         switch(keyword) {
         case "n": {
-            sortedExpenses = versionedAddressBook.sortExpensesByName();
+            sortedExpenses = versionedEPiggy.sortExpensesByName();
             break;
         }
         case "d": {
-            sortedExpenses = versionedAddressBook.sortExpensesByDate();
+            sortedExpenses = versionedEPiggy.sortExpensesByDate();
             break;
         }
         case "$": {
-            sortedExpenses = versionedAddressBook.sortExpensesByAmount();
+            sortedExpenses = versionedEPiggy.sortExpensesByAmount();
             break;
         } default: return;
         }
         FilteredList<Expense> fl = new FilteredList<>(sortedExpenses);
         fl.setPredicate(PREDICATE_SHOW_ALL_EXPENSES);
         logger.fine("sorted list");
-        versionedAddressBook.getExpenseList();
-        versionedAddressBook.indicateModified();
+        versionedEPiggy.getExpenseList();
+        versionedEPiggy.indicateModified();
     }
 
     @Override
@@ -289,28 +289,28 @@ public class ModelManager implements Model {
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
+    public boolean canUndoEPiggy() {
+        return versionedEPiggy.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
+    public boolean canRedoEPiggy() {
+        return versionedEPiggy.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
-        versionedAddressBook.undo();
+    public void undoEPiggy() {
+        versionedEPiggy.undo();
     }
 
     @Override
-    public void redoAddressBook() {
-        versionedAddressBook.redo();
+    public void redoEPiggy() {
+        versionedEPiggy.redo();
     }
 
     @Override
-    public void commitAddressBook() {
-        versionedAddressBook.commit();
+    public void commitEPiggy() {
+        versionedEPiggy.commit();
     }
 
     //=========== Selected person ===========================================================================
@@ -389,7 +389,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
+        return versionedEPiggy.equals(other.versionedEPiggy)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
                 && Objects.equals(selectedPerson.get(), other.selectedPerson.get());

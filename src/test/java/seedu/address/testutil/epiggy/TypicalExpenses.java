@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.EPiggy;
 import seedu.address.model.epiggy.Expense;
 
 /**
@@ -63,10 +63,10 @@ public class TypicalExpenses {
     private TypicalExpenses() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical expenses.
+     * Returns an {@code EPiggy} with all the typical expenses.
      */
-    public static AddressBook getTypicalEpiggy() {
-        AddressBook ab = new AddressBook();
+    public static EPiggy getTypicalEpiggy() {
+        EPiggy ab = new EPiggy();
         for (Expense expense : getTypicalExpenses()) {
             ab.addExpense(expense);
         }

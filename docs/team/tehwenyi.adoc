@@ -52,13 +52,16 @@ good spending habits in our users. Hence, users should be able to track their pr
 // ability to write code, explain and justify design choices, solve a user problem/fulfil a user need
 
 === Minor Enhancements
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Minor enhancement*:
+
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
 === Other Contributions
 * *Other contributions*:
 
+** Project Management:
+*** Did refactoring of AddressBook to EPiggy 
 ** Enhancements to existing features:
 *** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
 *** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
@@ -76,8 +79,7 @@ good spending habits in our users. Hence, users should be able to track their pr
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
 ** Tools:
 *** Created the *.jar file for ePiggy
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
+*** Set up Coveralls.
 ** All code contributed:
 **** View the codes I contributed here
 _{you can add/remove categories in the list above}_

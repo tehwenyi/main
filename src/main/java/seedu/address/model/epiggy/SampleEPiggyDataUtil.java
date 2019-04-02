@@ -5,14 +5,15 @@ import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.EPiggy;
+import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.epiggy.item.Name;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code EPiggy} with sample data.
  */
 public class SampleEPiggyDataUtil {
     public static Expense[] getSampleExpenses() {
@@ -30,7 +31,7 @@ public class SampleEPiggyDataUtil {
     }
 
     public static ReadOnlyEPiggy getSampleEPiggy() {
-        AddressBook sampleEp = new AddressBook();
+        EPiggy sampleEp = new EPiggy();
         for (Expense sampleExpense : getSampleExpenses()) {
             if (sampleExpense instanceof Allowance) {
                 sampleEp.addAllowance((Allowance) sampleExpense);

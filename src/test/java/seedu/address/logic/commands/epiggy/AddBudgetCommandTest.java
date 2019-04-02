@@ -26,14 +26,15 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.ReadOnlyEPiggy;
+
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.epiggy.BudgetBuilder;
@@ -182,12 +183,12 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getEPiggyFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setEPiggyFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -257,12 +258,12 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyEPiggy newData) {
+        public void setEPiggy(ReadOnlyEPiggy newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyEPiggy getAddressBook() {
+        public ReadOnlyEPiggy getEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -317,27 +318,27 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canRedoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -367,7 +368,7 @@ public class AddBudgetCommandTest {
      */
     private class ModelStubWithBudget extends ModelStub {
         final ArrayList<Budget> budgets = new ArrayList<>();
-        private AddressBook addressBook = new AddressBook();
+        private EPiggy EPiggy = new EPiggy();
 
         ModelStubWithBudget(Budget budget) {
             requireNonNull(budget);
@@ -381,7 +382,7 @@ public class AddBudgetCommandTest {
 
         @Override
         public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
-            return addressBook.budgetsOverlap(startDate, endDate, earlierBudget);
+            return EPiggy.budgetsOverlap(startDate, endDate, earlierBudget);
         }
     }
 
@@ -408,7 +409,7 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitEPiggy() {
             // called by {@code AddCommand#execute()}
         }
     }

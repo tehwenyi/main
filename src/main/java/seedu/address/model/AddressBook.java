@@ -202,6 +202,13 @@ public class AddressBook implements ReadOnlyEPiggy {
     public void deleteExpense(Expense toDelete) {
         expenses.remove(toDelete);
         updateBudgetList(toDelete);
+        Savings s = savings.get();
+        if (toDelete instanceof Allowance) {
+            s.deductSavings(toDelete.getItem().getCost().getAmount());
+        } else {
+            s.addSavings(toDelete.getItem().getCost().getAmount());
+        }
+        this.savings.setValue(new Savings(s));
         indicateModified();
     }
 

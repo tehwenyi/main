@@ -547,7 +547,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag::Report[]
+// tag::report[]
 === Report feature
 This command allows users to view the report within a user-input period of time. +
 This command requires users to specify the `date`, `month` or `year` of the report in the command. +

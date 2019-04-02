@@ -97,9 +97,3 @@ include::../UserGuide.adoc[tag=v2.0]
 The following section shows my additions to the ePiggy Developer Guide for the report and auto complete features.
 
 include::../DeveloperGuide.adoc[tag=report]
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_

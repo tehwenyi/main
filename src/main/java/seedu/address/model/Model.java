@@ -12,7 +12,6 @@ import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.ReadOnlyEPiggy;
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 
@@ -57,14 +56,14 @@ public interface Model {
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setAddressBookFilePath(Path ePiggy);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code ePiggy}.
      */
-    void setAddressBook(ReadOnlyEPiggy addressBook);
+    void setAddressBook(ReadOnlyEPiggy ePiggy);
 
-    /** Returns the AddressBook */
+    /** Returns the EPiggy */
     ReadOnlyEPiggy getAddressBook();
 
     /**

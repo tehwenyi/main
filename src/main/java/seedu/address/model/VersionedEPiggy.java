@@ -3,37 +3,37 @@ package seedu.address.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.address.model.epiggy.ReadOnlyEPiggy;
+import seedu.address.model.ReadOnlyEPiggy;
 
 /**
- * {@code AddressBook} that keeps track of its own history.
+ * {@code EPiggy} that keeps track of its own history.
  */
-public class VersionedAddressBook extends AddressBook {
+public class VersionedEPiggy extends EPiggy {
 
-    private final List<ReadOnlyEPiggy> addressBookStateList;
+    private final List<ReadOnlyEPiggy> ePiggyStateList;
     private int currentStatePointer;
 
-    public VersionedAddressBook(ReadOnlyEPiggy initialState) {
+    public VersionedEPiggy(ReadOnlyEPiggy initialState) {
         super(initialState);
 
-        addressBookStateList = new ArrayList<>();
-        addressBookStateList.add(new AddressBook(initialState));
+        ePiggyStateList = new ArrayList<>();
+        ePiggyStateList.add(new EPiggy(initialState));
         currentStatePointer = 0;
     }
 
     /**
-     * Saves a copy of the current {@code AddressBook} state at the end of the state list.
+     * Saves a copy of the current {@code EPiggy} state at the end of the state list.
      * Undone states are removed from the state list.
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
-        addressBookStateList.add(new AddressBook(this));
+        ePiggyStateList.add(new EPiggy(this));
         currentStatePointer++;
         indicateModified();
     }
 
     private void removeStatesAfterCurrentPointer() {
-        addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
+        ePiggyStateList.subList(currentStatePointer + 1, ePiggyStateList.size()).clear();
     }
 
     /**
@@ -44,7 +44,7 @@ public class VersionedAddressBook extends AddressBook {
             throw new NoUndoableStateException();
         }
         currentStatePointer--;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(ePiggyStateList.get(currentStatePointer));
     }
 
     /**
@@ -55,7 +55,7 @@ public class VersionedAddressBook extends AddressBook {
             throw new NoRedoableStateException();
         }
         currentStatePointer++;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(ePiggyStateList.get(currentStatePointer));
     }
 
     /**
@@ -69,7 +69,7 @@ public class VersionedAddressBook extends AddressBook {
      * Returns true if {@code redo()} has address book states to redo.
      */
     public boolean canRedo() {
-        return currentStatePointer < addressBookStateList.size() - 1;
+        return currentStatePointer < ePiggyStateList.size() - 1;
     }
 
     @Override
@@ -80,15 +80,15 @@ public class VersionedAddressBook extends AddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof VersionedAddressBook)) {
+        if (!(other instanceof VersionedEPiggy)) {
             return false;
         }
 
-        VersionedAddressBook otherVersionedAddressBook = (VersionedAddressBook) other;
+        VersionedEPiggy otherVersionedAddressBook = (VersionedEPiggy) other;
 
         // state check
         return super.equals(otherVersionedAddressBook)
-                && addressBookStateList.equals(otherVersionedAddressBook.addressBookStateList)
+                && ePiggyStateList.equals(otherVersionedAddressBook.ePiggyStateList)
                 && currentStatePointer == otherVersionedAddressBook.currentStatePointer;
     }
 
@@ -97,7 +97,7 @@ public class VersionedAddressBook extends AddressBook {
      */
     public static class NoUndoableStateException extends RuntimeException {
         private NoUndoableStateException() {
-            super("Current state pointer at start of addressBookState list, unable to undo.");
+            super("Current state pointer at start of ePiggyState list, unable to undo.");
         }
     }
 
@@ -106,7 +106,7 @@ public class VersionedAddressBook extends AddressBook {
      */
     public static class NoRedoableStateException extends RuntimeException {
         private NoRedoableStateException() {
-            super("Current state pointer at end of addressBookState list, unable to redo.");
+            super("Current state pointer at end of ePiggyState list, unable to redo.");
         }
     }
 }

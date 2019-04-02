@@ -18,7 +18,7 @@ import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.ExpenseList;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.ReadOnlyEPiggy;
+import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.epiggy.UniqueBudgetList;
 import seedu.address.model.epiggy.item.Item;
@@ -30,7 +30,7 @@ import seedu.address.model.person.UniquePersonList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyEPiggy {
+public class EPiggy implements ReadOnlyEPiggy {
 
     private final ExpenseList expenses;
     private final ObservableList<Item> items;
@@ -57,12 +57,12 @@ public class AddressBook implements ReadOnlyEPiggy {
 
     }
 
-    public AddressBook() {}
+    public EPiggy() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an EPiggy using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyEPiggy toBeCopied) {
+    public EPiggy(ReadOnlyEPiggy toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -97,7 +97,7 @@ public class AddressBook implements ReadOnlyEPiggy {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code EPiggy} with {@code newData}.
      */
     public void resetData(ReadOnlyEPiggy newData) {
         requireNonNull(newData);
@@ -355,7 +355,7 @@ public class AddressBook implements ReadOnlyEPiggy {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code EPiggy}.
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
@@ -414,8 +414,8 @@ public class AddressBook implements ReadOnlyEPiggy {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                || (other instanceof EPiggy // instanceof handles nulls
+                && persons.equals(((EPiggy) other).persons));
     }
 
     @Override

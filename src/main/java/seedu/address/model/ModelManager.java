@@ -21,7 +21,7 @@ import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.ReadOnlyEPiggy;
+import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -32,7 +32,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook versionedAddressBook;
+    private final VersionedEPiggy versionedAddressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Expense> filteredExpenses;
@@ -41,7 +41,7 @@ public class ModelManager implements Model {
     private final SimpleObjectProperty<Expense> selectedExpense = new SimpleObjectProperty<>();
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given ePiggy and userPrefs.
      */
     public ModelManager(ReadOnlyEPiggy ePiggy, ReadOnlyUserPrefs userPrefs) {
         super();
@@ -49,7 +49,7 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + ePiggy + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedAddressBook(ePiggy);
+        versionedAddressBook = new VersionedEPiggy(ePiggy);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredPersons.addListener(this::ensureSelectedPersonIsValid);
@@ -60,7 +60,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new EPiggy(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -93,16 +93,16 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setAddressBookFilePath(Path ePiggy) {
+        requireNonNull(ePiggy);
+        userPrefs.setAddressBookFilePath(ePiggy);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== EPiggy ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyEPiggy addressBook) {
-        versionedAddressBook.resetData(addressBook);
+    public void setAddressBook(ReadOnlyEPiggy ePiggy) {
+        versionedAddressBook.resetData(ePiggy);
     }
 
     @Override

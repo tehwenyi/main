@@ -13,12 +13,12 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.epiggy.ReadOnlyEPiggy;
+import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.storage.epiggy.EPiggyStorage;
 import seedu.address.storage.epiggy.JsonSerializableEPiggy;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * A class to access EPiggy data stored as a json file on the hard disk.
  */
 public class JsonAddressBookStorage implements EPiggyStorage {
 

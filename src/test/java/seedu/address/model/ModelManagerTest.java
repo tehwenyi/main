@@ -23,7 +23,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.EPiggyBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 @Ignore
@@ -37,7 +37,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new EPiggy(), new EPiggy(modelManager.getAddressBook()));
+        assertEquals(new EPiggy(), new EPiggy(modelManager.getEPiggy()));
         assertEquals(null, modelManager.getSelectedExpense());
     }
 
@@ -50,14 +50,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setEPiggyFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setEPiggyFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -75,16 +75,16 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setEPiggyFilePath_nullPath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        modelManager.setAddressBookFilePath(null);
+        modelManager.setEPiggyFilePath(null);
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setEPiggyFilePath_validPath_setsEPiggyFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setEPiggyFilePath(path);
+        assertEquals(path, modelManager.getEPiggyFilePath());
     }
 
     @Test
@@ -94,12 +94,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInEPiggy_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInEPiggy_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
     }
@@ -154,7 +154,7 @@ public class ModelManagerTest {
     @Ignore
     @Test
     public void equals() {
-        EPiggy EPiggy = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        EPiggy EPiggy = new EPiggyBuilder().withPerson(ALICE).withPerson(BENSON).build();
         EPiggy differentEPiggy = new EPiggy();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -185,7 +185,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setEPiggyFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(EPiggy, differentUserPrefs)));
     }
 }

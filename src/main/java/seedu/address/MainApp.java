@@ -63,7 +63,7 @@ public class MainApp extends Application {
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
         */
 
-        EPiggyStorage ePiggyStorage = new JsonEPiggyStorage(userPrefs.getAddressBookFilePath());
+        EPiggyStorage ePiggyStorage = new JsonEPiggyStorage(userPrefs.getEPiggyFilePath());
         storage = new StorageManager(ePiggyStorage, userPrefsStorage);
 
         initLogging(config);

@@ -35,7 +35,7 @@ public class SortExpenseCommand extends Command {
         requireNonNull(model);
         model.sortExpenses(keyword);
         model.getExpenseList();
-        model.commitAddressBook();
+        model.commitEPiggy();
 
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, model.getFilteredExpenseList().size()));

@@ -82,12 +82,12 @@ public class VersionedEPiggy extends EPiggy {
             return false;
         }
 
-        VersionedEPiggy otherVersionedAddressBook = (VersionedEPiggy) other;
+        VersionedEPiggy otherVersionedEPiggyBook = (VersionedEPiggy) other;
 
         // state check
-        return super.equals(otherVersionedAddressBook)
-                && addressBookStateList.equals(otherVersionedAddressBook.addressBookStateList)
-                && currentStatePointer == otherVersionedAddressBook.currentStatePointer;
+        return super.equals(otherVersionedEPiggyBook)
+                && addressBookStateList.equals(otherVersionedEPiggyBook.addressBookStateList)
+                && currentStatePointer == otherVersionedEPiggyBook.currentStatePointer;
     }
 
     /**

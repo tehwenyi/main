@@ -97,10 +97,10 @@ public class CommandTestUtil {
         DESC_IPHONE = new EditExpenseDescriptorBuilder().withName(VALID_NAME_IPHONE)
                 .withCost(VALID_COST_IPHONE).withDate(VALID_DATE_2019).build();
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withEPiggy(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withEPiggy(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     }
@@ -145,7 +145,7 @@ public class CommandTestUtil {
             String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        EPiggy expectedEPiggy = new EPiggy(actualModel.getAddressBook());
+        EPiggy expectedEPiggy = new EPiggy(actualModel.getEPiggy());
         List<Expense> expectedFilteredList = new ArrayList<>(actualModel.getFilteredExpenseList());
         Expense expectedSelectedExpense = actualModel.getSelectedExpense();
 
@@ -156,7 +156,7 @@ public class CommandTestUtil {
             throw new AssertionError("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
-            assertEquals(expectedEPiggy, actualModel.getAddressBook());
+            assertEquals(expectedEPiggy, actualModel.getEPiggy());
             assertEquals(expectedFilteredList, actualModel.getFilteredExpenseList());
             assertEquals(expectedSelectedExpense, actualModel.getSelectedExpense());
             assertEquals(expectedCommandHistory, actualCommandHistory);
@@ -198,7 +198,7 @@ public class CommandTestUtil {
     public static void deleteFirstPerson(Model model) {
         Expense firstExpense = model.getFilteredExpenseList().get(0);
         model.deleteExpense(firstExpense);
-        model.commitAddressBook();
+        model.commitEPiggy();
     }
 
 }

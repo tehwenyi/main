@@ -43,9 +43,9 @@ public class TestApp extends MainApp {
 
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
-            JsonEPiggyStorage jsonAddressBookStorage = new JsonEPiggyStorage(saveFileLocation);
+            JsonEPiggyStorage jsonEPiggyStorage = new JsonEPiggyStorage(saveFileLocation);
             try {
-                jsonAddressBookStorage.saveEPiggy(initialDataSupplier.get());
+                jsonEPiggyStorage.saveEPiggy(initialDataSupplier.get());
             } catch (IOException ioe) {
                 throw new AssertionError(ioe);
             }
@@ -65,14 +65,14 @@ public class TestApp extends MainApp {
         double x = Screen.getPrimary().getVisualBounds().getMinX();
         double y = Screen.getPrimary().getVisualBounds().getMinY();
         userPrefs.setGuiSettings(new GuiSettings(600.0, 600.0, (int) x, (int) y));
-        userPrefs.setAddressBookFilePath(saveFileLocation);
+        userPrefs.setEPiggyFilePath(saveFileLocation);
         return userPrefs;
     }
 
     /**
      * Returns a defensive copy of the address book data stored inside the storage file.
      */
-    public EPiggy readStorageAddressBook() {
+    public EPiggy readStorageEPiggy() {
         try {
             return new EPiggy(storage.readEPiggy().get());
         } catch (DataConversionException dce) {
@@ -93,7 +93,7 @@ public class TestApp extends MainApp {
      * Returns a defensive copy of the model.
      */
     public Model getModel() {
-        Model copy = new ModelManager((model.getAddressBook()), new UserPrefs());
+        Model copy = new ModelManager((model.getEPiggy()), new UserPrefs());
         ModelHelper.setFilteredList(copy, model.getFilteredPersonList());
         return copy;
     }

@@ -62,7 +62,7 @@ public class TypicalPersons {
     /**
      * Returns an {@code EPiggy} with all the typical persons.
      */
-    public static EPiggy getTypicalAddressBook() {
+    public static EPiggy getTypicalEPiggy() {
         EPiggy ab = new EPiggy();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);

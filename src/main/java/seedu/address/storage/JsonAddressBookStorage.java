@@ -21,14 +21,14 @@ import seedu.address.storage.epiggy.JsonSerializableEPiggy;
 /**
  * A class to access EPiggy data stored as a json file on the hard disk.
  */
-public class JsonAddressBookStorage implements EPiggyStorage {
+public class JsonEPiggyStorage implements EPiggyStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonEPiggyStorage.class);
 
     private Path filePath;
     private Path backupFilePath;
 
-    public JsonAddressBookStorage(Path filePath) {
+    public JsonEPiggyStorage(Path filePath) {
         this.filePath = filePath;
         backupFilePath = Paths.get(filePath.toString() + ".backup");
     }

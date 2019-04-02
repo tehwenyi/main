@@ -11,12 +11,12 @@ import seedu.address.model.ReadOnlyEPiggy;
 /**
  * Represents a storage for {@link EPiggy}.
  */
-public interface AddressBookStorage {
+public interface EPiggyStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getEPiggyFilePath();
 
     /**
      * Returns EPiggy data as a {@link ReadOnlyEPiggy}.
@@ -24,30 +24,30 @@ public interface AddressBookStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<seedu.address.model.ReadOnlyEPiggy> readAddressBook() throws DataConversionException, IOException;
+    Optional<seedu.address.model.ReadOnlyEPiggy> readEPiggy() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getEPiggyFilePath()
      */
-    Optional<seedu.address.model.ReadOnlyEPiggy> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<seedu.address.model.ReadOnlyEPiggy> readEPiggy(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyEPiggy} to the storage.
      * @param ePiggy cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyEPiggy ePiggy) throws IOException;
+    void saveEPiggy(ReadOnlyEPiggy ePiggy) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyEPiggy)
+     * @see #saveEPiggy(ReadOnlyEPiggy)
      */
-    void saveAddressBook(ReadOnlyEPiggy ePiggy, Path filePath) throws IOException;
+    void saveEPiggy(ReadOnlyEPiggy ePiggy, Path filePath) throws IOException;
 
     /**
      * Creates a backup file for {@link ReadOnlyEPiggy}
      * @param ePiggy
      * @throws IOException
      */
-    void backupAddressBook(ReadOnlyEPiggy ePiggy) throws IOException;
+    void backupEPiggy(ReadOnlyEPiggy ePiggy) throws IOException;
 
 }

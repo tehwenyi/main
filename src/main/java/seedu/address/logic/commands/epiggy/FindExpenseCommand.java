@@ -35,7 +35,7 @@ public class FindExpenseCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredExpensesList(predicate);
-        model.commitAddressBook();
+        model.commitEPiggy();
 
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, model.getFilteredExpenseList().size()));

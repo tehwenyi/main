@@ -15,15 +15,15 @@ import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.EPiggyBuilder;
 
 @Ignore
 public class VersionedEPiggyTest {
 
-    private final ReadOnlyEPiggy addressBookWithAmy = new AddressBookBuilder().withPerson(AMY).build();
-    private final ReadOnlyEPiggy addressBookWithBob = new AddressBookBuilder().withPerson(BOB).build();
-    private final ReadOnlyEPiggy addressBookWithCarl = new AddressBookBuilder().withPerson(CARL).build();
-    private final ReadOnlyEPiggy emptyAddressBook = new AddressBookBuilder().build();
+    private final ReadOnlyEPiggy addressBookWithAmy = new EPiggyBuilder().withPerson(AMY).build();
+    private final ReadOnlyEPiggy addressBookWithBob = new EPiggyBuilder().withPerson(BOB).build();
+    private final ReadOnlyEPiggy addressBookWithCarl = new EPiggyBuilder().withPerson(CARL).build();
+    private final ReadOnlyEPiggy emptyAddressBook = new EPiggyBuilder().build();
 
     @Test
     public void commit_singleAddressBook_noStatesRemovedCurrentStateSaved() {

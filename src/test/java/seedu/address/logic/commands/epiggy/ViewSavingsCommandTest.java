@@ -83,7 +83,7 @@ public class ViewSavingsCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getEPiggyBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 

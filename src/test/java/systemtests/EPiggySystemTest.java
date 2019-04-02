@@ -75,7 +75,7 @@ public abstract class EPiggySystemTest {
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
     protected EPiggy getInitialData() {
-        return TypicalPersons.getTypicalAddressBook();
+        return TypicalPersons.getTypicalEPiggy();
     }
 
     /**
@@ -133,7 +133,7 @@ public abstract class EPiggySystemTest {
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getAddressBook().getPersonList().size(), getModel().getFilteredPersonList().size());
+        assertEquals(getModel().getEPiggy().getPersonList().size(), getModel().getFilteredPersonList().size());
     }
 
     /**

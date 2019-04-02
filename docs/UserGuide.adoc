@@ -93,6 +93,7 @@ Adds an expense for a $5 chicken rice set, tagged as Food with the date as 21/02
 * `addExpense n/Chicken rice set $/5 t/Food` +
 Adds an expense for a $5 chicken rice set, tagged as Food dated as the current date, by default.
 
+// tag::addAllowance[]
 ==== Adding an allowance: `addAllowance`
 
 Adds a new allowance record to the Expense Tracker. +
@@ -312,7 +313,7 @@ View the yearly report of 2019.
 // end::report[]
 
 === Goal Setting
-
+// tag::setGoal[]
 ==== Setting the savings goal : `setGoal`
 
 Sets the item and the amount that the user wishes to save up for. +
@@ -323,10 +324,15 @@ Example:
 * `setGoal n/nike shoes $/80` +
 Sets the goal to a $80 Nike shoe.
 
+// end::setGoal[]
+
+// tag::viewGoal[]
 ==== Viewing the savings goal : `viewGoal`
 
 Show details about the current goal set. +
 Format: `viewGoal`
+
+// end::viewGoal[]
 
 === Miscellaneous
 

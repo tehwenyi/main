@@ -461,6 +461,8 @@ The command is first parsed into `SetGoalCommandParser`, which separates the arg
 ** Pros: Gives user freedom to set more than 1 goal.
 ** Cons: Makes ePiggy more complicated, not suitable for younger age groups.
 
+// end::setGoal[]
+
 // tag::viewGoal[]
 === View Goal feature
 This command allows users to view their goal set, as well as to check how much more the user has to save in order to reach the goal. +
@@ -482,6 +484,8 @@ If `diff` is negative, the congratulation message is passed to `CommandResult`.
 
 [NOTE]
 If a goal has not been set by the user, the command will use a default goal which has an empty name and $0 for the amount.
+
+// end::viewGoal[]
 
 // tag::undoredo[]
 === Undo/Redo feature

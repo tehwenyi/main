@@ -40,7 +40,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyEPiggy getSampleAddressBook() {
+    public static ReadOnlyEPiggy getSampleEPiggy() {
         EPiggy sampleAb = new EPiggy();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);

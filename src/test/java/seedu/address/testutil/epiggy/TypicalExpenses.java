@@ -66,11 +66,11 @@ public class TypicalExpenses {
      * Returns an {@code EPiggy} with all the typical expenses.
      */
     public static EPiggy getTypicalEpiggy() {
-        EPiggy ab = new EPiggy();
+        EPiggy ePiggy = new EPiggy();
         for (Expense expense : getTypicalExpenses()) {
-            ab.addExpense(expense);
+            ePiggy.addExpense(expense);
         }
-        return ab;
+        return ePiggy;
     }
 
     public static List<Expense> getTypicalExpenses() {

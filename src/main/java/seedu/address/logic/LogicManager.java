@@ -43,7 +43,7 @@ public class LogicManager implements Logic {
         EPiggyParser = new EPiggyParser();
 
         // Set ePiggyModified to true whenever the models' address book is modified.
-        model.getAddressBook().addListener(observable -> ePiggyModified = true);
+        model.getEPiggy().addListener(observable -> ePiggyModified = true);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class LogicManager implements Logic {
         if (ePiggyModified) {
             logger.info("Address book modified, saving to file.");
             try {
-                storage.saveEPiggy(model.getAddressBook());
+                storage.saveEPiggy(model.getEPiggy());
             } catch (IOException ioe) {
                 throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
             }
@@ -72,8 +72,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyEPiggy getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyEPiggy getEPiggy() {
+        return model.getEPiggy();
     }
 
     @Override
@@ -107,8 +107,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getEPiggyFilePath() {
+        return model.getEPiggyFilePath();
     }
 
     @Override

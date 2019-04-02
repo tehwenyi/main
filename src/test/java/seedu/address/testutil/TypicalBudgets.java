@@ -50,13 +50,13 @@ public class TypicalBudgets {
      * Returns an {@code EPiggy} with all the typical persons.
      */
     public static EPiggy getTypicalEPiggy() {
-        EPiggy ab = new EPiggy();
+        EPiggy ePiggy = new EPiggy();
         int i = 0;
         for (Budget budget : getTypicalBudgets()) {
-            ab.addBudget(i, budget);
+            ePiggy.addBudget(i, budget);
             i++;
         }
-        return ab;
+        return ePiggy;
     }
 
     public static List<Budget> getTypicalBudgets() {

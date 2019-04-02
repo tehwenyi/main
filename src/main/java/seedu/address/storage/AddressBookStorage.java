@@ -16,7 +16,7 @@ public interface AddressBookStorage {
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getEPiggyFilePath();
 
     /**
      * Returns EPiggy data as a {@link ReadOnlyEPiggy}.
@@ -27,7 +27,7 @@ public interface AddressBookStorage {
     Optional<ReadOnlyEPiggy> readAddressBook() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getEPiggyFilePath()
      */
     Optional<ReadOnlyEPiggy> readAddressBook(Path filePath) throws DataConversionException, IOException;
 

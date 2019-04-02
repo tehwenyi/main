@@ -32,9 +32,9 @@ public interface Logic {
     /**
      * Returns the EPiggy.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getEPiggy()
      */
-    ReadOnlyEPiggy getAddressBook();
+    ReadOnlyEPiggy getEPiggy();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
@@ -57,7 +57,7 @@ public interface Logic {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getEPiggyFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

@@ -37,7 +37,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new EPiggy(), new EPiggy(modelManager.getAddressBook()));
+        assertEquals(new EPiggy(), new EPiggy(modelManager.getEPiggy()));
         assertEquals(null, modelManager.getSelectedExpense());
     }
 
@@ -50,14 +50,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setEPiggyFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setEPiggyFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -75,16 +75,16 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
+    public void setEPiggyFilePath_nullPath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        modelManager.setAddressBookFilePath(null);
+        modelManager.setEPiggyFilePath(null);
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setEPiggyFilePath_validPath_setsAddressBookFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setEPiggyFilePath(path);
+        assertEquals(path, modelManager.getEPiggyFilePath());
     }
 
     @Test
@@ -185,7 +185,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setEPiggyFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(EPiggy, differentUserPrefs)));
     }
 }

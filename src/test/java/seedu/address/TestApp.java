@@ -64,7 +64,7 @@ public class TestApp extends MainApp {
         double x = Screen.getPrimary().getVisualBounds().getMinX();
         double y = Screen.getPrimary().getVisualBounds().getMinY();
         userPrefs.setGuiSettings(new GuiSettings(600.0, 600.0, (int) x, (int) y));
-        userPrefs.setAddressBookFilePath(saveFileLocation);
+        userPrefs.setEPiggyFilePath(saveFileLocation);
         return userPrefs;
     }
 
@@ -92,7 +92,7 @@ public class TestApp extends MainApp {
      * Returns a defensive copy of the model.
      */
     public Model getModel() {
-        Model copy = new ModelManager((model.getAddressBook()), new UserPrefs());
+        Model copy = new ModelManager((model.getEPiggy()), new UserPrefs());
         ModelHelper.setFilteredList(copy, model.getFilteredPersonList());
         return copy;
     }

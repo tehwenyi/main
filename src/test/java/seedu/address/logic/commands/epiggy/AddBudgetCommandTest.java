@@ -182,12 +182,12 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getEPiggyFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path ePiggyFilePath) {
+        public void setEPiggyFilePath(Path ePiggyFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -257,12 +257,12 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyEPiggy newData) {
+        public void setEPiggy(ReadOnlyEPiggy newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyEPiggy getAddressBook() {
+        public ReadOnlyEPiggy getEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -317,27 +317,27 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canRedoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -408,7 +408,7 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitEPiggy() {
             // called by {@code AddCommand#execute()}
         }
     }

@@ -80,7 +80,7 @@ public class EditExpenseCommand extends Command {
 
         model.setExpense(toEdit, editedExpense);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
+        model.commitEPiggy();
         return new CommandResult(String.format(MESSAGE_EDIT_EXPENSE_SUCCESS, editedExpense));
     }
 

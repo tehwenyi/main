@@ -19,8 +19,8 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.setAddressBook(new EPiggy());
-        model.commitAddressBook();
+        model.setEPiggy(new EPiggy());
+        model.commitEPiggy();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

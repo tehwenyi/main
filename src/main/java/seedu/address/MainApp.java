@@ -58,11 +58,11 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         /*
-        AddressBookStorage ePiggyStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
+        EPiggyStorage ePiggyStorage = new JsonEPiggyStorage(userPrefs.getEPiggyFilePath());
         storage = new StorageManager(ePiggyStorage, userPrefsStorage);
         */
 
-        EPiggyStorage ePiggyStorage = new JsonEPiggyStorage(userPrefs.getAddressBookFilePath());
+        EPiggyStorage ePiggyStorage = new JsonEPiggyStorage(userPrefs.getEPiggyFilePath());
         storage = new StorageManager(ePiggyStorage, userPrefsStorage);
 
         initLogging(config);

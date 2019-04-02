@@ -133,7 +133,7 @@ public abstract class EPiggySystemTest {
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getAddressBook().getPersonList().size(), getModel().getFilteredPersonList().size());
+        assertEquals(getModel().getEPiggy().getPersonList().size(), getModel().getFilteredPersonList().size());
     }
 
     /**
@@ -141,7 +141,7 @@ public abstract class EPiggySystemTest {
      */
     protected void showPersonsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredPersonList().size() < getModel().getAddressBook().getPersonList().size());
+        assertTrue(getModel().getFilteredPersonList().size() < getModel().getEPiggy().getPersonList().size());
     }
 
     /**
@@ -157,7 +157,7 @@ public abstract class EPiggySystemTest {
      */
     protected void deleteAllPersons() {
         executeCommand(ClearCommand.COMMAND_WORD);
-        assertEquals(0, getModel().getAddressBook().getPersonList().size());
+        assertEquals(0, getModel().getEPiggy().getPersonList().size());
     }
 
     /**
@@ -169,7 +169,7 @@ public abstract class EPiggySystemTest {
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new EPiggy(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
+        assertEquals(new EPiggy(expectedModel.getEPiggy()), testApp.readStorageAddressBook());
         //        assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
     }
 

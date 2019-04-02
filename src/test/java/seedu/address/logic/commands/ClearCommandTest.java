@@ -19,7 +19,7 @@ public class ClearCommandTest {
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
-        expectedModel.commitAddressBook();
+        expectedModel.commitEPiggy();
 
         assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -28,8 +28,8 @@ public class ClearCommandTest {
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setAddressBook(new EPiggy());
-        expectedModel.commitAddressBook();
+        expectedModel.setEPiggy(new EPiggy());
+        expectedModel.commitEPiggy();
 
         assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }

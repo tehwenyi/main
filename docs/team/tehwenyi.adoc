@@ -1,4 +1,4 @@
-= Teh Wen Yi - Project Portfolio
+= Teh Wen Yi - Project Portfolio for ePiggy
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
@@ -7,7 +7,7 @@
 
 ---
 
-== Overview
+== [red]Overview
 
 This portfolio aims to document my contributions to *_ePiggy_*.
 
@@ -16,7 +16,7 @@ This portfolio aims to document my contributions to *_ePiggy_*.
 == Introduction
 
 === About
-
+// what specific project task is, what module it is for, whether it is an indiv or grp proj
 *ePiggy* is a desktop application designed to inculcate good spending habits in students
 through allowing them to track their finances. It includes everything from tracking expenses, managing budgets
 to setting goals. +
@@ -46,6 +46,8 @@ workforce and deal with larger sums of money. +
 ** This enhancement was built from scratch. It is completely new and hence required the creation of many new objects including `budget`, `period`, `uniqueBudgetList` and a new `budgetPanel` for the UI. This enhancement required the familiarity with
 almost all the different areas of the code (`commons`, `logic`, `model`, `ui`).
 ** For this enhancement, the UI is important as the purpose is to constantly remind users of the remaining amount they can spend. It was challenging to make the UI simple and concise for our target users whilst conveying the crucial information.
+
+// ability to write code, explain and justify design choices, solve a user problem/fulfil a user need
 
 === Minor Enhancements
 * *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
@@ -80,7 +82,7 @@ _{you can add/remove categories in the list above}_
 
 
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_// Change this part: Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
 include::../UserGuide.adoc[tag=undoredo]
@@ -96,10 +98,3 @@ include::../UserGuide.adoc[tag=dataencryption]
 include::../DeveloperGuide.adoc[tag=undoredo]
 
 include::../DeveloperGuide.adoc[tag=dataencryption]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_

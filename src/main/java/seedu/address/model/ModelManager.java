@@ -41,7 +41,7 @@ public class ModelManager implements Model {
     private final SimpleObjectProperty<Expense> selectedExpense = new SimpleObjectProperty<>();
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given ePiggy and userPrefs.
      */
     public ModelManager(ReadOnlyEPiggy ePiggy, ReadOnlyUserPrefs userPrefs) {
         super();
@@ -101,8 +101,8 @@ public class ModelManager implements Model {
     //=========== EPiggy ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyEPiggy addressBook) {
-        versionedAddressBook.resetData(addressBook);
+    public void setAddressBook(ReadOnlyEPiggy ePiggy) {
+        versionedAddressBook.resetData(ePiggy);
     }
 
     @Override

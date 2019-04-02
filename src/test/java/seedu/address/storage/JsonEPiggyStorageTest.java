@@ -109,12 +109,12 @@ public class JsonEPiggyStorageTest {
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code ePiggy} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyEPiggy addressBook, String filePath) {
+    private void saveAddressBook(ReadOnlyEPiggy ePiggy, String filePath) {
         try {
             new JsonEPiggyStorage(Paths.get(filePath))
-                    .saveEPiggy(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveEPiggy(ePiggy, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

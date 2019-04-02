@@ -59,9 +59,9 @@ public interface Model {
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code ePiggy}.
      */
-    void setAddressBook(ReadOnlyEPiggy addressBook);
+    void setAddressBook(ReadOnlyEPiggy ePiggy);
 
     /** Returns the EPiggy */
     ReadOnlyEPiggy getAddressBook();

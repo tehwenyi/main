@@ -33,21 +33,21 @@ public interface AddressBookStorage {
 
     /**
      * Saves the given {@link ReadOnlyEPiggy} to the storage.
-     * @param addressBook cannot be null.
+     * @param ePiggy cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyEPiggy addressBook) throws IOException;
+    void saveAddressBook(ReadOnlyEPiggy ePiggy) throws IOException;
 
     /**
      * @see #saveAddressBook(ReadOnlyEPiggy)
      */
-    void saveAddressBook(ReadOnlyEPiggy addressBook, Path filePath) throws IOException;
+    void saveAddressBook(ReadOnlyEPiggy ePiggy, Path filePath) throws IOException;
 
     /**
      * Creates a backup file for {@link ReadOnlyEPiggy}
-     * @param addressBook
+     * @param ePiggy
      * @throws IOException
      */
-    void backupAddressBook(ReadOnlyEPiggy addressBook) throws IOException;
+    void backupAddressBook(ReadOnlyEPiggy ePiggy) throws IOException;
 
 }

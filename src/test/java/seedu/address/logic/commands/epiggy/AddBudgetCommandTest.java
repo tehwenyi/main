@@ -22,12 +22,10 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -147,6 +145,22 @@ public class AddBudgetCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+
+        @Override
+        public ObservableList<Budget> getBudgetList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortExpenses(String keyword) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Expense> getExpenseList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -303,11 +317,6 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public void sortExpenses(ArgumentMultimap keywords) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean canUndoAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -343,7 +352,7 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public Person getSelectedPerson() {
+        public Expense getSelectedExpense() {
             throw new AssertionError("This method should not be called.");
         }
 

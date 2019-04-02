@@ -29,17 +29,17 @@ import seedu.address.TestApp;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.model.AddressBook;
+import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.testutil.TypicalPersons;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
 
 /**
- * A system test class for AddressBook, which provides access to handles of GUI components and helper methods
+ * A system test class for EPiggy, which provides access to handles of GUI components and helper methods
  * for test verification.
  */
-public abstract class AddressBookSystemTest {
+public abstract class EPiggySystemTest {
     @ClassRule
     public static ClockRule clockRule = new ClockRule();
 
@@ -74,7 +74,7 @@ public abstract class AddressBookSystemTest {
     /**
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
-    protected AddressBook getInitialData() {
+    protected EPiggy getInitialData() {
         return TypicalPersons.getTypicalAddressBook();
     }
 
@@ -169,7 +169,7 @@ public abstract class AddressBookSystemTest {
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new AddressBook(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
+        assertEquals(new EPiggy(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
         //        assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
     }
 

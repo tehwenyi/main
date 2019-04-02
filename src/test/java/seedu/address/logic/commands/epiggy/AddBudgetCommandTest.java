@@ -26,7 +26,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -368,7 +368,7 @@ public class AddBudgetCommandTest {
      */
     private class ModelStubWithBudget extends ModelStub {
         final ArrayList<Budget> budgets = new ArrayList<>();
-        private AddressBook addressBook = new AddressBook();
+        private EPiggy EPiggy = new EPiggy();
 
         ModelStubWithBudget(Budget budget) {
             requireNonNull(budget);
@@ -382,7 +382,7 @@ public class AddBudgetCommandTest {
 
         @Override
         public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
-            return addressBook.budgetsOverlap(startDate, endDate, earlierBudget);
+            return EPiggy.budgetsOverlap(startDate, endDate, earlierBudget);
         }
     }
 

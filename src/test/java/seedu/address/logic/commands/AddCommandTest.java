@@ -21,7 +21,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -359,7 +359,7 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyEPiggy getAddressBook() {
-            return new AddressBook();
+            return new EPiggy();
         }
     }
 

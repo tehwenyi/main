@@ -32,7 +32,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook versionedAddressBook;
+    private final VersionedEPiggy versionedAddressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Expense> filteredExpenses;
@@ -49,7 +49,7 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + ePiggy + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedAddressBook(ePiggy);
+        versionedAddressBook = new VersionedEPiggy(ePiggy);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredPersons.addListener(this::ensureSelectedPersonIsValid);
@@ -60,7 +60,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new EPiggy(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -98,7 +98,7 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== EPiggy ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyEPiggy addressBook) {

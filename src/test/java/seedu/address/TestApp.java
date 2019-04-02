@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyEPiggy;
@@ -72,11 +72,11 @@ public class TestApp extends MainApp {
     /**
      * Returns a defensive copy of the address book data stored inside the storage file.
      */
-    public AddressBook readStorageAddressBook() {
+    public EPiggy readStorageAddressBook() {
         try {
-            return new AddressBook(storage.readEPiggy().get());
+            return new EPiggy(storage.readEPiggy().get());
         } catch (DataConversionException dce) {
-            throw new AssertionError("Data is not in the AddressBook format.", dce);
+            throw new AssertionError("Data is not in the EPiggy format.", dce);
         } catch (IOException ioe) {
             throw new AssertionError("Storage file cannot be found.", ioe);
         }

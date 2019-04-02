@@ -20,7 +20,7 @@ import seedu.address.logic.commands.epiggy.EditExpenseCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.model.AddressBook;
+import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
@@ -145,7 +145,7 @@ public class CommandTestUtil {
             String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        EPiggy expectedEPiggy = new EPiggy(actualModel.getAddressBook());
         List<Expense> expectedFilteredList = new ArrayList<>(actualModel.getFilteredExpenseList());
         Expense expectedSelectedExpense = actualModel.getSelectedExpense();
 
@@ -156,7 +156,7 @@ public class CommandTestUtil {
             throw new AssertionError("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
-            assertEquals(expectedAddressBook, actualModel.getAddressBook());
+            assertEquals(expectedEPiggy, actualModel.getAddressBook());
             assertEquals(expectedFilteredList, actualModel.getFilteredExpenseList());
             assertEquals(expectedSelectedExpense, actualModel.getSelectedExpense());
             assertEquals(expectedCommandHistory, actualCommandHistory);

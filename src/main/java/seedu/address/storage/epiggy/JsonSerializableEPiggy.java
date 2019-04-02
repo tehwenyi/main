@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.EPiggy;
 import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Expense;
@@ -52,18 +52,18 @@ public class JsonSerializableEPiggy {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public EPiggy toModelType() throws IllegalValueException {
+        EPiggy EPiggy = new EPiggy();
         for (JsonAdaptedExpense jsonAdaptedExpense : expenses) {
             Expense expense = jsonAdaptedExpense.toModelType();
             if (expense instanceof Allowance) {
-                addressBook.addAllowance((Allowance) expense);
+                EPiggy.addAllowance((Allowance) expense);
             } else {
-                addressBook.addExpense(expense);
+                EPiggy.addExpense(expense);
             }
         }
-        addressBook.setGoal(goal.toModelType());
-        addressBook.setSavings(savings.toModelType());
-        return addressBook;
+        EPiggy.setGoal(goal.toModelType());
+        EPiggy.setSavings(savings.toModelType());
+        return EPiggy;
     }
 }

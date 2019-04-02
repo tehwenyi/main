@@ -63,7 +63,7 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyEPiggy addressBook);
 
-    /** Returns the AddressBook */
+    /** Returns the EPiggy */
     ReadOnlyEPiggy getAddressBook();
 
     /**

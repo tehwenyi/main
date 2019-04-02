@@ -19,7 +19,7 @@ import seedu.address.storage.epiggy.EPiggyStorage;
 import seedu.address.storage.epiggy.JsonSerializableEPiggy;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * A class to access EPiggy data stored as a json file on the hard disk.
  */
 public class JsonAddressBookStorage implements EPiggyStorage {
 

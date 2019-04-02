@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.AddressBook;
+import seedu.address.model.EPiggy;
 import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.UserPrefs;
 
@@ -58,12 +58,12 @@ public class StorageManagerTest {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonEPiggyStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
+        EPiggy original = getTypicalAddressBook();
         storageManager.saveEPiggy(original);
         ReadOnlyEPiggy retrieved = storageManager.readEPiggy().get();
-        assertEquals(original, new AddressBook(retrieved));
+        assertEquals(original, new EPiggy(retrieved));
     }
 
     @Test

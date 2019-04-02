@@ -14,7 +14,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.storage.epiggy.EPiggyStorage;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of EPiggy data in local storage.
  */
 public class StorageManager implements Storage {
 
@@ -47,7 +47,7 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ EPiggy methods ==============================
 
     @Override
     public Path getEPiggyFilePath() {

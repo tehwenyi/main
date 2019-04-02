@@ -18,13 +18,13 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.EPiggy;
 
 import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.storage.epiggy.JsonEPiggyStorage;
 
-public class JsonAddressBookStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
+public class JsonEPiggyStorageTest {
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonEPiggyStorageTest");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -79,26 +79,26 @@ public class JsonAddressBookStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.getRoot().toPath().resolve("TempAddressBook.json");
-        AddressBook original = getTypicalAddressBook();
+        EPiggy original = getTypicalAddressBook();
         JsonEPiggyStorage jsonAddressBookStorage = new JsonEPiggyStorage(filePath);
 
         // Save in new file and read back
         jsonAddressBookStorage.saveEPiggy(original, filePath);
         ReadOnlyEPiggy readBack = jsonAddressBookStorage.readEPiggy(filePath).get();
-        assertEquals(original, new AddressBook(readBack));
+        assertEquals(original, new EPiggy(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
         original.removePerson(ALICE);
         jsonAddressBookStorage.saveEPiggy(original, filePath);
         readBack = jsonAddressBookStorage.readEPiggy(filePath).get();
-        assertEquals(original, new AddressBook(readBack));
+        assertEquals(original, new EPiggy(readBack));
 
         // Save and read without specifying file path
         original.addPerson(IDA);
         jsonAddressBookStorage.saveEPiggy(original); // file path not specified
         readBack = jsonAddressBookStorage.readEPiggy().get(); // file path not specified
-        assertEquals(original, new AddressBook(readBack));
+        assertEquals(original, new EPiggy(readBack));
 
     }
 
@@ -123,6 +123,6 @@ public class JsonAddressBookStorageTest {
     @Test
     public void saveAddressBook_nullFilePath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        saveAddressBook(new AddressBook(), null);
+        saveAddressBook(new EPiggy(), null);
     }
 }

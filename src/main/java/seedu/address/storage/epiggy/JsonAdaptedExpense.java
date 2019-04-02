@@ -23,7 +23,8 @@ import seedu.address.model.tag.Tag;
 /**
  * Json friendly version of (@Link Expense)
  */
-public class JsonAdaptedExpense {
+public class
+JsonAdaptedExpense {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Expense's %s field is missing!";
 

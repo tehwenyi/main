@@ -302,7 +302,26 @@ public class EPiggy implements ReadOnlyEPiggy {
         requireNonNull(editedExpense);
         expenses.setExpense(target, editedExpense);
         updateBudgetList(editedExpense);
+        recalculateSavings(target, editedExpense);
         indicateModified();
+    }
+
+    /**
+     * Calculates the new savings amount when the setExpense function is used.
+     * @param oldExp
+     * @param newExp
+     */
+    public void recalculateSavings(Expense oldExp, Expense newExp) {
+        Savings s = savings.get();
+        double diff = newExp.getItem().getCost().getAmount() - oldExp.getItem().getCost().getAmount();
+        if (oldExp instanceof Allowance) {
+            // positive means increase allowance, negative means decrease allowance.
+            s.addSavings(diff);
+        } else {
+            // positive means increase expense, negative means decrease expense.
+            s.deductSavings(diff);
+        }
+        this.savings.setValue(new Savings(s));
     }
 
     /**

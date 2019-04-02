@@ -22,6 +22,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Item;
@@ -96,6 +97,9 @@ public class EditExpenseCommand extends Command {
         Date updatedDate = editExpenseDescriptor.getDate().orElse(expenseToEdit.getDate());
         Set<Tag> updatedTags = editExpenseDescriptor.getTags().orElse(expenseToEdit.getItem().getTags());
 
+        if (expenseToEdit instanceof Allowance) {
+            return new Allowance(new Item(updatedName, updatedCost, updatedTags), updatedDate);
+        }
         return new Expense(new Item(updatedName, updatedCost, updatedTags), updatedDate);
     }
 

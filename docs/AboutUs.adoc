@@ -29,6 +29,16 @@ Responsibilities: `budget` feature, documentations
 
 '''
 
+=== Rahul Baid
+image::rahulb99.png[width="150", align="left"]
+{empty}[https://github.com/rahulb99[github]] [<<rahul#, portfolio>>]
+
+Role: Developer
+
+Responsibilities: `sort` feature, `find` feature, data
+
+'''
+
 === Wu Yunjun
 image::yunjun199321.png[width="150", align="left"]
 {empty}[https://github.com/yunjun199321[github]] [<<yunjun199321#, portfolio>>]
@@ -46,15 +56,5 @@ image::kev-inc.png[width="150", align="left"]
 Role: Developer
 
 Responsibilities: Storage, `goal` and `savings` features
-
-'''
-
-=== Rahul Baid
-image::rahulb99.png[width="150", align="left"]
-{empty}[https://github.com/rahulb99[github]] [<<rahul99#, portfolio>>]
-
-Role: Developer
-
-Responsibilities: `sort` feature, `find` feature, data
 
 '''

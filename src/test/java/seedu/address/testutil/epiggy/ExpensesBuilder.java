@@ -18,7 +18,7 @@ public class ExpensesBuilder {
 
     public static final String DEFAULT_NAME = "Chicken Rice";
     public static final String DEFAULT_COST = "5.0";
-    public static final String DEFAULT_DATE = "01/03/2019";
+    public static final String DEFAULT_DATE = "03/01/2019";
     //public static final Set<Tag> DEFAULT_TAGS = new HashSet<>(Arrays.asList("Food", "Lunch"));
 
     private Name name;

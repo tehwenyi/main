@@ -133,8 +133,8 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
         } else { //if the user enter a range of dates
             Date start = new Date(splitDate[0]);
             Date end = new Date(splitDate[1]);
-            boolean isWithinRange = start.after(expense.getDate())
-                    && end.before(expense.getDate());
+            boolean isWithinRange = start.before(expense.getDate())
+                    && end.after(expense.getDate());
             result = start.equals(expense.getDate())
                     || end.equals(expense.getDate())
                     || isWithinRange;

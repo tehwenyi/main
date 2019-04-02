@@ -21,7 +21,7 @@ Responsibilities: basic features
 
 === Teh Wen Yi
 image::tehwenyi.png[width="150", align="left"]
-{empty}[https://github.com/tehwenyi[github]] [<<wenyi#, portfolio>>]
+{empty}[https://github.com/tehwenyi[github]] [<<tehwenyi#, portfolio>>]
 
 Role: Developer
 

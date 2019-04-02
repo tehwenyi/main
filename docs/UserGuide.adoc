@@ -277,6 +277,7 @@ A budget should be set. +
 The expenses list should have at least one day’s worth of expenses.
 ****
 
+// tag::report[]
 === Expense Report
 
 ==== Generate report : `report`
@@ -301,6 +302,7 @@ View the monthly report of Mar 2019.
 
 * `report t/2019` +
 View the yearly report of 2019.
+// end::report[]
 
 === Goal Setting
 
@@ -344,6 +346,7 @@ User can enable/disable data encryption to secure their files.
 Compares between different users.
 Requires multiple accounts in the same network.
 
+// tag::v2.0[]
 ==== Login to ePiggy `[coming in v2.0]`
 
 Login to ePiggy as an existing user. +
@@ -355,6 +358,7 @@ Logout ePiggy. +
 ==== Register to ePiggy `[coming in v2.0]`
 
 Register a new user in ePiggy. +
+// end::v2.0[]
 
 == FAQ
 
@@ -408,8 +412,5 @@ e.g. `report d/21/03/2019`
 e.g. `setGoal n/nike shoes $/80`
 
 * *View Savings Goal* : `viewGoal`
-
-* *Login* : `login u/USERNAME p/PASSWORD` +
-e.g. `login u/johndoe1990 p/password123`
 
 * *Exit* : `exit`

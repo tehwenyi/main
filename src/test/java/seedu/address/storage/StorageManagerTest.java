@@ -18,6 +18,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.epiggy.ReadOnlyEPiggy;
 import seedu.address.storage.epiggy.JsonEPiggyStorage;
 
+@Ignore
 public class StorageManagerTest {
 
     @Rule

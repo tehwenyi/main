@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.epiggy.ReadOnlyEPiggy;
 import seedu.address.storage.epiggy.JsonEPiggyStorage;
 
+@Ignore
 public class JsonAddressBookStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
 

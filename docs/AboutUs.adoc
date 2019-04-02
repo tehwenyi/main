@@ -11,7 +11,7 @@ We are a team of Year 2 Computer Science undergraduates based in http://www.comp
 
 === Phan Duc Nhat Minh
 image::pdnm.png[width="150", align="left"]
-{empty}[https://github.com/pdnm[github]] [<<pdnm#, portfolio>>]
+{empty}[https://github.com/pdnm[github]]
 
 Role: Team Leader, Developer
 
@@ -52,7 +52,7 @@ Responsibilities: `report` feature, `autocomplete` feature
 
 === Kevin
 image::kev-inc.png[width="150", align="left"]
-{empty}[https://github.com/kev-inc[github]] [<<kev-inc#, portfolio>>]
+{empty}[https://github.com/kev-inc[github]]
 
 Role: Developer
 

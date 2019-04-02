@@ -46,7 +46,7 @@ public class DeleteBudgetCommand extends Command {
 
         Budget budgetToDelete = lastShownBudgetList.get(this.targetIndex.getZeroBased());
         model.deleteBudgetAtIndex(this.targetIndex.getZeroBased());
-        model.commitAddressBook();
+        model.commitEPiggy();
         return new CommandResult(String.format(MESSAGE_DELETE_BUDGET_SUCCESS, budgetToDelete));
     }
 

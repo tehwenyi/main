@@ -286,7 +286,7 @@ image::addBudgetSequenceDiagram.png[width="800"]
 Figure: Add Budget Command Sequence Diagram +
 
 The command is first parsed into `AddBudgetCommandParser`, which separates the arguments into their respective fields. A new `Budget` is created and parsed into `AddBudgetCommand`. +
-As long as the `Budget` object created does not overlap with any existing `Budget` objects, the `Budget` will be added with `Model#addBudget()` and saved into the AddressBook storage. +
+As long as the `Budget` object created does not overlap with any existing `Budget` objects, the `Budget` will be added with `Model#addBudget()` and saved into the EPiggy storage. +
 
 *Example usage scenario:* +
 1. User launches application and enters `addBudget $/500 p/31 d/01/03/2019`. +
@@ -334,7 +334,7 @@ follow the `editBudget` command word.
 
 Afterwards, a `budget` object is created from the `EditBudgetDescriptor` object. Then, the `budget` object is passed into address book
 through `Model.#setCurrentBudget()`, which will replace the current `budget` with the new `budget` passed in. +
-Since only the current `budget` can be edited, the `editBudget` command will first check if a current `budget` is present in `AddressBook`’s
+Since only the current `budget` can be edited, the `editBudget` command will first check if a current `budget` is present in `EPiggy`’s
 `budgetList` through `Model#getCurrentBudgetIndex()`. If the current `budget` does not exist, the command will feedback to the user that the
 command entered is invalid. +
 
@@ -351,7 +351,7 @@ present. The index is then used to retrieve the current budget.
 * *Alternative 2*: +
 Using a boolean `hasCurrentBudget` method to check if a current `budget` exists in `budgetList`, then another `getCurrentBudget` method to get the current `budget`.
 
-** Pros: Code will be written in `AddressBook` rather than at `editBudget` command and can be easily used for other commands.
+** Pros: Code will be written in `EPiggy` rather than at `editBudget` command and can be easily used for other commands.
 
 ** Cons: Will need to implement additional methods. Reduces the abstraction has the current `budget` is exposed to the entire project as it is a public method.
 
@@ -368,7 +368,7 @@ The above command deletes the `Budget` with the displayed `index` of #2. +
 The `Budget` to be deleted is identified by its displayed `index` and subsequently deleted. +
 
 ==== Current Implementation
-The command’s current implementation retrieves the `budgetList` from `AddressBook` and removes the
+The command’s current implementation retrieves the `budgetList` from `EPiggy` and removes the
 budget at the zero-based version of the displayed `index`. +
 A `listener` has been added to `budgetList`, so the order in which the budgets are displayed is the same
 as the order of the budgets in `budgetList`. Furthermore, the indexes are unique. +
@@ -471,7 +471,7 @@ If a goal has not been set by the user, the command will use a default goal whic
 ==== Current Implementation
 
 The undo/redo mechanism is facilitated by `VersionedAddressBook`.
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
+It extends `EPiggy` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
 Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commit()` -- Saves the current address book state in its history.

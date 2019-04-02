@@ -3,26 +3,30 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
 import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.epiggy.EditExpenseCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
+import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.ExpenseContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.epiggy.EditExpenseDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -51,25 +55,54 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String VALID_TAG_FOOD = "food";
+    public static final String VALID_TAG_FRIENDS = "friend";
+    public static final String VALID_DATE_2018 = "07/10/2018";
+    public static final String VALID_DATE_2019 = "20/03/2019";
+    public static final String VALID_NAME_BOWLING = "bowling at West Bowl centre";
+    public static final String VALID_COST_BOWLING = "4.80";
+    public static final String VALID_NAME_IPHONE = "IPhone XR from challenger";
+    public static final String VALID_COST_IPHONE = "1799.00";
+
+    public static final String NAME_DESC_BOWLING = " " + PREFIX_NAME + VALID_NAME_BOWLING;
+    public static final String NAME_DESC_IPHONE = " " + PREFIX_NAME + VALID_NAME_IPHONE;
+    public static final String COST_DESC_BOWLING = " " + PREFIX_COST + VALID_COST_BOWLING;
+    public static final String COST_DESC_IPHONE = " " + PREFIX_COST + VALID_COST_IPHONE;
+    public static final String DATE_DESC_2018 = " " + PREFIX_DATE + VALID_DATE_2018;
+    public static final String DATE_DESC_2019 = " " + PREFIX_DATE + VALID_DATE_2019;
+    public static final String TAG_DESC_FRIENDS = " " + PREFIX_TAG + VALID_TAG_FRIENDS;
+
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_COST_DESC = " " + PREFIX_COST + "0.00"; // cost of 0 is not allowed
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "12/04"; // year should be mentioned
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "food*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+    public static final EditExpenseCommand.EditExpenseDescriptor DESC_BOWLING;
+    public static final EditExpenseCommand.EditExpenseDescriptor DESC_IPHONE;
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
     static {
+        DESC_BOWLING = new EditExpenseDescriptorBuilder().withName(VALID_NAME_BOWLING)
+                .withCost(VALID_COST_BOWLING).withDate(VALID_DATE_2018)
+                .withTags(VALID_TAG_FRIENDS).build();
+        DESC_IPHONE = new EditExpenseDescriptorBuilder().withName(VALID_NAME_IPHONE)
+                .withCost(VALID_COST_IPHONE).withDate(VALID_DATE_2019).build();
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
     }
 
     /**
@@ -113,8 +146,8 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
-        Person expectedSelectedPerson = actualModel.getSelectedPerson();
+        List<Expense> expectedFilteredList = new ArrayList<>(actualModel.getFilteredExpenseList());
+        Expense expectedSelectedExpense = actualModel.getSelectedExpense();
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
 
@@ -124,24 +157,26 @@ public class CommandTestUtil {
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedAddressBook, actualModel.getAddressBook());
-            assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
-            assertEquals(expectedSelectedPerson, actualModel.getSelectedPerson());
+            assertEquals(expectedFilteredList, actualModel.getFilteredExpenseList());
+            assertEquals(expectedSelectedExpense, actualModel.getSelectedExpense());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the expense at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredExpenseList().size());
 
-        Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        Expense expense = model.getFilteredExpenseList().get(targetIndex.getZeroBased());
+        String[] splitName = expense.getItem().getName().name.split("\\s+");
+        final ArgumentMultimap keywordsMap = ArgumentTokenizer.tokenize(" n/"
+                + splitName[0], PREFIX_NAME);
+        model.updateFilteredExpensesList(new ExpenseContainsKeywordsPredicate(keywordsMap));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredExpenseList().size());
     }
 
     /**
@@ -158,11 +193,11 @@ public class CommandTestUtil {
     }
 
     /**
-     * Deletes the first person in {@code model}'s filtered list from {@code model}'s address book.
+     * Deletes the first expense in {@code model}'s filtered list from {@code model}'s address book.
      */
     public static void deleteFirstPerson(Model model) {
-        Person firstPerson = model.getFilteredPersonList().get(0);
-        model.deletePerson(firstPerson);
+        Expense firstExpense = model.getFilteredExpenseList().get(0);
+        model.deleteExpense(firstExpense);
         model.commitAddressBook();
     }
 

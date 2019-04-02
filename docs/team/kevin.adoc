@@ -20,11 +20,32 @@ This section shows a summary of my code, documentation, and other contributions 
 ** What it does: The `setGoal` command allows the user to set the name and the amount of their savings goal, and the `viewGoal` command allows the user to view their previously set goal, and how much more they have to save to hit the goal
 ** Justification: This is one of the student-centric features that we wanted to implement in ePiggy to make it different from other expense trackers.
 ** Highlights: This enhancement requires a quick comparison of the amount that the goal is set, and the net amount of money recorded (savings) in ePiggy. The avoid the need of having to scan through the whole list of expenses to obtain the savings amount, a savings class was implemented to track the movement of the net total of money recorded. This savings class had to accurately calculate the net total of money in ePiggy and this amount had to be recalculated everytime an `addAllowance`, `addExpense`, `deleteExpense`, or `editExpense` command is used. By using this savings class, we can deliver the amount the user has to save in the future to hit the goal accurately and quickly.
-* Added an `addAllowance` command that extends from the `addExpense` command
-* Incorporated a panel dedicated to savings and goals into the user interface
-* Added command aliases
+** Code contributed:
+*** Functional code:
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/SetGoalCommand.java[SetGoalCommand]
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/ViewGoalCommand.java[ViewGoalCommand]
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/ViewSavingsCommand.java[ViewSavingsCommand]
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/parser/epiggy/SetGoalCommandParser.java[SetGoalCommandParser]
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/model/epiggy/Goal.java[Goal]
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/model/epiggy/Savings.java[Savings]
+*** Test code:
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/SetGoalCommandTest.java[SetGoalCommandTest]
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/ViewGoalCommandTest.java[ViewGoalCommandTest]
+https://github.com/CS2103-AY1819S2-W17-4/main/tree/master/src/test/java/seedu/address/logic/commands/epiggy[ViewSavingsCommandTest]
 
-*Code contributed:* Please click the links the see a sample of my code: https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/SetGoalCommand.java[(Functional code)] https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/SetGoalCommandTest.java[(Test code)]
+* Refactored `Storage` to include `Expense`, `Goal`, `Savings` and `Budget`
+** Code contributed: https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/storage/epiggy/EPiggyStorage.java[EPiggyStorage]
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/storage/epiggy/JsonSerializableEPiggy.java[JsonSerializableEPiggy]
+
+* Added an `addAllowance` command that extends from the `addExpense` command
+** Code contributed:
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/AddAllowanceCommand.java[AddAllowanceCommand]
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/parser/epiggy/AddAllowanceCommandParser.java[AddAllowanceCommandParser]
+
+* Incorporated a panel dedicated to savings and goals into the user interface
+** Code contributed: https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/SavingsPanel.java[SavingsPanel]
+
+* Added command aliases
 
 *Other contributions:*
 
@@ -33,6 +54,7 @@ This section shows a summary of my code, documentation, and other contributions 
 * Documentation:
 ** Compiled and made formatting changes to the user guide to make it more reader-friendly https://github.com/CS2103-AY1819S2-W17-4/main/commit/5046afedac24c4da8a391b84a5a767604efa2155[(#85)]
 * Tools:
+** Set up auto-publishing of documentation for the team
 ** Set up reposense for the team
 
 == Contributions to the User Guide

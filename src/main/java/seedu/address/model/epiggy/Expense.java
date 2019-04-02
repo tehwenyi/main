@@ -29,7 +29,7 @@ public class Expense {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        SimpleDateFormat format = new SimpleDateFormat("h:mma, dd MMM YYYY");
+        SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d, ''yy");
         builder.append(item)
                 .append("\nAdded on: ")
                 .append(format.format(date));

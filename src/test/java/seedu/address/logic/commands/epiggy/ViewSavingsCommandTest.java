@@ -12,18 +12,17 @@ import org.junit.Test;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
-
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.ReadOnlyEPiggy;
+
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.epiggy.SavingsBuilder;
@@ -49,6 +48,21 @@ public class ViewSavingsCommandTest {
     private class ModelStub implements Model {
 
         @Override
+        public void sortExpenses(String keyword) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Expense> getExpenseList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Budget> getBudgetList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
@@ -69,12 +83,12 @@ public class ViewSavingsCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getEPiggyFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setEPiggyFilePath(Path EPiggyFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -144,12 +158,12 @@ public class ViewSavingsCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyEPiggy newData) {
+        public void setEPiggy(ReadOnlyEPiggy newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyEPiggy getAddressBook() {
+        public ReadOnlyEPiggy getEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -204,32 +218,27 @@ public class ViewSavingsCommandTest {
         }
 
         @Override
-        public void sortExpenses(ArgumentMultimap keywords) {
+        public boolean canUndoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canRedoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public void undoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void redoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void commitAddressBook() {
+        public void commitEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -244,7 +253,7 @@ public class ViewSavingsCommandTest {
         }
 
         @Override
-        public Person getSelectedPerson() {
+        public Expense getSelectedExpense() {
             throw new AssertionError("This method should not be called.");
         }
 

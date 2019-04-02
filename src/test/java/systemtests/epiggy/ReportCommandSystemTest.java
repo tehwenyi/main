@@ -12,10 +12,10 @@ import guitests.GuiRobot;
 import guitests.guihandles.epiggy.ReportWindowHandle;
 import seedu.address.logic.commands.epiggy.ReportCommand;
 import seedu.address.logic.parser.CliSyntax;
-import systemtests.AddressBookSystemTest;
+import systemtests.EPiggySystemTest;
 
 
-public class ReportCommandSystemTest extends AddressBookSystemTest {
+public class ReportCommandSystemTest extends EPiggySystemTest {
     private static final String ERROR_MESSAGE = "ATTENTION!!!! : On some computers, this test may fail when run on "
             + "non-headless mode as FxRobot#clickOn(Node, MouseButton...) clicks on the wrong location. We suspect "
             + "that this is a bug with TestFX library that we are using. If this test fails, you have to run your "

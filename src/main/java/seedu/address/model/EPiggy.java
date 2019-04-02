@@ -18,7 +18,6 @@ import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.ExpenseList;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.ReadOnlyEPiggy;
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.epiggy.UniqueBudgetList;
 import seedu.address.model.epiggy.item.Item;
@@ -30,7 +29,7 @@ import seedu.address.model.person.UniquePersonList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyEPiggy {
+public class EPiggy implements ReadOnlyEPiggy {
 
     private final ExpenseList expenses;
     private final ObservableList<Item> items;
@@ -57,12 +56,12 @@ public class AddressBook implements ReadOnlyEPiggy {
 
     }
 
-    public AddressBook() {}
+    public EPiggy() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an EPiggy using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyEPiggy toBeCopied) {
+    public EPiggy(ReadOnlyEPiggy toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -97,7 +96,7 @@ public class AddressBook implements ReadOnlyEPiggy {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code EPiggy} with {@code newData}.
      */
     public void resetData(ReadOnlyEPiggy newData) {
         requireNonNull(newData);
@@ -137,14 +136,21 @@ public class AddressBook implements ReadOnlyEPiggy {
         this.savings.setValue(new Savings(s));
 
         if (budgetList.getBudgetListSize() > 0) {
-            int indexOfBudgetToEdit = budgetList.getBudgetIndexBasedOnDate(expense.getDate());
-            if (indexOfBudgetToEdit >= 0) {
-                Budget budgetToEdit = budgetList.getBudgetAtIndex(indexOfBudgetToEdit);
-                Budget editedBudget = updateBudget(budgetToEdit);
-                budgetList.replaceAtIndex(indexOfBudgetToEdit, editedBudget);
-            }
+            updateBudgetList(expense);
         }
         indicateModified();
+    }
+
+    /**
+     * Updates the budgetList. Called every time an expense is added, edited or deleted.
+     */
+    private void updateBudgetList(Expense expense) {
+        int indexOfBudgetToEdit = budgetList.getBudgetIndexBasedOnDate(expense.getDate());
+        if (indexOfBudgetToEdit >= 0) {
+            Budget budgetToEdit = budgetList.getBudgetAtIndex(indexOfBudgetToEdit);
+            Budget editedBudget = updateBudget(budgetToEdit);
+            budgetList.replaceAtIndex(indexOfBudgetToEdit, editedBudget);
+        }
     }
 
     /**
@@ -194,6 +200,14 @@ public class AddressBook implements ReadOnlyEPiggy {
      */
     public void deleteExpense(Expense toDelete) {
         expenses.remove(toDelete);
+        updateBudgetList(toDelete);
+        Savings s = savings.get();
+        if (toDelete instanceof Allowance) {
+            s.deductSavings(toDelete.getItem().getCost().getAmount());
+        } else {
+            s.addSavings(toDelete.getItem().getCost().getAmount());
+        }
+        this.savings.setValue(new Savings(s));
         indicateModified();
     }
 
@@ -264,7 +278,7 @@ public class AddressBook implements ReadOnlyEPiggy {
     }
 
     /**
-     * Sorts Expenses according to Date. Earlier Dates will have lower indexes.
+     * Sorts Expenses according to Name (alphabetically).
      * @return SortedList of Expenses
      */
     public SortedList<Expense> sortExpensesByName() {
@@ -272,7 +286,7 @@ public class AddressBook implements ReadOnlyEPiggy {
     }
 
     /**
-     * Sorts Expenses according to Date. Earlier Dates will have lower indexes.
+     * Sorts Expenses according to Amount. Higher amounts will have lower indexes.
      * @return SortedList of Expenses
      */
     public SortedList<Expense> sortExpensesByAmount() {
@@ -289,7 +303,27 @@ public class AddressBook implements ReadOnlyEPiggy {
     public void setExpense(Expense target, Expense editedExpense) {
         requireNonNull(editedExpense);
         expenses.setExpense(target, editedExpense);
+        updateBudgetList(editedExpense);
+        recalculateSavings(target, editedExpense);
         indicateModified();
+    }
+
+    /**
+     * Calculates the new savings amount when the setExpense function is used.
+     * @param oldExp
+     * @param newExp
+     */
+    public void recalculateSavings(Expense oldExp, Expense newExp) {
+        Savings s = savings.get();
+        double diff = newExp.getItem().getCost().getAmount() - oldExp.getItem().getCost().getAmount();
+        if (oldExp instanceof Allowance) {
+            // positive means increase allowance, negative means decrease allowance.
+            s.addSavings(diff);
+        } else {
+            // positive means increase expense, negative means decrease expense.
+            s.deductSavings(diff);
+        }
+        this.savings.setValue(new Savings(s));
     }
 
     /**
@@ -339,7 +373,7 @@ public class AddressBook implements ReadOnlyEPiggy {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code EPiggy}.
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
@@ -398,8 +432,8 @@ public class AddressBook implements ReadOnlyEPiggy {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                || (other instanceof EPiggy // instanceof handles nulls
+                && persons.equals(((EPiggy) other).persons));
     }
 
     @Override

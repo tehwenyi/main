@@ -38,7 +38,7 @@ public class AddExpenseCommand extends Command {
 
         model.addExpense(toAdd);
 
-        model.commitAddressBook();
+        model.commitEPiggy();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 }

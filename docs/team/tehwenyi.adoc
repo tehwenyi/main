@@ -7,14 +7,7 @@
 
 ---
 
-
-== Overview
-This portfolio aims to document my contributions to *_ePiggy_*.
-
-*_ePiggy_* Github link: https://github.com/CS2103-AY1819S2-W17-4/main
-
 == Introduction
-
 === About
 // what specific project task is, what module it is for, whether it is an indiv or grp proj
 *ePiggy* is a desktop application designed to inculcate good spending habits in students
@@ -26,8 +19,15 @@ It can be used on both Windows and Mac.
 
 === Project Team
 
-*_ePiggy_* was morphed from the link:https://github.com/nus-cs2103-AY1819S2/addressbook-level4[AddressBook - Level 4] application. My team consists of
-5 members. I contributed the `budget` feature of *_ePiggy_*, which allows users to add, edit and delete budgets to track their spendings.
+*_ePiggy_* was designed for twin modules CS2101 and CS2103T. It was transformed from the link:https://github.com/nus-cs2103-AY1819S2/addressbook-level4[AddressBook - Level 4] application.
+My team consists of 5 members, including myself. +
+I contributed the `budget` feature of *_ePiggy_*, which allows users to add, edit and delete budgets to track their spendings.
+
+=== Purpose
+
+This portfolio aims to document my contributions to *_ePiggy_*.
+
+*_ePiggy_* Github link: https://github.com/CS2103-AY1819S2-W17-4/main
 
 == Summary of contributions
 
@@ -44,7 +44,9 @@ workforce and deal with larger sums of money. +
 
 * *Highlights:*
 ** This enhancement was built from scratch. It is completely new and hence required the creation of many new objects including `budget`, `period`, `uniqueBudgetList` and a new `budgetPanel` for the UI. This enhancement required the familiarity with
-almost all the different areas of the code (`commons`, `logic`, `model`, `ui`).
+almost all the different aspects of the code (`commons`, `logic`, `model`, `ui`).
+** Typically, expense trackers only have one budget but I decided it would be better to have a list of budgets instead, so that users can view their budget history and plan future budgets. This is due to the purpose of ePiggy, which is to inculcate
+good spending habits in our users. Hence, users should be able to track their previous spendings.
 ** For this enhancement, the UI is important as the purpose is to constantly remind users of the remaining amount they can spend. It was challenging to make the UI simple and concise for our target users whilst conveying the crucial information.
 
 // ability to write code, explain and justify design choices, solve a user problem/fulfil a user need
@@ -64,9 +66,11 @@ almost all the different areas of the code (`commons`, `logic`, `model`, `ui`).
 *** Standardised and beautified the User Guide
 **** Designed and added the header and images across the user guide to suit our target user
 **** Standardised the language and formatting of the user guide
+**** Checked for grammar and spelling mistakes throughout the user guide
 *** Standardised and beautified the Developer Guide
 **** Designed and added the header
 **** Standardised the language and formatting of the user guide
+**** Checked for grammar and spelling mistakes throughout the developer guide
 ** Community:
 *** PRs contributed:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
@@ -80,9 +84,8 @@ _{you can add/remove categories in the list above}_
 
 == Contributions to the User Guide
 
-
 |===
-|_// Change this part: Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
 include::../UserGuide.adoc[tag=undoredo]

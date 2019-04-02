@@ -443,7 +443,6 @@ public class AddBudgetCommandTest {
     private class ModelStubWithBudgetAcceptingBudgetAdded extends ModelStub {
         final ArrayList<Budget> budgetsAdded = new ArrayList<>();
 
-
         ModelStubWithBudgetAcceptingBudgetAdded() {
             Budget budget = new BudgetBuilder().withDate("12/12/2019").build();
             budgetsAdded.add(budget);

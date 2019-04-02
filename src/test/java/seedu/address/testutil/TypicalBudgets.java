@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.EPiggy;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.testutil.epiggy.BudgetBuilder;
 
@@ -47,10 +47,10 @@ public class TypicalBudgets {
     private TypicalBudgets() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code EPiggy} with all the typical persons.
      */
-    public static AddressBook getTypicalEPiggy() {
-        AddressBook ab = new AddressBook();
+    public static EPiggy getTypicalEPiggy() {
+        EPiggy ab = new EPiggy();
         int i = 0;
         for (Budget budget : getTypicalBudgets()) {
             ab.addBudget(i, budget);

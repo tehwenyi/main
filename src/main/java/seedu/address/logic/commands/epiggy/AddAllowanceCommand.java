@@ -33,7 +33,7 @@ public class AddAllowanceCommand extends Command {
         requireNonNull(model);
 
         model.addAllowance(toAdd);
-        model.commitAddressBook();
+        model.commitEPiggy();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

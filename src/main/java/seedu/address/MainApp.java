@@ -18,9 +18,10 @@ import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.epiggy.ReadOnlyEPiggy;
+
 import seedu.address.model.epiggy.SampleEPiggyDataUtil;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;

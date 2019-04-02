@@ -13,7 +13,8 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.epiggy.ReadOnlyEPiggy;
+import seedu.address.model.ReadOnlyEPiggy;
+
 
 /**
  * A class to access epiggy data stored as a json file on the hard disk.

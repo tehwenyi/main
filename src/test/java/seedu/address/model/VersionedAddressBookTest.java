@@ -15,7 +15,6 @@ import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import seedu.address.model.epiggy.ReadOnlyEPiggy;
 import seedu.address.testutil.AddressBookBuilder;
 
 @Ignore

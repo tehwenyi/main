@@ -9,10 +9,11 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.ReadOnlyEPiggy;
+
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 

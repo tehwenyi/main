@@ -8,7 +8,8 @@ import java.util.Date;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.epiggy.ReadOnlyEPiggy;
+import seedu.address.model.ReadOnlyEPiggy;
+
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.

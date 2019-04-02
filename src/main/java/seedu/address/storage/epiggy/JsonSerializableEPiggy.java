@@ -10,9 +10,10 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Expense;
-import seedu.address.model.epiggy.ReadOnlyEPiggy;
+
 
 /**
  * An Immutable epiggy that is serializable to JSON format.

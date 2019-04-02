@@ -26,7 +26,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.ReadOnlyEPiggy;
+
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.person.Person;
@@ -122,7 +122,7 @@ public class AddressBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyEPiggy whose persons list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyEPiggy {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();

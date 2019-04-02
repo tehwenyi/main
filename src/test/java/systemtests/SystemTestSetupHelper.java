@@ -9,7 +9,8 @@ import org.testfx.api.FxToolkit;
 import guitests.guihandles.MainWindowHandle;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
-import seedu.address.model.epiggy.ReadOnlyEPiggy;
+import seedu.address.model.ReadOnlyEPiggy;
+
 
 /**
  * Contains helper methods that system tests require.

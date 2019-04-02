@@ -1,20 +1,23 @@
 package seedu.address.logic.commands.epiggy;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_TWO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_ONE;
+import static seedu.address.logic.commands.epiggy.EditBudgetCommand.createEditedBudget;
+import static seedu.address.testutil.TypicalBudgets.getTypicalEPiggy;
 
 import java.nio.file.Path;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
+import java.util.GregorianCalendar;
 import java.util.function.Predicate;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -23,146 +26,151 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.epiggy.EditBudgetCommand.EditBudgetDetails;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
-
 import seedu.address.model.epiggy.Savings;
+import seedu.address.model.epiggy.item.Cost;
+import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.TypicalBudgets;
 import seedu.address.testutil.epiggy.BudgetBuilder;
+import seedu.address.testutil.epiggy.EditBudgetDetailsBuilder;
 
-public class AddBudgetCommandTest {
+/**
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
+ * and unit tests for EditBudgetCommand.
+ */
+@Ignore
+public class EditBudgetCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    private Model model = new ModelManager(getTypicalEPiggy(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
+    private Date todaysDate = new Date();
 
     @Test
-    public void constructor_nullBudget_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        new AddBudgetCommand(null);
-    }
+    public void execute_allFieldsSpecified_success() throws Exception {
+        ModelStubWithOneCurrentBudget modelStub = new ModelStubWithOneCurrentBudget();
 
-    @Test
-    public void execute_budgetAcceptedByModelWithEmptyBudgetList_addSuccessful() throws Exception {
-        ModelStubAcceptingBudgetAdded modelStub = new ModelStubAcceptingBudgetAdded();
-        Budget validBudget = new BudgetBuilder().build();
+        EditBudgetDetails details = DESC_ONE;
+        Budget budgetToEdit = new BudgetBuilder().build();
+        Budget editedBudget = createEditedBudget(budgetToEdit, details);
+        CommandResult commandResult = new EditBudgetCommand(details).execute(modelStub, commandHistory);
 
-        CommandResult commandResult = new AddBudgetCommand(validBudget).execute(modelStub, commandHistory);
-
-        assertEquals(String.format(AddBudgetCommand.MESSAGE_SUCCESS, validBudget), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validBudget), modelStub.budgetsAdded);
+        assertEquals(String.format(EditBudgetCommand.MESSAGE_EDIT_BUDGET_SUCCESS, editedBudget),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(editedBudget), modelStub.budgets);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_budgetAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubWithBudgetAcceptingBudgetAdded modelStub = new ModelStubWithBudgetAcceptingBudgetAdded();
-        Budget validBudget = new BudgetBuilder().build();
+    public void execute_amountSpecified_success() throws Exception {
+        ModelStubWithOneCurrentBudget modelStub = new ModelStubWithOneCurrentBudget();
 
-        CommandResult commandResult = new AddBudgetCommand(validBudget).execute(modelStub, commandHistory);
+        Budget budgetToEdit = new BudgetBuilder().build();
+        EditBudgetDetails details = new EditBudgetDetails();
+        details.setPeriod(budgetToEdit.getPeriod());
+        details.setStartDate(budgetToEdit.getStartDate());
+        details.setAmount(new Cost(200));
 
-        assertEquals(String.format(AddBudgetCommand.MESSAGE_SUCCESS, validBudget), commandResult.getFeedbackToUser());
+        Budget editedBudget = createEditedBudget(budgetToEdit, details);
+        CommandResult commandResult = new EditBudgetCommand(details).execute(modelStub, commandHistory);
+
+        assertEquals(String.format(EditBudgetCommand.MESSAGE_EDIT_BUDGET_SUCCESS, editedBudget),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(editedBudget), modelStub.budgets);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_duplicateBudget_throwsCommandException() throws Exception {
-        Budget validBudget = new BudgetBuilder().build();
-        // Person validPerson = new PersonBuilder().build();
-        AddBudgetCommand addBudgetCommand = new AddBudgetCommand(validBudget);
-        ModelStub modelStub = new ModelStubWithBudget(validBudget);
+    public void execute_periodSpecified_success() throws Exception {
+        ModelStubWithOneCurrentBudget modelStub = new ModelStubWithOneCurrentBudget();
 
-        thrown.expect(CommandException.class);
-        thrown.expectMessage(AddBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
-        addBudgetCommand.execute(modelStub, commandHistory);
-    }
+        Budget budgetToEdit = new BudgetBuilder().build();
+        EditBudgetDetails details = new EditBudgetDetails();
+        details.setStartDate(budgetToEdit.getStartDate());
+        details.setAmount(budgetToEdit.getCost());
+        details.setPeriod(new Period(26));
 
-    @Test
-    public void execute_overlappingStartDate_throwsCommandException() throws Exception {
-        Budget validBudget = new BudgetBuilder().build();
+        Budget editedBudget = createEditedBudget(budgetToEdit, details);
+        CommandResult commandResult = new EditBudgetCommand(details).execute(modelStub, commandHistory);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(validBudget.getEndDate());
-        calendar.add(Calendar.DAY_OF_MONTH, -1);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        String endDate = simpleDateFormat.format(calendar.getTime());
-        Budget overlappingBudget = new BudgetBuilder().withDate(endDate).build();
-
-        AddBudgetCommand addBudgetCommand = new AddBudgetCommand(validBudget);
-        ModelStub modelStub = new ModelStubWithBudget(overlappingBudget);
-
-        thrown.expect(CommandException.class);
-        thrown.expectMessage(AddBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
-        addBudgetCommand.execute(modelStub, commandHistory);
-    }
-
-    @Test
-    public void execute_overlappingEndDate_throwsCommandException() throws Exception {
-        Budget validBudget = new BudgetBuilder().build();
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(validBudget.getStartDate());
-        calendar.add(Calendar.DAY_OF_MONTH, 1 - Integer.parseInt(BudgetBuilder.DEFAULT_PERIOD));
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        String startDate = simpleDateFormat.format(calendar.getTime());
-        Budget overlappingBudget = new BudgetBuilder().withDate(startDate).build();
-
-        AddBudgetCommand addBudgetCommand = new AddBudgetCommand(validBudget);
-        ModelStub modelStub = new ModelStubWithBudget(overlappingBudget);
-
-        thrown.expect(CommandException.class);
-        thrown.expectMessage(AddBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
-        addBudgetCommand.execute(modelStub, commandHistory);
-    }
-
-    @Test
-    public void execute_budgetTooOld_throwsCommandException() throws Exception {
-        Budget validBudget = new BudgetBuilder().withDate("01/01/2010").build();
-        ModelStubWithMaximumNumberOfBudgets modelStub = new ModelStubWithMaximumNumberOfBudgets();
-        CommandResult commandResult = new AddBudgetCommand(validBudget).execute(modelStub, commandHistory);
-
-        assertEquals(AddBudgetCommand.MESSAGE_FAIL, commandResult.getFeedbackToUser());
+        assertEquals(String.format(EditBudgetCommand.MESSAGE_EDIT_BUDGET_SUCCESS, editedBudget),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(editedBudget), modelStub.budgets);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+    }
+
+    @Test
+    public void execute_dateSpecified_success() throws Exception {
+        ModelStubWithOneCurrentBudget modelStub = new ModelStubWithOneCurrentBudget();
+
+        Budget budgetToEdit = new BudgetBuilder().build();
+        EditBudgetDetails details = new EditBudgetDetails();
+        details.setAmount(budgetToEdit.getCost());
+        details.setPeriod(budgetToEdit.getPeriod());
+
+        Date newDate = new GregorianCalendar(2010, Calendar.FEBRUARY, 11).getTime();
+        details.setStartDate(newDate);
+
+        Budget editedBudget = createEditedBudget(budgetToEdit, details);
+        CommandResult commandResult = new EditBudgetCommand(details).execute(modelStub, commandHistory);
+
+        assertEquals(String.format(EditBudgetCommand.MESSAGE_EDIT_BUDGET_SUCCESS, editedBudget),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(editedBudget), modelStub.budgets);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+    }
+
+    @Test
+    public void execute_noCurrentBudget_failure() throws Exception {
+        EditBudgetDetails details = new EditBudgetDetailsBuilder().withAmount(VALID_AMOUNT_ONE).build();
+
+        EditBudgetCommand editBudgetCommand = new EditBudgetCommand(details);
+        ModelStubWithNoCurrentBudget modelStub = new ModelStubWithNoCurrentBudget();
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(EditBudgetCommand.MESSAGE_EDIT_BUDGET_FAIL);
+        editBudgetCommand.execute(modelStub, commandHistory);
     }
 
     @Test
     public void equals() {
-        Budget twenty = new BudgetBuilder().withAmount("20").build();
-        Budget fifty = new BudgetBuilder().withAmount("50").build();
-        // Person alice = new PersonBuilder().withName("Alice").build();
-        // Person bob = new PersonBuilder().withName("Bob").build();
-        AddBudgetCommand addTwentyCommand = new AddBudgetCommand(twenty);
-        AddBudgetCommand addFiftyCommand = new AddBudgetCommand(fifty);
-
-        // same object -> returns true
-        assertTrue(addTwentyCommand.equals(addTwentyCommand));
+        final EditBudgetCommand standardCommand = new EditBudgetCommand(DESC_ONE);
 
         // same values -> returns true
-        AddBudgetCommand addTwentyCommandCopy = new AddBudgetCommand(twenty);
-        assertTrue(addTwentyCommand.equals(addTwentyCommandCopy));
+        EditBudgetDetails copyDetails = new EditBudgetDetails(DESC_ONE);
+        EditBudgetCommand commandWithSameValues = new EditBudgetCommand(copyDetails);
+        assertTrue(standardCommand.equals(commandWithSameValues));
 
-        // different types -> returns false
-        assertFalse(addTwentyCommand.equals(1));
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
 
         // null -> returns false
-        assertFalse(addTwentyCommand.equals(null));
+        assertFalse(standardCommand.equals(null));
 
-        // different budgets -> returns false
-        assertFalse(addTwentyCommand.equals(addFiftyCommand));
+        // different types -> returns false
+        assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different details -> returns false
+        assertFalse(standardCommand.equals(new EditBudgetCommand(DESC_TWO)));
     }
 
     /**
@@ -389,13 +397,27 @@ public class AddBudgetCommandTest {
     /**
      * A Model stub that contains a single person.
      */
-    private class ModelStubWithBudget extends ModelStub {
+    private class ModelStubWithOneCurrentBudget extends ModelStub {
         final ArrayList<Budget> budgets = new ArrayList<>();
-        private EPiggy EPiggy = new EPiggy();
+        private Date todaysDate = new Date();
 
-        ModelStubWithBudget(Budget budget) {
-            requireNonNull(budget);
-            budgets.add(budget);
+        ModelStubWithOneCurrentBudget() {
+            Budget currentBudget = new BudgetBuilder().withDate(todaysDate).build();
+            budgets.add(currentBudget);
+        }
+
+        @Override
+        public int getCurrentBudgetIndex() {
+            return 0;
+        }
+
+        @Override
+        public void setCurrentBudget(Budget editedBudget) {
+            budgets.set(0, editedBudget);
+        }
+
+        @Override
+        public void updateFilteredBudgetList(Predicate<Budget> predicate) {
         }
 
         @Override
@@ -404,101 +426,24 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
-            return EPiggy.budgetsOverlap(startDate, endDate, earlierBudget);
+        public void commitEPiggy() {
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that contains a single person.
      */
-    private class ModelStubAcceptingBudgetAdded extends ModelStub {
-        final ArrayList<Budget> budgetsAdded = new ArrayList<>();
+    private class ModelStubWithNoCurrentBudget extends ModelStub {
+        final ArrayList<Budget> budgets = new ArrayList<>();
 
         @Override
-        public void addBudget(int index, Budget toAdd) {
-            budgetsAdded.add(index, toAdd);
+        public int getCurrentBudgetIndex() {
+            return -1;
         }
 
         @Override
         public ObservableList<Budget> getFilteredBudgetList() {
-            return FXCollections.observableArrayList(budgetsAdded);
-        }
-
-        @Override
-        public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
-            requireAllNonNull(startDate, endDate, earlierBudget);
-            return false;
-        }
-
-        @Override
-        public void commitEPiggy() {
-            // called by {@code AddCommand#execute()}
-        }
-    }
-
-    /**
-     * A Model stub that contains a single budget that always accept the person being added.
-     */
-    private class ModelStubWithBudgetAcceptingBudgetAdded extends ModelStub {
-        final ArrayList<Budget> budgetsAdded = new ArrayList<>();
-
-        ModelStubWithBudgetAcceptingBudgetAdded() {
-            Budget budget = new BudgetBuilder().withDate("12/12/2019").build();
-            budgetsAdded.add(budget);
-        }
-
-        @Override
-        public void addBudget(int index, Budget toAdd) {
-            budgetsAdded.add(index, toAdd);
-        }
-
-        @Override
-        public ObservableList<Budget> getFilteredBudgetList() {
-            return FXCollections.observableArrayList(budgetsAdded);
-        }
-
-        @Override
-        public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
-            requireAllNonNull(startDate, endDate, earlierBudget);
-            return false;
-        }
-
-        @Override
-        public void commitEPiggy() {
-            // called by {@code AddCommand#execute()}
-        }
-    }
-
-    /**
-     * A Model stub that contains a single budget that always accept the person being added.
-     */
-    private class ModelStubWithMaximumNumberOfBudgets extends ModelStub {
-        private List<Budget> budgetsAdded = new ArrayList<>();
-
-        ModelStubWithMaximumNumberOfBudgets() {
-            budgetsAdded = TypicalBudgets.getMaximumNumberOfBudgets();
-        }
-
-        @Override
-        public void addBudget(int index, Budget toAdd) {
-            // Empty as it does not add any budget
-        }
-
-        @Override
-        public ObservableList<Budget> getFilteredBudgetList() {
-            return FXCollections.observableArrayList(budgetsAdded);
-        }
-
-        @Override
-        public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
-            requireAllNonNull(startDate, endDate, earlierBudget);
-            return false;
-        }
-
-        @Override
-        public void commitEPiggy() {
-            // called by {@code AddCommand#execute()}
+            return FXCollections.observableArrayList(budgets);
         }
     }
 }

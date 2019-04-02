@@ -31,7 +31,6 @@ public class JsonAdaptedGoal {
      * Converts a given {@code Goal} into this class for Jackson use.
      */
     public JsonAdaptedGoal(Goal source) {
-        System.out.println(source);
         name = source.getName().toString();
         cost = String.valueOf(source.getAmount().getAmount());
     }

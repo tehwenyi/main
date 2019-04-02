@@ -436,6 +436,12 @@ It requires the user to specify the name of the goal, as well as the amount they
 The command above sets a goal with the name `Nintendo Switch` and with the amount `$499`
 
 ==== Current Implementation
+Given below is a sequence diagram of how the `setGoal` command works:
+
+image::setGoalSequenceDiagram.png[width="800"]
+
+Figure: SetGoalCommand Sequence Diagram.
+
 The command is first parsed into `SetGoalCommandParser`, which separates the arguments into their respective fields. A new `Goal` is created and parsed into `SetGoalCommand`.
 `Goal` will then be set with `Model#setGoal()` and saved into the ePiggy `Storage`.
 
@@ -443,6 +449,15 @@ The command is first parsed into `SetGoalCommandParser`, which separates the arg
 1.	User launches application and enters `setGoal n/Nintendo Switch $/499`. +
 2.	`SetGoalCommandParser` takes in the arguments and parses the command to create the appropriate `Goal`. +
 3.	The `SetGoalCommand` is passed back to the `LogicManager`, and the method `execute()` is called. `Goal` is then set to the `model`.
+
+==== Design considerations
+===== Aspect: `setGoal` (1 goal) VS `addGoal` (multiple goals)
+* *Alternative 1 (current choice):* `setGoal` (1 goal) +
+** Pros: Easier to implement. Makes ePiggy easier to use.
+** Cons: Limits the user experience by allowing only 1 savings goal.
+* *Alternative 2:* `addGoal` (multiple goals)
+** Pros: Gives user freedom to set more than 1 goal.
+** Cons: Makes ePiggy more complicated, not suitable for younger age groups.
 
 // tag::viewGoal[]
 === View Goal feature

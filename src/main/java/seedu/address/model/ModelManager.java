@@ -266,6 +266,15 @@ public class ModelManager implements Model {
         filteredBudget.setPredicate(predicate);
     }
 
+    //@@author rahulb99
+
+    /**
+     * Reveres the {@code filteredExpenses} list.
+     */
+    public void reverseFilteredExpensesList() {
+        versionedEPiggy.reverseExpenseList();
+    }
+
     //=========== Undo/Redo =================================================================================
 
     @Override

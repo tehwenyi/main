@@ -28,6 +28,7 @@ import seedu.address.logic.commands.epiggy.EditBudgetCommand;
 import seedu.address.logic.commands.epiggy.EditExpenseCommand;
 import seedu.address.logic.commands.epiggy.FindExpenseCommand;
 import seedu.address.logic.commands.epiggy.ReportCommand;
+import seedu.address.logic.commands.epiggy.ReverseListCommand;
 import seedu.address.logic.commands.epiggy.SetGoalCommand;
 import seedu.address.logic.commands.epiggy.SortExpenseCommand;
 import seedu.address.logic.commands.epiggy.ViewGoalCommand;
@@ -107,6 +108,10 @@ public class EPiggyParser {
         case SortExpenseCommand.COMMAND_WORD:
         case SortExpenseCommand.COMMAND_ALIAS:
             return new SortExpenseCommandParser().parse(arguments);
+
+        case ReverseListCommand.COMMAND_WORD:
+        case ReverseListCommand.COMMAND_ALIAS:
+            return new ReverseListCommand();
 
         case SelectCommand.COMMAND_WORD:
         case SelectCommand.COMMAND_ALIAS:

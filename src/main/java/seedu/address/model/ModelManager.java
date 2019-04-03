@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -14,14 +15,12 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
-
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
@@ -254,30 +253,11 @@ public class ModelManager implements Model {
     //@@author rahulb99
     /**
      * Sorts the expenses according to the keyword.
-     * @param keyword input arguments.
+     * @param comparator expense comparator
      */
-    public void sortExpenses(String keyword) {
-        SortedList<Expense> sortedExpenses;
-        switch(keyword) {
-        case "n": {
-            sortedExpenses = versionedEPiggy.sortExpensesByName();
-            break;
-        }
-        case "d": {
-            sortedExpenses = versionedEPiggy.sortExpensesByDate();
-            break;
-        }
-        case "$": {
-            sortedExpenses = versionedEPiggy.sortExpensesByAmount();
-            break;
-        } default: return;
-        }
-        FilteredList<Expense> fl = new FilteredList<>(sortedExpenses);
-        filteredExpenses.clear();
-        filteredExpenses.addAll(fl);
-        logger.fine("sorted list");
-        versionedEPiggy.getExpenseList();
-        versionedEPiggy.indicateModified();
+    public void sortExpenses(Comparator<Expense> comparator) {
+        requireAllNonNull(comparator);
+        versionedEPiggy.sortExpense(comparator);
     }
 
     @Override

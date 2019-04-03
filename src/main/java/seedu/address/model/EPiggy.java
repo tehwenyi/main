@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
@@ -277,18 +278,8 @@ public class EPiggy implements ReadOnlyEPiggy {
         return expenses.sortByDate();
     }
 
-    /**
-     * Sorts Expenses according to Name (alphabetically).
-     * @return SortedList of Expenses
-     */
-    public SortedList<Expense> sortExpensesByName() { return expenses.sortByName(); }
-
-    /**
-     * Sorts Expenses according to Amount. Higher amounts will have lower indexes.
-     * @return SortedList of Expenses
-     */
-    public SortedList<Expense> sortExpensesByAmount() {
-        return expenses.sortByAmount();
+    public void sortExpense(Comparator<Expense> comparator) {
+        expenses.sort(comparator);
     }
 
 

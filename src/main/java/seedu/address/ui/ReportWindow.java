@@ -230,13 +230,19 @@ public class ReportWindow {
         VBox layout = new VBox(10);
         Label labelOfTotalExpense = new Label();
         Label labelOfTotalAllowance = new Label();
+        Label labelOfTotalSaving = new Label();
         Label labelOfMinExpenseDay = new Label();
         Label labelOfMaxExpenseDay = new Label();
+
         if (!expenses.isEmpty()) {
             // adds labels into layout
-            labelOfTotalExpense.setText("The total amount of expense on this month: S$" + totalExpense);
-            labelOfTotalAllowance.setText("The total amount of allowance on this month: S$" + totalAllowance);
-            labelOfMinExpenseDay.setText("You spent a minimum amount of S$"
+            labelOfTotalExpense.setText("The total amount of expense on this month: S$"
+                    + totalExpense);
+            labelOfTotalAllowance.setText("The total amount of allowance on this month: S$"
+                    + totalAllowance);
+            labelOfTotalSaving.setText("The total amount of Saving on this month: S$"
+                    + (totalAllowance - totalExpense));
+            labelOfMinExpenseDay.setText("Your minimum amount of expense is S$"
                     + minExpense
                     + " at "
                     + dayWithMinExpense
@@ -244,8 +250,7 @@ public class ReportWindow {
                     + new SimpleDateFormat("MMM").format(cal.getTime())
                     + " "
                     + cal.get(Calendar.YEAR));
-            ;
-            labelOfMaxExpenseDay.setText("You spent a maximum amount of S$"
+            labelOfMaxExpenseDay.setText("Your maximum amount of expense is S$"
                     + maxExpense
                     + " at "
                     + dayWithMaxExpense
@@ -254,11 +259,12 @@ public class ReportWindow {
                     + " "
                     + cal.get(Calendar.YEAR));
             layout.getChildren().addAll(lineChart, labelOfTotalExpense, labelOfTotalAllowance,
-                    labelOfMaxExpenseDay, labelOfMinExpenseDay);
+                    labelOfTotalSaving, labelOfMaxExpenseDay, labelOfMinExpenseDay);
             // JavaFx bug, need to manually set all nodes margin!!!
             VBox.setMargin(lineChart, new Insets(10, 20, 10, 10));
             VBox.setMargin(labelOfTotalAllowance, new Insets(5, 10, 0, 50));
             VBox.setMargin(labelOfTotalExpense, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfTotalSaving, new Insets(5, 10, 0, 50));
             VBox.setMargin(labelOfMaxExpenseDay, new Insets(5, 10, 0, 50));
             VBox.setMargin(labelOfMinExpenseDay, new Insets(5, 10, 0, 50));
         } else {
@@ -314,8 +320,15 @@ public class ReportWindow {
         final ObservableList<Expense> expenseList = model.getFilteredExpenseList();
 
         double[] budgets = new double[12];
-        double[] savings = new double[12];
+        double[] allowances = new double[12];
         double[] expenses = new double[12];
+        double totalAllowance = 0; // total allowance of the year
+        double totalExpense = 0; // total expense of the year
+        double totalBudget = 0; // total budget of the year
+        double minExpenseValue = Double.MAX_VALUE;
+        double maxExpenseValue = Double.MIN_VALUE;
+        int monthWithMinExpense = 0; // the day with minimum expense
+        int monthWithMaxExpense = 0; // the day with maximum expense
 
         if (!expenseList.isEmpty()) {
             for (Expense expense : expenseList) {
@@ -325,7 +338,7 @@ public class ReportWindow {
                     // found the specified year
                     if (expense.getItem().getName().toString().equals("Allowance")) {
                         // allowance
-                        savings[currentDate.getMonthValue() - 1] += expense.getItem().getCost().getAmount();
+                        allowances[currentDate.getMonthValue() - 1] += expense.getItem().getCost().getAmount();
                     } else {
                         // expense
                         expenses[currentDate.getMonthValue() - 1] += expense.getItem().getCost().getAmount();
@@ -345,15 +358,73 @@ public class ReportWindow {
 
         String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
                 "Sep", "Oct", "Nov", "Dec"};
+
+        String[] monthsLong = {"January", "February", "March", "April", "May", "June", "July",
+                "August", "September", "October", "November", "December"};
         for (int i = 0; i < expenses.length; i++) {
+            // calculate total expense and allowance
+            totalExpense += expenses[i];
+            totalAllowance += allowances[i];
+            totalBudget += budgets[i];
+
+            // get the days with min, max expense value
+            if (expenses[i] < minExpenseValue) {
+                minExpenseValue = expenses[i];
+                monthWithMinExpense = i;
+            }
+            if (expenses[i] > maxExpenseValue) {
+                maxExpenseValue = expenses[i];
+                monthWithMaxExpense = i;
+            }
             seriesExpense.getData().add(new XYChart.Data(months[i], expenses[i]));
             seriesBudget.getData().add(new XYChart.Data(months[i], budgets[i]));
-            seriesAllowance.getData().add(new XYChart.Data(months[i], savings[i]));
+            seriesAllowance.getData().add(new XYChart.Data(months[i], allowances[i]));
         }
 
-        Scene scene = new Scene(bc, 800, 600);
+        VBox layout = new VBox(10);
+        Label labelOfTotalExpense = new Label();
+        Label labelOfTotalAllowance = new Label();
+        Label labelOfTotalSaving = new Label();
+        Label labelOfTotalBudget = new Label();
+        Label labelOfMinExpenseDay = new Label();
+        Label labelOfMaxExpenseDay = new Label();
+
+        if (!expenseList.isEmpty()) {
+            // adds labels into layout
+            labelOfTotalExpense.setText("The total amount of expense on this year: S$"
+                    + totalExpense);
+            labelOfTotalAllowance.setText("The total amount of allowance on this year: S$"
+                    + totalAllowance);
+            labelOfTotalSaving.setText("The total amount of saving on this year: S$"
+                    + (totalAllowance - totalExpense));
+            labelOfTotalBudget.setText("The total amount of budget on this year: S$"
+                    + totalBudget);
+            labelOfMinExpenseDay.setText(monthsLong[monthWithMinExpense]
+                    + " is the least consumed month in "
+                    + date.getYear()
+                    + ". Expense is S$"
+                    + minExpenseValue);
+
+            labelOfMaxExpenseDay.setText(monthsLong[monthWithMaxExpense]
+                    + " is the most consumed month in "
+                    + date.getYear()
+                    + ". Expense is S$"
+                    + maxExpenseValue);
+            layout.getChildren().addAll(bc, labelOfTotalExpense, labelOfTotalAllowance,
+                    labelOfTotalBudget, labelOfTotalSaving, labelOfMaxExpenseDay, labelOfMinExpenseDay);
+
+            VBox.setMargin(bc, new Insets(10, 20, 10, 10));
+            VBox.setMargin(labelOfTotalAllowance, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfTotalExpense, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfTotalSaving, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfTotalBudget, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfMaxExpenseDay, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfMinExpenseDay, new Insets(5, 10, 0, 50));
+        }
+        Scene scene = new Scene(layout, 800, 650);
         bc.getData().addAll(seriesBudget, seriesExpense, seriesAllowance);
         window.setScene(scene);
+
     }
 
     /**

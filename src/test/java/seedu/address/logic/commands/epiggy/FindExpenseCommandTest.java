@@ -24,7 +24,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Prefix;
@@ -40,7 +39,6 @@ import seedu.address.model.epiggy.ExpenseContainsKeywordsPredicate;
 public class FindExpenseCommandTest {
     private Model model = new ModelManager(getTypicalEpiggy(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalEpiggy(), new UserPrefs());
-    private CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void equals() {

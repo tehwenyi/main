@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -181,15 +182,23 @@ public class ReportWindow {
         final ObservableList<Expense> expenses = model.getFilteredExpenseList();
         double[] exps = new double[31];
         double[] allowances = new double[31];
+        double totalAllowance = 0; // total allowance of the month
+        double totalExpense = 0; // total expense of the month
+        double minExpense = Double.MAX_VALUE; // a minimum amount of expense within the month
+        double maxExpense = Double.MIN_VALUE; // a maximum amount of expense within the month
+        double dayWithMinExpense = 0; // the day with minimum expense
+        double dayWithMsxExpense = 0; // the day with maximum expense
+
         if (!expenses.isEmpty()) {
             for (Expense expense : expenses) {
                 LocalDate currentDay = expense.getDate().toInstant().atZone(ZoneId.systemDefault())
                         .toLocalDate();
+                // find same year and same month with the target month
                 if (currentDay.getMonthValue() == date.getMonthValue()
                         && currentDay.getYear() == date.getYear()) {
-                    // same year and same month with the target month
                     // -1 because getMonthValue from 1 to 12
                     if (expense.getItem().getName().toString().equals("Allowance")) {
+                        // calculate total allowance
                         allowances[currentDay.getMonthValue() - 1] += expense.getItem().getCost().getAmount();
                     } else {
                         exps[currentDay.getMonthValue() - 1] += expense.getItem().getCost().getAmount();
@@ -199,13 +208,36 @@ public class ReportWindow {
         }
         // spot the data into the chart
         for (int i = 0; i < allowances.length; i++) {
+            // calculate total expense and allowance
+            totalAllowance += allowances[i];
+            totalExpense += exps[i];
             seriesExpense.getData().add(new XYChart.Data(i + 1, exps[i]));
             seriesAllowance.getData().add(new XYChart.Data(i + 1, allowances[i]));
         }
-
-        Scene scene = new Scene(lineChart, 800, 600);
+        // JavaFX stage content setup
         lineChart.getData().addAll(seriesExpense, seriesAllowance);
+        VBox layout = new VBox(10);
+//        layout.setAlignment(Pos.CENTER);
+        Label labelOfTotalExpense = new Label();
+        Label labelOfTotalAllowance = new Label();
+        if (!expenses.isEmpty()) {
+            // adds labels into layout
+            labelOfTotalExpense.setText("The total amount of Expense on this month: S$" + totalExpense);
+            labelOfTotalAllowance.setText("The total amount of allowance on this month: S$" + totalAllowance);
+            layout.getChildren().addAll(lineChart, labelOfTotalExpense, labelOfTotalAllowance);
 
+            // JavaFx bug, only first node in VBox set the margin!!!
+            VBox.setMargin(lineChart, new Insets(10, 20, 10, 10));
+            VBox.setMargin(labelOfTotalAllowance, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfTotalExpense, new Insets(5, 10, 0, 50));
+        } else {
+            layout.getChildren().add(lineChart);
+            // JavaFx bug, only first node in VBox set the margin!!!
+            VBox.setMargin(lineChart, new Insets(10, 20, 10, 10));
+        }
+        // JavaFx bug, only first node in VBox set the margin!!!
+        // VBox.setMargin(layout, new Insets(10, 20, 10, 10));
+        Scene scene = new Scene(layout, 800, 600);
         window.setScene(scene);
     }
 

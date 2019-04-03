@@ -71,8 +71,9 @@ public class ExpensesBuilder {
      * Sets the {@code date} of the {@code Expense} that we are building.
      */
     public ExpensesBuilder withDate(String date) {
-        if (date.equals(""))
+        if (date.equals("")) {
             this.date = new Date();
+        }
         this.date = new Date(date);
         return this;
     }

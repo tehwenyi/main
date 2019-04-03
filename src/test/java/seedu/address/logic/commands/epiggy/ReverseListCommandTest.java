@@ -30,13 +30,15 @@ public class ReverseListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ReverseListCommand(), model, commandHistory, ReverseListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ReverseListCommand(), model, commandHistory,
+                ReverseListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     @Ignore
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_EXPENSE);
-        assertCommandSuccess(new ReverseListCommand(), model, commandHistory, ReverseListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ReverseListCommand(), model, commandHistory,
+                ReverseListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

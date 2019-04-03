@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
@@ -20,6 +21,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -76,6 +78,10 @@ public class ReportWindow {
      * Display daily summary on area chart.
      */
     private void displayReportOnSpecifiedDay(Model model, LocalDate date) {
+        //TODO: max, min, total spend of the day
+        double minSpend = Double.MAX_VALUE; // minimum spend of the day
+        double maxSpend = Double.MIN_VALUE; // maximum spend of the day
+        double totalSpend = 0; // total spend of the day
 
         // Creates an Area Chart
         final NumberAxis xAxis = new NumberAxis(0, 24, 1);
@@ -99,25 +105,50 @@ public class ReportWindow {
             // expense is not empty
             for (Expense expense : expenses) {
                 Date currentDate = expense.getDate();
+                // convert to calender object.
                 calExpenseDay.setTime(currentDate);
+                // find specified date and type of the expense is not allowance
                 if (calExpenseDay.get(Calendar.DAY_OF_MONTH)
                         == calSpecifiedDay.get(Calendar.DAY_OF_MONTH)
                         && !expense.getItem().getName()
                         .toString().equals("Allowance")) {
-                    // find specified date and expense type is not allowance
-
-                    int hour = calExpenseDay.get(Calendar.HOUR_OF_DAY);
+                    // find min value
+                    double price = expense.getItem().getCost().getAmount();
+                    if (price < minSpend) {
+                        minSpend = price;
+                    }
+                    // find max value
+                    if (price > maxSpend) {
+                        maxSpend = price;
+                    }
+                    // calculate total value
+                    totalSpend += price;
                     // hour as index, amount as value
+                    int hour = calExpenseDay.get(Calendar.HOUR_OF_DAY);
                     hours[hour] += expense.getItem().getCost().getAmount();
                 }
             }
             for (int i = 0; i < hours.length; i++) {
-                seriesExpense.getData().add(new XYChart.Data(i, hours[i]));
+                seriesExpense.getData().add(new XYChart.Data(i, hours[i])); // spot data to the chart
             }
         }
+        // JavaFx chart setup
+        // create a layout of the new window
+        VBox layout = new VBox(10);
+        layout.setAlignment(Pos.CENTER);
+        Label min = new Label();
+        Label max = new Label();
+        Label total = new Label();
 
-        VBox layout = new VBox();
-        layout.getChildren().add(areaChart);
+        if (!expenses.isEmpty()) {
+            min.setText("The minimum amount of expense for today: S$" + minSpend);
+            max.setText("The maximum amount of expense for today: S$" + maxSpend);
+            total.setText("The total amount of expense for today: S$" + totalSpend);
+            layout.getChildren().addAll(areaChart, min, max, total);
+        } else {
+            total.setText("No Record found!");
+            layout.getChildren().addAll(areaChart, total);
+        }
         Scene scene = new Scene(layout, 800, 600);
         areaChart.getData().add(seriesExpense);
         window.setScene(scene);
@@ -192,7 +223,8 @@ public class ReportWindow {
                         new PieChart.Data("Cosmetics", 22),
                         new PieChart.Data("Others", 30));
         final PieChart chart = new PieChart(pieChartData);
-        chart.setTitle("Percentage of spending on each categories"); (
+        chart.setTitle("Percentage of spending on each categories");
+        (
                 (Group) scene.getRoot()
         ).getChildren().add(chart);
         window.setScene(scene);
@@ -251,7 +283,7 @@ public class ReportWindow {
         }
 
         String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
-            "Sep", "Oct", "Nov", "Dec"};
+                "Sep", "Oct", "Nov", "Dec"};
         for (int i = 0; i < expenses.length; i++) {
             seriesExpense.getData().add(new XYChart.Data(months[i], expenses[i]));
             seriesBudget.getData().add(new XYChart.Data(months[i], budgets[i]));

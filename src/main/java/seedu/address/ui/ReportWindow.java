@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
@@ -186,8 +187,8 @@ public class ReportWindow {
         double totalExpense = 0; // total expense of the month
         double minExpense = Double.MAX_VALUE; // a minimum amount of expense within the month
         double maxExpense = Double.MIN_VALUE; // a maximum amount of expense within the month
-        double dayWithMinExpense = 0; // the day with minimum expense
-        double dayWithMsxExpense = 0; // the day with maximum expense
+        int dayWithMinExpense = 0; // the day with minimum expense
+        int dayWithMaxExpense = 0; // the day with maximum expense
 
         if (!expenses.isEmpty()) {
             for (Expense expense : expenses) {
@@ -211,32 +212,60 @@ public class ReportWindow {
             // calculate total expense and allowance
             totalAllowance += allowances[i];
             totalExpense += exps[i];
+            // get the days with min, max expense value
+            if (exps[i] < minExpense) {
+                minExpense = exps[i];
+                dayWithMinExpense = i + 1; // day is not start from 0.
+            }
+            if (exps[i] > maxExpense) {
+                maxExpense = exps[i];
+                dayWithMaxExpense = i + 1;
+            }
+            // spot the chart
             seriesExpense.getData().add(new XYChart.Data(i + 1, exps[i]));
             seriesAllowance.getData().add(new XYChart.Data(i + 1, allowances[i]));
         }
         // JavaFX stage content setup
         lineChart.getData().addAll(seriesExpense, seriesAllowance);
         VBox layout = new VBox(10);
-//        layout.setAlignment(Pos.CENTER);
         Label labelOfTotalExpense = new Label();
         Label labelOfTotalAllowance = new Label();
+        Label labelOfMinExpenseDay = new Label();
+        Label labelOfMaxExpenseDay = new Label();
         if (!expenses.isEmpty()) {
             // adds labels into layout
-            labelOfTotalExpense.setText("The total amount of Expense on this month: S$" + totalExpense);
+            labelOfTotalExpense.setText("The total amount of expense on this month: S$" + totalExpense);
             labelOfTotalAllowance.setText("The total amount of allowance on this month: S$" + totalAllowance);
-            layout.getChildren().addAll(lineChart, labelOfTotalExpense, labelOfTotalAllowance);
-
-            // JavaFx bug, only first node in VBox set the margin!!!
+            labelOfMinExpenseDay.setText("You spent a minimum amount of S$"
+                    + minExpense
+                    + " at "
+                    + dayWithMinExpense
+                    + " "
+                    + new SimpleDateFormat("MMM").format(cal.getTime())
+                    + " "
+                    + cal.get(Calendar.YEAR));
+            ;
+            labelOfMaxExpenseDay.setText("You spent a maximum amount of S$"
+                    + maxExpense
+                    + " at "
+                    + dayWithMaxExpense
+                    + " "
+                    + new SimpleDateFormat("MMM").format(cal.getTime())
+                    + " "
+                    + cal.get(Calendar.YEAR));
+            layout.getChildren().addAll(lineChart, labelOfTotalExpense, labelOfTotalAllowance,
+                    labelOfMaxExpenseDay, labelOfMinExpenseDay);
+            // JavaFx bug, need to manually set all nodes margin!!!
             VBox.setMargin(lineChart, new Insets(10, 20, 10, 10));
             VBox.setMargin(labelOfTotalAllowance, new Insets(5, 10, 0, 50));
             VBox.setMargin(labelOfTotalExpense, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfMaxExpenseDay, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfMinExpenseDay, new Insets(5, 10, 0, 50));
         } else {
             layout.getChildren().add(lineChart);
-            // JavaFx bug, only first node in VBox set the margin!!!
+            // JavaFx bug, need to manually set all nodes margin!!!
             VBox.setMargin(lineChart, new Insets(10, 20, 10, 10));
         }
-        // JavaFx bug, only first node in VBox set the margin!!!
-        // VBox.setMargin(layout, new Insets(10, 20, 10, 10));
         Scene scene = new Scene(layout, 800, 600);
         window.setScene(scene);
     }

@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.function.Predicate;
 
@@ -101,7 +102,7 @@ public class AddCommandTest {
     private class ModelStub implements Model {
 
         @Override
-        public void sortExpenses(String keyword) {
+        public void sortExpenses(Comparator<Expense> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 

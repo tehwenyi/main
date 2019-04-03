@@ -47,6 +47,10 @@ public class ViewSavingsCommandTest {
     }
 
     private class ModelStub implements Model {
+        @Override
+        public void reverseFilteredExpensesList() {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void sortExpenses(Comparator<Expense> comparator) {

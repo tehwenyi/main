@@ -1,6 +1,5 @@
 package seedu.address.storage.epiggy;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -12,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.item.Cost;
@@ -59,9 +57,7 @@ public class JsonAdaptedExpense {
     public JsonAdaptedExpense(Expense source) {
         name = source.getItem().getName().name;
         cost = String.valueOf(source.getItem().getCost().getAmount());
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date d = source.getDate();
-        date = sdf.format(d);
+        date = source.getDate().toString();
         if (source instanceof Allowance) {
             type = "allowance";
         } else {
@@ -73,7 +69,7 @@ public class JsonAdaptedExpense {
     }
 
     /**
-     * Converts this Jackson-friendly adapted budget object into the model's {@code Expense} object.
+     * Converts this Jackson-friendly adapted person object into the model's {@code Expense} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted expense.
      */
@@ -100,7 +96,7 @@ public class JsonAdaptedExpense {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
 
-        final Date modelDate = ParserUtil.parseDate(date);
+        final Date modelDate = new Date();
 
         final Set<Tag> modelTags = new HashSet<>(expenseTags);
 

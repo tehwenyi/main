@@ -1,5 +1,6 @@
 package seedu.address.model.epiggy;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -125,15 +126,16 @@ public class Budget {
 
     @Override
     public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         final StringBuilder builder = new StringBuilder();
         builder.append("$")
                 .append(getBudgetedAmount())
                 .append(" for ")
                 .append(getPeriod())
                 .append(" days starting from ")
-                .append(getStartDate())
+                .append(sdf.format(getStartDate()))
                 .append(" till ")
-                .append(getEndDate())
+                .append(sdf.format(getEndDate()))
                 .append(".\n")
                 .append(getRemainingDays())
                 .append(" days remaining and $")

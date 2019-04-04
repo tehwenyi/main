@@ -429,4 +429,8 @@ public class EPiggy implements ReadOnlyEPiggy {
     public int hashCode() {
         return persons.hashCode();
     }
+
+    public void reverseExpenseList() {
+        expenses.reverse();
+    }
 }

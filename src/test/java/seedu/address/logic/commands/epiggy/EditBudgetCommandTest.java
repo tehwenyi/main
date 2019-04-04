@@ -178,7 +178,10 @@ public class EditBudgetCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
-
+        @Override
+        public void reverseFilteredExpensesList() {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public ObservableList<Budget> getBudgetList() {
             throw new AssertionError("This method should not be called.");

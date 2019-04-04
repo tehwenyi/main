@@ -137,4 +137,7 @@ public class ExpenseList implements Iterable<seedu.address.model.epiggy.Expense>
     }
 
 
+    public void reverse() {
+        FXCollections.reverse(internalList);
+    }
 }

@@ -255,4 +255,9 @@ public interface Model {
      * Sorts the expenses according to the specified {@param expenseComparator}.
      */
     void sortExpenses(Comparator<Expense> expenseComparator);
+
+    /**
+     * Reveres the {@code filteredExpenses} list.
+     */
+    void reverseFilteredExpensesList();
 }

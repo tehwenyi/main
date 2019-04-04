@@ -100,7 +100,10 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
-
+        @Override
+        public void reverseFilteredExpensesList() {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public void sortExpenses(Comparator<Expense> comparator) {
             throw new AssertionError("This method should not be called.");

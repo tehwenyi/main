@@ -26,9 +26,9 @@ public class PeriodTest {
     @Test
     public void constructor_validPeriod_success() {
         Period validPeriod = new Period("31");
-        assertEquals(validPeriod.getTimePeriod(), 31);
+        assertEquals(31, validPeriod.getTimePeriod());
         validPeriod = new Period(25);
-        assertEquals(validPeriod.getTimePeriod(), 25);
+        assertEquals(25, validPeriod.getTimePeriod());
     }
 
     @Test

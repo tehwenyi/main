@@ -67,9 +67,9 @@ public class JsonSerializableEPiggy {
                 EPiggy.addExpense(expense);
             }
         }
-        for(JsonAdaptedBudget jsonAdaptedBudget : budgets) {
-            Budget budget = jsonAdaptedBudget.toModelType();
-            EPiggy.addBudget(budget);
+        for(int i = 0; i < budgets.size(); i++) {
+            Budget budget = budgets.get(i).toModelType();
+            EPiggy.addBudget(i, budget);
         }
         EPiggy.setGoal(goal.toModelType());
         EPiggy.setSavings(savings.toModelType());

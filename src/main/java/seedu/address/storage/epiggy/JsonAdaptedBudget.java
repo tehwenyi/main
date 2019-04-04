@@ -19,19 +19,17 @@ public class JsonAdaptedBudget {
     private final String startDate;
     private final String period;
     private final String remainingAmount;
-    private final String index;
 
     @JsonCreator
     public JsonAdaptedBudget(@JsonProperty("amount") String amount,
                              @JsonProperty("startDate") String startDate,
                              @JsonProperty("period") String period,
-                             @JsonProperty("remainingAmount") String remainingAmount,
-                             @JsonProperty("index") String index) {
+                             @JsonProperty("remainingAmount") String remainingAmount) {
         this.amount = amount;
         this.startDate = startDate;
         this.period = period;
         this.remainingAmount = remainingAmount;
-        this.index = index;
+
     }
 
     public JsonAdaptedBudget(Budget source) {
@@ -62,7 +60,7 @@ public class JsonAdaptedBudget {
         if (remainingAmount == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Cost.class.getSimpleName()));
         }
-        final Cost modelRemaining = new Cost(remainingAmount);
+        final Cost modelRemaining = new Cost(Double.parseDouble(remainingAmount));
 
         Budget b = new Budget(modelAmount, modelPeriod, modelStartDate);
         b.setRemainingAmount(modelRemaining);

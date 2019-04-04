@@ -24,22 +24,10 @@ import seedu.address.model.epiggy.exceptions.DuplicateBudgetException;
  * Supports a minimal set of list operations.
  */
 public class UniqueBudgetList implements Iterable<Budget> {
-
-    // TODO: max 10/20 budget per list
     public static final int MAXIMUM_SIZE = 20;
     private final ObservableList<Budget> internalList = FXCollections.observableArrayList();
     private final ObservableList<Budget> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
-
-    /**
-     * Returns true if the list contains an equivalent budget as the given argument.
-     * @param toCheck if the budget exists in the internalList already.
-     * @return true if internalList already contains the budget.
-     */
-    public boolean contains(Budget toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::equals);
-    }
 
     /**
      * Adds a new budget to the top of the list.
@@ -47,7 +35,7 @@ public class UniqueBudgetList implements Iterable<Budget> {
      * @param toAdd the budget to be added.
      */
     public void addAtIndex(int index, Budget toAdd) {
-        requireNonNull(toAdd);
+        requireAllNonNull(index, toAdd);
         internalList.add(index, toAdd);
         limitSize();
     }
@@ -56,8 +44,11 @@ public class UniqueBudgetList implements Iterable<Budget> {
      * Replaces the budget at index {@code index} with budget {@code toSet}.
      * @param toSet the budget to be added.
      */
-    public void replaceAtIndex(int index, Budget toSet) {
+    public void replaceAtIndex(int index, Budget toSet) throws IndexOutOfBoundsException {
         requireNonNull(toSet);
+        if (index < 0 || index >= internalList.size()) {
+            throw new IndexOutOfBoundsException();
+        }
         internalList.set(index, toSet);
         limitSize();
     }

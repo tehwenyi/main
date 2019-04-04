@@ -1,62 +1,101 @@
 package seedu.address.model.epiggy.item;
 
-import org.junit.Test;
-import seedu.address.model.person.Email;
-import seedu.address.testutil.Assert;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_TWO;
+
+import org.junit.Test;
+
+import seedu.address.testutil.Assert;
+import seedu.address.testutil.epiggy.BudgetBuilder;
 
 public class PeriodTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new Email(null));
+        Assert.assertThrows(NullPointerException.class, () -> new Period(null));
     }
 
     @Test
-    public void constructor_invalidEmail_throwsIllegalArgumentException() {
-        String invalidEmail = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new Email(invalidEmail));
+    public void constructor_invalidPeriod_throwsIllegalArgumentException() {
+        String invalidPeriod = "";
+        Assert.assertThrows(IllegalArgumentException.class, () -> new Period(invalidPeriod));
     }
 
     @Test
-    public void isValidEmail() {
-        // null email
-        Assert.assertThrows(NullPointerException.class, () -> Email.isValidEmail(null));
+    public void constructor_validPeriod_success() {
+        Period validPeriod = new Period("31");
+        assertEquals(validPeriod.getTimePeriod(), 31);
+        validPeriod = new Period(25);
+        assertEquals(validPeriod.getTimePeriod(), 25);
+    }
 
-        // blank email
-        assertFalse(Email.isValidEmail("")); // empty string
-        assertFalse(Email.isValidEmail(" ")); // spaces only
+    @Test
+    public void isValidPeriod() {
+        // null period
+        Assert.assertThrows(NullPointerException.class, () -> Period.isValidPeriod(null));
 
-        // missing parts
-        assertFalse(Email.isValidEmail("@example.com")); // missing local part
-        assertFalse(Email.isValidEmail("peterjackexample.com")); // missing '@' symbol
-        assertFalse(Email.isValidEmail("peterjack@")); // missing domain name
+        // blank period
+        assertFalse(Period.isValidPeriod("")); // empty string
+        assertFalse(Period.isValidPeriod(" ")); // spaces only
 
-        // invalid parts
-        assertFalse(Email.isValidEmail("peterjack@-")); // invalid domain name
-        assertFalse(Email.isValidEmail("peterjack@exam_ple.com")); // underscore in domain name
-        assertFalse(Email.isValidEmail("peter jack@example.com")); // spaces in local part
-        assertFalse(Email.isValidEmail("peterjack@exam ple.com")); // spaces in domain name
-        assertFalse(Email.isValidEmail(" peterjack@example.com")); // leading space
-        assertFalse(Email.isValidEmail("peterjack@example.com ")); // trailing space
-        assertFalse(Email.isValidEmail("peterjack@@example.com")); // double '@' symbol
-        assertFalse(Email.isValidEmail("peter@jack@example.com")); // '@' symbol in local part
-        assertFalse(Email.isValidEmail("peterjack@example@com")); // '@' symbol in domain name
-        assertFalse(Email.isValidEmail("peterjack@.example.com")); // domain name starts with a period
-        assertFalse(Email.isValidEmail("peterjack@example.com.")); // domain name ends with a period
-        assertFalse(Email.isValidEmail("peterjack@-example.com")); // domain name starts with a hyphen
-        assertFalse(Email.isValidEmail("peterjack@example.com-")); // domain name ends with a hyphen
+        // invalid types
+        assertFalse(Period.isValidPeriod("1.20")); // double not an integer
+        assertFalse(Period.isValidPeriod("1.0")); // double should not auto parse to integer
+        assertFalse(Period.isValidPeriod("-4")); // cannot be negative
+        assertFalse(Period.isValidPeriod("7g")); // letters not allowed
+        assertFalse(Period.isValidPeriod("a 31")); // letters
+        assertFalse(Period.isValidPeriod("31 5")); // split up numbers
+        assertFalse(Period.isValidPeriod("#$1")); // special characters not allowed
+        assertFalse(Period.isValidPeriod("54$5^")); // special characters not allowed
+        assertFalse(Period.isValidPeriod("thirteen")); // words not allowed
+        assertFalse(Period.isValidPeriod("2147483648")); // number too big
+        assertFalse(Period.isValidPeriod(" 5")); // leading space
+        assertFalse(Period.isValidPeriod("18 ")); // trailing space
 
-        // valid email
-        assertTrue(Email.isValidEmail("PeterJack_1190@example.com"));
-        assertTrue(Email.isValidEmail("a@bc")); // minimal
-        assertTrue(Email.isValidEmail("test@localhost")); // alphabets only
-        assertTrue(Email.isValidEmail("!#$%&'*+/=?`{|}~^.-@example.org")); // special characters local part
-        assertTrue(Email.isValidEmail("123@145")); // numeric local part and domain name
-        assertTrue(Email.isValidEmail("a1+be!@example1.com")); // mixture of alphanumeric and special characters
-        assertTrue(Email.isValidEmail("peter_jack@very-very-very-long-example.com")); // long domain name
-        assertTrue(Email.isValidEmail("if.you.dream.it_you.can.do.it@example.com")); // long local part
+        // valid period
+        assertTrue(Period.isValidPeriod("2147483647")); // largest number
+        assertTrue(Period.isValidPeriod("0")); // zero
+
+        // invalid int period
+        assertFalse(Period.isValidPeriod(-2)); // negative integer
+
+        // valid int period
+        assertTrue(Period.isValidPeriod(2147483647)); // largest accepted integer
+        assertTrue(Period.isValidPeriod(0)); // zero
+    }
+
+    @Test
+    public void equals() {
+        // same values -> returns true
+        Period one = new Period(VALID_PERIOD_ONE);
+        Period two = new Period(VALID_PERIOD_TWO);
+        Period oneCopy = new Period(VALID_PERIOD_ONE);
+        assertTrue(one.equals(oneCopy));
+
+        // same object -> returns true
+        assertTrue(one.equals(one));
+
+        // null -> returns false
+        assertFalse(one.equals(null));
+
+        // different type -> returns false
+        assertFalse(one.equals(5));
+
+        // different budget -> returns false
+        assertFalse(one.equals(two));
+    }
+
+    @Test
+    public void toStringTest() {
+        Period one = new Period(VALID_PERIOD_ONE);
+
+        // same string -> return true
+        assertTrue(one.toString().equals(VALID_PERIOD_ONE));
+
+        // different strings -> return false
+        assertFalse(one.toString().equals(VALID_PERIOD_TWO));
     }
 }

@@ -9,20 +9,21 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable
  */
 public class Period {
-    // TODO PERIOD CANNOT BE NEGATIVE
     public static final String MESSAGE_CONSTRAINTS =
             "Time period is in terms of days and should only contain whole numbers of at least value 1.";
-    public static final String VALIDATION_REGEX = "\\d+";
+    public static final String VALIDATION_REGEX = "\\b([0-9]{1,9}|1[0-9]{9}|2(0[0-9]{8}|"
+            + "1([0-3][0-9]{7}|4([0-6][0-9]{6}|7([0-3][0-9]{5}|4([0-7][0-9]{4}|8([0-2][0-9]{3}|3([0-5][0-9]{2}|6([0-3][0-9]|4[0-7])))))))))\\b";
     private final int timePeriod;
 
     public Period(int timePeriod) {
+        checkArgument(isValidPeriod(timePeriod), MESSAGE_CONSTRAINTS);
         this.timePeriod = timePeriod;
     }
 
     public Period(String period) {
         requireNonNull(period);
         checkArgument(isValidPeriod(period), MESSAGE_CONSTRAINTS);
-        timePeriod = Integer.parseInt(period);
+        this.timePeriod = Integer.parseInt(period);
     }
 
     public int getTimePeriod() {
@@ -34,6 +35,16 @@ public class Period {
      */
     public static boolean isValidPeriod(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given string is a valid time period.
+     */
+    public static boolean isValidPeriod(int test) {
+        if (test < 0 || test > 2147483647) {
+            return false;
+        }
+        return true;
     }
 
     @Override

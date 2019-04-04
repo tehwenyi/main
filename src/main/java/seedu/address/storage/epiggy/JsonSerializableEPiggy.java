@@ -2,6 +2,7 @@ package seedu.address.storage.epiggy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -37,7 +38,11 @@ public class JsonSerializableEPiggy {
         this.expenses.addAll(expenses);
         this.budgets.addAll(budgets);
         this.savings = savings;
-        this.goal = goal;
+        if(goal != null) {
+            this.goal = goal;
+        } else {
+            this.goal = null;
+        }
     }
 
     /**
@@ -71,7 +76,9 @@ public class JsonSerializableEPiggy {
             Budget budget = budgets.get(i).toModelType();
             ePiggy.addBudget(i, budget);
         }
-        ePiggy.setGoal(goal.toModelType());
+        if(goal != null) {
+            ePiggy.setGoal(goal.toModelType());
+        }
         ePiggy.setSavings(savings.toModelType());
         return ePiggy;
     }

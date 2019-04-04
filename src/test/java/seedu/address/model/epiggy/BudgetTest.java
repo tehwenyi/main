@@ -1,6 +1,7 @@
 package seedu.address.model.epiggy;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_TWO;
@@ -11,6 +12,7 @@ import static seedu.address.testutil.TypicalBudgets.TWO;
 
 import java.util.Calendar;
 import java.util.Date;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -64,38 +66,6 @@ public class BudgetTest {
         assertEquals(validBudget.getRemainingAmount().getAmount(), Integer.parseInt(BudgetBuilder.DEFAULT_AMOUNT));
     }
 
-
-//    @Test
-//    public void isSameBudget() {
-//        // same object -> returns true
-//        assertTrue(ONE.isSameBudget(ONE));
-//
-//        // null -> returns false
-//        assertFalse(ONE.isSameBudget(null));
-//
-//        // different phone and email -> returns false
-//        Budget editedOne = new BudgetBuilder(ONE).withPhone(VALID_PHONE_TWO).withEmail(VALID_EMAIL_TWO).build();
-//        assertFalse(ONE.isSameBudget(editedOne));
-//
-//        // different name -> returns false
-//        editedOne = new BudgetBuilder(ONE).withName(VALID_NAME_TWO).build();
-//        assertFalse(ONE.isSameBudget(editedOne));
-//
-//        // same name, same phone, different attributes -> returns true
-//        editedOne = new BudgetBuilder(ONE).withEmail(VALID_EMAIL_TWO).withAddress(VALID_ADDRESS_TWO)
-//                .withTags(VALID_TAG_HUSBAND).build();
-//        assertTrue(ONE.isSameBudget(editedOne));
-//
-//        // same name, same email, different attributes -> returns true
-//        editedOne = new BudgetBuilder(ONE).withPhone(VALID_PHONE_TWO).withAddress(VALID_ADDRESS_TWO)
-//                .withTags(VALID_TAG_HUSBAND).build();
-//        assertTrue(ONE.isSameBudget(editedOne));
-//
-//        // same name, same phone, same email, different attributes -> returns true
-//        editedOne = new BudgetBuilder(ONE).withAddress(VALID_ADDRESS_TWO).withTags(VALID_TAG_HUSBAND).build();
-//        assertTrue(ONE.isSameBudget(editedOne));
-//    }
-
     @Test
     public void deductRemainingAmount() {
         Budget budget = new BudgetBuilder().build();
@@ -142,5 +112,34 @@ public class BudgetTest {
         // different email -> returns false
         editedOne = new BudgetBuilder(ONE).withDate(VALID_DATE_TWO).build();
         assertFalse(ONE.equals(editedOne));
+    }
+
+    @Test
+    public void toStringTest() {
+        // same values -> returns true
+        Budget oneCopy = new BudgetBuilder(ONE).build();
+        String oneString = "$100 for 7 days starting from 04/02/2019 till 11/02/2019. "
+                + "0 days remaining and $100 remaining.";
+
+        // same budget
+        assertEquals(ONE.toString(), oneCopy.toString());
+
+        // same object
+        assertEquals(ONE.toString(), ONE.toString());
+
+        // different budget
+        assertNotEquals(ONE.toString(), TWO.toString());
+
+        // different name
+        Budget editedOne = new BudgetBuilder(ONE).withAmount(VALID_AMOUNT_TWO).build();
+        assertNotEquals(ONE.toString(), editedOne.toString());
+
+        // different phone -> returns false
+        editedOne = new BudgetBuilder(ONE).withPeriod(VALID_PERIOD_TWO).build();
+        assertNotEquals(ONE.toString(), editedOne.toString());
+
+        // different email -> returns false
+        editedOne = new BudgetBuilder(ONE).withDate(VALID_DATE_TWO).build();
+        assertNotEquals(ONE.toString(), editedOne.toString());
     }
 }

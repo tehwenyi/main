@@ -83,7 +83,7 @@ public class Budget {
         return cal.getTime();
     }
 
-    private void setRemainingAmount(Cost remainingAmount) {
+    public void setRemainingAmount(Cost remainingAmount) {
         this.remainingAmount = remainingAmount;
     }
 

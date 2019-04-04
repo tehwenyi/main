@@ -11,6 +11,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import seedu.address.model.epiggy.exceptions.DuplicateBudgetException;
 
 
@@ -34,8 +35,11 @@ public class UniqueBudgetList implements Iterable<Budget> {
      * Only called when a new budget is added.
      * @param toAdd the budget to be added.
      */
-    public void addAtIndex(int index, Budget toAdd) {
+    public void addAtIndex(int index, Budget toAdd) throws IndexOutOfBoundsException {
         requireAllNonNull(index, toAdd);
+        if (index > MAXIMUM_SIZE) {
+            throw new IndexOutOfBoundsException();
+        }
         internalList.add(index, toAdd);
         limitSize();
     }
@@ -117,19 +121,11 @@ public class UniqueBudgetList implements Iterable<Budget> {
      * The budget of the index must exist in the list.
      * @param index of the budget to be removed.
      */
-    public void remove(int index) {
-        requireNonNull(index);
+    public void remove(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= internalList.size()) {
+            throw new IndexOutOfBoundsException();
+        }
         internalList.remove(index, index + 1);
-    }
-
-    /**
-     * Sets internalList to a new list of the same type.
-     * @param replacement list.
-     */
-    public void addBudgetList(UniqueBudgetList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-        limitSize();
     }
 
     /**

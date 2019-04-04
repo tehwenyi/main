@@ -85,6 +85,7 @@ public class MainApp extends Application {
         ReadOnlyEPiggy initialData;
         try {
             ePiggyOptional = storage.readEPiggy();
+            System.out.println(ePiggyOptional);
             if (!ePiggyOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample EPiggy");
             }

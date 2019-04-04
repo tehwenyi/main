@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
@@ -169,14 +170,17 @@ public class AddBudgetCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
-
+        @Override
+        public void reverseFilteredExpensesList() {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public ObservableList<Budget> getBudgetList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void sortExpenses(String keyword) {
+        public void sortExpenses(Comparator<Expense> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 

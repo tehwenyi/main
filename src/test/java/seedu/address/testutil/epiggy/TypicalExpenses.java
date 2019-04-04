@@ -65,7 +65,7 @@ public class TypicalExpenses {
     /**
      * Returns an {@code EPiggy} with all the typical expenses.
      */
-    public static EPiggy getTypicalEpiggy() {
+    public static EPiggy getTypicalEPiggy() {
         EPiggy ab = new EPiggy();
         for (Expense expense : getTypicalExpenses()) {
             ab.addExpense(expense);

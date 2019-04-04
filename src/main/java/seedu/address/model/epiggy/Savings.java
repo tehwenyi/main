@@ -15,20 +15,16 @@ public class Savings {
         this.savings = savings;
     }
 
-    public Savings(Savings savings) {
-        this.savings = savings.getSavings();
-    }
-
     public double getSavings() {
         return savings;
     }
 
-    public void addSavings(double increment) {
-        savings += increment;
+    public Savings addSavings(double increment) {
+        return new Savings(savings + increment);
     }
 
-    public void deductSavings(double decrement) {
-        savings -= decrement;
+    public Savings deductSavings(double decrement) {
+        return new Savings(savings - decrement);
     }
 
     @Override

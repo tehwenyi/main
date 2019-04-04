@@ -274,7 +274,12 @@ This command allows users to add a new budget to monitor their expenses within a
 
 The above command adds a budget with `$500` which starts on `1st March 2019` and lasts for `31` days. +
 
-The budget will compute the end date and provide a status based on the local date. The status will include whether the budget is an old, current or future budget, as well as the `remaining amount` until the budget is exceeded and `remaining days` till the end of the budget. This is so that users are aware about how much they have spent. +
+The budget will compute the end date and provide a status based on the local date.
+The status will include whether the budget is an old, current or future budget, as well as the `remaining amount` until the budget is exceeded and `remaining days` till the end of the budget.
+This is so that users are aware about how much they have spent. +
+
+[NOTE]
+Time period cannot exceed 1 million days.
 
 Adding of overlapping budgets are not allowed in ePiggy.
 [NOTE]

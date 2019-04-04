@@ -80,7 +80,7 @@ public class ReportWindow {
      * Display daily summary on area chart.
      */
     private void displayReportOnSpecifiedDay(Model model, LocalDate date) {
-        //TODO: max, min, total spend of the day
+        //TODO: there is an error in the min, max value in empty data
         double minSpend = Double.MAX_VALUE; // minimum spend of the day
         double maxSpend = Double.MIN_VALUE; // maximum spend of the day
         double totalSpend = 0; // total spend of the day
@@ -147,7 +147,7 @@ public class ReportWindow {
             total.setText("The total amount of expense on today: S$" + totalSpend);
             layout.getChildren().addAll(areaChart, min, max, total);
 
-            // JavaFx bug. 
+            // JavaFx bug.
             VBox.setMargin(areaChart, new Insets(10, 20, 10, 10));
             VBox.setMargin(min, new Insets(5, 10, 0, 50));
             VBox.setMargin(max, new Insets(5, 10, 0, 50));

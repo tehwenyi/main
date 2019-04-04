@@ -25,8 +25,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Json friendly version of (@Link Expense)
  */
-public class
-JsonAdaptedExpense {
+public class JsonAdaptedExpense {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Expense's %s field is missing!";
 
@@ -74,7 +73,7 @@ JsonAdaptedExpense {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Expense} object.
+     * Converts this Jackson-friendly adapted budget object into the model's {@code Expense} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted expense.
      */

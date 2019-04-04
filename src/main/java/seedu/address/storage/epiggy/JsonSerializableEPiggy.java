@@ -58,21 +58,21 @@ public class JsonSerializableEPiggy {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public EPiggy toModelType() throws IllegalValueException {
-        EPiggy EPiggy = new EPiggy();
+        EPiggy ePiggy = new EPiggy();
         for (JsonAdaptedExpense jsonAdaptedExpense : expenses) {
             Expense expense = jsonAdaptedExpense.toModelType();
             if (expense instanceof Allowance) {
-                EPiggy.addAllowance((Allowance) expense);
+                ePiggy.addAllowance((Allowance) expense);
             } else {
-                EPiggy.addExpense(expense);
+                ePiggy.addExpense(expense);
             }
         }
-        for(int i = 0; i < budgets.size(); i++) {
+        for (int i = 0; i < budgets.size(); i++) {
             Budget budget = budgets.get(i).toModelType();
-            EPiggy.addBudget(i, budget);
+            ePiggy.addBudget(i, budget);
         }
-        EPiggy.setGoal(goal.toModelType());
-        EPiggy.setSavings(savings.toModelType());
-        return EPiggy;
+        ePiggy.setGoal(goal.toModelType());
+        ePiggy.setSavings(savings.toModelType());
+        return ePiggy;
     }
 }

@@ -281,7 +281,9 @@ public class EPiggy implements ReadOnlyEPiggy {
      * Sorts Expenses according to Name (alphabetically).
      * @return SortedList of Expenses
      */
-    public SortedList<Expense> sortExpensesByName() { return expenses.sortByName(); }
+    public SortedList<Expense> sortExpensesByName() {
+        return expenses.sortByName();
+    }
 
     /**
      * Sorts Expenses according to Amount. Higher amounts will have lower indexes.

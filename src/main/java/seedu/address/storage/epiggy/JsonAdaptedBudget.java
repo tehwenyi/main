@@ -1,16 +1,21 @@
 package seedu.address.storage.epiggy;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Period;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
+/**
+ * Json friendly version of (@Link Budget)
+ */
 public class JsonAdaptedBudget {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Budget's %s field is missing!";
@@ -20,6 +25,9 @@ public class JsonAdaptedBudget {
     private final String period;
     private final String remainingAmount;
 
+    /**
+     * Constructs a {@code JsonAdaptedBudget} with the given expense details.
+     */
     @JsonCreator
     public JsonAdaptedBudget(@JsonProperty("amount") String amount,
                              @JsonProperty("startDate") String startDate,
@@ -31,7 +39,9 @@ public class JsonAdaptedBudget {
         this.remainingAmount = remainingAmount;
 
     }
-
+    /**
+     * Converts a given {@code Budget} into this class for Jackson use.
+     */
     public JsonAdaptedBudget(Budget source) {
         amount = String.valueOf(source.getCost().getAmount());
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -41,6 +51,11 @@ public class JsonAdaptedBudget {
         remainingAmount = String.valueOf(source.getRemainingAmount().getAmount());
     }
 
+    /**
+     * Converts this Jackson-friendly adapted budget object into the model's {@code Budget} object.
+     * @return
+     * @throws IllegalValueException
+     */
     public Budget toModelType() throws IllegalValueException {
         if (amount == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Cost.class.getSimpleName()));

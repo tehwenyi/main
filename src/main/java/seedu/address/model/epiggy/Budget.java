@@ -47,30 +47,6 @@ public class Budget {
     }
 
     /**
-     * Represents a Budget in the expense book.
-     * Guarantees: details are present and not null, field values are validated, immutable.
-     */
-    public Budget() {
-        this.amount = new Cost(0);
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, 2000);
-        cal.set(Calendar.MONTH, Calendar.JANUARY);
-        cal.set(Calendar.DAY_OF_MONTH, 1);
-        this.startDate = cal.getTime();
-        this.period = new Period(0);
-        this.endDate = this.startDate;
-        this.remainingAmount = amount;
-        this.remainingDays = period;
-        if (!todaysDate.before(startDate) && !todaysDate.after(endDate)) {
-            this.status = CURRENT_BUDGET;
-        } else if (todaysDate.before(startDate)) {
-            this.status = FUTURE_BUDGET;
-        } else {
-            this.status = OLD_BUDGET;
-        }
-    }
-
-    /**
      * Calculates the end date = startDate + period (number of days)
      * @param startDate
      * @param period
@@ -81,10 +57,6 @@ public class Budget {
         cal.setTime(this.startDate);
         cal.add(Calendar.DATE, period.getTimePeriod());
         return cal.getTime();
-    }
-
-    private void setRemainingAmount(Cost remainingAmount) {
-        this.remainingAmount = remainingAmount;
     }
 
     public void setRemainingDays(Period remainingDays) {

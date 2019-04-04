@@ -9,6 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable
  */
 public class Period {
+    // TODO PERIOD CANNOT BE NEGATIVE
     public static final String MESSAGE_CONSTRAINTS =
             "Time period is in terms of days and should only contain whole numbers of at least value 1.";
     public static final String VALIDATION_REGEX = "\\d+";
@@ -33,6 +34,20 @@ public class Period {
      */
     public static boolean isValidPeriod(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Period)) {
+            return false;
+        }
+
+        Period p = (Period) o;
+        return this.timePeriod == p.getTimePeriod();
     }
 
     @Override

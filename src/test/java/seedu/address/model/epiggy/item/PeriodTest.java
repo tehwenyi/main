@@ -3,13 +3,12 @@ package seedu.address.model.epiggy.item;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_ONE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_TWO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_FIRSTEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_SECONDEXTRA;
 
 import org.junit.Test;
 
 import seedu.address.testutil.Assert;
-import seedu.address.testutil.epiggy.BudgetBuilder;
 
 public class PeriodTest {
 
@@ -70,9 +69,9 @@ public class PeriodTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Period one = new Period(VALID_PERIOD_ONE);
-        Period two = new Period(VALID_PERIOD_TWO);
-        Period oneCopy = new Period(VALID_PERIOD_ONE);
+        Period one = new Period(VALID_PERIOD_FIRSTEXTRA);
+        Period two = new Period(VALID_PERIOD_SECONDEXTRA);
+        Period oneCopy = new Period(VALID_PERIOD_FIRSTEXTRA);
         assertTrue(one.equals(oneCopy));
 
         // same object -> returns true
@@ -90,12 +89,12 @@ public class PeriodTest {
 
     @Test
     public void toStringTest() {
-        Period one = new Period(VALID_PERIOD_ONE);
+        Period one = new Period(VALID_PERIOD_FIRSTEXTRA);
 
         // same string -> return true
-        assertTrue(one.toString().equals(VALID_PERIOD_ONE));
+        assertTrue(one.toString().equals(VALID_PERIOD_FIRSTEXTRA));
 
         // different strings -> return false
-        assertFalse(one.toString().equals(VALID_PERIOD_TWO));
+        assertFalse(one.toString().equals(VALID_PERIOD_SECONDEXTRA));
     }
 }

@@ -4,11 +4,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_TWO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_TWO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_TWO;
-import static seedu.address.testutil.TypicalBudgets.ONE;
-import static seedu.address.testutil.TypicalBudgets.TWO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_SECONDEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_SECONDEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_SECONDEXTRA;
+import static seedu.address.testutil.TypicalBudgets.FIRST_EXTRA;
+import static seedu.address.testutil.TypicalBudgets.SECOND_EXTRA;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -86,60 +86,60 @@ public class BudgetTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Budget oneCopy = new BudgetBuilder(ONE).build();
-        assertTrue(ONE.equals(oneCopy));
+        Budget oneCopy = new BudgetBuilder(FIRST_EXTRA).build();
+        assertTrue(FIRST_EXTRA.equals(oneCopy));
 
         // same object -> returns true
-        assertTrue(ONE.equals(ONE));
+        assertTrue(FIRST_EXTRA.equals(FIRST_EXTRA));
 
         // null -> returns false
-        assertFalse(ONE.equals(null));
+        assertFalse(FIRST_EXTRA.equals(null));
 
         // different type -> returns false
-        assertFalse(ONE.equals(5));
+        assertFalse(FIRST_EXTRA.equals(5));
 
         // different budget -> returns false
-        assertFalse(ONE.equals(TWO));
+        assertFalse(FIRST_EXTRA.equals(SECOND_EXTRA));
 
         // different name -> returns false
-        Budget editedOne = new BudgetBuilder(ONE).withAmount(VALID_AMOUNT_TWO).build();
-        assertFalse(ONE.equals(editedOne));
+        Budget editedOne = new BudgetBuilder(FIRST_EXTRA).withAmount(VALID_AMOUNT_SECONDEXTRA).build();
+        assertFalse(FIRST_EXTRA.equals(editedOne));
 
         // different phone -> returns false
-        editedOne = new BudgetBuilder(ONE).withPeriod(VALID_PERIOD_TWO).build();
-        assertFalse(ONE.equals(editedOne));
+        editedOne = new BudgetBuilder(FIRST_EXTRA).withPeriod(VALID_PERIOD_SECONDEXTRA).build();
+        assertFalse(FIRST_EXTRA.equals(editedOne));
 
         // different email -> returns false
-        editedOne = new BudgetBuilder(ONE).withDate(VALID_DATE_TWO).build();
-        assertFalse(ONE.equals(editedOne));
+        editedOne = new BudgetBuilder(FIRST_EXTRA).withDate(VALID_DATE_SECONDEXTRA).build();
+        assertFalse(FIRST_EXTRA.equals(editedOne));
     }
 
     @Test
     public void toStringTest() {
         // same values -> returns true
-        Budget oneCopy = new BudgetBuilder(ONE).build();
+        Budget oneCopy = new BudgetBuilder(FIRST_EXTRA).build();
         String oneString = "$100 for 7 days starting from 04/02/2019 till 11/02/2019. "
                 + "0 days remaining and $100 remaining.";
 
         // same budget
-        assertEquals(ONE.toString(), oneCopy.toString());
+        assertEquals(FIRST_EXTRA.toString(), oneCopy.toString());
 
         // same object
-        assertEquals(ONE.toString(), ONE.toString());
+        assertEquals(FIRST_EXTRA.toString(), FIRST_EXTRA.toString());
 
         // different budget
-        assertNotEquals(ONE.toString(), TWO.toString());
+        assertNotEquals(FIRST_EXTRA.toString(), SECOND_EXTRA.toString());
 
         // different name
-        Budget editedOne = new BudgetBuilder(ONE).withAmount(VALID_AMOUNT_TWO).build();
-        assertNotEquals(ONE.toString(), editedOne.toString());
+        Budget editedOne = new BudgetBuilder(FIRST_EXTRA).withAmount(VALID_AMOUNT_SECONDEXTRA).build();
+        assertNotEquals(FIRST_EXTRA.toString(), editedOne.toString());
 
         // different phone -> returns false
-        editedOne = new BudgetBuilder(ONE).withPeriod(VALID_PERIOD_TWO).build();
-        assertNotEquals(ONE.toString(), editedOne.toString());
+        editedOne = new BudgetBuilder(FIRST_EXTRA).withPeriod(VALID_PERIOD_SECONDEXTRA).build();
+        assertNotEquals(FIRST_EXTRA.toString(), editedOne.toString());
 
         // different email -> returns false
-        editedOne = new BudgetBuilder(ONE).withDate(VALID_DATE_TWO).build();
-        assertNotEquals(ONE.toString(), editedOne.toString());
+        editedOne = new BudgetBuilder(FIRST_EXTRA).withDate(VALID_DATE_SECONDEXTRA).build();
+        assertNotEquals(FIRST_EXTRA.toString(), editedOne.toString());
     }
 }

@@ -70,12 +70,12 @@ public class CommandTestUtil {
     public static final String VALID_NAME_IPHONE = "IPhone XR from challenger";
     public static final String VALID_COST_IPHONE = "1799.00";
 
-    public static final String VALID_AMOUNT_ONE = "500";
-    public static final String VALID_AMOUNT_TWO = "1000";
-    public static final String VALID_PERIOD_ONE = "7";
-    public static final String VALID_PERIOD_TWO = "28";
-    public static final String VALID_DATE_ONE = "03/03/2019";
-    public static final String VALID_DATE_TWO = "02/01/2019";
+    public static final String VALID_AMOUNT_FIRSTEXTRA = "500";
+    public static final String VALID_AMOUNT_SECONDEXTRA = "1000";
+    public static final String VALID_PERIOD_FIRSTEXTRA = "7";
+    public static final String VALID_PERIOD_SECONDEXTRA = "28";
+    public static final String VALID_DATE_FIRSTEXTRA = "03/03/2019";
+    public static final String VALID_DATE_SECONDEXTRA = "02/01/2019";
 
     public static final String NAME_DESC_BOWLING = " " + PREFIX_NAME + VALID_NAME_BOWLING;
     public static final String NAME_DESC_IPHONE = " " + PREFIX_NAME + VALID_NAME_IPHONE;
@@ -96,8 +96,8 @@ public class CommandTestUtil {
     public static final EditExpenseCommand.EditExpenseDescriptor DESC_BOWLING;
     public static final EditExpenseCommand.EditExpenseDescriptor DESC_IPHONE;
 
-    public static final EditBudgetCommand.EditBudgetDetails DESC_ONE;
-    public static final EditBudgetCommand.EditBudgetDetails DESC_TWO;
+    public static final EditBudgetCommand.EditBudgetDetails DESC_FIRSTEXTRA;
+    public static final EditBudgetCommand.EditBudgetDetails DESC_SECONDEXTRA;
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
@@ -108,10 +108,10 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_FRIENDS).build();
         DESC_IPHONE = new EditExpenseDescriptorBuilder().withName(VALID_NAME_IPHONE)
                 .withCost(VALID_COST_IPHONE).withDate(VALID_DATE_2019).build();
-        DESC_ONE = new EditBudgetDetailsBuilder().withAmount(VALID_AMOUNT_ONE).withPeriod(VALID_PERIOD_ONE)
-                .withDate(VALID_DATE_ONE).build();
-        DESC_TWO = new EditBudgetDetailsBuilder().withAmount(VALID_AMOUNT_TWO).withPeriod(VALID_PERIOD_TWO)
-                .withDate(VALID_DATE_TWO).build();
+        DESC_FIRSTEXTRA = new EditBudgetDetailsBuilder().withAmount(VALID_AMOUNT_FIRSTEXTRA).withPeriod(VALID_PERIOD_FIRSTEXTRA)
+                .withDate(VALID_DATE_FIRSTEXTRA).build();
+        DESC_SECONDEXTRA = new EditBudgetDetailsBuilder().withAmount(VALID_AMOUNT_SECONDEXTRA).withPeriod(VALID_PERIOD_SECONDEXTRA)
+                .withDate(VALID_DATE_SECONDEXTRA).build();
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND).build();

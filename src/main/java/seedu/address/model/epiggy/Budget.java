@@ -66,6 +66,10 @@ public class Budget {
         this.remainingDays = remainingDays;
     }
 
+    public void setRemainingAmount(Cost remainingAmount) {
+        this.remainingAmount = remainingAmount;
+    }
+
     public void resetRemainingAmount() {
         this.remainingAmount = this.amount;
     }

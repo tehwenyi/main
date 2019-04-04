@@ -60,6 +60,13 @@ public class BudgetTest {
     }
 
     @Test
+    public void setRemainingAmount_success() {
+        Budget validBudget = new BudgetBuilder().build();
+        validBudget.setRemainingAmount(new Cost(100));
+        assertEquals(100, validBudget.getRemainingAmount().getAmount());
+    }
+
+    @Test
     public void resetRemainingAmount_success() {
         Budget validBudget = new BudgetBuilder().build();
         validBudget.resetRemainingAmount();

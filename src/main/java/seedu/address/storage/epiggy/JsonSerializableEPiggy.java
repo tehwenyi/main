@@ -12,7 +12,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.EPiggy;
 import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.epiggy.Allowance;
-import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 
 
@@ -22,7 +21,6 @@ import seedu.address.model.epiggy.Expense;
 @JsonRootName(value = "epiggy")
 public class JsonSerializableEPiggy {
     private final List<JsonAdaptedExpense> expenses = new ArrayList<>();
-    private final List<JsonAdaptedBudget> budgets = new ArrayList<>();
     private final JsonAdaptedSavings savings;
     private final JsonAdaptedGoal goal;
 
@@ -31,17 +29,11 @@ public class JsonSerializableEPiggy {
      */
     @JsonCreator
     public JsonSerializableEPiggy(@JsonProperty("expenses") List<JsonAdaptedExpense> expenses,
-                                  @JsonProperty("budgets") List<JsonAdaptedBudget> budgets,
                                   @JsonProperty("savings") JsonAdaptedSavings savings,
                                   @JsonProperty("goal") JsonAdaptedGoal goal) {
         this.expenses.addAll(expenses);
-        this.budgets.addAll(budgets);
         this.savings = savings;
-        if (goal != null) {
-            this.goal = goal;
-        } else {
-            this.goal = null;
-        }
+        this.goal = goal;
     }
 
     /**
@@ -51,7 +43,6 @@ public class JsonSerializableEPiggy {
      */
     public JsonSerializableEPiggy(ReadOnlyEPiggy source) {
         expenses.addAll(source.getExpenseList().stream().map(JsonAdaptedExpense::new).collect(Collectors.toList()));
-        budgets.addAll(source.getBudgetList().stream().map(JsonAdaptedBudget::new).collect(Collectors.toList()));
         savings = new JsonAdaptedSavings(source.getSavings().get());
         goal = new JsonAdaptedGoal(source.getGoal().get());
     }
@@ -62,23 +53,17 @@ public class JsonSerializableEPiggy {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public EPiggy toModelType() throws IllegalValueException {
-        EPiggy ePiggy = new EPiggy();
+        EPiggy EPiggy = new EPiggy();
         for (JsonAdaptedExpense jsonAdaptedExpense : expenses) {
             Expense expense = jsonAdaptedExpense.toModelType();
             if (expense instanceof Allowance) {
-                ePiggy.addAllowance((Allowance) expense);
+                EPiggy.addAllowance((Allowance) expense);
             } else {
-                ePiggy.addExpense(expense);
+                EPiggy.addExpense(expense);
             }
         }
-        for (int i = 0; i < budgets.size(); i++) {
-            Budget budget = budgets.get(i).toModelType();
-            ePiggy.addBudget(i, budget);
-        }
-        if (goal != null) {
-            ePiggy.setGoal(goal.toModelType());
-        }
-        ePiggy.setSavings(savings.toModelType());
-        return ePiggy;
+        EPiggy.setGoal(goal.toModelType());
+        EPiggy.setSavings(savings.toModelType());
+        return EPiggy;
     }
 }

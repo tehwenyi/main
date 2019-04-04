@@ -34,14 +34,14 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final CommandHistory history;
-    private final EPiggyParser ePiggyParser;
+    private final EPiggyParser EPiggyParser;
     private boolean addressBookModified;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
         history = new CommandHistory();
-        ePiggyParser = new EPiggyParser();
+        EPiggyParser = new EPiggyParser();
 
         // Set addressBookModified to true whenever the models' address book is modified.
         model.getEPiggy().addListener(observable -> addressBookModified = true);
@@ -54,7 +54,7 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         try {
-            Command command = ePiggyParser.parseCommand(commandText);
+            Command command = EPiggyParser.parseCommand(commandText);
             commandResult = command.execute(model, history);
         } finally {
             history.add(commandText);

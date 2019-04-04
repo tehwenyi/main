@@ -10,9 +10,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Period {
     public static final String MESSAGE_CONSTRAINTS =
-            "Time period is in terms of days and should only contain whole numbers of at least value 1.";
-    public static final String VALIDATION_REGEX = "\\b([0-9]{1,9}|1[0-9]{9}|2(0[0-9]{8}|"
-            + "1([0-3][0-9]{7}|4([0-6][0-9]{6}|7([0-3][0-9]{5}|4([0-7][0-9]{4}|8([0-2][0-9]{3}|3([0-5][0-9]{2}|6([0-3][0-9]|4[0-7])))))))))\\b";
+            "Time period is in terms of days and should only contain whole numbers of at least value 1.\n"
+                    + "Time period cannot exceed 1 million days (1,000,000)";
+    public static final String VALIDATION_REGEX = "\\b([1-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]"
+            + "|[1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-8][0-9]{4}|9[0-8][0-9]{3}|99[0-8][0-9]{2}"
+            + "|999[0-8][0-9]|9999[0-9]|[1-8][0-9]{5}|9[0-8][0-9]{4}|99[0-8][0-9]{3}|999[0-8][0-9]{2}|9999[0-8][0-9]"
+            + "|99999[0-9]|1000000)\\b";
     private final int timePeriod;
 
     public Period(int timePeriod) {

@@ -148,7 +148,7 @@ public class EditBudgetCommandTest {
         ModelStubWithNoCurrentBudget modelStub = new ModelStubWithNoCurrentBudget();
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(EditBudgetCommand.MESSAGE_EDIT_BUDGET_FAIL);
+        thrown.expectMessage(EditBudgetCommand.MESSAGE_EDIT_BUDGET_DOES_NOT_EXIST_FAIL);
         editBudgetCommand.execute(modelStub, commandHistory);
     }
 

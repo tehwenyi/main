@@ -12,14 +12,16 @@ import seedu.address.model.epiggy.item.Period;
  */
 public class Budget {
     public static final String MESSAGE_CONSTRAINTS =
-            "Budgeted amount should be greater than $0 and less than 2147483647";
+            "Budgeted amount should be greater than $0.00.";
     public static final String CURRENT_BUDGET = "Current";
     private static final String OLD_BUDGET = "Old";
     private static final String FUTURE_BUDGET = "Future";
+
     private final Cost amount;
     private final Date startDate;
     private final Date endDate;
     private final Period period;
+
     private Cost remainingAmount;
     private Period remainingDays;
     private String status = null;
@@ -125,7 +127,7 @@ public class Budget {
                 .append(getStartDate())
                 .append(" till ")
                 .append(getEndDate())
-                .append(". ")
+                .append(".\n")
                 .append(getRemainingDays())
                 .append(" days remaining and $")
                 .append(getRemainingAmount())

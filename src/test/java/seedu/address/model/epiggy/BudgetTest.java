@@ -118,7 +118,7 @@ public class BudgetTest {
     public void toStringTest() {
         // same values -> returns true
         Budget oneCopy = new BudgetBuilder(FIRST_EXTRA).build();
-        String oneString = "$100 for 7 days starting from 04/02/2019 till 11/02/2019. "
+        String oneString = "$100 for 7 days starting from 04/02/2019 till 11/02/2019.\n"
                 + "0 days remaining and $100 remaining.";
 
         // same budget

@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
 
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -35,7 +36,7 @@ import seedu.address.model.epiggy.Expense;
 /**
  * Report Window. Provides report and chart to the user.
  */
-public class ReportWindow {
+public class ReportWindow{
     private final Logger logger = LogsCenter.getLogger(getClass());
     private Stage window;
 

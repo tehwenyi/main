@@ -1,5 +1,12 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_FIRSTEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_SECONDEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_FIRSTEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_SECONDEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_FIRSTEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_SECONDEXTRA;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,13 +14,6 @@ import java.util.List;
 import seedu.address.model.EPiggy;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.testutil.epiggy.BudgetBuilder;
-
-import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_FIRSTEXTRA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_SECONDEXTRA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_FIRSTEXTRA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_SECONDEXTRA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_FIRSTEXTRA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_SECONDEXTRA;
 
 /**
  * A utility class containing a list of {@code Budget} objects to be used in tests.

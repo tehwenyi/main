@@ -278,9 +278,6 @@ The budget will compute the end date and provide a status based on the local dat
 The status will include whether the budget is an old, current or future budget, as well as the `remaining amount` until the budget is exceeded and `remaining days` till the end of the budget.
 This is so that users are aware about how much they have spent. +
 
-[NOTE]
-Time period cannot exceed 1 million days.
-
 Adding of overlapping budgets are not allowed in ePiggy.
 [NOTE]
 A `budget` is considered overlapping if *any* of the dates *in between (inclusive)* one `budget`’s start *and* end dates is the *same* as the dates *in between (inclusive)* another `budget`’s start *and* end dates.

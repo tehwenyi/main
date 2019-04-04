@@ -65,8 +65,8 @@ public class TypicalBudgets {
             .withDate("02/14/2020").withPeriod("1").build();
 
     // Manually added - Budget's details found in {@code CommandTestUtil}
-    public static final Budget FIRST_EXTRA = new BudgetBuilder().withAmount(VALID_AMOUNT_FIRSTEXTRA).withPeriod(VALID_PERIOD_FIRSTEXTRA)
-            .withDate(VALID_DATE_FIRSTEXTRA).build();
+    public static final Budget FIRST_EXTRA = new BudgetBuilder().withAmount(VALID_AMOUNT_FIRSTEXTRA)
+            .withPeriod(VALID_PERIOD_FIRSTEXTRA).withDate(VALID_DATE_FIRSTEXTRA).build();
     public static final Budget SECOND_EXTRA = new BudgetBuilder().withAmount(VALID_AMOUNT_SECONDEXTRA)
             .withPeriod(VALID_PERIOD_SECONDEXTRA).withDate(VALID_DATE_SECONDEXTRA).build();
 

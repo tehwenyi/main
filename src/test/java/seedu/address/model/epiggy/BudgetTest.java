@@ -43,27 +43,27 @@ public class BudgetTest {
         c.setTime(todaysDate);
         c.add(Calendar.DAY_OF_MONTH, Integer.parseInt(BudgetBuilder.DEFAULT_PERIOD));
         Date expectedEndDate = c.getTime();
-        assertEquals(validBudget.getBudgetedAmount().getAmount(), Double.parseDouble(BudgetBuilder.DEFAULT_AMOUNT));
-        assertEquals(validBudget.getPeriod().getTimePeriod(), Integer.parseInt(BudgetBuilder.DEFAULT_PERIOD));
-        assertEquals(validBudget.getStartDate(), todaysDate);
-        assertEquals(validBudget.getEndDate(), expectedEndDate);
-        assertEquals(validBudget.getRemainingAmount().getAmount(), Double.parseDouble(BudgetBuilder.DEFAULT_AMOUNT));
-        assertEquals(validBudget.getRemainingDays().getTimePeriod(), Integer.parseInt(BudgetBuilder.DEFAULT_PERIOD));
-        assertEquals(validBudget.getStatus(), Budget.CURRENT_BUDGET);
+        assertEquals(Double.parseDouble(BudgetBuilder.DEFAULT_AMOUNT), validBudget.getBudgetedAmount().getAmount());
+        assertEquals(Integer.parseInt(BudgetBuilder.DEFAULT_PERIOD), validBudget.getPeriod().getTimePeriod());
+        assertEquals(todaysDate, validBudget.getStartDate());
+        assertEquals(expectedEndDate, validBudget.getEndDate());
+        assertEquals(Double.parseDouble(BudgetBuilder.DEFAULT_AMOUNT), validBudget.getRemainingAmount().getAmount());
+        assertEquals(Integer.parseInt(BudgetBuilder.DEFAULT_PERIOD), validBudget.getRemainingDays().getTimePeriod());
+        assertEquals(Budget.CURRENT_BUDGET, validBudget.getStatus());
     }
 
     @Test
     public void setRemainingDays_success() {
         Budget validBudget = new BudgetBuilder().build();
         validBudget.setRemainingDays(new Period(2));
-        assertEquals(validBudget.getRemainingDays().getTimePeriod(), 2);
+        assertEquals(2, validBudget.getRemainingDays().getTimePeriod());
     }
 
     @Test
     public void resetRemainingAmount_success() {
         Budget validBudget = new BudgetBuilder().build();
         validBudget.resetRemainingAmount();
-        assertEquals(validBudget.getRemainingAmount().getAmount(), Integer.parseInt(BudgetBuilder.DEFAULT_AMOUNT));
+        assertEquals(Integer.parseInt(BudgetBuilder.DEFAULT_AMOUNT), validBudget.getRemainingAmount().getAmount());
     }
 
     @Test
@@ -73,14 +73,24 @@ public class BudgetTest {
         Cost positiveCost = new Cost(10);
         budget.deductRemainingAmount(positiveCost);
         Cost resultingCost = new Cost(BudgetBuilder.DEFAULT_AMOUNT).deduct(positiveCost);
-        assertEquals(budget.getRemainingAmount().getAmount(), resultingCost.getAmount());
+        assertEquals(resultingCost.getAmount(), budget.getRemainingAmount().getAmount());
 
         // deduct negative cost
         Cost negativeCost = new Cost(-10);
         budget = new BudgetBuilder().build();
         resultingCost = new Cost(BudgetBuilder.DEFAULT_AMOUNT).deduct(negativeCost);
         budget.deductRemainingAmount(negativeCost);
-        assertEquals(budget.getRemainingAmount().getAmount(), resultingCost.getAmount());
+        assertEquals(resultingCost.getAmount(), budget.getRemainingAmount().getAmount());
+    }
+
+    @Test
+    public void getPositiveRemainingAmount() {
+        Budget positiveBudget = new BudgetBuilder().withAmount("100").build();
+        positiveBudget.resetRemainingAmount();
+        assertEquals(Integer.parseInt(BudgetBuilder.DEFAULT_AMOUNT), positiveBudget.getRemainingAmount().getAmount());
+        Budget negativeBudget = new BudgetBuilder().build();
+        negativeBudget.deductRemainingAmount(new Cost(200.00));
+        assertEquals(-100, negativeBudget.getPositiveRemainingAmount())
     }
 
     @Test

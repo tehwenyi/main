@@ -59,7 +59,11 @@ public class BudgetCard extends UiPart<Region> {
         period.setText("Period of Budget: " + budget.getPeriod().toString() + " days");
 
         currentStatus.setText("Status");
-        remainingAmount.setText("Amount remaining: $" + budget.getRemainingAmount().toString());
+        if (budget.getRemainingAmount().getAmount() >= 0) {
+            remainingAmount.setText("Amount remaining: $" + budget.getRemainingAmount().toString());
+        } else {
+            remainingAmount.setText("Amount exceeded: $" + budget.getPositiveRemainingAmount().toString());
+        }
         remainingDays.setText("Days remaining: " + budget.getRemainingDays().toString() + " days");
 
         if (budget.getRemainingAmount().getAmount() < 0) {

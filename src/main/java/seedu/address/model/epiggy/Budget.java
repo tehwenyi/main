@@ -81,6 +81,13 @@ public class Budget {
         return remainingAmount;
     }
 
+    public Cost getPositiveRemainingAmount() {
+        if (remainingAmount.getAmount() < 0) {
+            return new Cost(-remainingAmount.getAmount());
+        }
+        return remainingAmount;
+    }
+
     public Period getRemainingDays() {
         return remainingDays; }
 

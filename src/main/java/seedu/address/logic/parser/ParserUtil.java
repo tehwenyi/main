@@ -79,20 +79,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String budgetAmount} into a {@code Cost}.
-     * Leading and trailing whitespaces will be trimmed.
-     */
-    public static Cost parseBudgetAmount(String cost) throws ParseException {
-        requireNonNull(cost);
-        String trimmedCost = cost.trim();
-        int budgetAmount = Integer.parseInt(trimmedCost);
-        if (budgetAmount <= 0) {
-            throw new ParseException(Budget.MESSAGE_CONSTRAINTS);
-        }
-        return new Cost(budgetAmount);
-    }
-
-    /**
      * Parses a {@code String Date} into a {@code Date}.
      * Leading and trailing whitespaces will be trimmed.
      */

@@ -12,7 +12,7 @@ import seedu.address.model.epiggy.item.Period;
  */
 public class Budget {
     public static final String MESSAGE_CONSTRAINTS =
-            "Budgeted amount should be more than $0.";
+            "Budgeted amount should be greater than $0 and less than 2147483647";
     public static final String CURRENT_BUDGET = "Current";
     private static final String OLD_BUDGET = "Old";
     private static final String FUTURE_BUDGET = "Future";

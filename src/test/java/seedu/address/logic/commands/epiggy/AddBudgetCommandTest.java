@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
@@ -176,7 +177,7 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public void sortExpenses(String keyword) {
+        public void sortExpenses(Comparator<Expense> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 

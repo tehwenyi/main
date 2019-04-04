@@ -43,7 +43,7 @@ public class BudgetTest {
         c.setTime(todaysDate);
         c.add(Calendar.DAY_OF_MONTH, Integer.parseInt(BudgetBuilder.DEFAULT_PERIOD));
         Date expectedEndDate = c.getTime();
-        assertEquals(validBudget.getCost().getAmount(), Double.parseDouble(BudgetBuilder.DEFAULT_AMOUNT));
+        assertEquals(validBudget.getBudgetedAmount().getAmount(), Double.parseDouble(BudgetBuilder.DEFAULT_AMOUNT));
         assertEquals(validBudget.getPeriod().getTimePeriod(), Integer.parseInt(BudgetBuilder.DEFAULT_PERIOD));
         assertEquals(validBudget.getStartDate(), todaysDate);
         assertEquals(validBudget.getEndDate(), expectedEndDate);

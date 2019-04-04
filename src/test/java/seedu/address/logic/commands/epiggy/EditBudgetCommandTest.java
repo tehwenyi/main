@@ -107,7 +107,7 @@ public class EditBudgetCommandTest {
         Budget budgetToEdit = new BudgetBuilder().build();
         EditBudgetDetails details = new EditBudgetDetails();
         details.setStartDate(budgetToEdit.getStartDate());
-        details.setAmount(budgetToEdit.getCost());
+        details.setAmount(budgetToEdit.getBudgetedAmount());
         details.setPeriod(new Period(26));
 
         Budget editedBudget = createEditedBudget(budgetToEdit, details);
@@ -125,7 +125,7 @@ public class EditBudgetCommandTest {
 
         Budget budgetToEdit = new BudgetBuilder().build();
         EditBudgetDetails details = new EditBudgetDetails();
-        details.setAmount(budgetToEdit.getCost());
+        details.setAmount(budgetToEdit.getBudgetedAmount());
         details.setPeriod(budgetToEdit.getPeriod());
 
         Date newDate = new GregorianCalendar(2010, Calendar.FEBRUARY, 11).getTime();

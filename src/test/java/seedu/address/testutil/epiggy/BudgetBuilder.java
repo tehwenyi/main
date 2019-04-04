@@ -30,7 +30,7 @@ public class BudgetBuilder {
      * Initializes the BudgetBuilder with the data of {@code budgetToCopy}.
      */
     public BudgetBuilder(Budget budgetToCopy) {
-        amount = budgetToCopy.getCost();
+        amount = budgetToCopy.getBudgetedAmount();
         days = budgetToCopy.getPeriod();
         startDate = budgetToCopy.getStartDate();
     }

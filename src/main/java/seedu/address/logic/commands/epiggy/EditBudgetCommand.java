@@ -99,7 +99,7 @@ public class EditBudgetCommand extends Command {
     public static Budget createEditedBudget(Budget budgetToEdit, EditBudgetDetails editBudgetDetails) {
         assert budgetToEdit != null;
 
-        Cost updatedAmount = editBudgetDetails.getAmount().orElse(budgetToEdit.getCost());
+        Cost updatedAmount = editBudgetDetails.getAmount().orElse(budgetToEdit.getBudgetedAmount());
         Date updatedStartDate = editBudgetDetails.getStartDate().orElse((budgetToEdit.getStartDate()));
         Period updatedPeriod = editBudgetDetails.getPeriod().orElse(budgetToEdit.getPeriod());
 

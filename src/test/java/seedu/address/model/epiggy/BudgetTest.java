@@ -86,7 +86,7 @@ public class BudgetTest {
     @Test
     public void getPositiveRemainingAmount() {
         Budget positiveBudget = new BudgetBuilder().withAmount("100").build();
-        assertEquals(100, positiveBudget.getRemainingAmount().getAmount());
+        assertEquals(100, positiveBudget.getPositiveRemainingAmount().getAmount());
 
         Budget negativeBudget = new BudgetBuilder().withAmount("100").build();
         negativeBudget.deductRemainingAmount(new Cost(200.00));

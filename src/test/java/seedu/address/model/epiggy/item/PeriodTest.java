@@ -50,13 +50,13 @@ public class PeriodTest {
         assertFalse(Period.isValidPeriod("#$1")); // special characters not allowed
         assertFalse(Period.isValidPeriod("54$5^")); // special characters not allowed
         assertFalse(Period.isValidPeriod("thirteen")); // words not allowed
-        assertFalse(Period.isValidPeriod("2147483648")); // number too big
+        assertFalse(Period.isValidPeriod("1000001")); // number too big
         assertFalse(Period.isValidPeriod(" 5")); // leading space
         assertFalse(Period.isValidPeriod("18 ")); // trailing space
 
         // valid period
-        assertTrue(Period.isValidPeriod("1000001")); // largest number
-        assertTrue(Period.isValidPeriod("0")); // zero
+        assertTrue(Period.isValidPeriod("1000000")); // largest number
+        assertTrue(Period.isValidPeriod("1")); // smallest accepted number
 
         // invalid int period
         assertFalse(Period.isValidPeriod(-2)); // negative integer

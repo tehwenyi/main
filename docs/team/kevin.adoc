@@ -1,4 +1,7 @@
 = Kevin Chan - Project Portfolio for ePiggy
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
 
 == Overview
 ePiggy is a simplified expense tracker for students.

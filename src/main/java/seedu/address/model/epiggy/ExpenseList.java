@@ -132,34 +132,12 @@ public class ExpenseList implements Iterable<seedu.address.model.epiggy.Expense>
         });
     }
 
-    /**
-     * Returns list of expenses sorted by date
-     * @return SortedList of Expense
-     */
-    public SortedList<Expense> sortByName() {
-        return internalList.sorted(new Comparator<Expense>() {
-            public int compare(Expense e1, Expense e2) {
-                if (e1.getItem().getName() == null || e2.getItem().getName() == null) {
-                    return 0;
-                }
-                return e1.getItem().getName().name.compareTo(e2.getItem().getName().name);
-            }
-        });
+    public void sort(Comparator<Expense> comparator) {
+        FXCollections.sort(internalList, comparator);
     }
 
-    /**
-     * Returns list of expenses sorted by date
-     * @return SortedList of Expense
-     */
-    public SortedList<Expense> sortByAmount() {
-        return internalList.sorted(new Comparator<Expense>() {
-            public int compare(Expense e1, Expense e2) {
-                if (e1.getItem().getCost() == null || e2.getItem().getCost() == null) {
-                    return 0;
-                }
-                return e1.getItem().getCost().getAmount() < e2.getItem().getCost().getAmount() ? 1 : -1;
-            }
-        });
-    }
 
+    public void reverse() {
+        FXCollections.reverse(internalList);
+    }
 }

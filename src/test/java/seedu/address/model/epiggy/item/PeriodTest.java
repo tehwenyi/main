@@ -55,7 +55,7 @@ public class PeriodTest {
         assertFalse(Period.isValidPeriod("18 ")); // trailing space
 
         // valid period
-        assertTrue(Period.isValidPeriod("2147483647")); // largest number
+        assertTrue(Period.isValidPeriod("1000000")); // largest number
         assertTrue(Period.isValidPeriod("0")); // zero
 
         // invalid int period

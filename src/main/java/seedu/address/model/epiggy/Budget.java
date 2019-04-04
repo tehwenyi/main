@@ -126,7 +126,7 @@ public class Budget {
 
     @Override
     public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
         final StringBuilder builder = new StringBuilder();
         builder.append("$")
                 .append(getBudgetedAmount())

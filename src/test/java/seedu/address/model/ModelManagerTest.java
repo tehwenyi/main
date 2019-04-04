@@ -154,13 +154,13 @@ public class ModelManagerTest {
     @Ignore
     @Test
     public void equals() {
-        EPiggy EPiggy = new EPiggyBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        EPiggy ePiggy = new EPiggyBuilder().withPerson(ALICE).withPerson(BENSON).build();
         EPiggy differentEPiggy = new EPiggy();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(EPiggy, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(EPiggy, userPrefs);
+        modelManager = new ModelManager(ePiggy, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(ePiggy, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -178,7 +178,7 @@ public class ModelManagerTest {
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(EPiggy, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(ePiggy, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -186,6 +186,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setEPiggyFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(EPiggy, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(ePiggy, differentUserPrefs)));
     }
 }

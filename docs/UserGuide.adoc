@@ -211,6 +211,7 @@ Sets a total budget of $10000 every 15 days starting from 1st January 2000.
 
 ****
 *Additional Information:* +
+Time period cannot exceed 1 million days.
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
 
@@ -246,6 +247,7 @@ Edits the current budget to $200 for every 15 days starting from the budget's in
 
 ****
 *Additional Information:* +
+Time period cannot exceed 1 million days.
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
 

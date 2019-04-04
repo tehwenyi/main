@@ -1,5 +1,12 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_FIRSTEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_SECONDEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_FIRSTEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_SECONDEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_FIRSTEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_SECONDEXTRA;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -57,12 +64,12 @@ public class TypicalBudgets {
     public static final Budget TWENTY = new BudgetBuilder().withAmount("12")
             .withDate("02/14/2020").withPeriod("1").build();
 
-    // TODO
     // Manually added - Budget's details found in {@code CommandTestUtil}
-    //    public static final Budget TEN = new BudgetBuilder().withAmount(VALID_NAME_AMY)
-    //            .withDate(VALID_EMAIL_AMY).withPeriod(VALID_ADDRESS_AMY).build();
-    //    public static final Budget ELEVEN = new BudgetBuilder().withAmount(VALID_NAME_BOB)
-    //            .withDate(VALID_EMAIL_BOB).withPeriod(VALID_ADDRESS_BOB).build();
+    public static final Budget FIRST_EXTRA = new BudgetBuilder().withAmount(VALID_AMOUNT_FIRSTEXTRA)
+            .withPeriod(VALID_PERIOD_FIRSTEXTRA).withDate(VALID_DATE_FIRSTEXTRA).build();
+    public static final Budget SECOND_EXTRA = new BudgetBuilder().withAmount(VALID_AMOUNT_SECONDEXTRA)
+            .withPeriod(VALID_PERIOD_SECONDEXTRA).withDate(VALID_DATE_SECONDEXTRA).build();
+
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

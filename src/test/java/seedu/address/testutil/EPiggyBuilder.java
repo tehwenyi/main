@@ -6,29 +6,29 @@ import seedu.address.model.person.Person;
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code EPiggy ab = new EPiggyBuilder().withPerson("John", "Doe").build();}
+ *     {@code ePiggy ab = new EPiggyBuilder().withPerson("John", "Doe").build();}
  */
 public class EPiggyBuilder {
 
-    private EPiggy EPiggy;
+    private EPiggy ePiggy;
 
     public EPiggyBuilder() {
-        EPiggy = new EPiggy();
+        ePiggy = new EPiggy();
     }
 
-    public EPiggyBuilder(EPiggy EPiggy) {
-        this.EPiggy = EPiggy;
+    public EPiggyBuilder(EPiggy ePiggy) {
+        this.ePiggy = ePiggy;
     }
 
     /**
-     * Adds a new {@code Person} to the {@code EPiggy} that we are building.
+     * Adds a new {@code Person} to the {@code ePiggy} that we are building.
      */
     public EPiggyBuilder withPerson(Person person) {
-        EPiggy.addPerson(person);
+        ePiggy.addPerson(person);
         return this;
     }
 
     public EPiggy build() {
-        return EPiggy;
+        return ePiggy;
     }
 }

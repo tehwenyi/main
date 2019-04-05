@@ -32,6 +32,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.epiggy.TypicalReports;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
 import systemtests.ClockRule;
@@ -77,7 +78,7 @@ public abstract class EPiggySystemTestV2 {
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
     protected EPiggy getInitialData() {
-        return TypicalPersons.getTypicalEPiggy();
+        return TypicalReports.getTypicalEPiggy();
     }
 
     /**

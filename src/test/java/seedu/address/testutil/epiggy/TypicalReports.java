@@ -2,13 +2,17 @@ package seedu.address.testutil.epiggy;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_2018;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_2019;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FOOD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
@@ -16,47 +20,56 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.EPiggy;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.Expense;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code budget}, {@code expense},
+ * {@code allowance} objects to be used in tests.
  */
 public class TypicalReports {
 
-    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253")
-            .withTags("friends").build();
-    public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
-    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").build();
-    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave").build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withAddress("4th street").build();
+    // valid test budgets
+    // Date is in the form MM/dd/yyyy
+    public static final Budget VALID_BUDGET_ONE = new BudgetBuilder().withAmount("100")
+            .withPeriod("7").withDate("02/04/2019").build();
+    public static final Budget VALID_BUDGET_TWO = new BudgetBuilder().withAmount("300")
+            .withPeriod("18").withDate("02/11/2019").build();
+    public static final Budget VALID_BUDGET_THREE = new BudgetBuilder().withAmount("500")
+            .withDate("03/01/2019").withPeriod("30").build();
 
-    // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withAddress("little india").build();
-    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withAddress("chicago ave").build();
+    // invalid budgets
+    public static final Budget INVALID_BUDGET_ONE = new BudgetBuilder().withAmount("10")
+            .withPeriod("1").withDate("02/04/2020").build();
+    public static final Budget INVALID_BUDGET_TWO = new BudgetBuilder().withAmount("30")
+            .withPeriod("1").withDate("02/05/2020").build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .build();
-
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    // test expenses
+    public static final Expense DUMPLING_SOUP = new ExpensesBuilder().withName("Dumpling Soup")
+            .withCost("5.00")
+            .withDate(VALID_DATE_2019)
+            .withTags(VALID_TAG_FOOD, "lunch").build();
+    public static final Expense STATIONARY = new ExpensesBuilder().withName("Stationary")
+            .withCost("3.00")
+            .withDate("03/06/2019")
+            .withTags("school", "misc").build();
+    public static final Expense MOVIE_AVENGERS = new ExpensesBuilder().withName("Avengers : Endgame movie")
+            .withDate("04/26/2019")
+            .withCost("8.50")
+            .withTags("movie", "entertainment", VALID_TAG_FRIENDS).build();
+    public static final Expense KARAOKE = new ExpensesBuilder().withName("Karaoke: KTV")
+            .withCost("10.00")
+            .withDate(VALID_DATE_2018)
+            .withTags(VALID_TAG_FRIENDS).build();
+    public static final Expense CLOTHES = new ExpensesBuilder().withName("Clothes shopping")
+            .withCost("21.80")
+            .withTags("shopping").build();
+    public static final Expense KFC = new ExpensesBuilder().withName("KFC")
+            .withDate("04/26/2019")
+            .withCost("13.00")
+            .withTags(VALID_TAG_FOOD, "dinner").build();
 
     private TypicalReports() {} // prevents instantiation
 
@@ -65,15 +78,30 @@ public class TypicalReports {
      */
     public static EPiggy getTypicalEPiggy() {
         // todo: change the method here
-        EPiggy ab = new EPiggy();
-        for (Person person : getTypicalPersons()) {
-            ab.addPerson(person);
+        EPiggy ePiggy = new EPiggy();
+
+        //add budgets into ePiggy
+        int i = 0;
+        for (Budget budget : getTypicalBudgets()) {
+            ePiggy.addBudget(i, budget);
+            i++;
         }
-        return ab;
+
+        //add expenses into ePiggy
+        for (Expense expense : getTypicalExpenses()) {
+            ePiggy.addExpense(expense);
+        }
+
+        return ePiggy;
     }
 
-    public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    public static List<Budget> getTypicalBudgets() {
+        return new ArrayList<>(Arrays.asList(VALID_BUDGET_ONE, VALID_BUDGET_TWO,
+                VALID_BUDGET_THREE, INVALID_BUDGET_ONE, INVALID_BUDGET_TWO));
+    }
+
+    public static List<Expense> getTypicalExpenses() {
+        return new ArrayList<>(Arrays.asList(DUMPLING_SOUP, STATIONARY, MOVIE_AVENGERS, KARAOKE, CLOTHES, KFC));
     }
 }
 

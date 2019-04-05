@@ -195,7 +195,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             logic.execute("report");
         } catch (CommandException | ParseException e) {
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultDisplay.setFeedbackToUser(e.getMessage(), "report t/daily");
         }
     }
 
@@ -208,7 +208,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             logic.execute("report type/monthly");
         } catch (CommandException | ParseException e) {
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultDisplay.setFeedbackToUser(e.getMessage(), "report t/monthly");
         }
     }
 
@@ -221,7 +221,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             logic.execute("report type/yearly");
         } catch (CommandException | ParseException e) {
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultDisplay.setFeedbackToUser(e.getMessage(), "report t/yearly");
         }
     }
 
@@ -234,7 +234,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             logic.execute("report type/percentage");
         } catch (CommandException | ParseException e) {
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultDisplay.setFeedbackToUser(e.getMessage(), "report t/percentage");
         }
     }
 
@@ -251,7 +251,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser(), commandText);
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -264,7 +264,7 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultDisplay.setFeedbackToUser(e.getMessage(), commandText);
             throw e;
         }
     }

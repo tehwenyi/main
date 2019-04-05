@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.function.Predicate;
 
@@ -251,7 +252,12 @@ public interface Model {
     void setSelectedExpense(Expense expense);
 
     /**
-     * Sorts the expenses according to the specified {@param keywords}.
+     * Sorts the expenses according to the specified {@param expenseComparator}.
      */
-    void sortExpenses(String keyword);
+    void sortExpenses(Comparator<Expense> expenseComparator);
+
+    /**
+     * Reveres the {@code filteredExpenses} list.
+     */
+    void reverseFilteredExpensesList();
 }

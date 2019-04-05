@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
@@ -132,8 +133,8 @@ public class EPiggy implements ReadOnlyEPiggy {
         expenses.add(expense);
 
         Savings s = savings.get();
-        s.deductSavings(expense.getItem().getCost().getAmount());
-        this.savings.setValue(new Savings(s));
+        Savings newSavings = s.deductSavings(expense.getItem().getCost().getAmount());
+        this.savings.setValue(newSavings);
 
         if (budgetList.getBudgetListSize() > 0) {
             updateBudgetList(expense);
@@ -160,8 +161,8 @@ public class EPiggy implements ReadOnlyEPiggy {
     public void addAllowance(Allowance allowance) {
         expenses.add(allowance);
         Savings s = savings.get();
-        s.addSavings(allowance.getItem().getCost().getAmount());
-        this.savings.setValue(new Savings(s));
+        Savings newSavings = s.addSavings(allowance.getItem().getCost().getAmount());
+        this.savings.setValue(newSavings);
         indicateModified();
     }
 
@@ -171,6 +172,7 @@ public class EPiggy implements ReadOnlyEPiggy {
 
     public void setSavings(Savings savings) {
         this.savings.setValue(savings);
+        indicateModified();
     }
 
     /**
@@ -202,12 +204,13 @@ public class EPiggy implements ReadOnlyEPiggy {
         expenses.remove(toDelete);
         updateBudgetList(toDelete);
         Savings s = savings.get();
+        Savings newSavings;
         if (toDelete instanceof Allowance) {
-            s.deductSavings(toDelete.getItem().getCost().getAmount());
+            newSavings = s.deductSavings(toDelete.getItem().getCost().getAmount());
         } else {
-            s.addSavings(toDelete.getItem().getCost().getAmount());
+            newSavings = s.addSavings(toDelete.getItem().getCost().getAmount());
         }
-        this.savings.setValue(new Savings(s));
+        this.savings.setValue(newSavings);
         indicateModified();
     }
 
@@ -277,18 +280,8 @@ public class EPiggy implements ReadOnlyEPiggy {
         return expenses.sortByDate();
     }
 
-    /**
-     * Sorts Expenses according to Name (alphabetically).
-     * @return SortedList of Expenses
-     */
-    public SortedList<Expense> sortExpensesByName() { return expenses.sortByName(); }
-
-    /**
-     * Sorts Expenses according to Amount. Higher amounts will have lower indexes.
-     * @return SortedList of Expenses
-     */
-    public SortedList<Expense> sortExpensesByAmount() {
-        return expenses.sortByAmount();
+    public void sortExpense(Comparator<Expense> comparator) {
+        expenses.sort(comparator);
     }
 
 
@@ -313,15 +306,16 @@ public class EPiggy implements ReadOnlyEPiggy {
      */
     public void recalculateSavings(Expense oldExp, Expense newExp) {
         Savings s = savings.get();
+        Savings newSavings;
         double diff = newExp.getItem().getCost().getAmount() - oldExp.getItem().getCost().getAmount();
         if (oldExp instanceof Allowance) {
             // positive means increase allowance, negative means decrease allowance.
-            s.addSavings(diff);
+            newSavings = s.addSavings(diff);
         } else {
             // positive means increase expense, negative means decrease expense.
-            s.deductSavings(diff);
+            newSavings = s.deductSavings(diff);
         }
-        this.savings.setValue(new Savings(s));
+        this.savings.setValue(newSavings);
     }
 
     /**
@@ -437,5 +431,9 @@ public class EPiggy implements ReadOnlyEPiggy {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    public void reverseExpenseList() {
+        expenses.reverse();
     }
 }

@@ -11,7 +11,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.person.Address;
@@ -76,20 +75,6 @@ public class ParserUtil {
             throw new ParseException(Cost.MESSAGE_CONSTRAINTS);
         }
         return new Cost(Double.parseDouble(trimmedCost));
-    }
-
-    /**
-     * Parses a {@code String budgetAmount} into a {@code Cost}.
-     * Leading and trailing whitespaces will be trimmed.
-     */
-    public static Cost parseBudgetAmount(String cost) throws ParseException {
-        requireNonNull(cost);
-        String trimmedCost = cost.trim();
-        int budgetAmount = Integer.parseInt(trimmedCost);
-        if (budgetAmount <= 0) {
-            throw new ParseException(Budget.MESSAGE_CONSTRAINTS);
-        }
-        return new Cost(budgetAmount);
     }
 
     /**

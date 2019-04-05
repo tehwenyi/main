@@ -234,12 +234,12 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the EPiggy data.
+* stores the ePiggy data.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `EPiggy`, which `Person` can reference. This would allow `ePiggy` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
+As a more OOP model, we can store a `Tag` list in `ePiggy`, which `Person` can reference. This would allow `ePiggy` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
 
@@ -274,7 +274,9 @@ This command allows users to add a new budget to monitor their expenses within a
 
 The above command adds a budget with `$500` which starts on `1st March 2019` and lasts for `31` days. +
 
-The budget will compute the end date and provide a status based on the local date. The status will include whether the budget is an old, current or future budget, as well as the `remaining amount` until the budget is exceeded and `remaining days` till the end of the budget. This is so that users are aware about how much they have spent. +
+The budget will compute the end date and provide a status based on the local date.
+The status will include whether the budget is an old, current or future budget, as well as the `remaining amount` until the budget is exceeded and `remaining days` till the end of the budget.
+This is so that users are aware about how much they have spent. +
 
 Adding of overlapping budgets are not allowed in ePiggy.
 [NOTE]
@@ -288,7 +290,7 @@ image::addBudgetSequenceDiagram.png[width="800"]
 Figure: Add Budget Command Sequence Diagram +
 
 The command is first parsed into `AddBudgetCommandParser`, which separates the arguments into their respective fields. A new `Budget` is created and parsed into `AddBudgetCommand`. +
-As long as the `Budget` object created does not overlap with any existing `Budget` objects, the `Budget` will be added with `Model#addBudget()` and saved into the EPiggy storage. +
+As long as the `Budget` object created does not overlap with any existing `Budget` objects, the `Budget` will be added with `Model#addBudget()` and saved into the ePiggy storage. +
 
 *Example usage scenario:* +
 1. User launches application and enters `addBudget $/500 p/31 d/01/03/2019`. +
@@ -336,7 +338,7 @@ follow the `editBudget` command word.
 
 Afterwards, a `budget` object is created from the `EditBudgetDescriptor` object. Then, the `budget` object is passed into address book
 through `Model.#setCurrentBudget()`, which will replace the current `budget` with the new `budget` passed in. +
-Since only the current `budget` can be edited, the `editBudget` command will first check if a current `budget` is present in `EPiggy`’s
+Since only the current `budget` can be edited, the `editBudget` command will first check if a current `budget` is present in `ePiggy`’s
 `budgetList` through `Model#getCurrentBudgetIndex()`. If the current `budget` does not exist, the command will feedback to the user that the
 command entered is invalid. +
 
@@ -353,7 +355,7 @@ present. The index is then used to retrieve the current budget.
 * *Alternative 2*: +
 Using a boolean `hasCurrentBudget` method to check if a current `budget` exists in `budgetList`, then another `getCurrentBudget` method to get the current `budget`.
 
-** Pros: Code will be written in `EPiggy` rather than at `editBudget` command and can be easily used for other commands.
+** Pros: Code will be written in `ePiggy` rather than at `editBudget` command and can be easily used for other commands.
 
 ** Cons: Will need to implement additional methods. Reduces the abstraction has the current `budget` is exposed to the entire project as it is a public method.
 
@@ -370,7 +372,7 @@ The above command deletes the `Budget` with the displayed `index` of #2. +
 The `Budget` to be deleted is identified by its displayed `index` and subsequently deleted. +
 
 ==== Current Implementation
-The command’s current implementation retrieves the `budgetList` from `EPiggy` and removes the
+The command’s current implementation retrieves the `budgetList` from `ePiggy` and removes the
 budget at the zero-based version of the displayed `index`. +
 A `listener` has been added to `budgetList`, so the order in which the budgets are displayed is the same
 as the order of the budgets in `budgetList`. Furthermore, the indexes are unique. +
@@ -492,7 +494,7 @@ If a goal has not been set by the user, the command will use a default goal whic
 ==== Current Implementation
 
 The undo/redo mechanism is facilitated by `VersionedEPiggy`.
-It extends `EPiggy` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
+It extends `ePiggy` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
 Additionally, it implements the following operations:
 
 * `VersionedEPiggy#commit()` -- Saves the current address book state in its history.
@@ -884,12 +886,12 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 +
 ****
 * Hints
-** The link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/address/model/EPiggy.java[`EPiggy`] API need to be updated.
+** The link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/address/model/ePiggy.java[`ePiggy`] API need to be updated.
 ** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/EPiggy.java[`EPiggy`] and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/EPiggy.java[`EPiggy`] allows you to update a person, and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] allows you to update the tags.
+**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/ePiggy.java[`ePiggy`] and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/ePiggy.java[`ePiggy`] allows you to update a person, and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] allows you to update the tags.
 * Solution
-** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/EPiggy.java[`EPiggy`]. Loop through each person, and remove the `tag` from each person.
-** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should call `EPiggy#removeTag(Tag)`.
+** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/ePiggy.java[`ePiggy`]. Loop through each person, and remove the `tag` from each person.
+** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should call `ePiggy#removeTag(Tag)`.
 ** Add new tests for each of the new public methods that you have added.
 ** See this https://github.com/se-edu/addressbook-level4/pull/790[PR] for the full solution.
 ****

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.function.Predicate;
 
@@ -46,9 +47,13 @@ public class ViewSavingsCommandTest {
     }
 
     private class ModelStub implements Model {
+        @Override
+        public void reverseFilteredExpensesList() {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
-        public void sortExpenses(String keyword) {
+        public void sortExpenses(Comparator<Expense> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -88,7 +93,7 @@ public class ViewSavingsCommandTest {
         }
 
         @Override
-        public void setEPiggyFilePath(Path EPiggyFilePath) {
+        public void setEPiggyFilePath(Path ePiggyFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 

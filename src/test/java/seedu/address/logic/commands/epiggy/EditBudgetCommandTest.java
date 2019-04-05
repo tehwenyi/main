@@ -3,9 +3,9 @@ package seedu.address.logic.commands.epiggy;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_ONE;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_TWO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_FIRSTEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_SECONDEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_FIRSTEXTRA;
 import static seedu.address.logic.commands.epiggy.EditBudgetCommand.createEditedBudget;
 import static seedu.address.testutil.TypicalBudgets.getTypicalEPiggy;
 
@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.function.Predicate;
@@ -69,7 +70,7 @@ public class EditBudgetCommandTest {
     public void execute_allFieldsSpecified_success() throws Exception {
         ModelStubWithOneCurrentBudget modelStub = new ModelStubWithOneCurrentBudget();
 
-        EditBudgetDetails details = DESC_ONE;
+        EditBudgetDetails details = DESC_FIRSTEXTRA;
         Budget budgetToEdit = new BudgetBuilder().build();
         Budget editedBudget = createEditedBudget(budgetToEdit, details);
         CommandResult commandResult = new EditBudgetCommand(details).execute(modelStub, commandHistory);
@@ -106,7 +107,7 @@ public class EditBudgetCommandTest {
         Budget budgetToEdit = new BudgetBuilder().build();
         EditBudgetDetails details = new EditBudgetDetails();
         details.setStartDate(budgetToEdit.getStartDate());
-        details.setAmount(budgetToEdit.getCost());
+        details.setAmount(budgetToEdit.getBudgetedAmount());
         details.setPeriod(new Period(26));
 
         Budget editedBudget = createEditedBudget(budgetToEdit, details);
@@ -124,7 +125,7 @@ public class EditBudgetCommandTest {
 
         Budget budgetToEdit = new BudgetBuilder().build();
         EditBudgetDetails details = new EditBudgetDetails();
-        details.setAmount(budgetToEdit.getCost());
+        details.setAmount(budgetToEdit.getBudgetedAmount());
         details.setPeriod(budgetToEdit.getPeriod());
 
         Date newDate = new GregorianCalendar(2010, Calendar.FEBRUARY, 11).getTime();
@@ -141,22 +142,22 @@ public class EditBudgetCommandTest {
 
     @Test
     public void execute_noCurrentBudget_failure() throws Exception {
-        EditBudgetDetails details = new EditBudgetDetailsBuilder().withAmount(VALID_AMOUNT_ONE).build();
+        EditBudgetDetails details = new EditBudgetDetailsBuilder().withAmount(VALID_AMOUNT_FIRSTEXTRA).build();
 
         EditBudgetCommand editBudgetCommand = new EditBudgetCommand(details);
         ModelStubWithNoCurrentBudget modelStub = new ModelStubWithNoCurrentBudget();
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(EditBudgetCommand.MESSAGE_EDIT_BUDGET_FAIL);
+        thrown.expectMessage(EditBudgetCommand.MESSAGE_EDIT_BUDGET_DOES_NOT_EXIST_FAIL);
         editBudgetCommand.execute(modelStub, commandHistory);
     }
 
     @Test
     public void equals() {
-        final EditBudgetCommand standardCommand = new EditBudgetCommand(DESC_ONE);
+        final EditBudgetCommand standardCommand = new EditBudgetCommand(DESC_FIRSTEXTRA);
 
         // same values -> returns true
-        EditBudgetDetails copyDetails = new EditBudgetDetails(DESC_ONE);
+        EditBudgetDetails copyDetails = new EditBudgetDetails(DESC_FIRSTEXTRA);
         EditBudgetCommand commandWithSameValues = new EditBudgetCommand(copyDetails);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -170,21 +171,24 @@ public class EditBudgetCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different details -> returns false
-        assertFalse(standardCommand.equals(new EditBudgetCommand(DESC_TWO)));
+        assertFalse(standardCommand.equals(new EditBudgetCommand(DESC_SECONDEXTRA)));
     }
 
     /**
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
-
+        @Override
+        public void reverseFilteredExpensesList() {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public ObservableList<Budget> getBudgetList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void sortExpenses(String keyword) {
+        public void sortExpenses(Comparator<Expense> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 

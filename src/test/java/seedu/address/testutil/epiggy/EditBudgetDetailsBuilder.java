@@ -27,7 +27,7 @@ public class EditBudgetDetailsBuilder {
      */
     public EditBudgetDetailsBuilder(Budget budget) {
         details = new EditBudgetDetails();
-        details.setAmount(budget.getCost());
+        details.setAmount(budget.getBudgetedAmount());
         details.setPeriod(budget.getPeriod());
         details.setStartDate(budget.getStartDate());
     }

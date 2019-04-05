@@ -33,19 +33,16 @@ public class EditBudgetCommand extends Command {
     // TODO MESSAGE_USAGE should come out
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the current budget. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: [" + PREFIX_COST + "AMOUNT] "
+            + "Parameters: [" + PREFIX_COST + "BUDGET_IN_DOLLARS] "
             + "[" + PREFIX_PERIOD + "TIME_PERIOD_IN_DAYS] "
             + "[" + PREFIX_DATE + "START_DATE_IN_DD/MM/YYYY] "
             + "Example: " + COMMAND_WORD
             + PREFIX_COST + "200 "
             + PREFIX_PERIOD + "7";
 
-    public static final String MESSAGE_EDIT_BUDGET_SUCCESS = "Current budget updated: %1$s";
-    public static final String MESSAGE_EDIT_BUDGET_FAIL = "Only the current budget can be edited."
+    public static final String MESSAGE_EDIT_BUDGET_SUCCESS = "Current budget updated:\n%1$s";
+    public static final String MESSAGE_EDIT_BUDGET_DOES_NOT_EXIST_FAIL = "Only the current budget can be edited."
             + " There is no current budget to be edited.";
-
-    public static final String MESSAGE_BUDGET_STATUS_ERROR = "The current budget must remain as the current budget."
-            + " Please add a new budget or delete the current budget if you wish to create a budget of another status.";
     public static final String MESSAGE_NOT_EDITED = "Budget not edited as there are no changes.\n"
             + MESSAGE_USAGE;
 
@@ -63,7 +60,7 @@ public class EditBudgetCommand extends Command {
 
         int indexOfCurrentBudget = model.getCurrentBudgetIndex();
         if (indexOfCurrentBudget == -1) {
-            throw new CommandException(MESSAGE_EDIT_BUDGET_FAIL);
+            throw new CommandException(MESSAGE_EDIT_BUDGET_DOES_NOT_EXIST_FAIL);
         }
         Budget budgetToEdit = lastShownBudgetList.get(indexOfCurrentBudget);
         Budget editedBudget = createEditedBudget(budgetToEdit, editBudgetDetails);
@@ -99,7 +96,7 @@ public class EditBudgetCommand extends Command {
     public static Budget createEditedBudget(Budget budgetToEdit, EditBudgetDetails editBudgetDetails) {
         assert budgetToEdit != null;
 
-        Cost updatedAmount = editBudgetDetails.getAmount().orElse(budgetToEdit.getCost());
+        Cost updatedAmount = editBudgetDetails.getAmount().orElse(budgetToEdit.getBudgetedAmount());
         Date updatedStartDate = editBudgetDetails.getStartDate().orElse((budgetToEdit.getStartDate()));
         Period updatedPeriod = editBudgetDetails.getPeriod().orElse(budgetToEdit.getPeriod());
 

@@ -39,24 +39,24 @@ public class EPiggyTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final EPiggy EPiggy = new EPiggy();
+    private final EPiggy ePiggy = new EPiggy();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), EPiggy.getPersonList());
+        assertEquals(Collections.emptyList(), ePiggy.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        EPiggy.resetData(null);
+        ePiggy.resetData(null);
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
         EPiggy newData = getTypicalEPiggy();
-        EPiggy.resetData(newData);
-        assertEquals(newData, EPiggy);
+        ePiggy.resetData(newData);
+        assertEquals(newData, ePiggy);
     }
 
     @Test
@@ -68,46 +68,46 @@ public class EPiggyTest {
         AddressBookStub newData = new AddressBookStub(newPersons);
 
         thrown.expect(DuplicatePersonException.class);
-        EPiggy.resetData(newData);
+        ePiggy.resetData(newData);
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        EPiggy.hasPerson(null);
+        ePiggy.hasPerson(null);
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(EPiggy.hasPerson(ALICE));
+        assertFalse(ePiggy.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        EPiggy.addPerson(ALICE);
-        assertTrue(EPiggy.hasPerson(ALICE));
+        ePiggy.addPerson(ALICE);
+        assertTrue(ePiggy.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        EPiggy.addPerson(ALICE);
+        ePiggy.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(EPiggy.hasPerson(editedAlice));
+        assertTrue(ePiggy.hasPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        EPiggy.getPersonList().remove(0);
+        ePiggy.getPersonList().remove(0);
     }
 
     @Test
     public void addListener_withInvalidationListener_listenerAdded() {
         SimpleIntegerProperty counter = new SimpleIntegerProperty();
         InvalidationListener listener = observable -> counter.set(counter.get() + 1);
-        EPiggy.addListener(listener);
-        EPiggy.addPerson(ALICE);
+        ePiggy.addListener(listener);
+        ePiggy.addPerson(ALICE);
         assertEquals(1, counter.get());
     }
 
@@ -115,9 +115,9 @@ public class EPiggyTest {
     public void removeListener_withInvalidationListener_listenerRemoved() {
         SimpleIntegerProperty counter = new SimpleIntegerProperty();
         InvalidationListener listener = observable -> counter.set(counter.get() + 1);
-        EPiggy.addListener(listener);
-        EPiggy.removeListener(listener);
-        EPiggy.addPerson(ALICE);
+        ePiggy.addListener(listener);
+        ePiggy.removeListener(listener);
+        ePiggy.addPerson(ALICE);
         assertEquals(0, counter.get());
     }
 

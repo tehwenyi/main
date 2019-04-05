@@ -30,9 +30,9 @@ public class JsonSerializableEPiggyTest {
     public void toModelType_typicalPersonsFile_success() throws Exception {
         JsonSerializableEPiggy dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableEPiggy.class).get();
-        EPiggy EPiggyFromFile = dataFromFile.toModelType();
+        EPiggy ePiggyFromFile = dataFromFile.toModelType();
         EPiggy typicalPersonsEPiggy = TypicalPersons.getTypicalEPiggy();
-        assertEquals(EPiggyFromFile, typicalPersonsEPiggy);
+        assertEquals(ePiggyFromFile, typicalPersonsEPiggy);
     }
 
     @Test

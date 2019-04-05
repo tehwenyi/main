@@ -55,7 +55,7 @@ public abstract class EPiggySystemTestV2 {
 
     @BeforeClass
     public static void setupBeforeClass() {
-        SystemTestSetupHelper.initialize();
+        EpiggySystemTestSetupHelper.initialize();
     }
 
     @Before

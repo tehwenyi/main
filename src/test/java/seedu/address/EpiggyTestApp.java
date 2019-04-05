@@ -26,10 +26,11 @@ import systemtests.ModelHelper;
  */
 public class EpiggyTestApp extends MainApp {
 
-    public static final Path SAVE_LOCATION_FOR_TESTING = TestUtil.getFilePathInSandboxFolder("sampleData.json");
+    public static final Path SAVE_LOCATION_FOR_TESTING = TestUtil
+            .getFilePathInSandboxFolder("sampleEpiggyData.json");
 
     protected static final Path DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
-            TestUtil.getFilePathInSandboxFolder("pref_testing.json");
+            TestUtil.getFilePathInSandboxFolder("pref_testing_epiggy.json");
     protected Supplier<ReadOnlyEPiggy> initialDataSupplier = () -> null;
     protected Path saveFileLocation = SAVE_LOCATION_FOR_TESTING;
 

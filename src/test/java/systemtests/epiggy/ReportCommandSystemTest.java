@@ -13,8 +13,7 @@ import seedu.address.logic.commands.epiggy.ReportCommand;
 import seedu.address.logic.parser.CliSyntax;
 import systemtests.EPiggySystemTest;
 
-
-public class ReportCommandSystemTest extends EPiggySystemTest {
+public class ReportCommandSystemTest extends EPiggySystemTestV2 {
     private static final String ERROR_MESSAGE = "ATTENTION!!!! : On some computers, this test may fail when run on "
             + "non-headless mode as FxRobot#clickOn(Node, MouseButton...) clicks on the wrong location. We suspect "
             + "that this is a bug with TestFX library that we are using. If this test fails, you have to run your "

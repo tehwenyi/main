@@ -28,7 +28,7 @@ public class ResultDisplayTest extends GuiUnitTest {
         assertEquals("", resultDisplayHandle.getText());
 
         // new result received
-        guiRobot.interact(() -> resultDisplay.setFeedbackToUser("Dummy feedback to user"));
+        guiRobot.interact(() -> resultDisplay.setFeedbackToUser("Dummy feedback to user", "Dummy command from user"));
         guiRobot.pauseForHuman();
         assertEquals("Dummy feedback to user", resultDisplayHandle.getText());
     }

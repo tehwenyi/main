@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -136,8 +137,13 @@ public class ExpenseList implements Iterable<seedu.address.model.epiggy.Expense>
         FXCollections.sort(internalList, comparator);
     }
 
-
     public void reverse() {
         FXCollections.reverse(internalList);
+    }
+
+    public double getTotalSpendings() {
+        List<Double> costList = internalList.stream().map(e -> e.getItem().getCost().getAmount())
+                .collect(Collectors.toList());
+        return costList.stream().mapToDouble(f -> f.doubleValue()).sum();
     }
 }

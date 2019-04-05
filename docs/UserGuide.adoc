@@ -163,17 +163,17 @@ Format: *`findExpense [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
 
 Examples:
 
-* `search n/MCDONALDS` +
+* `fE n/MCDONALDS` +
 Displays all entries with the name “MCDONALDS”.
-* `search t/FOOD` +
+* `fE t/FOOD` +
 Displays all entries with the tag specified (in this case, it’s food).
-* `search d/2019/01/02` +
+* `fE d/2019/01/02` +
 Displays all entries listed on 2nd Jan 2019.
-* `search d/2019/01/02:2020/12/05` +
+* `fE d/2019/01/02:2020/12/05` +
 Displays all entries listed in the range 2nd Jan 2019 to 5th Dec 2020.
-* `search $/250` +
+* `fE $/250` +
 Displays all entries listed with the cost range of $250.
-* `search $/250:500` +
+* `fE $/250:500` +
 Displays all entries listed with the cost range of $250 to $500.
 
 ****
@@ -190,11 +190,11 @@ Format: `sortExpense -[n/d/$]/`
 
 Examples:
 
-* `sort n/` +
+* `sE n/` +
 Sorts all entries by name (in ascending order).
-* `sort d/` +
+* `sE d/` +
 Sorts all entries by date in descending order.
-* `sort $/` +
+* `sE $/` +
 Sorts all entries by amount in ascending order.
 
 === Budgeting

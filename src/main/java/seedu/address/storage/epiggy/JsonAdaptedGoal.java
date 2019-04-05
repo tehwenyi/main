@@ -15,6 +15,7 @@ public class JsonAdaptedGoal {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Goal's %s field is missing!";
 
+    private final Boolean isNull;
     private final String name;
     private final String cost;
 
@@ -22,7 +23,11 @@ public class JsonAdaptedGoal {
      * Constructs a {@code JsonAdaptedGoal} with the given goal details.
      */
     @JsonCreator
-    public JsonAdaptedGoal(@JsonProperty("name") String name, @JsonProperty("cost") String cost) {
+    public JsonAdaptedGoal(
+            @JsonProperty("isNull") Boolean isNull,
+            @JsonProperty("name") String name,
+            @JsonProperty("cost") String cost) {
+        this.isNull = isNull;
         this.name = name;
         this.cost = cost;
     }
@@ -31,9 +36,15 @@ public class JsonAdaptedGoal {
      * Converts a given {@code Goal} into this class for Jackson use.
      */
     public JsonAdaptedGoal(Goal source) {
-        System.out.println(source);
-        name = source.getName().toString();
-        cost = String.valueOf(source.getAmount().getAmount());
+        if (source == null) {
+            isNull = true;
+            name = null;
+            cost = null;
+        } else {
+            isNull = false;
+            name = source.getName().toString();
+            cost = String.valueOf(source.getAmount().getAmount());
+        }
     }
 
     /**
@@ -43,6 +54,9 @@ public class JsonAdaptedGoal {
      * @throws IllegalValueException
      */
     public Goal toModelType() throws IllegalValueException {
+        if (isNull) {
+            return null;
+        }
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }

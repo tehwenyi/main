@@ -109,6 +109,11 @@ Adds an allowance entry of $10 to the expense tracker.
 Lists the expense records from newest to oldest. Use this to return to the default view after search/sort commands +
 Format: `list`
 
+==== Listing all expenses in reverse : `reverseList`
+
+Lists the expense records from oldest to newest. Use this to return to the default view after search/sort commands +
+Format: `reverseList`
+
 ==== Editing an expense : `editExpense`
 
 Edits an existing expense in ePiggy at a specific `*INDEX`* . +
@@ -151,7 +156,7 @@ Format: `viewSavings`
 
 === Filtering and Sorting Data
 
-==== Searching for an expense : `search`
+==== Searching for an expense : `findExpense`
 
 You can search for any expense in the list by specifying either its name, tag, date, range of dates, or range of amount. +
 Format: *`findExpense [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
@@ -178,10 +183,10 @@ If the entry is not found, it displays an appropriate error message. +
 Date format is `yyyy/MM/dd` .
 ****
 
-==== Sorting the expenses : `sort`
+==== Sorting the expenses : `sortExpense`
 
 The user can sort the expenses in the list by name, date added, amount in ascending or descending order. +
-Format: `sort -[n/d/$]/`
+Format: `sortExpense -[n/d/$]/`
 
 Examples:
 
@@ -402,6 +407,8 @@ e.g. `addExpense n/Chicken rice set $/5 t/Food a/HAINAN KITCHEN d/2019-02-21`
 e.g. `addAllowance $/10`
 
 * *List* : `list`
+
+* *Reverse list* : `reverseList`
 
 * *Edit* : `edit INDEX [n/EXPENSE_NAME] [$/COST] [c/CATEGORY] [d/DATE] [t/TAG]…` +
 e.g. `edit 1 n/pen $1 c/supplies`

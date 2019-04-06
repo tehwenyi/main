@@ -1,5 +1,10 @@
 package seedu.address.model.epiggy.item;
 
+import seedu.address.logic.parser.exceptions.ParseException;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -8,8 +13,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable
  */
 public class Cost {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Cost should be a non-negative real number";
+    public static final String MESSAGE_CONSTRAINTS = "Cost should be an amount not more than 6 digits.";
+    private static final Pattern AMOUNT_FORMAT = Pattern.compile("^(?!\\.?$)\\d{0,6}(\\.\\d{0,2})?$");
     private final double amount;
 
     public Cost(double amount) {
@@ -35,12 +40,17 @@ public class Cost {
      */
     public static boolean isValidCost(String test) {
         try {
+            Matcher matcher = AMOUNT_FORMAT.matcher(test);
+            if (!matcher.matches()) {
+                throw new ParseException(String.format(MESSAGE_CONSTRAINTS));
+            }
             double d = Double.parseDouble(test);
-            return d >= 0.;
-        } catch (NumberFormatException e) {
+            return d > 0. && d < 1000000.0;
+        } catch (NumberFormatException | ParseException e) {
             return false;
         }
     }
+
 
     @Override
     public String toString() {

@@ -24,10 +24,9 @@ import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
 
-import seedu.address.model.epiggy.Savings;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.epiggy.GoalBuilder;
-import seedu.address.testutil.epiggy.SavingsBuilder;
 
 public class ViewGoalCommandTest {
 
@@ -38,8 +37,8 @@ public class ViewGoalCommandTest {
     @Test
     public void execute_viewSuccessful_savingsLessThanGoal() throws Exception {
         Goal validGoal = new GoalBuilder().build();
-        Savings validSavings = new SavingsBuilder().withSavings(100).build();
-        double diff = validGoal.getAmount().getAmount() - validSavings.getSavings();
+        Cost validSavings = new Cost(100);
+        double diff = validGoal.getAmount().getAmount() - validSavings.getAmount();
         ModelStubWithGoalAndSavings modelStub = new ModelStubWithGoalAndSavings(validGoal, validSavings);
         CommandResult commandResult = new ViewGoalCommand().execute(modelStub, commandHistory);
 
@@ -52,7 +51,7 @@ public class ViewGoalCommandTest {
     @Test
     public void execute_viewSuccessful_savingsMoreThanGoal() throws Exception {
         Goal validGoal = new GoalBuilder().build();
-        Savings validSavings = new SavingsBuilder().build();
+        Cost validSavings = new Cost(300);
         ModelStubWithGoalAndSavings modelStub = new ModelStubWithGoalAndSavings(validGoal, validSavings);
         CommandResult commandResult = new ViewGoalCommand().execute(modelStub, commandHistory);
 
@@ -160,7 +159,7 @@ public class ViewGoalCommandTest {
         }
 
         @Override
-        public SimpleObjectProperty<Savings> getSavings() {
+        public SimpleObjectProperty<Cost> getSavings() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -288,9 +287,9 @@ public class ViewGoalCommandTest {
     private class ModelStubWithGoalAndSavings extends ModelStub {
 
         final SimpleObjectProperty<Goal> goal = new SimpleObjectProperty<>();
-        final SimpleObjectProperty<Savings> savings = new SimpleObjectProperty<>();
+        final SimpleObjectProperty<Cost> savings = new SimpleObjectProperty<>();
 
-        ModelStubWithGoalAndSavings(Goal goal, Savings savings) {
+        ModelStubWithGoalAndSavings(Goal goal, Cost savings) {
             requireNonNull(goal);
             requireNonNull(savings);
             this.goal.setValue(goal);
@@ -303,7 +302,7 @@ public class ViewGoalCommandTest {
         }
 
         @Override
-        public SimpleObjectProperty<Savings> getSavings() {
+        public SimpleObjectProperty<Cost> getSavings() {
             return this.savings;
         }
     }

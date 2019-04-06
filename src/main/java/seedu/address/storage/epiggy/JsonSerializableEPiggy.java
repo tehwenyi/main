@@ -21,7 +21,6 @@ import seedu.address.model.epiggy.Expense;
 @JsonRootName(value = "epiggy")
 public class JsonSerializableEPiggy {
     private final List<JsonAdaptedExpense> expenses = new ArrayList<>();
-    private final JsonAdaptedSavings savings;
     private final JsonAdaptedGoal goal;
 
     /**
@@ -29,10 +28,8 @@ public class JsonSerializableEPiggy {
      */
     @JsonCreator
     public JsonSerializableEPiggy(@JsonProperty("expenses") List<JsonAdaptedExpense> expenses,
-                                  @JsonProperty("savings") JsonAdaptedSavings savings,
                                   @JsonProperty("goal") JsonAdaptedGoal goal) {
         this.expenses.addAll(expenses);
-        this.savings = savings;
         this.goal = goal;
     }
 
@@ -43,7 +40,6 @@ public class JsonSerializableEPiggy {
      */
     public JsonSerializableEPiggy(ReadOnlyEPiggy source) {
         expenses.addAll(source.getExpenseList().stream().map(JsonAdaptedExpense::new).collect(Collectors.toList()));
-        savings = new JsonAdaptedSavings(source.getSavings().get());
         goal = new JsonAdaptedGoal(source.getGoal().get());
     }
 
@@ -63,7 +59,6 @@ public class JsonSerializableEPiggy {
             }
         }
         ePiggy.setGoal(goal.toModelType());
-        ePiggy.setSavings(savings.toModelType());
         return ePiggy;
     }
 }

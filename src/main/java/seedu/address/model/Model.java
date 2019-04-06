@@ -13,7 +13,7 @@ import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.Savings;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.person.Person;
 
 /**
@@ -131,7 +131,6 @@ public interface Model {
     void updateFilteredExpensesList(Predicate<seedu.address.model.epiggy.Expense> predicate);
 
     /**
-<<<<<<< HEAD
      * Gets the current budget list.
      */
     ObservableList<Budget> getBudgetList();
@@ -142,8 +141,6 @@ public interface Model {
     ObservableList<Expense> getExpenseList();
 
     /**
-=======
->>>>>>> 8083632d0f8f287afe6b8a7985e25ad145ba8dc5
      * Gets the current budget's index.
      * @return -1 if there is no current budget.
      */
@@ -153,7 +150,7 @@ public interface Model {
     /**
      * Get the current savings.
      */
-    SimpleObjectProperty<Savings> getSavings();
+    SimpleObjectProperty<Cost> getSavings();
 
     /**
      * Get the savings goal.

@@ -4,8 +4,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_FIRSTEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_SECONDEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_FIRSTEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_SECONDEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_FIRSTEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_SECONDEXTRA;
 import static seedu.address.testutil.TypicalBudgets.FIRST_EXTRA;
 import static seedu.address.testutil.TypicalBudgets.SECOND_EXTRA;
@@ -103,8 +106,9 @@ public class BudgetTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Budget oneCopy = new BudgetBuilder(FIRST_EXTRA).build();
-        assertTrue(FIRST_EXTRA.equals(oneCopy));
+        Budget oneCopy = new BudgetBuilder().withAmount(VALID_AMOUNT_FIRSTEXTRA).withPeriod(VALID_PERIOD_FIRSTEXTRA)
+                .withDate(VALID_DATE_FIRSTEXTRA).build();
+        assertEquals(FIRST_EXTRA, oneCopy);
 
         // same object -> returns true
         assertTrue(FIRST_EXTRA.equals(FIRST_EXTRA));

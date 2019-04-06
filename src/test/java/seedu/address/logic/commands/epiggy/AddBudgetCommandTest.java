@@ -152,8 +152,12 @@ public class AddBudgetCommandTest {
         // same object -> returns true
         assertTrue(addTwentyCommand.equals(addTwentyCommand));
 
-        // same values -> returns true
+        // copy of object -> returns true
         AddBudgetCommand addTwentyCommandCopy = new AddBudgetCommand(twenty);
+        assertTrue(addTwentyCommand.equals(addTwentyCommandCopy));
+
+        // same values -> returns true
+        addTwentyCommandCopy = new AddBudgetCommand(new BudgetBuilder().withAmount("20").build());
         assertTrue(addTwentyCommand.equals(addTwentyCommandCopy));
 
         // different types -> returns false

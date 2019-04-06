@@ -25,7 +25,7 @@ public class AddExpenseCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "EXPENSE NAME "
             + PREFIX_COST + "COST "
-            + PREFIX_TAG + "TAG..."
+            + "[" + PREFIX_TAG + "TAG]..."
             + "[" + PREFIX_DATE + "DATE] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Chicken Rice "
@@ -44,9 +44,7 @@ public class AddExpenseCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
         model.addExpense(toAdd);
-
         model.commitEPiggy();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

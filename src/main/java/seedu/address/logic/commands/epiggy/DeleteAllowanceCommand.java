@@ -14,27 +14,27 @@ import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Expense;
 
 /**
- * Delete an expense in ePiggy.
+ * Deletes an allowance in epiggy.
  */
-public class DeleteExpenseCommand extends Command {
-
-    public static final String COMMAND_WORD = "deleteExpense";
-    public static final String COMMAND_ALIAS = "de";
+public class DeleteAllowanceCommand extends Command {
+    public static final String COMMAND_WORD = "deleteAllowance";
+    public static final String COMMAND_ALIAS = "da";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the expense identified by the index number used in the displayed expense list.\n"
+            + ": Deletes the allowance identified by the index number used in the displayed expense list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    private static final String MESSAGE_DELETE_EXPENSE_SUCCESS = "Deleted expense: %1$s";
+    private static final String MESSAGE_DELETE_ALLOWANCE_SUCCESS = "Deleted allowance: %1$s";
     private static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The index does not exist on the expense list.";
-    private static final String MESSAGE_ITEM_NOT_EXPENSE = "The item selected is not an expense. "
-            + "Please use " + COMMAND_WORD + " to delete expenses and "
-            + DeleteAllowanceCommand.COMMAND_WORD + " to delete allowances.";
+    private static final String MESSAGE_ITEM_NOT_ALLOWANCE = "The item selected is not an allowance. "
+            + "Please use " + DeleteExpenseCommand.COMMAND_WORD + " to delete expenses and "
+            + COMMAND_WORD + " to delete allowances.";
+
 
     private final Index targetIndex;
 
-    public DeleteExpenseCommand(Index targetIndex) {
+    public DeleteAllowanceCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -48,11 +48,11 @@ public class DeleteExpenseCommand extends Command {
         }
 
         Expense expenseToDelete = lastShownExpenseList.get(this.targetIndex.getZeroBased());
-        if (expenseToDelete instanceof Allowance) {
-            throw new CommandException(MESSAGE_ITEM_NOT_EXPENSE);
+        if (!(expenseToDelete instanceof Allowance)) {
+            throw new CommandException(MESSAGE_ITEM_NOT_ALLOWANCE);
         }
         model.deleteExpense(expenseToDelete);
         model.commitEPiggy();
-        return new CommandResult(String.format(MESSAGE_DELETE_EXPENSE_SUCCESS, expenseToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_ALLOWANCE_SUCCESS, expenseToDelete));
     }
 }

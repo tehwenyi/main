@@ -13,6 +13,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.epiggy.EditAllowanceCommand;
 import seedu.address.logic.commands.epiggy.EditExpenseCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -21,17 +22,13 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
-/**
- * Parses input arguments and creates a new EditExpenseCommand object
- */
-public class EditExpenseCommandParser implements Parser<EditExpenseCommand> {
 
-    /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
-     */
-    public EditExpenseCommand parse(String args) throws ParseException {
+/**
+ * Parses input arguments and creates a new EditAllowanceCommand object
+ */
+public class EditAllowanceCommandParser implements Parser<EditAllowanceCommand> {
+    @Override
+    public EditAllowanceCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_COST, PREFIX_DATE, PREFIX_TAG);
@@ -43,7 +40,7 @@ public class EditExpenseCommandParser implements Parser<EditExpenseCommand> {
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditExpenseCommand.MESSAGE_USAGE),
+                            EditAllowanceCommand.MESSAGE_USAGE),
                     pe);
         }
 
@@ -63,7 +60,7 @@ public class EditExpenseCommandParser implements Parser<EditExpenseCommand> {
             throw new ParseException(EditExpenseCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditExpenseCommand(index, editExpenseDescriptor);
+        return new EditAllowanceCommand(index, editExpenseDescriptor);
     }
 
     /**
@@ -74,8 +71,7 @@ public class EditExpenseCommandParser implements Parser<EditExpenseCommand> {
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        tagSet.add("Expense");
+        tagSet.add("Allowance");
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
-
 }

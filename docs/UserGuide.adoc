@@ -271,27 +271,6 @@ Deletes the first budget in the Budget List.
 *Additional Information:* +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
-
-==== Recommend future spendings : `recommend`
-
-You have to set a budget before you can use this command. +
-This command recommends a daily limit you need to
-have in order to satisfy your budget and the income you need to have if you intend to maintain your current spending
-habits. +
-Format: `recommend`
-
-Example:
-
-* `recommend` +
-Recommends a daily limit and the income you need to maintain current spending habits
-while staying below budget.
-
-****
-*Additional Information:* +
-A budget should be set. +
-The expenses list should have at least one day’s worth of expenses.
-****
-
 // tag::report[]
 === Expense Report
 

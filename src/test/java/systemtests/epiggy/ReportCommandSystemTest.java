@@ -11,10 +11,8 @@ import guitests.GuiRobot;
 import guitests.guihandles.epiggy.ReportWindowHandle;
 import seedu.address.logic.commands.epiggy.ReportCommand;
 import seedu.address.logic.parser.CliSyntax;
-import systemtests.EPiggySystemTest;
 
-
-public class ReportCommandSystemTest extends EPiggySystemTest {
+public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
     private static final String ERROR_MESSAGE = "ATTENTION!!!! : On some computers, this test may fail when run on "
             + "non-headless mode as FxRobot#clickOn(Node, MouseButton...) clicks on the wrong location. We suspect "
             + "that this is a bug with TestFX library that we are using. If this test fails, you have to run your "
@@ -45,16 +43,19 @@ public class ReportCommandSystemTest extends EPiggySystemTest {
         //use menu button
         getMainMenu().openReportWindowUsingMenu();
         assertReportWindowOpen(); // close window if report window open
+        getMainWindowHandle().focus();
 
         //use command box
         executeCommand(ReportCommand.COMMAND_WORD);
         assertReportWindowOpen();
+        getMainWindowHandle().focus();
 
         // open report window and give it focus
         executeCommand(ReportCommand.COMMAND_WORD);
         getMainWindowHandle().focus();
 
         // check report window for specified day
+        //TODO: some Java internal error here. Remove this test case will make the error.
         executeCommand(ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "21/03/2019");
         assertReportWindowOpen();
         assertEquals("", getCommandBox().getInput());
@@ -77,6 +78,16 @@ public class ReportCommandSystemTest extends EPiggySystemTest {
 
         // check report window for specified year
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "2019";
+        executeCommand(command);
+        assertReportWindowOpen();
+        assertEquals("", getCommandBox().getInput());
+        assertCommandBoxShowsDefaultStyle();
+        messageHistory = "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+                + "You: " + command + "\n\n" + messageHistory;
+        assertEquals(messageHistory, getResultDisplay().getText());
+
+        // check report window for specified date
+        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "21/03/2019";
         executeCommand(command);
         assertReportWindowOpen();
         assertEquals("", getCommandBox().getInput());

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -18,8 +19,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

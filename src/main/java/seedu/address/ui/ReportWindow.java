@@ -80,7 +80,7 @@ public class ReportWindow {
      * Display daily summary on area chart.
      */
     private void displayReportOnSpecifiedDay(Model model, LocalDate date) {
-        //TODO: max, min, total spend of the day
+        //TODO: there is an error in the min, max value in empty data
         double minSpend = Double.MAX_VALUE; // minimum spend of the day
         double maxSpend = Double.MIN_VALUE; // maximum spend of the day
         double totalSpend = 0; // total spend of the day
@@ -137,16 +137,21 @@ public class ReportWindow {
         // JavaFx chart setup
         // create a layout of the new window
         VBox layout = new VBox(10);
-        layout.setAlignment(Pos.CENTER);
         Label min = new Label();
         Label max = new Label();
         Label total = new Label();
 
         if (!expenses.isEmpty()) {
-            min.setText("The minimum amount of expense for today: S$" + minSpend);
-            max.setText("The maximum amount of expense for today: S$" + maxSpend);
-            total.setText("The total amount of expense for today: S$" + totalSpend);
+            min.setText("The lowest expense record on today: S$" + minSpend);
+            max.setText("The highest expense record on today: S$" + maxSpend);
+            total.setText("The total amount of expense on today: S$" + totalSpend);
             layout.getChildren().addAll(areaChart, min, max, total);
+
+            // JavaFx bug.
+            VBox.setMargin(areaChart, new Insets(10, 20, 10, 10));
+            VBox.setMargin(min, new Insets(5, 10, 0, 50));
+            VBox.setMargin(max, new Insets(5, 10, 0, 50));
+            VBox.setMargin(total, new Insets(5, 10, 0, 50));
         } else {
             total.setText("No Record found!");
             layout.getChildren().addAll(areaChart, total);
@@ -230,13 +235,19 @@ public class ReportWindow {
         VBox layout = new VBox(10);
         Label labelOfTotalExpense = new Label();
         Label labelOfTotalAllowance = new Label();
+        Label labelOfTotalSaving = new Label();
         Label labelOfMinExpenseDay = new Label();
         Label labelOfMaxExpenseDay = new Label();
+
         if (!expenses.isEmpty()) {
             // adds labels into layout
-            labelOfTotalExpense.setText("The total amount of expense on this month: S$" + totalExpense);
-            labelOfTotalAllowance.setText("The total amount of allowance on this month: S$" + totalAllowance);
-            labelOfMinExpenseDay.setText("You spent a minimum amount of S$"
+            labelOfTotalExpense.setText("The total amount of expense on this month: S$"
+                    + totalExpense);
+            labelOfTotalAllowance.setText("The total amount of allowance on this month: S$"
+                    + totalAllowance);
+            labelOfTotalSaving.setText("The total amount of Saving on this month: S$"
+                    + (totalAllowance - totalExpense));
+            labelOfMinExpenseDay.setText("The lowest expense record is S$"
                     + minExpense
                     + " at "
                     + dayWithMinExpense
@@ -244,8 +255,7 @@ public class ReportWindow {
                     + new SimpleDateFormat("MMM").format(cal.getTime())
                     + " "
                     + cal.get(Calendar.YEAR));
-            ;
-            labelOfMaxExpenseDay.setText("You spent a maximum amount of S$"
+            labelOfMaxExpenseDay.setText("The highest expense record is S$"
                     + maxExpense
                     + " at "
                     + dayWithMaxExpense
@@ -254,17 +264,20 @@ public class ReportWindow {
                     + " "
                     + cal.get(Calendar.YEAR));
             layout.getChildren().addAll(lineChart, labelOfTotalExpense, labelOfTotalAllowance,
-                    labelOfMaxExpenseDay, labelOfMinExpenseDay);
+                    labelOfTotalSaving, labelOfMaxExpenseDay, labelOfMinExpenseDay);
             // JavaFx bug, need to manually set all nodes margin!!!
             VBox.setMargin(lineChart, new Insets(10, 20, 10, 10));
             VBox.setMargin(labelOfTotalAllowance, new Insets(5, 10, 0, 50));
             VBox.setMargin(labelOfTotalExpense, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfTotalSaving, new Insets(5, 10, 0, 50));
             VBox.setMargin(labelOfMaxExpenseDay, new Insets(5, 10, 0, 50));
             VBox.setMargin(labelOfMinExpenseDay, new Insets(5, 10, 0, 50));
         } else {
-            layout.getChildren().add(lineChart);
+            labelOfTotalExpense.setText("No record found!");
+            layout.getChildren().addAll(lineChart, labelOfTotalExpense);
             // JavaFx bug, need to manually set all nodes margin!!!
             VBox.setMargin(lineChart, new Insets(10, 20, 10, 10));
+            VBox.setMargin(labelOfTotalExpense, new Insets(5, 10, 0, 50));
         }
         Scene scene = new Scene(layout, 800, 600);
         window.setScene(scene);
@@ -284,8 +297,7 @@ public class ReportWindow {
                         new PieChart.Data("Cosmetics", 22),
                         new PieChart.Data("Others", 30));
         final PieChart chart = new PieChart(pieChartData);
-        chart.setTitle("Percentage of spending on each categories");
-        (
+        chart.setTitle("Percentage of spending on each categories"); (
                 (Group) scene.getRoot()
         ).getChildren().add(chart);
         window.setScene(scene);
@@ -314,8 +326,15 @@ public class ReportWindow {
         final ObservableList<Expense> expenseList = model.getFilteredExpenseList();
 
         double[] budgets = new double[12];
-        double[] savings = new double[12];
+        double[] allowances = new double[12];
         double[] expenses = new double[12];
+        double totalAllowance = 0; // total allowance of the year
+        double totalExpense = 0; // total expense of the year
+        double totalBudget = 0; // total budget of the year
+        double minExpenseValue = Double.MAX_VALUE;
+        double maxExpenseValue = Double.MIN_VALUE;
+        int monthWithMinExpense = 0; // the day with minimum expense
+        int monthWithMaxExpense = 0; // the day with maximum expense
 
         if (!expenseList.isEmpty()) {
             for (Expense expense : expenseList) {
@@ -325,7 +344,7 @@ public class ReportWindow {
                     // found the specified year
                     if (expense.getItem().getName().toString().equals("Allowance")) {
                         // allowance
-                        savings[currentDate.getMonthValue() - 1] += expense.getItem().getCost().getAmount();
+                        allowances[currentDate.getMonthValue() - 1] += expense.getItem().getCost().getAmount();
                     } else {
                         // expense
                         expenses[currentDate.getMonthValue() - 1] += expense.getItem().getCost().getAmount();
@@ -345,15 +364,77 @@ public class ReportWindow {
 
         String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
                 "Sep", "Oct", "Nov", "Dec"};
+
+        String[] monthsLong = {"January", "February", "March", "April", "May", "June", "July",
+                "August", "September", "October", "November", "December"};
         for (int i = 0; i < expenses.length; i++) {
+            // calculate total expense and allowance
+            totalExpense += expenses[i];
+            totalAllowance += allowances[i];
+            totalBudget += budgets[i];
+
+            // get the days with min, max expense value
+            if (expenses[i] < minExpenseValue) {
+                minExpenseValue = expenses[i];
+                monthWithMinExpense = i;
+            }
+            if (expenses[i] > maxExpenseValue) {
+                maxExpenseValue = expenses[i];
+                monthWithMaxExpense = i;
+            }
             seriesExpense.getData().add(new XYChart.Data(months[i], expenses[i]));
             seriesBudget.getData().add(new XYChart.Data(months[i], budgets[i]));
-            seriesAllowance.getData().add(new XYChart.Data(months[i], savings[i]));
+            seriesAllowance.getData().add(new XYChart.Data(months[i], allowances[i]));
         }
 
-        Scene scene = new Scene(bc, 800, 600);
+        VBox layout = new VBox(10);
+        Label labelOfTotalExpense = new Label();
+        Label labelOfTotalAllowance = new Label();
+        Label labelOfTotalSaving = new Label();
+        Label labelOfTotalBudget = new Label();
+        Label labelOfMinExpenseDay = new Label();
+        Label labelOfMaxExpenseDay = new Label();
+
+        if (!expenseList.isEmpty()) {
+            // adds labels into layout
+            labelOfTotalExpense.setText("The total amount of expense on this year: S$"
+                    + totalExpense);
+            labelOfTotalAllowance.setText("The total amount of allowance on this year: S$"
+                    + totalAllowance);
+            labelOfTotalSaving.setText("The total amount of saving on this year: S$"
+                    + (totalAllowance - totalExpense));
+            labelOfTotalBudget.setText("The total amount of budget on this year: S$"
+                    + totalBudget);
+            labelOfMinExpenseDay.setText(monthsLong[monthWithMinExpense]
+                    + " is the least consumed month in "
+                    + date.getYear()
+                    + ". The lowest expense record is S$"
+                    + minExpenseValue);
+
+            labelOfMaxExpenseDay.setText(monthsLong[monthWithMaxExpense]
+                    + " is the most consumed month in "
+                    + date.getYear()
+                    + ". The highest expense record is S$"
+                    + maxExpenseValue);
+            layout.getChildren().addAll(bc, labelOfTotalExpense, labelOfTotalAllowance,
+                    labelOfTotalBudget, labelOfTotalSaving, labelOfMaxExpenseDay, labelOfMinExpenseDay);
+            VBox.setMargin(bc, new Insets(10, 20, 10, 10));
+            VBox.setMargin(labelOfTotalAllowance, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfTotalExpense, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfTotalSaving, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfTotalBudget, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfMaxExpenseDay, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfMinExpenseDay, new Insets(5, 10, 0, 50));
+        } else {
+            labelOfTotalExpense.setText("No record found!");
+            layout.getChildren().addAll(bc, labelOfTotalExpense);
+            VBox.setMargin(bc, new Insets(10, 20, 10, 10));
+            VBox.setMargin(labelOfTotalExpense, new Insets(5, 10, 0, 50));
+        }
+        Scene scene = new Scene(layout, 800, 650);
         bc.getData().addAll(seriesBudget, seriesExpense, seriesAllowance);
         window.setScene(scene);
+
     }
 
     /**
@@ -369,7 +450,7 @@ public class ReportWindow {
         final ObservableList<Budget> budgets = model.getFilteredBudgetList();
         final ObservableList<Expense> expenses = model.getFilteredExpenseList();
 
-        bc.setTitle("Summary");
+        bc.setTitle("Completed Summary");
         yAxis.setLabel("Amount");
         xAxis.setLabel("Year");
 
@@ -433,8 +514,22 @@ public class ReportWindow {
         XYChart.Series series3 = new XYChart.Series();
         series3.setName("Budget");
 
+        double totalExpense = 0;
+        double totalBudget = 0;
+        double totalAllowance = 0;
+        double maxExpense = Double.MIN_VALUE;
+        String YearWithMaxExpense = "";
         TreeMap<Integer, ReportData> tm = new TreeMap<>(map);
         for (Map.Entry<Integer, ReportData> entry : tm.entrySet()) {
+            totalAllowance += entry.getValue().getAllowance();
+            totalBudget += entry.getValue().getBudget();
+            totalExpense += entry.getValue().getExpense();
+
+            if (entry.getValue().getExpense() > maxExpense) {
+                maxExpense = entry.getValue().getExpense();
+                YearWithMaxExpense = entry.getKey().toString();
+            }
+
             series1.getData().add(new XYChart.Data(entry.getKey().toString(),
                     entry.getValue().getAllowance()));
             series2.getData().add(new XYChart.Data(entry.getKey().toString(),
@@ -442,8 +537,44 @@ public class ReportWindow {
             series3.getData().add(new XYChart.Data(entry.getKey().toString(),
                     entry.getValue().getBudget()));
         }
-
-        Scene scene = new Scene(bc, 800, 600);
+        VBox layout = new VBox(10);
+        Label labelOfTotalExpense = new Label();
+        Label labelOfTotalAllowance = new Label();
+        Label labelOfTotalSaving = new Label();
+        Label labelOfTotalBudget = new Label();
+        Label labelOfMaxExpenseValue = new Label();
+        Label labelOfMaxExpenseYear = new Label();
+        if (!tm.isEmpty()) {
+            // adds labels into layout
+            labelOfTotalExpense.setText("The total amount of expense: S$"
+                    + totalExpense);
+            labelOfTotalAllowance.setText("The total amount of allowance: S$"
+                    + totalAllowance);
+            labelOfTotalSaving.setText("The total amount of saving: S$"
+                    + (totalAllowance - totalExpense));
+            labelOfTotalBudget.setText("The total amount of budget: S$"
+                    + totalBudget);
+            labelOfMaxExpenseYear.setText(YearWithMaxExpense
+                    + " is the most consumed year. "
+                    + "The highest expense record is S$"
+                    + maxExpense);
+            layout.getChildren().addAll(bc, labelOfTotalExpense, labelOfTotalBudget, labelOfTotalAllowance,
+                    labelOfTotalSaving, labelOfMaxExpenseYear,labelOfMaxExpenseValue);
+            // JavaFx bug, need to manually set all nodes margin!!!
+            VBox.setMargin(bc, new Insets(10, 20, 10, 10));
+            VBox.setMargin(labelOfTotalAllowance, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfTotalExpense, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfTotalSaving, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfTotalBudget, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfMaxExpenseValue, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfMaxExpenseYear, new Insets(5, 10, 0, 50));
+        } else {
+            labelOfTotalExpense.setText("No record found!");
+            layout.getChildren().addAll(bc, labelOfTotalExpense);
+            VBox.setMargin(labelOfTotalExpense, new Insets(5, 10, 0, 50));
+            VBox.setMargin(labelOfTotalExpense, new Insets(5, 10, 0, 50));
+        }
+        Scene scene = new Scene(layout, 800, 650);
         bc.getData().addAll(series1, series2, series3);
         window.setScene(scene);
     }

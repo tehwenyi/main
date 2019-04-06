@@ -265,7 +265,9 @@ public abstract class EPiggySystemTest {
      */
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
-        assertEquals("", getResultDisplay().getText());
+        assertEquals("Welcome to ePiggy! "
+                + "Enter a command to get started, or enter 'help' to view all the available commands!",
+                getResultDisplay().getText());
         //        assertListMatching(getPersonListPanel(), getModel().getFilteredPersonList());
         assertEquals(BrowserPanel.DEFAULT_PAGE, getBrowserPanel().getLoadedUrl());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),

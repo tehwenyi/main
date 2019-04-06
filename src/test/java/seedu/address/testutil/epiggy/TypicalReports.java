@@ -1,19 +1,9 @@
 package seedu.address.testutil.epiggy;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_2018;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_2019;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FOOD;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,8 +12,6 @@ import java.util.List;
 import seedu.address.model.EPiggy;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
 
 /**
  * A utility class containing a list of {@code budget}, {@code expense},
@@ -40,12 +28,6 @@ public class TypicalReports {
     public static final Budget VALID_BUDGET_THREE = new BudgetBuilder().withAmount("500")
             .withDate("03/01/2019").withPeriod("30").build();
 
-    // invalid budgets
-    public static final Budget INVALID_BUDGET_ONE = new BudgetBuilder().withAmount("10")
-            .withPeriod("1").withDate("02/04/2020").build();
-    public static final Budget INVALID_BUDGET_TWO = new BudgetBuilder().withAmount("30")
-            .withPeriod("1").withDate("02/05/2020").build();
-
     // test expenses
     public static final Expense DUMPLING_SOUP = new ExpensesBuilder().withName("Dumpling Soup")
             .withCost("5.00")
@@ -60,21 +42,23 @@ public class TypicalReports {
             .withCost("8.50")
             .withTags("movie", "entertainment", VALID_TAG_FRIENDS).build();
     public static final Expense KARAOKE = new ExpensesBuilder().withName("Karaoke: KTV")
-            .withCost("10.00")
+            .withCost("26.90")
             .withDate(VALID_DATE_2018)
             .withTags(VALID_TAG_FRIENDS).build();
     public static final Expense CLOTHES = new ExpensesBuilder().withName("Clothes shopping")
-            .withCost("21.80")
+            .withCost("50.80")
             .withTags("shopping").build();
     public static final Expense KFC = new ExpensesBuilder().withName("KFC")
             .withDate("04/26/2019")
-            .withCost("13.00")
+            .withCost("13.95")
             .withTags(VALID_TAG_FOOD, "dinner").build();
 
-    private TypicalReports() {} // prevents instantiation
+    private TypicalReports() {
+    } // prevents instantiation
 
     /**
-     * Returns an {@code EPiggy} with all the typical persons.
+     * Returns an {@code EPiggy} with all the typical expenses, allowance and budget.
+     * TODO: allowance and budget storage is not up yet. Therefore budgets are not add to storage.
      */
     public static EPiggy getTypicalEPiggy() {
         // todo: change the method here
@@ -91,13 +75,19 @@ public class TypicalReports {
         for (Expense expense : getTypicalExpenses()) {
             ePiggy.addExpense(expense);
         }
-
         return ePiggy;
+    }
+
+    /**
+     * Returns an {@code EPiggy} with empty data.
+     */
+    public static EPiggy getTypicalEPiggyWithEmptyData() {
+        return new EPiggy();
     }
 
     public static List<Budget> getTypicalBudgets() {
         return new ArrayList<>(Arrays.asList(VALID_BUDGET_ONE, VALID_BUDGET_TWO,
-                VALID_BUDGET_THREE, INVALID_BUDGET_ONE, INVALID_BUDGET_TWO));
+                VALID_BUDGET_THREE));
     }
 
     public static List<Expense> getTypicalExpenses() {

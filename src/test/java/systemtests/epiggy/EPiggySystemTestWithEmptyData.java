@@ -31,18 +31,16 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
-import seedu.address.testutil.TypicalPersons;
 import seedu.address.testutil.epiggy.TypicalReports;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
 import systemtests.ClockRule;
-import systemtests.SystemTestSetupHelper;
 
 /**
  * A system test class for EPiggy, which provides access to handles of GUI components and helper methods
  * for test verification.
  */
-public abstract class EPiggySystemTestV2 {
+public abstract class EPiggySystemTestWithEmptyData {
     @ClassRule
     public static ClockRule clockRule = new ClockRule();
 
@@ -50,6 +48,9 @@ public abstract class EPiggySystemTestV2 {
     private static final List<String> COMMAND_BOX_ERROR_STYLE =
             Arrays.asList("text-input", "text-field", CommandBox.ERROR_STYLE_CLASS);
 
+    private static final String WELCOME_MESSAGE =
+            "Welcome to ePiggy! Enter a command to get started, "
+                    + "or enter 'help' to view all the available commands!";
     private MainWindowHandle mainWindowHandle;
     private EpiggyTestApp testApp;
     private EpiggySystemTestSetupHelper setupHelper;
@@ -62,9 +63,8 @@ public abstract class EPiggySystemTestV2 {
     @Before
     public void setUp() {
         setupHelper = new EpiggySystemTestSetupHelper();
-        testApp = setupHelper.setupApplication(this::getInitialData, getDataFileLocation());
+        testApp = setupHelper.setupApplication(this::getInitialEmptyData, getDataFileLocation());
         mainWindowHandle = setupHelper.setupMainWindowHandle();
-
         waitUntilBrowserLoaded(getBrowserPanel());
         assertApplicationStartingStateIsCorrect(); // remove this line if displayList removed
     }
@@ -75,10 +75,10 @@ public abstract class EPiggySystemTestV2 {
     }
 
     /**
-     * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
+     * Returns the empty data to be loaded into the file in {@link #getDataFileLocation()}.
      */
-    protected EPiggy getInitialData() {
-        return TypicalReports.getTypicalEPiggy();
+    protected EPiggy getInitialEmptyData() {
+        return TypicalReports.getTypicalEPiggyWithEmptyData();
     }
 
     /**
@@ -95,10 +95,6 @@ public abstract class EPiggySystemTestV2 {
     public CommandBoxHandle getCommandBox() {
         return mainWindowHandle.getCommandBox();
     }
-
-    //    public PersonListPanelHandle getPersonListPanel() {
-    //        return mainWindowHandle.getPersonListPanel();
-    //    }
 
     public MainMenuHandle getMainMenu() {
         return mainWindowHandle.getMainMenu();
@@ -148,14 +144,6 @@ public abstract class EPiggySystemTestV2 {
     }
 
     /**
-     * Selects the person at {@code index} of the displayed list.
-     */
-    //    protected void selectPerson(Index index) {
-    //        executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
-    //        assertEquals(index.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
-    //    }
-
-    /**
      * Deletes all persons in the address book.
      */
     protected void deleteAllPersons() {
@@ -185,12 +173,12 @@ public abstract class EPiggySystemTestV2 {
         getBrowserPanel().rememberUrl();
         statusBarFooterHandle.rememberSaveLocation();
         statusBarFooterHandle.rememberSyncStatus();
-        //        getPersonListPanel().rememberSelectedPersonCard();
     }
 
     /**
      * Asserts that the previously selected card is now deselected and the browser's url is now displaying the
      * default page.
+     *
      * @see BrowserPanelHandle#isUrlChanged()
      */
     protected void assertSelectedCardDeselected() {
@@ -204,22 +192,10 @@ public abstract class EPiggySystemTestV2 {
      * @see BrowserPanelHandle#isUrlChanged()
      * @see PersonListPanelHandle#isSelectedPersonCardChanged()
      */
-    //    protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
-    ////        getPersonListPanel().navigateToCard(getPersonListPanel().getSelectedCardIndex());
-    ////        String selectedCardName = getPersonListPanel().getHandleToSelectedCard().getName();
-    //        URL expectedUrl;
-    //        try {
-    ////            expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardName.replaceAll(" ", "%20"));
-    //        } catch (MalformedURLException mue) {
-    //            throw new AssertionError("URL expected to be valid.", mue);
-    //        }
-    ////        assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl());
-    //
-    ////        assertEquals(expectedSelectedCardIndex.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
-    //    }
 
     /**
      * Asserts that the browser's url and the selected card in the person list panel remain unchanged.
+     *
      * @see BrowserPanelHandle#isUrlChanged()
      * @see PersonListPanelHandle#isSelectedPersonCardChanged()
      */
@@ -268,7 +244,7 @@ public abstract class EPiggySystemTestV2 {
      */
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
-        assertEquals("", getResultDisplay().getText());
+        assertEquals(WELCOME_MESSAGE, getResultDisplay().getText());
         //        assertListMatching(getPersonListPanel(), getModel().getFilteredPersonList());
         assertEquals(BrowserPanel.DEFAULT_PAGE, getBrowserPanel().getLoadedUrl());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),

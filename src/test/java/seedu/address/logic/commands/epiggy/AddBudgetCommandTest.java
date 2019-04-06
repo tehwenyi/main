@@ -37,7 +37,7 @@ import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
 
-import seedu.address.model.epiggy.Savings;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.TypicalBudgets;
 import seedu.address.testutil.epiggy.BudgetBuilder;
@@ -99,7 +99,7 @@ public class AddBudgetCommandTest {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(validBudget.getEndDate());
         calendar.add(Calendar.DAY_OF_MONTH, -1);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String endDate = simpleDateFormat.format(calendar.getTime());
         Budget overlappingBudget = new BudgetBuilder().withDate(endDate).build();
 
@@ -118,7 +118,7 @@ public class AddBudgetCommandTest {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(validBudget.getStartDate());
         calendar.add(Calendar.DAY_OF_MONTH, 1 - Integer.parseInt(BudgetBuilder.DEFAULT_PERIOD));
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String startDate = simpleDateFormat.format(calendar.getTime());
         Budget overlappingBudget = new BudgetBuilder().withDate(startDate).build();
 
@@ -152,8 +152,12 @@ public class AddBudgetCommandTest {
         // same object -> returns true
         assertTrue(addTwentyCommand.equals(addTwentyCommand));
 
-        // same values -> returns true
+        // copy of object -> returns true
         AddBudgetCommand addTwentyCommandCopy = new AddBudgetCommand(twenty);
+        assertTrue(addTwentyCommand.equals(addTwentyCommandCopy));
+
+        // same values -> returns true
+        addTwentyCommandCopy = new AddBudgetCommand(new BudgetBuilder().withAmount("20").build());
         assertTrue(addTwentyCommand.equals(addTwentyCommandCopy));
 
         // different types -> returns false
@@ -265,7 +269,7 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public SimpleObjectProperty<Savings> getSavings() {
+        public SimpleObjectProperty<Cost> getSavings() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -391,7 +395,7 @@ public class AddBudgetCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single budget.
      */
     private class ModelStubWithBudget extends ModelStub {
         final ArrayList<Budget> budgets = new ArrayList<>();

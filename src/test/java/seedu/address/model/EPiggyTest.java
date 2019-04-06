@@ -27,7 +27,7 @@ import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
 
-import seedu.address.model.epiggy.Savings;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -130,7 +130,6 @@ public class EPiggyTest {
         private final ObservableList<Item> items = FXCollections.observableArrayList();
         private ObservableList<Budget> budgets; //TODO
         private SimpleObjectProperty<Goal> goal;
-        private SimpleObjectProperty<Savings> savings;
 
 
         AddressBookStub(Collection<Person> persons) {
@@ -163,7 +162,7 @@ public class EPiggyTest {
         }
 
         @Override
-        public SimpleObjectProperty<Savings> getSavings() {
+        public SimpleObjectProperty<Cost> getSavings() {
             return null;
         }
 

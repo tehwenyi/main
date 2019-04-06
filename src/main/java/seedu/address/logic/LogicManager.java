@@ -20,7 +20,7 @@ import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
 
-import seedu.address.model.epiggy.Savings;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -93,7 +93,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableValue<Savings> getSavings() {
+    public ObservableValue<Cost> getSavings() {
         return model.getSavings();
     }
 

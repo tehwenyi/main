@@ -50,7 +50,7 @@ public class EditBudgetCommand extends Command {
 
     public EditBudgetCommand(EditBudgetDetails editBudgetDetails) {
         requireNonNull(editBudgetDetails);
-        this.editBudgetDetails = new EditBudgetDetails(editBudgetDetails);
+        this.editBudgetDetails = editBudgetDetails;
     }
 
     @Override

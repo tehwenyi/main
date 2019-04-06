@@ -1,7 +1,9 @@
 package seedu.address.testutil.epiggy;
 
 import seedu.address.model.epiggy.Goal;
-
+/**
+ * A utility class containing a list of {@code Goal} objects to be used in tests.
+ */
 public class TypicalGoal {
     public static final Goal IPHONE = new GoalBuilder()
             .withName("IPHONE X")

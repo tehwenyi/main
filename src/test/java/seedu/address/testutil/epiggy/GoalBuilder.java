@@ -19,12 +19,16 @@ public class GoalBuilder {
         name = new Name(DEFAULT_NAME);
         cost = new Cost(DEFAULT_COST);
     }
-
+    /**
+     * Sets the {@code Name} of the {@code Goal} that we are building.
+     */
     public GoalBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
-
+    /**
+     * Sets the {@code cost} of the {@code Goal} that we are building.
+     */
     public GoalBuilder withCost(String cost) {
         this.cost = new Cost(cost);
         return this;

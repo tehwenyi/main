@@ -1,15 +1,17 @@
 package seedu.address.storage.epiggy;
 
+import static org.junit.Assert.assertEquals;
+import static seedu.address.storage.epiggy.JsonAdaptedGoal.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.epiggy.TypicalGoal.IPHONE;
+
 import org.junit.Test;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Name;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static seedu.address.storage.epiggy.JsonAdaptedGoal.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.epiggy.TypicalGoal.IPHONE;
+
 
 
 public class JsonAdaptedGoalTest {

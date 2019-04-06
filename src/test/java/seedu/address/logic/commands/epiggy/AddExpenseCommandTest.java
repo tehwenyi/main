@@ -1,11 +1,22 @@
 package seedu.address.logic.commands.epiggy;
 
-import javafx.beans.property.ReadOnlyProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
+import static org.junit.Assert.assertEquals;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.function.Predicate;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import javafx.beans.property.ReadOnlyProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
@@ -21,15 +32,7 @@ import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.epiggy.ExpensesBuilder;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.function.Predicate;
 
-import static java.util.Objects.requireNonNull;
-import static org.junit.Assert.assertEquals;
 
 public class AddExpenseCommandTest {
 
@@ -45,7 +48,8 @@ public class AddExpenseCommandTest {
         ModelStubAcceptingExpenseAdded modelStub = new ModelStubAcceptingExpenseAdded();
         Expense validExpense = new ExpensesBuilder().build();
         CommandResult commandResult = new AddExpenseCommand(validExpense).execute(modelStub, commandHistory);
-        assertEquals(String.format(AddExpenseCommand.MESSAGE_SUCCESS, validExpense), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddExpenseCommand.MESSAGE_SUCCESS, validExpense),
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validExpense), modelStub.expenseAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }

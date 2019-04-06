@@ -1,16 +1,26 @@
 package seedu.address.logic.commands.epiggy;
 
-import javafx.beans.property.ReadOnlyProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
+import static org.junit.Assert.assertEquals;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.function.Predicate;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import javafx.beans.property.ReadOnlyProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -21,16 +31,6 @@ import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.epiggy.AllowanceBuilder;
-
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.Assert.assertEquals;
 
 public class AddAllowanceCommandTest {
 
@@ -45,7 +45,8 @@ public class AddAllowanceCommandTest {
         ModelStubAcceptingAllowanceAdded modelStub = new ModelStubAcceptingAllowanceAdded();
         Allowance validAllowance = new AllowanceBuilder().build();
         CommandResult commandResult = new AddAllowanceCommand(validAllowance).execute(modelStub, commandHistory);
-        assertEquals(String.format(AddAllowanceCommand.MESSAGE_SUCCESS, validAllowance), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddAllowanceCommand.MESSAGE_SUCCESS, validAllowance),
+                commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validAllowance), modelStub.allowanceAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }

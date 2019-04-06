@@ -1,5 +1,9 @@
 package seedu.address.testutil.epiggy;
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Item;
@@ -7,9 +11,6 @@ import seedu.address.model.epiggy.item.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A utility class to help with building Allowance objects.
@@ -19,7 +20,6 @@ public class AllowanceBuilder {
     public static final String DEFAULT_NAME = "Allowance from Mom";
     public static final String DEFAULT_COST = "20.0";
     public static final String DEFAULT_DATE = "03/01/2019";
-//    public static final Set<Tag> DEFAULT_TAGS = new HashSet<>(Arrays.asList("Allowance", "Weekly"));
 
     private Name name;
     private Cost cost;

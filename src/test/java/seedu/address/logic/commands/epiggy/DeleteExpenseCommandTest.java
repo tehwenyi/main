@@ -1,8 +1,12 @@
 package seedu.address.logic.commands.epiggy;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showExpenseAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ALLOWANCE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXPENSE;
 import static seedu.address.testutil.epiggy.TypicalExpenses.getTypicalEPiggy;
 
 import org.junit.Test;
@@ -21,25 +25,31 @@ public class DeleteExpenseCommandTest {
 
     @Test
     public void execute_validIndexIsExpense_deleteSuccess() {
-        Expense expenseToDelete = model.getFilteredExpenseList().get(INDEX_FIRST_EXPENSE.getZeroBased());
+        Expense expenseToDelete = model.getFilteredExpenseList()
+                .get(INDEX_FIRST_EXPENSE.getZeroBased());
         DeleteExpenseCommand deleteExpenseCommand = new DeleteExpenseCommand(INDEX_FIRST_EXPENSE);
 
-        String expectedMessage = String.format(DeleteExpenseCommand.MESSAGE_DELETE_EXPENSE_SUCCESS, expenseToDelete);
+        String expectedMessage = String.format(DeleteExpenseCommand.MESSAGE_DELETE_EXPENSE_SUCCESS,
+                expenseToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getEPiggy(), new UserPrefs());
         expectedModel.deleteExpense(expenseToDelete);
         expectedModel.commitEPiggy();
 
-        assertCommandSuccess(deleteExpenseCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteExpenseCommand, model, commandHistory,
+                expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_validIndexIsAllowance_throwsCommandException() {
-        Model tempModel = new ModelManager(seedu.address.testutil.epiggy.TypicalAllowances.getTypicalEPiggy(), new UserPrefs());
-        Allowance allowanceToDelete = (Allowance) tempModel.getFilteredExpenseList().get(INDEX_FIRST_ALLOWANCE.getZeroBased());
+        Model tempModel = new ModelManager(seedu.address.testutil.epiggy.TypicalAllowances.getTypicalEPiggy(),
+                new UserPrefs());
+        Allowance allowanceToDelete = (Allowance) tempModel.getFilteredExpenseList()
+                .get(INDEX_FIRST_ALLOWANCE.getZeroBased());
         DeleteExpenseCommand deleteExpenseCommand = new DeleteExpenseCommand(INDEX_FIRST_ALLOWANCE);
 
-        String expectedMessage = String.format(DeleteExpenseCommand.MESSAGE_ITEM_NOT_EXPENSE, allowanceToDelete);
+        String expectedMessage = String.format(DeleteExpenseCommand.MESSAGE_ITEM_NOT_EXPENSE,
+                allowanceToDelete);
 
         ModelManager expectedModel = new ModelManager(tempModel.getEPiggy(), new UserPrefs());
         expectedModel.deleteExpense(allowanceToDelete);
@@ -54,6 +64,7 @@ public class DeleteExpenseCommandTest {
         Index outOfBoundIndex = INDEX_SECOND_EXPENSE;
         assertTrue(outOfBoundIndex.getZeroBased() < model.getEPiggy().getExpenseList().size());
         DeleteExpenseCommand deleteExpenseCommand = new DeleteExpenseCommand(outOfBoundIndex);
-        assertCommandFailure(deleteExpenseCommand, model, commandHistory, DeleteExpenseCommand.MESSAGE_INDEX_OUT_OF_BOUNDS);
+        assertCommandFailure(deleteExpenseCommand, model, commandHistory,
+                DeleteExpenseCommand.MESSAGE_INDEX_OUT_OF_BOUNDS);
     }
 }

@@ -85,6 +85,10 @@ public class CommandTestUtil {
     public static final String DATE_DESC_FIRSTEXTRA = " " + PREFIX_DATE + VALID_DATE_FIRSTEXTRA;
     public static final String DATE_DESC_SECONDEXTRA = " " + PREFIX_DATE + VALID_DATE_SECONDEXTRA;
 
+    public static final String INVALID_AMOUNT_DESC = " " + PREFIX_COST + "-500.00"; // negative cost is not allowed
+    public static final String INVALID_PERIOD_DESC = " " + PREFIX_PERIOD + "0"; // period of 0 is not allowed
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "12/04"; // year should be mentioned
+
     public static final String NAME_DESC_BOWLING = " " + PREFIX_NAME + VALID_NAME_BOWLING;
     public static final String NAME_DESC_IPHONE = " " + PREFIX_NAME + VALID_NAME_IPHONE;
     public static final String COST_DESC_BOWLING = " " + PREFIX_COST + VALID_COST_BOWLING;
@@ -95,7 +99,6 @@ public class CommandTestUtil {
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_COST_DESC = " " + PREFIX_COST + "0.00"; // cost of 0 is not allowed
-    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "12/04"; // year should be mentioned
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "food*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

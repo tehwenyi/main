@@ -19,6 +19,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE;
+
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
@@ -89,7 +91,7 @@ public class ParserUtil {
         try {
             parsedDate = dateFormat.parse(date.trim());
         } catch (java.text.ParseException parseException) {
-            throw new ParseException("Date should be in the format dd/mm/yyyy.");
+            throw new ParseException(MESSAGE_INVALID_DATE);
         }
         return parsedDate;
     }

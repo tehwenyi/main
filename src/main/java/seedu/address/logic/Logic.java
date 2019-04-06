@@ -14,7 +14,7 @@ import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
 
-import seedu.address.model.epiggy.Savings;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.person.Person;
 
 /**
@@ -45,7 +45,7 @@ public interface Logic {
 
     ObservableList<Budget> getFilteredBudgetList();
 
-    ObservableValue<Savings> getSavings();
+    ObservableValue<Cost> getSavings();
 
     ObservableValue<Goal> getGoal();
 

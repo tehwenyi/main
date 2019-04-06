@@ -26,16 +26,16 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * Supports a minimal set of list operations.
  *
  */
-public class ExpenseList implements Iterable<seedu.address.model.epiggy.Expense> {
+public class ExpenseList implements Iterable<Expense> {
 
-    private final ObservableList<seedu.address.model.epiggy.Expense> internalList = FXCollections.observableArrayList();
-    private final ObservableList<seedu.address.model.epiggy.Expense> internalUnmodifiableList =
+    private final ObservableList<Expense> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Expense> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Adds a expense to the list.
      */
-    public void add(seedu.address.model.epiggy.Expense toAdd) {
+    public void add(Expense toAdd) {
         requireNonNull(toAdd);
         internalList.add(toAdd);
     }
@@ -45,8 +45,8 @@ public class ExpenseList implements Iterable<seedu.address.model.epiggy.Expense>
      * {@code target} must exist in the list.
      * The expense identity of {@code editedExpense} must not be the same as another existing expense in the list.
      */
-    public void setExpense(seedu.address.model.epiggy.Expense target,
-                           seedu.address.model.epiggy.Expense editedExpense) {
+    public void setExpense(Expense target,
+                           Expense editedExpense) {
         requireAllNonNull(target, editedExpense);
 
         int index = internalList.indexOf(target);
@@ -61,7 +61,7 @@ public class ExpenseList implements Iterable<seedu.address.model.epiggy.Expense>
      * Removes the equivalent expense from the list.
      * The expense must exist in the list.
      */
-    public void remove(seedu.address.model.epiggy.Expense toRemove) {
+    public void remove(Expense toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
@@ -82,20 +82,40 @@ public class ExpenseList implements Iterable<seedu.address.model.epiggy.Expense>
      * Replaces the contents of this list with {@code expenses}.
      * {@code expenses} must not contain duplicate expenses.
      */
-    public void setExpenses(List<seedu.address.model.epiggy.Expense> expenses) {
+    public void setExpenses(List<Expense> expenses) {
         requireAllNonNull(expenses);
         internalList.setAll(expenses);
+    }
+
+    public double getTotalExpenses() {
+        double sum = internalUnmodifiableList.stream()
+                .filter(expense -> !(expense instanceof Allowance))
+                .mapToDouble(expense -> expense.getItem().getCost().getAmount())
+                .sum();
+        return sum;
+    }
+
+    public double getTotalAllowances() {
+        double sum = internalUnmodifiableList.stream()
+                .filter(allowance -> allowance instanceof Allowance)
+                .mapToDouble(allowance -> allowance.getItem().getCost().getAmount())
+                .sum();
+        return sum;
+    }
+
+    public double getTotalSavings() {
+        return getTotalAllowances() - getTotalExpenses();
     }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
-    public ObservableList<seedu.address.model.epiggy.Expense> asUnmodifiableObservableList() {
+    public ObservableList<Expense> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
 
     @Override
-    public Iterator<seedu.address.model.epiggy.Expense> iterator() {
+    public Iterator<Expense> iterator() {
         return internalList.iterator();
     }
 

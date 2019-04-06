@@ -19,8 +19,8 @@ import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.ExpenseList;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.Savings;
 import seedu.address.model.epiggy.UniqueBudgetList;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.person.Person;
@@ -35,7 +35,6 @@ public class EPiggy implements ReadOnlyEPiggy {
     private final ExpenseList expenses;
     private final ObservableList<Item> items;
     private SimpleObjectProperty<Goal> goal;
-    private SimpleObjectProperty<Savings> savings;
     private final UniquePersonList persons;
     private final UniqueBudgetList budgetList;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
@@ -53,7 +52,6 @@ public class EPiggy implements ReadOnlyEPiggy {
         budgetList = new UniqueBudgetList();
         persons = new UniquePersonList();
         goal = new SimpleObjectProperty<>();
-        savings = new SimpleObjectProperty<>(new Savings());
 
     }
 
@@ -103,7 +101,6 @@ public class EPiggy implements ReadOnlyEPiggy {
         requireNonNull(newData);
         setExpenses(newData.getExpenseList());
         setGoal(newData.getGoal().get());
-        setSavings(newData.getSavings().get());
         addBudgetList(newData.getBudgetList());
     }
 
@@ -131,11 +128,6 @@ public class EPiggy implements ReadOnlyEPiggy {
      */
     public void addExpense(Expense expense) {
         expenses.add(expense);
-
-        Savings s = savings.get();
-        Savings newSavings = s.deductSavings(expense.getItem().getCost().getAmount());
-        this.savings.setValue(newSavings);
-
         if (budgetList.getBudgetListSize() > 0) {
             updateBudgetList(expense);
         }
@@ -160,20 +152,14 @@ public class EPiggy implements ReadOnlyEPiggy {
      */
     public void addAllowance(Allowance allowance) {
         expenses.add(allowance);
-        Savings s = savings.get();
-        Savings newSavings = s.addSavings(allowance.getItem().getCost().getAmount());
-        this.savings.setValue(newSavings);
         indicateModified();
     }
 
-    public SimpleObjectProperty<Savings> getSavings() {
-        return savings;
+    public SimpleObjectProperty<Cost> getSavings() {
+        return new SimpleObjectProperty<>(new Cost(expenses.getTotalSavings()));
     }
 
-    public void setSavings(Savings savings) {
-        this.savings.setValue(savings);
-        indicateModified();
-    }
+
 
     /**
      * Adds a budget to the budgetList.
@@ -203,14 +189,6 @@ public class EPiggy implements ReadOnlyEPiggy {
     public void deleteExpense(Expense toDelete) {
         expenses.remove(toDelete);
         updateBudgetList(toDelete);
-        Savings s = savings.get();
-        Savings newSavings;
-        if (toDelete instanceof Allowance) {
-            newSavings = s.deductSavings(toDelete.getItem().getCost().getAmount());
-        } else {
-            newSavings = s.addSavings(toDelete.getItem().getCost().getAmount());
-        }
-        this.savings.setValue(newSavings);
         indicateModified();
     }
 
@@ -295,27 +273,7 @@ public class EPiggy implements ReadOnlyEPiggy {
         requireNonNull(editedExpense);
         expenses.setExpense(target, editedExpense);
         updateBudgetList(editedExpense);
-        recalculateSavings(target, editedExpense);
         indicateModified();
-    }
-
-    /**
-     * Calculates the new savings amount when the setExpense function is used.
-     * @param oldExp
-     * @param newExp
-     */
-    public void recalculateSavings(Expense oldExp, Expense newExp) {
-        Savings s = savings.get();
-        Savings newSavings;
-        double diff = newExp.getItem().getCost().getAmount() - oldExp.getItem().getCost().getAmount();
-        if (oldExp instanceof Allowance) {
-            // positive means increase allowance, negative means decrease allowance.
-            newSavings = s.addSavings(diff);
-        } else {
-            // positive means increase expense, negative means decrease expense.
-            newSavings = s.deductSavings(diff);
-        }
-        this.savings.setValue(newSavings);
     }
 
     /**

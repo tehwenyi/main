@@ -21,7 +21,7 @@ import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.Savings;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -180,7 +180,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public SimpleObjectProperty<Savings> getSavings() {
+    public SimpleObjectProperty<Cost> getSavings() {
         return versionedEPiggy.getSavings();
     }
 

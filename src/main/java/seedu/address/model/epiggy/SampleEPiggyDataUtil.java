@@ -18,11 +18,8 @@ import seedu.address.model.tag.Tag;
 public class SampleEPiggyDataUtil {
     public static Expense[] getSampleExpenses() {
         return new Expense[] {
-            new Allowance(new Item(new Name("Allowance"), new Cost(20), getTagSet("Allowance")), new Date()),
-            new Expense(new Item(new Name("Fishball Noodles"), new Cost(4), getTagSet("Lunch")), new Date()),
-            new Expense(new Item(new Name("Pen Refill"), new Cost(1), getTagSet("Stationary")), new Date()),
-            new Expense(new Item(new Name("Foolscap Paper"), new Cost(3), getTagSet("Stationary")), new Date()),
-            new Expense(new Item(new Name("Laksa"), new Cost(3), getTagSet("Dinner")), new Date())
+            new Allowance(new Item(new Name("Allowance"), new Cost(20), getTagSet("Allowance")), new Date(2019, 1, 31)),
+            new Expense(new Item(new Name("Fishball Noodles"), new Cost(4), getTagSet("Lunch")), new Date(2019, 2, 2)),
         };
     }
 

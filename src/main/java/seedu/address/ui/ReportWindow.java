@@ -245,7 +245,7 @@ public class ReportWindow {
                 LocalDate currentDate = budget.getStartDate().toInstant().atZone(ZoneId.systemDefault())
                         .toLocalDate();
                 if (currentDate.getYear() == date.getYear()) {
-                    budgets[currentDate.getMonthValue() - 1] += budget.getCost().getAmount();
+                    budgets[currentDate.getMonthValue() - 1] += budget.getBudgetedAmount().getAmount();
                 }
             }
         }
@@ -316,7 +316,7 @@ public class ReportWindow {
                 int year = budgets.get(i).getStartDate().toInstant().atZone(ZoneId.systemDefault())
                         .toLocalDate().getYear(); // get year from expense
                 ReportData data;
-                double amount = budgets.get(i).getCost().getAmount();
+                double amount = budgets.get(i).getBudgetedAmount().getAmount();
 
                 if (map.containsKey(year)) {
                     // if year data exists

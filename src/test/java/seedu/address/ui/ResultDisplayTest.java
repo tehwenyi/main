@@ -25,11 +25,15 @@ public class ResultDisplayTest extends GuiUnitTest {
     public void display() {
         // default result text
         guiRobot.pauseForHuman();
-        assertEquals("", resultDisplayHandle.getText());
+        assertEquals("Welcome to ePiggy! "
+                + "Enter a command to get started, or enter 'help' to view all the available commands!",
+                resultDisplayHandle.getText());
 
         // new result received
-        guiRobot.interact(() -> resultDisplay.setFeedbackToUser("Dummy feedback to user"));
+        guiRobot.interact(() -> resultDisplay.setFeedbackToUser("Dummy feedback to user",
+                "Dummy command from user"));
         guiRobot.pauseForHuman();
-        assertEquals("Dummy feedback to user", resultDisplayHandle.getText());
+        assertEquals("ePiggy: Dummy feedback to user\n\n"
+                + "You: Dummy command from user\n\n", resultDisplayHandle.getText());
     }
 }

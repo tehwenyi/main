@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
 
@@ -53,11 +52,10 @@ public class ExpenseCard extends UiPart<Region> {
         this.expense = expense;
         id.setText(displayedIndex + ". ");
         name.setText(expense.getItem().getName().name);
-        DecimalFormat df = new DecimalFormat("#.##");
         if (expense instanceof Allowance) {
-            cost.setText("Amount: " + df.format(expense.getItem().getCost().getAmount()));
+            cost.setText("Amount: " + expense.getItem().getCost().toString());
         } else {
-            cost.setText("Cost: " + df.format(expense.getItem().getCost().getAmount()));
+            cost.setText("Cost: " + expense.getItem().getCost().toString());
         }
         SimpleDateFormat formatter = new SimpleDateFormat("EEE, MMM d, ''yy");
         date.setText(String.format("Added on: %s \n", formatter.format(expense.getDate())));

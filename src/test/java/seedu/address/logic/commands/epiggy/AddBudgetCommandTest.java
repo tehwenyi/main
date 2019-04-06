@@ -395,7 +395,7 @@ public class AddBudgetCommandTest {
      */
     private class ModelStubWithBudget extends ModelStub {
         final ArrayList<Budget> budgets = new ArrayList<>();
-        private EPiggy EPiggy = new EPiggy();
+        private EPiggy ePiggy = new EPiggy();
 
         ModelStubWithBudget(Budget budget) {
             requireNonNull(budget);
@@ -409,7 +409,7 @@ public class AddBudgetCommandTest {
 
         @Override
         public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
-            return EPiggy.budgetsOverlap(startDate, endDate, earlierBudget);
+            return ePiggy.budgetsOverlap(startDate, endDate, earlierBudget);
         }
     }
 

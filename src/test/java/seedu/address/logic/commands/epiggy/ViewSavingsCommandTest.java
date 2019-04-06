@@ -93,7 +93,7 @@ public class ViewSavingsCommandTest {
         }
 
         @Override
-        public void setEPiggyFilePath(Path EPiggyFilePath) {
+        public void setEPiggyFilePath(Path ePiggyFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 

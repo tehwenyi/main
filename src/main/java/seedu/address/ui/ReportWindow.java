@@ -10,8 +10,6 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
 
-import javafx.application.Application;
-import javafx.application.Preloader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -37,7 +35,7 @@ import seedu.address.model.epiggy.Expense;
 /**
  * Report Window. Provides report and chart to the user.
  */
-public class ReportWindow{
+public class ReportWindow {
     private final Logger logger = LogsCenter.getLogger(getClass());
     private Stage window;
 
@@ -382,10 +380,10 @@ public class ReportWindow{
         }
 
         String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
-                "Sep", "Oct", "Nov", "Dec"};
+            "Sep", "Oct", "Nov", "Dec"};
 
         String[] monthsLong = {"January", "February", "March", "April", "May", "June", "July",
-                "August", "September", "October", "November", "December"};
+            "August", "September", "October", "November", "December"};
         for (int i = 0; i < expenses.length; i++) {
             // calculate total expense and allowance
             totalExpense += expenses[i];
@@ -546,7 +544,7 @@ public class ReportWindow{
         double totalBudget = 0;
         double totalAllowance = 0;
         double maxExpense = Double.MIN_VALUE;
-        String YearWithMaxExpense = "";
+        String yearWithMaxExpense = "";
         TreeMap<Integer, ReportData> tm = new TreeMap<>(map);
         for (Map.Entry<Integer, ReportData> entry : tm.entrySet()) {
             totalAllowance += entry.getValue().getAllowance();
@@ -555,7 +553,7 @@ public class ReportWindow{
 
             if (entry.getValue().getExpense() > maxExpense) {
                 maxExpense = entry.getValue().getExpense();
-                YearWithMaxExpense = entry.getKey().toString();
+                yearWithMaxExpense = entry.getKey().toString();
             }
 
             series1.getData().add(new XYChart.Data(entry.getKey().toString(),
@@ -586,12 +584,12 @@ public class ReportWindow{
                     + (totalAllowance - totalExpense));
             labelOfTotalBudget.setText("The total amount of budget: S$"
                     + totalBudget);
-            labelOfMaxExpenseYear.setText(YearWithMaxExpense
+            labelOfMaxExpenseYear.setText(yearWithMaxExpense
                     + " is the most consumed year. "
                     + "The highest expense record is S$"
                     + maxExpense);
             layout.getChildren().addAll(bc, labelOfTotalExpense, labelOfTotalBudget, labelOfTotalAllowance,
-                    labelOfTotalSaving, labelOfMaxExpenseYear,labelOfMaxExpenseValue);
+                    labelOfTotalSaving, labelOfMaxExpenseYear, labelOfMaxExpenseValue);
             // JavaFx bug, need to manually set all nodes margin!!!
             VBox.setMargin(bc, new Insets(10, 20, 10, 10));
             VBox.setMargin(labelOfTotalAllowance, new Insets(5, 10, 0, 50));

@@ -70,4 +70,15 @@ public class Cost {
     public String toString() {
         return String.format("$%.2f", amount);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Cost)) {
+            return false;
+        }
+        return amount == ((Cost) other).getAmount();
+    }
 }

@@ -20,6 +20,16 @@ public class GoalBuilder {
         cost = new Cost(DEFAULT_COST);
     }
 
+    public GoalBuilder withName(String name) {
+        this.name = new Name(name);
+        return this;
+    }
+
+    public GoalBuilder withCost(String cost) {
+        this.cost = new Cost(cost);
+        return this;
+    }
+
     public Goal build() {
         return new Goal(name, cost);
     }

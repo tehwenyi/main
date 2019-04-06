@@ -59,9 +59,12 @@ public class ParserUtil {
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static seedu.address.model.epiggy.item.Name parseItemName(String name) {
+    public static seedu.address.model.epiggy.item.Name parseItemName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        if (!seedu.address.model.epiggy.item.Name.isValidName(trimmedName)) {
+            throw new ParseException(seedu.address.model.epiggy.item.Name.MESSAGE_CONSTRAINTS);
+        }
         return new seedu.address.model.epiggy.item.Name(trimmedName);
     }
 
@@ -87,6 +90,7 @@ public class ParserUtil {
         Date parsedDate;
         // TODO add more forms of setting date eg. dd.mm.yyyy
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormat.setLenient(false);
         try {
             parsedDate = dateFormat.parse(date.trim());
         } catch (java.text.ParseException parseException) {

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
@@ -17,7 +18,11 @@ public class AddAllowanceCommand extends Command {
     public static final String COMMAND_WORD = "addAllowance";
     public static final String COMMAND_ALIAS = "aa";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an allowance to the expense book. ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an allowance to the expense book. "
+            + "Parameters: "
+            + PREFIX_COST + "ALLOWANCE AMOUNT\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_COST + "50";
 
     public static final String MESSAGE_SUCCESS = "New allowance added: %1$s";
 

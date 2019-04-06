@@ -11,6 +11,7 @@ import java.util.TreeMap;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
+import javafx.application.Preloader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -81,10 +82,10 @@ public class ReportWindow{
      * Display daily summary on area chart.
      */
     private void displayReportOnSpecifiedDay(Model model, LocalDate date) {
-        //TODO: there is an error in the min, max value in empty data
         double minSpend = Double.MAX_VALUE; // minimum spend of the day
         double maxSpend = Double.MIN_VALUE; // maximum spend of the day
         double totalSpend = 0; // total spend of the day
+        boolean isEmptyExpenseData = true;
 
         // Creates an Area Chart
         final NumberAxis xAxis = new NumberAxis(0, 24, 1);
@@ -115,6 +116,8 @@ public class ReportWindow{
                         == calSpecifiedDay.get(Calendar.DAY_OF_MONTH)
                         && !expense.getItem().getName()
                         .toString().equals("Allowance")) {
+                    // data is not empty
+                    isEmptyExpenseData = false;
                     // find min value
                     double price = expense.getItem().getCost().getAmount();
                     if (price < minSpend) {
@@ -142,19 +145,19 @@ public class ReportWindow{
         Label max = new Label();
         Label total = new Label();
 
-        if (!expenses.isEmpty()) {
-            min.setText("The lowest expense record on today: S$" + minSpend);
-            max.setText("The highest expense record on today: S$" + maxSpend);
-            total.setText("The total amount of expense on today: S$" + totalSpend);
+        if (!isEmptyExpenseData) {
+            min.setText("The minimum amount of expense for today: S$" + minSpend);
+            max.setText("The maximum amount of expense for today: S$" + maxSpend);
+            total.setText("The total amount of expense for today: S$" + totalSpend);
             layout.getChildren().addAll(areaChart, min, max, total);
-
-            // JavaFx bug.
+            // JavaFx bug, need to manually set all nodes margin!!!
             VBox.setMargin(areaChart, new Insets(10, 20, 10, 10));
             VBox.setMargin(min, new Insets(5, 10, 0, 50));
             VBox.setMargin(max, new Insets(5, 10, 0, 50));
             VBox.setMargin(total, new Insets(5, 10, 0, 50));
         } else {
             total.setText("No Record found!");
+            layout.setAlignment(Pos.CENTER);
             layout.getChildren().addAll(areaChart, total);
         }
         Scene scene = new Scene(layout, 800, 600);
@@ -195,6 +198,8 @@ public class ReportWindow{
         double maxExpense = Double.MIN_VALUE; // a maximum amount of expense within the month
         int dayWithMinExpense = 0; // the day with minimum expense
         int dayWithMaxExpense = 0; // the day with maximum expense
+        boolean isExpenseDataEmpty = true;
+        boolean isAllowanceDataEmpty = true;
 
         if (!expenses.isEmpty()) {
             for (Expense expense : expenses) {
@@ -207,8 +212,10 @@ public class ReportWindow{
                     if (expense.getItem().getName().toString().equals("Allowance")) {
                         // calculate total allowance
                         allowances[currentDay.getMonthValue() - 1] += expense.getItem().getCost().getAmount();
+                        isAllowanceDataEmpty = false;
                     } else {
                         exps[currentDay.getMonthValue() - 1] += expense.getItem().getCost().getAmount();
+                        isExpenseDataEmpty = false;
                     }
                 }
             }
@@ -240,7 +247,11 @@ public class ReportWindow{
         Label labelOfMinExpenseDay = new Label();
         Label labelOfMaxExpenseDay = new Label();
 
-        if (!expenses.isEmpty()) {
+        if (!isAllowanceDataEmpty || !isExpenseDataEmpty) {
+            if (isExpenseDataEmpty) {
+                minExpense = 0;
+                maxExpense = 0;
+            }
             // adds labels into layout
             labelOfTotalExpense.setText("The total amount of expense on this month: S$"
                     + totalExpense);
@@ -274,8 +285,9 @@ public class ReportWindow{
             VBox.setMargin(labelOfMaxExpenseDay, new Insets(5, 10, 0, 50));
             VBox.setMargin(labelOfMinExpenseDay, new Insets(5, 10, 0, 50));
         } else {
-            labelOfTotalExpense.setText("No record found!");
             layout.getChildren().addAll(lineChart, labelOfTotalExpense);
+            labelOfTotalExpense.setText("No record found!");
+            layout.setAlignment(Pos.CENTER);
             // JavaFx bug, need to manually set all nodes margin!!!
             VBox.setMargin(lineChart, new Insets(10, 20, 10, 10));
             VBox.setMargin(labelOfTotalExpense, new Insets(5, 10, 0, 50));
@@ -336,6 +348,9 @@ public class ReportWindow{
         double maxExpenseValue = Double.MIN_VALUE;
         int monthWithMinExpense = 0; // the day with minimum expense
         int monthWithMaxExpense = 0; // the day with maximum expense
+        boolean isExpenseEmpty = true;
+        boolean isBudgetEmpty = true;
+        boolean isAllowanceEmpty = true;
 
         if (!expenseList.isEmpty()) {
             for (Expense expense : expenseList) {
@@ -346,9 +361,11 @@ public class ReportWindow{
                     if (expense.getItem().getName().toString().equals("Allowance")) {
                         // allowance
                         allowances[currentDate.getMonthValue() - 1] += expense.getItem().getCost().getAmount();
+                        isAllowanceEmpty = false;
                     } else {
                         // expense
                         expenses[currentDate.getMonthValue() - 1] += expense.getItem().getCost().getAmount();
+                        isExpenseEmpty = false;
                     }
                 }
             }
@@ -359,6 +376,7 @@ public class ReportWindow{
                         .toLocalDate();
                 if (currentDate.getYear() == date.getYear()) {
                     budgets[currentDate.getMonthValue() - 1] += budget.getBudgetedAmount().getAmount();
+                    isBudgetEmpty = false;
                 }
             }
         }
@@ -396,7 +414,11 @@ public class ReportWindow{
         Label labelOfMinExpenseDay = new Label();
         Label labelOfMaxExpenseDay = new Label();
 
-        if (!expenseList.isEmpty()) {
+        if (!isAllowanceEmpty || !isBudgetEmpty || !isExpenseEmpty) {
+            if (isExpenseEmpty) {
+                minExpenseValue = 0;
+                maxExpenseValue = 0;
+            }
             // adds labels into layout
             labelOfTotalExpense.setText("The total amount of expense on this year: S$"
                     + totalExpense);
@@ -430,7 +452,7 @@ public class ReportWindow{
             labelOfTotalExpense.setText("No record found!");
             layout.getChildren().addAll(bc, labelOfTotalExpense);
             VBox.setMargin(bc, new Insets(10, 20, 10, 10));
-            VBox.setMargin(labelOfTotalExpense, new Insets(5, 10, 0, 50));
+            layout.setAlignment(Pos.CENTER);
         }
         Scene scene = new Scene(layout, 800, 650);
         bc.getData().addAll(seriesBudget, seriesExpense, seriesAllowance);
@@ -451,6 +473,8 @@ public class ReportWindow{
         final ObservableList<Budget> budgets = model.getFilteredBudgetList();
         final ObservableList<Expense> expenses = model.getFilteredExpenseList();
 
+        boolean isExpenseEmpty = true;
+
         bc.setTitle("Completed Summary");
         yAxis.setLabel("Amount");
         xAxis.setLabel("Year");
@@ -468,9 +492,12 @@ public class ReportWindow{
                     // if year data exists
                     ReportData temp = map.get(year);
                     if (expenses.get(i).getItem().getName().toString().equals("Allowance")) {
+                        // expense type is allowance.
                         temp.setAllowance(temp.updateValue(temp.getAllowance(), amount));
                     } else {
+                        // expense type is expense.
                         temp.setExpense(temp.updateValue(temp.getExpense(), amount));
+                        isExpenseEmpty = false;
                     }
                     map.put(year, temp);
                 } else {
@@ -546,6 +573,10 @@ public class ReportWindow{
         Label labelOfMaxExpenseValue = new Label();
         Label labelOfMaxExpenseYear = new Label();
         if (!tm.isEmpty()) {
+            if (isExpenseEmpty) {
+                // reset max expense value to 0
+                maxExpense = 0;
+            }
             // adds labels into layout
             labelOfTotalExpense.setText("The total amount of expense: S$"
                     + totalExpense);
@@ -572,8 +603,7 @@ public class ReportWindow{
         } else {
             labelOfTotalExpense.setText("No record found!");
             layout.getChildren().addAll(bc, labelOfTotalExpense);
-            VBox.setMargin(labelOfTotalExpense, new Insets(5, 10, 0, 50));
-            VBox.setMargin(labelOfTotalExpense, new Insets(5, 10, 0, 50));
+            layout.setAlignment(Pos.CENTER);
         }
         Scene scene = new Scene(layout, 800, 650);
         bc.getData().addAll(series1, series2, series3);

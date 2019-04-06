@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -75,7 +76,14 @@ public class CommandTestUtil {
     public static final String VALID_PERIOD_FIRSTEXTRA = "7";
     public static final String VALID_PERIOD_SECONDEXTRA = "28";
     public static final String VALID_DATE_FIRSTEXTRA = "03/03/2019";
-    public static final String VALID_DATE_SECONDEXTRA = "02/01/2019";
+    public static final String VALID_DATE_SECONDEXTRA = "01/02/2019";
+
+    public static final String AMOUNT_DESC_FIRSTEXTRA = " " + PREFIX_COST + VALID_AMOUNT_FIRSTEXTRA;
+    public static final String AMOUNT_DESC_SECONDEXTRA = " " + PREFIX_COST + VALID_AMOUNT_SECONDEXTRA;
+    public static final String PERIOD_DESC_FIRSTEXTRA = " " + PREFIX_PERIOD + VALID_PERIOD_FIRSTEXTRA;
+    public static final String PERIOD_DESC_SECONDEXTRA = " " + PREFIX_PERIOD + VALID_PERIOD_SECONDEXTRA;
+    public static final String DATE_DESC_FIRSTEXTRA = " " + PREFIX_DATE + VALID_DATE_FIRSTEXTRA;
+    public static final String DATE_DESC_SECONDEXTRA = " " + PREFIX_DATE + VALID_DATE_SECONDEXTRA;
 
     public static final String NAME_DESC_BOWLING = " " + PREFIX_NAME + VALID_NAME_BOWLING;
     public static final String NAME_DESC_IPHONE = " " + PREFIX_NAME + VALID_NAME_IPHONE;

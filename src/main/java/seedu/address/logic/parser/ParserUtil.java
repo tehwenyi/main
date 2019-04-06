@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -93,7 +94,7 @@ public class ParserUtil {
         try {
             parsedDate = dateFormat.parse(date.trim());
         } catch (java.text.ParseException parseException) {
-            throw new ParseException("Date should be valid and in the format dd/mm/yyyy.");
+            throw new ParseException(MESSAGE_INVALID_DATE);
         }
         return parsedDate;
     }

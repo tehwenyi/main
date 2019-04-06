@@ -28,7 +28,8 @@ public class CommandBox extends UiPart<Region> {
         "report d/", "list ", "help ", "edit ", "search ", "sort ", "exit", "view ",
         "editBudget $/ p/ d/", "percentage", "addBudget $/ p/ d/",
         "addAllowance $/", "deleteBudget ", "setGoal n/ $/",
-        "viewGoal", "viewSavings ", "sE n/"};
+        "viewGoal", "viewSavings ", "sortExpense n/",
+        "findExpense n/ t/ d/ $/"};
 
     @FXML
     private TextField commandTextField;

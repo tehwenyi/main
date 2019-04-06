@@ -6,7 +6,8 @@ package seedu.address.model.epiggy.item;
  */
 public class Name {
 
-    public static final String MESSAGE_CONSTRAINTS = "Name should have at least 1 alphanumeric character and less than 50 characters in length.";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Name should have at least 1 alphanumeric character and less than 50 characters in length.";
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9 ]{1,50}$";
     public final String name;
 

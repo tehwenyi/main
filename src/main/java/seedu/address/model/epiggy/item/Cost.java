@@ -1,12 +1,12 @@
 package seedu.address.model.epiggy.item;
 
-import seedu.address.logic.parser.exceptions.ParseException;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a Cost.

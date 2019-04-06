@@ -61,7 +61,7 @@ public class ParserUtil {
     public static seedu.address.model.epiggy.item.Name parseItemName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if(!seedu.address.model.epiggy.item.Name.isValidName(trimmedName)) {
+        if (!seedu.address.model.epiggy.item.Name.isValidName(trimmedName)) {
             throw new ParseException(seedu.address.model.epiggy.item.Name.MESSAGE_CONSTRAINTS);
         }
         return new seedu.address.model.epiggy.item.Name(trimmedName);

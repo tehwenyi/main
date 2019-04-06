@@ -10,7 +10,6 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
-import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 //@@author rahulb99

@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.logging.Logger;
 
@@ -12,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.epiggy.Expense;
-import seedu.address.model.epiggy.ExpenseList;
 import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.item.Cost;
 
@@ -36,7 +34,8 @@ public class SavingsPanel extends UiPart<Region> {
     @FXML
     private Label amountDifference;
 
-    public SavingsPanel(ObservableList<Expense> expense, ObservableValue<Goal> goal, Supplier<ObservableValue<Cost>> onSavingsChange) {
+    public SavingsPanel(ObservableList<Expense> expense, ObservableValue<Goal> goal,
+                        Supplier<ObservableValue<Cost>> onSavingsChange) {
         super(FXML);
 
         expense.addListener((ListChangeListener<? super Expense>) observable -> {
@@ -50,6 +49,11 @@ public class SavingsPanel extends UiPart<Region> {
         refreshPanel(goal, onSavingsChange);
     }
 
+    /**
+     * Updates the savings panel with new changes.
+     * @param goal
+     * @param onSavingsChange
+     */
     private void refreshPanel(ObservableValue<Goal> goal, Supplier<ObservableValue<Cost>> onSavingsChange) {
         currentSavings.setText(onSavingsChange.get().getValue().toString());
         if (goal.getValue() == null) {

@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.EPiggy;
 import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.epiggy.item.Cost;
@@ -19,8 +18,8 @@ import seedu.address.model.tag.Tag;
 public class SampleEPiggyDataUtil {
     public static Expense[] getSampleExpenses() {
         return new Expense[] {
-            new Allowance(new Item(new Name("Allowance"), new Cost(20), getTagSet("Allowance")), new Date(2019,1,31)),
-            new Expense(new Item(new Name("Fishball Noodles"), new Cost(4), getTagSet("Lunch")), new Date(2019,2,2)),
+            new Allowance(new Item(new Name("Allowance"), new Cost(20), getTagSet("Allowance")), new Date(2019, 1, 31)),
+            new Expense(new Item(new Name("Fishball Noodles"), new Cost(4), getTagSet("Lunch")), new Date(2019, 2, 2)),
         };
     }
 

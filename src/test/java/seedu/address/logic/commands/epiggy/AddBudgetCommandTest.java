@@ -99,7 +99,7 @@ public class AddBudgetCommandTest {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(validBudget.getEndDate());
         calendar.add(Calendar.DAY_OF_MONTH, -1);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String endDate = simpleDateFormat.format(calendar.getTime());
         Budget overlappingBudget = new BudgetBuilder().withDate(endDate).build();
 
@@ -118,7 +118,7 @@ public class AddBudgetCommandTest {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(validBudget.getStartDate());
         calendar.add(Calendar.DAY_OF_MONTH, 1 - Integer.parseInt(BudgetBuilder.DEFAULT_PERIOD));
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String startDate = simpleDateFormat.format(calendar.getTime());
         Budget overlappingBudget = new BudgetBuilder().withDate(startDate).build();
 
@@ -395,7 +395,7 @@ public class AddBudgetCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single budget.
      */
     private class ModelStubWithBudget extends ModelStub {
         final ArrayList<Budget> budgets = new ArrayList<>();

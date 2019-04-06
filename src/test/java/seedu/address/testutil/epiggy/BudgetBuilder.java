@@ -15,7 +15,7 @@ public class BudgetBuilder {
 
     public static final String DEFAULT_AMOUNT = "500";
     public static final String DEFAULT_PERIOD = "25";
-    // The date is in the format MM/dd/yyyy, hence 3rd February 2019 below
+    // The date is in the format dd/MM/yyyy, hence 3rd February 2019 below
     public static final String DEFAULT_STARTDATE = "03/02/2019";
 
     private Cost amount;

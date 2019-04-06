@@ -20,49 +20,49 @@ import seedu.address.testutil.epiggy.BudgetBuilder;
  */
 public class TypicalBudgets {
 
-    // Date is in the form MM/dd/yyyy
+    // Date is in the form dd/MM/yyyy
     public static final Budget ONE = new BudgetBuilder().withAmount("100")
-            .withPeriod("7").withDate("02/04/2019").build();
+            .withPeriod("7").withDate("04/02/2019").build();
     public static final Budget TWO = new BudgetBuilder().withAmount("300")
-            .withPeriod("18").withDate("02/11/2019").build();
+            .withPeriod("18").withDate("11/02/2019").build();
     public static final Budget THREE = new BudgetBuilder().withAmount("500")
-            .withDate("03/01/2019").withPeriod("30").build();
+            .withDate("01/03/2019").withPeriod("30").build();
     public static final Budget FOUR = new BudgetBuilder().withAmount("15")
-            .withDate("03/31/2019").withPeriod("1").build();
+            .withDate("31/03/2019").withPeriod("1").build();
     public static final Budget FIVE = new BudgetBuilder().withAmount("20")
-            .withDate("04/01/2019").withPeriod("2").build();
+            .withDate("01/04/2019").withPeriod("2").build();
     public static final Budget SIX = new BudgetBuilder().withAmount("90")
-            .withDate("04/15/2019").withPeriod("5").build();
+            .withDate("15/04/2019").withPeriod("5").build();
     public static final Budget SEVEN = new BudgetBuilder().withAmount("12000")
-            .withDate("04/20/2019").withPeriod("365").build();
+            .withDate("20/04/2019").withPeriod("365").build();
     public static final Budget EIGHT = new BudgetBuilder().withAmount("90")
-            .withDate("02/01/2019").withPeriod("3").build();
+            .withDate("01/02/2019").withPeriod("3").build();
     public static final Budget NINE = new BudgetBuilder().withAmount("12")
-            .withDate("01/31/2019").withPeriod("1").build();
+            .withDate("31/01/2019").withPeriod("1").build();
 
     // Other budgets
     public static final Budget TEN = new BudgetBuilder().withAmount("10")
-            .withPeriod("1").withDate("02/04/2020").build();
+            .withPeriod("1").withDate("04/02/2020").build();
     public static final Budget ELEVEN = new BudgetBuilder().withAmount("30")
-            .withPeriod("1").withDate("02/05/2020").build();
+            .withPeriod("1").withDate("05/02/2020").build();
     public static final Budget TWELVE = new BudgetBuilder().withAmount("50")
-            .withDate("02/06/2020").withPeriod("1").build();
+            .withDate("06/02/2020").withPeriod("1").build();
     public static final Budget THIRTEEN = new BudgetBuilder().withAmount("15")
-            .withDate("02/07/2020").withPeriod("1").build();
+            .withDate("07/02/2020").withPeriod("1").build();
     public static final Budget FOURTEEN = new BudgetBuilder().withAmount("20")
-            .withDate("02/08/2020").withPeriod("1").build();
+            .withDate("08/02/2020").withPeriod("1").build();
     public static final Budget FIFTEEN = new BudgetBuilder().withAmount("9")
-            .withDate("02/09/2020").withPeriod("1").build();
+            .withDate("09/02/2020").withPeriod("1").build();
     public static final Budget SIXTEEN = new BudgetBuilder().withAmount("15")
-            .withDate("02/10/2020").withPeriod("1").build();
+            .withDate("10/02/2020").withPeriod("1").build();
     public static final Budget SEVENTEEN = new BudgetBuilder().withAmount("90")
-            .withDate("02/11/2020").withPeriod("1").build();
+            .withDate("11/02/2020").withPeriod("1").build();
     public static final Budget EIGHTEEN = new BudgetBuilder().withAmount("12")
-            .withDate("02/12/2020").withPeriod("1").build();
+            .withDate("12/02/2020").withPeriod("1").build();
     public static final Budget NINETEEN = new BudgetBuilder().withAmount("12")
-            .withDate("02/13/2020").withPeriod("1").build();
+            .withDate("13/02/2020").withPeriod("1").build();
     public static final Budget TWENTY = new BudgetBuilder().withAmount("12")
-            .withDate("02/14/2020").withPeriod("1").build();
+            .withDate("14/02/2020").withPeriod("1").build();
 
     // Manually added - Budget's details found in {@code CommandTestUtil}
     public static final Budget FIRST_EXTRA = new BudgetBuilder().withAmount(VALID_AMOUNT_FIRSTEXTRA)

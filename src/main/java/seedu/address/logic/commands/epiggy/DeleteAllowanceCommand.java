@@ -25,9 +25,9 @@ public class DeleteAllowanceCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    private static final String MESSAGE_DELETE_ALLOWANCE_SUCCESS = "Deleted allowance: %1$s";
-    private static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The index does not exist on the expense list.";
-    private static final String MESSAGE_ITEM_NOT_ALLOWANCE = "The item selected is not an allowance. "
+    public static final String MESSAGE_DELETE_ALLOWANCE_SUCCESS = "Deleted allowance: %1$s";
+    public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The index does not exist on the expense list.";
+    public static final String MESSAGE_ITEM_NOT_ALLOWANCE = "The item selected is not an allowance. "
             + "Please use " + DeleteExpenseCommand.COMMAND_WORD + " to delete expenses and "
             + COMMAND_WORD + " to delete allowances.";
 

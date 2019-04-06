@@ -219,6 +219,13 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredBudgetList().size());
     }
 
+    public static void showExpenseAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredExpenseList().size());;
+        Expense expense = model.getExpenseList().get(targetIndex.getZeroBased());
+        model.updateFilteredExpensesList(Predicate.isEqual(expense));
+        assertEquals(1, model.getFilteredExpenseList().size());
+    }
+
     /**
      * Deletes the first expense in {@code model}'s filtered list from {@code model}'s address book.
      */

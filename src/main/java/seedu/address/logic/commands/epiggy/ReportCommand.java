@@ -46,13 +46,6 @@ public class ReportCommand extends Command {
         this.date = date;
         this.type = type;
     }
-
-    /**
-     * Default constructor
-     */
-    public ReportCommand() {
-    }
-
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);

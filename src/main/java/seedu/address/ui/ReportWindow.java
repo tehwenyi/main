@@ -24,6 +24,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -47,33 +48,30 @@ public class ReportWindow {
      * @param type  Report display type
      */
     public void displayReportController(Model model, LocalDate date, String type) {
-        try {
-            logger.info("Creates Report window");
-            ReportDisplayType expenseDisplayType = ReportDisplayType.valueOf(type);
-            window = new Stage();
-            window.initModality(Modality.APPLICATION_MODAL);
-            window.setTitle("Report");
-            switch (expenseDisplayType) {
-            case ALL:
-                displayCompleteReport(model);
-                break;
-            case DAY:
-                displayReportOnSpecifiedDay(model, date);
-                break;
-            case MONTH:
-                displayReportOnSpecifiedMonth(model, date);
-                break;
-            case YEAR:
-                displayReportOnSpecifiedYear(model, date);
-                break;
-            default:
-                displayCompleteReport(model);
-                break;
-            }
-            window.showAndWait();
-        } catch (Exception e) {
-            throw e;
+        logger.info("Creates Report window");
+        ReportDisplayType expenseDisplayType = ReportDisplayType.valueOf(type);
+        window = new Stage();
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle("Report");
+        switch (expenseDisplayType) {
+        case ALL:
+            displayCompleteReport(model);
+            break;
+        case DAY:
+            displayReportOnSpecifiedDay(model, date);
+            break;
+        case MONTH:
+            displayReportOnSpecifiedMonth(model, date);
+            break;
+        case YEAR:
+            displayReportOnSpecifiedYear(model, date);
+            break;
+        default:
+            displayCompleteReport(model);
+            break;
         }
+        window.showAndWait();
+
     }
 
     /**
@@ -297,21 +295,25 @@ public class ReportWindow {
     /**
      * Display the proportion of income spent on different categories on pie chart.
      */
-    private void displayExpensePercentageReport(Model model) {
-        Scene scene = new Scene(new Group(), 800, 600);
+    private Group displayExpensePercentageReport(double totalExpense, double totalAllowance) {
 
+        double totalSaving = (totalAllowance < totalExpense) ? 0 : (totalAllowance - totalExpense);
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
-                        new PieChart.Data("Food", 13),
-                        new PieChart.Data("Daily necessities", 25),
-                        new PieChart.Data("Electronics", 10),
-                        new PieChart.Data("Cosmetics", 22),
-                        new PieChart.Data("Others", 30));
+                        new PieChart.Data("Total expense", totalExpense),
+                        new PieChart.Data("Total saving", totalSaving));
         final PieChart chart = new PieChart(pieChartData);
-        chart.setTitle("Percentage of spending on each categories"); (
-                (Group) scene.getRoot()
-        ).getChildren().add(chart);
-        window.setScene(scene);
+        chart.setTitle("Percentage of total saving over total expense");
+        //setting the direction to arrange the data
+        chart.setClockwise(true);
+        //Setting legend and labels
+        chart.setLabelLineLength(15);
+        //Setting the labels of the pie chart visible
+        chart.setLabelsVisible(true);
+        //Setting the start angle of the pie chart
+        chart.setStartAngle(180);
+        //Creating a Group object
+        return new Group(chart);
     }
 
     /**
@@ -356,13 +358,14 @@ public class ReportWindow {
                         .toLocalDate();
                 if (currentDate.getYear() == date.getYear()) {
                     // found the specified year
+                    double value = expense.getItem().getCost().getAmount();
                     if (expense.getItem().getName().toString().equals("Allowance")) {
                         // allowance
-                        allowances[currentDate.getMonthValue() - 1] += expense.getItem().getCost().getAmount();
+                        allowances[currentDate.getMonthValue() - 1] += value;
                         isAllowanceEmpty = false;
                     } else {
                         // expense
-                        expenses[currentDate.getMonthValue() - 1] += expense.getItem().getCost().getAmount();
+                        expenses[currentDate.getMonthValue() - 1] += value;
                         isExpenseEmpty = false;
                     }
                 }
@@ -588,8 +591,15 @@ public class ReportWindow {
                     + " is the most consumed year. "
                     + "The highest expense record is S$"
                     + maxExpense);
-            layout.getChildren().addAll(bc, labelOfTotalExpense, labelOfTotalBudget, labelOfTotalAllowance,
-                    labelOfTotalSaving, labelOfMaxExpenseYear, labelOfMaxExpenseValue);
+
+            // show pie chart
+            Group pieChart = displayExpensePercentageReport(totalExpense, totalAllowance);
+
+            layout.getChildren().addAll(bc, pieChart, labelOfTotalExpense, labelOfTotalBudget,
+                    labelOfTotalAllowance, labelOfTotalSaving, labelOfMaxExpenseYear, labelOfMaxExpenseValue);
+            // creates a scroll pane
+            ScrollPane sp = new ScrollPane();
+            sp.setContent(layout);
             // JavaFx bug, need to manually set all nodes margin!!!
             VBox.setMargin(bc, new Insets(10, 20, 10, 10));
             VBox.setMargin(labelOfTotalAllowance, new Insets(5, 10, 0, 50));
@@ -598,14 +608,18 @@ public class ReportWindow {
             VBox.setMargin(labelOfTotalBudget, new Insets(5, 10, 0, 50));
             VBox.setMargin(labelOfMaxExpenseValue, new Insets(5, 10, 0, 50));
             VBox.setMargin(labelOfMaxExpenseYear, new Insets(5, 10, 0, 50));
+            Scene scene = new Scene(sp, 800, 650);
+            bc.getData().addAll(series1, series2, series3);
+            window.setScene(scene);
         } else {
             labelOfTotalExpense.setText("No record found!");
             layout.getChildren().addAll(bc, labelOfTotalExpense);
             layout.setAlignment(Pos.CENTER);
+            Scene scene = new Scene(layout, 800, 650);
+            bc.getData().addAll(series1, series2, series3);
+            window.setScene(scene);
         }
-        Scene scene = new Scene(layout, 800, 650);
-        bc.getData().addAll(series1, series2, series3);
-        window.setScene(scene);
+
     }
 
     /**

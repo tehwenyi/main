@@ -37,6 +37,7 @@ public class ReportCommandEmptyDataSystemTest extends EPiggySystemTestWithEmptyD
         getMainWindowHandle().focus();
 
         // check report window for specified day
+        //TODO: some Java internal error here. Remove this test case will make the error.
         executeCommand(ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "21/03/2019");
         assertReportWindowOpen();
         assertEquals("", getCommandBox().getInput());
@@ -59,6 +60,16 @@ public class ReportCommandEmptyDataSystemTest extends EPiggySystemTestWithEmptyD
 
         // check report window for specified year
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "2019";
+        executeCommand(command);
+        assertReportWindowOpen();
+        assertEquals("", getCommandBox().getInput());
+        assertCommandBoxShowsDefaultStyle();
+        messageHistory = "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+                + "You: " + command + "\n\n" + messageHistory;
+        assertEquals(messageHistory, getResultDisplay().getText());
+
+        // check report window for specified date
+        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "21/03/2019";
         executeCommand(command);
         assertReportWindowOpen();
         assertEquals("", getCommandBox().getInput());

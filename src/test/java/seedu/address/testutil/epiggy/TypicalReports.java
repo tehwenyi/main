@@ -52,13 +52,12 @@ public class TypicalReports {
             .withDate("04/26/2019")
             .withCost("13.95")
             .withTags(VALID_TAG_FOOD, "dinner").build();
-
+    public static final String KEYWORD_MATCHING_STATIONARY = "Stationary";
     private TypicalReports() {
     } // prevents instantiation
-
     /**
      * Returns an {@code EPiggy} with all the typical expenses, allowance and budget.
-     * TODO: allowance and budget storage is not up yet. Therefore budgets are not add to storage.
+     * TODO: allowance are not add to storage.
      */
     public static EPiggy getTypicalEPiggy() {
         // todo: change the method here

@@ -47,7 +47,7 @@ import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
 @Ignore
-public class AddCommandSystemTest extends EPiggySystemTest {
+public class AddCommandSystemTest extends EPiggySystemTestOld {
 
     @Test
     public void add() {
@@ -191,7 +191,7 @@ public class AddCommandSystemTest extends EPiggySystemTest {
      * Verifications 1, 3 and 4 are performed by
      * {@code EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      *
-     * @see EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see EPiggySystemTestOld#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(Person toAdd) {
         assertCommandSuccess(PersonUtil.getAddCommand(toAdd), toAdd);
@@ -238,7 +238,7 @@ public class AddCommandSystemTest extends EPiggySystemTest {
      * Verifications 1, 3 and 4 are performed by
      * {@code EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      *
-     * @see EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see EPiggySystemTestOld#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();

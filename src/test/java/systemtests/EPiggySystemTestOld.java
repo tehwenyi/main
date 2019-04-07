@@ -41,7 +41,7 @@ import seedu.address.ui.CommandBox;
  * A system test class for EPiggy, which provides access to handles of GUI components and helper methods
  * for test verification.
  */
-public abstract class EPiggySystemTest {
+public abstract class EPiggySystemTestOld {
     @ClassRule
     public static ClockRule clockRule = new ClockRule();
 

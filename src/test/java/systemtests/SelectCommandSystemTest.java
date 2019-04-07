@@ -20,7 +20,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 
 @Ignore
-public class SelectCommandSystemTest extends EPiggySystemTest {
+public class SelectCommandSystemTest extends EPiggySystemTestOld {
     @Test
     public void select() {
         /* ------------------------ Perform select operations on the shown unfiltered list -------------------------- */
@@ -111,7 +111,7 @@ public class SelectCommandSystemTest extends EPiggySystemTest {
      * 6. Status bar remains unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see EPiggySystemTestOld#assertApplicationDisplaysExpected(String, String, Model)
 //     * @see EPiggySystemTest#assertSelectedCardChanged(Index)
      */
     private void assertCommandSuccess(String command, Index expectedSelectedCardIndex) {
@@ -142,7 +142,7 @@ public class SelectCommandSystemTest extends EPiggySystemTest {
      * 5. Browser url, selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see EPiggySystemTestOld#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();

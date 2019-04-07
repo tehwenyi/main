@@ -13,7 +13,7 @@ import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
 @Ignore
-public class SampleDataTest extends EPiggySystemTest {
+public class SampleDataTest extends EPiggySystemTestOld {
     /**
      * Returns null to force test app to load data of the file in {@code getDataFileLocation()}.
      */

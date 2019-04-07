@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
 @Ignore
-public class ClearCommandSystemTest extends EPiggySystemTest {
+public class ClearCommandSystemTest extends EPiggySystemTestOld {
 
     @Test
     public void clear() {
@@ -63,7 +63,7 @@ public class ClearCommandSystemTest extends EPiggySystemTest {
      * These verifications are done by
      * {@code EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * Also verifies that the command box has the default style class and the status bar's sync status changes.
-     * @see EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see EPiggySystemTestOld#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command) {
         assertCommandSuccess(command, ClearCommand.MESSAGE_SUCCESS, new ModelManager());
@@ -88,7 +88,7 @@ public class ClearCommandSystemTest extends EPiggySystemTest {
      * {@code EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * Also verifies that the browser url, selected card and status bar remain unchanged, and the command box has the
      * error style.
-     * @see EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see EPiggySystemTestOld#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();

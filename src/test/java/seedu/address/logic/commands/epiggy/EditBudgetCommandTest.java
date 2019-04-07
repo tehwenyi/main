@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_SECONDEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_FIRSTEXTRA;
 import static seedu.address.logic.commands.epiggy.EditBudgetCommand.createEditedBudget;
 import static seedu.address.testutil.TypicalBudgets.FIRST_EXTRA;
-import static seedu.address.testutil.TypicalBudgets.getTypicalEPiggy;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -19,7 +18,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.function.Predicate;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -36,10 +34,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.epiggy.EditBudgetCommand.EditBudgetDetails;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
@@ -54,7 +50,6 @@ import seedu.address.testutil.epiggy.EditBudgetDetailsBuilder;
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
  * and unit tests for EditBudgetCommand.
  */
-@Ignore
 public class EditBudgetCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
@@ -62,7 +57,6 @@ public class EditBudgetCommandTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private Model model = new ModelManager(getTypicalEPiggy(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
     private Date todaysDate = new Date();
 
@@ -237,28 +231,36 @@ public class EditBudgetCommandTest {
 
     @Test
     public void isAnyFieldUpdated() {
-        // no fields edited -> return false
+        // pass in empty EditBudgetDetails object -> return false
         EditBudgetDetails details = new EditBudgetDetails();
+        EditBudgetDetails detailsHolder = new EditBudgetDetails(details);
+        assertFalse(detailsHolder.isAnyFieldEdited());
+
+        // no fields edited in original -> return false
         assertFalse(details.isAnyFieldEdited());
 
-        // amount edited
+        // amount edited -> return true
         details.setAmount(new Cost(10000));
         assertTrue(details.isAnyFieldEdited());
 
-        // period edited
+        // period edited -> return true
         EditBudgetDetails periodDetailsChange = new EditBudgetDetails();
         periodDetailsChange.setPeriod(new Period(999));
         assertTrue(periodDetailsChange.isAnyFieldEdited());
 
-        // date edited
+        // date edited -> return true
         EditBudgetDetails dateDetailsChange = new EditBudgetDetails();
         dateDetailsChange.setStartDate(new Date());
         assertTrue(dateDetailsChange.isAnyFieldEdited());
 
-        // all fields edited
+        // all fields edited -> return true
         details.setPeriod(new Period(999));
         details.setStartDate(new Date());
         assertTrue(details.isAnyFieldEdited());
+
+        // filled EditBudgetDetails object passed in -> return true
+        detailsHolder = new EditBudgetDetails(details);
+        assertTrue(detailsHolder.isAnyFieldEdited());
     }
 
     @Test

@@ -13,6 +13,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import javax.sound.midi.Soundbank;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -168,6 +170,8 @@ public abstract class EPiggySystemTest {
     protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
+        System.out.println(expectedCommandInput);
+        System.out.println(getResultDisplay().getText());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new EPiggy(expectedModel.getEPiggy()), testApp.readStorageEPiggy());
         //        assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());

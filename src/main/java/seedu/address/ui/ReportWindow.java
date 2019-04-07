@@ -54,9 +54,7 @@ public class ReportWindow {
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Report");
         switch (expenseDisplayType) {
-        case ALL:
-            displayCompleteReport(model);
-            break;
+
         case DAY:
             displayReportOnSpecifiedDay(model, date);
             break;
@@ -66,6 +64,7 @@ public class ReportWindow {
         case YEAR:
             displayReportOnSpecifiedYear(model, date);
             break;
+        case ALL:
         default:
             displayCompleteReport(model);
             break;

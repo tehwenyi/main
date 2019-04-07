@@ -97,7 +97,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * auto complete text.
+     * autocomplete text.
      */
     private void autoCompleteText() {
         String[] inputString = commandTextField.getText().split(" "); //split with white space
@@ -125,7 +125,6 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.positionCaret(stringBuilder.length()); // set caret after the new text
         tabCount++;
     }
-
     /**
      * Updates the text field with the previous input in {@code historySnapshot},
      * if there exists a previous input in {@code historySnapshot}

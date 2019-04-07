@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import javax.naming.OperationNotSupportedException;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;

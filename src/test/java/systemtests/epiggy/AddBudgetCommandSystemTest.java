@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PERIOD_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PERIOD_DESC_FIRSTEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_FIRSTEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_SECONDEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_FIRSTEXTRA;
 import static seedu.address.testutil.TypicalBudgets.FIRST_EXTRA;
 import static seedu.address.testutil.TypicalBudgets.ONE;
@@ -28,7 +29,7 @@ import seedu.address.model.epiggy.item.Period;
 import seedu.address.testutil.epiggy.BudgetBuilder;
 import seedu.address.testutil.epiggy.BudgetUtil;
 
-public class AddBudgetCommandSystemTest extends EPiggySystemTestWithDefaultData {
+public class AddBudgetCommandSystemTest extends EPiggySystemTestWithEmptyData {
 
     private String messageHistory = "";
 
@@ -38,7 +39,7 @@ public class AddBudgetCommandSystemTest extends EPiggySystemTestWithDefaultData 
 
         /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
 
-        /* Case: add a budget without tags to a non-empty address book, command with leading spaces and trailing spaces
+        /* Case: add a budget to a non-empty ePiggy, command with leading spaces and trailing spaces
          * -> added
          */
         Budget toAdd = FIRST_EXTRA;
@@ -58,13 +59,13 @@ public class AddBudgetCommandSystemTest extends EPiggySystemTestWithDefaultData 
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: add a budget with all fields same as another budget in the address book except date -> added */
-        toAdd = new BudgetBuilder(FIRST_EXTRA).withDate(DATE_DESC_SECONDEXTRA).build();
+        toAdd = new BudgetBuilder(FIRST_EXTRA).withDate(VALID_DATE_SECONDEXTRA).build();
         command = AddBudgetCommand.COMMAND_WORD + AMOUNT_DESC_FIRSTEXTRA + PERIOD_DESC_FIRSTEXTRA
                 + DATE_DESC_SECONDEXTRA;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add to empty address book -> added */
-        deleteAllBudgets();
+        messageHistory = deleteAllBudgets() + messageHistory;
         assertCommandSuccess(ONE);
 
         /* ----------------------------------- Perform invalid add operations --------------------------------------- */
@@ -125,7 +126,7 @@ public class AddBudgetCommandSystemTest extends EPiggySystemTestWithDefaultData 
      * Verifications 1, 3 and 4 are performed by
      * {@code EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      *
-     * @see EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see EPiggySystemTestWithEmptyData#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(Budget toAdd) {
         assertCommandSuccess(BudgetUtil.getAddBudgetCommand(toAdd), toAdd);
@@ -140,10 +141,9 @@ public class AddBudgetCommandSystemTest extends EPiggySystemTestWithDefaultData 
     private void assertCommandSuccess(String command, Budget toAdd) {
         Model expectedModel = getModel();
         expectedModel.addBudget(0, toAdd);
-        messageHistory = String.format("ePiggy: " + AddBudgetCommand.MESSAGE_SUCCESS, toAdd
-                + "\n\n" + "You: " + command + "\n\n") + messageHistory;
+        String expectedMessage = String.format(AddBudgetCommand.MESSAGE_SUCCESS, toAdd);
         // assertEquals(messageHistory, getResultDisplay().getText());
-        assertCommandSuccess(command, expectedModel, messageHistory);
+        assertCommandSuccess(command, expectedModel, expectedMessage);
     }
 
     /**
@@ -157,7 +157,8 @@ public class AddBudgetCommandSystemTest extends EPiggySystemTestWithDefaultData 
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);
-        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
+        messageHistory = "ePiggy: " + expectedResultMessage + "\n\n" + "You: " + command + "\n\n" + messageHistory;
+        assertApplicationDisplaysExpected("", messageHistory, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsDefaultStyle();
         assertStatusBarUnchangedExceptSyncStatus();
@@ -173,13 +174,14 @@ public class AddBudgetCommandSystemTest extends EPiggySystemTestWithDefaultData 
      * Verifications 1, 3 and 4 are performed by
      * {@code EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      *
-     * @see EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see EPiggySystemTestWithEmptyData#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();
 
         executeCommand(command);
-        assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
+        messageHistory = "ePiggy: " + expectedResultMessage + "\n\n" + "You: " + command + "\n\n" + messageHistory;
+        assertApplicationDisplaysExpected(command, messageHistory, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsErrorStyle();
         assertStatusBarUnchanged();

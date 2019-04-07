@@ -4,6 +4,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
 
+import java.text.SimpleDateFormat;
+
 import seedu.address.logic.commands.epiggy.AddBudgetCommand;
 import seedu.address.logic.commands.epiggy.EditBudgetCommand.EditBudgetDetails;
 import seedu.address.model.epiggy.Budget;
@@ -24,10 +26,11 @@ public class BudgetUtil {
      * Returns the part of command string for the given {@code budget}'s details.
      */
     public static String getBudgetDetails(Budget budget) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_COST + budget.getBudgetedAmount().toString() + " ");
+        sb.append(PREFIX_COST + String.valueOf(budget.getBudgetedAmount().getAmount()) + " ");
         sb.append(PREFIX_PERIOD + budget.getPeriod().toString() + " ");
-        sb.append(PREFIX_DATE + budget.getStartDate().toString() + " ");
+        sb.append(PREFIX_DATE + sdf.format(budget.getStartDate()) + " ");
         return sb.toString();
     }
 
@@ -35,10 +38,12 @@ public class BudgetUtil {
      * Returns the part of command string for the given {@code EditBudgetDetails}'s details.
      */
     public static String getEditBudgetDetailsDetails(EditBudgetDetails details) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         StringBuilder sb = new StringBuilder();
-        details.getAmount().ifPresent(amount -> sb.append(PREFIX_COST).append(amount.toString()).append(" "));
+        details.getAmount().ifPresent(amount -> sb.append(PREFIX_COST)
+                .append(String.valueOf(amount.getAmount())).append(" "));
         details.getPeriod().ifPresent(period -> sb.append(PREFIX_PERIOD).append(period.toString()).append(" "));
-        details.getStartDate().ifPresent(date -> sb.append(PREFIX_DATE).append(date.toString()).append(" "));
+        details.getStartDate().ifPresent(date -> sb.append(PREFIX_DATE).append(sdf.format(date)).append(" "));
         return sb.toString();
     }
 }

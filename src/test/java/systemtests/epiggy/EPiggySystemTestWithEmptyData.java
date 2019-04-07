@@ -29,8 +29,10 @@ import seedu.address.EpiggyTestApp;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
+import seedu.address.model.epiggy.Budget;
 import seedu.address.testutil.epiggy.TypicalReports;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
@@ -149,6 +151,23 @@ public abstract class EPiggySystemTestWithEmptyData {
     protected void deleteAllPersons() {
         executeCommand(ClearCommand.COMMAND_WORD);
         assertEquals(0, getModel().getEPiggy().getPersonList().size());
+    }
+
+    /**
+     * Deletes all persons in the address book.
+     */
+    protected String deleteAllBudgets() {
+        String messageHistory = "";
+        List<Budget> budgetList = getModel().getBudgetList();
+        int budgetListSize = budgetList.size();
+        for (int i = 0; i < budgetListSize; i++) {
+            executeCommand(DeleteBudgetCommand.COMMAND_WORD + " 1");
+            messageHistory = "ePiggy: " + String.format(DeleteBudgetCommand.MESSAGE_DELETE_BUDGET_SUCCESS,
+                    budgetList.get(i)) + "\n\n" + "You: " + DeleteBudgetCommand.COMMAND_WORD + " 1" + "\n\n"
+                    + messageHistory;
+        }
+        assertEquals(0, getModel().getEPiggy().getBudgetList().size());
+        return messageHistory;
     }
 
     /**

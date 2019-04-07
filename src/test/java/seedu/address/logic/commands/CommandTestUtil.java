@@ -207,8 +207,8 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * Updates {@code model}'s filtered list to show only the budget at the given {@code targetIndex} in the
+     * {@code model}'s epiggy.
      */
     public static void showBudgetAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredBudgetList().size());
@@ -217,6 +217,16 @@ public class CommandTestUtil {
         model.updateFilteredBudgetList(Predicate.isEqual(budget));
 
         assertEquals(1, model.getFilteredBudgetList().size());
+    }
+    /**
+     * Updates {@code model}'s filtered list to show only the expense at the given {@code targetIndex} in the
+     * {@code model}'s epiggy.
+     */
+    public static void showExpenseAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredExpenseList().size());;
+        Expense expense = model.getExpenseList().get(targetIndex.getZeroBased());
+        model.updateFilteredExpensesList(Predicate.isEqual(expense));
+        assertEquals(1, model.getFilteredExpenseList().size());
     }
 
     /**

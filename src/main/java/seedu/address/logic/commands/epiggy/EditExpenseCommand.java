@@ -52,8 +52,12 @@ public class EditExpenseCommand extends Command {
     public static final String MESSAGE_EDIT_EXPENSE_SUCCESS = "Edited Expense: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
-    private final Index index;
-    private final EditExpenseDescriptor editExpenseDescriptor;
+    private static final String MESSAGE_ITEM_NOT_EXPENSE = "The item selected is not an expense. "
+            + "Please use " + COMMAND_WORD + " to edit expenses and "
+            + EditAllowanceCommand.COMMAND_WORD + " to edit allowances.";
+
+    final Index index;
+    final EditExpenseDescriptor editExpenseDescriptor;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -77,6 +81,9 @@ public class EditExpenseCommand extends Command {
         }
 
         Expense toEdit = lastShownList.get(index.getZeroBased());
+        if (toEdit instanceof Allowance) {
+            throw new CommandException(MESSAGE_ITEM_NOT_EXPENSE);
+        }
         Expense editedExpense = createEditedExpense(toEdit, editExpenseDescriptor);
 
         model.setExpense(toEdit, editedExpense);
@@ -89,7 +96,7 @@ public class EditExpenseCommand extends Command {
      * Creates and returns a {@code Expense} with the details of {@code expenseToEdit}
      * edited with {@code editExpenseDescriptor}.
      */
-    private static Expense createEditedExpense(Expense expenseToEdit, EditExpenseDescriptor editExpenseDescriptor) {
+    static Expense createEditedExpense(Expense expenseToEdit, EditExpenseDescriptor editExpenseDescriptor) {
         assert expenseToEdit != null;
 
         Name updatedName = editExpenseDescriptor.getName().orElse(expenseToEdit.getItem().getName());

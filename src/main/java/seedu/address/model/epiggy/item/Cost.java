@@ -51,23 +51,19 @@ public class Cost {
         }
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-
-        if (!(o instanceof Cost)) {
-            return false;
-        }
-
-        Cost b = (Cost) o;
-        return this.amount == b.getAmount();
-    }
-
     @Override
     public String toString() {
         return String.format("$%.2f", amount);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Cost)) {
+            return false;
+        }
+        return amount == ((Cost) other).getAmount();
     }
 }

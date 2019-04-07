@@ -1,6 +1,7 @@
 package seedu.address.testutil.epiggy;
 
-import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import seedu.address.logic.commands.epiggy.EditBudgetCommand.EditBudgetDetails;
 import seedu.address.model.epiggy.Budget;
@@ -52,7 +53,12 @@ public class EditBudgetDetailsBuilder {
      * Sets the {@code StartDate} of the {@code EditBudgetDetails} that we are building.
      */
     public EditBudgetDetailsBuilder withDate(String startDate) {
-        details.setStartDate(new Date(startDate));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            details.setStartDate(dateFormat.parse(startDate));
+        } catch (ParseException e) {
+            System.out.println("Date should be in the format dd/mm/yyyy.");
+        }
         return this;
     }
 

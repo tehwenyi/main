@@ -12,7 +12,6 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
-@Ignore
 public class ClearCommandSystemTest extends EPiggySystemTestWithDefaultData {
 
     @Test

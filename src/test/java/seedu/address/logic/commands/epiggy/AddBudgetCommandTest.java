@@ -112,6 +112,25 @@ public class AddBudgetCommandTest {
     }
 
     @Test
+    public void execute_subsetBudget_throwsCommandException() throws Exception {
+        Budget validBudget = new BudgetBuilder().build();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(validBudget.getEndDate());
+        calendar.add(Calendar.DAY_OF_MONTH, -2);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String endDate = simpleDateFormat.format(calendar.getTime());
+        Budget overlappingBudget = new BudgetBuilder().withDate(endDate).withPeriod("1").build();
+
+        AddBudgetCommand addBudgetCommand = new AddBudgetCommand(validBudget);
+        ModelStub modelStub = new ModelStubWithBudget(overlappingBudget);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(AddBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
+        addBudgetCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
     public void execute_overlappingEndDate_throwsCommandException() throws Exception {
         Budget validBudget = new BudgetBuilder().build();
 

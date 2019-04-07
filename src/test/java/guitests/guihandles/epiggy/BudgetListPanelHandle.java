@@ -1,43 +1,45 @@
-package guitests.guihandles;
+package guitests.guihandles.epiggy;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import guitests.guihandles.NodeHandle;
+
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
-import seedu.address.model.person.Person;
+import seedu.address.model.epiggy.Budget;
 
 /**
- * Provides a handle for {@code PersonListPanel} containing the list of {@code PersonCard}.
+ * Provides a handle for {@code BudgetListPanel} containing the list of {@code BudgetCard}.
  */
-public class PersonListPanelHandle extends NodeHandle<ListView<Person>> {
-    public static final String PERSON_LIST_VIEW_ID = "#personListView";
+public class BudgetListPanelHandle extends NodeHandle<ListView<Budget>> {
+    public static final String BUDGET_LIST_VIEW_ID = "#budgetView";
 
     private static final String CARD_PANE_ID = "#cardPane";
 
-    private Optional<Person> lastRememberedSelectedPersonCard;
+    private Optional<Budget> lastRememberedSelectedBudgetCard;
 
-    public PersonListPanelHandle(ListView<Person> personListPanelNode) {
-        super(personListPanelNode);
+    public BudgetListPanelHandle(ListView<Budget> budgetListPanelNode) {
+        super(budgetListPanelNode);
     }
 
     /**
-     * Returns a handle to the selected {@code PersonCardHandle}.
+     * Returns a handle to the selected {@code BudgetCardHandle}.
      * A maximum of 1 item can be selected at any time.
      * @throws AssertionError if no card is selected, or more than 1 card is selected.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
-    public PersonCardHandle getHandleToSelectedCard() {
-        List<Person> selectedPersonList = getRootNode().getSelectionModel().getSelectedItems();
+    public BudgetCardHandle getHandleToSelectedCard() {
+        List<Budget> selectedBudgetList = getRootNode().getSelectionModel().getSelectedItems();
 
-        if (selectedPersonList.size() != 1) {
-            throw new AssertionError("Person list size expected 1.");
+        if (selectedBudgetList.size() != 1) {
+            throw new AssertionError("Budget list size expected 1.");
         }
 
         return getAllCardNodes().stream()
-                .map(PersonCardHandle::new)
-                .filter(handle -> handle.equals(selectedPersonList.get(0)))
+                .map(BudgetCardHandle::new)
+                .filter(handle -> handle.equals(selectedBudgetList.get(0)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
     }
@@ -53,7 +55,7 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Person>> {
      * Returns true if a card is currently selected.
      */
     public boolean isAnyCardSelected() {
-        List<Person> selectedCardsList = getRootNode().getSelectionModel().getSelectedItems();
+        List<Budget> selectedCardsList = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedCardsList.size() > 1) {
             throw new AssertionError("Card list size expected 0 or 1.");
@@ -63,15 +65,15 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Person>> {
     }
 
     /**
-     * Navigates the listview to display {@code person}.
+     * Navigates the listview to display {@code budget}.
      */
-    public void navigateToCard(Person person) {
-        if (!getRootNode().getItems().contains(person)) {
-            throw new IllegalArgumentException("Person does not exist.");
+    public void navigateToCard(Budget budget) {
+        if (!getRootNode().getItems().contains(budget)) {
+            throw new IllegalArgumentException("Budget does not exist.");
         }
 
         guiRobot.interact(() -> {
-            getRootNode().scrollTo(person);
+            getRootNode().scrollTo(budget);
         });
         guiRobot.pauseForHuman();
     }
@@ -91,25 +93,25 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Person>> {
     }
 
     /**
-     * Selects the {@code PersonCard} at {@code index} in the list.
+     * Selects the {@code BudgetCard} at {@code index} in the list.
      */
     public void select(int index) {
         getRootNode().getSelectionModel().select(index);
     }
 
     /**
-     * Returns the person card handle of a person associated with the {@code index} in the list.
+     * Returns the budget card handle of a budget associated with the {@code index} in the list.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
-    public PersonCardHandle getPersonCardHandle(int index) {
+    public BudgetCardHandle getBudgetCardHandle(int index) {
         return getAllCardNodes().stream()
-                .map(PersonCardHandle::new)
-                .filter(handle -> handle.equals(getPerson(index)))
+                .map(BudgetCardHandle::new)
+                .filter(handle -> handle.equals(getBudget(index)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
     }
 
-    private Person getPerson(int index) {
+    private Budget getBudget(int index) {
         return getRootNode().getItems().get(index);
     }
 
@@ -123,30 +125,30 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Person>> {
     }
 
     /**
-     * Remembers the selected {@code PersonCard} in the list.
+     * Remembers the selected {@code BudgetCard} in the list.
      */
-    public void rememberSelectedPersonCard() {
-        List<Person> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
+    public void rememberSelectedBudgetCard() {
+        List<Budget> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            lastRememberedSelectedPersonCard = Optional.empty();
+            lastRememberedSelectedBudgetCard = Optional.empty();
         } else {
-            lastRememberedSelectedPersonCard = Optional.of(selectedItems.get(0));
+            lastRememberedSelectedBudgetCard = Optional.of(selectedItems.get(0));
         }
     }
 
     /**
-     * Returns true if the selected {@code PersonCard} is different from the value remembered by the most recent
-     * {@code rememberSelectedPersonCard()} call.
+     * Returns true if the selected {@code BudgetCard} is different from the value remembered by the most recent
+     * {@code rememberSelectedBudgetCard()} call.
      */
-    public boolean isSelectedPersonCardChanged() {
-        List<Person> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
+    public boolean isSelectedBudgetCardChanged() {
+        List<Budget> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            return lastRememberedSelectedPersonCard.isPresent();
+            return lastRememberedSelectedBudgetCard.isPresent();
         } else {
-            return !lastRememberedSelectedPersonCard.isPresent()
-                    || !lastRememberedSelectedPersonCard.get().equals(selectedItems.get(0));
+            return !lastRememberedSelectedBudgetCard.isPresent()
+                    || !lastRememberedSelectedBudgetCard.get().equals(selectedItems.get(0));
         }
     }
 

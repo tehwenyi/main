@@ -1,87 +1,92 @@
-package guitests.guihandles;
+package guitests.guihandles.epiggy;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import com.google.common.collect.ImmutableMultiset;
+import guitests.guihandles.NodeHandle;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+
+import seedu.address.model.epiggy.Budget;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to a budget card in the budget list panel.
  */
-public class PersonCardHandle extends NodeHandle<Node> {
-    private static final String ID_FIELD_ID = "#id";
-    private static final String NAME_FIELD_ID = "#name";
-    private static final String ADDRESS_FIELD_ID = "#address";
-    private static final String PHONE_FIELD_ID = "#phone";
-    private static final String EMAIL_FIELD_ID = "#email";
-    private static final String TAGS_FIELD_ID = "#tags";
+public class BudgetCardHandle extends NodeHandle<Node> {
+    private static final String TITLE_FIELD_ID = "#title";
+    private static final String AMOUNT_FIELD_ID = "#amount";
+    private static final String STARTDATE_FIELD_ID = "#startDate";
+    private static final String ENDDATE_FIELD_ID = "#endDate";
+    private static final String PERIOD_FIELD_ID = "#period";
+    private static final String STATUS_FIELD_ID = "#status";
+    private static final String REMAININGAMOUNT_FIELD_ID = "#remainingAmount";
+    private static final String REMAININGDAYS_FIELD_ID = "#remainingDays";
+    private static final String NOTIFICATION_FIELD_ID = "#notification";
 
-    private final Label idLabel;
-    private final Label nameLabel;
-    private final Label addressLabel;
-    private final Label phoneLabel;
-    private final Label emailLabel;
-    private final List<Label> tagLabels;
+    private final Label titleLabel;
+    private final Label amountLabel;
+    private final Label startDateLabel;
+    private final Label endDateLabel;
+    private final Label periodLabel;
+    private final Label statusLabel;
+    private final Label remainingAmountLabel;
+    private final Label remainingDaysLabel;
+    private final Label notificationLabel;
 
-    public PersonCardHandle(Node cardNode) {
+    public BudgetCardHandle(Node cardNode) {
         super(cardNode);
 
-        idLabel = getChildNode(ID_FIELD_ID);
-        nameLabel = getChildNode(NAME_FIELD_ID);
-        addressLabel = getChildNode(ADDRESS_FIELD_ID);
-        phoneLabel = getChildNode(PHONE_FIELD_ID);
-        emailLabel = getChildNode(EMAIL_FIELD_ID);
-
-        Region tagsContainer = getChildNode(TAGS_FIELD_ID);
-        tagLabels = tagsContainer
-                .getChildrenUnmodifiable()
-                .stream()
-                .map(Label.class::cast)
-                .collect(Collectors.toList());
+        titleLabel = getChildNode(TITLE_FIELD_ID);
+        amountLabel = getChildNode(AMOUNT_FIELD_ID);
+        startDateLabel = getChildNode(STARTDATE_FIELD_ID);
+        endDateLabel = getChildNode(ENDDATE_FIELD_ID);
+        periodLabel = getChildNode(PERIOD_FIELD_ID);
+        statusLabel = getChildNode(STATUS_FIELD_ID);
+        remainingAmountLabel = getChildNode(REMAININGAMOUNT_FIELD_ID);
+        remainingDaysLabel = getChildNode(REMAININGDAYS_FIELD_ID);
+        notificationLabel = getChildNode(NOTIFICATION_FIELD_ID);
     }
 
-    public String getId() {
-        return idLabel.getText();
+    public String getTitle() {
+        return titleLabel.getText();
     }
 
-    public String getName() {
-        return nameLabel.getText();
+    public String getAmount() {
+        return amountLabel.getText();
     }
 
-    public String getAddress() {
-        return addressLabel.getText();
+    public String getStartDate() {
+        return startDateLabel.getText();
     }
 
-    public String getPhone() {
-        return phoneLabel.getText();
+    public String getEndDate() {
+        return endDateLabel.getText();
     }
 
-    public String getEmail() {
-        return emailLabel.getText();
+    public String getPeriod() {
+        return periodLabel.getText();
     }
 
-    public List<String> getTags() {
-        return tagLabels
-                .stream()
-                .map(Label::getText)
-                .collect(Collectors.toList());
+    public String getStatus() {
+        return statusLabel.getText();
+    }
+
+    public String getRemainingAmount() {
+        return remainingAmountLabel.getText();
+    }
+
+    public String getRemainingDays() {
+        return remainingDaysLabel.getText();
+    }
+
+    public String getNotification() {
+        return notificationLabel.getText();
     }
 
     /**
-     * Returns true if this handle contains {@code person}.
+     * Returns true if this handle contains {@code budget}.
      */
-    public boolean equals(Person person) {
-        return getName().equals(person.getName().fullName)
-                && getAddress().equals(person.getAddress().value)
-                && getPhone().equals(person.getPhone().value)
-                && getEmail().equals(person.getEmail().value)
-                && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(person.getTags().stream()
-                        .map(tag -> tag.tagName)
-                        .collect(Collectors.toList())));
+    public boolean equals(Budget budget) {
+        return getAmount().equals(budget.getBudgetedAmount().toString())
+                && getStartDate().equals(budget.getStartDate().toString())
+                && getPeriod().equals(budget.getPeriod().toString());
     }
 }

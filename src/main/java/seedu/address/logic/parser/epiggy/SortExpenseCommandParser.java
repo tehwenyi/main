@@ -15,10 +15,10 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.epiggy.Expense;
-import seedu.address.model.epiggy.comparators.CompareExpenseByCost;
-import seedu.address.model.epiggy.comparators.CompareExpenseByDate;
-import seedu.address.model.epiggy.comparators.CompareExpenseByName;
+import seedu.address.model.Expense.Expense;
+import seedu.address.model.Expense.comparators.CompareExpenseByCost;
+import seedu.address.model.Expense.comparators.CompareExpenseByDate;
+import seedu.address.model.Expense.comparators.CompareExpenseByName;
 
 //@@author rahulb99
 /**

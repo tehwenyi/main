@@ -9,7 +9,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.epiggy.AddExpenseCommand;
 import seedu.address.logic.commands.epiggy.EditExpenseCommand.EditExpenseDescriptor;
-import seedu.address.model.epiggy.Expense;
+import seedu.address.model.Expense.Expense;
 import seedu.address.model.tag.Tag;
 
 /**

@@ -4,8 +4,8 @@ import java.util.Date;
 
 import seedu.address.logic.commands.epiggy.EditBudgetCommand.EditBudgetDetails;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.item.Cost;
-import seedu.address.model.epiggy.item.Period;
+import seedu.address.model.Expense.Cost;
+import seedu.address.model.Expense.Period;
 
 /**
  * A utility class to help with building EditBudgetDetails objects.

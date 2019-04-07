@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.epiggy.EditExpenseCommand.EditExpenseDescriptor;
-import seedu.address.model.epiggy.Expense;
-import seedu.address.model.epiggy.item.Cost;
-import seedu.address.model.epiggy.item.Name;
+import seedu.address.model.Expense.Expense;
+import seedu.address.model.Expense.Cost;
+import seedu.address.model.Expense.Name;
 import seedu.address.model.tag.Tag;
 
 /**

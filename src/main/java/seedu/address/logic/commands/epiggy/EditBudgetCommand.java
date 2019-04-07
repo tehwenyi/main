@@ -18,8 +18,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.item.Cost;
-import seedu.address.model.epiggy.item.Period;
+import seedu.address.model.Expense.Cost;
+import seedu.address.model.Expense.Period;
 
 
 /**

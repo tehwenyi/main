@@ -21,11 +21,9 @@ import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Expense;
+import seedu.address.model.Expense.Expense;
 import seedu.address.model.epiggy.Goal;
-
 import seedu.address.model.epiggy.Savings;
-import seedu.address.model.person.Person;
 import seedu.address.testutil.epiggy.GoalBuilder;
 import seedu.address.testutil.epiggy.SavingsBuilder;
 
@@ -115,11 +113,6 @@ public class ViewGoalCommandTest {
         }
 
         @Override
-        public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void addExpense(Expense expense) {
             throw new AssertionError("This method should not be called.");
         }
@@ -190,27 +183,7 @@ public class ViewGoalCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setPerson(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setCurrentBudget(Budget editedBudget) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -221,11 +194,6 @@ public class ViewGoalCommandTest {
 
         @Override
         public ObservableList<Expense> getFilteredExpenseList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -265,22 +233,12 @@ public class ViewGoalCommandTest {
         }
 
         @Override
-        public ReadOnlyProperty<Person> selectedPersonProperty() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setExpense(Expense target, Expense editedExpense) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public Expense getSelectedExpense() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setSelectedPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
     }

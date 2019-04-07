@@ -11,7 +11,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.epiggy.Expense;
+import seedu.address.model.Expense.Expense;
 
 /**
  * Panel containing the list of expenses.

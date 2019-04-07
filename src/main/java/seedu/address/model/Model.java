@@ -11,18 +11,14 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Expense;
+import seedu.address.model.Expense.Expense;
 import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.Savings;
-import seedu.address.model.person.Person;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-
     /** {@code Predicate} that always evaluate to true */
     Predicate<Budget> PREDICATE_SHOW_ALL_BUDGETS = unused -> true;
 
@@ -68,25 +64,8 @@ public interface Model {
     ReadOnlyEPiggy getEPiggy();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
-     */
-    boolean hasPerson(Person person);
-
-    /**
-     * Deletes the given person.
-     * The person must exist in the address book.
-     */
-    void deletePerson(Person target);
-
-    /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
-     */
-    void addPerson(Person person);
-
-    /**
      * Adds the given expense.
-     * {@code person} must not already exist in the address book.
+     * {@code } must not already exist in the address book.
      */
     void addExpense(Expense expense);
 
@@ -128,7 +107,7 @@ public interface Model {
      * Updates the filter of the filtered expense list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredExpensesList(Predicate<seedu.address.model.epiggy.Expense> predicate);
+    void updateFilteredExpensesList(Predicate<Expense> predicate);
 
     /**
      * Gets the current budget list.
@@ -163,31 +142,15 @@ public interface Model {
     void setGoal(Goal goal);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
-     */
-    void setPerson(Person target, Person editedPerson);
-
-    /**
      * Replaces the current budget with {@code editedBudget}.
      */
     void setCurrentBudget(Budget editedBudget);
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered expense list */
     ObservableList<Expense> getFilteredExpenseList();
 
     /** Returns an unmodifiable view of the filtered budget list */
     ObservableList<Budget> getFilteredBudgetList();
-
-    /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
      * Updates the filter of the filtered budget list to filter by the given {@code predicate}.
@@ -221,27 +184,16 @@ public interface Model {
     void commitEPiggy();
 
     /**
-     * Selected person in the filtered person list.
-     * null if no person is selected.
-     */
-    ReadOnlyProperty<Person> selectedPersonProperty();
-
-    /**
-     * Selected person in the filtered person list.
-     * null if no person is selected.
+     * Selected expense in the filtered expense list.
+     * null if no expense is selected.
      */
     ReadOnlyProperty<Expense> selectedExpenseProperty();
 
     /**
-     * Returns the selected person in the filtered person list.
-     * null if no person is selected.
+     * Returns the selected expense in the filtered expense list.
+     * null if no expense is selected.
      */
     Expense getSelectedExpense();
-
-    /**
-     * Sets the selected person in the filtered person list.
-     */
-    void setSelectedPerson(Person person);
 
     /**
      * Sets the selected expense in the filtered expense list.

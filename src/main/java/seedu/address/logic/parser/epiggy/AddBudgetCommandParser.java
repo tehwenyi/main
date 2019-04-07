@@ -16,8 +16,8 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.item.Cost;
-import seedu.address.model.epiggy.item.Period;
+import seedu.address.model.Expense.Cost;
+import seedu.address.model.Expense.Period;
 
 /**
  * Parses input arguments and creates a new AddCommand object

@@ -26,7 +26,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.Model;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Expense;
+import seedu.address.model.Expense.Expense;
 
 /**
  * Report Window. Provides report and chart to the user.

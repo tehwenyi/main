@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import seedu.address.model.epiggy.item.Cost;
-import seedu.address.model.epiggy.item.Period;
+import seedu.address.model.Expense.Cost;
+import seedu.address.model.Expense.Period;
 
 /**
  * Represents a Budget in the expense book.

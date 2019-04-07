@@ -7,7 +7,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.epiggy.Expense;
+import seedu.address.model.Expense.Expense;
 
 /**
  * Adds a person to the toAdd book.

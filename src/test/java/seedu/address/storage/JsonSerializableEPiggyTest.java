@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
+import static seedu.address.testutil.epiggy.TypicalExpenses.getTypicalEPiggy;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,7 +14,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.EPiggy;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.storage.epiggy.JsonSerializableEPiggy;
 
 @Ignore
 public class JsonSerializableEPiggyTest {
@@ -31,7 +32,7 @@ public class JsonSerializableEPiggyTest {
         JsonSerializableEPiggy dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableEPiggy.class).get();
         EPiggy ePiggyFromFile = dataFromFile.toModelType();
-        EPiggy typicalPersonsEPiggy = TypicalPersons.getTypicalEPiggy();
+        EPiggy typicalPersonsEPiggy = getTypicalEPiggy();
         assertEquals(ePiggyFromFile, typicalPersonsEPiggy);
     }
 
@@ -43,13 +44,13 @@ public class JsonSerializableEPiggyTest {
         dataFromFile.toModelType();
     }
 
-    @Test
-    public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
-        JsonSerializableEPiggy dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
-                JsonSerializableEPiggy.class).get();
-        thrown.expect(IllegalValueException.class);
-        thrown.expectMessage(JsonSerializableEPiggy.MESSAGE_DUPLICATE_PERSON);
-        dataFromFile.toModelType();
-    }
+    //    @Test
+    //    public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
+    //        JsonSerializableEPiggy dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
+    //                JsonSerializableEPiggy.class).get();
+    //        thrown.expect(IllegalValueException.class);
+    //        thrown.expectMessage(JsonSerializableEPiggy.MESSAGE_DUPLICATE_PERSON);
+    //        dataFromFile.toModelType();
+    //    }
 
 }

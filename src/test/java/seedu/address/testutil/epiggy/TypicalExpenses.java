@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.EPiggy;
-import seedu.address.model.epiggy.Expense;
+import seedu.address.model.Expense.Expense;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.

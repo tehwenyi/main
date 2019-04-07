@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX;
 
 import java.util.List;
 
@@ -9,8 +10,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Expense.Expense;
 import seedu.address.model.Model;
-import seedu.address.model.epiggy.Expense;
 
 /**
  * Delete an expense in ePiggy.
@@ -26,7 +27,6 @@ public class DeleteExpenseCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     private static final String MESSAGE_DELETE_EXPENSE_SUCCESS = "Deleted expense: %1$s";
-    private static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The index does not exist on the expense list.";
 
     private final Index targetIndex;
 
@@ -40,7 +40,7 @@ public class DeleteExpenseCommand extends Command {
         List<Expense> lastShownExpenseList = model.getFilteredExpenseList();
 
         if (targetIndex.getZeroBased() >= lastShownExpenseList.size()) {
-            throw new CommandException(MESSAGE_INDEX_OUT_OF_BOUNDS);
+            throw new CommandException(MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
         }
 
         Expense expenseToDelete = lastShownExpenseList.get(this.targetIndex.getZeroBased());

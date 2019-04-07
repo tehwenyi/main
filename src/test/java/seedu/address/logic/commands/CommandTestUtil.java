@@ -24,9 +24,8 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Expense;
-import seedu.address.model.epiggy.ExpenseContainsKeywordsPredicate;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.model.Expense.Expense;
+import seedu.address.model.Expense.ExpenseContainsKeywordsPredicate;
 import seedu.address.testutil.epiggy.EditBudgetDetailsBuilder;
 import seedu.address.testutil.epiggy.EditExpenseDescriptorBuilder;
 
@@ -98,10 +97,6 @@ public class CommandTestUtil {
 
     public static final EditBudgetCommand.EditBudgetDetails DESC_FIRSTEXTRA;
     public static final EditBudgetCommand.EditBudgetDetails DESC_SECONDEXTRA;
-
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
-
     static {
         DESC_BOWLING = new EditExpenseDescriptorBuilder().withName(VALID_NAME_BOWLING)
                 .withCost(VALID_COST_BOWLING).withDate(VALID_DATE_2018)
@@ -112,13 +107,6 @@ public class CommandTestUtil {
                 .withPeriod(VALID_PERIOD_FIRSTEXTRA).withDate(VALID_DATE_FIRSTEXTRA).build();
         DESC_SECONDEXTRA = new EditBudgetDetailsBuilder().withAmount(VALID_AMOUNT_SECONDEXTRA)
                 .withPeriod(VALID_PERIOD_SECONDEXTRA).withDate(VALID_DATE_SECONDEXTRA).build();
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-
     }
 
     /**

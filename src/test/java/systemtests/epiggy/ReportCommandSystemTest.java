@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.FORMAT_ERROR_MESSAGE;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import guitests.GuiRobot;
@@ -13,7 +14,7 @@ import seedu.address.logic.commands.epiggy.ReportCommand;
 import seedu.address.logic.parser.CliSyntax;
 import systemtests.EPiggySystemTest;
 
-
+@Ignore
 public class ReportCommandSystemTest extends EPiggySystemTest {
     private static final String ERROR_MESSAGE = "ATTENTION!!!! : On some computers, this test may fail when run on "
             + "non-headless mode as FxRobot#clickOn(Node, MouseButton...) clicks on the wrong location. We suspect "

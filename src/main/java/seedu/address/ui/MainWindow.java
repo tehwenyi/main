@@ -32,7 +32,6 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
     private ExpenseListPanel expenseListPanel;
     private SavingsPanel savingsPanel;
     private BudgetPanel budgetPanel;
@@ -121,7 +120,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(logic.selectedPersonProperty());
+        browserPanel = new BrowserPanel(logic.selectedExpenseProperty());
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
         expenseListPanel = new ExpenseListPanel(logic.getFilteredExpenseList(),

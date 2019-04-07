@@ -6,10 +6,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.EPiggy;
+import seedu.address.model.Expense.Expense;
 import seedu.address.model.ReadOnlyEPiggy;
-import seedu.address.model.epiggy.item.Cost;
-import seedu.address.model.epiggy.item.Item;
-import seedu.address.model.epiggy.item.Name;
+import seedu.address.model.Expense.Cost;
+import seedu.address.model.Expense.Item;
+import seedu.address.model.Expense.Name;
 import seedu.address.model.tag.Tag;
 
 /**

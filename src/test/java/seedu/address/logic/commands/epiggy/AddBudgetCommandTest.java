@@ -151,15 +151,13 @@ public class AddBudgetCommandTest {
 
     @Test
     public void execute_overlapWithLaterBudget_throwsCommandException() throws Exception {
-        Budget validBudget = new BudgetBuilder().build();
-
         Date todaysDate = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(todaysDate);
         calendar.add(Calendar.YEAR, 1);
         Budget futureBudget = new BudgetBuilder().withDate(calendar.getTime()).build();
         calendar.add(Calendar.DAY_OF_MONTH, -1);
-        Budget overlappingBudget = new BudgetBuilder().withDate(calendar.getTime()).withPeriod("30").build();
+        Budget overlappingBudget = new BudgetBuilder().withDate(calendar.getTime()).withPeriod("3").build();
 
         AddBudgetCommand addBudgetCommand = new AddBudgetCommand(overlappingBudget);
         ModelStubWithOldBudgetAndBudget modelStub = new ModelStubWithOldBudgetAndBudget(futureBudget);
@@ -167,6 +165,23 @@ public class AddBudgetCommandTest {
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
         addBudgetCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_middleBudget_success() throws Exception {
+        Date todaysDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(todaysDate);
+        calendar.add(Calendar.YEAR, 1);
+        Budget futureBudget = new BudgetBuilder().withDate(calendar.getTime()).build();
+        calendar.add(Calendar.DAY_OF_MONTH, -3);
+        Budget validBudget = new BudgetBuilder().withDate(calendar.getTime()).withPeriod("1").build();
+
+        ModelStubWithOldBudgetAndBudget modelStub = new ModelStubWithOldBudgetAndBudget(futureBudget);
+        CommandResult commandResult = new AddBudgetCommand(validBudget).execute(modelStub, commandHistory);
+
+        assertEquals(String.format(AddBudgetCommand.MESSAGE_SUCCESS, validBudget), commandResult.getFeedbackToUser());
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
@@ -568,6 +583,11 @@ public class AddBudgetCommandTest {
         }
 
         @Override
+        public void addBudget(int index, Budget toAdd) {
+            budgets.add(index, toAdd);
+        }
+
+        @Override
         public ObservableList<Budget> getFilteredBudgetList() {
             return FXCollections.observableArrayList(budgets);
         }
@@ -575,6 +595,11 @@ public class AddBudgetCommandTest {
         @Override
         public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
             return ePiggy.budgetsOverlap(startDate, endDate, earlierBudget);
+        }
+
+        @Override
+        public void commitEPiggy() {
+            // called by {@code AddCommand#execute()}
         }
     }
 }

@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_FIRSTEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_SECONDEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_FIRSTEXTRA;
 import static seedu.address.logic.commands.epiggy.EditBudgetCommand.createEditedBudget;
+import static seedu.address.testutil.TypicalBudgets.FIRST_EXTRA;
 import static seedu.address.testutil.TypicalBudgets.getTypicalEPiggy;
 
 import java.nio.file.Path;
@@ -152,6 +153,115 @@ public class EditBudgetCommandTest {
     }
 
     @Test
+    public void execute_currentAndFutureBudgetPresent_success() throws Exception {
+        Date todaysDate = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR, 2);
+        Budget futureBudget = new BudgetBuilder().withDate(cal.getTime()).build();
+
+        ModelStubWithCurrentBudgetAndAnotherBudget modelStub =
+                new ModelStubWithCurrentBudgetAndAnotherBudget(futureBudget);
+
+        EditBudgetDetails details = DESC_FIRSTEXTRA;
+        Budget budgetToEdit = new BudgetBuilder().build();
+        Budget editedBudget = createEditedBudget(budgetToEdit, details);
+        ArrayList<Budget> editedBudgetList = new ArrayList<Budget>();
+        editedBudgetList.add(futureBudget);
+        editedBudgetList.add(editedBudget);
+        CommandResult commandResult = new EditBudgetCommand(details).execute(modelStub, commandHistory);
+
+        assertEquals(String.format(EditBudgetCommand.MESSAGE_EDIT_BUDGET_SUCCESS, editedBudget),
+                commandResult.getFeedbackToUser());
+        assertEquals(editedBudgetList, modelStub.budgets);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+    }
+
+    @Test
+    public void execute_currentAndOldBudgetPresent_success() throws Exception {
+        Date todaysDate = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR, -2);
+        Budget oldBudget = new BudgetBuilder().withDate(cal.getTime()).build();
+
+        ModelStubWithCurrentBudgetAndAnotherBudget modelStub =
+                new ModelStubWithCurrentBudgetAndAnotherBudget(oldBudget);
+
+        EditBudgetDetails details = DESC_FIRSTEXTRA;
+        Budget budgetToEdit = new BudgetBuilder().build();
+        Budget editedBudget = createEditedBudget(budgetToEdit, details);
+        ArrayList<Budget> editedBudgetList = new ArrayList<Budget>();
+        editedBudgetList.add(editedBudget);
+        editedBudgetList.add(oldBudget);
+        CommandResult commandResult = new EditBudgetCommand(details).execute(modelStub, commandHistory);
+
+        assertEquals(String.format(EditBudgetCommand.MESSAGE_EDIT_BUDGET_SUCCESS, editedBudget),
+                commandResult.getFeedbackToUser());
+        assertEquals(editedBudgetList, modelStub.budgets);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+    }
+
+    @Test
+    public void execute_currentAndFutureBudgetPresent_overlappingBudgetFailure() throws Exception {
+        Date todaysDate = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.YEAR, 2);
+        Budget futureBudget = new BudgetBuilder().withDate(cal.getTime()).build();
+
+        ModelStubWithCurrentBudgetAndAnotherBudget modelStub =
+                new ModelStubWithCurrentBudgetAndAnotherBudget(futureBudget);
+
+        EditBudgetDetails details = new EditBudgetDetailsBuilder().withDate(cal.getTime()).build();
+        Budget budgetToEdit = new BudgetBuilder().build();
+        Budget editedBudget = createEditedBudget(budgetToEdit, details);
+        EditBudgetCommand editBudgetCommand = new EditBudgetCommand(details);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(AddBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
+        editBudgetCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_currentAndOldBudgetPresent_overlappingBudgetFailure() throws Exception {
+        ModelStubWithCurrentBudgetAndAnotherBudget modelStub =
+                new ModelStubWithCurrentBudgetAndAnotherBudget(FIRST_EXTRA);
+
+        EditBudgetDetails details = DESC_FIRSTEXTRA;
+        Budget budgetToEdit = new BudgetBuilder().build();
+        Budget editedBudget = createEditedBudget(budgetToEdit, details);
+        EditBudgetCommand editBudgetCommand = new EditBudgetCommand(details);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(AddBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
+        editBudgetCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void isAnyFieldUpdated() {
+        // no fields edited -> return false
+        EditBudgetDetails details = new EditBudgetDetails();
+        assertFalse(details.isAnyFieldEdited());
+
+        // amount edited
+        details.setAmount(new Cost(10000));
+        assertTrue(details.isAnyFieldEdited());
+
+        // period edited
+        EditBudgetDetails periodDetailsChange = new EditBudgetDetails();
+        periodDetailsChange.setPeriod(new Period(999));
+        assertTrue(periodDetailsChange.isAnyFieldEdited());
+
+        // date edited
+        EditBudgetDetails dateDetailsChange = new EditBudgetDetails();
+        dateDetailsChange.setStartDate(new Date());
+        assertTrue(dateDetailsChange.isAnyFieldEdited());
+
+        // all fields edited
+        details.setPeriod(new Period(999));
+        details.setStartDate(new Date());
+        assertTrue(details.isAnyFieldEdited());
+    }
+
+    @Test
     public void equals() {
         final EditBudgetCommand standardCommand = new EditBudgetCommand(DESC_FIRSTEXTRA);
 
@@ -161,7 +271,8 @@ public class EditBudgetCommandTest {
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
+        EditBudgetCommand copyOfStandardCommand = standardCommand;
+        assertTrue(standardCommand.equals(copyOfStandardCommand));
 
         // null -> returns false
         assertFalse(standardCommand.equals(null));
@@ -447,6 +558,51 @@ public class EditBudgetCommandTest {
         @Override
         public ObservableList<Budget> getFilteredBudgetList() {
             return FXCollections.observableArrayList(budgets);
+        }
+    }
+
+    /**
+     * A Model stub that contains a single person.
+     */
+    private class ModelStubWithCurrentBudgetAndAnotherBudget extends ModelStub {
+        final ArrayList<Budget> budgets = new ArrayList<>();
+        private Date todaysDate = new Date();
+        private int currentBudgetIndex = 0;
+
+        ModelStubWithCurrentBudgetAndAnotherBudget(Budget anotherBudget) {
+            Budget currentBudget = new BudgetBuilder().withDate(todaysDate).build();
+            budgets.add(currentBudget);
+            if (todaysDate.after(anotherBudget.getStartDate())) {
+                // old budget
+                budgets.add(anotherBudget);
+            } else {
+                // future budget
+                budgets.add(0, anotherBudget);
+                currentBudgetIndex = 1;
+            }
+        }
+
+        @Override
+        public int getCurrentBudgetIndex() {
+            return currentBudgetIndex;
+        }
+
+        @Override
+        public void setCurrentBudget(Budget editedBudget) {
+            budgets.set(currentBudgetIndex, editedBudget);
+        }
+
+        @Override
+        public void updateFilteredBudgetList(Predicate<Budget> predicate) {
+        }
+
+        @Override
+        public ObservableList<Budget> getFilteredBudgetList() {
+            return FXCollections.observableArrayList(budgets);
+        }
+
+        @Override
+        public void commitEPiggy() {
         }
     }
 }

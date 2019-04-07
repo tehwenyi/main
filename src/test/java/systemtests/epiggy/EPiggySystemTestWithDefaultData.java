@@ -29,6 +29,7 @@ import seedu.address.EpiggyTestApp;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.testutil.epiggy.TypicalReports;
@@ -159,6 +160,17 @@ public abstract class EPiggySystemTestWithDefaultData {
     protected void deleteAllPersons() {
         executeCommand(ClearCommand.COMMAND_WORD);
         assertEquals(0, getModel().getEPiggy().getPersonList().size());
+    }
+
+    /**
+     * Deletes all persons in the address book.
+     */
+    protected void deleteAllBudgets() {
+        int budgetListSize = getModel().getBudgetList().size();
+        for (int i = 0; i < budgetListSize; i++) {
+            executeCommand(DeleteBudgetCommand.COMMAND_WORD + " 1");
+        }
+        assertEquals(0, getModel().getEPiggy().getBudgetList().size());
     }
 
     /**

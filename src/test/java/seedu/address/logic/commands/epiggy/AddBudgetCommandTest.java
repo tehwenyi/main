@@ -150,6 +150,26 @@ public class AddBudgetCommandTest {
     }
 
     @Test
+    public void execute_overlapWithLaterBudget_throwsCommandException() throws Exception {
+        Budget validBudget = new BudgetBuilder().build();
+
+        Date todaysDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(todaysDate);
+        calendar.add(Calendar.YEAR, 1);
+        Budget futureBudget = new BudgetBuilder().withDate(calendar.getTime()).build();
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        Budget overlappingBudget = new BudgetBuilder().withDate(calendar.getTime()).withPeriod("30").build();
+
+        AddBudgetCommand addBudgetCommand = new AddBudgetCommand(overlappingBudget);
+        ModelStubWithOldBudgetAndBudget modelStub = new ModelStubWithOldBudgetAndBudget(futureBudget);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(AddBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
+        addBudgetCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
     public void execute_budgetTooOld_throwsCommandException() throws Exception {
         Budget validBudget = new BudgetBuilder().withDate("01/01/2010").build();
         ModelStubWithMaximumNumberOfBudgets modelStub = new ModelStubWithMaximumNumberOfBudgets();
@@ -526,6 +546,35 @@ public class AddBudgetCommandTest {
         @Override
         public void commitEPiggy() {
             // called by {@code AddCommand#execute()}
+        }
+    }
+
+    /**
+     * A Model stub that contains a single budget.
+     */
+    private class ModelStubWithOldBudgetAndBudget extends ModelStub {
+        final ArrayList<Budget> budgets = new ArrayList<>();
+        private EPiggy ePiggy = new EPiggy();
+
+        ModelStubWithOldBudgetAndBudget(Budget futureBudget) {
+            // initialise initial present old budget
+            Date todaysDate = new Date();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(todaysDate);
+            cal.add(Calendar.YEAR, -2);
+            Budget oldBudget = new BudgetBuilder().withDate(cal.getTime()).build();
+            budgets.add(futureBudget);
+            budgets.add(oldBudget);
+        }
+
+        @Override
+        public ObservableList<Budget> getFilteredBudgetList() {
+            return FXCollections.observableArrayList(budgets);
+        }
+
+        @Override
+        public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
+            return ePiggy.budgetsOverlap(startDate, endDate, earlierBudget);
         }
     }
 }

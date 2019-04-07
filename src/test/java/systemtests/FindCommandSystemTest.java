@@ -22,7 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
 @Ignore
-public class FindCommandSystemTest extends EPiggySystemTestOld {
+public class FindCommandSystemTest extends EPiggySystemTest {
 
     @Test
     public void find() {
@@ -163,7 +163,7 @@ public class FindCommandSystemTest extends EPiggySystemTestOld {
      * {@code EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * Also verifies that the status bar remains unchanged, and the command box has the default style class, and the
      * selected card updated accordingly, depending on {@code cardStatus}.
-     * @see EPiggySystemTestOld#assertApplicationDisplaysExpected(String, String, Model)
+     * @see EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command, Model expectedModel) {
         String expectedResultMessage = String.format(
@@ -182,7 +182,7 @@ public class FindCommandSystemTest extends EPiggySystemTestOld {
      * {@code EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * Also verifies that the browser url, selected card and status bar remain unchanged, and the command box has the
      * error style.
-     * @see EPiggySystemTestOld#assertApplicationDisplaysExpected(String, String, Model)
+     * @see EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();

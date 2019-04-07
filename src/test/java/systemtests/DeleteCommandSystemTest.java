@@ -22,7 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 @Ignore
-public class DeleteCommandSystemTest extends EPiggySystemTestOld {
+public class DeleteCommandSystemTest extends EPiggySystemTest {
 
     private static final String MESSAGE_INVALID_DELETE_COMMAND_FORMAT =
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
@@ -146,7 +146,7 @@ public class DeleteCommandSystemTest extends EPiggySystemTestOld {
      * 5. Asserts that the command box has the default style class.<br>
      * Verifications 1 and 2 are performed by
      * {@code EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
-     * @see EPiggySystemTestOld#assertApplicationDisplaysExpected(String, String, Model)
+     * @see EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         assertCommandSuccess(command, expectedModel, expectedResultMessage, null);
@@ -183,7 +183,7 @@ public class DeleteCommandSystemTest extends EPiggySystemTestOld {
      * 4. Asserts that the command box has the error style.<br>
      * Verifications 1 and 2 are performed by
      * {@code EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see EPiggySystemTestOld#assertApplicationDisplaysExpected(String, String, Model)
+     * @see EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();

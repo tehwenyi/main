@@ -17,11 +17,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.expense.Expense;
-import seedu.address.model.expense.Item;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.Savings;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.Item;
 
 @Ignore
 public class EPiggyTest {

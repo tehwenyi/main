@@ -27,11 +27,11 @@ import org.junit.Test;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.expense.Expense;
-import seedu.address.model.expense.ExpenseContainsKeywordsPredicate;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.ExpenseContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindExpenseCommand}.

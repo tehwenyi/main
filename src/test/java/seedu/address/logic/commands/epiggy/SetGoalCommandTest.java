@@ -22,10 +22,9 @@ import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.expense.Expense;
 import seedu.address.model.epiggy.Goal;
-
 import seedu.address.model.epiggy.Savings;
+import seedu.address.model.expense.Expense;
 import seedu.address.testutil.epiggy.GoalBuilder;
 
 public class SetGoalCommandTest {

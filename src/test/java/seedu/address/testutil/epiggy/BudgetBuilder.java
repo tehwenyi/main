@@ -3,8 +3,8 @@ package seedu.address.testutil.epiggy;
 import java.util.Date;
 
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.Expense.Cost;
-import seedu.address.model.Expense.Period;
+import seedu.address.model.expense.Cost;
+import seedu.address.model.expense.Period;
 
 /**
  * A utility class to help with building Budget objects.

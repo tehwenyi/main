@@ -1,4 +1,4 @@
-package seedu.address.model.Expense;
+package seedu.address.model.expense;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
@@ -17,7 +17,7 @@ import seedu.address.logic.parser.ArgumentMultimap;
 //@@author rahulb99
 /**
  * TODO: Refactor
- * Tests that a {@code Expense}'s {@code Name, Cost, Category, Date} matches any of the keywords given.
+ * Tests that a {@code expense}'s {@code Name, Cost, Category, Date} matches any of the keywords given.
  */
 public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
 
@@ -37,7 +37,7 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
      */
     @Override
     public boolean test(Expense expense) {
-        assert expense != null : "Expense should not be null.";
+        assert expense != null : "expense should not be null.";
 
         String nameKeywords = keywords.getValue(PREFIX_NAME).orElse("");
         List<String> tagKeywords = keywords.getAllValues(PREFIX_TAG);

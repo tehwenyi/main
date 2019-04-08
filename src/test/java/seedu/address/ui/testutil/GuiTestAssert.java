@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import guitests.guihandles.ExpenseCardHandle;
 import guitests.guihandles.ExpenseListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
-import seedu.address.model.Expense.Expense;
+import seedu.address.model.expense.Expense;
 
 /**
  * A set of assertion methods useful for writing GUI tests.

@@ -9,11 +9,11 @@ import java.util.Set;
 
 import seedu.address.logic.commands.epiggy.AddExpenseCommand;
 import seedu.address.logic.commands.epiggy.EditExpenseCommand.EditExpenseDescriptor;
-import seedu.address.model.Expense.Expense;
+import seedu.address.model.expense.Expense;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class for Expense.
+ * A utility class for expense.
  */
 public class ExpenseUtil {
 

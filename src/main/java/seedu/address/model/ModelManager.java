@@ -16,12 +16,12 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.Expense.Expense;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.epiggy.exceptions.ExpenseNotFoundException;
+import seedu.address.model.expense.Expense;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -184,7 +184,7 @@ public class ModelManager implements Model {
     //=========== Filtered Person List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Expense} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code expense} backed by the internal list of
      * {@code versionedEPiggy}
      */
     @Override
@@ -283,7 +283,7 @@ public class ModelManager implements Model {
     /**
      * Ensures {@code selectedExpense} is a valid person in {@code filteredPersons}.
      */
-    //    private void ensureSelectedPersonIsValid(ListChangeListener.Change<? extends Expense> change) {
+    //    private void ensureSelectedPersonIsValid(ListChangeListener.Change<? extends expense> change) {
     //        while (change.next()) {
     //            if (selectedExpense.getValue() == null) {
     //                // null is always a valid selected person, so we do not need to check that it is valid anymore.

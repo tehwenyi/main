@@ -17,8 +17,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.Expense.Expense;
-import seedu.address.model.Expense.Item;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.Item;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.Savings;
@@ -52,10 +52,10 @@ public class EPiggyTest {
     //    @Test
     //    public void resetData_withDuplicateExpenses_throwsDuplicateExpensesException() {
     //        // Two persons with the same identity fields
-    //        Expense editedAlice = new ExpensesBuilder(BOWLING)
+    //        expense editedAlice = new ExpensesBuilder(BOWLING)
     //        .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
     //                .build();
-    //        List<Expense> newExpensess = Arrays.asList(BOWLING, editedAlice);
+    //        List<expense> newExpensess = Arrays.asList(BOWLING, editedAlice);
     //        AddressBookStub newData = new AddressBookStub(newExpensess);
     //
     //        thrown.expect(DuplicateExpensesException.class);

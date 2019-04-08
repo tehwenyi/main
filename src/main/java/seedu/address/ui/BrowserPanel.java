@@ -13,7 +13,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.Expense.Expense;
+import seedu.address.model.expense.Expense;
 
 /**
  * The Browser Panel of the App.

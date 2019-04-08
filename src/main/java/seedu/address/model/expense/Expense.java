@@ -1,10 +1,10 @@
-package seedu.address.model.Expense;
+package seedu.address.model.expense;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Represents an Expense in the expense book.
+ * Represents an expense in the expense book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Expense {

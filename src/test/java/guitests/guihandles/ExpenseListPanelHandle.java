@@ -6,7 +6,7 @@ import java.util.Set;
 
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
-import seedu.address.model.Expense.Expense;
+import seedu.address.model.expense.Expense;
 
 /**
  * Provides a handle for {@code ExpenseListPanel} containing the list of {@code ExpenseCard}.
@@ -32,7 +32,7 @@ public class ExpenseListPanelHandle extends NodeHandle<ListView<Expense>> {
         List<Expense> selectedExpenseList = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedExpenseList.size() != 1) {
-            throw new AssertionError("Expense list size expected 1.");
+            throw new AssertionError("expense list size expected 1.");
         }
 
         return getAllCardNodes().stream()
@@ -67,7 +67,7 @@ public class ExpenseListPanelHandle extends NodeHandle<ListView<Expense>> {
      */
     public void navigateToCard(Expense person) {
         if (!getRootNode().getItems().contains(person)) {
-            throw new IllegalArgumentException("Expense does not exist.");
+            throw new IllegalArgumentException("expense does not exist.");
         }
 
         guiRobot.interact(() -> {

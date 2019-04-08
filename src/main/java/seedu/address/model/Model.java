@@ -11,9 +11,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.Expense.Expense;
 import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.Savings;
+import seedu.address.model.expense.Expense;
 
 /**
  * The API of the Model component.
@@ -115,7 +115,7 @@ public interface Model {
     ObservableList<Budget> getBudgetList();
 
     /**
-     * Gets the Expense list.
+     * Gets the expense list.
      */
     ObservableList<Expense> getExpenseList();
 

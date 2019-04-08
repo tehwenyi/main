@@ -1,8 +1,8 @@
-package seedu.address.model.Expense.comparators;
+package seedu.address.model.expense.comparators;
 
 import java.util.Comparator;
 
-import seedu.address.model.Expense.Expense;
+import seedu.address.model.expense.Expense;
 
 /**
  * Comparator function for sorting Expenses by name in lexicographical order.

@@ -1,8 +1,8 @@
 package seedu.address.testutil.epiggy;
 
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.Expense.Cost;
-import seedu.address.model.Expense.Name;
+import seedu.address.model.expense.Cost;
+import seedu.address.model.expense.Name;
 
 /**
  * A utility class to help with building Goal objects.

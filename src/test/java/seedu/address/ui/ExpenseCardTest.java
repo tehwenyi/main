@@ -9,7 +9,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import guitests.guihandles.ExpenseCardHandle;
-import seedu.address.model.Expense.Expense;
+import seedu.address.model.expense.Expense;
 import seedu.address.testutil.epiggy.ExpensesBuilder;
 
 public class ExpenseCardTest extends GuiUnitTest {

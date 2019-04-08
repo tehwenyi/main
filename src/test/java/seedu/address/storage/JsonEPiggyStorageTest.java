@@ -22,10 +22,10 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.EPiggy;
-import seedu.address.model.Expense.Cost;
-import seedu.address.model.Expense.Expense;
-import seedu.address.model.Expense.Item;
-import seedu.address.model.Expense.Name;
+import seedu.address.model.expense.Cost;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.Item;
+import seedu.address.model.expense.Name;
 import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.tag.Tag;
 import seedu.address.storage.epiggy.JsonEPiggyStorage;

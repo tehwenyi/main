@@ -24,8 +24,8 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.Expense.Expense;
-import seedu.address.model.Expense.ExpenseContainsKeywordsPredicate;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.ExpenseContainsKeywordsPredicate;
 import seedu.address.testutil.epiggy.EditBudgetDetailsBuilder;
 import seedu.address.testutil.epiggy.EditExpenseDescriptorBuilder;
 

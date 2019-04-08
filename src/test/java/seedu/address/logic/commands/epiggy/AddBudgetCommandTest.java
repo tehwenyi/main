@@ -34,7 +34,7 @@ import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.Expense.Expense;
+import seedu.address.model.expense.Expense;
 import seedu.address.model.epiggy.Goal;
 
 import seedu.address.model.epiggy.Savings;

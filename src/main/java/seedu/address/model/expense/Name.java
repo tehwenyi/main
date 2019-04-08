@@ -1,4 +1,4 @@
-package seedu.address.model.Expense;
+package seedu.address.model.expense;
 
 /**
  * Represents an Item's name in the expense book.

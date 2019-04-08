@@ -1,4 +1,4 @@
-package seedu.address.model.Expense;
+package seedu.address.model.expense;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -17,10 +17,10 @@ import seedu.address.model.epiggy.exceptions.ExpenseNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A expense is considered unique by comparing using {@code Expense#isSamePerson(Expense)}. As such,
- * adding and updating of persons uses Expense#isSamePerson(Expense) for equality so as to
+ * A expense is considered unique by comparing using {@code expense#isSamePerson(expense)}. As such,
+ * adding and updating of persons uses expense#isSamePerson(expense) for equality so as to
  * ensure that the expense being added or updated is
- * unique in terms of identity in the ExpenseList. However, the removal of a expense uses Expense#equals(Object) so
+ * unique in terms of identity in the ExpenseList. However, the removal of a expense uses expense#equals(Object) so
  * as to ensure that the expense with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -120,7 +120,7 @@ public class ExpenseList implements Iterable<Expense> {
 
     /**
      * Returns list of expenses sorted by date
-     * @return SortedList of Expense
+     * @return SortedList of expense
      */
     public SortedList<Expense> sortByDate() {
         return internalList.sorted(new Comparator<Expense>() {

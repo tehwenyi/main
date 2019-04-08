@@ -4,15 +4,15 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.Expense.Cost;
-import seedu.address.model.Expense.Expense;
-import seedu.address.model.Expense.Item;
-import seedu.address.model.Expense.Name;
+import seedu.address.model.expense.Cost;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.Item;
+import seedu.address.model.expense.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Expense objects.
+ * A utility class to help with building expense objects.
  */
 public class ExpensesBuilder {
 
@@ -44,7 +44,7 @@ public class ExpensesBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Expense} that we are building.
+     * Sets the {@code Name} of the {@code expense} that we are building.
      */
     public ExpensesBuilder withName(String name) {
         this.name = new Name(name);
@@ -52,7 +52,7 @@ public class ExpensesBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Expense} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code expense} that we are building.
      */
     public ExpensesBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
@@ -60,7 +60,7 @@ public class ExpensesBuilder {
     }
 
     /**
-     * Sets the {@code cost} of the {@code Expense} that we are building.
+     * Sets the {@code cost} of the {@code expense} that we are building.
      */
     public ExpensesBuilder withCost(String cost) {
         this.cost = new Cost(cost);
@@ -68,7 +68,7 @@ public class ExpensesBuilder {
     }
 
     /**
-     * Sets the {@code date} of the {@code Expense} that we are building.
+     * Sets the {@code date} of the {@code expense} that we are building.
      */
     public ExpensesBuilder withDate(String date) {
         if (date.equals("")) {
@@ -79,8 +79,8 @@ public class ExpensesBuilder {
     }
 
     /**
-     * Builds an {@code Expense} object with name, date, cost and tags
-     * @return Expense object
+     * Builds an {@code expense} object with name, date, cost and tags
+     * @return expense object
      */
     public Expense build() {
         Item item = new Item(name, cost, tags);

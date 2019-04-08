@@ -17,8 +17,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.Expense.Cost;
-import seedu.address.model.Expense.Period;
+import seedu.address.model.expense.Cost;
+import seedu.address.model.expense.Period;
 import seedu.address.testutil.Assert;
 import seedu.address.testutil.epiggy.BudgetBuilder;
 

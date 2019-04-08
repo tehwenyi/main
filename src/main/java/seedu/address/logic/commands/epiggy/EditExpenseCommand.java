@@ -21,12 +21,12 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.expense.Cost;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.Item;
+import seedu.address.model.expense.Name;
 import seedu.address.model.Model;
 import seedu.address.model.epiggy.Allowance;
-import seedu.address.model.Expense.Expense;
-import seedu.address.model.Expense.Cost;
-import seedu.address.model.Expense.Item;
-import seedu.address.model.Expense.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -49,7 +49,7 @@ public class EditExpenseCommand extends Command {
             + PREFIX_COST + "5 "
             + PREFIX_TAG + "food";
 
-    public static final String MESSAGE_EDIT_EXPENSE_SUCCESS = "Edited Expense: %1$s";
+    public static final String MESSAGE_EDIT_EXPENSE_SUCCESS = "Edited expense: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final Index index;
@@ -86,7 +86,7 @@ public class EditExpenseCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Expense} with the details of {@code expenseToEdit}
+     * Creates and returns a {@code expense} with the details of {@code expenseToEdit}
      * edited with {@code editExpenseDescriptor}.
      */
     private static Expense createEditedExpense(Expense expenseToEdit, EditExpenseDescriptor editExpenseDescriptor) {

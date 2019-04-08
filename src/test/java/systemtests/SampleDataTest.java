@@ -10,7 +10,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.address.model.EPiggy;
-import seedu.address.model.Expense.Expense;
+import seedu.address.model.expense.Expense;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 

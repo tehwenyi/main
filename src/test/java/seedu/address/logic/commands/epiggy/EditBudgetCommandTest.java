@@ -41,11 +41,11 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.Expense.Expense;
+import seedu.address.model.expense.Expense;
 import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.Savings;
-import seedu.address.model.Expense.Cost;
-import seedu.address.model.Expense.Period;
+import seedu.address.model.expense.Cost;
+import seedu.address.model.expense.Period;
 import seedu.address.testutil.epiggy.BudgetBuilder;
 import seedu.address.testutil.epiggy.EditBudgetDetailsBuilder;
 

@@ -14,15 +14,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.util.InvalidationListenerManager;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.ExpenseList;
+import seedu.address.model.expense.Item;
+import seedu.address.model.expense.Period;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.Expense.Expense;
-import seedu.address.model.Expense.ExpenseList;
 import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.Savings;
 import seedu.address.model.epiggy.UniqueBudgetList;
-import seedu.address.model.Expense.Item;
-import seedu.address.model.Expense.Period;
 
 /**
  * Wraps all data at the address-book level
@@ -185,7 +185,7 @@ public class EPiggy implements ReadOnlyEPiggy {
 
     /**
      * Updates the remaining amount and days of the budget.
-     * Allowances in the Expense list does not affect the budget.
+     * Allowances in the expense list does not affect the budget.
      * @param budget to be updated.
      * @return updated budget.
      */

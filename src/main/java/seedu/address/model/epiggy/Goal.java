@@ -1,7 +1,7 @@
 package seedu.address.model.epiggy;
 
-import seedu.address.model.Expense.Cost;
-import seedu.address.model.Expense.Name;
+import seedu.address.model.expense.Cost;
+import seedu.address.model.expense.Name;
 
 /**
  * Represents a Goal in the expense book.

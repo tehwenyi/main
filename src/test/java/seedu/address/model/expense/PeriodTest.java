@@ -1,4 +1,4 @@
-package seedu.address.model.Expense;
+package seedu.address.model.expense;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

@@ -24,12 +24,12 @@ public class CommandBox extends UiPart<Region> {
     private final List<String> history;
     private ListElementPointer historySnapshot;
 
-    private String[] keywords = { "addExpense n/ $/ t/ d/", "deleteExpense ", "editExpense",
-        "report d/", "list ", "help ", "edit ", "search ", "sort ", "exit", "view ",
-        "editBudget $/ p/ d/", "percentage", "addBudget $/ p/ d/",
-        "addAllowance $/", "deleteBudget ", "setGoal n/ $/",
-        "viewGoal", "viewSavings ", "sortExpense n/",
-        "findExpense n/ t/ d/ $/"};
+    private String[] commandArr = {"addExpense n/ $/ t/ d/", "deleteExpense ", "editExpense",
+            "report d/", "list ", "help ", "edit ", "search ", "sortExpense $/ ", "exit",
+            "editBudget $/ p/ d/", "percentage", "addBudget $/ p/ d/",
+            "addAllowance n/ $/", "deleteBudget ", "setGoal n/ $/",
+            "viewGoal", "viewSavings ", "sortExpense n/",
+            "findExpense n/ t/ d/ $/"};
 
     @FXML
     private TextField commandTextField;
@@ -46,26 +46,67 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Find set of similar prefix keywords.
      *
-     * @param partOfString user enters prefix
-     * @param strings      keywords checklist
-     * @return set of same prefix keywords.
+     * @param stringTryToMatch User enters prefix
+     * @param commandInArray   Command checklist
+     * @return Set of same prefix commands.
      */
-    private static String[] findString(String partOfString, String[] strings) {
+    private static String[] findString(String stringTryToMatch, String[] commandInArray) {
 
-        if (partOfString.length() == 0) {
+        if (stringTryToMatch.length() == 0) {
             // partOfString is null, return empty array
             return new String[0];
         }
-        ArrayList<String> result = new ArrayList<>();
+        ArrayList<String> resultArr = new ArrayList<>();
         // for each elements in strings, compare with part of the string.
-        for (int i = 0; i < strings.length; i++) {
-            if (partOfString.length() > strings[i].length()) {
+        for (int i = 0; i < commandInArray.length; i++) {
+            if (stringTryToMatch.length() > commandInArray[i].length()) {
+                // do nothing if the length of user input string longer than keyword.
                 continue;
-            } else if (partOfString.equals(strings[i].substring(0, partOfString.trim().length()))) {
-                result.add(strings[i]);
+            } else if (stringTryToMatch.equals(commandInArray[i].substring(0, stringTryToMatch.trim().length()))) {
+                resultArr.add(commandInArray[i]);
             }
         }
-        return result.toArray(new String[result.size()]);
+        //TODO: this part is for 2101 demo, remove it after demo
+        switch (stringTryToMatch) {
+        case "1":
+            resultArr.add("addAllowance n/From Mom $/300");
+            break;
+        case "2":
+            resultArr.add("setGoal n/Apple Watch $/600");
+            break;
+        case "3":
+            resultArr.add("addBudget $/200 p/30 d/8/4/2019");
+            break;
+        case "4":
+            resultArr.add("addExpense n/Chicken Rice $/4 t/Lunch");
+            break;
+        case "5":
+            resultArr.add("addExpense n/Roti Prata $/5 t/TeaBreak");
+            break;
+        case "6":
+            resultArr.add("addExpense n/Beef Pho $/6 t/Dinner");
+            break;
+        case "7":
+            resultArr.add("addExpense n/Gift $/180 t/gf");
+            break;
+        case "8":
+            resultArr.add("findExpense n/pho");
+            break;
+        case "9":
+            resultArr.add("addExpense n/Pho $/6");
+            break;
+        case "10":
+            resultArr.add("sortExpense $/");
+            break;
+        case "11":
+            resultArr.add("report");
+            break;
+        case "12":
+            resultArr.add("addAllowance n/new life $/600");
+            break;
+        }
+
+        return resultArr.toArray(new String[resultArr.size()]);
     }
 
     /**
@@ -98,23 +139,27 @@ public class CommandBox extends UiPart<Region> {
 
     /**
      * autocomplete text.
+     * Compare user input with the commandArr in the commands list.
+     * commandBox shows found command
      */
     private void autoCompleteText() {
         String[] inputString = commandTextField.getText().split(" "); //split with white space
         String partOfString = inputString[inputString.length - 1]; // get the last element of input string
-        String[] results = findString(partOfString, keywords);
+        String[] results = findString(partOfString, commandArr);
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < inputString.length - 1; i++) {
             /* group user inputs */
             stringBuilder.append(inputString[i].trim());
             stringBuilder.append(" ");
         }
+        // updates user + found keyword
         if (results.length == 0) {
             /* if result is null, nothing match */
             stringBuilder.append(inputString[inputString.length - 1]); // adds back last element of input string
         } else {
+            // append match keyword to user input
             if (tabCount >= results.length) {
-                tabCount = 0; // reset tabCount when tabCount bigger than match keywords number
+                tabCount = 0; // reset tabCount when tabCount bigger than the number of match commandArr
                 stringBuilder.append(results[tabCount]); // adds found keyword
             } else {
                 stringBuilder.append(results[tabCount]); // adds found keyword
@@ -125,6 +170,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.positionCaret(stringBuilder.length()); // set caret after the new text
         tabCount++;
     }
+
     /**
      * Updates the text field with the previous input in {@code historySnapshot},
      * if there exists a previous input in {@code historySnapshot}

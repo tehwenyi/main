@@ -17,4 +17,5 @@ public class Messages {
 
     public static final String FORMAT_ERROR_MESSAGE = "Error: Incorrect date format. \nCorrect data format: dd/mm/yyyy";
 
+    public static final String MESSAGE_INVALID_DATE = "Date format is invalid. Date format should be dd/mm/yyyy.";
 }

@@ -22,13 +22,13 @@
     </columnConstraints>
     <VBox alignment="CENTER_LEFT" minHeight="105.0" prefHeight="284.9998779296875" prefWidth="323.0" GridPane.columnIndex="0">
       <HBox alignment="CENTER_LEFT" spacing="5.0" />
-      <Label fx:id="budgetTitle" styleClass="cell_big_label" text="\$">
+      <Label fx:id="title" styleClass="cell_big_label" text="\$title">
         <minWidth>
           <!-- Ensures that the label text is never truncated -->
           <Double fx:value="-Infinity" />
         </minWidth>
       </Label>
-      <Label fx:id="budgetedAmount" prefWidth="182.0" styleClass="cell_small_label" text="\$budgetedAmount" textFill="#9f9f9f" />
+      <Label fx:id="amount" prefWidth="182.0" styleClass="cell_small_label" text="\$amount" textFill="#9f9f9f" />
       <Label fx:id="startDate" prefWidth="182.0" styleClass="cell_small_label" text="\$startDate">
         <textFill>
           <Color blue="0.625" green="0.625" red="0.625" fx:id="x1" />
@@ -36,7 +36,7 @@
       </Label>
       <Label fx:id="endDate" prefWidth="182.0" styleClass="cell_small_label" text="\$endDate" textFill="$x1" />
       <Label fx:id="period" prefWidth="196.0" styleClass="cell_small_label" text="\$period" textFill="$x1" />
-      <Label fx:id="currentStatus" styleClass="cell_big_label">
+      <Label fx:id="status" styleClass="cell_big_label">
         <minWidth>
           <!-- Ensures that the label text is never truncated -->
           <Double fx:value="-Infinity" />

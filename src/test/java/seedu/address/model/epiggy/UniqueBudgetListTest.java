@@ -11,7 +11,10 @@ import static seedu.address.testutil.TypicalBudgets.FIRST_EXTRA;
 import static seedu.address.testutil.TypicalBudgets.ONE;
 import static seedu.address.testutil.TypicalBudgets.SECOND_EXTRA;
 import static seedu.address.testutil.TypicalBudgets.TWO;
+import static seedu.address.testutil.TypicalBudgets.getMaximumNumberOfBudgets;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -137,13 +140,27 @@ public class UniqueBudgetListTest {
     @Test
     public void getBudgetIndexBasedOnDate_budgetNotFound_success() {
         uniqueBudgetList.addAtIndex(0, ONE);
-        assertEquals(-1, uniqueBudgetList.getBudgetIndexBasedOnDate(new Date("01/01/2000")));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        try {
+            date = sdf.parse("01/01/2000");
+        } catch (ParseException e) {
+            System.out.println("Date should be in the format dd/mm/yyyy.");
+        }
+        assertEquals(-1, uniqueBudgetList.getBudgetIndexBasedOnDate(date));
     }
 
     @Test
     public void getBudgetIndexBasedOnDate_budgetSuccess_success() {
         uniqueBudgetList.addAtIndex(0, FIRST_EXTRA);
-        assertEquals(0, uniqueBudgetList.getBudgetIndexBasedOnDate(new Date(VALID_DATE_FIRSTEXTRA)));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        try {
+            date = sdf.parse(VALID_DATE_FIRSTEXTRA);
+        } catch (ParseException e) {
+            System.out.println("Date should be in the format dd/mm/yyyy.");
+        }
+        assertEquals(0, uniqueBudgetList.getBudgetIndexBasedOnDate(date));
     }
 
     @Test
@@ -223,6 +240,13 @@ public class UniqueBudgetListTest {
         uniqueBudgetList.remove(0);
         UniqueBudgetList expectedUniqueBudgetList = new UniqueBudgetList();
         assertEquals(expectedUniqueBudgetList, uniqueBudgetList);
+    }
+
+    @Test
+    public void limitSize_exceedingBudgetListSize_success() {
+        List<Budget> budgetList = getMaximumNumberOfBudgets();
+        budgetList.add(FIRST_EXTRA);
+        uniqueBudgetList.addBudgetList(budgetList);
     }
 
     @Test

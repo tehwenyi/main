@@ -10,6 +10,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Expense;
 
 /**
@@ -25,8 +26,11 @@ public class DeleteExpenseCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    private static final String MESSAGE_DELETE_EXPENSE_SUCCESS = "Deleted expense: %1$s";
-    private static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The index does not exist on the expense list.";
+    public static final String MESSAGE_DELETE_EXPENSE_SUCCESS = "Deleted expense: %1$s";
+    public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The index does not exist on the expense list.";
+    public static final String MESSAGE_ITEM_NOT_EXPENSE = "The item selected is not an expense. "
+            + "Please use " + COMMAND_WORD + " to delete expenses and "
+            + DeleteAllowanceCommand.COMMAND_WORD + " to delete allowances.";
 
     private final Index targetIndex;
 
@@ -44,6 +48,9 @@ public class DeleteExpenseCommand extends Command {
         }
 
         Expense expenseToDelete = lastShownExpenseList.get(this.targetIndex.getZeroBased());
+        if (expenseToDelete instanceof Allowance) {
+            throw new CommandException(MESSAGE_ITEM_NOT_EXPENSE);
+        }
         model.deleteExpense(expenseToDelete);
         model.commitEPiggy();
         return new CommandResult(String.format(MESSAGE_DELETE_EXPENSE_SUCCESS, expenseToDelete));

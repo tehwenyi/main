@@ -23,14 +23,6 @@ public class ReportData {
         this.allowance = allowance;
     }
 
-    public double getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
     public double getBudget() {
         return budget;
     }

@@ -4,13 +4,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_SECONDEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_SECONDEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.testutil.TypicalBudgets.ONE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalEPiggy;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Ignore;
@@ -32,8 +36,8 @@ import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.epiggy.BudgetBuilder;
 
-@Ignore
 public class EPiggyTest {
 
     @Rule
@@ -52,6 +56,7 @@ public class EPiggyTest {
         ePiggy.resetData(null);
     }
 
+    @Ignore
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
         EPiggy newData = getTypicalEPiggy();
@@ -59,6 +64,7 @@ public class EPiggyTest {
         assertEquals(newData, ePiggy);
     }
 
+    @Ignore
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
@@ -94,6 +100,24 @@ public class EPiggyTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(ePiggy.hasPerson(editedAlice));
+    }
+
+    @Test
+    public void setCurrentBudget_nullBudget_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        ePiggy.setCurrentBudget(null);
+    }
+
+    @Test
+    public void setCurrentBudget_success() {
+        Date todaysDate = new Date();
+        Budget currentBudget = new BudgetBuilder(ONE).withDate(todaysDate).build();
+        ePiggy.addBudget(0, currentBudget);
+        Budget editedOne = new BudgetBuilder(ONE).withAmount(VALID_AMOUNT_SECONDEXTRA)
+                .withPeriod(VALID_PERIOD_SECONDEXTRA).build();
+        assertEquals(ePiggy.getCurrentBudgetIndex(), 0);
+        ePiggy.setCurrentBudget(editedOne);
+        assertEquals(ePiggy.getBudgetList(), Arrays.asList(editedOne));
     }
 
     @Test

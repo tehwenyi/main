@@ -13,7 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Guarantees: immutable
  */
 public class Cost {
-    public static final String MESSAGE_CONSTRAINTS = "Cost should be an amount not more than 6 digits.";
+    public static final String MESSAGE_CONSTRAINTS = "Cost should be an numerical amount not more than 6 digits.";
     private static final Pattern AMOUNT_FORMAT = Pattern.compile("^(?!\\.?$)\\d{0,6}(\\.\\d{0,2})?$");
     private final double amount;
 

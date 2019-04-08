@@ -27,9 +27,11 @@ import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.EpiggyTestApp;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
+
 import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
+import seedu.address.logic.commands.epiggy.FindExpenseCommand;
+
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.testutil.epiggy.TypicalReports;
@@ -140,10 +142,21 @@ public abstract class EPiggySystemTestWithDefaultData {
 
     /**
      * Displays all persons with any parts of their names matching {@code keyword} (case-insensitive).
-     */
+
     protected void showPersonsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
         assertTrue(getModel().getFilteredPersonList().size() < getModel().getEPiggy().getPersonList().size());
+    }
+     */
+
+    /**
+     * Displays all expense with any parts of their item names matching {@code keyword} (case-insensitive).
+     */
+    protected void showExpensesWithName(String keyword) {
+        int totalExpensesCount = getModel().getFilteredExpenseList().size();
+        executeCommand(FindExpenseCommand.COMMAND_WORD + " n/" + keyword);
+        int resultExpensesCount = this.testApp.getModelAfterExecution().getFilteredExpenseList().size();
+        assertTrue(resultExpensesCount < totalExpensesCount);
     }
 
     /**

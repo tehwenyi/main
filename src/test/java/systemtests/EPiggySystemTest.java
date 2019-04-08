@@ -168,6 +168,8 @@ public abstract class EPiggySystemTest {
     protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
+        System.out.println(expectedCommandInput);
+        System.out.println(getResultDisplay().getText());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new EPiggy(expectedModel.getEPiggy()), testApp.readStorageEPiggy());
         //        assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());

@@ -10,12 +10,12 @@ import seedu.address.model.tag.Tag;
  */
 public class Item {
     private final Name name;
-    private final Price price;
+    private final Cost cost;
     private final Set<Tag> tags;
 
-    public Item(Name name, Price price, Set<Tag> tags) {
+    public Item(Name name, Cost cost, Set<Tag> tags) {
         this.name = name;
-        this.price = price;
+        this.cost = cost;
         this.tags = tags;
     }
 
@@ -23,8 +23,8 @@ public class Item {
         return name;
     }
 
-    public Price getPrice() {
-        return price;
+    public Cost getCost() {
+        return cost;
     }
 
     public Set<Tag> getTags() {
@@ -35,9 +35,9 @@ public class Item {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(name)
-                .append(" - $")
-                .append(price)
-                .append(" ")
+                .append(": $")
+                .append(cost)
+                .append("\nTags: ")
                 .append(tags);
         return builder.toString();
     }

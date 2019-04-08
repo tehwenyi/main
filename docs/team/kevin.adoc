@@ -1,0 +1,75 @@
+= Kevin Chan - Project Portfolio for ePiggy
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== Overview
+ePiggy is a simplified expense tracker for students.
+It can be used to record their allowance, expenses, savings, and can even plan out what they should eat for recess.
+It has student-centric features that makes managing their money easier.
+
+ePiggy was build based from a basic command line interface addressbook for a software engineering project.
+My team and I decided to build ePiggy because we wanted to teach students to start managing their expenses from young, through the use of basic coding, in a manner that relates to them.
+
+My primary role was to develop the goal setting feature.
+The following sections show these enhancements in more detail, as well as the additional features that I added to the user and developer guides on top of this enhancement.
+
+== Summary of contributions
+This section shows a summary of my code, documentation, and other contributions to the team project.
+
+*Enhancements added:*
+
+* Added the goal setting function
+** What it does: The `setGoal` command allows the user to set the name and the amount of their savings goal, and the `viewGoal` command allows the user to view their previously set goal, and how much more they have to save to hit the goal
+** Justification: This is one of the student-centric features that we wanted to implement in ePiggy to make it different from other expense trackers.
+** Highlights: This enhancement requires a quick comparison of the amount that the goal is set, and the net amount of money recorded (savings) in ePiggy. The avoid the need of having to scan through the whole list of expenses to obtain the savings amount, a savings class was implemented to track the movement of the net total of money recorded. This savings class had to accurately calculate the net total of money in ePiggy and this amount had to be recalculated everytime an `addAllowance`, `addExpense`, `deleteExpense`, or `editExpense` command is used. By using this savings class, we can deliver the amount the user has to save in the future to hit the goal accurately and quickly.
+** Code contributed:
+*** Functional code:
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/SetGoalCommand.java[SetGoalCommand]
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/ViewGoalCommand.java[ViewGoalCommand]
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/ViewSavingsCommand.java[ViewSavingsCommand]
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/parser/epiggy/SetGoalCommandParser.java[SetGoalCommandParser]
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/model/epiggy/Goal.java[Goal]
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/model/epiggy/Savings.java[Savings]
+*** Test code:
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/SetGoalCommandTest.java[SetGoalCommandTest]
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/ViewGoalCommandTest.java[ViewGoalCommandTest]
+https://github.com/CS2103-AY1819S2-W17-4/main/tree/master/src/test/java/seedu/address/logic/commands/epiggy[ViewSavingsCommandTest]
+
+* Refactored `Storage` to include `Expense`, `Goal`, `Savings` and `Budget`
+** Code contributed: https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/storage/epiggy/EPiggyStorage.java[EPiggyStorage]
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/storage/epiggy/JsonSerializableEPiggy.java[JsonSerializableEPiggy]
+
+* Added an `addAllowance` command that extends from the `addExpense` command
+** Code contributed:
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/AddAllowanceCommand.java[AddAllowanceCommand]
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/parser/epiggy/AddAllowanceCommandParser.java[AddAllowanceCommandParser]
+
+* Incorporated a panel dedicated to savings and goals into the user interface
+** Code contributed: https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/SavingsPanel.java[SavingsPanel]
+
+* Added command aliases
+
+*Other contributions:*
+
+* Community:
+** Helped to fix bugs in classes created by other teammates https://github.com/CS2103-AY1819S2-W17-4/main/commit/f0d99ad433d3741491aafcc6798527407b4f5191[{#97)]
+* Documentation:
+** Compiled and made formatting changes to the user guide to make it more reader-friendly https://github.com/CS2103-AY1819S2-W17-4/main/commit/5046afedac24c4da8a391b84a5a767604efa2155[(#85)]
+* Tools:
+** Set up auto-publishing of documentation for the team
+** Set up reposense for the team
+
+== Contributions to the User Guide
+We had to write a new User Guide as most of the sections in the AddressBook User Guide was not applicable to our application. Below is an excerpt from the *ePiggy User Guide*, showing additions I made for the `setGoal`, `viewGoal` and `addAllowance` commands.
+
+include::../UserGuide.adoc[tag=setGoal]
+
+include::../UserGuide.adoc[tag=viewGoal]
+
+== Contributions to the Developer Guide
+The following section shows my addition to the developer guide for the `setGoal` and `viewGoal` commands.
+
+include::../DeveloperGuide.adoc[tag=setGoal]
+
+include::../DeveloperGuide.adoc[tag=viewGoal]

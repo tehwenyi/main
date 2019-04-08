@@ -21,14 +21,10 @@ public class BudgetPanel extends UiPart<Region> {
     @FXML
     private ListView<Budget> budgetView;
 
-    public BudgetPanel(ObservableList<Budget> budgetList, Consumer<Budget> setBudget) {
+    public BudgetPanel(ObservableList<Budget> budgetList, Consumer<Budget> setCurrentBudget) {
         super(FXML);
         budgetView.setItems(budgetList);
         budgetView.setCellFactory(listView -> new BudgetListViewCell());
-        budgetView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            logger.fine("Budget changed to : '" + newValue + "'");
-            setBudget.accept(newValue);
-        });
         //        budget.addListener((observable, oldValue, newValue) -> {
         //            logger.fine("Budget changed to: " + newValue);
         //            // Don't modify selection if we are already selecting the selected expense,

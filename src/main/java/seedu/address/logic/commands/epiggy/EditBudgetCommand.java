@@ -1,8 +1,7 @@
 package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
-
-import static seedu.address.logic.commands.epiggy.SetBudgetCommand.MESSAGE_OVERLAPPING_BUDGET;
+import static seedu.address.logic.commands.epiggy.AddBudgetCommand.MESSAGE_OVERLAPPING_BUDGET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
@@ -19,8 +18,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Period;
-import seedu.address.model.epiggy.item.Price;
 
 
 /**
@@ -34,19 +33,16 @@ public class EditBudgetCommand extends Command {
     // TODO MESSAGE_USAGE should come out
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the current budget. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: [" + PREFIX_COST + "AMOUNT] "
+            + "Parameters: [" + PREFIX_COST + "BUDGET_IN_DOLLARS] "
             + "[" + PREFIX_PERIOD + "TIME_PERIOD_IN_DAYS] "
             + "[" + PREFIX_DATE + "START_DATE_IN_DD/MM/YYYY] "
             + "Example: " + COMMAND_WORD
             + PREFIX_COST + "200 "
             + PREFIX_PERIOD + "7";
 
-    private static final String MESSAGE_EDIT_BUDGET_SUCCESS = "Current budget updated: %1$s";
-    private static final String MESSAGE_EDIT_BUDGET_FAIL = "Only the current budget can be edited."
+    public static final String MESSAGE_EDIT_BUDGET_SUCCESS = "Current budget updated:\n%1$s";
+    public static final String MESSAGE_EDIT_BUDGET_DOES_NOT_EXIST_FAIL = "Only the current budget can be edited."
             + " There is no current budget to be edited.";
-
-    private static final String MESSAGE_BUDGET_STATUS_ERROR = "The current budget must remain as the current budget."
-            + " Please add a new budget or delete the current budget if you wish to create a budget of another status.";
     public static final String MESSAGE_NOT_EDITED = "Budget not edited as there are no changes.\n"
             + MESSAGE_USAGE;
 
@@ -64,7 +60,7 @@ public class EditBudgetCommand extends Command {
 
         int indexOfCurrentBudget = model.getCurrentBudgetIndex();
         if (indexOfCurrentBudget == -1) {
-            throw new CommandException(MESSAGE_EDIT_BUDGET_FAIL);
+            throw new CommandException(MESSAGE_EDIT_BUDGET_DOES_NOT_EXIST_FAIL);
         }
         Budget budgetToEdit = lastShownBudgetList.get(indexOfCurrentBudget);
         Budget editedBudget = createEditedBudget(budgetToEdit, editBudgetDetails);
@@ -89,7 +85,7 @@ public class EditBudgetCommand extends Command {
 
         model.setCurrentBudget(editedBudget);
         model.updateFilteredBudgetList(PREDICATE_SHOW_ALL_BUDGETS);
-        model.commitAddressBook();
+        model.commitEPiggy();
         return new CommandResult(String.format(MESSAGE_EDIT_BUDGET_SUCCESS, editedBudget));
     }
 
@@ -97,14 +93,31 @@ public class EditBudgetCommand extends Command {
      * Creates and returns a {@code Budget} with the details of {@code budgetToEdit}
      * edited with {@code editBudgetDetails}.
      */
-    private static Budget createEditedBudget(Budget budgetToEdit, EditBudgetDetails editBudgetDetails) {
+    public static Budget createEditedBudget(Budget budgetToEdit, EditBudgetDetails editBudgetDetails) {
         assert budgetToEdit != null;
 
-        Price updatedAmount = editBudgetDetails.getAmount().orElse(budgetToEdit.getPrice());
+        Cost updatedAmount = editBudgetDetails.getAmount().orElse(budgetToEdit.getBudgetedAmount());
         Date updatedStartDate = editBudgetDetails.getStartDate().orElse((budgetToEdit.getStartDate()));
         Period updatedPeriod = editBudgetDetails.getPeriod().orElse(budgetToEdit.getPeriod());
 
         return new Budget(updatedAmount, updatedPeriod, updatedStartDate);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditBudgetCommand)) {
+            return false;
+        }
+
+        // state check
+        EditBudgetCommand e = (EditBudgetCommand) other;
+        return this.editBudgetDetails.equals(e.editBudgetDetails);
     }
 
     /**
@@ -112,7 +125,7 @@ public class EditBudgetCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditBudgetDetails {
-        private Price amount;
+        private Cost amount;
         private Date startDate;
         private Period period;
 
@@ -135,7 +148,7 @@ public class EditBudgetCommand extends Command {
             return CollectionUtil.isAnyNonNull(amount, startDate, period);
         }
 
-        public void setAmount(Price amount) {
+        public void setAmount(Cost amount) {
             this.amount = amount;
         }
 
@@ -147,7 +160,7 @@ public class EditBudgetCommand extends Command {
             this.period = period;
         }
 
-        public Optional<Price> getAmount() {
+        public Optional<Cost> getAmount() {
             return Optional.ofNullable(amount);
         }
 
@@ -177,6 +190,12 @@ public class EditBudgetCommand extends Command {
             return getAmount().equals(e.getAmount())
                     && getStartDate().equals(e.getStartDate())
                     && getPeriod().equals(e.getPeriod());
+        }
+
+        @Override
+        public String toString() {
+            return new String("Amount of $" + amount + " and period of " + period
+                    + " starting from " + startDate);
         }
     }
 }

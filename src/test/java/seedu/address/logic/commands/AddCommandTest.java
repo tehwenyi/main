@@ -8,6 +8,8 @@ import static org.junit.Assert.assertTrue;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -20,9 +22,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
@@ -99,6 +101,25 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
+        public void reverseFilteredExpensesList() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void sortExpenses(Comparator<Expense> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Expense> getExpenseList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Budget> getBudgetList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
@@ -119,12 +140,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getEPiggyFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setEPiggyFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -144,17 +165,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Expense> getFilteredExpenseList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ReadOnlyProperty<Expense> selectedExpenseProperty() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setBudget(Budget budget) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -164,27 +175,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public void deleteBudgetAtIndex(int index) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public SimpleObjectProperty<Budget> getBudget() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Budget> getBudgetList() {
+        public void deleteExpense(Expense toDelete) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public int getCurrentBudgetIndex() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasBudget() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -209,12 +215,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setEPiggy(ReadOnlyEPiggy newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyEPiggy getEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -249,6 +255,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Expense> getFilteredExpenseList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -259,27 +270,32 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public void updateFilteredExpensesList(Predicate<Expense> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canUndoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public boolean canRedoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void undoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public void redoEPiggy() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -289,7 +305,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Person getSelectedPerson() {
+        public void setExpense(Expense target, Expense editedExpense) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Expense getSelectedExpense() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -336,13 +357,13 @@ public class AddCommandTest {
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitEPiggy() {
             // called by {@code AddCommand#execute()}
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyEPiggy getEPiggy() {
+            return new EPiggy();
         }
     }
 

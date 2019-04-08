@@ -1,5 +1,6 @@
 package seedu.address.model.epiggy;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import seedu.address.model.epiggy.item.Item;
@@ -28,10 +29,10 @@ public class Expense {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
+        SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d, ''yy");
         builder.append(item)
-                .append(" (")
-                .append(date)
-                .append(")");
+                .append("\nAdded on: ")
+                .append(format.format(date));
         return builder.toString();
     }
 }

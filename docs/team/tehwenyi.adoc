@@ -1,0 +1,114 @@
+= Teh Wen Yi - Project Portfolio for ePiggy
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: ePiggy
+
+---
+
+== Introduction
+=== About
+// what specific project task is, what module it is for, whether it is an indiv or grp proj
+*ePiggy* is a desktop application designed to inculcate good spending habits in students
+through allowing them to track their finances. It includes everything from tracking expenses, managing budgets
+to setting goals. +
+
+It is written in Java. Interactions by users are done through the Command Line Interface (CLI) and it has a Graphical User Interface (GUI) created with JavaFX. +
+It can be used on both Windows and Mac.
+
+=== Project Team
+
+*_ePiggy_* was designed for twin modules CS2101 and CS2103T. It was transformed from the link:https://github.com/nus-cs2103-AY1819S2/addressbook-level4[AddressBook - Level 4] application.
+My team consists of 5 members, including myself. +
+I contributed the `budget` feature of *_ePiggy_*, which allows users to add, edit and delete budgets to track their spendings.
+
+=== Purpose
+
+This portfolio aims to document my contributions to *_ePiggy_*.
+
+*_ePiggy_* Github link: https://github.com/CS2103-AY1819S2-W17-4/main
+
+== Summary of contributions
+
+=== Major Enhancements
+
+Added the entire `budget` feature of ePiggy. +
+
+* *What it does:*
+Allows users to set a limit on their spendings for a specified time period and provide reminders when they are going to or have exceeded the limit. +
+Unlike typical expense trackers where only one budget is set, ePiggy's `budget` feature consists of a list of budgets. This is because the purpose of ePiggy is to inculcate good spending habits in our users, so users should be able to track their previous spendings.
+Being able to view their budget history and plan future budgets would fuel this purpose. +
+The `budget` feature is visible on the GUI and comprises of 3 commands: `addBudget`, `editBudget` and `deleteBudget`.
+
+* *Justification:*
+The `budget` feature urges users to be more aware of the amount they spend per time period so that they can better manage their expenses and avoid splurging. It is also a good habit we hope to inculcate in users before they enter the
+workforce and deal with larger sums of money. +
+
+* *Highlights:*
+** This enhancement was built from scratch. It is completely new and hence required the creation of many new objects including `budget`, `period`, `uniqueBudgetList` and a new `budgetPanel` for the UI. This enhancement required the familiarity with
+almost all the different aspects of the code (`commons`, `logic`, `model`, `ui`).
+** Typically, expense trackers only have one budget but I decided it would be better to have a list of budgets instead, so that users can view their budget history and plan future budgets. This is due to the purpose of ePiggy, which is to inculcate
+good spending habits in our users. Hence, users should be able to track their previous spendings.
+** For this enhancement, the UI is important as the purpose is to constantly remind users of the remaining amount they can spend. It was challenging to make the UI simple and concise for our target users whilst conveying the crucial information.
+* *Functional code contributed:* link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/AddBudgetCommand.java[Add Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/EditBudgetCommand.java[Edit Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/DeleteBudgetCommand.java[Delete Budget]
+* *Test code contributed*: link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/AddBudgetCommandTest.java[Add Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/DeleteBudgetCommandTest.java[Delete Budget]
+
+// ability to write code, explain and justify design choices, solve a user problem/fulfil a user need
+
+=== Minor Enhancements
+* *Minor enhancement 1*:
+Added the UI component for the `budget` feature.
+
+* *What it does:*
+Allows users to view all the details and real-time status of the budgets they have added on the GUI. The status of the budgets will update whenever an expense is added, edited or deleted.
+
+* *Justification:*
+*_ePiggy_*'s target audience are students, who may be as young as seven years old. Hence, having a simple and concise GUI to engage them while conveying all the crucial information is very important. +
+
+* *Functional code contributed*: [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetPanel.java[Budget Panel]] | [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetCard.java[Budget Card]] _{give links to collated code files}_
+* *Test code contributed*:
+
+=== Other Contributions
+* *Other contributions*:
+
+** Project Management:
+*** Managed the refactoring of AddressBook to ePiggy
+** Documentation:
+*** Standardised and beautified the User Guide
+**** Designed and added the header and images across the user guide to suit our target user
+**** Standardised the language and formatting of the user guide
+**** Checked for grammar and spelling mistakes throughout the user guide
+*** Standardised and beautified the Developer Guide
+**** Designed and added the header
+**** Standardised the language and formatting of the user guide
+**** Checked for grammar and spelling mistakes throughout the developer guide
+** Community:
+*** PRs contributed:
+*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+** Tools:
+*** Created the *.jar file for ePiggy
+*** Set up Coveralls.
+** All code contributed:
+**** View the codes I contributed here
+_{you can add/remove categories in the list above}_
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=undoredo]
+
+include::../UserGuide.adoc[tag=dataencryption]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=undoredo]
+
+include::../DeveloperGuide.adoc[tag=dataencryption]

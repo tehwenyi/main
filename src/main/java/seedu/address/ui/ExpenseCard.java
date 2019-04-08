@@ -9,6 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Expense;
 
 /**
@@ -20,14 +21,14 @@ public class ExpenseCard extends UiPart<Region> {
 
     private static final String FXML = "ExpenseListCard.fxml";
     private static final String[] TAG_COLOR_STYLES =
-        { "turquoise", "orange", "yellow", "green", "black", "blue", "beige", "pink", "grey" };
+        { "turquoise", "orange", "yellow", "green", "black", "blue", "pink", "grey" };
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
+     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on EPiggy level 4</a>
      */
 
     public final Expense expense;
@@ -51,9 +52,13 @@ public class ExpenseCard extends UiPart<Region> {
         this.expense = expense;
         id.setText(displayedIndex + ". ");
         name.setText(expense.getItem().getName().name);
-        cost.setText(String.format("Cost: %d $", expense.getItem().getPrice().getAmount()));
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
-        date.setText(expense.getDate().toString());
+        if (expense instanceof Allowance) {
+            cost.setText("Amount: " + expense.getItem().getCost().toString());
+        } else {
+            cost.setText("Cost: " + expense.getItem().getCost().toString());
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("EEE, MMM d, ''yy");
+        date.setText(String.format("Added on: %s \n", formatter.format(expense.getDate())));
         initialiseTags(expense);
     }
 

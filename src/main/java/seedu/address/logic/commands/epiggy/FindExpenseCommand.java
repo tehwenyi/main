@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_EXPENSES_LISTED_OVERVIEW;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
@@ -23,7 +24,7 @@ public class FindExpenseCommand extends Command {
             + " The keywords do not need to be in order.\n"
             + " Parameters: [n/NAME] [$/COST:COST] [t/TAG] [d/DATE:DATE]...\n"
             + " Example: " + COMMAND_WORD + " n/Mala Hotpot t/lunch t/food $/7.00:15.00 d/14-03-2019:17-03-2019\n";
-    public static final String MESSAGE_SUCCESS = "Finding Expenses...\n";
+    public static final String MESSAGE_SUCCESS = MESSAGE_EXPENSES_LISTED_OVERVIEW;
 
     private final ExpenseContainsKeywordsPredicate predicate;
 
@@ -35,7 +36,7 @@ public class FindExpenseCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredExpensesList(predicate);
-        model.commitAddressBook();
+        model.commitEPiggy();
 
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, model.getFilteredExpenseList().size()));

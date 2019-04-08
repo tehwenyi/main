@@ -41,12 +41,14 @@ public class BudgetCard extends UiPart<Region> {
     private Label remainingAmount;
     @FXML
     private Label remainingDays;
+    @FXML
+    private Label notification;
 
     public BudgetCard(int displayedIndex, Budget budget) {
         super(FXML);
         this.budget = budget;
         budgetTitle.setText(displayedIndex + ". " + budget.getStatus() + " Budget");
-        budgetedAmount.setText("Amount: $" + budget.getPrice().toString());
+        budgetedAmount.setText("Amount: $" + budget.getBudgetedAmount().toString());
 
         DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy (E)");
         startDate.setText("Start Date: " + dateFormat.format(budget.getStartDate()));
@@ -54,11 +56,35 @@ public class BudgetCard extends UiPart<Region> {
         calendar.setTime(budget.getEndDate());
         calendar.add(Calendar.DAY_OF_MONTH, -1);
         endDate.setText("End Date: " + dateFormat.format(calendar.getTime()));
-
         period.setText("Period of Budget: " + budget.getPeriod().toString() + " days");
+
         currentStatus.setText("Status");
-        remainingAmount.setText("Amount remaining: $" + budget.getRemainingAmount().toString());
+        if (budget.getRemainingAmount().getAmount() >= 0) {
+            remainingAmount.setText("Amount remaining: $" + budget.getRemainingAmount().toString());
+        } else {
+            remainingAmount.setText("Amount exceeded: $" + budget.getPositiveRemainingAmount().toString());
+        }
         remainingDays.setText("Days remaining: " + budget.getRemainingDays().toString() + " days");
+
+        if (budget.getRemainingAmount().getAmount() < 0) {
+            notification.setText("You have exceeded your budget!");
+            notification.setStyle("-fx-font-weight: bold; -fx-border-color: firebrick;"
+                    + "-fx-text-fill: white; -fx-background-color: crimson;");
+        } else if (budget.getRemainingAmount().getAmount() == 0) {
+            notification.setText("You have $0 left of your budget!");
+            notification.setStyle("-fx-font-weight: bold; -fx-border-color: orchid; "
+                    + "-fx-text-fill: white; -fx-background-color: mediumorchid;");
+        } else if (budget.getRemainingAmount().getAmount() < (budget.getBudgetedAmount().getAmount() / 5)) {
+            notification.setText("You have spent more than 80% of your budget. \n"
+                    + "Please control your expenses!");
+            notification.setStyle("-fx-font-weight: bold; -fx-border-color: tomato; "
+                    + "-fx-text-fill: white; -fx-background-color: coral;");
+        } else {
+            notification.setText("“Save money and money will save you.”\n"
+                    + "Remember to spend wisely!");
+            notification.setStyle("-fx-font-weight: bold; -fx-border-color: thistle;"
+                    + "-fx-text-fill: white; -fx-background-color: plum;");
+        }
     }
 
     //    /**

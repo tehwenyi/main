@@ -1,15 +1,20 @@
 package seedu.address.model;
 
+import java.nio.file.Path;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.function.Predicate;
+
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.model.epiggy.*;
+import seedu.address.model.epiggy.Allowance;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
-
-import java.nio.file.Path;
-import java.util.function.Predicate;
 
 /**
  * The API of the Model component.
@@ -47,20 +52,20 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getEPiggyFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setEPiggyFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code ePiggy}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setEPiggy(ReadOnlyEPiggy ePiggy);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the EPiggy */
+    ReadOnlyEPiggy getEPiggy();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -91,14 +96,14 @@ public interface Model {
     void addAllowance(Allowance allowance);
 
     /**
-     * Sets the given budget.
-     */
-    void setBudget(Budget budget);
-
-    /**
      * Adds a new budget.
      */
     void addBudget(int index, Budget budget);
+
+    /**
+     * Checks if there are any overlapping budgets.
+     */
+    boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget);
 
     /**
      * Deletes the budget at the specific index.
@@ -106,13 +111,18 @@ public interface Model {
     void deleteBudgetAtIndex(int index);
 
     /**
+     * Deletes the expense {@code toDelete}.
+     * @param toDelete the expense to be deleted.
+     */
+    void deleteExpense(Expense toDelete);
+
+    /**
      * Replaces the given expense {@code target} with {@code editedExpense}.
      * {@code target} must exist in the address book.
      * The expense identity of {@code editedExpense} must not be the same as
      * another existing expense in the address book.
      */
-    void setExpense(seedu.address.model.epiggy.Expense target,
-                    seedu.address.model.epiggy.Expense editedExpense);
+    void setExpense(Expense target, Expense editedExpense);
 
     /**
      * Updates the filter of the filtered expense list to filter by the given {@code predicate}.
@@ -121,14 +131,14 @@ public interface Model {
     void updateFilteredExpensesList(Predicate<seedu.address.model.epiggy.Expense> predicate);
 
     /**
-     * Gets the current budget.
-     */
-    SimpleObjectProperty<Budget> getBudget();
-
-    /**
      * Gets the current budget list.
      */
     ObservableList<Budget> getBudgetList();
+
+    /**
+     * Gets the Expense list.
+     */
+    ObservableList<Expense> getExpenseList();
 
     /**
      * Gets the current budget's index.
@@ -151,11 +161,6 @@ public interface Model {
      * Sets the savings goal.
      */
     void setGoal(Goal goal);
-
-    /**
-     * Checks if a budget already exists in AddressBook.
-     */
-    boolean hasBudget();
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -193,27 +198,27 @@ public interface Model {
     /**
      * Returns true if the model has previous address book states to restore.
      */
-    boolean canUndoAddressBook();
+    boolean canUndoEPiggy();
 
     /**
      * Returns true if the model has undone address book states to restore.
      */
-    boolean canRedoAddressBook();
+    boolean canRedoEPiggy();
 
     /**
      * Restores the model's address book to its previous state.
      */
-    void undoAddressBook();
+    void undoEPiggy();
 
     /**
      * Restores the model's address book to its previously undone state.
      */
-    void redoAddressBook();
+    void redoEPiggy();
 
     /**
      * Saves the current address book state for undo/redo.
      */
-    void commitAddressBook();
+    void commitEPiggy();
 
     /**
      * Selected person in the filtered person list.
@@ -231,7 +236,7 @@ public interface Model {
      * Returns the selected person in the filtered person list.
      * null if no person is selected.
      */
-    Person getSelectedPerson();
+    Expense getSelectedExpense();
 
     /**
      * Sets the selected person in the filtered person list.
@@ -244,7 +249,12 @@ public interface Model {
     void setSelectedExpense(Expense expense);
 
     /**
-     * Sorts the expenses according to the specified {@param keywords}.
+     * Sorts the expenses according to the specified {@param expenseComparator}.
      */
-    void sortExpenses(ArgumentMultimap keywords);
+    void sortExpenses(Comparator<Expense> expenseComparator);
+
+    /**
+     * Reveres the {@code filteredExpenses} list.
+     */
+    void reverseFilteredExpensesList();
 }

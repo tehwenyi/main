@@ -3,14 +3,15 @@ package seedu.address.model.epiggy;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
 
 //@@author rahulb99
 
@@ -65,6 +66,15 @@ public class ExpenseList implements Iterable<seedu.address.model.epiggy.Expense>
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+    }
+
+    /**
+     * Removes the expense with the specific index from the list.
+     * The expense of the index must exist in the list.
+     * @param index of the expense to be removed.
+     */
+    public void remove(int index) {
+        internalList.remove(index, index + 1);
     }
 
 
@@ -123,34 +133,17 @@ public class ExpenseList implements Iterable<seedu.address.model.epiggy.Expense>
         });
     }
 
-    /**
-     * Returns list of expenses sorted by date
-     * @return SortedList of Expense
-     */
-    public SortedList<Expense> sortByName() {
-        return internalList.sorted(new Comparator<Expense>() {
-            public int compare(Expense e1, Expense e2) {
-                if (e1.getItem().getName() == null || e2.getItem().getName() == null) {
-                    return 0;
-                }
-                return e1.getItem().getName().name.compareTo(e2.getItem().getName().name);
-            }
-        });
+    public void sort(Comparator<Expense> comparator) {
+        FXCollections.sort(internalList, comparator);
     }
 
-    /**
-     * Returns list of expenses sorted by date
-     * @return SortedList of Expense
-     */
-    public SortedList<Expense> sortByAmount() {
-        return internalList.sorted(new Comparator<Expense>() {
-            public int compare(Expense e1, Expense e2) {
-                if (e1.getItem().getPrice() == null || e2.getItem().getPrice()  == null) {
-                    return 0;
-                }
-                return e1.getItem().getPrice().getAmount() < e2.getItem().getPrice().getAmount() ? 1 : -1;
-            }
-        });
+    public void reverse() {
+        FXCollections.reverse(internalList);
     }
 
+    public double getTotalSpendings() {
+        List<Double> costList = internalList.stream().map(e -> e.getItem().getCost().getAmount())
+                .collect(Collectors.toList());
+        return costList.stream().mapToDouble(f -> f.doubleValue()).sum();
+    }
 }

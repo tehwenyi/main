@@ -23,7 +23,7 @@ public class SetGoalCommand extends Command {
             + PREFIX_NAME + "GOAL NAME "
             + PREFIX_COST + "GOAL AMOUNT\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Nike shoe"
+            + PREFIX_NAME + "Nike shoe "
             + PREFIX_COST + "79";
     public static final String MESSAGE_SUCCESS = "Goal set: %1$s";
 
@@ -38,7 +38,7 @@ public class SetGoalCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         model.setGoal(toSet);
-        model.commitAddressBook();
+        model.commitEPiggy();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toSet));
     }
 }

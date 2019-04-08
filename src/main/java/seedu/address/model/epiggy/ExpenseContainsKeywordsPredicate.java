@@ -5,16 +5,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.model.epiggy.item.Item;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.model.epiggy.item.Item;
+
+//@@author rahulb99
 /**
  * TODO: Refactor
  * Tests that a {@code Expense}'s {@code Name, Cost, Category, Date} matches any of the keywords given.
@@ -53,7 +54,7 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
         //if one or more keywords are present
         boolean result = true;
         if (!nameKeywords.equals("")) {
-            result = result && containsNameKeywords(nameKeywords, expense);
+            result = containsNameKeywords(nameKeywords, expense);
         }
 
         if (!costKeywords.equals("")) {
@@ -88,9 +89,9 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
      * */
     public boolean checkTagKeywords(List<String> tagKeywords, Expense expense) {
         assert tagKeywords != null : "tagKeywords should not be null.\n";
-        List<String> separatedTagKeywordsList = new ArrayList<>();
+        List<String> tagKeywordsList = new ArrayList<>();
         for (String tag : tagKeywords) {
-            separatedTagKeywordsList.addAll(Arrays.asList(tag.split("\\s+")));
+            tagKeywordsList.addAll(Arrays.asList(tag.split("\\s+")));
         }
         Item item = expense.getItem();
         boolean result = tagKeywords.stream()
@@ -107,14 +108,14 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
         boolean result;
         String[] splitCost = costKeywords.split(":");
         Item item = expense.getItem();
-        if (splitCost.length == 1) { //if the user enters a particular cost
+        if (splitCost.length == 1) { //if the user enters an exact cost
             double chosenCost = Double.parseDouble(splitCost[0]);
-            result = item.getPrice().getAmount() == chosenCost;
+            result = item.getCost().getAmount() == chosenCost;
         } else { //if the user enters a range of dates
             double lowerBound = Double.parseDouble(splitCost[0]);
             double higherBound = Double.parseDouble(splitCost[1]);
-            result = lowerBound <= item.getPrice().getAmount()
-                    && item.getPrice().getAmount() <= higherBound;
+            result = lowerBound <= item.getCost().getAmount()
+                    && item.getCost().getAmount() <= higherBound;
         }
         return result;
     }
@@ -126,14 +127,14 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
         assert dateKeywords != null : "dateKeywords should not be null.\n";
         boolean result;
         String[] splitDate = dateKeywords.split(":");
-        if (splitDate.length == 1) { //if the user only enter a particular date
+        if (splitDate.length == 1) { //if the user only enter an exact date
             Date chosenDate = new Date(splitDate[0]);
             result = expense.getDate().equals(chosenDate);
         } else { //if the user enter a range of dates
             Date start = new Date(splitDate[0]);
             Date end = new Date(splitDate[1]);
-            boolean isWithinRange = start.after(expense.getDate())
-                    && end.before(expense.getDate());
+            boolean isWithinRange = start.before(expense.getDate())
+                    && end.after(expense.getDate());
             result = start.equals(expense.getDate())
                     || end.equals(expense.getDate())
                     || isWithinRange;

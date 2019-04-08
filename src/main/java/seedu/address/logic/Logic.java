@@ -3,15 +3,18 @@ package seedu.address.logic;
 import java.nio.file.Path;
 
 import javafx.beans.property.ReadOnlyProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
+
+import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 
 /**
@@ -28,11 +31,11 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the EPiggy.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getEPiggy()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyEPiggy getEPiggy();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
@@ -40,9 +43,12 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Expense> getFilteredExpenseList();
 
-    SimpleObjectProperty<Budget> getBudget();
+    ObservableList<Budget> getFilteredBudgetList();
 
-    ObservableList<Budget> getBudgetList();
+    ObservableValue<Savings> getSavings();
+
+    ObservableValue<Goal> getGoal();
+
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
      * The list is ordered from the least recent command to the most recent command.
@@ -52,7 +58,7 @@ public interface Logic {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getEPiggyFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
@@ -88,11 +94,11 @@ public interface Logic {
     void setSelectedPerson(Person person);
 
     /**
-     * Sets the budget.
+     * Sets the current budget.
      *
-     * @see seedu.address.model.Model#setBudget(Budget)
+     * @see seedu.address.model.Model#addBudget(Budget)
      */
-    void setBudget(Budget budget);
+    void setCurrentBudget(Budget budget);
 
     /**
      * Adds a new budget.

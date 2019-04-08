@@ -77,7 +77,8 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'ePiggy.jar'
+    baseName = 'ePiggy'
 
     destinationDir = file("${buildDir}/jar/")
 }

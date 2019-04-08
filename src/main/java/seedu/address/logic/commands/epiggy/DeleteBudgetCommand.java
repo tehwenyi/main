@@ -26,8 +26,8 @@ public class DeleteBudgetCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    private static final String MESSAGE_DELETE_BUDGET_SUCCESS = "Deleted budget: %1$s";
-    private static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The index does not exist on the budget list.";
+    public static final String MESSAGE_DELETE_BUDGET_SUCCESS = "Deleted budget:\n%1$s";
+    public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The index does not exist on the budget list.";
 
     private final Index targetIndex;
 
@@ -46,7 +46,14 @@ public class DeleteBudgetCommand extends Command {
 
         Budget budgetToDelete = lastShownBudgetList.get(this.targetIndex.getZeroBased());
         model.deleteBudgetAtIndex(this.targetIndex.getZeroBased());
-        model.commitAddressBook();
+        model.commitEPiggy();
         return new CommandResult(String.format(MESSAGE_DELETE_BUDGET_SUCCESS, budgetToDelete));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeleteBudgetCommand // instanceof handles nulls
+                && targetIndex.equals(((DeleteBudgetCommand) other).targetIndex)); // state check
     }
 }

@@ -5,19 +5,22 @@ import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javafx.beans.property.ReadOnlyProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.EPiggyParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
+
+import seedu.address.model.epiggy.Savings;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -31,17 +34,17 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final CommandHistory history;
-    private final AddressBookParser addressBookParser;
+    private final EPiggyParser ePiggyParser;
     private boolean addressBookModified;
 
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
         history = new CommandHistory();
-        addressBookParser = new AddressBookParser();
+        ePiggyParser = new EPiggyParser();
 
         // Set addressBookModified to true whenever the models' address book is modified.
-        model.getAddressBook().addListener(observable -> addressBookModified = true);
+        model.getEPiggy().addListener(observable -> addressBookModified = true);
     }
 
     @Override
@@ -51,16 +54,16 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         try {
-            Command command = addressBookParser.parseCommand(commandText);
+            Command command = ePiggyParser.parseCommand(commandText);
             commandResult = command.execute(model, history);
         } finally {
             history.add(commandText);
         }
 
         if (addressBookModified) {
-            logger.info("Address book modified, saving to file.");
+            logger.info("ePiggy modified, saving to file.");
             try {
-                storage.saveAddressBook(model.getAddressBook());
+                storage.saveEPiggy(model.getEPiggy());
             } catch (IOException ioe) {
                 throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
             }
@@ -70,8 +73,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyEPiggy getEPiggy() {
+        return model.getEPiggy();
     }
 
     @Override
@@ -85,13 +88,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public SimpleObjectProperty<Budget> getBudget() {
-        return model.getBudget();
+    public ObservableList<Budget> getFilteredBudgetList() {
+        return model.getFilteredBudgetList();
     }
 
     @Override
-    public ObservableList<Budget> getBudgetList() {
-        return model.getBudgetList();
+    public ObservableValue<Savings> getSavings() {
+        return model.getSavings();
+    }
+
+    @Override
+    public ObservableValue<Goal> getGoal() {
+        return model.getGoal();
     }
 
     @Override
@@ -100,8 +108,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getEPiggyFilePath() {
+        return model.getEPiggyFilePath();
     }
 
     @Override
@@ -130,8 +138,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public void setBudget(Budget budget) {
-        model.setBudget(budget); }
+    public void setCurrentBudget(Budget budget) {
+        model.setCurrentBudget(budget); }
 
     @Override
     public void addBudget(int index, Budget budget) {

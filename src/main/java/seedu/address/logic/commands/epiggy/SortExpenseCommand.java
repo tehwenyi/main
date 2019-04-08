@@ -2,11 +2,13 @@ package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.Model;
+import seedu.address.model.epiggy.Expense;
 
 
 //@@author rahulb99
@@ -19,35 +21,30 @@ public class SortExpenseCommand extends Command {
     public static final String COMMAND_WORD = "sortExpense";
     public static final String COMMAND_ALIAS = "sE";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + " : Sorts the expenses as specified by the user. "
-            + " The keywordss do not need to be in order.\n"
-            + " Parameters: -[n/d/$]...\n"
-            + " Example: " + COMMAND_WORD + " n/n";
-    public static final String MESSAGE_SUCCESS = "Sorting Expenses...\n";
+            + " : Sorts the expenses as specified by the user, according to name, cost, date or tag. \n"
+            + " Parameters: -[n/d/$]/...\n"
+            + " Example: " + COMMAND_WORD + " n/";
+    public static final String MESSAGE_SUCCESS = "Sorted %1$d Expenses...\n";
 
-    ArgumentMultimap keywords;
+    private final Comparator<Expense> expenseComparator;
 
-    public SortExpenseCommand(ArgumentMultimap keywords) {
-        assert keywords != null : "keywords should not be null.";
-        this.keywords = keywords;
+    public SortExpenseCommand(Comparator<Expense> expenseComparator) {
+        assert expenseComparator != null : "keywords should not be null.";
+        this.expenseComparator = expenseComparator;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.sortExpenses(keywords);
-        model.getFilteredExpenseList();
-        model.commitAddressBook();
+        model.sortExpenses(expenseComparator);
+        model.updateFilteredExpensesList(Model.PREDICATE_SHOW_ALL_EXPENSES);
+        model.commitEPiggy();
 
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, model.getFilteredExpenseList().size()));
     }
 
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof SortExpenseCommand // instanceof handles nulls
-                && keywords.equals(((SortExpenseCommand) other).keywords)); // state check
+    public Comparator<Expense> getExpenseComparator() {
+        return expenseComparator;
     }
-
 }

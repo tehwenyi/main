@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
     private ExpenseListPanel expenseListPanel;
+    private SavingsPanel savingsPanel;
     private BudgetPanel budgetPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -48,7 +49,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane savingsPanelPlaceholder;
 
     @FXML
     private StackPane expenseListPanelPlaceholder;
@@ -123,22 +124,21 @@ public class MainWindow extends UiPart<Stage> {
         browserPanel = new BrowserPanel(logic.selectedPersonProperty());
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.selectedPersonProperty(),
-                logic::setSelectedPerson);
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
         expenseListPanel = new ExpenseListPanel(logic.getFilteredExpenseList(),
                 logic.selectedExpenseProperty(), expense -> {
         }); //TODO
         expenseListPanelPlaceholder.getChildren().add(expenseListPanel.getRoot());
 
-        budgetPanel = new BudgetPanel(logic.getBudgetList(), logic::setBudget);
+        savingsPanel = new SavingsPanel(logic.getSavings(), logic.getGoal());
+        savingsPanelPlaceholder.getChildren().add(savingsPanel.getRoot());
+
+        budgetPanel = new BudgetPanel(logic.getFilteredBudgetList(), logic::setCurrentBudget);
         budgetPanelPlaceholder.getChildren().add(budgetPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath(), logic.getAddressBook());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getEPiggyFilePath(), logic.getEPiggy());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand, logic.getHistory());
@@ -193,9 +193,9 @@ public class MainWindow extends UiPart<Stage> {
     private void handleDailyReport() {
         helpWindow.hide();
         try {
-            logic.execute("report t/daily");
+            logic.execute("report");
         } catch (CommandException | ParseException e) {
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultDisplay.setFeedbackToUser(e.getMessage(), "report t/daily");
         }
     }
 
@@ -206,9 +206,9 @@ public class MainWindow extends UiPart<Stage> {
     private void handleMonthlyReport() {
         helpWindow.hide();
         try {
-            logic.execute("report t/monthly");
+            logic.execute("report type/monthly");
         } catch (CommandException | ParseException e) {
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultDisplay.setFeedbackToUser(e.getMessage(), "report t/monthly");
         }
     }
 
@@ -219,9 +219,9 @@ public class MainWindow extends UiPart<Stage> {
     private void handleYearlyReport() {
         helpWindow.hide();
         try {
-            logic.execute("report t/yearly");
+            logic.execute("report type/yearly");
         } catch (CommandException | ParseException e) {
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultDisplay.setFeedbackToUser(e.getMessage(), "report t/yearly");
         }
     }
 
@@ -232,9 +232,9 @@ public class MainWindow extends UiPart<Stage> {
     private void handlePercentageReport() {
         helpWindow.hide();
         try {
-            logic.execute("report t/percentage");
+            logic.execute("report type/percentage");
         } catch (CommandException | ParseException e) {
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultDisplay.setFeedbackToUser(e.getMessage(), "report t/percentage");
         }
     }
 
@@ -251,7 +251,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser(), commandText);
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -264,7 +264,7 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultDisplay.setFeedbackToUser(e.getMessage(), commandText);
             throw e;
         }
     }

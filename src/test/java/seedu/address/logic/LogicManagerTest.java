@@ -3,10 +3,6 @@ package seedu.address.logic;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.COST_DESC_BOWLING;
-import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_2018;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOWLING;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIENDS;
 import static seedu.address.testutil.epiggy.TypicalExpenses.BOWLING;
 
 import java.io.IOException;
@@ -19,12 +15,13 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
+import seedu.address.logic.commands.CommandTestUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.epiggy.AddExpenseCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -87,8 +84,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddExpenseCommand.COMMAND_WORD + NAME_DESC_BOWLING + COST_DESC_BOWLING + DATE_DESC_2018
-                + TAG_DESC_FRIENDS;
+        String addCommand = AddExpenseCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_BOWLING + CommandTestUtil.COST_DESC_BOWLING + CommandTestUtil.DATE_DESC_2018
+                + CommandTestUtil.TAG_DESC_FRIENDS;
         Expense expectedExpense = new ExpensesBuilder(BOWLING).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addExpense(expectedExpense);

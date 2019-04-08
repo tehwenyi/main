@@ -1,18 +1,14 @@
 package seedu.address.model.expense;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.CliSyntax;
+import seedu.address.commons.util.StringUtil;
 
 //@@author rahulb99
 /**
@@ -39,10 +35,10 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
     public boolean test(Expense expense) {
         assert expense != null : "expense should not be null.";
 
-        String nameKeywords = keywords.getValue(PREFIX_NAME).orElse("");
-        List<String> tagKeywords = keywords.getAllValues(PREFIX_TAG);
-        String dateKeywords = keywords.getValue(PREFIX_DATE).orElse("");
-        String costKeywords = keywords.getValue(PREFIX_COST).orElse("");
+        String nameKeywords = keywords.getValue(CliSyntax.PREFIX_NAME).orElse("");
+        List<String> tagKeywords = keywords.getAllValues(CliSyntax.PREFIX_TAG);
+        String dateKeywords = keywords.getValue(CliSyntax.PREFIX_DATE).orElse("");
+        String costKeywords = keywords.getValue(CliSyntax.PREFIX_COST).orElse("");
 
         //if all keywords are absent, return false
         if (nameKeywords.equals("") && tagKeywords.isEmpty()

@@ -6,6 +6,19 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
+import seedu.address.logic.commands.epiggy.EditBudgetCommand;
+import seedu.address.logic.commands.epiggy.FindExpenseCommand;
+import seedu.address.logic.commands.epiggy.ReverseListCommand;
+import seedu.address.logic.commands.epiggy.SetGoalCommand;
+import seedu.address.logic.parser.epiggy.AddAllowanceCommandParser;
+import seedu.address.logic.parser.epiggy.AddExpenseCommandParser;
+import seedu.address.logic.parser.epiggy.DeleteBudgetCommandParser;
+import seedu.address.logic.parser.epiggy.EditBudgetCommandParser;
+import seedu.address.logic.parser.epiggy.FindExpenseCommandParser;
+import seedu.address.logic.parser.epiggy.ReportCommandParser;
+import seedu.address.logic.parser.epiggy.SetGoalCommandParser;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
@@ -18,29 +31,20 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.epiggy.AddAllowanceCommand;
 import seedu.address.logic.commands.epiggy.AddBudgetCommand;
 import seedu.address.logic.commands.epiggy.AddExpenseCommand;
-import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
+import seedu.address.logic.commands.epiggy.DeleteAllowanceCommand;
 import seedu.address.logic.commands.epiggy.DeleteExpenseCommand;
-import seedu.address.logic.commands.epiggy.EditBudgetCommand;
+import seedu.address.logic.commands.epiggy.EditAllowanceCommand;
 import seedu.address.logic.commands.epiggy.EditExpenseCommand;
-import seedu.address.logic.commands.epiggy.FindExpenseCommand;
 import seedu.address.logic.commands.epiggy.ReportCommand;
-import seedu.address.logic.commands.epiggy.ReverseListCommand;
-import seedu.address.logic.commands.epiggy.SetGoalCommand;
 import seedu.address.logic.commands.epiggy.SortExpenseCommand;
 import seedu.address.logic.commands.epiggy.ViewGoalCommand;
 import seedu.address.logic.commands.epiggy.ViewSavingsCommand;
-import seedu.address.logic.parser.epiggy.AddAllowanceCommandParser;
 import seedu.address.logic.parser.epiggy.AddBudgetCommandParser;
-import seedu.address.logic.parser.epiggy.AddExpenseCommandParser;
-import seedu.address.logic.parser.epiggy.DeleteBudgetCommandParser;
+import seedu.address.logic.parser.epiggy.DeleteAllowanceCommandParser;
 import seedu.address.logic.parser.epiggy.DeleteExpenseCommandParser;
-import seedu.address.logic.parser.epiggy.EditBudgetCommandParser;
+import seedu.address.logic.parser.epiggy.EditAllowanceCommandParser;
 import seedu.address.logic.parser.epiggy.EditExpenseCommandParser;
-import seedu.address.logic.parser.epiggy.FindExpenseCommandParser;
-import seedu.address.logic.parser.epiggy.ReportCommandParser;
-import seedu.address.logic.parser.epiggy.SetGoalCommandParser;
 import seedu.address.logic.parser.epiggy.SortExpenseCommandParser;
-import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses user input.
@@ -84,6 +88,14 @@ public class EPiggyParser {
         case AddAllowanceCommand.COMMAND_WORD:
         case AddAllowanceCommand.COMMAND_ALIAS:
             return new AddAllowanceCommandParser().parse(arguments);
+
+        case EditAllowanceCommand.COMMAND_WORD:
+        case EditAllowanceCommand.COMMAND_ALIAS:
+            return new EditAllowanceCommandParser().parse(arguments);
+
+        case DeleteAllowanceCommand.COMMAND_WORD:
+        case DeleteAllowanceCommand.COMMAND_ALIAS:
+            return new DeleteAllowanceCommandParser().parse(arguments);
 
         case ViewSavingsCommand.COMMAND_WORD:
         case ViewSavingsCommand.COMMAND_ALIAS:

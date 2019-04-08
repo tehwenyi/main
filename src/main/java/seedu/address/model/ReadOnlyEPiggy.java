@@ -2,10 +2,11 @@ package seedu.address.model;
 
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.Savings;
+import seedu.address.model.expense.Cost;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.expense.Item;
 
@@ -29,7 +30,7 @@ public interface ReadOnlyEPiggy extends Observable {
      */
     ObservableList<Budget> getBudgetList();
 
-    SimpleObjectProperty<Savings> getSavings();
+    ObservableValue<Cost> getSavings();
 
     SimpleObjectProperty<Goal> getGoal();
 }

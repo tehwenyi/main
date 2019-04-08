@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.commons.util.AppUtil;
+
 /**
  * Represents a time period.
  * Guarantees: immutable
@@ -19,13 +21,13 @@ public class Period {
     private final int timePeriod;
 
     public Period(int timePeriod) {
-        checkArgument(isValidPeriod(timePeriod), MESSAGE_CONSTRAINTS);
+        AppUtil.checkArgument(isValidPeriod(timePeriod), MESSAGE_CONSTRAINTS);
         this.timePeriod = timePeriod;
     }
 
     public Period(String period) {
         requireNonNull(period);
-        checkArgument(isValidPeriod(period), MESSAGE_CONSTRAINTS);
+        AppUtil.checkArgument(isValidPeriod(period), MESSAGE_CONSTRAINTS);
         this.timePeriod = Integer.parseInt(period);
     }
 

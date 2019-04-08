@@ -16,12 +16,13 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.expense.Cost;
+import seedu.address.model.expense.Expense;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.Savings;
 import seedu.address.model.epiggy.exceptions.ExpenseNotFoundException;
-import seedu.address.model.expense.Expense;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -40,7 +41,7 @@ public class ModelManager implements Model {
      */
     public ModelManager(ReadOnlyEPiggy ePiggy, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(ePiggy, userPrefs);
+        CollectionUtil.requireAllNonNull(ePiggy, userPrefs);
 
         logger.fine("Initializing with address book: " + ePiggy + " and user prefs " + userPrefs);
 
@@ -106,7 +107,7 @@ public class ModelManager implements Model {
     @Override
     public void setExpense(Expense target,
                            Expense editedExpense) {
-        requireAllNonNull(target, editedExpense);
+        CollectionUtil.requireAllNonNull(target, editedExpense);
 
         versionedEPiggy.setExpense(target, editedExpense);
     }
@@ -160,7 +161,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public SimpleObjectProperty<Savings> getSavings() {
+    public SimpleObjectProperty<Cost> getSavings() {
         return versionedEPiggy.getSavings();
     }
 
@@ -214,7 +215,7 @@ public class ModelManager implements Model {
      * @param comparator expense comparator
      */
     public void sortExpenses(Comparator<Expense> comparator) {
-        requireAllNonNull(comparator);
+        CollectionUtil.requireAllNonNull(comparator);
         versionedEPiggy.sortExpense(comparator);
     }
 

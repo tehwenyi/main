@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.EPiggy;
 import seedu.address.model.ReadOnlyEPiggy;
+import seedu.address.commons.exceptions.DataConversionException;
 
 /**
  * Represents a storage for {@link EPiggy}.
@@ -24,12 +24,12 @@ public interface EPiggyStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<seedu.address.model.ReadOnlyEPiggy> readEPiggy() throws DataConversionException, IOException;
+    Optional<ReadOnlyEPiggy> readEPiggy() throws DataConversionException, IOException;
 
     /**
      * @see #getEPiggyFilePath()
      */
-    Optional<seedu.address.model.ReadOnlyEPiggy> readEPiggy(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyEPiggy> readEPiggy(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyEPiggy} to the storage.

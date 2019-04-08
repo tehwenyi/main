@@ -3,11 +3,10 @@ package seedu.address.model.expense;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_FIRSTEXTRA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_SECONDEXTRA;
 
 import org.junit.Test;
 
+import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.testutil.Assert;
 
 public class PeriodTest {
@@ -69,9 +68,9 @@ public class PeriodTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Period one = new Period(VALID_PERIOD_FIRSTEXTRA);
-        Period two = new Period(VALID_PERIOD_SECONDEXTRA);
-        Period oneCopy = new Period(VALID_PERIOD_FIRSTEXTRA);
+        Period one = new Period(CommandTestUtil.VALID_PERIOD_FIRSTEXTRA);
+        Period two = new Period(CommandTestUtil.VALID_PERIOD_SECONDEXTRA);
+        Period oneCopy = new Period(CommandTestUtil.VALID_PERIOD_FIRSTEXTRA);
         assertTrue(one.equals(oneCopy));
 
         // same object -> returns true
@@ -89,12 +88,12 @@ public class PeriodTest {
 
     @Test
     public void toStringTest() {
-        Period one = new Period(VALID_PERIOD_FIRSTEXTRA);
+        Period one = new Period(CommandTestUtil.VALID_PERIOD_FIRSTEXTRA);
 
         // same string -> return true
-        assertTrue(one.toString().equals(VALID_PERIOD_FIRSTEXTRA));
+        assertTrue(one.toString().equals(CommandTestUtil.VALID_PERIOD_FIRSTEXTRA));
 
         // different strings -> return false
-        assertFalse(one.toString().equals(VALID_PERIOD_SECONDEXTRA));
+        assertFalse(one.toString().equals(CommandTestUtil.VALID_PERIOD_SECONDEXTRA));
     }
 }

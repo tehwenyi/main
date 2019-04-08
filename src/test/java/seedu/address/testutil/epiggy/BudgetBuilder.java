@@ -1,5 +1,7 @@
 package seedu.address.testutil.epiggy;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import seedu.address.model.epiggy.Budget;
@@ -13,8 +15,8 @@ public class BudgetBuilder {
 
     public static final String DEFAULT_AMOUNT = "500";
     public static final String DEFAULT_PERIOD = "25";
-    // The date is in the format MM/dd/yyyy, hence 3rd February 2019 below
-    public static final String DEFAULT_STARTDATE = "02/03/2019";
+    // The date is in the format dd/MM/yyyy, hence 3rd February 2019 below
+    public static final String DEFAULT_STARTDATE = "03/02/2019";
 
     private Cost amount;
     private Period days;
@@ -23,7 +25,12 @@ public class BudgetBuilder {
     public BudgetBuilder() {
         amount = new Cost(DEFAULT_AMOUNT);
         days = new Period(DEFAULT_PERIOD);
-        startDate = new Date(DEFAULT_STARTDATE);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            startDate = dateFormat.parse(DEFAULT_STARTDATE);
+        } catch (ParseException e) {
+            System.out.println("Date should be in the format dd/mm/yyyy.");
+        }
     }
 
     /**
@@ -55,7 +62,12 @@ public class BudgetBuilder {
      * Sets the {@code Date} of the {@code Budget} that we are building.
      */
     public BudgetBuilder withDate(String startDate) {
-        this.startDate = new Date(startDate);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            this.startDate = dateFormat.parse(startDate);
+        } catch (ParseException e) {
+            System.out.println("Date should be in the format dd/mm/yyyy.");
+        }
         return this;
     }
 

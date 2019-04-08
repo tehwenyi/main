@@ -2,22 +2,19 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXPENSE;
 import static seedu.address.testutil.epiggy.TypicalExpenses.getTypicalEPiggy;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
+import seedu.address.logic.CommandHistory;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.testutil.TypicalIndexes;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
@@ -32,8 +29,8 @@ public class SelectCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Index lastExpenseIndex = Index.fromOneBased(model.getFilteredExpenseList().size());
 
-        assertExecutionSuccess(INDEX_FIRST_EXPENSE);
-        assertExecutionSuccess(INDEX_SECOND_EXPENSE);
+        assertExecutionSuccess(TypicalIndexes.INDEX_FIRST_EXPENSE);
+        assertExecutionSuccess(TypicalIndexes.INDEX_SECOND_EXPENSE);
         assertExecutionSuccess(lastExpenseIndex);
     }
 
@@ -46,18 +43,18 @@ public class SelectCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_EXPENSE);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_EXPENSE);
+        CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_EXPENSE);
+        CommandTestUtil.showPersonAtIndex(expectedModel, TypicalIndexes.INDEX_FIRST_EXPENSE);
 
-        assertExecutionSuccess(INDEX_FIRST_EXPENSE);
+        assertExecutionSuccess(TypicalIndexes.INDEX_FIRST_EXPENSE);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_EXPENSE);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_EXPENSE);
+        CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_EXPENSE);
+        CommandTestUtil.showPersonAtIndex(expectedModel, TypicalIndexes.INDEX_FIRST_EXPENSE);
 
-        Index outOfBoundsIndex = INDEX_SECOND_EXPENSE;
+        Index outOfBoundsIndex = TypicalIndexes.INDEX_SECOND_EXPENSE;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundsIndex.getZeroBased() < model.getEPiggy().getExpenseList().size());
 
@@ -66,14 +63,14 @@ public class SelectCommandTest {
 
     @Test
     public void equals() {
-        SelectCommand selectFirstCommand = new SelectCommand(INDEX_FIRST_EXPENSE);
-        SelectCommand selectSecondCommand = new SelectCommand(INDEX_SECOND_EXPENSE);
+        SelectCommand selectFirstCommand = new SelectCommand(TypicalIndexes.INDEX_FIRST_EXPENSE);
+        SelectCommand selectSecondCommand = new SelectCommand(TypicalIndexes.INDEX_SECOND_EXPENSE);
 
         // same object -> returns true
         assertTrue(selectFirstCommand.equals(selectFirstCommand));
 
         // same values -> returns true
-        SelectCommand selectFirstCommandCopy = new SelectCommand(INDEX_FIRST_EXPENSE);
+        SelectCommand selectFirstCommandCopy = new SelectCommand(TypicalIndexes.INDEX_FIRST_EXPENSE);
         assertTrue(selectFirstCommand.equals(selectFirstCommandCopy));
 
         // different types -> returns false
@@ -104,6 +101,6 @@ public class SelectCommandTest {
      */
     private void assertExecutionFailure(Index index, String expectedMessage) {
         SelectCommand selectCommand = new SelectCommand(index);
-        assertCommandFailure(selectCommand, model, commandHistory, expectedMessage);
+        CommandTestUtil.assertCommandFailure(selectCommand, model, commandHistory, expectedMessage);
     }
 }

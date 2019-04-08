@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -8,9 +9,9 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.expense.Cost;
 import seedu.address.model.expense.Name;
 import seedu.address.model.expense.Period;
@@ -40,9 +41,12 @@ public class ParserUtil {
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static Name parseItemName(String name) {
+    public static Name parseItemName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
         return new Name(trimmedName);
     }
 
@@ -68,10 +72,11 @@ public class ParserUtil {
         Date parsedDate;
         // TODO add more forms of setting date eg. dd.mm.yyyy
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormat.setLenient(false);
         try {
             parsedDate = dateFormat.parse(date.trim());
         } catch (java.text.ParseException parseException) {
-            throw new ParseException("Date should be in the format dd/mm/yyyy.");
+            throw new ParseException(MESSAGE_INVALID_DATE);
         }
         return parsedDate;
     }

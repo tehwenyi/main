@@ -19,11 +19,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.Savings;
+import seedu.address.model.expense.Cost;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.expense.Item;
 
-@Ignore
 public class EPiggyTest {
 
     @Rule
@@ -42,6 +41,7 @@ public class EPiggyTest {
         ePiggy.resetData(null);
     }
 
+    @Ignore
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
         EPiggy newData = getTypicalEPiggy();
@@ -122,7 +122,6 @@ public class EPiggyTest {
         private final ObservableList<Item> items = FXCollections.observableArrayList();
         private ObservableList<Budget> budgets; //TODO
         private SimpleObjectProperty<Goal> goal;
-        private SimpleObjectProperty<Savings> savings;
 
 
         AddressBookStub(Collection<Expense> persons) {
@@ -150,7 +149,7 @@ public class EPiggyTest {
         }
 
         @Override
-        public SimpleObjectProperty<Savings> getSavings() {
+        public SimpleObjectProperty<Cost> getSavings() {
             return null;
         }
 

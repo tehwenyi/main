@@ -7,14 +7,14 @@ import java.util.logging.Logger;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import seedu.address.logic.Logic;
+import seedu.address.logic.LogicManager;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.Logic;
-import seedu.address.logic.LogicManager;
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -23,14 +23,14 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
 import seedu.address.model.epiggy.SampleEPiggyDataUtil;
+import seedu.address.ui.Ui;
+import seedu.address.ui.UiManager;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.epiggy.EPiggyStorage;
 import seedu.address.storage.epiggy.JsonEPiggyStorage;
-import seedu.address.ui.Ui;
-import seedu.address.ui.UiManager;
 
 /**
  * The main entry point to the application.

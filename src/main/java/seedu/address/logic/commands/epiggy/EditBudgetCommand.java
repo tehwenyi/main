@@ -2,15 +2,13 @@ package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.epiggy.AddBudgetCommand.MESSAGE_OVERLAPPING_BUDGET;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BUDGETS;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
@@ -33,12 +31,12 @@ public class EditBudgetCommand extends Command {
     // TODO MESSAGE_USAGE should come out
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the current budget. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: [" + PREFIX_COST + "BUDGET_IN_DOLLARS] "
-            + "[" + PREFIX_PERIOD + "TIME_PERIOD_IN_DAYS] "
-            + "[" + PREFIX_DATE + "START_DATE_IN_DD/MM/YYYY] "
+            + "Parameters: [" + CliSyntax.PREFIX_COST + "BUDGET_IN_DOLLARS] "
+            + "[" + CliSyntax.PREFIX_PERIOD + "TIME_PERIOD_IN_DAYS] "
+            + "[" + CliSyntax.PREFIX_DATE + "START_DATE_IN_DD/MM/YYYY] "
             + "Example: " + COMMAND_WORD
-            + PREFIX_COST + "200 "
-            + PREFIX_PERIOD + "7";
+            + CliSyntax.PREFIX_COST + "200 "
+            + CliSyntax.PREFIX_PERIOD + "7";
 
     public static final String MESSAGE_EDIT_BUDGET_SUCCESS = "Current budget updated:\n%1$s";
     public static final String MESSAGE_EDIT_BUDGET_DOES_NOT_EXIST_FAIL = "Only the current budget can be edited."
@@ -50,7 +48,7 @@ public class EditBudgetCommand extends Command {
 
     public EditBudgetCommand(EditBudgetDetails editBudgetDetails) {
         requireNonNull(editBudgetDetails);
-        this.editBudgetDetails = new EditBudgetDetails(editBudgetDetails);
+        this.editBudgetDetails = editBudgetDetails;
     }
 
     @Override

@@ -1,10 +1,6 @@
 package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
 
 import java.util.Collections;
@@ -14,10 +10,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -41,19 +38,23 @@ public class EditExpenseCommand extends Command {
             + "by the index number used in the displayed expense list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_COST + "COST] "
-            + "[" + PREFIX_DATE + "DATE] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + CliSyntax.PREFIX_NAME + "NAME] "
+            + "[" + CliSyntax.PREFIX_COST + "COST] "
+            + "[" + CliSyntax.PREFIX_DATE + "DATE] "
+            + "[" + CliSyntax.PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_COST + "5 "
-            + PREFIX_TAG + "food";
+            + CliSyntax.PREFIX_COST + "5 "
+            + CliSyntax.PREFIX_TAG + "food";
 
     public static final String MESSAGE_EDIT_EXPENSE_SUCCESS = "Edited expense: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
-    private final Index index;
-    private final EditExpenseDescriptor editExpenseDescriptor;
+    private static final String MESSAGE_ITEM_NOT_EXPENSE = "The item selected is not an expense. "
+            + "Please use " + COMMAND_WORD + " to edit expenses and "
+            + EditAllowanceCommand.COMMAND_WORD + " to edit allowances.";
+
+    final Index index;
+    final EditExpenseDescriptor editExpenseDescriptor;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -77,6 +78,9 @@ public class EditExpenseCommand extends Command {
         }
 
         Expense toEdit = lastShownList.get(index.getZeroBased());
+        if (toEdit instanceof Allowance) {
+            throw new CommandException(MESSAGE_ITEM_NOT_EXPENSE);
+        }
         Expense editedExpense = createEditedExpense(toEdit, editExpenseDescriptor);
 
         model.setExpense(toEdit, editedExpense);
@@ -89,7 +93,7 @@ public class EditExpenseCommand extends Command {
      * Creates and returns a {@code expense} with the details of {@code expenseToEdit}
      * edited with {@code editExpenseDescriptor}.
      */
-    private static Expense createEditedExpense(Expense expenseToEdit, EditExpenseDescriptor editExpenseDescriptor) {
+    static Expense createEditedExpense(Expense expenseToEdit, EditExpenseDescriptor editExpenseDescriptor) {
         assert expenseToEdit != null;
 
         Name updatedName = editExpenseDescriptor.getName().orElse(expenseToEdit.getItem().getName());

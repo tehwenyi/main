@@ -2,17 +2,17 @@ package seedu.address.logic.parser.epiggy;
 
 import static seedu.address.commons.core.Messages.FORMAT_ERROR_MESSAGE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
 import java.time.LocalDate;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.epiggy.ReportCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.commands.epiggy.ReportCommand;
 
 /**
  * Parses input arguments and display report.
@@ -45,16 +45,16 @@ public class ReportCommandParser implements Parser<ReportCommand> {
         }
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DATE);
+                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_DATE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DATE)
+        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ReportCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            String dateString = argMultimap.getValue(PREFIX_DATE).get();
+        if (argMultimap.getValue(CliSyntax.PREFIX_DATE).isPresent()) {
+            String dateString = argMultimap.getValue(CliSyntax.PREFIX_DATE).get();
             // splits the dateString into year, month and day.
             String[] dateArr = dateString.split("/");
             try {

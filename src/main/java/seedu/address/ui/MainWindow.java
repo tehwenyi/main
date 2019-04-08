@@ -10,12 +10,12 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.address.logic.Logic;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -128,7 +128,7 @@ public class MainWindow extends UiPart<Stage> {
         }); //TODO
         expenseListPanelPlaceholder.getChildren().add(expenseListPanel.getRoot());
 
-        savingsPanel = new SavingsPanel(logic.getSavings(), logic.getGoal());
+        savingsPanel = new SavingsPanel(logic.getFilteredExpenseList(), logic.getGoal(), logic::getSavings);
         savingsPanelPlaceholder.getChildren().add(savingsPanel.getRoot());
 
         budgetPanel = new BudgetPanel(logic.getFilteredBudgetList(), logic::setCurrentBudget);
@@ -244,7 +244,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Executes the command and returns the result.
      *
-     * @see seedu.address.logic.Logic#execute(String)
+     * @see Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {

@@ -13,18 +13,17 @@ import org.junit.Test;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
+import seedu.address.model.ReadOnlyEPiggy;
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.Savings;
+import seedu.address.model.expense.Cost;
 import seedu.address.model.expense.Expense;
-import seedu.address.testutil.epiggy.SavingsBuilder;
 
 public class ViewSavingsCommandTest {
 
@@ -34,7 +33,7 @@ public class ViewSavingsCommandTest {
 
     @Test
     public void execute_viewSuccessful() throws Exception {
-        Savings validSavings = new SavingsBuilder().build();
+        Cost validSavings = new Cost(20);
         ModelStubWithSavings modelStub = new ModelStubWithSavings(validSavings);
         CommandResult commandResult = new ViewSavingsCommand().execute(modelStub, commandHistory);
 
@@ -136,7 +135,7 @@ public class ViewSavingsCommandTest {
         }
 
         @Override
-        public SimpleObjectProperty<Savings> getSavings() {
+        public SimpleObjectProperty<Cost> getSavings() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -227,15 +226,15 @@ public class ViewSavingsCommandTest {
     }
 
     private class ModelStubWithSavings extends ModelStub {
-        final SimpleObjectProperty<Savings> savings = new SimpleObjectProperty<>();
+        final SimpleObjectProperty<Cost> savings = new SimpleObjectProperty<>();
 
-        ModelStubWithSavings(Savings savings) {
+        ModelStubWithSavings(Cost savings) {
             requireNonNull(savings);
             this.savings.setValue(savings);
         }
 
         @Override
-        public SimpleObjectProperty<Savings> getSavings() {
+        public SimpleObjectProperty<Cost> getSavings() {
             return this.savings;
         }
     }

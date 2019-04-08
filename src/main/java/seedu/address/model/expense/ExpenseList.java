@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
+import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.exceptions.ExpenseNotFoundException;
 
 //@@author rahulb99
@@ -85,6 +86,26 @@ public class ExpenseList implements Iterable<Expense> {
     public void setExpenses(List<Expense> expenses) {
         requireAllNonNull(expenses);
         internalList.setAll(expenses);
+    }
+
+    public double getTotalExpenses() {
+        double sum = internalUnmodifiableList.stream()
+                .filter(expense -> !(expense instanceof Allowance))
+                .mapToDouble(expense -> expense.getItem().getCost().getAmount())
+                .sum();
+        return sum;
+    }
+
+    public double getTotalAllowances() {
+        double sum = internalUnmodifiableList.stream()
+                .filter(allowance -> allowance instanceof Allowance)
+                .mapToDouble(allowance -> allowance.getItem().getCost().getAmount())
+                .sum();
+        return sum;
+    }
+
+    public double getTotalSavings() {
+        return getTotalAllowances() - getTotalExpenses();
     }
 
     /**

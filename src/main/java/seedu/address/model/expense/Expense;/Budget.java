@@ -112,6 +112,24 @@ public class Budget {
         return this.endDate;
     }
 
+    public int getDay() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.startDate);
+        return cal.get(Calendar.DAY_OF_MONTH);
+    }
+
+    public int getMonth() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.startDate);
+        return cal.get(Calendar.MONTH);
+    }
+
+    public int getYear() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.startDate);
+        return cal.get(Calendar.YEAR);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -123,9 +141,13 @@ public class Budget {
         }
 
         Budget b = (Budget) o;
-        return this.amount == b.getBudgetedAmount()
-                && this.startDate == b.getStartDate()
-                && this.period == b.getPeriod();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.startDate);
+        return this.amount.equals(b.getBudgetedAmount())
+                && cal.get(Calendar.YEAR) == b.getYear()
+                && cal.get(Calendar.MONTH) == b.getMonth()
+                && cal.get(Calendar.DAY_OF_MONTH) == b.getDay()
+                && this.period.equals(b.getPeriod());
     }
 
     @Override

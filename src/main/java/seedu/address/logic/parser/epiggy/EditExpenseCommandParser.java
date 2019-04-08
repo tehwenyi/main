@@ -2,23 +2,20 @@ package seedu.address.logic.parser.epiggy;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.epiggy.EditExpenseCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,7 +31,7 @@ public class EditExpenseCommandParser implements Parser<EditExpenseCommand> {
     public EditExpenseCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_COST, PREFIX_DATE, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_COST, CliSyntax.PREFIX_DATE, CliSyntax.PREFIX_TAG);
 
         Index index;
 
@@ -48,16 +45,16 @@ public class EditExpenseCommandParser implements Parser<EditExpenseCommand> {
         }
 
         EditExpenseCommand.EditExpenseDescriptor editExpenseDescriptor = new EditExpenseCommand.EditExpenseDescriptor();
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editExpenseDescriptor.setName(ParserUtil.parseItemName(argMultimap.getValue(PREFIX_NAME).get()));
+        if (argMultimap.getValue(CliSyntax.PREFIX_NAME).isPresent()) {
+            editExpenseDescriptor.setName(ParserUtil.parseItemName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get()));
         }
-        if (argMultimap.getValue(PREFIX_COST).isPresent()) {
-            editExpenseDescriptor.setCost(ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get()));
+        if (argMultimap.getValue(CliSyntax.PREFIX_COST).isPresent()) {
+            editExpenseDescriptor.setCost(ParserUtil.parseCost(argMultimap.getValue(CliSyntax.PREFIX_COST).get()));
         }
-        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            editExpenseDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+        if (argMultimap.getValue(CliSyntax.PREFIX_DATE).isPresent()) {
+            editExpenseDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(CliSyntax.PREFIX_DATE).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editExpenseDescriptor::setTags);
+        parseTagsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_TAG)).ifPresent(editExpenseDescriptor::setTags);
 
         if (!editExpenseDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditExpenseCommand.MESSAGE_NOT_EDITED);
@@ -73,11 +70,8 @@ public class EditExpenseCommandParser implements Parser<EditExpenseCommand> {
      */
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
-
-        if (tags.isEmpty()) {
-            return Optional.empty();
-        }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+        tagSet.add("Expense");
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 

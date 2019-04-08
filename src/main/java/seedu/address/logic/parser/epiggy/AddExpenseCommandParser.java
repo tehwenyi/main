@@ -10,13 +10,13 @@ import java.util.Date;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.commands.epiggy.AddExpenseCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.expense.Cost;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.expense.Item;
@@ -37,7 +37,7 @@ public class AddExpenseCommandParser implements Parser<AddExpenseCommand> {
     public AddExpenseCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_COST, PREFIX_DATE, PREFIX_TAG);
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_COST, PREFIX_TAG)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_COST)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExpenseCommand.MESSAGE_USAGE));
         }
@@ -49,6 +49,7 @@ public class AddExpenseCommandParser implements Parser<AddExpenseCommand> {
             date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        tagList.add(new Tag("Expense"));
 
         Item item = new Item(name, cost, tagList);
         Expense expense = new Expense(item, date);

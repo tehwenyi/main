@@ -4,12 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import javafx.beans.property.SimpleObjectProperty;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.expense.Cost;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.Savings;
 
 /**
  * Views the current goal set.
@@ -31,11 +31,11 @@ public class ViewGoalCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        SimpleObjectProperty<Savings> savings = model.getSavings();
+        SimpleObjectProperty<Cost> savings = model.getSavings();
         SimpleObjectProperty<Goal> goal = model.getGoal();
 
         double goalAmount = goal.getValue().getAmount().getAmount();
-        double savingsAmount = savings.getValue().getSavings();
+        double savingsAmount = savings.getValue().getAmount();
 
         double diff = goalAmount - savingsAmount;
 

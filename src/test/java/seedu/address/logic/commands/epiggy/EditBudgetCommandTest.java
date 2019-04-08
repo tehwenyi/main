@@ -33,14 +33,14 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.epiggy.Allowance;
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Goal;
-import seedu.address.model.expense.Cost;
+import seedu.address.model.expense.Allowance;
+import seedu.address.model.expense.Budget;
+import seedu.address.model.expense.Goal;
+import seedu.address.model.expense.item.Cost;
 import seedu.address.model.expense.Expense;
 import seedu.address.testutil.epiggy.BudgetBuilder;
 import seedu.address.testutil.epiggy.EditBudgetDetailsBuilder;
-import seedu.address.model.expense.Period;
+import seedu.address.model.expense.item.Period;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)

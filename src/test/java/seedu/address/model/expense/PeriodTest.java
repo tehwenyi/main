@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.Test;
 
 import seedu.address.logic.commands.CommandTestUtil;
+import seedu.address.model.expense.item.Period;
 import seedu.address.testutil.Assert;
 
 public class PeriodTest {

@@ -8,7 +8,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
 import seedu.address.logic.commands.Command;
-import seedu.address.model.epiggy.Allowance;
+import seedu.address.model.expense.Allowance;
 
 /**
  * Adds an allowance to ePiggy.

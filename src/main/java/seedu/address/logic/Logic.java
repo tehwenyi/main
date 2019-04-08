@@ -5,16 +5,15 @@ import java.nio.file.Path;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyEPiggy;
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Goal;
-import seedu.address.model.Model;
-import seedu.address.model.expense.Cost;
+import seedu.address.model.expense.Budget;
 import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.Goal;
+import seedu.address.model.expense.item.Cost;
 
 /**
  * API of the Logic component
@@ -31,8 +30,6 @@ public interface Logic {
 
     /**
      * Returns the EPiggy.
-     *
-     * @see Model#getEPiggy()
      */
     ReadOnlyEPiggy getEPiggy();
 
@@ -69,8 +66,6 @@ public interface Logic {
     /**
      * Selected expense in the filtered expense list.
      * null if no expense is selected.
-     *
-     * @see Model#selectedExpenseProperty()
      */
     ReadOnlyProperty<Expense> selectedExpenseProperty();
 
@@ -86,8 +81,6 @@ public interface Logic {
 
     /**
      * Sets the selected expense in the filtered person list.
-     *
-     * @see Model#setSelectedExpense(Expense)
      */
     void setSelectedExpense(Expense expense);
 }

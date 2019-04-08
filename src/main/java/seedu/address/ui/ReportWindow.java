@@ -30,7 +30,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.Model;
-import seedu.address.model.epiggy.Budget;
+import seedu.address.model.expense.Budget;
 import seedu.address.model.expense.Expense;
 
 /**

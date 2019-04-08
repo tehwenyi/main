@@ -1,11 +1,11 @@
-package seedu.address.model.epiggy;
+package seedu.address.model.expense;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import seedu.address.model.expense.Cost;
-import seedu.address.model.expense.Period;
+import seedu.address.model.expense.item.Cost;
+import seedu.address.model.expense.item.Period;
 
 /**
  * Represents a Budget in the expense book.

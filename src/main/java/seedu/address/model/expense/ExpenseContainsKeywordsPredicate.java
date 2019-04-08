@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.expense.item.Item;
 
 //@@author rahulb99
 /**

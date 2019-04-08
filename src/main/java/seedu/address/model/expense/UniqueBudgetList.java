@@ -1,9 +1,9 @@
-package seedu.address.model.epiggy;
+package seedu.address.model.expense;
 
 import static java.util.Objects.requireNonNull;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.epiggy.Budget.CURRENT_BUDGET;
+import static seedu.address.model.expense.Budget.CURRENT_BUDGET;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -12,7 +12,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import seedu.address.model.epiggy.exceptions.DuplicateBudgetException;
+import seedu.address.model.expense.exceptions.DuplicateBudgetException;
 
 
 /**

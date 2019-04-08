@@ -4,9 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.expense.Cost;
-import seedu.address.model.expense.Period;
+import seedu.address.model.expense.Budget;
+import seedu.address.model.expense.item.Cost;
+import seedu.address.model.expense.item.Period;
 
 /**
  * A utility class to help with building Budget objects.

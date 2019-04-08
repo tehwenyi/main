@@ -5,7 +5,7 @@ import guitests.guihandles.NodeHandle;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 
-import seedu.address.model.epiggy.Budget;
+import seedu.address.model.expense.Budget;
 
 /**
  * Provides a handle to a budget card in the budget list panel.

@@ -3,6 +3,8 @@ package seedu.address.model.expense;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import seedu.address.model.expense.item.Item;
+
 /**
  * Represents an expense in the expense book.
  * Guarantees: details are present and not null, field values are validated, immutable.

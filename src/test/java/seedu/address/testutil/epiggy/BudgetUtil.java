@@ -2,10 +2,10 @@ package seedu.address.testutil.epiggy;
 
 import java.text.SimpleDateFormat;
 
+import seedu.address.logic.commands.epiggy.AddBudgetCommand;
 import seedu.address.logic.commands.epiggy.EditBudgetCommand;
 import seedu.address.logic.parser.CliSyntax;
-import seedu.address.logic.commands.epiggy.AddBudgetCommand;
-import seedu.address.model.epiggy.Budget;
+import seedu.address.model.expense.Budget;
 
 /**
  * A utility class for Budget.

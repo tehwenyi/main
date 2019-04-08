@@ -27,7 +27,7 @@ import seedu.address.EpiggyTestApp;
 import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
-import seedu.address.model.epiggy.Budget;
+import seedu.address.model.expense.Budget;
 import seedu.address.testutil.epiggy.TypicalReports;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;

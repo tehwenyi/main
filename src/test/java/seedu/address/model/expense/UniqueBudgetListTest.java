@@ -1,4 +1,4 @@
-package seedu.address.model.epiggy;
+package seedu.address.model.expense;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,7 +23,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.epiggy.exceptions.DuplicateBudgetException;
+import seedu.address.model.expense.exceptions.DuplicateBudgetException;
 import seedu.address.testutil.epiggy.BudgetBuilder;
 
 public class UniqueBudgetListTest {

@@ -2,9 +2,9 @@ package seedu.address.testutil.epiggy;
 
 import java.util.Set;
 
-import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.commands.epiggy.AddExpenseCommand;
-import seedu.address.logic.commands.epiggy.EditExpenseCommand.EditExpenseDescriptor;
+import seedu.address.logic.commands.epiggy.EditExpenseCommand;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.expense.Expense;
 import seedu.address.model.tag.Tag;
 
@@ -39,7 +39,7 @@ public class ExpenseUtil {
     /**
      * Returns the part of command string for the given {@code EditExpenseDescriptor}'s details.
      */
-    public static String getEditExpenseDescriptorDetails(EditExpenseDescriptor descriptor) {
+    public static String getEditExpenseDescriptorDetails(EditExpenseCommand.EditExpenseDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(CliSyntax.PREFIX_NAME).append(name).append(" "));
         descriptor.getCost().ifPresent(cost -> sb.append(CliSyntax.PREFIX_COST).append(cost.toString()).append(" "));

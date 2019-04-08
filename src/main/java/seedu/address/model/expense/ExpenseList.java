@@ -11,8 +11,7 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
-import seedu.address.model.epiggy.Allowance;
-import seedu.address.model.epiggy.exceptions.ExpenseNotFoundException;
+import seedu.address.model.expense.exceptions.ExpenseNotFoundException;
 
 //@@author rahulb99
 

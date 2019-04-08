@@ -9,11 +9,11 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.expense.Cost;
+import seedu.address.model.expense.Allowance;
+import seedu.address.model.expense.Budget;
 import seedu.address.model.expense.Expense;
-import seedu.address.model.epiggy.Allowance;
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Goal;
+import seedu.address.model.expense.Goal;
+import seedu.address.model.expense.item.Cost;
 
 /**
  * The API of the Model component.

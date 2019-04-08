@@ -4,11 +4,11 @@ import javafx.beans.Observable;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Goal;
-import seedu.address.model.expense.Cost;
+import seedu.address.model.expense.Budget;
 import seedu.address.model.expense.Expense;
-import seedu.address.model.expense.Item;
+import seedu.address.model.expense.Goal;
+import seedu.address.model.expense.item.Cost;
+import seedu.address.model.expense.item.Item;
 
 /**
  * Unmodifiable view of an address book

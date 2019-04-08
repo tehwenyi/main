@@ -11,7 +11,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.epiggy.Allowance;
+import seedu.address.model.expense.Allowance;
 import seedu.address.model.expense.Expense;
 import seedu.address.testutil.TypicalIndexes;
 import seedu.address.testutil.epiggy.TypicalAllowances;

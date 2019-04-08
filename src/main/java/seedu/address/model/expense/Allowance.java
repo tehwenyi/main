@@ -1,9 +1,8 @@
-package seedu.address.model.epiggy;
+package seedu.address.model.expense;
 
 import java.util.Date;
 
-import seedu.address.model.expense.Expense;
-import seedu.address.model.expense.Item;
+import seedu.address.model.expense.item.Item;
 
 /**
  * Represents an allowance in the expense book.

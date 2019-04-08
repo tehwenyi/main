@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Comparator;
@@ -17,12 +16,12 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.expense.Cost;
+import seedu.address.model.expense.Allowance;
+import seedu.address.model.expense.Budget;
 import seedu.address.model.expense.Expense;
-import seedu.address.model.epiggy.Allowance;
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.exceptions.ExpenseNotFoundException;
+import seedu.address.model.expense.Goal;
+import seedu.address.model.expense.exceptions.ExpenseNotFoundException;
+import seedu.address.model.expense.item.Cost;
 
 /**
  * Represents the in-memory model of the address book data.

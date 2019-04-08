@@ -2,14 +2,13 @@ package seedu.address.logic.parser.epiggy;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.commands.epiggy.EditBudgetCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.CliSyntax;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.commands.epiggy.EditBudgetCommand;
-import seedu.address.logic.commands.epiggy.EditBudgetCommand.EditBudgetDetails;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new EditBudgetCommand object
@@ -26,7 +25,7 @@ public class EditBudgetCommandParser implements Parser<EditBudgetCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_COST, CliSyntax.PREFIX_PERIOD, CliSyntax.PREFIX_DATE);
 
-        EditBudgetDetails editBudgetDetails = new EditBudgetDetails();
+        EditBudgetCommand.EditBudgetDetails editBudgetDetails = new EditBudgetCommand.EditBudgetDetails();
         if (argMultimap.getValue(CliSyntax.PREFIX_COST).isPresent()) {
             editBudgetDetails.setAmount(ParserUtil.parseCost(argMultimap.getValue(CliSyntax.PREFIX_COST).get()));
         }

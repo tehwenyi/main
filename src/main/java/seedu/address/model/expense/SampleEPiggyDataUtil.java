@@ -1,4 +1,4 @@
-package seedu.address.model.epiggy;
+package seedu.address.model.expense;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,11 +9,10 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.EPiggy;
 import seedu.address.model.ReadOnlyEPiggy;
-import seedu.address.model.expense.Cost;
-import seedu.address.model.expense.Expense;
-import seedu.address.model.expense.Item;
-import seedu.address.model.expense.Name;
-import seedu.address.model.expense.Period;
+import seedu.address.model.expense.item.Cost;
+import seedu.address.model.expense.item.Item;
+import seedu.address.model.expense.item.Name;
+import seedu.address.model.expense.item.Period;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,7 +22,7 @@ public class SampleEPiggyDataUtil {
     public static Expense[] getSampleExpenses() throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return new Expense[] {
-            new seedu.address.model.epiggy.Allowance(new Item(new Name("Allowance"), new Cost(20), getTagSet("Allowance")), new Date()),
+            new Allowance(new Item(new Name("Allowance"), new Cost(20), getTagSet("Allowance")), new Date()),
             new Expense(new Item(new Name("Dumpling Soup"), new Cost("5.00"),
                     getTagSet("food", "lunch")), new Date("20/03/2019")),
             new Expense(new Item(new Name("Stationary"), new Cost("3.00"),
@@ -43,15 +42,15 @@ public class SampleEPiggyDataUtil {
         };
     }
 
-    public static seedu.address.model.epiggy.Goal getSampleGoal() {
-        return new seedu.address.model.epiggy.Goal(new Name("Nintendo Switch"), new Cost(499));
+    public static Goal getSampleGoal() {
+        return new Goal(new Name("Nintendo Switch"), new Cost(499));
     }
 
-    public static seedu.address.model.epiggy.Budget[] getSampleBudget() throws ParseException {
+    public static Budget[] getSampleBudget() throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return new seedu.address.model.epiggy.Budget[] {
-            new seedu.address.model.epiggy.Budget(new Cost(200), new Period(30), sdf.parse("01/04/2019")),
-            new seedu.address.model.epiggy.Budget(new Cost(200), new Period(31), sdf.parse("01/03/2019"))
+        return new Budget[] {
+            new Budget(new Cost(200), new Period(30), sdf.parse("01/04/2019")),
+            new Budget(new Cost(200), new Period(31), sdf.parse("01/03/2019"))
         };
     }
 
@@ -59,13 +58,13 @@ public class SampleEPiggyDataUtil {
         EPiggy sampleEp = new EPiggy();
         try {
             for (Expense sampleExpense : getSampleExpenses()) {
-                if (sampleExpense instanceof seedu.address.model.epiggy.Allowance) {
-                    sampleEp.addAllowance((seedu.address.model.epiggy.Allowance) sampleExpense);
+                if (sampleExpense instanceof Allowance) {
+                    sampleEp.addAllowance((Allowance) sampleExpense);
                 } else {
                     sampleEp.addExpense(sampleExpense);
                 }
             }
-            seedu.address.model.epiggy.Budget[] budgets = getSampleBudget();
+            Budget[] budgets = getSampleBudget();
             for (int i = 0; i < budgets.length; i++) {
                 sampleEp.addBudget(i, budgets[i]);
             }

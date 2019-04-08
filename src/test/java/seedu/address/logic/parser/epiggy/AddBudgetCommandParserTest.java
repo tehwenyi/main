@@ -9,10 +9,10 @@ import org.junit.Test;
 import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.logic.commands.epiggy.AddBudgetCommand;
 import seedu.address.logic.parser.CommandParserTestUtil;
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.expense.Cost;
+import seedu.address.model.expense.Budget;
+import seedu.address.model.expense.item.Cost;
 import seedu.address.testutil.epiggy.BudgetBuilder;
-import seedu.address.model.expense.Period;
+import seedu.address.model.expense.item.Period;
 
 public class AddBudgetCommandParserTest {
     private AddBudgetCommandParser parser = new AddBudgetCommandParser();

@@ -2,7 +2,7 @@ package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
 
-import static seedu.address.model.epiggy.UniqueBudgetList.MAXIMUM_SIZE;
+import static seedu.address.model.expense.UniqueBudgetList.MAXIMUM_SIZE;
 
 import java.util.Date;
 import java.util.List;
@@ -13,7 +13,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.epiggy.Budget;
+import seedu.address.model.expense.Budget;
 
 /**
  * Sets a budget for the total expenses.

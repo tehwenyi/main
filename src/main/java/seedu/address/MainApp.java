@@ -22,7 +22,7 @@ import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 
-import seedu.address.model.epiggy.SampleEPiggyDataUtil;
+import seedu.address.model.expense.SampleEPiggyDataUtil;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 import seedu.address.storage.JsonUserPrefsStorage;

@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.epiggy.EditAllowanceCommand;
 import seedu.address.logic.commands.epiggy.EditExpenseCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -16,7 +17,6 @@ import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.tag.Tag;
 
 

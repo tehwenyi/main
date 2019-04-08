@@ -12,9 +12,9 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.epiggy.Goal;
-import seedu.address.model.expense.Cost;
-import seedu.address.model.expense.Name;
+import seedu.address.model.expense.Goal;
+import seedu.address.model.expense.item.Cost;
+import seedu.address.model.expense.item.Name;
 
 /**
  * Parses input arguments and creates a new SetGoalCommand object

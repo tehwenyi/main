@@ -24,10 +24,10 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.epiggy.Allowance;
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Goal;
-import seedu.address.model.expense.Cost;
+import seedu.address.model.expense.Allowance;
+import seedu.address.model.expense.Budget;
+import seedu.address.model.expense.Goal;
+import seedu.address.model.expense.item.Cost;
 import seedu.address.model.expense.Expense;
 import seedu.address.testutil.epiggy.AllowanceBuilder;
 

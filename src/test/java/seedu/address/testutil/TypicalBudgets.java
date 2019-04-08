@@ -6,7 +6,7 @@ import java.util.List;
 
 import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.model.EPiggy;
-import seedu.address.model.epiggy.Budget;
+import seedu.address.model.expense.Budget;
 import seedu.address.testutil.epiggy.BudgetBuilder;
 
 /**

@@ -1,4 +1,4 @@
-package seedu.address.model.expense;
+package seedu.address.model.expense.item;
 
 import static java.util.Objects.requireNonNull;
 

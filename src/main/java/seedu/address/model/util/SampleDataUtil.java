@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.EPiggy;
 import seedu.address.model.ReadOnlyEPiggy;
-import seedu.address.model.expense.Cost;
+import seedu.address.model.expense.item.Cost;
 import seedu.address.model.expense.Expense;
-import seedu.address.model.expense.Item;
-import seedu.address.model.expense.Name;
+import seedu.address.model.expense.item.Item;
+import seedu.address.model.expense.item.Name;
 import seedu.address.model.tag.Tag;
 
 /**

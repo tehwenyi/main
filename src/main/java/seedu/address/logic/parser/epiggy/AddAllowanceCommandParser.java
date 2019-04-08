@@ -10,17 +10,17 @@ import java.util.Date;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.commands.epiggy.AddAllowanceCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.epiggy.Allowance;
-import seedu.address.model.expense.Cost;
-import seedu.address.model.expense.Item;
-import seedu.address.model.expense.Name;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.expense.Allowance;
+import seedu.address.model.expense.item.Cost;
+import seedu.address.model.expense.item.Item;
+import seedu.address.model.expense.item.Name;
 import seedu.address.model.tag.Tag;
 
 /**

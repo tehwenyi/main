@@ -7,19 +7,19 @@ import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.EPiggyParser;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyEPiggy;
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Goal;
-import seedu.address.model.expense.Cost;
+import seedu.address.model.expense.Budget;
 import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.Goal;
+import seedu.address.model.expense.item.Cost;
 import seedu.address.storage.Storage;
 
 /**

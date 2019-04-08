@@ -9,12 +9,12 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.expense.Cost;
-import seedu.address.model.expense.Name;
-import seedu.address.model.expense.Period;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.expense.item.Cost;
+import seedu.address.model.expense.item.Name;
+import seedu.address.model.expense.item.Period;
 import seedu.address.model.tag.Tag;
 
 /**

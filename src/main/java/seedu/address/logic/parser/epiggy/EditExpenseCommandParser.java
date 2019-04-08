@@ -31,7 +31,8 @@ public class EditExpenseCommandParser implements Parser<EditExpenseCommand> {
     public EditExpenseCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_COST, CliSyntax.PREFIX_DATE, CliSyntax.PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_COST,
+                        CliSyntax.PREFIX_DATE, CliSyntax.PREFIX_TAG);
 
         Index index;
 

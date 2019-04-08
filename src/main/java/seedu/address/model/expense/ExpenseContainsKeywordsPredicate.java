@@ -1,14 +1,11 @@
 package seedu.address.model.expense;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.CliSyntax;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.model.expense.item.Item;
 
 //@@author rahulb99
@@ -36,7 +33,7 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
     public boolean test(Expense expense) {
         assert expense != null : "expense should not be null.";
 
-        String nameKeywords = keywords.getValue(CliSyntax.PREFIX_NAME).orElse("");
+        List<String> nameKeywords = keywords.getAllValues(CliSyntax.PREFIX_NAME);
         List<String> tagKeywords = keywords.getAllValues(CliSyntax.PREFIX_TAG);
         String dateKeywords = keywords.getValue(CliSyntax.PREFIX_DATE).orElse("");
         String costKeywords = keywords.getValue(CliSyntax.PREFIX_COST).orElse("");
@@ -71,12 +68,13 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
     /**
      * Return true if the {@code Name} of {@code expense} contains {@code nameKeywords}.
      * */
-    public boolean containsNameKeywords(String nameKeywords, Expense expense) {
+    public boolean containsNameKeywords(List<String> nameKeywords, Expense expense) {
         assert nameKeywords != null : "nameKeywords should not be null.\n";
-        List<String> splitNameKeywords = Arrays.asList(nameKeywords.trim().split("\\s+"));
         Item item = expense.getItem();
-        boolean result = splitNameKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(item.getName().name, keyword));
+        boolean result = true;
+        for (String n: nameKeywords) {
+            result = result && item.getName().name.toLowerCase().contains(n.trim().toLowerCase());
+        }
         return result;
     }
 
@@ -85,14 +83,12 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
      * */
     public boolean checkTagKeywords(List<String> tagKeywords, Expense expense) {
         assert tagKeywords != null : "tagKeywords should not be null.\n";
-        List<String> tagKeywordsList = new ArrayList<>();
-        for (String tag : tagKeywords) {
-            tagKeywordsList.addAll(Arrays.asList(tag.split("\\s+")));
-        }
+        boolean result = true;
         Item item = expense.getItem();
-        boolean result = tagKeywords.stream()
-                .anyMatch(keyword -> item.getTags().stream()
-                        .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
+        for (String tag : tagKeywords) {
+            result = result && item.getTags().stream()
+                    .anyMatch(keyword -> (keyword.tagName.trim().toLowerCase().contains(tag.trim().toLowerCase())));
+        }
         return result;
     }
 

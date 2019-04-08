@@ -4,11 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import javafx.beans.property.SimpleObjectProperty;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.expense.item.Cost;
-import seedu.address.logic.commands.Command;
 
 /**
  * Allows the user to view the savings recorded in ePiggy.

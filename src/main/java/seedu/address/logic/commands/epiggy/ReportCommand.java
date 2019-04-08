@@ -7,10 +7,10 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.parser.CliSyntax;
-import seedu.address.model.Model;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.parser.CliSyntax;
+import seedu.address.model.Model;
 import seedu.address.ui.ReportWindow;
 
 /**

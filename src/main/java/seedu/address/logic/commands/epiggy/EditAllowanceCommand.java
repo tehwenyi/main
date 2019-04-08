@@ -5,12 +5,12 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
 
 import java.util.List;
 
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.parser.CliSyntax;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
 import seedu.address.model.expense.Allowance;
 import seedu.address.model.expense.Expense;

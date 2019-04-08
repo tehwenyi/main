@@ -42,9 +42,9 @@ public class FindExpenseCommandParser implements Parser<FindExpenseCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindExpenseCommand.MESSAGE_USAGE));
         }
-
         ArgumentMultimap keywordsMap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_COST, CliSyntax.PREFIX_TAG, CliSyntax.PREFIX_DATE);
+                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_COST,
+                        CliSyntax.PREFIX_TAG, CliSyntax.PREFIX_DATE);
 
         ExpenseContainsKeywordsPredicate predicate = new ExpenseContainsKeywordsPredicate(keywordsMap);
         return new FindExpenseCommand(predicate);

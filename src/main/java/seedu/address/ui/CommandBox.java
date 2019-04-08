@@ -25,11 +25,11 @@ public class CommandBox extends UiPart<Region> {
     private ListElementPointer historySnapshot;
 
     private String[] commandArr = {"addExpense n/ $/ t/ d/", "deleteExpense ", "editExpense",
-            "report d/", "list ", "help ", "edit ", "search ", "sortExpense $/ ", "exit",
-            "editBudget $/ p/ d/", "percentage", "addBudget $/ p/ d/",
-            "addAllowance n/ $/", "deleteBudget ", "setGoal n/ $/",
-            "viewGoal", "viewSavings ", "sortExpense n/",
-            "findExpense n/ t/ d/ $/"};
+        "report d/", "list ", "help ", "edit ", "search ", "sortExpense $/ ", "exit",
+        "editBudget $/ p/ d/", "percentage", "addBudget $/ p/ d/",
+        "addAllowance n/ $/", "deleteBudget ", "setGoal n/ $/",
+        "viewGoal", "viewSavings ", "sortExpense n/",
+        "findExpense n/ t/ d/ $/"};
 
     @FXML
     private TextField commandTextField;
@@ -102,6 +102,7 @@ public class CommandBox extends UiPart<Region> {
             resultArr.add("report");
             break;
         case "12":
+        default:
             resultArr.add("addAllowance n/new life $/600");
             break;
         }

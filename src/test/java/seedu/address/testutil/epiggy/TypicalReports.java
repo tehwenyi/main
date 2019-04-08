@@ -20,7 +20,7 @@ import seedu.address.model.epiggy.Expense;
 public class TypicalReports {
 
     // valid test budgets
-    // Date is in the form MM/dd/yyyy
+    // Date is in the form mm/dd/yyyy
     public static final Budget VALID_BUDGET_ONE = new BudgetBuilder().withAmount("100")
             .withPeriod("7").withDate("02/04/2019").build();
     public static final Budget VALID_BUDGET_TWO = new BudgetBuilder().withAmount("300")
@@ -35,7 +35,7 @@ public class TypicalReports {
             .withTags(VALID_TAG_FOOD, "lunch").build();
     public static final Expense STATIONARY = new ExpensesBuilder().withName("Stationary")
             .withCost("3.00")
-            .withDate("03/06/2019")
+            .withDate("04/07/2019")
             .withTags("school", "misc").build();
     public static final Expense MOVIE_AVENGERS = new ExpensesBuilder().withName("Avengers : Endgame movie")
             .withDate("04/26/2019")
@@ -53,6 +53,10 @@ public class TypicalReports {
             .withCost("13.95")
             .withTags(VALID_TAG_FOOD, "dinner").build();
     public static final String KEYWORD_MATCHING_STATIONARY = "Stationary";
+    public static final String KEYWORD_MATCHING_DINNER = "dinner";
+    public static final String KEYWORD_MATCHING_DATE = "26/04/2019";
+    public static final String KEYWORD_MATCHING_START_DATE = "25/04/2019";
+    public static final String KEYWORD_MATCHING_END_DATE = "27/04/2019";
     private TypicalReports() {
     } // prevents instantiation
     /**

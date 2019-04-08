@@ -173,7 +173,7 @@ Displays all entries with the name “MCDONALDS”.
 Displays all entries with the tag specified (in this case, it’s food).
 * `search d/02/01/2019:05/12/2020` +
 Displays all entries listed in the range 2nd Jan 2019 to 5th Dec 2020.
-* `search $/250 500` +
+* `search $/250:500` +
 Displays all entries listed with the price range of $250 to $500.
 
 ****
@@ -189,19 +189,12 @@ Format: `sort -[n/d/$] -[A/D]`
 
 Examples:
 
-* `sort -n` +
+* `sort n/n` +
 Sorts all entries by name (in ascending order).
-* `sort -d -A` +
-Sorts all entries by date in ascending order.
-* `sort -$ -D` +
-Sorts all entries by amount in descending order.
-
-****
-*Additional Information:* +
-Sorts the entries according to the user-specified command. +
-A and D are optional arguments which determine whether you want the expenses sorted in ascending or
-descending, respectively. Unless otherwise explicitly mentioned, then it will be assumed to be ascending order.
-****
+* `sort d/d` +
+Sorts all entries by date in descending order.
+* `sort $/$` +
+Sorts all entries by amount in ascending order.
 
 === Budgeting
 

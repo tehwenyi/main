@@ -2,30 +2,22 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-
-import java.util.ListIterator;
-import java.util.concurrent.TimeUnit;
-
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.util.InvalidationListenerManager;
-import seedu.address.model.epiggy.Allowance;
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Expense;
-import seedu.address.model.epiggy.ExpenseList;
-import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.Savings;
-import seedu.address.model.epiggy.UniqueBudgetList;
+import seedu.address.model.epiggy.*;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+
+import java.util.Date;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Wraps all data at the address-book level
@@ -261,9 +253,26 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Sorts Expenses according to Date. Earlier Dates will have lower indexes.
      * @return SortedList of Expenses
      */
-    private SortedList<Expense> sortExpensesByDate() {
-        return expenses.sorted();
+    public SortedList<Expense> sortExpensesByDate() {
+        return expenses.sortByDate();
     }
+
+    /**
+     * Sorts Expenses according to Date. Earlier Dates will have lower indexes.
+     * @return SortedList of Expenses
+     */
+    public SortedList<Expense> sortExpensesByName() {
+        return expenses.sortByName();
+    }
+
+    /**
+     * Sorts Expenses according to Date. Earlier Dates will have lower indexes.
+     * @return SortedList of Expenses
+     */
+    public SortedList<Expense> sortExpensesByAmount() {
+        return expenses.sortByAmount();
+    }
+
 
     /**
      * Replaces the given expense {@code target} in the list with {@code editedExpense}.

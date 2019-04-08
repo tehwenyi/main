@@ -32,7 +32,7 @@ public class FindExpenseCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history)  {
+    public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredExpensesList(predicate);
         model.commitAddressBook();

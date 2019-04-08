@@ -3,22 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.epiggy.AddAllowanceCommand;
 import seedu.address.logic.commands.epiggy.AddExpenseCommand;
 import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
@@ -27,6 +13,7 @@ import seedu.address.logic.commands.epiggy.FindExpenseCommand;
 import seedu.address.logic.commands.epiggy.ReportCommand;
 import seedu.address.logic.commands.epiggy.SetBudgetCommand;
 import seedu.address.logic.commands.epiggy.SetGoalCommand;
+import seedu.address.logic.commands.epiggy.SortExpenseCommand;
 import seedu.address.logic.commands.epiggy.ViewBudgetCommand;
 import seedu.address.logic.commands.epiggy.ViewGoalCommand;
 import seedu.address.logic.commands.epiggy.ViewGoalProgressCommand;
@@ -39,7 +26,11 @@ import seedu.address.logic.parser.epiggy.FindExpenseCommandParser;
 import seedu.address.logic.parser.epiggy.ReportCommandParser;
 import seedu.address.logic.parser.epiggy.SetBudgetCommandParser;
 import seedu.address.logic.parser.epiggy.SetGoalCommandParser;
+import seedu.address.logic.parser.epiggy.SortExpenseCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Parses user input.
@@ -91,6 +82,10 @@ public class AddressBookParser {
         case FindExpenseCommand.COMMAND_WORD:
         case FindExpenseCommand.COMMAND_ALIAS:
             return new FindExpenseCommandParser().parse(arguments);
+
+        case SortExpenseCommand.COMMAND_WORD:
+        case SortExpenseCommand.COMMAND_ALIAS:
+            return new SortExpenseCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
         case SelectCommand.COMMAND_ALIAS:

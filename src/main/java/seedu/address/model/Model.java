@@ -1,18 +1,15 @@
 package seedu.address.model;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
-
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.epiggy.Allowance;
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Expense;
-import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.Savings;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.model.epiggy.*;
 import seedu.address.model.person.Person;
+
+import java.nio.file.Path;
+import java.util.function.Predicate;
 
 /**
  * The API of the Model component.
@@ -25,7 +22,7 @@ public interface Model {
     Predicate<Budget> PREDICATE_SHOW_ALL_BUDGETS = unused -> true;
 
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Budget> PREDICATE_SHOW_ALL_EXPENSES = unused -> true;
+    Predicate<Expense> PREDICATE_SHOW_ALL_EXPENSES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -111,9 +108,11 @@ public interface Model {
     /**
      * Replaces the given expense {@code target} with {@code editedExpense}.
      * {@code target} must exist in the address book.
-     * The expense identity of {@code editedExpense} must not be the same as another existing expense in the address book.
+     * The expense identity of {@code editedExpense} must not be the same as
+     * another existing expense in the address book.
      */
-    void setExpense(seedu.address.model.epiggy.Expense target, seedu.address.model.epiggy.Expense editedExpense);
+    void setExpense(seedu.address.model.epiggy.Expense target,
+                    seedu.address.model.epiggy.Expense editedExpense);
 
     /**
      * Updates the filter of the filtered expense list to filter by the given {@code predicate}.
@@ -243,4 +242,9 @@ public interface Model {
      * Sets the selected expense in the filtered expense list.
      */
     void setSelectedExpense(Expense expense);
+
+    /**
+     * Sorts the expenses according to the specified {@param keywords}.
+     */
+    void sortExpenses(ArgumentMultimap keywords);
 }

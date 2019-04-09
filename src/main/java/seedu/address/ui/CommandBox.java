@@ -82,7 +82,6 @@ public class CommandBox extends UiPart<Region> {
                 resultArr.add(commandInArray[i]);
             }
         }
-
         return resultArr.toArray(new String[resultArr.size()]);
     }
 

@@ -24,12 +24,7 @@ import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.EpiggyTestApp;
-
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
-import seedu.address.logic.commands.epiggy.FindExpenseCommand;
-
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.testutil.epiggy.TypicalReports;
@@ -129,7 +124,6 @@ public abstract class EPiggySystemTestWithDefaultData {
 
         waitUntilBrowserLoaded(getBrowserPanel());
     }
-  
     /**
      * Deletes all persons in the address book.
      */

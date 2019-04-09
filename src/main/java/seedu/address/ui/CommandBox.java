@@ -66,47 +66,6 @@ public class CommandBox extends UiPart<Region> {
                 resultArr.add(commandInArray[i]);
             }
         }
-        //TODO: this part is for 2101 demo, remove it after demo
-        switch (stringTryToMatch) {
-        case "1":
-            resultArr.add("addAllowance n/From Mom $/300");
-            break;
-        case "2":
-            resultArr.add("setGoal n/Apple Watch $/600");
-            break;
-        case "3":
-            resultArr.add("addBudget $/200 p/30 d/8/4/2019");
-            break;
-        case "4":
-            resultArr.add("addExpense n/Chicken Rice $/4 t/Lunch");
-            break;
-        case "5":
-            resultArr.add("addExpense n/Roti Prata $/5 t/TeaBreak");
-            break;
-        case "6":
-            resultArr.add("addExpense n/Beef Pho $/6 t/Dinner");
-            break;
-        case "7":
-            resultArr.add("addExpense n/Gift $/180 t/gf");
-            break;
-        case "8":
-            resultArr.add("findExpense n/pho");
-            break;
-        case "9":
-            resultArr.add("addExpense n/Pho $/6");
-            break;
-        case "10":
-            resultArr.add("sortExpense $/");
-            break;
-        case "11":
-            resultArr.add("report");
-            break;
-        case "12":
-        default:
-            resultArr.add("addAllowance n/new life $/600");
-            break;
-        }
-
         return resultArr.toArray(new String[resultArr.size()]);
     }
 

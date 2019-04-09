@@ -30,6 +30,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.Model;
+import seedu.address.model.expense.Allowance;
 import seedu.address.model.expense.Budget;
 import seedu.address.model.expense.Expense;
 
@@ -54,9 +55,7 @@ public class ReportWindow {
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Report");
         switch (expenseDisplayType) {
-        case ALL:
-            displayCompleteReport(model);
-            break;
+
         case DAY:
             displayReportOnSpecifiedDay(model, date);
             break;
@@ -66,6 +65,7 @@ public class ReportWindow {
         case YEAR:
             displayReportOnSpecifiedYear(model, date);
             break;
+        case ALL:
         default:
             displayCompleteReport(model);
             break;
@@ -205,7 +205,7 @@ public class ReportWindow {
                 if (currentDay.getMonthValue() == date.getMonthValue()
                         && currentDay.getYear() == date.getYear()) {
                     // -1 because getMonthValue from 1 to 12
-                    if (expense.getItem().getName().toString().equals("Allowance")) {
+                    if (expense instanceof Allowance) {
                         // calculate total allowance
                         allowances[currentDay.getMonthValue() - 1] += expense.getItem().getCost().getAmount();
                         isAllowanceDataEmpty = false;
@@ -359,7 +359,7 @@ public class ReportWindow {
                 if (currentDate.getYear() == date.getYear()) {
                     // found the specified year
                     double value = expense.getItem().getCost().getAmount();
-                    if (expense.getItem().getName().toString().equals("Allowance")) {
+                    if (expense instanceof Allowance) {
                         // allowance
                         allowances[currentDate.getMonthValue() - 1] += value;
                         isAllowanceEmpty = false;
@@ -492,7 +492,7 @@ public class ReportWindow {
                 if (map.containsKey(year)) {
                     // if year data exists
                     ReportData temp = map.get(year);
-                    if (expenses.get(i).getItem().getName().toString().equals("Allowance")) {
+                    if (expenses.get(i) instanceof Allowance) {
                         // expense type is allowance.
                         temp.setAllowance(temp.updateValue(temp.getAllowance(), amount));
                     } else {
@@ -504,10 +504,11 @@ public class ReportWindow {
                 } else {
                     // year data does not exist
                     data = new ReportData(year);
-                    if (expenses.get(i).getItem().getName().toString().equals("Allowance")) {
+                    if (expenses.get(i) instanceof Allowance) {
                         data.setAllowance(amount);
                     } else {
                         data.setExpense(amount);
+                        isExpenseEmpty = false;
                     }
                     map.put(year, data);
                 }
@@ -546,7 +547,7 @@ public class ReportWindow {
         double totalExpense = 0;
         double totalBudget = 0;
         double totalAllowance = 0;
-        double maxExpense = Double.MIN_VALUE;
+        double maxExpense = 0;
         String yearWithMaxExpense = "";
         TreeMap<Integer, ReportData> tm = new TreeMap<>(map);
         for (Map.Entry<Integer, ReportData> entry : tm.entrySet()) {
@@ -574,10 +575,7 @@ public class ReportWindow {
         Label labelOfMaxExpenseValue = new Label();
         Label labelOfMaxExpenseYear = new Label();
         if (!tm.isEmpty()) {
-            if (isExpenseEmpty) {
-                // reset max expense value to 0
-                maxExpense = 0;
-            }
+
             // adds labels into layout
             labelOfTotalExpense.setText("The total amount of expense: S$"
                     + totalExpense);
@@ -592,11 +590,21 @@ public class ReportWindow {
                     + "The highest expense record is S$"
                     + maxExpense);
 
-            // show pie chart
-            Group pieChart = displayExpensePercentageReport(totalExpense, totalAllowance);
+            if (isExpenseEmpty) {
+                labelOfMaxExpenseYear.setText("");
+            }
 
-            layout.getChildren().addAll(bc, pieChart, labelOfTotalExpense, labelOfTotalBudget,
-                    labelOfTotalAllowance, labelOfTotalSaving, labelOfMaxExpenseYear, labelOfMaxExpenseValue);
+            if (!isExpenseEmpty) {
+                // show pie chart
+                Group pieChart = displayExpensePercentageReport(totalExpense, totalAllowance);
+
+                layout.getChildren().addAll(bc, pieChart, labelOfTotalExpense, labelOfTotalBudget,
+                        labelOfTotalAllowance, labelOfTotalSaving, labelOfMaxExpenseYear, labelOfMaxExpenseValue);
+            } else {
+                layout.getChildren().addAll(bc, labelOfTotalExpense, labelOfTotalBudget,
+                        labelOfTotalAllowance, labelOfTotalSaving, labelOfMaxExpenseYear, labelOfMaxExpenseValue);
+            }
+
             // creates a scroll pane
             ScrollPane sp = new ScrollPane();
             sp.setContent(layout);

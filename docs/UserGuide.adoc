@@ -303,9 +303,9 @@ Budget does not take into account allowances as budget only accounts for expense
 
 Generates a report of the given date, month, or year. The report consists of total inflow, total outflow, and proportion of income
 spent on different categories. +
-Format: `report [t/DD/MM/YYYY]` +
-Format: `report [t/MM/YYYY]` +
-Format: `report [t/YYYY]` +
+Format: `report [d/DD/MM/YYYY]` +
+Format: `report [d/MM/YYYY]` +
+Format: `report [d/YYYY]` +
 Format: `report`
 
 Examples:
@@ -313,13 +313,13 @@ Examples:
 * `report` +
 View the completed report.
 
-* `report t/21/03/2019` +
+* `report d/21/03/2019` +
 View the daily report of 21 Mar 2019.
 
-* `report t/03/2019` +
+* `report d/03/2019` +
 View the monthly report of Mar 2019.
 
-* `report t/2019` +
+* `report d/2019` +
 View the yearly report of 2019.
 // end::report[]
 

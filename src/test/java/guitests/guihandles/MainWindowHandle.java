@@ -16,7 +16,6 @@ public class MainWindowHandle extends StageHandle {
 
     public MainWindowHandle(Stage stage) {
         super(stage);
-
         expenseListPanel = new ExpenseListPanelHandle(getChildNode(ExpenseListPanelHandle.PERSON_LIST_VIEW_ID));
         resultDisplay = new ResultDisplayHandle(getChildNode(ResultDisplayHandle.RESULT_DISPLAY_ID));
         commandBox = new CommandBoxHandle(getChildNode(CommandBoxHandle.COMMAND_INPUT_FIELD_ID));

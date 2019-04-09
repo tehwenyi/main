@@ -98,6 +98,13 @@ public class EpiggyTestApp extends MainApp {
         return copy;
     }
 
+    /**
+     * Returns the mode after executed the command.
+     */
+    public Model getModelAfterExecution() {
+        return this.model;
+    }
+
     @Override
     public void start(Stage primaryStage) {
         ui.start(primaryStage);

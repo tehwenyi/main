@@ -58,7 +58,7 @@ public class SelectCommandSystemTest extends EPiggySystemTest {
         /* Case: filtered person list, select index within bounds of address book but out of bounds of person list
          * -> rejected
          */
-        //        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        //        showExpensesWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getEPiggy().getExpenseList().size();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 

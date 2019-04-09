@@ -138,7 +138,7 @@ public abstract class EPiggySystemTest {
     /**
      * Displays all persons with any parts of their names matching {@code keyword} (case-insensitive).
      */
-    protected void showPersonsWithName(String keyword) {
+    protected void showExpensesWithName(String keyword) {
         executeCommand(FindExpenseCommand.COMMAND_WORD + " " + keyword);
         assertTrue(getModel().getFilteredExpenseList().size() < getModel().getEPiggy().getExpenseList().size());
     }

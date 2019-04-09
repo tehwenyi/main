@@ -3,6 +3,7 @@ package systemtests.epiggy;
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
 
@@ -25,6 +26,7 @@ import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.EpiggyTestApp;
 import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
+import seedu.address.logic.commands.epiggy.FindExpenseCommand;
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.testutil.epiggy.TypicalReports;
@@ -253,6 +255,14 @@ public abstract class EPiggySystemTestWithDefaultData {
      */
     protected Model getModel() {
         return testApp.getModel();
+    }
+
+    /**
+     * Displays all persons with any parts of their names matching {@code keyword} (case-insensitive).
+     */
+    protected void showExpensesWithName(String keyword) {
+        executeCommand(FindExpenseCommand.COMMAND_WORD + " " + keyword);
+        assertTrue(getModel().getFilteredExpenseList().size() < getModel().getEPiggy().getExpenseList().size());
     }
 }
 

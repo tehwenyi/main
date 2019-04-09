@@ -204,8 +204,7 @@ public class EPiggy implements ReadOnlyEPiggy {
         budget.resetRemainingAmount();
         SortedList<Expense> sortedExpensesByDate = sortExpensesByDate();
         ListIterator<Expense> iterator = sortedExpensesByDate.listIterator();
-        while (iterator.hasNext()) {
-            Expense expense = iterator.next();
+        for (Expense expense : sortedExpensesByDate) {
             if (!expense.getDate().before(budget.getStartDate())) {
                 if (budget.getEndDate().after(expense.getDate())) {
                     if (!(expense instanceof Allowance)) {

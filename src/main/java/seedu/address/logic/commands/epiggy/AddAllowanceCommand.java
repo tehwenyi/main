@@ -31,7 +31,7 @@ public class AddAllowanceCommand extends Command {
             + PREFIX_NAME + "From Mummy "
             + PREFIX_COST + "30 "
             + PREFIX_TAG + "Weekly "
-            + PREFIX_DATE + "31/02/2019 ";
+            + PREFIX_DATE + "21/03/2019 ";
 
     public static final String MESSAGE_SUCCESS = "New allowance added: %1$s";
 

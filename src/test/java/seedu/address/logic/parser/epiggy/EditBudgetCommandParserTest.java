@@ -9,8 +9,8 @@ import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.logic.commands.epiggy.EditBudgetCommand;
 import seedu.address.logic.parser.CommandParserTestUtil;
 import seedu.address.model.expense.item.Cost;
-import seedu.address.testutil.epiggy.EditBudgetDetailsBuilder;
 import seedu.address.model.expense.item.Period;
+import seedu.address.testutil.epiggy.EditBudgetDetailsBuilder;
 
 public class EditBudgetCommandParserTest {
 
@@ -36,19 +36,25 @@ public class EditBudgetCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_AMOUNT_DESC, Cost.MESSAGE_CONSTRAINTS); // invalid amount
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_PERIOD_DESC, Period.MESSAGE_CONSTRAINTS); // invalid period
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_DATE_DESC, MESSAGE_INVALID_DATE); // invalid date
+        CommandParserTestUtil.assertParseFailure(parser, "1"
+                + CommandTestUtil.INVALID_AMOUNT_DESC, Cost.MESSAGE_CONSTRAINTS); // invalid amount
+        CommandParserTestUtil.assertParseFailure(parser, "1"
+                + CommandTestUtil.INVALID_PERIOD_DESC, Period.MESSAGE_CONSTRAINTS); // invalid period
+        CommandParserTestUtil.assertParseFailure(parser, "1"
+                + CommandTestUtil.INVALID_DATE_DESC, MESSAGE_INVALID_DATE); // invalid date
 
         // invalid period followed by valid date
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_PERIOD_DESC + CommandTestUtil.DATE_DESC_FIRSTEXTRA, Period.MESSAGE_CONSTRAINTS);
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_PERIOD_DESC
+                + CommandTestUtil.DATE_DESC_FIRSTEXTRA, Period.MESSAGE_CONSTRAINTS);
 
         // valid period followed by invalid period. The test case for invalid period followed by valid period
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.PERIOD_DESC_SECONDEXTRA + CommandTestUtil.INVALID_PERIOD_DESC, Period.MESSAGE_CONSTRAINTS);
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.PERIOD_DESC_SECONDEXTRA
+                + CommandTestUtil.INVALID_PERIOD_DESC, Period.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_AMOUNT_DESC + CommandTestUtil.INVALID_DATE_DESC + CommandTestUtil.VALID_PERIOD_FIRSTEXTRA,
+        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_AMOUNT_DESC
+                        + CommandTestUtil.INVALID_DATE_DESC + CommandTestUtil.VALID_PERIOD_FIRSTEXTRA,
                 Cost.MESSAGE_CONSTRAINTS);
     }
 
@@ -57,8 +63,10 @@ public class EditBudgetCommandParserTest {
         String userInput = CommandTestUtil.PERIOD_DESC_SECONDEXTRA + CommandTestUtil.DATE_DESC_FIRSTEXTRA
                 + CommandTestUtil.AMOUNT_DESC_FIRSTEXTRA;
 
-        EditBudgetCommand.EditBudgetDetails details = new EditBudgetDetailsBuilder().withAmount(CommandTestUtil.VALID_AMOUNT_FIRSTEXTRA)
-                .withPeriod(CommandTestUtil.VALID_PERIOD_SECONDEXTRA).withDate(CommandTestUtil.VALID_DATE_FIRSTEXTRA).build();
+        EditBudgetCommand.EditBudgetDetails details = new EditBudgetDetailsBuilder()
+                .withAmount(CommandTestUtil.VALID_AMOUNT_FIRSTEXTRA)
+                .withPeriod(CommandTestUtil.VALID_PERIOD_SECONDEXTRA)
+                .withDate(CommandTestUtil.VALID_DATE_FIRSTEXTRA).build();
         EditBudgetCommand expectedCommand = new EditBudgetCommand(details);
 
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
@@ -69,7 +77,8 @@ public class EditBudgetCommandParserTest {
         String userInput = CommandTestUtil.PERIOD_DESC_SECONDEXTRA + CommandTestUtil.DATE_DESC_FIRSTEXTRA;
 
         EditBudgetCommand.EditBudgetDetails details = new EditBudgetDetailsBuilder()
-                .withPeriod(CommandTestUtil.VALID_PERIOD_SECONDEXTRA).withDate(CommandTestUtil.VALID_DATE_FIRSTEXTRA).build();
+                .withPeriod(CommandTestUtil.VALID_PERIOD_SECONDEXTRA)
+                .withDate(CommandTestUtil.VALID_DATE_FIRSTEXTRA).build();
         EditBudgetCommand expectedCommand = new EditBudgetCommand(details);
 
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
@@ -79,7 +88,8 @@ public class EditBudgetCommandParserTest {
     public void parse_oneFieldSpecified_success() {
         // amount
         String userInput = CommandTestUtil.AMOUNT_DESC_FIRSTEXTRA;
-        EditBudgetCommand.EditBudgetDetails details = new EditBudgetDetailsBuilder().withAmount(CommandTestUtil.VALID_AMOUNT_FIRSTEXTRA).build();
+        EditBudgetCommand.EditBudgetDetails details = new EditBudgetDetailsBuilder()
+                .withAmount(CommandTestUtil.VALID_AMOUNT_FIRSTEXTRA).build();
         EditBudgetCommand expectedCommand = new EditBudgetCommand(details);
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -98,10 +108,12 @@ public class EditBudgetCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        String userInput = CommandTestUtil.PERIOD_DESC_FIRSTEXTRA + CommandTestUtil.DATE_DESC_FIRSTEXTRA + CommandTestUtil.PERIOD_DESC_FIRSTEXTRA + CommandTestUtil.DATE_DESC_FIRSTEXTRA
+        String userInput = CommandTestUtil.PERIOD_DESC_FIRSTEXTRA + CommandTestUtil.DATE_DESC_FIRSTEXTRA
+                + CommandTestUtil.PERIOD_DESC_FIRSTEXTRA + CommandTestUtil.DATE_DESC_FIRSTEXTRA
                 + CommandTestUtil.PERIOD_DESC_SECONDEXTRA + CommandTestUtil.DATE_DESC_SECONDEXTRA;
 
-        EditBudgetCommand.EditBudgetDetails details = new EditBudgetDetailsBuilder().withPeriod(CommandTestUtil.VALID_PERIOD_SECONDEXTRA)
+        EditBudgetCommand.EditBudgetDetails details = new EditBudgetDetailsBuilder()
+                .withPeriod(CommandTestUtil.VALID_PERIOD_SECONDEXTRA)
                 .withDate(CommandTestUtil.VALID_DATE_SECONDEXTRA).build();
         EditBudgetCommand expectedCommand = new EditBudgetCommand(details);
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
@@ -111,12 +123,14 @@ public class EditBudgetCommandParserTest {
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
         String userInput = CommandTestUtil.INVALID_PERIOD_DESC + CommandTestUtil.PERIOD_DESC_SECONDEXTRA;
-        EditBudgetCommand.EditBudgetDetails details = new EditBudgetDetailsBuilder().withPeriod(CommandTestUtil.VALID_PERIOD_SECONDEXTRA).build();
+        EditBudgetCommand.EditBudgetDetails details = new EditBudgetDetailsBuilder()
+                .withPeriod(CommandTestUtil.VALID_PERIOD_SECONDEXTRA).build();
         EditBudgetCommand expectedCommand = new EditBudgetCommand(details);
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = CommandTestUtil.DATE_DESC_SECONDEXTRA + CommandTestUtil.INVALID_PERIOD_DESC + CommandTestUtil.PERIOD_DESC_SECONDEXTRA;
+        userInput = CommandTestUtil.DATE_DESC_SECONDEXTRA + CommandTestUtil.INVALID_PERIOD_DESC
+                + CommandTestUtil.PERIOD_DESC_SECONDEXTRA;
         details = new EditBudgetDetailsBuilder().withPeriod(CommandTestUtil.VALID_PERIOD_SECONDEXTRA)
                 .withDate(CommandTestUtil.VALID_DATE_SECONDEXTRA).build();
         expectedCommand = new EditBudgetCommand(details);

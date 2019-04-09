@@ -22,9 +22,9 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.expense.item.Cost;
+import seedu.address.model.expense.item.Period;
 import seedu.address.testutil.Assert;
 import seedu.address.testutil.epiggy.BudgetBuilder;
-import seedu.address.model.expense.item.Period;
 
 
 public class BudgetTest {

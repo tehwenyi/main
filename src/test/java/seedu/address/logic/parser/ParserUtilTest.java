@@ -14,10 +14,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.testutil.Assert;
-import seedu.address.testutil.TypicalIndexes;
 import seedu.address.model.expense.item.Name;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.Assert;
+import seedu.address.testutil.TypicalIndexes;
 
 @Ignore
 public class ParserUtilTest {

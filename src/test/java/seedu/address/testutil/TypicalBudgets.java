@@ -60,9 +60,11 @@ public class TypicalBudgets {
 
     // Manually added - Budget's details found in {@code CommandTestUtil}
     public static final Budget FIRST_EXTRA = new BudgetBuilder().withAmount(CommandTestUtil.VALID_AMOUNT_FIRSTEXTRA)
-            .withPeriod(CommandTestUtil.VALID_PERIOD_FIRSTEXTRA).withDate(CommandTestUtil.VALID_DATE_FIRSTEXTRA).build();
+            .withPeriod(CommandTestUtil.VALID_PERIOD_FIRSTEXTRA)
+            .withDate(CommandTestUtil.VALID_DATE_FIRSTEXTRA).build();
     public static final Budget SECOND_EXTRA = new BudgetBuilder().withAmount(CommandTestUtil.VALID_AMOUNT_SECONDEXTRA)
-            .withPeriod(CommandTestUtil.VALID_PERIOD_SECONDEXTRA).withDate(CommandTestUtil.VALID_DATE_SECONDEXTRA).build();
+            .withPeriod(CommandTestUtil.VALID_PERIOD_SECONDEXTRA)
+            .withDate(CommandTestUtil.VALID_DATE_SECONDEXTRA).build();
 
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

@@ -52,7 +52,8 @@ public class StatusBarFooterTest extends GuiUnitTest {
     @Test
     public void display() {
         // initial state
-        assertStatusBarContent(RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString(), StatusBarFooter.SYNC_STATUS_INITIAL);
+        assertStatusBarContent(RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString(),
+                StatusBarFooter.SYNC_STATUS_INITIAL);
 
         // after address book is updated
         guiRobot.interact(() -> ePiggy.addExpense(BOWLING));

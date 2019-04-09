@@ -39,7 +39,8 @@ public class BudgetUtil {
         StringBuilder sb = new StringBuilder();
         details.getAmount().ifPresent(amount -> sb.append(CliSyntax.PREFIX_COST)
                 .append(String.valueOf(amount.getAmount())).append(" "));
-        details.getPeriod().ifPresent(period -> sb.append(CliSyntax.PREFIX_PERIOD).append(period.toString()).append(" "));
+        details.getPeriod().ifPresent(period -> sb.append(CliSyntax.PREFIX_PERIOD)
+                .append(period.toString()).append(" "));
         details.getStartDate().ifPresent(date -> sb.append(CliSyntax.PREFIX_DATE).append(sdf.format(date)).append(" "));
         return sb.toString();
     }

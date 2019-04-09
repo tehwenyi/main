@@ -21,7 +21,8 @@ public class DeleteBudgetCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        CommandParserTestUtil.assertParseSuccess(parser, "1", new DeleteBudgetCommand(TypicalIndexes.INDEX_FIRST_PERSON));
+        CommandParserTestUtil.assertParseSuccess(parser, "1",
+                new DeleteBudgetCommand(TypicalIndexes.INDEX_FIRST_PERSON));
     }
 
     @Test

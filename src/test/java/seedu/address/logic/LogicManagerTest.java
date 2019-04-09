@@ -15,13 +15,13 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.logic.commands.CommandTestUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.epiggy.AddExpenseCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -84,7 +84,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddExpenseCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_BOWLING + CommandTestUtil.COST_DESC_BOWLING + CommandTestUtil.DATE_DESC_2018
+        String addCommand = AddExpenseCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_BOWLING
+                + CommandTestUtil.COST_DESC_BOWLING + CommandTestUtil.DATE_DESC_2018
                 + CommandTestUtil.TAG_DESC_FRIENDS;
         Expense expectedExpense = new ExpensesBuilder(BOWLING).withTags().build();
         ModelManager expectedModel = new ModelManager();

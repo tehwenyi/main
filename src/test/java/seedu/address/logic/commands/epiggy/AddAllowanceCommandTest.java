@@ -17,18 +17,18 @@ import org.junit.rules.ExpectedException;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.expense.Allowance;
 import seedu.address.model.expense.Budget;
+import seedu.address.model.expense.Expense;
 import seedu.address.model.expense.Goal;
 import seedu.address.model.expense.item.Cost;
-import seedu.address.model.expense.Expense;
 import seedu.address.testutil.epiggy.AllowanceBuilder;
 
 

@@ -8,9 +8,9 @@ import static seedu.address.testutil.epiggy.TypicalExpenses.getTypicalEPiggy;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import seedu.address.logic.CommandHistory;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;

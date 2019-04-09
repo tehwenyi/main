@@ -34,7 +34,8 @@ public class JsonAdaptedGoalTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedGoal goal = new JsonAdaptedGoal(false, null, VALID_COST);
-        String expectedMessage = String.format(JsonAdaptedGoal.MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
+        String expectedMessage = String.format(JsonAdaptedGoal.MISSING_FIELD_MESSAGE_FORMAT,
+                Name.class.getSimpleName());
         seedu.address.testutil.Assert.assertThrows(IllegalValueException.class, expectedMessage, goal::toModelType);
     }
 
@@ -48,7 +49,8 @@ public class JsonAdaptedGoalTest {
     @Test
     public void toModelType_nullCost_throwsIllegalValueException() {
         JsonAdaptedGoal goal = new JsonAdaptedGoal(false, VALID_NAME, null);
-        String expectedMessage = String.format(JsonAdaptedGoal.MISSING_FIELD_MESSAGE_FORMAT, Cost.class.getSimpleName());
+        String expectedMessage = String.format(JsonAdaptedGoal.MISSING_FIELD_MESSAGE_FORMAT,
+                Cost.class.getSimpleName());
         seedu.address.testutil.Assert.assertThrows(IllegalValueException.class, expectedMessage, goal::toModelType);
     }
 

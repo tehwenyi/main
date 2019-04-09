@@ -5,9 +5,9 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandTestUtil;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -25,7 +25,8 @@ public class DeleteAllowanceCommandTest {
     public void execute_validIndexIsAllowance_deleteSuccess() {
         Allowance allowanceToDelete = (Allowance) model.getFilteredExpenseList()
                 .get(TypicalIndexes.INDEX_FIRST_ALLOWANCE.getZeroBased());
-        DeleteAllowanceCommand deleteAllowanceCommand = new DeleteAllowanceCommand(TypicalIndexes.INDEX_FIRST_ALLOWANCE);
+        DeleteAllowanceCommand deleteAllowanceCommand =
+                new DeleteAllowanceCommand(TypicalIndexes.INDEX_FIRST_ALLOWANCE);
 
         String expectedMessage = String.format(DeleteAllowanceCommand.MESSAGE_DELETE_ALLOWANCE_SUCCESS,
                 allowanceToDelete);

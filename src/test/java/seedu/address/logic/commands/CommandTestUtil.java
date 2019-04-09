@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.epiggy.EditBudgetCommand;
+import seedu.address.logic.commands.epiggy.EditExpenseCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.EPiggy;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.epiggy.EditExpenseCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.expense.Budget;
 import seedu.address.model.expense.Expense;
@@ -52,7 +52,8 @@ public class CommandTestUtil {
 
     public static final String INVALID_PHONE_DESC = " " + CliSyntax.PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + CliSyntax.PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + CliSyntax.PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_ADDRESS_DESC = " " + CliSyntax.PREFIX_ADDRESS;
+    // empty string not allowed for addresses
 
     public static final String VALID_TAG_FOOD = "food";
     public static final String VALID_TAG_FRIENDS = "friends";
@@ -77,7 +78,8 @@ public class CommandTestUtil {
     public static final String DATE_DESC_FIRSTEXTRA = " " + CliSyntax.PREFIX_DATE + VALID_DATE_FIRSTEXTRA;
     public static final String DATE_DESC_SECONDEXTRA = " " + CliSyntax.PREFIX_DATE + VALID_DATE_SECONDEXTRA;
 
-    public static final String INVALID_AMOUNT_DESC = " " + CliSyntax.PREFIX_COST + "-500.00"; // negative cost is not allowed
+    public static final String INVALID_AMOUNT_DESC = " " + CliSyntax.PREFIX_COST + "-500.00";
+    // negative cost is not allowed
     public static final String INVALID_PERIOD_DESC = " " + CliSyntax.PREFIX_PERIOD + "0"; // period of 0 is not allowed
     public static final String INVALID_DATE_DESC = " " + CliSyntax.PREFIX_DATE + "12/04"; // year should be mentioned
 

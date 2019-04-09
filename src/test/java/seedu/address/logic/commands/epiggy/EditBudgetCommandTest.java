@@ -25,8 +25,8 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.logic.CommandHistory;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -35,12 +35,12 @@ import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.expense.Allowance;
 import seedu.address.model.expense.Budget;
+import seedu.address.model.expense.Expense;
 import seedu.address.model.expense.Goal;
 import seedu.address.model.expense.item.Cost;
-import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.item.Period;
 import seedu.address.testutil.epiggy.BudgetBuilder;
 import seedu.address.testutil.epiggy.EditBudgetDetailsBuilder;
-import seedu.address.model.expense.item.Period;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
@@ -132,7 +132,8 @@ public class EditBudgetCommandTest {
 
     @Test
     public void execute_noCurrentBudget_failure() throws Exception {
-        EditBudgetCommand.EditBudgetDetails details = new EditBudgetDetailsBuilder().withAmount(VALID_AMOUNT_FIRSTEXTRA).build();
+        EditBudgetCommand.EditBudgetDetails details =
+                new EditBudgetDetailsBuilder().withAmount(VALID_AMOUNT_FIRSTEXTRA).build();
 
         EditBudgetCommand editBudgetCommand = new EditBudgetCommand(details);
         ModelStubWithNoCurrentBudget modelStub = new ModelStubWithNoCurrentBudget();

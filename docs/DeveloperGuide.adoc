@@ -572,6 +572,13 @@ image::UndoRedoActivityDiagram.png[width="650"]
 // tag::report[]
 === Report feature
 This command allows users to view the report within a user-input period of time. +
+
+Given below is a sequence diagram of how the `report` command works: +
+
+image::reportSequenceDiagram.png[width="900"]
+
+Figure: Report Command Sequence Diagram +
+
 This command requires users to specify the `date`, `month` or `year` of the report in the command. +
 
 * `report d/DD/MM/YYYY` +

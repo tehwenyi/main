@@ -2,6 +2,7 @@ package seedu.address.logic.parser.epiggy;
 
 import static seedu.address.commons.core.Messages.FORMAT_ERROR_MESSAGE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
 import java.time.LocalDate;
 import java.util.stream.Stream;
@@ -9,7 +10,6 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.epiggy.ReportCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -45,9 +45,9 @@ public class ReportCommandParser implements Parser<ReportCommand> {
         }
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_DATE);
+                ArgumentTokenizer.tokenize(args, PREFIX_DATE);
 
-        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DATE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ReportCommand.MESSAGE_USAGE));

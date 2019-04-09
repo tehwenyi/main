@@ -1,5 +1,8 @@
 package seedu.address.model.expense;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
@@ -55,7 +58,11 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
         }
 
         if (!dateKeywords.equals("")) {
-            result = result && isWithinDateRange(dateKeywords, expense);
+            try {
+                result = result && isWithinDateRange(dateKeywords, expense);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
 
         if (!tagKeywords.isEmpty()) {
@@ -115,13 +122,22 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
     /**
      * Return true if the {@code Date} of {@code expense} is within the range denoted by {@code dateKeywords}.
      * */
-    public boolean isWithinDateRange(String dateKeywords, Expense expense) {
+    public boolean isWithinDateRange(String dateKeywords, Expense expense) throws ParseException {
         assert dateKeywords != null : "dateKeywords should not be null.\n";
         boolean result;
         String[] splitDate = dateKeywords.split(":");
         if (splitDate.length == 1) { //if the user only enter an exact date
             Date chosenDate = new Date(splitDate[0]);
-            result = expense.getDate().equals(chosenDate);
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            cal.setTime(sdf.parse(dateKeywords));
+            Calendar expenseCal = Calendar.getInstance();
+            // SimpleDateFormat sdf1 = new SimpleDateFormat("EEE, MMM d, yyyy");
+            // expenseCal.setTime(sdf1.parse(expense.getDate().toString()));
+            expenseCal.setTime(expense.getDate());
+            result = cal.get(Calendar.YEAR) == expenseCal.get(Calendar.YEAR)
+                    && cal.get(Calendar.MONTH) == expenseCal.get(Calendar.MONTH)
+                    && cal.get(Calendar.DATE) == expenseCal.get(Calendar.DATE);
         } else { //if the user enter a range of dates
             Date start = new Date(splitDate[0]);
             Date end = new Date(splitDate[1]);

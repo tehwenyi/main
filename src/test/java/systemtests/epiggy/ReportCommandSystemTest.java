@@ -209,8 +209,8 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
         // check report window for invalid command
         command = ReportCommand.COMMAND_WORD + " invalid";
         executeCommand(command);
-        String s1 = "========================\n" + "ePiggy: Invalid command format! \n" + ReportCommand.MESSAGE_USAGE + "\n\n"
-                + "You: " + command + "\n" + messageHistory;
+        String s1 = "========================\n" + "ePiggy: Invalid command format! \n" + ReportCommand.MESSAGE_USAGE
+                + "\n\n" + "You: " + command + "\n" + messageHistory;
         String s2 = getResultDisplay().getText();
         assertEquals(s1, s2);
         assertCommandBoxShowsErrorStyle();

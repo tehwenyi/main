@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Calendar;
 import java.util.Set;
 
 import seedu.address.logic.commands.epiggy.AddExpenseCommand;
@@ -33,7 +34,7 @@ public class ExpenseUtil {
      */
     public static String getExpenseDetails(Expense expense) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + expense.getItem().getName().name + " ");
+        sb.append(PREFIX_NAME + expense.getItem().getName().toString() + " ");
         sb.append(PREFIX_COST + expense.getItem().getCost().toString() + " ");
         sb.append(PREFIX_DATE + expense.getDate().toString() + " ");
         expense.getItem().getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));

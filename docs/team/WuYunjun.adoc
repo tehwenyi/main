@@ -14,26 +14,21 @@ We chose to change some logic and methods in addressbook4 so that it became a us
 The ePiggy aids to inculcate good spending habits in students. At the same time, ePiggy supports budgets, expenses and allowances management.
 Student can use it to manage money easily by single and simply commands.
 
-My role was to design and write the codes for the report and auto-complete features. The following sections
+My role was to design and write the codes for the `*report*` and `*auto-complete*` features. The following sections
 illustrate these enhancements in more detail, as well as the relevant sections I have added to the
 user and developer guides in relation to these enhancements.
 
 Note the following symbols and formatting used in this document:
 
 [NOTE]
+This symbol indicates important information.
 
-
-[width="59%",cols="30%,70%",options="header",]
-|=======================================================================
-|[NOTE] |This symbol indicates important information.
-|`report` | A grey highlight (called a mark-up) indicates that this is a command
+`report` | A grey highlight (called a mark-up) indicates that this is a command
            that can be inputted into the command line and executed by the
            application.
 
-|`ReportWindow` |Blue text with grey highlight indicates a component, class or object in
+_ReportWindow_ | Italic text with grey highlight indicates a component, class or object in
                  the architecture of the application.
-
-|=======================================================================
 
 == Summary of contributions
 
@@ -44,8 +39,10 @@ team project.
 
 * I added a `report` command for ePiggy: +
 ** What it does: The `report` command allows the user to view a report (summary) of expenses, budgets and allowance on specified date, month or year.
-** Justification: If user wants to manage his/her money better, the report command enables ePiggy to generate a visualized report of specified date, month or year with different charts. The user can have a better idea of how much he/she spend or how much he/she save in that period of time.
-** Highlights: This command works with existing advanced features such as budget and allowance management. The implementations were challenging as it required good understanding of the addressbook4 structure and JavaFX.
+** Justification: If user wants to manage his/her money better, the report command enables ePiggy to generate a visualized report of specified date, month or year with different charts. The user can have a better idea of how much he/she spent or how much he/she save in that period of time.
+** Highlights:
+*** This command works with existing advanced features such as budget and allowance management. The implementations were challenging as it required good understanding of the addressbook4 structure and JavaFX.
+*** This enhancement was built from scratch. I found my way to create a new window to show different charts and data. I tried multiply JavaFX panes to make sure that the charts and message nicely fit and display on the new window.
 ** Credits: JavaFX basic feature online tutorials, JavaFX advanced features (charts) tutorials.
 
 * I added auto complete feature for ePiggy +
@@ -53,10 +50,16 @@ team project.
 ** Justification: In case the user forgot some of the commands, he/she can quickly find the correct command format by press the ‘Tab’ key. If user forgot the parameters of the command, he/she can also use it function fill in the correct parameters of the command.
 
 * *Code contributed*: Please click these links to see a sample of my code:
-https://github.com/yunjun199321/main/commits?author=yunjun199321[Code contribution]
+
+** Functional code: https://github.com/yunjun199321/main/commits?author=yunjun199321[Code contribution]
 https://github.com/yunjun199321/main/commit/fcc384f89b82596b30448aa47c6f4b64151e67c7[Auto Complete function]|
-https://github.com/yunjun199321/main/commit/17e48dfc8f152ba857fbe41ac729d03f20c493be[Report command phaser and UI button]|
-https://github.com/yunjun199321/main/commit/9cfcc856b16a1da07112742a670aee9a38208103[JavaFX charts]
+https://github.com/yunjun199321/main/commit/17e48dfc8f152ba857fbe41ac729d03f20c493be[Report command parser and UI button]|
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[JavaFX charts]
+** Test code:
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/223/commits/8cb923ff73b91af9e771ab99fa69a321e44a5f12[Two ePiggy System test super class]|
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/223/commits/82461630c71db7b40c2d598d5c2d56015517997d[report command system test]|
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/228/commits/9157714093bc5a93524990aa00214526ed16567a[Help command System test]|
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/228/commits/84c02d96acd964a1b8104e558345ffc105176ecb[Clear command System test]
 
 * *Other contributions*:
 
@@ -89,7 +92,7 @@ include::../UserGuide.adoc[tag=report]
 Enter the first few letters of the command or tag, and then press Tab key on the keyboard to auto complete the command.
 If the auto complete command is not what you want, delete some letters and press Tab again. Another command will show.
 
-Example: Enter letter 'a' and then press Tab, the `addExpense n/ $/ t/ d/` will show.
+Example: Enter letter 'a' and then press Tab, the command `addExpense n/ $/ t/ d/` will show.
 
 include::../UserGuide.adoc[tag=v2.0]
 

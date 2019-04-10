@@ -20,17 +20,18 @@ import org.junit.ClassRule;
 
 import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
-import guitests.guihandles.ExpenseListPanelHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
+import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.TestApp;
-import seedu.address.logic.commands.ClearExpenseCommand;
-import seedu.address.logic.commands.epiggy.FindExpenseCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
-import seedu.address.testutil.epiggy.TypicalExpenses;
+import seedu.address.testutil.TypicalPersons;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
 
@@ -74,7 +75,7 @@ public abstract class EPiggySystemTest {
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
     protected EPiggy getInitialData() {
-        return TypicalExpenses.getTypicalEPiggy();
+        return TypicalPersons.getTypicalEPiggy();
     }
 
     /**
@@ -92,9 +93,9 @@ public abstract class EPiggySystemTest {
         return mainWindowHandle.getCommandBox();
     }
 
-    public ExpenseListPanelHandle getExpenseListPanel() {
-        return mainWindowHandle.getExpenseListPanel();
-    }
+    //    public PersonListPanelHandle getPersonListPanel() {
+    //        return mainWindowHandle.getPersonListPanel();
+    //    }
 
     public MainMenuHandle getMainMenu() {
         return mainWindowHandle.getMainMenu();
@@ -130,17 +131,17 @@ public abstract class EPiggySystemTest {
     /**
      * Displays all persons in the address book.
      */
-    //    protected void showAllPersons() {
-    //        executeCommand(ListCommand.COMMAND_WORD);
-    //        assertEquals(getModel().getEPiggy().getPersonList().size(), getModel().getFilteredExpenseList().size());
-    //    }
+    protected void showAllPersons() {
+        executeCommand(ListCommand.COMMAND_WORD);
+        assertEquals(getModel().getEPiggy().getPersonList().size(), getModel().getFilteredPersonList().size());
+    }
 
     /**
      * Displays all persons with any parts of their names matching {@code keyword} (case-insensitive).
      */
-    protected void showExpensesWithName(String keyword) {
-        executeCommand(FindExpenseCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredExpenseList().size() < getModel().getEPiggy().getExpenseList().size());
+    protected void showPersonsWithName(String keyword) {
+        executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
+        assertTrue(getModel().getFilteredPersonList().size() < getModel().getEPiggy().getPersonList().size());
     }
 
     /**
@@ -155,8 +156,8 @@ public abstract class EPiggySystemTest {
      * Deletes all persons in the address book.
      */
     protected void deleteAllPersons() {
-        executeCommand(ClearExpenseCommand.COMMAND_WORD);
-        assertEquals(0, getModel().getEPiggy().getExpenseList().size());
+        executeCommand(ClearCommand.COMMAND_WORD);
+        assertEquals(0, getModel().getEPiggy().getPersonList().size());
     }
 
     /**
@@ -171,11 +172,11 @@ public abstract class EPiggySystemTest {
         System.out.println(getResultDisplay().getText());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new EPiggy(expectedModel.getEPiggy()), testApp.readStorageEPiggy());
-        //        assertListMatching(getPersonListPanel(), expectedModel.getFilteredExpenseList());
+        //        assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
     }
 
     /**
-     * Calls {@code BrowserPanelHandle}, {@code ExpenseListPanelHandle} and {@code StatusBarFooterHandle} to remember
+     * Calls {@code BrowserPanelHandle}, {@code PersonListPanelHandle} and {@code StatusBarFooterHandle} to remember
      * their current state.
      */
     private void rememberStates() {
@@ -219,6 +220,7 @@ public abstract class EPiggySystemTest {
     /**
      * Asserts that the browser's url and the selected card in the person list panel remain unchanged.
      * @see BrowserPanelHandle#isUrlChanged()
+     * @see PersonListPanelHandle#isSelectedPersonCardChanged()
      */
     protected void assertSelectedCardUnchanged() {
         assertFalse(getBrowserPanel().isUrlChanged());
@@ -268,7 +270,7 @@ public abstract class EPiggySystemTest {
         assertEquals("Welcome to ePiggy! "
                 + "Enter a command to get started, or enter 'help' to view all the available commands!",
                 getResultDisplay().getText());
-        //        assertListMatching(getPersonListPanel(), getModel().getFilteredExpenseList());
+        //        assertListMatching(getPersonListPanel(), getModel().getFilteredPersonList());
         assertEquals(BrowserPanel.DEFAULT_PAGE, getBrowserPanel().getLoadedUrl());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());

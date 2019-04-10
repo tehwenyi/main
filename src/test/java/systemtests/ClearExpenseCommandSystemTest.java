@@ -1,19 +1,19 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalBudgets.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
-import seedu.address.logic.commands.ClearExpenseCommand;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
 @Ignore
-public class ClearExpenseCommandSystemTest extends EPiggySystemTest {
+public class ClearCommandSystemTest extends EPiggySystemTest {
 
     @Test
     public void clear() {
@@ -22,7 +22,7 @@ public class ClearExpenseCommandSystemTest extends EPiggySystemTest {
         /* Case: clear non-empty address book, command with leading spaces and trailing alphanumeric characters and
          * spaces -> cleared
          */
-        assertCommandSuccess("   " + ClearExpenseCommand.COMMAND_WORD + " ab12   ");
+        assertCommandSuccess("   " + ClearCommand.COMMAND_WORD + " ab12   ");
         assertSelectedCardUnchanged();
 
         /* Case: undo clearing address book -> original address book restored */
@@ -40,17 +40,17 @@ public class ClearExpenseCommandSystemTest extends EPiggySystemTest {
         /* Case: selects first card in person list and clears address book -> cleared and no card selected */
         executeCommand(UndoCommand.COMMAND_WORD); // restores the original address book
         //selectPerson(Index.fromOneBased(1));
-        assertCommandSuccess(ClearExpenseCommand.COMMAND_WORD);
+        assertCommandSuccess(ClearCommand.COMMAND_WORD);
         assertSelectedCardDeselected();
 
         /* Case: filters the person list before clearing -> entire address book cleared */
         executeCommand(UndoCommand.COMMAND_WORD); // restores the original address book
-        showExpensesWithName(KEYWORD_MATCHING_MEIER);
-        assertCommandSuccess(ClearExpenseCommand.COMMAND_WORD);
+        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        assertCommandSuccess(ClearCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();
 
         /* Case: clear empty address book -> cleared */
-        assertCommandSuccess(ClearExpenseCommand.COMMAND_WORD);
+        assertCommandSuccess(ClearCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();
 
         /* Case: mixed case command word -> rejected */
@@ -59,20 +59,20 @@ public class ClearExpenseCommandSystemTest extends EPiggySystemTest {
 
     /**
      * Executes {@code command} and verifies that the command box displays an empty string, the result display
-     * box displays {@code ClearExpenseCommand#MESSAGE_SUCCESS} and the model related components equal to an empty model.
+     * box displays {@code ClearCommand#MESSAGE_SUCCESS} and the model related components equal to an empty model.
      * These verifications are done by
      * {@code EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * Also verifies that the command box has the default style class and the status bar's sync status changes.
      * @see EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command) {
-        assertCommandSuccess(command, ClearExpenseCommand.MESSAGE_SUCCESS, new ModelManager());
+        assertCommandSuccess(command, ClearCommand.MESSAGE_SUCCESS, new ModelManager());
     }
 
     /**
      * Performs the same verification as {@code assertCommandSuccess(String)} except that the result box displays
      * {@code expectedResultMessage} and the model related components equal to {@code expectedModel}.
-     * @see ClearExpenseCommandSystemTest#assertCommandSuccess(String)
+     * @see ClearCommandSystemTest#assertCommandSuccess(String)
      */
     private void assertCommandSuccess(String command, String expectedResultMessage, Model expectedModel) {
         executeCommand(command);

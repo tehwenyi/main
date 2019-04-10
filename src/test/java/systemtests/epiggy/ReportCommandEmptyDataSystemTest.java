@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import guitests.GuiRobot;
@@ -20,7 +19,6 @@ public class ReportCommandEmptyDataSystemTest extends EPiggySystemTestWithEmptyD
     private static final GuiRobot guiRobot = new GuiRobot();
 
     @Test
-    @Ignore
     public void openReportWindow() {
 
         String messageHistory = "";

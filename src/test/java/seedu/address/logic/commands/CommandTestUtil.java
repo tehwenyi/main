@@ -2,10 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
@@ -19,12 +22,12 @@ import seedu.address.logic.commands.epiggy.EditExpenseCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
-import seedu.address.model.expense.Budget;
-import seedu.address.model.expense.Expense;
-import seedu.address.model.expense.ExpenseContainsKeywordsPredicate;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.ExpenseContainsKeywordsPredicate;
+import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.epiggy.EditBudgetDetailsBuilder;
 import seedu.address.testutil.epiggy.EditExpenseDescriptorBuilder;
 
@@ -46,19 +49,18 @@ public class CommandTestUtil {
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String PHONE_DESC_AMY = " " + CliSyntax.PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + CliSyntax.PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + CliSyntax.PREFIX_ADDRESS + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + CliSyntax.PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
+    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
+    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
+    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
+    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
-    public static final String INVALID_PHONE_DESC = " " + CliSyntax.PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_EMAIL_DESC = " " + CliSyntax.PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + CliSyntax.PREFIX_ADDRESS;
-    // empty string not allowed for addresses
+    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
 
     public static final String VALID_TAG_FOOD = "food";
     public static final String VALID_TAG_FRIENDS = "friends";
@@ -75,7 +77,6 @@ public class CommandTestUtil {
     public static final String VALID_PERIOD_SECONDEXTRA = "28";
     public static final String VALID_DATE_FIRSTEXTRA = "03/03/2019";
     public static final String VALID_DATE_SECONDEXTRA = "01/02/2019";
-
     public static final String VALID_NAME_FIRSTEXTRA = "Apple watch";
     public static final String VALID_NAME_SECONDEXTRA = "Apple Pineapple";
 
@@ -85,7 +86,6 @@ public class CommandTestUtil {
     public static final String PERIOD_DESC_SECONDEXTRA = " " + PREFIX_PERIOD + VALID_PERIOD_SECONDEXTRA;
     public static final String DATE_DESC_FIRSTEXTRA = " " + PREFIX_DATE + VALID_DATE_FIRSTEXTRA;
     public static final String DATE_DESC_SECONDEXTRA = " " + PREFIX_DATE + VALID_DATE_SECONDEXTRA;
-
     public static final String NAME_DESC_FIRSTEXTRA = " " + PREFIX_NAME + VALID_NAME_FIRSTEXTRA;
     public static final String NAME_DESC_SECONDEXTRA = " " + PREFIX_NAME + VALID_NAME_SECONDEXTRA;
 
@@ -99,10 +99,11 @@ public class CommandTestUtil {
     public static final String COST_DESC_IPHONE = " " + PREFIX_COST + VALID_COST_IPHONE;
     public static final String DATE_DESC_2018 = " " + PREFIX_DATE + VALID_DATE_2018;
     public static final String DATE_DESC_2019 = " " + PREFIX_DATE + VALID_DATE_2019;
-    public static final String TAG_DESC_FOOD = " " + PREFIX_TAG + VALID_TAG_FOOD;
+    public static final String TAG_DESC_FRIENDS = " " + PREFIX_TAG + VALID_TAG_FRIENDS;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_COST_DESC = " " + PREFIX_COST + "0.00"; // cost of 0 is not allowed
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "food*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -112,6 +113,10 @@ public class CommandTestUtil {
 
     public static final EditBudgetCommand.EditBudgetDetails DESC_FIRSTEXTRA;
     public static final EditBudgetCommand.EditBudgetDetails DESC_SECONDEXTRA;
+
+    public static final EditCommand.EditPersonDescriptor DESC_AMY;
+    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
     static {
         DESC_BOWLING = new EditExpenseDescriptorBuilder().withName(VALID_NAME_BOWLING)
                 .withCost(VALID_COST_BOWLING).withDate(VALID_DATE_2018)
@@ -122,6 +127,13 @@ public class CommandTestUtil {
                 .withPeriod(VALID_PERIOD_FIRSTEXTRA).withDate(VALID_DATE_FIRSTEXTRA).build();
         DESC_SECONDEXTRA = new EditBudgetDetailsBuilder().withAmount(VALID_AMOUNT_SECONDEXTRA)
                 .withPeriod(VALID_PERIOD_SECONDEXTRA).withDate(VALID_DATE_SECONDEXTRA).build();
+        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withTags(VALID_TAG_FRIEND).build();
+        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
     }
 
     /**

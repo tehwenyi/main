@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.epiggy.TypicalExpenses.getTypicalEPiggy;
+import static seedu.address.testutil.TypicalPersons.getTypicalEPiggy;
 
 import org.junit.Test;
 

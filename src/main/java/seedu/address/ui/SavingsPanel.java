@@ -55,7 +55,7 @@ public class SavingsPanel extends UiPart<Region> {
      * @param onSavingsChange
      */
     private void refreshPanel(ObservableValue<Goal> goal, Supplier<ObservableValue<Cost>> onSavingsChange) {
-        currentSavings.setText(onSavingsChange.get().getValue().toString());
+        currentSavings.setText("$" + onSavingsChange.get().getValue().toString());
         if (goal.getValue() == null) {
             currentGoal.setText("(None set)");
             amountDifference.setText("$0.00");

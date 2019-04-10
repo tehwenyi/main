@@ -53,7 +53,7 @@ public class Cost {
 
     @Override
     public String toString() {
-        return String.format("$%.2f", amount);
+        return String.format("%.2f", amount);
     }
 
     @Override

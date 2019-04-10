@@ -143,6 +143,7 @@ public class ModelManager implements Model {
     @Override
     public void addAllowance(Allowance allowance) {
         versionedEPiggy.addAllowance(allowance);
+        setSelectedExpense(allowance);
     }
 
     @Override

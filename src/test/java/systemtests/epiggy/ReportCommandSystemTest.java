@@ -63,10 +63,10 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
         assertReportWindowOpen();
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
-        messageHistory = "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + ReportCommand.COMMAND_WORD + "\n\n";
-        messageHistory = "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + ReportCommand.COMMAND_WORD + "\n\n" + messageHistory;
+        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n" + "You: "
+                + ReportCommand.COMMAND_WORD + "\n" + messageHistory;
+        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n" + "You: "
+                + ReportCommand.COMMAND_WORD + "\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
 
         // check report window for specified month
@@ -75,7 +75,7 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
         assertReportWindowOpen();
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
-        messageHistory = "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
                 + "You: " + command + "\n\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
 
@@ -85,7 +85,7 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
         assertReportWindowOpen();
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
-        messageHistory = "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
                 + "You: " + command + "\n\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
 
@@ -95,14 +95,14 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
         assertReportWindowOpen();
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
-        messageHistory = "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
                 + "You: " + command + "\n\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
 
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_DATE_WORD;
         executeCommand(command);
-        messageHistory = "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
+        messageHistory = "========================\n" + "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
                 + "You: " + command + "\n\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
         assertCommandBoxShowsErrorStyle();
@@ -110,7 +110,7 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_DATE_LARGE_DAY;
         executeCommand(command);
-        messageHistory = "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
+        messageHistory = "========================\n" + "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
                 + "You: " + command + "\n\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
         assertCommandBoxShowsErrorStyle();
@@ -126,7 +126,7 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_DATE_LARGE_YEAR;
         executeCommand(command);
-        messageHistory = "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
+        messageHistory = "========================\n" + "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
                 + "You: " + command + "\n\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
         assertCommandBoxShowsErrorStyle();
@@ -134,7 +134,7 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_DATE_NEGATIVE_DAY;
         executeCommand(command);
-        messageHistory = "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
+        messageHistory = "========================\n" + "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
                 + "You: " + command + "\n\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
         assertCommandBoxShowsErrorStyle();
@@ -142,7 +142,7 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_DATE_NEGATIVE_MONTH;
         executeCommand(command);
-        messageHistory = "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
+        messageHistory = "========================\n" + "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
                 + "You: " + command + "\n\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
         assertCommandBoxShowsErrorStyle();
@@ -157,7 +157,7 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_MONTH_LARGE_MONTH;
         executeCommand(command);
-        messageHistory = "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
+        messageHistory = "========================\n" + "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
                 + "You: " + command + "\n\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
         assertCommandBoxShowsErrorStyle();
@@ -165,7 +165,7 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_MONTH_LARGE_YEAR;
         executeCommand(command);
-        messageHistory = "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
+        messageHistory = "========================\n" + "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
                 + "You: " + command + "\n\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
         assertCommandBoxShowsErrorStyle();
@@ -173,7 +173,7 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_MONTH_NEGATIVE_MONTH;
         executeCommand(command);
-        messageHistory = "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
+        messageHistory = "========================\n" + "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
                 + "You: " + command + "\n\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
         assertCommandBoxShowsErrorStyle();
@@ -188,7 +188,7 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_YEAR_LARGE_YEAR;
         executeCommand(command);
-        messageHistory = "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
+        messageHistory = "========================\n" + "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
                 + "You: " + command + "\n\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
         assertCommandBoxShowsErrorStyle();
@@ -203,7 +203,7 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_MONTH_LARGE_MONTH;
         executeCommand(command);
-        messageHistory = "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
+        messageHistory = "========================\n" + "ePiggy: " + FORMAT_ERROR_MESSAGE + "\n\n"
                 + "You: " + command + "\n\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
         assertCommandBoxShowsErrorStyle();
@@ -211,7 +211,7 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
         // check report window for invalid command
         command = ReportCommand.COMMAND_WORD + " invalid";
         executeCommand(command);
-        String s1 = "ePiggy: Invalid command format! \n" + ReportCommand.MESSAGE_USAGE + "\n\n"
+        String s1 = "========================\n" + "ePiggy: Invalid command format! \n" + ReportCommand.MESSAGE_USAGE + "\n\n"
                 + "You: " + command + "\n\n" + messageHistory;
         String s2 = getResultDisplay().getText();
         assertEquals(s1, s2);

@@ -15,6 +15,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_FIRSTEXT
 import static seedu.address.testutil.TypicalBudgets.FIRST_EXTRA;
 import static seedu.address.testutil.TypicalBudgets.ONE;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
@@ -33,6 +34,7 @@ public class AddBudgetCommandSystemTest extends EPiggySystemTestWithEmptyData {
     private String messageHistory = "";
 
     @Test
+    @Ignore
     public void add() {
         Model model = getModel();
 

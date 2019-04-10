@@ -5,31 +5,31 @@ import java.text.SimpleDateFormat;
 
 import java.util.Date;
 
-import seedu.address.logic.commands.epiggy.EditBudgetCommand;
-import seedu.address.model.expense.Budget;
-import seedu.address.model.expense.item.Cost;
-import seedu.address.model.expense.item.Period;
+import seedu.address.logic.commands.epiggy.EditBudgetCommand.EditBudgetDetails;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.item.Cost;
+import seedu.address.model.epiggy.item.Period;
 
 /**
  * A utility class to help with building EditBudgetDetails objects.
  */
 public class EditBudgetDetailsBuilder {
 
-    private EditBudgetCommand.EditBudgetDetails details;
+    private EditBudgetDetails details;
 
     public EditBudgetDetailsBuilder() {
-        details = new EditBudgetCommand.EditBudgetDetails();
+        details = new EditBudgetDetails();
     }
 
-    public EditBudgetDetailsBuilder(EditBudgetCommand.EditBudgetDetails details) {
-        this.details = new EditBudgetCommand.EditBudgetDetails(details);
+    public EditBudgetDetailsBuilder(EditBudgetDetails details) {
+        this.details = new EditBudgetDetails(details);
     }
 
     /**
      * Returns an {@code EditBudgetDetails} with fields containing {@code person}'s details
      */
     public EditBudgetDetailsBuilder(Budget budget) {
-        details = new EditBudgetCommand.EditBudgetDetails();
+        details = new EditBudgetDetails();
         details.setAmount(budget.getBudgetedAmount());
         details.setPeriod(budget.getPeriod());
         details.setStartDate(budget.getStartDate());
@@ -72,7 +72,7 @@ public class EditBudgetDetailsBuilder {
         return this;
     }
 
-    public EditBudgetCommand.EditBudgetDetails build() {
+    public EditBudgetDetails build() {
         return details;
     }
 }

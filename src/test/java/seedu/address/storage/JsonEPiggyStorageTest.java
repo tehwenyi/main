@@ -2,17 +2,14 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static seedu.address.testutil.epiggy.TypicalExpenses.BOWLING;
-import static seedu.address.testutil.epiggy.TypicalExpenses.IPHONE;
-import static seedu.address.testutil.epiggy.TypicalExpenses.getTypicalEPiggy;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.HOON;
+import static seedu.address.testutil.TypicalPersons.IDA;
+import static seedu.address.testutil.TypicalPersons.getTypicalEPiggy;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -22,12 +19,8 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.EPiggy;
+
 import seedu.address.model.ReadOnlyEPiggy;
-import seedu.address.model.expense.Expense;
-import seedu.address.model.expense.item.Cost;
-import seedu.address.model.expense.item.Item;
-import seedu.address.model.expense.item.Name;
-import seedu.address.model.tag.Tag;
 import seedu.address.storage.epiggy.JsonEPiggyStorage;
 
 @Ignore
@@ -96,15 +89,14 @@ public class JsonEPiggyStorageTest {
         assertEquals(original, new EPiggy(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addExpense(IPHONE);
-        original.removeExpense(BOWLING);
+        original.addPerson(HOON);
+        original.removePerson(ALICE);
         jsonEPiggyBookStorage.saveEPiggy(original, filePath);
         readBack = jsonEPiggyBookStorage.readEPiggy(filePath).get();
         assertEquals(original, new EPiggy(readBack));
 
         // Save and read without specifying file path
-        original.addExpense(new Expense(new Item(new Name("KFC"), new Cost("13.00"),
-                getTagSet("food", "dinner")), new Date("26/04/2019")));
+        original.addPerson(IDA);
         jsonEPiggyBookStorage.saveEPiggy(original); // file path not specified
         readBack = jsonEPiggyBookStorage.readEPiggy().get(); // file path not specified
         assertEquals(original, new EPiggy(readBack));
@@ -133,14 +125,5 @@ public class JsonEPiggyStorageTest {
     public void saveEPiggyBook_nullFilePath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         saveEPiggyBook(new EPiggy(), null);
-    }
-
-    /**
-     * Returns a tag set containing the list of strings given.
-     */
-    public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
     }
 }

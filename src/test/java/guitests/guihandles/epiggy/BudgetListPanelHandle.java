@@ -8,7 +8,7 @@ import guitests.guihandles.NodeHandle;
 
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
-import seedu.address.model.expense.Budget;
+import seedu.address.model.epiggy.Budget;
 
 /**
  * Provides a handle for {@code BudgetListPanel} containing the list of {@code BudgetCard}.

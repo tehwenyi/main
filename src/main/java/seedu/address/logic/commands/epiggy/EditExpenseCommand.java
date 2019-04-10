@@ -1,7 +1,11 @@
 package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.Date;
@@ -17,13 +21,12 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
-import seedu.address.model.expense.Allowance;
-import seedu.address.model.expense.Expense;
-import seedu.address.model.expense.item.Cost;
-import seedu.address.model.expense.item.Item;
-import seedu.address.model.expense.item.Name;
+import seedu.address.model.epiggy.Allowance;
+import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.item.Cost;
+import seedu.address.model.epiggy.item.Item;
+import seedu.address.model.epiggy.item.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,15 +41,15 @@ public class EditExpenseCommand extends Command {
             + "by the index number used in the displayed expense list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + CliSyntax.PREFIX_NAME + "NAME] "
-            + "[" + CliSyntax.PREFIX_COST + "COST] "
-            + "[" + CliSyntax.PREFIX_DATE + "DATE] "
-            + "[" + CliSyntax.PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_COST + "COST] "
+            + "[" + PREFIX_DATE + "DATE] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + CliSyntax.PREFIX_COST + "5 "
-            + CliSyntax.PREFIX_TAG + "food";
+            + PREFIX_COST + "5 "
+            + PREFIX_TAG + "food";
 
-    public static final String MESSAGE_EDIT_EXPENSE_SUCCESS = "Edited expense: %1$s";
+    public static final String MESSAGE_EDIT_EXPENSE_SUCCESS = "Edited Expense: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private static final String MESSAGE_ITEM_NOT_EXPENSE = "The item selected is not an expense. "
@@ -84,13 +87,13 @@ public class EditExpenseCommand extends Command {
         Expense editedExpense = createEditedExpense(toEdit, editExpenseDescriptor);
 
         model.setExpense(toEdit, editedExpense);
-        model.updateFilteredExpensesList(PREDICATE_SHOW_ALL_EXPENSES);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitEPiggy();
         return new CommandResult(String.format(MESSAGE_EDIT_EXPENSE_SUCCESS, editedExpense));
     }
 
     /**
-     * Creates and returns a {@code expense} with the details of {@code expenseToEdit}
+     * Creates and returns a {@code Expense} with the details of {@code expenseToEdit}
      * edited with {@code editExpenseDescriptor}.
      */
     static Expense createEditedExpense(Expense expenseToEdit, EditExpenseDescriptor editExpenseDescriptor) {
@@ -131,7 +134,7 @@ public class EditExpenseCommand extends Command {
      */
     public static class EditExpenseDescriptor {
 
-        private Name name;
+        private seedu.address.model.epiggy.item.Name name;
         private Cost cost;
         private Date date;
         private Set<Tag> tags;
@@ -156,7 +159,7 @@ public class EditExpenseCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, cost, date, tags);
         }
 
-        public void setName(Name name) {
+        public void setName(seedu.address.model.epiggy.item.Name name) {
             this.name = name;
         }
 
@@ -176,7 +179,7 @@ public class EditExpenseCommand extends Command {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
-        public Optional<Name> getName() {
+        public Optional<seedu.address.model.epiggy.item.Name> getName() {
             return Optional.ofNullable(name);
         }
 

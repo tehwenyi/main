@@ -11,7 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.expense.Budget;
+import seedu.address.model.epiggy.Budget;
 
 /**
  * A UI component that displays information of a {@code Budget}.

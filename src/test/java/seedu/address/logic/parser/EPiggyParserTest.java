@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BUDGET;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,18 +17,12 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.epiggy.AddBudgetCommand;
-import seedu.address.logic.commands.epiggy.AddExpenseCommand;
-import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
-import seedu.address.logic.commands.epiggy.DeleteExpenseCommand;
 import seedu.address.logic.commands.epiggy.EditBudgetCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Expense;
 import seedu.address.testutil.epiggy.BudgetBuilder;
 import seedu.address.testutil.epiggy.BudgetUtil;
 import seedu.address.testutil.epiggy.EditBudgetDetailsBuilder;
-import seedu.address.testutil.epiggy.ExpenseUtil;
-import seedu.address.testutil.epiggy.ExpensesBuilder;
 
 public class EPiggyParserTest {
     @Rule
@@ -41,7 +33,8 @@ public class EPiggyParserTest {
     // @Test
     // public void parseCommand_addAllowance() throws Exception {
     //    Allowance allowance = new AllowanceBuilder().build();
-    //    AddAllowanceCommand command = (AddAllowanceCommand) parser.parseCommand(AllowanceUtil.getAddAllowanceCommand(allowance));
+    //    AddAllowanceCommand command = (AddAllowanceCommand)
+    // parser.parseCommand(AllowanceUtil.getAddAllowanceCommand(allowance));
     //    assertEquals(new AddAllowanceCommand(allowance), command);
     // }
 
@@ -55,7 +48,8 @@ public class EPiggyParserTest {
     // @Test
     // public void parseCommand_addExpense() throws Exception {
     //     Expense expense = new ExpensesBuilder().build();
-    //     AddExpenseCommand command = (AddExpenseCommand) parser.parseCommand(ExpenseUtil.getAddExpenseCommand(expense));
+    //     AddExpenseCommand command = (AddExpenseCommand)
+    // parser.parseCommand(ExpenseUtil.getAddExpenseCommand(expense));
     //     assertEquals(new AddExpenseCommand(expense), command);
     // }
 

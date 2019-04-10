@@ -11,8 +11,8 @@ import seedu.address.model.Model;
  */
 public class ClearCommand extends Command {
 
-    public static final String COMMAND_WORD = "clearExpense";
-    public static final String COMMAND_ALIAS = "cE";
+    public static final String COMMAND_WORD = "clear";
+    public static final String COMMAND_ALIAS = "c";
     public static final String MESSAGE_SUCCESS = "ePiggy's expense list has been cleared!";
 
     @Override

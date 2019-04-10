@@ -608,17 +608,28 @@ Only last tag `d/` is used to generate a report if multiply of `d/` appear.
 
 ==== Current Implementation
 
-The command is first parsed into `ReportCommandParser`, which separates the arguments into their respective fields. A new `localDate` object is created and `type` of the report are generated according to the date format of `d/`. The `model`, `localDate` and `type` are parsed into `ReportCommand`. +
+The command is first parsed into link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/parser/epiggy/ReportCommandParser.java[`ReportCommandParser`],
+which separates the arguments into their respective fields. A new link:https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html[`localDate`]
+object is created and link:[`type`] of the report are generated according to the date format of `d/`.
+The link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/model/Model.java[`model`],
+link:https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html[`localDate`] and link:[`type`] are parsed into
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/ReportCommand.java[`ReportCommand`]. +
 
-The reportCommand will initialize `ReportWindow` and the method `displayReportController` of the object `ReportWindow` will be invoked. +
+The link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/ReportCommand.java[`reportCommand`] will initialize link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`ReportWindow`] and the method
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`displayReportController`] of the object
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`ReportWindow`] will be invoked. +
 
-The `displayReportController` method will select a specified type of report to display the report.
+The link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`displayReportController`] method will select a specified type of report to display the report.
 
 *Example usage scenario:* +
 1. User launches application and enters `Report d/21/03/2019`. +
-2. `ReportCommandParser` takes in the arguments and parses the command to create the appropriate `localDate`. +
-3. The `ReportCommand` is passed back to the `LogicManager`, and the method `execute()` is called. The `ReportWindow` is initialized. +
-4. The method `displayReportController` is called and report will show.
+2. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/parser/epiggy/ReportCommandParser.java[`ReportCommandParser`] takes in the arguments and parses the command to create the appropriate
+link:https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html[`localDate`]. +
+3. The link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`ReportWindow`] is passed back to the
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/LogicManager.java[`LogicManager`], and the method
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/LogicManager.java[`execute()`] is called. The
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`ReportWindow`] is initialized. +
+4. The method link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`displayReportController`] is called and report will show.
 
 ==== Design Considerations
 *Aspect: How to make report more readable?* +

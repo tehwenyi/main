@@ -2,6 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +43,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
-    public static final String NAME_DESC_AMY = " " + CliSyntax.PREFIX_NAME + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + CliSyntax.PREFIX_NAME + VALID_NAME_BOB;
+    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
+    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + CliSyntax.PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + CliSyntax.PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_AMY;
@@ -70,14 +74,17 @@ public class CommandTestUtil {
     public static final String VALID_PERIOD_SECONDEXTRA = "28";
     public static final String VALID_DATE_FIRSTEXTRA = "03/03/2019";
     public static final String VALID_DATE_SECONDEXTRA = "01/02/2019";
+
     public static final String VALID_NAME_FIRSTEXTRA = "Apple watch";
     public static final String VALID_NAME_SECONDEXTRA = "Apple Pineapple";
+
     public static final String AMOUNT_DESC_FIRSTEXTRA = " " + PREFIX_COST + VALID_AMOUNT_FIRSTEXTRA;
     public static final String AMOUNT_DESC_SECONDEXTRA = " " + PREFIX_COST + VALID_AMOUNT_SECONDEXTRA;
     public static final String PERIOD_DESC_FIRSTEXTRA = " " + PREFIX_PERIOD + VALID_PERIOD_FIRSTEXTRA;
     public static final String PERIOD_DESC_SECONDEXTRA = " " + PREFIX_PERIOD + VALID_PERIOD_SECONDEXTRA;
     public static final String DATE_DESC_FIRSTEXTRA = " " + PREFIX_DATE + VALID_DATE_FIRSTEXTRA;
     public static final String DATE_DESC_SECONDEXTRA = " " + PREFIX_DATE + VALID_DATE_SECONDEXTRA;
+
     public static final String NAME_DESC_FIRSTEXTRA = " " + PREFIX_NAME + VALID_NAME_FIRSTEXTRA;
     public static final String NAME_DESC_SECONDEXTRA = " " + PREFIX_NAME + VALID_NAME_SECONDEXTRA;
 
@@ -91,11 +98,9 @@ public class CommandTestUtil {
     public static final String COST_DESC_IPHONE = " " + PREFIX_COST + VALID_COST_IPHONE;
     public static final String DATE_DESC_2018 = " " + PREFIX_DATE + VALID_DATE_2018;
     public static final String DATE_DESC_2019 = " " + PREFIX_DATE + VALID_DATE_2019;
-    public static final String TAG_DESC_FRIENDS = " " + PREFIX_TAG + VALID_TAG_FRIENDS;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_COST_DESC = " " + PREFIX_COST + "0.00"; // cost of 0 is not allowed
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "food*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -185,7 +190,7 @@ public class CommandTestUtil {
         Expense expense = model.getFilteredExpenseList().get(targetIndex.getZeroBased());
         String[] splitName = expense.getItem().getName().name.split("\\s+");
         final ArgumentMultimap keywordsMap = ArgumentTokenizer.tokenize(" n/"
-                + splitName[0], CliSyntax.PREFIX_NAME);
+                + splitName[0], PREFIX_NAME);
         model.updateFilteredExpensesList(new ExpenseContainsKeywordsPredicate(keywordsMap));
 
         assertEquals(1, model.getFilteredExpenseList().size());

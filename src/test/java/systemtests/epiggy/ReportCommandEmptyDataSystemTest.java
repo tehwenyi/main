@@ -44,9 +44,9 @@ public class ReportCommandEmptyDataSystemTest extends EPiggySystemTestWithEmptyD
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
         messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + ReportCommand.COMMAND_WORD + "\n\n";
+                + "You: " + ReportCommand.COMMAND_WORD + "\n";
         messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + ReportCommand.COMMAND_WORD + "\n\n" + messageHistory;
+                + "You: " + ReportCommand.COMMAND_WORD + "\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
 
         // check report window for specified month
@@ -56,7 +56,7 @@ public class ReportCommandEmptyDataSystemTest extends EPiggySystemTestWithEmptyD
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
         messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + command + "\n\n" + messageHistory;
+                + "You: " + command + "\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
 
         // check report window for specified year
@@ -66,7 +66,7 @@ public class ReportCommandEmptyDataSystemTest extends EPiggySystemTestWithEmptyD
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
         messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + command + "\n\n" + messageHistory;
+                + "You: " + command + "\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
 
         // check report window for specified date
@@ -76,7 +76,7 @@ public class ReportCommandEmptyDataSystemTest extends EPiggySystemTestWithEmptyD
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
         messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + command + "\n\n" + messageHistory;
+                + "You: " + command + "\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
     }
 

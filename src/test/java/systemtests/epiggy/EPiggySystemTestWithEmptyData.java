@@ -163,7 +163,7 @@ public abstract class EPiggySystemTestWithEmptyData {
         for (int i = 0; i < budgetListSize; i++) {
             executeCommand(DeleteBudgetCommand.COMMAND_WORD + " 1");
             messageHistory = "========================\n" + "ePiggy: " + String.format(DeleteBudgetCommand.MESSAGE_DELETE_BUDGET_SUCCESS,
-                    budgetList.get(i)) + "\n\n" + "You: " + DeleteBudgetCommand.COMMAND_WORD + " 1" + "\n\n"
+                    budgetList.get(i)) + "\n\n" + "You: " + DeleteBudgetCommand.COMMAND_WORD + " 1" + "\n"
                     + messageHistory;
         }
         assertEquals(0, getModel().getEPiggy().getBudgetList().size());

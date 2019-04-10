@@ -33,7 +33,7 @@ public class ResultDisplayTest extends GuiUnitTest {
         guiRobot.interact(() -> resultDisplay.setFeedbackToUser("Dummy feedback to user",
                 "Dummy command from user"));
         guiRobot.pauseForHuman();
-        assertEquals("ePiggy: Dummy feedback to user\n\n"
-                + "You: Dummy command from user\n\n", resultDisplayHandle.getText());
+        assertEquals("========================\nePiggy: Dummy feedback to user\n\n"
+                + "You: Dummy command from user\n", resultDisplayHandle.getText());
     }
 }

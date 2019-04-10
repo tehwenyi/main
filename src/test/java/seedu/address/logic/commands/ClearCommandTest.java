@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-public class ClearExpenseCommandTest {
+public class ClearCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
 
@@ -21,7 +21,7 @@ public class ClearExpenseCommandTest {
         Model expectedModel = new ModelManager();
         expectedModel.commitEPiggy();
 
-        assertCommandSuccess(new ClearExpenseCommand(), model, commandHistory, ClearExpenseCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -31,7 +31,7 @@ public class ClearExpenseCommandTest {
         expectedModel.setEPiggy(new EPiggy());
         expectedModel.commitEPiggy();
 
-        assertCommandSuccess(new ClearExpenseCommand(), model, commandHistory, ClearExpenseCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 }

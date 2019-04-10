@@ -29,7 +29,7 @@ import javafx.collections.ObservableList;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.ClearExpenseCommand;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.epiggy.EditBudgetCommand.EditBudgetDetails;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -280,7 +280,7 @@ public class EditBudgetCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearExpenseCommand()));
+        assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different details -> returns false
         assertFalse(standardCommand.equals(new EditBudgetCommand(DESC_SECONDEXTRA)));

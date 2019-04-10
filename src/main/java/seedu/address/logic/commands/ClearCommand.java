@@ -9,7 +9,7 @@ import seedu.address.model.Model;
 /**
  * Clears the address book.
  */
-public class ClearExpenseCommand extends Command {
+public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clearExpense";
     public static final String COMMAND_ALIAS = "cE";

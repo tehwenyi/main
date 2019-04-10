@@ -1,27 +1,22 @@
 package seedu.address.model.epiggy;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.CliSyntax;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.epiggy.item.Item;
 
 //@@author rahulb99
 /**
- * TODO: Refactor
- * Tests that a {@code Expense}'s {@code Name, Cost, Category, Date} matches any of the keywords given.
+ * Tests that a {@code expense}'s {@code Name, Cost, Category, Date} matches any of the keywords given.
  */
 public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
 
+    public static final int LEVENSHTIEN_THRESHOLD = 5;
     private final ArgumentMultimap keywords;
 
     public ExpenseContainsKeywordsPredicate(ArgumentMultimap keywords) {
@@ -38,22 +33,22 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
      */
     @Override
     public boolean test(Expense expense) {
-        assert expense != null : "Expense should not be null.";
+        assert expense != null : "expense should not be null.";
 
-        String nameKeywords = keywords.getValue(PREFIX_NAME).orElse("");
-        List<String> tagKeywords = keywords.getAllValues(PREFIX_TAG);
-        String dateKeywords = keywords.getValue(PREFIX_DATE).orElse("");
-        String costKeywords = keywords.getValue(PREFIX_COST).orElse("");
+        List<String> nameKeywords = keywords.getAllValues(CliSyntax.PREFIX_NAME);
+        List<String> tagKeywords = keywords.getAllValues(CliSyntax.PREFIX_TAG);
+        String dateKeywords = keywords.getValue(CliSyntax.PREFIX_DATE).orElse("");
+        String costKeywords = keywords.getValue(CliSyntax.PREFIX_COST).orElse("");
 
         //if all keywords are absent, return false
-        if (nameKeywords.equals("") && tagKeywords.isEmpty()
+        if (nameKeywords.isEmpty() && tagKeywords.isEmpty()
                 && dateKeywords.equals("") && costKeywords.equals("")) {
             return false;
         }
 
         //if one or more keywords are present
         boolean result = true;
-        if (!nameKeywords.equals("")) {
+        if (!nameKeywords.isEmpty()) {
             result = containsNameKeywords(nameKeywords, expense);
         }
 
@@ -62,7 +57,11 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
         }
 
         if (!dateKeywords.equals("")) {
-            result = result && isWithinDateRange(dateKeywords, expense);
+            try {
+                result = result && isWithinDateRange(dateKeywords, expense);
+            } catch (java.text.ParseException e) {
+                e.printStackTrace();
+            }
         }
 
         if (!tagKeywords.isEmpty()) {
@@ -75,12 +74,14 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
     /**
      * Return true if the {@code Name} of {@code expense} contains {@code nameKeywords}.
      * */
-    public boolean containsNameKeywords(String nameKeywords, Expense expense) {
+    public boolean containsNameKeywords(List<String> nameKeywords, Expense expense) {
         assert nameKeywords != null : "nameKeywords should not be null.\n";
-        List<String> splitNameKeywords = Arrays.asList(nameKeywords.trim().split("\\s+"));
         Item item = expense.getItem();
-        boolean result = splitNameKeywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(item.getName().name, keyword));
+        boolean result = true;
+        for (String n: nameKeywords) {
+            result = result && item.getName().name.toLowerCase().contains(n.trim().toLowerCase());
+            result = result || (levenshtienDist(item.getName().name, n) < LEVENSHTIEN_THRESHOLD);
+        }
         return result;
     }
 
@@ -89,14 +90,13 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
      * */
     public boolean checkTagKeywords(List<String> tagKeywords, Expense expense) {
         assert tagKeywords != null : "tagKeywords should not be null.\n";
-        List<String> tagKeywordsList = new ArrayList<>();
-        for (String tag : tagKeywords) {
-            tagKeywordsList.addAll(Arrays.asList(tag.split("\\s+")));
-        }
+        boolean result = true;
         Item item = expense.getItem();
-        boolean result = tagKeywords.stream()
-                .anyMatch(keyword -> item.getTags().stream()
-                        .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
+        for (String tag : tagKeywords) {
+            result = result && item.getTags().stream()
+                    .anyMatch(keyword -> (keyword.tagName.trim().toLowerCase().contains(tag.trim().toLowerCase()))
+                            || (levenshtienDist(keyword.tagName, tag) < LEVENSHTIEN_THRESHOLD));
+        }
         return result;
     }
 
@@ -105,7 +105,7 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
      * */
     public boolean isWithinCostRange(String costKeywords, Expense expense) {
         assert costKeywords != null : "costKeywords should not be null.\n";
-        boolean result;
+        boolean result = true;
         String[] splitCost = costKeywords.split(":");
         Item item = expense.getItem();
         if (splitCost.length == 1) { //if the user enters an exact cost
@@ -123,23 +123,68 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
     /**
      * Return true if the {@code Date} of {@code expense} is within the range denoted by {@code dateKeywords}.
      * */
-    public boolean isWithinDateRange(String dateKeywords, Expense expense) {
+    public boolean isWithinDateRange(String dateKeywords, Expense expense) throws java.text.ParseException {
         assert dateKeywords != null : "dateKeywords should not be null.\n";
-        boolean result;
+        boolean result = true;
         String[] splitDate = dateKeywords.split(":");
         if (splitDate.length == 1) { //if the user only enter an exact date
-            Date chosenDate = new Date(splitDate[0]);
-            result = expense.getDate().equals(chosenDate);
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            cal.setTime(sdf.parse(dateKeywords));
+            Calendar expenseCal = Calendar.getInstance();
+            // SimpleDateFormat sdf1 = new SimpleDateFormat("EEE, MMM d, yyyy");
+            // expenseCal.setTime(sdf1.parse(expense.getDate().toString()));
+            expenseCal.setTime(expense.getDate());
+            result = cal.get(Calendar.YEAR) == expenseCal.get(Calendar.YEAR)
+                    && cal.get(Calendar.MONTH) == expenseCal.get(Calendar.MONTH)
+                    && cal.get(Calendar.DATE) == expenseCal.get(Calendar.DATE);
         } else { //if the user enter a range of dates
-            Date start = new Date(splitDate[0]);
-            Date end = new Date(splitDate[1]);
-            boolean isWithinRange = start.before(expense.getDate())
-                    && end.after(expense.getDate());
-            result = start.equals(expense.getDate())
-                    || end.equals(expense.getDate())
-                    || isWithinRange;
+            Calendar start = Calendar.getInstance();
+            Calendar end = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            start.setTime(sdf.parse(splitDate[0]));
+            end.setTime(sdf.parse(splitDate[1]));
+            Calendar expenseCal = Calendar.getInstance();
+            expenseCal.setTime(expense.getDate());
+            boolean isWithinRange = start.before(expenseCal)
+                    && end.after(expenseCal);
+            boolean equalOrNot = (start.get(Calendar.YEAR) == expenseCal.get(Calendar.YEAR)
+                    && start.get(Calendar.MONTH) == expenseCal.get(Calendar.MONTH)
+                    && start.get(Calendar.DATE) == expenseCal.get(Calendar.DATE))
+                    || (end.get(Calendar.YEAR) == expenseCal.get(Calendar.YEAR)
+                    && end.get(Calendar.MONTH) == expenseCal.get(Calendar.MONTH)
+                    && end.get(Calendar.DATE) == expenseCal.get(Calendar.DATE));
+            result = (equalOrNot || isWithinRange);
         }
         return result;
+    }
+
+    /**
+     * Calculate Levenshtien distance for almost similar words.
+     * @param a {@code Name}
+     * @param b input keyword
+     * @return levenshtien distance
+     */
+    public static int levenshtienDist(String a, String b) {
+        a = a.toLowerCase();
+        b = b.toLowerCase();
+        // i == 0
+        int [] costs = new int [b.length() + 1];
+        for (int j = 0; j < costs.length; j++) {
+            costs[j] = j;
+        }
+        for (int i = 1; i <= a.length(); i++) {
+            // j == 0; nw = lev(i - 1, j)
+            costs[0] = i;
+            int nw = i - 1;
+            for (int j = 1; j <= b.length(); j++) {
+                int cj = Math.min(1 + Math.min(costs[j], costs[j - 1]),
+                        a.charAt(i - 1) == b.charAt(j - 1) ? nw : nw + 1);
+                nw = costs[j];
+                costs[j] = cj;
+            }
+        }
+        return costs[b.length()];
     }
 
     @Override
@@ -148,5 +193,4 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
                 || (other instanceof ExpenseContainsKeywordsPredicate // instanceof handles nulls
                 && keywords.equals(((ExpenseContainsKeywordsPredicate) other).keywords)); // state check
     }
-
 }

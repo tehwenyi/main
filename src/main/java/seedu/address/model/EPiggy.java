@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleObjectProperty;
@@ -68,7 +69,7 @@ public class EPiggy implements ReadOnlyEPiggy {
      * {@code persons} must not contain duplicate persons.
      */
     public void addBudgetList(List<Budget> budgets) {
-        this.budgetList.addBudgetList(budgets);
+        this.budgetList.addBudgetList(budgets.stream().map(Budget::new).collect(Collectors.toList()));
         indicateModified();
     }
 

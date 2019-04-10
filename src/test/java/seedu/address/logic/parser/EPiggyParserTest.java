@@ -17,12 +17,16 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.epiggy.AddBudgetCommand;
+import seedu.address.logic.commands.epiggy.AddExpenseCommand;
 import seedu.address.logic.commands.epiggy.EditBudgetCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.Expense;
 import seedu.address.testutil.epiggy.BudgetBuilder;
 import seedu.address.testutil.epiggy.BudgetUtil;
 import seedu.address.testutil.epiggy.EditBudgetDetailsBuilder;
+import seedu.address.testutil.epiggy.ExpenseUtil;
+import seedu.address.testutil.epiggy.ExpensesBuilder;
 
 public class EPiggyParserTest {
     @Rule
@@ -45,12 +49,12 @@ public class EPiggyParserTest {
         assertEquals(new AddBudgetCommand(budget), command);
     }
 
-    // @Test
-    // public void parseCommand_addExpense() throws Exception {
-    //     Expense expense = new ExpensesBuilder().build();
-    //     AddExpenseCommand command = (AddExpenseCommand)
-    // parser.parseCommand(ExpenseUtil.getAddExpenseCommand(expense));
-    //     assertEquals(new AddExpenseCommand(expense), command);
+    //@Test
+    //public void parseCommand_addExpense() throws Exception {
+    //    Expense expense = new ExpensesBuilder().build();
+    //    AddExpenseCommand command = (AddExpenseCommand)
+    //            parser.parseCommand(ExpenseUtil.getAddExpenseCommand(expense));
+    //    assertEquals(new AddExpenseCommand(expense), command);
     // }
 
     @Test

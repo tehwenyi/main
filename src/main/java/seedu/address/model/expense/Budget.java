@@ -50,6 +50,20 @@ public class Budget {
     }
 
     /**
+     * Clone budget.
+     */
+    public Budget(Budget budget) {
+        this.amount = budget.amount;
+        this.startDate = budget.startDate;
+        this.period = budget.period;
+        this.endDate = budget.endDate;
+        this.remainingAmount = budget.remainingAmount;
+        this.remainingDays = budget.remainingDays;
+        this.todaysDate = budget.todaysDate;
+        this.status = budget.status;
+    }
+
+    /**
      * Calculates the end date = startDate + period (number of days)
      * @param startDate
      * @param period

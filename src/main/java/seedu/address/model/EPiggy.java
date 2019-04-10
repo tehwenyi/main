@@ -273,6 +273,7 @@ public class EPiggy implements ReadOnlyEPiggy {
         requireNonNull(editedExpense);
         expenses.setExpense(target, editedExpense);
         updateBudgetList(editedExpense);
+        updateBudgetList(target);
         indicateModified();
     }
 

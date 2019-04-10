@@ -86,7 +86,7 @@ public class LogicManagerTest {
         // Execute add command
         String addCommand = AddExpenseCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_BOWLING
                 + CommandTestUtil.COST_DESC_BOWLING + CommandTestUtil.DATE_DESC_2018
-                + CommandTestUtil.TAG_DESC_FOOD;
+                + CommandTestUtil.TAG_DESC_FRIENDS;
         Expense expectedExpense = new ExpensesBuilder(BOWLING).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addExpense(expectedExpense);

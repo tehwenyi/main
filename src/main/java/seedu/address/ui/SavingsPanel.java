@@ -10,9 +10,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.expense.Expense;
-import seedu.address.model.expense.Goal;
-import seedu.address.model.expense.item.Cost;
+import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.item.Cost;
 
 /**
  * Panel containing savings information.
@@ -55,7 +55,7 @@ public class SavingsPanel extends UiPart<Region> {
      * @param onSavingsChange
      */
     private void refreshPanel(ObservableValue<Goal> goal, Supplier<ObservableValue<Cost>> onSavingsChange) {
-        currentSavings.setText(onSavingsChange.get().getValue().toString());
+        currentSavings.setText("$" + onSavingsChange.get().getValue().toString());
         if (goal.getValue() == null) {
             currentGoal.setText("(None set)");
             amountDifference.setText("$0.00");

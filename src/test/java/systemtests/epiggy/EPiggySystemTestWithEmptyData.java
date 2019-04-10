@@ -3,6 +3,7 @@ package systemtests.epiggy;
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
 
@@ -21,13 +22,17 @@ import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
+import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.EpiggyTestApp;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
-import seedu.address.model.expense.Budget;
+import seedu.address.model.epiggy.Budget;
 import seedu.address.testutil.epiggy.TypicalReports;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
@@ -125,6 +130,30 @@ public abstract class EPiggySystemTestWithEmptyData {
     }
 
     /**
+     * Displays all persons in the address book.
+     */
+    protected void showAllPersons() {
+        executeCommand(ListCommand.COMMAND_WORD);
+        assertEquals(getModel().getEPiggy().getPersonList().size(), getModel().getFilteredPersonList().size());
+    }
+
+    /**
+     * Displays all persons with any parts of their names matching {@code keyword} (case-insensitive).
+     */
+    protected void showPersonsWithName(String keyword) {
+        executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
+        assertTrue(getModel().getFilteredPersonList().size() < getModel().getEPiggy().getPersonList().size());
+    }
+
+    /**
+     * Deletes all persons in the address book.
+     */
+    protected void deleteAllPersons() {
+        executeCommand(ClearCommand.COMMAND_WORD);
+        assertEquals(0, getModel().getEPiggy().getPersonList().size());
+    }
+
+    /**
      * Deletes all persons in the address book.
      */
     protected String deleteAllBudgets() {
@@ -133,8 +162,9 @@ public abstract class EPiggySystemTestWithEmptyData {
         int budgetListSize = budgetList.size();
         for (int i = 0; i < budgetListSize; i++) {
             executeCommand(DeleteBudgetCommand.COMMAND_WORD + " 1");
-            messageHistory = "ePiggy: " + String.format(DeleteBudgetCommand.MESSAGE_DELETE_BUDGET_SUCCESS,
-                    budgetList.get(i)) + "\n\n" + "You: " + DeleteBudgetCommand.COMMAND_WORD + " 1" + "\n\n"
+            messageHistory = "========================\n" + "ePiggy: "
+                    + String.format(DeleteBudgetCommand.MESSAGE_DELETE_BUDGET_SUCCESS,
+                    budgetList.get(i)) + "\n\n" + "You: " + DeleteBudgetCommand.COMMAND_WORD + " 1" + "\n"
                     + messageHistory;
         }
         assertEquals(0, getModel().getEPiggy().getBudgetList().size());
@@ -187,6 +217,7 @@ public abstract class EPiggySystemTestWithEmptyData {
      * Asserts that the browser's url and the selected card in the person list panel remain unchanged.
      *
      * @see BrowserPanelHandle#isUrlChanged()
+     * @see PersonListPanelHandle#isSelectedPersonCardChanged()
      */
     protected void assertSelectedCardUnchanged() {
         assertFalse(getBrowserPanel().isUrlChanged());

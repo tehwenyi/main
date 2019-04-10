@@ -11,9 +11,9 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.EPiggy;
 import seedu.address.model.ReadOnlyEPiggy;
-import seedu.address.model.expense.Allowance;
-import seedu.address.model.expense.Budget;
-import seedu.address.model.expense.Expense;
+import seedu.address.model.epiggy.Allowance;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.Expense;
 
 
 /**

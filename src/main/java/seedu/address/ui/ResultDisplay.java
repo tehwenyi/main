@@ -28,7 +28,8 @@ public class ResultDisplay extends UiPart<Region> {
     public void setFeedbackToUser(String feedbackToUser, String commandEntered) {
         requireNonNull(feedbackToUser);
 
-        messages = "ePiggy: " + feedbackToUser + "\n\n" + "You: " + commandEntered + "\n\n" + messages;
+        messages = "========================\n" + "ePiggy: " + feedbackToUser + "\n\n" + "You: " + commandEntered
+                + "\n" + messages;
 
         resultDisplay.setText(messages);
     }

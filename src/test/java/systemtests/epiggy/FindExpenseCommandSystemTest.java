@@ -4,14 +4,12 @@ import static seedu.address.testutil.epiggy.TypicalReports.KEYWORD_MATCHING_DINN
 import static seedu.address.testutil.epiggy.TypicalReports.KEYWORD_MATCHING_START_DATE;
 import static seedu.address.testutil.epiggy.TypicalReports.KEYWORD_MATCHING_STATIONARY;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.address.logic.commands.epiggy.FindExpenseCommand;
 import seedu.address.model.Model;
 import systemtests.EPiggySystemTest;
 
-@Ignore
 public class FindExpenseCommandSystemTest extends EPiggySystemTestWithDefaultData {
     private StringBuilder stringBuilder = new StringBuilder();
     @Test
@@ -170,7 +168,8 @@ public class FindExpenseCommandSystemTest extends EPiggySystemTestWithDefaultDat
      */
     private void assertCommandSuccess(String command, Model expectedModel, int numOfFound) {
         executeCommand(command);
-        String exceptedMessage = "ePiggy: " + numOfFound + " expenses listed!\n\nYou: " + command + "\n\n";
+        String exceptedMessage = "========================\n" + "ePiggy: " + numOfFound + " expenses listed!\n\nYou: "
+                + command + "\n";
         stringBuilder.insert(0, exceptedMessage);
         assertApplicationDisplaysExpected("", stringBuilder.toString(), expectedModel);
         assertCommandBoxShowsDefaultStyle();

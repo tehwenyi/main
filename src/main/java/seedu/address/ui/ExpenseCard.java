@@ -9,8 +9,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.expense.Allowance;
-import seedu.address.model.expense.Expense;
+import seedu.address.model.epiggy.Allowance;
+import seedu.address.model.epiggy.Expense;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -55,7 +55,7 @@ public class ExpenseCard extends UiPart<Region> {
         if (expense instanceof Allowance) {
             cost.setText("Amount: " + expense.getItem().getCost().toString());
         } else {
-            cost.setText("Cost: " + expense.getItem().getCost().toString());
+            cost.setText("Cost: $" + expense.getItem().getCost().toString());
         }
         SimpleDateFormat formatter = new SimpleDateFormat("EEE, MMM d, yyyy");
         date.setText(String.format("Added on: %s \n", formatter.format(expense.getDate())));

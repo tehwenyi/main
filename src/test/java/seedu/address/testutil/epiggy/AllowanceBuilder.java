@@ -4,10 +4,10 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.expense.Allowance;
-import seedu.address.model.expense.item.Cost;
-import seedu.address.model.expense.item.Item;
-import seedu.address.model.expense.item.Name;
+import seedu.address.model.epiggy.Allowance;
+import seedu.address.model.epiggy.item.Cost;
+import seedu.address.model.epiggy.item.Item;
+import seedu.address.model.epiggy.item.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 

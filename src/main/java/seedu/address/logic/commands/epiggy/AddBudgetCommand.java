@@ -1,7 +1,11 @@
 package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.expense.UniqueBudgetList.MAXIMUM_SIZE;
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
+import static seedu.address.model.epiggy.UniqueBudgetList.MAXIMUM_SIZE;
 
 import java.util.Date;
 import java.util.List;
@@ -10,9 +14,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
-import seedu.address.model.expense.Budget;
+import seedu.address.model.epiggy.Budget;
 
 /**
  * Sets a budget for the total expenses.
@@ -23,13 +26,13 @@ public class AddBudgetCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets a budget for ePiggy. "
             + "Parameters: "
-            + CliSyntax.PREFIX_COST + "BUDGET_IN_DOLLARS "
-            + CliSyntax.PREFIX_PERIOD + "TIME_PERIOD_IN_DAYS "
-            + CliSyntax.PREFIX_DATE + "START_DATE_IN_DD/MM/YYYY \n"
+            + PREFIX_COST + "BUDGET_IN_DOLLARS "
+            + PREFIX_PERIOD + "TIME_PERIOD_IN_DAYS "
+            + PREFIX_DATE + "START_DATE_IN_DD/MM/YYYY \n"
             + "Example: " + COMMAND_WORD + " "
-            + CliSyntax.PREFIX_COST + "500 "
-            + CliSyntax.PREFIX_PERIOD + "30 "
-            + CliSyntax.PREFIX_DATE + "01/04/2019";
+            + PREFIX_COST + "500 "
+            + PREFIX_PERIOD + "30 "
+            + PREFIX_DATE + "01/04/2019";
 
     public static final String MESSAGE_SUCCESS = "Budget is set at:\n%1$s";
     public static final String MESSAGE_FAIL = "Budget is too old to be added."

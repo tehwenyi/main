@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
 import java.time.LocalDate;
 import java.util.logging.Logger;
@@ -9,7 +10,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
 import seedu.address.ui.ReportWindow;
 
@@ -24,13 +24,13 @@ public class ReportCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows report to the user.\n"
             + "Parameters: "
-            + CliSyntax.PREFIX_DATE + "SPECIFY DATE, MONTH OR YEAR \n"
+            + PREFIX_DATE + "SPECIFY DATE, MONTH OR YEAR \n"
             + "Example: " + COMMAND_WORD + " "
-            + CliSyntax.PREFIX_DATE + "21/03/2019\n"
+            + PREFIX_DATE + "21/03/2019\n"
             + "Example: " + COMMAND_WORD + " "
-            + CliSyntax.PREFIX_DATE + "03/2019\n"
+            + PREFIX_DATE + "03/2019\n"
             + "Example: " + COMMAND_WORD + " "
-            + CliSyntax.PREFIX_DATE + "2019\n";
+            + PREFIX_DATE + "2019\n";
 
     public static final String MESSAGE_SUCCESS = "Showed report.";
 

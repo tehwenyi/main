@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleObjectProperty;
@@ -14,25 +15,28 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.util.InvalidationListenerManager;
-import seedu.address.model.expense.Allowance;
-import seedu.address.model.expense.Budget;
-import seedu.address.model.expense.Expense;
-import seedu.address.model.expense.ExpenseList;
-import seedu.address.model.expense.Goal;
-import seedu.address.model.expense.UniqueBudgetList;
-import seedu.address.model.expense.item.Cost;
-import seedu.address.model.expense.item.Item;
-import seedu.address.model.expense.item.Period;
+import seedu.address.model.epiggy.Allowance;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.ExpenseList;
+import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.UniqueBudgetList;
+import seedu.address.model.epiggy.item.Cost;
+import seedu.address.model.epiggy.item.Item;
+import seedu.address.model.epiggy.item.Period;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.UniquePersonList;
 
 /**
  * Wraps all data at the address-book level
+ * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class EPiggy implements ReadOnlyEPiggy {
 
     private final ExpenseList expenses;
     private final ObservableList<Item> items;
     private SimpleObjectProperty<Goal> goal;
-    private SimpleObjectProperty<Cost> savings;
+    private final UniquePersonList persons;
     private final UniqueBudgetList budgetList;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
@@ -47,6 +51,7 @@ public class EPiggy implements ReadOnlyEPiggy {
         expenses = new ExpenseList();
         items = FXCollections.observableArrayList();
         budgetList = new UniqueBudgetList();
+        persons = new UniquePersonList();
         goal = new SimpleObjectProperty<>();
 
     }
@@ -67,8 +72,17 @@ public class EPiggy implements ReadOnlyEPiggy {
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
+    public void setPersons(List<Person> persons) {
+        this.persons.setPersons(persons);
+        indicateModified();
+    }
+
+    /**
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
     public void addBudgetList(List<Budget> budgets) {
-        this.budgetList.addBudgetList(budgets);
+        this.budgetList.addBudgetList(budgets.stream().map(Budget::new).collect(Collectors.toList()));
         indicateModified();
     }
 
@@ -92,6 +106,23 @@ public class EPiggy implements ReadOnlyEPiggy {
     }
 
     //// person-level operations
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasPerson(Person person) {
+        requireNonNull(person);
+        return persons.contains(person);
+    }
+
+    /**
+     * Adds a person to the address book.
+     * The person must not already exist in the address book.
+     */
+    public void addPerson(Person p) {
+        persons.add(p);
+        indicateModified();
+    }
 
     /**
      * Adds an expense to the expense book.
@@ -164,7 +195,7 @@ public class EPiggy implements ReadOnlyEPiggy {
 
     /**
      * Updates the remaining amount and days of the budget.
-     * Allowances in the expense list does not affect the budget.
+     * Allowances in the Expense list does not affect the budget.
      * @param budget to be updated.
      * @return updated budget.
      */
@@ -242,6 +273,7 @@ public class EPiggy implements ReadOnlyEPiggy {
         requireNonNull(editedExpense);
         expenses.setExpense(target, editedExpense);
         updateBudgetList(editedExpense);
+        updateBudgetList(target);
         indicateModified();
     }
 
@@ -280,11 +312,23 @@ public class EPiggy implements ReadOnlyEPiggy {
     }
 
     /**
+     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     */
+    public void setPerson(Person target, Person editedPerson) {
+        requireNonNull(editedPerson);
+
+        persons.setPerson(target, editedPerson);
+        indicateModified();
+    }
+
+    /**
      * Removes {@code key} from this {@code EPiggy}.
      * {@code key} must exist in the address book.
      */
-    public void removeExpense(Expense key) {
-        expenses.remove(key);
+    public void removePerson(Person key) {
+        persons.remove(key);
         indicateModified();
     }
 
@@ -314,6 +358,11 @@ public class EPiggy implements ReadOnlyEPiggy {
     }
 
     @Override
+    public ObservableList<Person> getPersonList() {
+        return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
     public ObservableList<Expense> getExpenseList() {
         return expenses.asUnmodifiableObservableList();
     }
@@ -335,12 +384,12 @@ public class EPiggy implements ReadOnlyEPiggy {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EPiggy // instanceof handles nulls
-                && expenses.equals(((EPiggy) other).expenses));
+                && persons.equals(((EPiggy) other).persons));
     }
 
     @Override
     public int hashCode() {
-        return expenses.hashCode();
+        return persons.hashCode();
     }
 
     public void reverseExpenseList() {

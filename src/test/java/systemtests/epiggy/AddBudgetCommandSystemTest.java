@@ -2,6 +2,7 @@ package systemtests.epiggy;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE;
+
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_FIRSTEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_FIRSTEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_SECONDEXTRA;
@@ -15,7 +16,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_FIRSTEXT
 import static seedu.address.testutil.TypicalBudgets.FIRST_EXTRA;
 import static seedu.address.testutil.TypicalBudgets.ONE;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
@@ -23,9 +23,9 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.epiggy.AddBudgetCommand;
 import seedu.address.model.Model;
-import seedu.address.model.expense.Budget;
-import seedu.address.model.expense.item.Cost;
-import seedu.address.model.expense.item.Period;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.item.Cost;
+import seedu.address.model.epiggy.item.Period;
 import seedu.address.testutil.epiggy.BudgetBuilder;
 import seedu.address.testutil.epiggy.BudgetUtil;
 
@@ -34,7 +34,6 @@ public class AddBudgetCommandSystemTest extends EPiggySystemTestWithEmptyData {
     private String messageHistory = "";
 
     @Test
-    @Ignore
     public void add() {
         Model model = getModel();
 
@@ -158,7 +157,8 @@ public class AddBudgetCommandSystemTest extends EPiggySystemTestWithEmptyData {
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);
-        messageHistory = "ePiggy: " + expectedResultMessage + "\n\n" + "You: " + command + "\n\n" + messageHistory;
+        messageHistory = "========================\n" + "ePiggy: " + expectedResultMessage + "\n\n" + "You: " + command
+                + "\n" + messageHistory;
         assertApplicationDisplaysExpected("", messageHistory, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsDefaultStyle();
@@ -181,7 +181,8 @@ public class AddBudgetCommandSystemTest extends EPiggySystemTestWithEmptyData {
         Model expectedModel = getModel();
 
         executeCommand(command);
-        messageHistory = "ePiggy: " + expectedResultMessage + "\n\n" + "You: " + command + "\n\n" + messageHistory;
+        messageHistory = "========================\n" + "ePiggy: " + expectedResultMessage + "\n\n" + "You: " + command
+                + "\n" + messageHistory;
         assertApplicationDisplaysExpected(command, messageHistory, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsErrorStyle();

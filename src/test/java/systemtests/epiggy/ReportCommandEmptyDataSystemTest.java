@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import guitests.GuiRobot;
@@ -20,7 +19,6 @@ public class ReportCommandEmptyDataSystemTest extends EPiggySystemTestWithEmptyD
     private static final GuiRobot guiRobot = new GuiRobot();
 
     @Test
-    @Ignore
     public void openReportWindow() {
 
         String messageHistory = "";
@@ -45,10 +43,10 @@ public class ReportCommandEmptyDataSystemTest extends EPiggySystemTestWithEmptyD
         assertReportWindowOpen();
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
-        messageHistory = "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + ReportCommand.COMMAND_WORD + "\n\n";
-        messageHistory = "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + ReportCommand.COMMAND_WORD + "\n\n" + messageHistory;
+        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+                + "You: " + ReportCommand.COMMAND_WORD + "\n";
+        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+                + "You: " + ReportCommand.COMMAND_WORD + "\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
 
         // check report window for specified month
@@ -57,8 +55,8 @@ public class ReportCommandEmptyDataSystemTest extends EPiggySystemTestWithEmptyD
         assertReportWindowOpen();
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
-        messageHistory = "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + command + "\n\n" + messageHistory;
+        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+                + "You: " + command + "\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
 
         // check report window for specified year
@@ -67,8 +65,8 @@ public class ReportCommandEmptyDataSystemTest extends EPiggySystemTestWithEmptyD
         assertReportWindowOpen();
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
-        messageHistory = "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + command + "\n\n" + messageHistory;
+        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+                + "You: " + command + "\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
 
         // check report window for specified date
@@ -77,8 +75,8 @@ public class ReportCommandEmptyDataSystemTest extends EPiggySystemTestWithEmptyD
         assertReportWindowOpen();
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
-        messageHistory = "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + command + "\n\n" + messageHistory;
+        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+                + "You: " + command + "\n" + messageHistory;
         assertEquals(messageHistory, getResultDisplay().getText());
     }
 

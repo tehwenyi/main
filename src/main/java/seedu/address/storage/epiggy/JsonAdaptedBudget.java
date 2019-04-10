@@ -8,9 +8,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.ParserUtil;
-import seedu.address.model.expense.Budget;
-import seedu.address.model.expense.item.Cost;
-import seedu.address.model.expense.item.Period;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.item.Cost;
+import seedu.address.model.epiggy.item.Period;
 
 
 /**

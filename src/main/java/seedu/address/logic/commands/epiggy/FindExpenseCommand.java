@@ -7,7 +7,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.expense.ExpenseContainsKeywordsPredicate;
+import seedu.address.model.epiggy.ExpenseContainsKeywordsPredicate;
 
 
 //@@author rahulb99
@@ -42,11 +42,11 @@ public class FindExpenseCommand extends Command {
                 String.format(MESSAGE_SUCCESS, model.getFilteredExpenseList().size()));
     }
 
-    //    @Override
-    //    public boolean equals(Object other) {
-    //        return other == this // short circuit if same object
-    //                || (other instanceof FindExpenseCommand // instanceof handles nulls
-    //                && predicate.equals(((FindExpenseCommand) other).predicate)); // state check
-    //    }
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof FindExpenseCommand // instanceof handles nulls
+                && predicate.equals(((FindExpenseCommand) other).predicate)); // state check
+    }
 
 }

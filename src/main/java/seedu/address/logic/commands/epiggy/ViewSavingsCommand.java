@@ -8,7 +8,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.epiggy.Savings;
+import seedu.address.model.expense.item.Cost;
 
 /**
  * Allows the user to view the savings recorded in ePiggy.
@@ -27,7 +27,7 @@ public class ViewSavingsCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
         requireNonNull(model);
-        SimpleObjectProperty<Savings> savings = model.getSavings();
+        SimpleObjectProperty<Cost> savings = model.getSavings();
         return new CommandResult(String.format(MESSAGE_SUCCESS, savings.getValue()));
     }
 }

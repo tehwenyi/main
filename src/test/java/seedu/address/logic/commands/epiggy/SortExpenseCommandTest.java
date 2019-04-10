@@ -18,9 +18,9 @@ import org.junit.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.epiggy.comparators.CompareExpenseByCost;
-import seedu.address.model.epiggy.comparators.CompareExpenseByDate;
-import seedu.address.model.epiggy.comparators.CompareExpenseByName;
+import seedu.address.model.expense.comparators.CompareExpenseByCost;
+import seedu.address.model.expense.comparators.CompareExpenseByDate;
+import seedu.address.model.expense.comparators.CompareExpenseByName;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code SortExpenseCommand}.

@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static seedu.address.testutil.TypicalPersons.getTypicalEPiggy;
+import static seedu.address.testutil.epiggy.TypicalExpenses.getTypicalEPiggy;
 
 import java.nio.file.Path;
 
@@ -16,7 +16,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.EPiggy;
 import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.UserPrefs;
-
 import seedu.address.storage.epiggy.JsonEPiggyStorage;
 
 public class StorageManagerTest {

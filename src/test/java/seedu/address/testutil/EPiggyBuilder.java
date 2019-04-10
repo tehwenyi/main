@@ -1,12 +1,12 @@
 package seedu.address.testutil;
 
 import seedu.address.model.EPiggy;
-import seedu.address.model.person.Person;
+import seedu.address.model.expense.Expense;
 
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code ePiggy ab = new EPiggyBuilder().withPerson("John", "Doe").build();}
+ *     {@code ePiggy ab = new EPiggyBuilder().withExpense("John", "Doe").build();}
  */
 public class EPiggyBuilder {
 
@@ -23,8 +23,8 @@ public class EPiggyBuilder {
     /**
      * Adds a new {@code Person} to the {@code ePiggy} that we are building.
      */
-    public EPiggyBuilder withPerson(Person person) {
-        ePiggy.addPerson(person);
+    public EPiggyBuilder withExpense(Expense expense) {
+        ePiggy.addExpense(expense);
         return this;
     }
 

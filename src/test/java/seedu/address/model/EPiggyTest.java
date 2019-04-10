@@ -1,17 +1,11 @@
 package seedu.address.model;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalEPiggy;
+import static seedu.address.testutil.epiggy.TypicalExpenses.BOWLING;
+import static seedu.address.testutil.epiggy.TypicalExpenses.getTypicalEPiggy;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -23,17 +17,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Expense;
-import seedu.address.model.epiggy.Goal;
+import seedu.address.model.expense.Budget;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.Goal;
+import seedu.address.model.expense.item.Cost;
+import seedu.address.model.expense.item.Item;
 
-import seedu.address.model.epiggy.Savings;
-import seedu.address.model.epiggy.item.Item;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.testutil.PersonBuilder;
-
-@Ignore
 public class EPiggyTest {
 
     @Rule
@@ -43,7 +32,7 @@ public class EPiggyTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), ePiggy.getPersonList());
+        assertEquals(Collections.emptyList(), ePiggy.getExpenseList());
     }
 
     @Test
@@ -52,6 +41,7 @@ public class EPiggyTest {
         ePiggy.resetData(null);
     }
 
+    @Ignore
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
         EPiggy newData = getTypicalEPiggy();
@@ -59,47 +49,49 @@ public class EPiggyTest {
         assertEquals(newData, ePiggy);
     }
 
-    @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+    //    @Test
+    //    public void resetData_withDuplicateExpenses_throwsDuplicateExpensesException() {
+    //        // Two persons with the same identity fields
+    //        expense editedAlice = new ExpensesBuilder(BOWLING)
+    //        .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    //                .build();
+    //        List<expense> newExpensess = Arrays.asList(BOWLING, editedAlice);
+    //        AddressBookStub newData = new AddressBookStub(newExpensess);
+    //
+    //        thrown.expect(DuplicateExpensesException.class);
+    //        ePiggy.resetData(newData);
+    //    }
 
-        thrown.expect(DuplicatePersonException.class);
-        ePiggy.resetData(newData);
-    }
+    //    @Test
+    //    public void hasExpenses_nullExpenses_throwsNullPointerException() {
+    //        thrown.expect(NullPointerException.class);
+    //        ePiggy.hasExpenses(null);
+    //    }
+    //
+    //    @Test
+    //    public void hasExpenses_personNotInAddressBook_returnsFalse() {
+    //        assertFalse(ePiggy.hasExpenses(BOWLING));
+    //    }
+    //
+    //    @Test
+    //    public void hasExpenses_personInAddressBook_returnsTrue() {
+    //        ePiggy.addExpense(BOWLING);
+    //        assertTrue(ePiggy.hasExpense(BOWLING));
+    //    }
+    //
+    //    @Test
+    //    public void hasExpenses_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    //        ePiggy.addExpenses(BOWLING);
+    //        Expenses editedAlice = new ExpensesBuilder(BOWLING)
+    //        .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    //                .build();
+    //        assertTrue(ePiggy.hasExpenses(editedAlice));
+    //    }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        ePiggy.hasPerson(null);
-    }
-
-    @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(ePiggy.hasPerson(ALICE));
-    }
-
-    @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        ePiggy.addPerson(ALICE);
-        assertTrue(ePiggy.hasPerson(ALICE));
-    }
-
-    @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        ePiggy.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        assertTrue(ePiggy.hasPerson(editedAlice));
-    }
-
-    @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getExpensesList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        ePiggy.getPersonList().remove(0);
+        ePiggy.getExpenseList().remove(0);
     }
 
     @Test
@@ -107,7 +99,7 @@ public class EPiggyTest {
         SimpleIntegerProperty counter = new SimpleIntegerProperty();
         InvalidationListener listener = observable -> counter.set(counter.get() + 1);
         ePiggy.addListener(listener);
-        ePiggy.addPerson(ALICE);
+        ePiggy.addExpense(BOWLING);
         assertEquals(1, counter.get());
     }
 
@@ -117,7 +109,7 @@ public class EPiggyTest {
         InvalidationListener listener = observable -> counter.set(counter.get() + 1);
         ePiggy.addListener(listener);
         ePiggy.removeListener(listener);
-        ePiggy.addPerson(ALICE);
+        ePiggy.addExpense(BOWLING);
         assertEquals(0, counter.get());
     }
 
@@ -125,15 +117,14 @@ public class EPiggyTest {
      * A stub ReadOnlyEPiggy whose persons list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyEPiggy {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Expense> persons = FXCollections.observableArrayList();
         private final ObservableList<Expense> expenses = FXCollections.observableArrayList();
         private final ObservableList<Item> items = FXCollections.observableArrayList();
         private ObservableList<Budget> budgets; //TODO
         private SimpleObjectProperty<Goal> goal;
-        private SimpleObjectProperty<Savings> savings;
 
 
-        AddressBookStub(Collection<Person> persons) {
+        AddressBookStub(Collection<Expense> persons) {
             this.persons.setAll(persons);
         }
 
@@ -153,17 +144,12 @@ public class EPiggyTest {
         // }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
-        }
-
-        @Override
         public ObservableList<Budget> getBudgetList() {
             return budgets;
         }
 
         @Override
-        public SimpleObjectProperty<Savings> getSavings() {
+        public SimpleObjectProperty<Cost> getSavings() {
             return null;
         }
 

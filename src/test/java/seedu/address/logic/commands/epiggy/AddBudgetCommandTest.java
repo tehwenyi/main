@@ -32,13 +32,11 @@ import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.epiggy.Allowance;
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Expense;
-import seedu.address.model.epiggy.Goal;
-
-import seedu.address.model.epiggy.Savings;
-import seedu.address.model.person.Person;
+import seedu.address.model.expense.Allowance;
+import seedu.address.model.expense.Budget;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.Goal;
+import seedu.address.model.expense.item.Cost;
 import seedu.address.testutil.TypicalBudgets;
 import seedu.address.testutil.epiggy.BudgetBuilder;
 
@@ -99,9 +97,28 @@ public class AddBudgetCommandTest {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(validBudget.getEndDate());
         calendar.add(Calendar.DAY_OF_MONTH, -1);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String endDate = simpleDateFormat.format(calendar.getTime());
         Budget overlappingBudget = new BudgetBuilder().withDate(endDate).build();
+
+        AddBudgetCommand addBudgetCommand = new AddBudgetCommand(validBudget);
+        ModelStub modelStub = new ModelStubWithBudget(overlappingBudget);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(AddBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
+        addBudgetCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_subsetBudget_throwsCommandException() throws Exception {
+        Budget validBudget = new BudgetBuilder().build();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(validBudget.getEndDate());
+        calendar.add(Calendar.DAY_OF_MONTH, -2);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String endDate = simpleDateFormat.format(calendar.getTime());
+        Budget overlappingBudget = new BudgetBuilder().withDate(endDate).withPeriod("1").build();
 
         AddBudgetCommand addBudgetCommand = new AddBudgetCommand(validBudget);
         ModelStub modelStub = new ModelStubWithBudget(overlappingBudget);
@@ -118,7 +135,7 @@ public class AddBudgetCommandTest {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(validBudget.getStartDate());
         calendar.add(Calendar.DAY_OF_MONTH, 1 - Integer.parseInt(BudgetBuilder.DEFAULT_PERIOD));
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String startDate = simpleDateFormat.format(calendar.getTime());
         Budget overlappingBudget = new BudgetBuilder().withDate(startDate).build();
 
@@ -128,6 +145,41 @@ public class AddBudgetCommandTest {
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
         addBudgetCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_overlapWithLaterBudget_throwsCommandException() throws Exception {
+        Date todaysDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(todaysDate);
+        calendar.add(Calendar.YEAR, 1);
+        Budget futureBudget = new BudgetBuilder().withDate(calendar.getTime()).build();
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        Budget overlappingBudget = new BudgetBuilder().withDate(calendar.getTime()).withPeriod("3").build();
+
+        AddBudgetCommand addBudgetCommand = new AddBudgetCommand(overlappingBudget);
+        ModelStubWithOldBudgetAndBudget modelStub = new ModelStubWithOldBudgetAndBudget(futureBudget);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(AddBudgetCommand.MESSAGE_OVERLAPPING_BUDGET);
+        addBudgetCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_middleBudget_success() throws Exception {
+        Date todaysDate = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(todaysDate);
+        calendar.add(Calendar.YEAR, 1);
+        Budget futureBudget = new BudgetBuilder().withDate(calendar.getTime()).build();
+        calendar.add(Calendar.DAY_OF_MONTH, -3);
+        Budget validBudget = new BudgetBuilder().withDate(calendar.getTime()).withPeriod("1").build();
+
+        ModelStubWithOldBudgetAndBudget modelStub = new ModelStubWithOldBudgetAndBudget(futureBudget);
+        CommandResult commandResult = new AddBudgetCommand(validBudget).execute(modelStub, commandHistory);
+
+        assertEquals(String.format(AddBudgetCommand.MESSAGE_SUCCESS, validBudget), commandResult.getFeedbackToUser());
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
@@ -152,8 +204,12 @@ public class AddBudgetCommandTest {
         // same object -> returns true
         assertTrue(addTwentyCommand.equals(addTwentyCommand));
 
-        // same values -> returns true
+        // copy of object -> returns true
         AddBudgetCommand addTwentyCommandCopy = new AddBudgetCommand(twenty);
+        assertTrue(addTwentyCommand.equals(addTwentyCommandCopy));
+
+        // same values -> returns true
+        addTwentyCommandCopy = new AddBudgetCommand(new BudgetBuilder().withAmount("20").build());
         assertTrue(addTwentyCommand.equals(addTwentyCommandCopy));
 
         // different types -> returns false
@@ -220,11 +276,6 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void addExpense(Expense expense) {
             throw new AssertionError("This method should not be called.");
         }
@@ -265,7 +316,7 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public SimpleObjectProperty<Savings> getSavings() {
+        public SimpleObjectProperty<Cost> getSavings() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -295,27 +346,7 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setPerson(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setCurrentBudget(Budget editedBudget) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -326,11 +357,6 @@ public class AddBudgetCommandTest {
 
         @Override
         public ObservableList<Expense> getFilteredExpenseList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -370,11 +396,6 @@ public class AddBudgetCommandTest {
         }
 
         @Override
-        public ReadOnlyProperty<Person> selectedPersonProperty() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setExpense(Expense target, Expense editedExpense) {
             throw new AssertionError("This method should not be called.");
         }
@@ -383,15 +404,10 @@ public class AddBudgetCommandTest {
         public Expense getSelectedExpense() {
             throw new AssertionError("This method should not be called.");
         }
-
-        @Override
-        public void setSelectedPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single budget.
      */
     private class ModelStubWithBudget extends ModelStub {
         final ArrayList<Budget> budgets = new ArrayList<>();
@@ -498,6 +514,45 @@ public class AddBudgetCommandTest {
         public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
             requireAllNonNull(startDate, endDate, earlierBudget);
             return false;
+        }
+
+        @Override
+        public void commitEPiggy() {
+            // called by {@code AddCommand#execute()}
+        }
+    }
+
+    /**
+     * A Model stub that contains a single budget.
+     */
+    private class ModelStubWithOldBudgetAndBudget extends ModelStub {
+        final ArrayList<Budget> budgets = new ArrayList<>();
+        private EPiggy ePiggy = new EPiggy();
+
+        ModelStubWithOldBudgetAndBudget(Budget futureBudget) {
+            // initialise initial present old budget
+            Date todaysDate = new Date();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(todaysDate);
+            cal.add(Calendar.YEAR, -2);
+            Budget oldBudget = new BudgetBuilder().withDate(cal.getTime()).build();
+            budgets.add(futureBudget);
+            budgets.add(oldBudget);
+        }
+
+        @Override
+        public void addBudget(int index, Budget toAdd) {
+            budgets.add(index, toAdd);
+        }
+
+        @Override
+        public ObservableList<Budget> getFilteredBudgetList() {
+            return FXCollections.observableArrayList(budgets);
+        }
+
+        @Override
+        public boolean budgetsOverlap(Date startDate, Date endDate, Budget earlierBudget) {
+            return ePiggy.budgetsOverlap(startDate, endDate, earlierBudget);
         }
 
         @Override

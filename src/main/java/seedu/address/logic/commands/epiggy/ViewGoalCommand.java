@@ -8,8 +8,8 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.Savings;
+import seedu.address.model.expense.Goal;
+import seedu.address.model.expense.item.Cost;
 
 /**
  * Views the current goal set.
@@ -31,11 +31,11 @@ public class ViewGoalCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        SimpleObjectProperty<Savings> savings = model.getSavings();
+        SimpleObjectProperty<Cost> savings = model.getSavings();
         SimpleObjectProperty<Goal> goal = model.getGoal();
 
         double goalAmount = goal.getValue().getAmount().getAmount();
-        double savingsAmount = savings.getValue().getSavings();
+        double savingsAmount = savings.getValue().getAmount();
 
         double diff = goalAmount - savingsAmount;
 

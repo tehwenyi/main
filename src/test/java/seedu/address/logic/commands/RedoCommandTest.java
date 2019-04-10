@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.deleteFirstPerson;
-import static seedu.address.testutil.TypicalPersons.getTypicalEPiggy;
+import static seedu.address.testutil.epiggy.TypicalExpenses.getTypicalEPiggy;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -24,13 +22,13 @@ public class RedoCommandTest {
     @Before
     public void setUp() {
         // set up of both models' undo/redo history
-        deleteFirstPerson(model);
-        deleteFirstPerson(model);
+        CommandTestUtil.deleteFirstPerson(model);
+        CommandTestUtil.deleteFirstPerson(model);
         model.undoEPiggy();
         model.undoEPiggy();
 
-        deleteFirstPerson(expectedModel);
-        deleteFirstPerson(expectedModel);
+        CommandTestUtil.deleteFirstPerson(expectedModel);
+        CommandTestUtil.deleteFirstPerson(expectedModel);
         expectedModel.undoEPiggy();
         expectedModel.undoEPiggy();
     }
@@ -46,6 +44,6 @@ public class RedoCommandTest {
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // no redoable state in model
-        assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
+        CommandTestUtil.assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }
 }

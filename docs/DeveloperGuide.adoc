@@ -86,7 +86,7 @@ This will generate all resources required by the application and tests.
 
 === Verifying the setup
 
-. Run the `seedu.address.MainApp` and try a few commands
+. Run the `MainApp` and try a few commands
 . <<Testing,Run the tests>> to ensure they all pass.
 
 === Configurations to do before writing code
@@ -572,6 +572,13 @@ image::UndoRedoActivityDiagram.png[width="650"]
 // tag::report[]
 === Report feature
 This command allows users to view the report within a user-input period of time. +
+
+Given below is a sequence diagram of how the `report` command works: +
+
+image::reportSequenceDiagram.png[width="900"]
+
+Figure: Report Command Sequence Diagram +
+
 This command requires users to specify the `date`, `month` or `year` of the report in the command. +
 
 * `report d/DD/MM/YYYY` +
@@ -793,9 +800,9 @@ We have two types of tests:
 ..  _Unit tests_ targeting the lowest level methods/classes. +
 e.g. `seedu.address.commons.StringUtilTest`
 ..  _Integration tests_ that are checking the integration of multiple code units (those code units are assumed to be working). +
-e.g. `seedu.address.storage.StorageManagerTest`
+e.g. `StorageManagerTest`
 ..  Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together. +
-e.g. `seedu.address.logic.LogicManagerTest`
+e.g. `LogicManagerTest`
 
 
 === Troubleshooting Testing

@@ -1,8 +1,8 @@
 package seedu.address.testutil.epiggy;
 
-import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.item.Cost;
-import seedu.address.model.epiggy.item.Name;
+import seedu.address.model.expense.Goal;
+import seedu.address.model.expense.item.Cost;
+import seedu.address.model.expense.item.Name;
 
 /**
  * A utility class to help with building Goal objects.
@@ -18,6 +18,20 @@ public class GoalBuilder {
     public GoalBuilder() {
         name = new Name(DEFAULT_NAME);
         cost = new Cost(DEFAULT_COST);
+    }
+    /**
+     * Sets the {@code Name} of the {@code Goal} that we are building.
+     */
+    public GoalBuilder withName(String name) {
+        this.name = new Name(name);
+        return this;
+    }
+    /**
+     * Sets the {@code cost} of the {@code Goal} that we are building.
+     */
+    public GoalBuilder withCost(String cost) {
+        this.cost = new Cost(cost);
+        return this;
     }
 
     public Goal build() {

@@ -72,9 +72,16 @@ This command adds a budget of $500 from 1st February 2019 to 28th February 2019 
 === Basic Features
 
 ==== Auto complete :
-Enter the first few letters of the command or tag, and then press `Tab` key on the keyboard to auto complete the command. +
-If the auto complete command is not what you want, delete some letters and press `Tab` again. Another command will show. +
-Example: enter letter 'a' and then press `Tab`, the addExpense will show.
+Enter the first few letters of the command, and then press `Tab` key on the keyboard to auto complete the command. +
+If the completed command is not what you want, delete the command. Enter the same letters again, and press `Tab`. Another command will show if the letters match another command. +
+
+Example: enter letter 'a' and then press `Tab`, the command "addExpense n/ $/ t/ d/ " will show.
+
+Delete the command, enter 'a' again and press `Tab`, the addBudget or addAllowance command will show.
+
+[NOTE]
+Enter 'as' and press `Tab`, *nothing will happen* because 'as' does not match any prefix of the command. +
+Enter 'Add' and press `Tab`, *nothing will happen* because auto complete function is *case sensitive*.
 
 ==== Viewing help : `help`
 Lists all the user commands with their syntax and descriptions. +
@@ -92,27 +99,6 @@ Adds an expense for a $5 chicken rice set, tagged as Food with the date as 21/02
 
 * `addExpense n/Chicken rice set $/5 t/Food` +
 Adds an expense for a $5 chicken rice set, tagged as Food dated as the current date, by default.
-
-// tag::addAllowance[]
-==== Adding an allowance: `addAllowance`
-
-Adds a new allowance record to the Expense Tracker. +
-Format: `addAllowance $/AMOUNT`
-
-Example:
-
-* `addAllowance $/10` +
-Adds an allowance entry of $10 to the expense tracker.
-
-==== Listing all expenses : `list`
-
-Lists the expense records from newest to oldest. Use this to return to the default view after search/sort commands +
-Format: `list`
-
-==== Listing all expenses in reverse : `reverseList`
-
-Lists the expense records from oldest to newest. Use this to return to the default view after search/sort commands +
-Format: `reverseList`
 
 ==== Editing an expense : `editExpense`
 
@@ -138,6 +124,52 @@ Examples:
 
 * `deleteExpense 1` +
 Deletes the first expense in the displaying expense list from Expense Tracker.
+
+==== Adding an allowance: `addAllowance`
+
+Adds a new allowance record to the Expense Tracker. +
+Format: `addAllowance n/EXPENSE_NAME $/COST [d/DATE] [t/TAG]…`
+
+Examples:
+
+* `addAllowance n/From Mom $/20 t/School d/21/02/2019` +
+Adds an allowance of $20 from Mom, tagged as School with the date as 21/02/2019.
+
+==== Editing an allowance : `editAllowance`
+
+Edits an existing allowance in ePiggy at a specific `*INDEX`* . +
+The *`INDEX`* refers to the number in the displayed Expenses List which is next to the name of the expense. Existing values of
+the expense will be changed according to the value of the parameters. +
+Format: `editAllowance INDEX [n/ALLOWANCE_NAME] [$/COST] [d/DATE] [t/TAG]…`
+
+Examples:
+
+* `editAllowance 1 n/From Mom $10 t/Emergency` +
+Edits the name, cost and tag of the first allowance in ePiggy to ‘From Mom’, ‘$10’ and ‘Emergency’ respectively.
+* `editAllowance 2 $/22` +
+Edits the amount of the second allowance in ePiggy to ‘$22’.
+
+==== Deleting an allowance : `deleteAllowance`
+
+Deletes the allowance at the specified INDEX. The INDEX refers to the number in the displayed Expenses List which is next to
+the name of the allowance. +
+Format: `deleteAllowance INDEX`
+
+Examples:
+
+* `deleteExpense 1` +
+Deletes the first allowance in the displaying expense list from Expense Tracker.
+
+==== Listing all expenses : `list`
+
+Lists the expense records from newest to oldest. Use this to return to the default view after search/sort commands +
+Format: `list`
+
+==== Listing all expenses in reverse : `reverseList`
+
+Lists the expense records from oldest to newest. Use this to return to the default view after search/sort commands +
+Format: `reverseList`
+
 
 ==== Viewing an expense : `view`
 
@@ -271,27 +303,6 @@ Deletes the first budget in the Budget List.
 *Additional Information:* +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
-
-==== Recommend future spendings : `recommend`
-
-You have to set a budget before you can use this command. +
-This command recommends a daily limit you need to
-have in order to satisfy your budget and the income you need to have if you intend to maintain your current spending
-habits. +
-Format: `recommend`
-
-Example:
-
-* `recommend` +
-Recommends a daily limit and the income you need to maintain current spending habits
-while staying below budget.
-
-****
-*Additional Information:* +
-A budget should be set. +
-The expenses list should have at least one day’s worth of expenses.
-****
-
 // tag::report[]
 === Expense Report
 
@@ -299,9 +310,9 @@ The expenses list should have at least one day’s worth of expenses.
 
 Generates a report of the given date, month, or year. The report consists of total inflow, total outflow, and proportion of income
 spent on different categories. +
-Format: `report [t/DD/MM/YYYY]` +
-Format: `report [t/MM/YYYY]` +
-Format: `report [t/YYYY]` +
+Format: `report [d/DD/MM/YYYY]` +
+Format: `report [d/MM/YYYY]` +
+Format: `report [d/YYYY]` +
 Format: `report`
 
 Examples:
@@ -309,13 +320,13 @@ Examples:
 * `report` +
 View the completed report.
 
-* `report t/21/03/2019` +
+* `report d/21/03/2019` +
 View the daily report of 21 Mar 2019.
 
-* `report t/03/2019` +
+* `report d/03/2019` +
 View the monthly report of Mar 2019.
 
-* `report t/2019` +
+* `report d/2019` +
 View the yearly report of 2019.
 // end::report[]
 
@@ -367,13 +378,9 @@ Compares between different users.
 Requires multiple accounts in the same network.
 
 // tag::v2.0[]
-==== Login to ePiggy `[coming in v2.0]`
+==== Login and logout to ePiggy `[coming in v2.0]`
 
-Login to ePiggy as an existing user. +
-
-==== Logout to ePiggy `[coming in v2.0]`
-
-Logout ePiggy. +
+Login and logout ePiggy as an existing user. +
 
 ==== Register to ePiggy `[coming in v2.0]`
 

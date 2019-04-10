@@ -643,6 +643,72 @@ link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/see
 ** Cons: Report feature becomes extra because list command can do the same thing.
 // end::report[]
 
+// tag::autocomplete[]
+=== autocomplete feature
+This feature allows users to reduce the typing time and learning cost of using ePiggy. Any command line application without
+an autocomplete feature is a nightmare for the user. The users not only need to type all the existing commands correctly but
+ also need to remember many different parameters in each commands. EPiggy tries to be user friendly. Autocomplete feature helps the users overcome these problems. +
+
+Given below is a class diagram of how the link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`autocomplete`]
+feature works: +
+
+image::reportSequenceDiagram.png[width="900"]
+
+Figure: Autocomplete class Diagram +
+
+This feature first requires users to enter a few letters on the link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`commandBox`]
+of ePiggy, and then press *Tab* key on the keyboard to autocomplete the command.
+If the completed command is not what you want, delete the command. Enter the same letters, and press *Tab* again. Another command will show if the letters match another command.
+
+Example: enter letter 'a' and then press *Tab*, the command "addExpense n/ $/ t/ d/ " will show.
+Delete the command, enter 'a' again and press *Tab*, the addBudget or addAllowance command will show.
+
+[NOTE]
+The autocomplete feature compares the last part of sub string from user input to the prefix of command in the checklist.
+
+Example: user types " `hello add` " to the commandBox, the sub string is "add". "add" is used to compare with commands in the checklist such as "setBudget",
+"addExpense", "addAllowance". Two commands "addExpense" and "addAllowance" will return but only one of them will replace "add" in the commandBox.
+The commandBox will show " `hello addExpense n/ $/ t/ d/` " or " `hello addAllowance n/ $/ d/` ".
+
+==== Current Implementation
+
+The command is first parsed into link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/parser/epiggy/ReportCommandParser.java[`ReportCommandParser`],
+which separates the arguments into their respective fields. A new link:https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html[`localDate`]
+object is created and link:[`type`] of the report are generated according to the date format of `d/`.
+The link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/model/Model.java[`model`],
+link:https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html[`localDate`] and link:[`type`] are parsed into
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/ReportCommand.java[`ReportCommand`]. +
+
+The link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/ReportCommand.java[`reportCommand`] will initialize link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`ReportWindow`] and the method
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`displayReportController`] of the object
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`ReportWindow`] will be invoked. +
+
+The link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`displayReportController`] method will select a specified type of report to display the report.
+
+*Example usage scenario:* +
+1. User launches application and enters `Report d/21/03/2019`. +
+2. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/parser/epiggy/ReportCommandParser.java[`ReportCommandParser`] takes in the arguments and parses the command to create the appropriate
+link:https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html[`localDate`]. +
+3. The link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`ReportWindow`] is passed back to the
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/LogicManager.java[`LogicManager`], and the method
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/LogicManager.java[`execute()`] is called. The
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`ReportWindow`] is initialized. +
+4. The method link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`displayReportController`] is called and report will show.
+
+==== Design Considerations
+*Aspect: How to make report more readable?* +
+
+* *Alternative 1 (current choice)*: the `report` command uses a chart to display different data of expenses, budgets and allowances.
+** Pros: Easy to know how much a user have spend on that date, that month or that year. Easy to compare with previous month or year.
+** Cons: The details of the expenses, budgets and allowances cannot show in the chart.
+
+* *Alternative 2* : Show the records of expenses, budgets and allowances in details line by line.
+** Pros: User can know the details of each records.
+** Cons: Report feature becomes extra because list command can do the same thing.
+// end::autocomplete[]
+
+
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 

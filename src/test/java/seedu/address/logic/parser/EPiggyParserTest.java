@@ -45,6 +45,13 @@ public class EPiggyParserTest {
         assertEquals(new AddBudgetCommand(budget), command);
     }
 
+    @Test
+    public void parseCommand_addBudgetAlias() throws Exception {
+        Budget budget = new BudgetBuilder().build();
+        AddBudgetCommand command = (AddBudgetCommand) parser.parseCommand(BudgetUtil.getAddBudgetCommand(budget));
+        assertEquals(new AddBudgetCommand(budget), command);
+    }
+
     //@Test
     //public void parseCommand_addExpense() throws Exception {
     //    // TODO: Issues with date toString method in ExpenseUtil
@@ -192,20 +199,6 @@ public class EPiggyParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_ALIAS) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_ALIAS + " 3") instanceof ListCommand);
     }
-
-    // @Test
-    // public void parseCommand_select() throws Exception {
-    //     SelectCommand command = (SelectCommand) parser.parseCommand(
-    //            SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-    //    assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
-    //}
-
-    //@Test
-    //public void parseCommand_selectAlias() throws Exception {
-    //    SelectCommand command = (SelectCommand) parser.parseCommand(
-    //            SelectCommand.COMMAND_ALIAS + " " + INDEX_FIRST_PERSON.getOneBased());
-    //    assertEquals(new SelectCommand(INDEX_FIRST_PERSON), command);
-    //}
 
     @Test
     public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {

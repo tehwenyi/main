@@ -652,8 +652,7 @@ an autocomplete feature is a nightmare for the user. The users not only need to 
 Given below is a class diagram of how the link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`autocomplete`]
 feature works: +
 
-image::reportSequenceDiagram.png[width="900"]
-
+image::AutocompleteActivityDiagram.png[width="600"]
 Figure: Autocomplete class Diagram +
 
 This feature first requires users to enter a few letters on the link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`commandBox`]

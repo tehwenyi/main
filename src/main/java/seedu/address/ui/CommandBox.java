@@ -120,10 +120,8 @@ public class CommandBox extends UiPart<Region> {
             // append match keyword to user input
             if (tabCount >= results.length) {
                 tabCount = 0; // reset tabCount when tabCount bigger than the number of match commandArr
-                stringBuilder.append(results[tabCount]); // adds found keyword
-            } else {
-                stringBuilder.append(results[tabCount]); // adds found keyword
             }
+            stringBuilder.append(results[tabCount]); // adds found keyword
         }
         commandTextField.requestFocus(); // set focus back to the textfield
         commandTextField.setText(stringBuilder.toString()); // updates the textfield

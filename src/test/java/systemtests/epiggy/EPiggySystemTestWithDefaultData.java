@@ -22,16 +22,11 @@ import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
-import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.EpiggyTestApp;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.ListCommand;
-
 import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
 import seedu.address.logic.commands.epiggy.FindExpenseCommand;
-
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.testutil.epiggy.TypicalReports;
@@ -131,50 +126,6 @@ public abstract class EPiggySystemTestWithDefaultData {
 
         waitUntilBrowserLoaded(getBrowserPanel());
     }
-
-    /**
-     * Displays all persons in the address book.
-     */
-    protected void showAllPersons() {
-        executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getEPiggy().getPersonList().size(), getModel().getFilteredPersonList().size());
-    }
-
-    /**
-     * Displays all persons with any parts of their names matching {@code keyword} (case-insensitive).
-
-    protected void showPersonsWithName(String keyword) {
-        executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredPersonList().size() < getModel().getEPiggy().getPersonList().size());
-    }
-     */
-
-    /**
-     * Displays all expense with any parts of their item names matching {@code keyword} (case-insensitive).
-     */
-    protected void showExpensesWithName(String keyword) {
-        int totalExpensesCount = getModel().getFilteredExpenseList().size();
-        executeCommand(FindExpenseCommand.COMMAND_WORD + " n/" + keyword);
-        int resultExpensesCount = this.testApp.getModelAfterExecution().getFilteredExpenseList().size();
-        assertTrue(resultExpensesCount < totalExpensesCount);
-    }
-
-    /**
-     * Selects the person at {@code index} of the displayed list.
-     */
-    //    protected void selectPerson(Index index) {
-    //        executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
-    //        assertEquals(index.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
-    //    }
-
-    /**
-     * Deletes all persons in the address book.
-     */
-    protected void deleteAllPersons() {
-        executeCommand(ClearCommand.COMMAND_WORD);
-        assertEquals(0, getModel().getEPiggy().getPersonList().size());
-    }
-
     /**
      * Deletes all persons in the address book.
      */
@@ -245,9 +196,7 @@ public abstract class EPiggySystemTestWithDefaultData {
     /**
      * Asserts that the browser's url and the selected card in the person list panel remain unchanged.
      *
-     * @see BrowserPanelHandle#isUrlChanged()
-     * @see PersonListPanelHandle#isSelectedPersonCardChanged()
-     */
+     * @see BrowserPanelHandle#isUrlChanged()*/
     protected void assertSelectedCardUnchanged() {
         assertFalse(getBrowserPanel().isUrlChanged());
         //assertFalse(getPersonListPanel().isSelectedPersonCardChanged());
@@ -306,6 +255,14 @@ public abstract class EPiggySystemTestWithDefaultData {
      */
     protected Model getModel() {
         return testApp.getModel();
+    }
+
+    /**
+     * Displays all persons with any parts of their names matching {@code keyword} (case-insensitive).
+     */
+    protected void showExpensesWithName(String keyword) {
+        executeCommand(FindExpenseCommand.COMMAND_WORD + " " + keyword);
+        assertTrue(getModel().getFilteredExpenseList().size() < getModel().getEPiggy().getExpenseList().size());
     }
 }
 

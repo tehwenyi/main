@@ -52,6 +52,7 @@ public class ReportCommandParser implements Parser<ReportCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ReportCommand.MESSAGE_USAGE));
         }
+
         String dateString = argMultimap.getValue(PREFIX_DATE).get();
         // splits the dateString into year, month and day.
         String[] dateArr = dateString.split("/");

@@ -16,12 +16,10 @@ import seedu.address.logic.parser.EPiggyParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyEPiggy;
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Expense;
-import seedu.address.model.epiggy.Goal;
-
-import seedu.address.model.epiggy.item.Cost;
-import seedu.address.model.person.Person;
+import seedu.address.model.expense.Budget;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.Goal;
+import seedu.address.model.expense.item.Cost;
 import seedu.address.storage.Storage;
 
 /**
@@ -78,11 +76,6 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
-    }
-
-    @Override
     public ObservableList<Expense> getFilteredExpenseList() {
         return model.getFilteredExpenseList();
     }
@@ -120,16 +113,6 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
-    }
-
-    @Override
-    public ReadOnlyProperty<Person> selectedPersonProperty() {
-        return model.selectedPersonProperty();
-    }
-
-    @Override
-    public void setSelectedPerson(Person person) {
-        model.setSelectedPerson(person);
     }
 
     @Override

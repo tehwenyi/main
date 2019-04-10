@@ -10,8 +10,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.EPiggy;
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Expense;
+import seedu.address.model.expense.Budget;
+import seedu.address.model.expense.Expense;
 
 /**
  * A utility class containing a list of {@code budget}, {@code expense},

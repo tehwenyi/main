@@ -8,7 +8,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.epiggy.item.Cost;
+import seedu.address.model.expense.item.Cost;
 
 /**
  * Allows the user to view the savings recorded in ePiggy.

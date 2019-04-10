@@ -9,7 +9,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.epiggy.Budget;
+import seedu.address.model.expense.Budget;
 
 /**
  * Panel containing the budget status.

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.FORMAT_ERROR_MESSAGE;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import guitests.GuiRobot;
@@ -35,6 +36,7 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
     //private static final String INVALID_YEAR_NEGATIVE_YEAR = "-2019";
 
     @Test
+    @Ignore
     public void openReportWindow() {
 
         String messageHistory = "";

@@ -9,8 +9,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.epiggy.Allowance;
-import seedu.address.model.epiggy.Expense;
+import seedu.address.model.expense.Allowance;
+import seedu.address.model.expense.Expense;
 
 /**
  * An UI component that displays information of a {@code Person}.

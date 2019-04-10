@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX;
 
 import java.util.List;
 
@@ -10,8 +11,8 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.epiggy.Allowance;
-import seedu.address.model.epiggy.Expense;
+import seedu.address.model.expense.Allowance;
+import seedu.address.model.expense.Expense;
 
 /**
  * Delete an expense in ePiggy.
@@ -25,7 +26,6 @@ public class DeleteExpenseCommand extends Command {
             + ": Deletes the expense identified by the index number used in the displayed expense list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
-
     public static final String MESSAGE_DELETE_EXPENSE_SUCCESS = "Deleted expense: %1$s";
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The index does not exist on the expense list.";
     public static final String MESSAGE_ITEM_NOT_EXPENSE = "The item selected is not an expense. "
@@ -44,7 +44,7 @@ public class DeleteExpenseCommand extends Command {
         List<Expense> lastShownExpenseList = model.getFilteredExpenseList();
 
         if (targetIndex.getZeroBased() >= lastShownExpenseList.size()) {
-            throw new CommandException(MESSAGE_INDEX_OUT_OF_BOUNDS);
+            throw new CommandException(MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX);
         }
 
         Expense expenseToDelete = lastShownExpenseList.get(this.targetIndex.getZeroBased());

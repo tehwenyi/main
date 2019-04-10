@@ -11,21 +11,20 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.epiggy.Allowance;
-import seedu.address.model.epiggy.Expense;
-import seedu.address.model.epiggy.item.Cost;
-import seedu.address.model.epiggy.item.Item;
-import seedu.address.model.epiggy.item.Name;
+import seedu.address.model.expense.Allowance;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.item.Cost;
+import seedu.address.model.expense.item.Item;
+import seedu.address.model.expense.item.Name;
 import seedu.address.model.tag.Tag;
 
 
-
 /**
- * Json friendly version of (@Link Expense)
+ * Json friendly version of (@Link expense)
  */
 public class JsonAdaptedExpense {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Expense's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "expense's %s field is missing!";
 
     private final String name;
     private final String cost;
@@ -52,7 +51,7 @@ public class JsonAdaptedExpense {
     }
 
     /**
-     * Converts a given {@code Expense} into this class for Jackson use.
+     * Converts a given {@code expense} into this class for Jackson use.
      */
     public JsonAdaptedExpense(Expense source) {
         name = source.getItem().getName().name;
@@ -69,7 +68,7 @@ public class JsonAdaptedExpense {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Expense} object.
+     * Converts this Jackson-friendly adapted person object into the model's {@code expense} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted expense.
      */

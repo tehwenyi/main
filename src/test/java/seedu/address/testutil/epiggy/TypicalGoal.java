@@ -1,6 +1,6 @@
 package seedu.address.testutil.epiggy;
 
-import seedu.address.model.epiggy.Goal;
+import seedu.address.model.expense.Goal;
 /**
  * A utility class containing a list of {@code Goal} objects to be used in tests.
  */

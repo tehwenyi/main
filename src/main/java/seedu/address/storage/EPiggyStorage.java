@@ -24,12 +24,12 @@ public interface EPiggyStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<seedu.address.model.ReadOnlyEPiggy> readEPiggy() throws DataConversionException, IOException;
+    Optional<ReadOnlyEPiggy> readEPiggy() throws DataConversionException, IOException;
 
     /**
      * @see #getEPiggyFilePath()
      */
-    Optional<seedu.address.model.ReadOnlyEPiggy> readEPiggy(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyEPiggy> readEPiggy(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyEPiggy} to the storage.

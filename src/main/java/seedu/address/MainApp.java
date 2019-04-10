@@ -21,8 +21,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
-
-import seedu.address.model.epiggy.SampleEPiggyDataUtil;
+import seedu.address.model.expense.SampleEPiggyDataUtil;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -58,10 +57,6 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        /*
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getEPiggyFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
-        */
 
         EPiggyStorage ePiggyStorage = new JsonEPiggyStorage(userPrefs.getEPiggyFilePath());
         storage = new StorageManager(ePiggyStorage, userPrefsStorage);

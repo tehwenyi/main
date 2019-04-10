@@ -14,7 +14,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.UserPrefs;
-
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.epiggy.JsonEPiggyStorage;
 import seedu.address.testutil.TestUtil;
@@ -95,7 +94,7 @@ public class EpiggyTestApp extends MainApp {
      */
     public Model getModel() {
         Model copy = new ModelManager((model.getEPiggy()), new UserPrefs());
-        ModelHelper.setFilteredList(copy, model.getFilteredPersonList());
+        ModelHelper.setFilteredList(copy, model.getFilteredExpenseList());
         return copy;
     }
 

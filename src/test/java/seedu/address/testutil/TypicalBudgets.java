@@ -1,18 +1,12 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_FIRSTEXTRA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_SECONDEXTRA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_FIRSTEXTRA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_SECONDEXTRA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_FIRSTEXTRA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_SECONDEXTRA;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.model.EPiggy;
-import seedu.address.model.epiggy.Budget;
+import seedu.address.model.expense.Budget;
 import seedu.address.testutil.epiggy.BudgetBuilder;
 
 /**
@@ -65,10 +59,12 @@ public class TypicalBudgets {
             .withDate("14/02/2020").withPeriod("1").build();
 
     // Manually added - Budget's details found in {@code CommandTestUtil}
-    public static final Budget FIRST_EXTRA = new BudgetBuilder().withAmount(VALID_AMOUNT_FIRSTEXTRA)
-            .withPeriod(VALID_PERIOD_FIRSTEXTRA).withDate(VALID_DATE_FIRSTEXTRA).build();
-    public static final Budget SECOND_EXTRA = new BudgetBuilder().withAmount(VALID_AMOUNT_SECONDEXTRA)
-            .withPeriod(VALID_PERIOD_SECONDEXTRA).withDate(VALID_DATE_SECONDEXTRA).build();
+    public static final Budget FIRST_EXTRA = new BudgetBuilder().withAmount(CommandTestUtil.VALID_AMOUNT_FIRSTEXTRA)
+            .withPeriod(CommandTestUtil.VALID_PERIOD_FIRSTEXTRA)
+            .withDate(CommandTestUtil.VALID_DATE_FIRSTEXTRA).build();
+    public static final Budget SECOND_EXTRA = new BudgetBuilder().withAmount(CommandTestUtil.VALID_AMOUNT_SECONDEXTRA)
+            .withPeriod(CommandTestUtil.VALID_PERIOD_SECONDEXTRA)
+            .withDate(CommandTestUtil.VALID_DATE_SECONDEXTRA).build();
 
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

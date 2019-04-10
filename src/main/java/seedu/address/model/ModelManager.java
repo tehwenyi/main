@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Comparator;
@@ -12,18 +11,17 @@ import java.util.logging.Logger;
 
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.epiggy.Allowance;
-import seedu.address.model.epiggy.Budget;
-import seedu.address.model.epiggy.Expense;
-import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.item.Cost;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.expense.Allowance;
+import seedu.address.model.expense.Budget;
+import seedu.address.model.expense.Expense;
+import seedu.address.model.expense.Goal;
+import seedu.address.model.expense.exceptions.ExpenseNotFoundException;
+import seedu.address.model.expense.item.Cost;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -33,10 +31,8 @@ public class ModelManager implements Model {
 
     private final VersionedEPiggy versionedEPiggy;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
     private final FilteredList<Expense> filteredExpenses;
     private final FilteredList<Budget> filteredBudget;
-    private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
     private final SimpleObjectProperty<Expense> selectedExpense = new SimpleObjectProperty<>();
 
     /**
@@ -44,16 +40,15 @@ public class ModelManager implements Model {
      */
     public ModelManager(ReadOnlyEPiggy ePiggy, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(ePiggy, userPrefs);
+        CollectionUtil.requireAllNonNull(ePiggy, userPrefs);
 
         logger.fine("Initializing with address book: " + ePiggy + " and user prefs " + userPrefs);
 
         versionedEPiggy = new VersionedEPiggy(ePiggy);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(versionedEPiggy.getPersonList());
-        filteredPersons.addListener(this::ensureSelectedPersonIsValid);
 
         filteredExpenses = new FilteredList<>(versionedEPiggy.getExpenseList());
+        //        filteredExpenses.addListener(this::ensureSelectedPersonIsValid);
         filteredBudget = new FilteredList<>(versionedEPiggy.getBudgetList());
     }
 
@@ -109,38 +104,23 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setExpense(seedu.address.model.epiggy.Expense target,
-                           seedu.address.model.epiggy.Expense editedExpense) {
-        requireAllNonNull(target, editedExpense);
+    public void setExpense(Expense target,
+                           Expense editedExpense) {
+        CollectionUtil.requireAllNonNull(target, editedExpense);
 
         versionedEPiggy.setExpense(target, editedExpense);
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return versionedEPiggy.hasPerson(person);
-    }
-
-    @Override
-    public void deletePerson(Person target) {
-        versionedEPiggy.removePerson(target);
-    }
-
-    @Override
-    public void addPerson(Person person) {
-        versionedEPiggy.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
     public void addExpense(Expense expense) {
         versionedEPiggy.addExpense(expense);
+        updateFilteredExpensesList(PREDICATE_SHOW_ALL_EXPENSES);
     }
 
     @Override
     public void addAllowance(Allowance allowance) {
         versionedEPiggy.addAllowance(allowance);
+        updateFilteredExpensesList(PREDICATE_SHOW_ALL_EXPENSES);
     }
 
     @Override
@@ -195,13 +175,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        versionedEPiggy.setPerson(target, editedPerson);
-    }
-
-    @Override
     public void setCurrentBudget(Budget editedBudget) {
         requireNonNull(editedBudget);
 
@@ -211,16 +184,7 @@ public class ModelManager implements Model {
     //=========== Filtered Person List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedEPiggy}
-     */
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
-    }
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code expense} backed by the internal list of
      * {@code versionedEPiggy}
      */
     @Override
@@ -237,15 +201,9 @@ public class ModelManager implements Model {
         return filteredBudget;
     }
 
-    @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
-        requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
-    }
-
     //@@author rahulb99
     @Override
-    public void updateFilteredExpensesList(Predicate<seedu.address.model.epiggy.Expense> predicate) {
+    public void updateFilteredExpensesList(Predicate<Expense> predicate) {
         requireNonNull(predicate);
         filteredExpenses.setPredicate(predicate);
     }
@@ -256,7 +214,7 @@ public class ModelManager implements Model {
      * @param comparator expense comparator
      */
     public void sortExpenses(Comparator<Expense> comparator) {
-        requireAllNonNull(comparator);
+        CollectionUtil.requireAllNonNull(comparator);
         versionedEPiggy.sortExpense(comparator);
     }
 
@@ -305,11 +263,6 @@ public class ModelManager implements Model {
     //=========== Selected person ===========================================================================
 
     @Override
-    public ReadOnlyProperty<Person> selectedPersonProperty() {
-        return selectedPerson;
-    }
-
-    @Override
     public ReadOnlyProperty<Expense> selectedExpenseProperty() {
         return selectedExpense;
     }
@@ -320,49 +273,43 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setSelectedPerson(Person person) {
-        if (person != null && !filteredPersons.contains(person)) {
-            throw new PersonNotFoundException();
-        }
-        selectedPerson.setValue(person);
-    }
-
-    @Override
     public void setSelectedExpense(Expense expense) {
         if (expense != null && !filteredExpenses.contains(expense)) {
-            throw new PersonNotFoundException(); //TODO
+            throw new ExpenseNotFoundException(); //TODO
         }
         selectedExpense.setValue(expense);
     }
 
     /**
-     * Ensures {@code selectedPerson} is a valid person in {@code filteredPersons}.
+     * Ensures {@code selectedExpense} is a valid person in {@code filteredPersons}.
      */
-    private void ensureSelectedPersonIsValid(ListChangeListener.Change<? extends Person> change) {
-        while (change.next()) {
-            if (selectedPerson.getValue() == null) {
-                // null is always a valid selected person, so we do not need to check that it is valid anymore.
-                return;
-            }
-
-            boolean wasSelectedPersonReplaced = change.wasReplaced() && change.getAddedSize() == change.getRemovedSize()
-                    && change.getRemoved().contains(selectedPerson.getValue());
-            if (wasSelectedPersonReplaced) {
-                // Update selectedPerson to its new value.
-                int index = change.getRemoved().indexOf(selectedPerson.getValue());
-                selectedPerson.setValue(change.getAddedSubList().get(index));
-                continue;
-            }
-
-            boolean wasSelectedPersonRemoved = change.getRemoved().stream()
-                    .anyMatch(removedPerson -> selectedPerson.getValue().isSamePerson(removedPerson));
-            if (wasSelectedPersonRemoved) {
-                // Select the person that came before it in the list,
-                // or clear the selection if there is no such person.
-                selectedPerson.setValue(change.getFrom() > 0 ? change.getList().get(change.getFrom() - 1) : null);
-            }
-        }
-    }
+    //    private void ensureSelectedPersonIsValid(ListChangeListener.Change<? extends expense> change) {
+    //        while (change.next()) {
+    //            if (selectedExpense.getValue() == null) {
+    //                // null is always a valid selected person, so we do not need to check that it is valid anymore.
+    //                return;
+    //            }
+    //
+    //            boolean wasSelectedPersonReplaced = change.wasReplaced() &&
+    //            change.getAddedSize() == change.getRemovedSize()
+    //                    && change.getRemoved().contains(selectedExpense.getValue());
+    //            if (wasSelectedPersonReplaced) {
+    //                // Update selectedExpense to its new value.
+    //                int index = change.getRemoved().indexOf(selectedExpense.getValue());
+    //                selectedExpense.setValue(change.getAddedSubList().get(index));
+    //                continue;
+    //            }
+    //
+    //            boolean wasSelectedPersonRemoved = change.getRemoved().stream()
+    //                    .anyMatch(removedPerson -> selectedExpense.getValue().isSameExpense(removedPerson));
+    //            if (wasSelectedPersonRemoved) {
+    //                // Select the person that came before it in the list,
+    //                // or clear the selection if there is no such person.
+    //                selectedExpense.setValue(change.getFrom() > 0 ? change.getList()
+    //                .get(change.getFrom() - 1) : null);
+    //            }
+    //        }
+    //    }
 
     @Override
     public boolean equals(Object obj) {
@@ -380,8 +327,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return versionedEPiggy.equals(other.versionedEPiggy)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons)
-                && Objects.equals(selectedPerson.get(), other.selectedPerson.get());
+                && filteredExpenses.equals(other.filteredExpenses)
+                && Objects.equals(selectedExpense.get(), other.selectedExpense.get());
     }
 
     @Override
@@ -389,10 +336,9 @@ public class ModelManager implements Model {
         return "ModelManager{"
                 + "versionedAddressBook=" + versionedEPiggy
                 + ", userPrefs=" + userPrefs
-                + ", filteredPersons=" + filteredPersons
                 + ", filteredExpenses=" + filteredExpenses
                 + ", filteredBudget=" + filteredBudget
-                + ", selectedPerson=" + selectedPerson
+                + ", selectedExpense=" + selectedExpense
                 + ", selectedExpense=" + selectedExpense
                 + '}';
     }

@@ -26,7 +26,7 @@ import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.TestApp;
-import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearExpenseCommand;
 import seedu.address.logic.commands.epiggy.FindExpenseCommand;
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
@@ -155,7 +155,7 @@ public abstract class EPiggySystemTest {
      * Deletes all persons in the address book.
      */
     protected void deleteAllPersons() {
-        executeCommand(ClearCommand.COMMAND_WORD);
+        executeCommand(ClearExpenseCommand.COMMAND_WORD);
         assertEquals(0, getModel().getEPiggy().getExpenseList().size());
     }
 

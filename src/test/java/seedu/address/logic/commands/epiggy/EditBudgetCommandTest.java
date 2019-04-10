@@ -27,7 +27,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearExpenseCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -277,7 +277,7 @@ public class EditBudgetCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardCommand.equals(new ClearExpenseCommand()));
 
         // different details -> returns false
         assertFalse(standardCommand.equals(new EditBudgetCommand(DESC_SECONDEXTRA)));

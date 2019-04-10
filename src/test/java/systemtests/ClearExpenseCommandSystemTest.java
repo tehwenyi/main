@@ -1,80 +1,82 @@
-package systemtests.epiggy;
+package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.testutil.TypicalBudgets.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
-import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearExpenseCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
 @Ignore
-public class ClearCommandSystemTest extends EPiggySystemTestWithDefaultData {
+public class ClearExpenseCommandSystemTest extends EPiggySystemTest {
 
     @Test
     public void clear() {
         final Model defaultModel = getModel();
 
-        /* Case: clear non-empty ePiggy, command with leading spaces and trailing alphanumeric characters and
+        /* Case: clear non-empty address book, command with leading spaces and trailing alphanumeric characters and
          * spaces -> cleared
          */
-        assertCommandSuccess(ClearCommand.COMMAND_WORD);
+        assertCommandSuccess("   " + ClearExpenseCommand.COMMAND_WORD + " ab12   ");
         assertSelectedCardUnchanged();
 
-        /* Case: undo clearing ePiggy -> original ePiggy restored */
+        /* Case: undo clearing address book -> original address book restored */
         String command = UndoCommand.COMMAND_WORD;
         String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, expectedResultMessage, defaultModel);
         assertSelectedCardUnchanged();
 
-        /* Case: redo clearing ePiggy -> cleared */
+        /* Case: redo clearing address book -> cleared */
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, expectedResultMessage, new ModelManager());
         assertSelectedCardUnchanged();
 
-        /* Case: selects first card in expense list and clears ePiggy -> cleared and no card selected */
-        executeCommand(UndoCommand.COMMAND_WORD); // restores the original ePiggy
-        assertCommandSuccess(ClearCommand.COMMAND_WORD);
+        /* Case: selects first card in person list and clears address book -> cleared and no card selected */
+        executeCommand(UndoCommand.COMMAND_WORD); // restores the original address book
+        //selectPerson(Index.fromOneBased(1));
+        assertCommandSuccess(ClearExpenseCommand.COMMAND_WORD);
         assertSelectedCardDeselected();
 
-        /* Case: filters the expense list before clearing -> entire ePiggy cleared */
-        executeCommand(UndoCommand.COMMAND_WORD); // restores the original ePiggy
-        // showExpensesWithName(KEYWORD_MATCHING_STATIONARY);
-        assertCommandSuccess(ClearCommand.COMMAND_WORD);
+        /* Case: filters the person list before clearing -> entire address book cleared */
+        executeCommand(UndoCommand.COMMAND_WORD); // restores the original address book
+        showExpensesWithName(KEYWORD_MATCHING_MEIER);
+        assertCommandSuccess(ClearExpenseCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();
 
         /* Case: clear empty address book -> cleared */
-        assertCommandSuccess(ClearCommand.COMMAND_WORD);
+        assertCommandSuccess(ClearExpenseCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();
 
         /* Case: mixed case command word -> rejected */
-        assertCommandFailure("ClEaR", "ePiggy: " + MESSAGE_UNKNOWN_COMMAND);
+        assertCommandFailure("ClEaR", MESSAGE_UNKNOWN_COMMAND);
     }
 
     /**
      * Executes {@code command} and verifies that the command box displays an empty string, the result display
-     * box displays {@code ClearCommand#MESSAGE_SUCCESS} and the model related components equal to an empty model.
+     * box displays {@code ClearExpenseCommand#MESSAGE_SUCCESS} and the model related components equal to an empty model.
      * These verifications are done by
      * {@code EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * Also verifies that the command box has the default style class and the status bar's sync status changes.
-     * @see EPiggySystemTestWithDefaultData#assertApplicationDisplaysExpected(String, String, Model)
+     * @see EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command) {
-        assertCommandSuccess(command, "ePiggy: " + ClearCommand.MESSAGE_SUCCESS, new ModelManager());
+        assertCommandSuccess(command, ClearExpenseCommand.MESSAGE_SUCCESS, new ModelManager());
     }
 
     /**
      * Performs the same verification as {@code assertCommandSuccess(String)} except that the result box displays
      * {@code expectedResultMessage} and the model related components equal to {@code expectedModel}.
-     * @see ClearCommandSystemTest#assertCommandSuccess(String)
+     * @see ClearExpenseCommandSystemTest#assertCommandSuccess(String)
      */
     private void assertCommandSuccess(String command, String expectedResultMessage, Model expectedModel) {
         executeCommand(command);
-        //assertApplicationDisplaysExpected("clear", expectedResultMessage, expectedModel);
+        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
         assertStatusBarUnchangedExceptSyncStatus();
     }
@@ -86,13 +88,13 @@ public class ClearCommandSystemTest extends EPiggySystemTestWithDefaultData {
      * {@code EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * Also verifies that the browser url, selected card and status bar remain unchanged, and the command box has the
      * error style.
-     * @see EPiggySystemTestWithDefaultData#assertApplicationDisplaysExpected(String, String, Model)
+     * @see EPiggySystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();
 
         executeCommand(command);
-        //assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
+        assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsErrorStyle();
         assertStatusBarUnchanged();

@@ -10,7 +10,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearExpenseCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -37,14 +37,14 @@ public class EPiggyParserTest {
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearExpenseCommand.COMMAND_WORD) instanceof ClearExpenseCommand);
+        assertTrue(parser.parseCommand(ClearExpenseCommand.COMMAND_WORD + " 3") instanceof ClearExpenseCommand);
     }
 
     @Test
     public void parseCommand_clearAlias() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_ALIAS) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_ALIAS + " 3") instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearExpenseCommand.COMMAND_ALIAS) instanceof ClearExpenseCommand);
+        assertTrue(parser.parseCommand(ClearExpenseCommand.COMMAND_ALIAS + " 3") instanceof ClearExpenseCommand);
     }
 
     //    @Test

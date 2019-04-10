@@ -41,4 +41,11 @@ public class SetGoalCommand extends Command {
         model.commitEPiggy();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toSet));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SetGoalCommand // instanceof handles nulls
+                && toSet.equals(((SetGoalCommand) other).toSet));
+    }
 }

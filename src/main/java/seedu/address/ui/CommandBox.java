@@ -24,12 +24,28 @@ public class CommandBox extends UiPart<Region> {
     private final List<String> history;
     private ListElementPointer historySnapshot;
 
-    private String[] commandArr = {"addExpense n/ $/ t/ d/", "deleteExpense ", "editExpense",
-        "report d/", "list ", "help ", "edit ", "search ", "sortExpense $/ ", "exit",
-        "editBudget $/ p/ d/", "percentage", "addBudget $/ p/ d/",
-        "addAllowance n/ $/", "deleteBudget ", "setGoal n/ $/",
-        "viewGoal", "viewSavings ", "sortExpense n/",
-        "findExpense n/ t/ d/ $/"};
+    private String[] commandArr = {
+        "addAllowance n/ $/",
+        "addBudget $/ p/ d/",
+        "addExpense n/ $/ t/ d/",
+        "clear",
+        "deleteAllowance ",
+        "deleteBudget ",
+        "deleteExpense ",
+        "editAllowance ",
+        "editBudget ",
+        "editExpense ",
+        "exit",
+        "findExpense n/ t/ d/ $/",
+        "help",
+        "list ",
+        "redo",
+        "report d/",
+        "setGoal n/ $/",
+        "sortExpense ",
+        "viewGoal",
+        "viewSavings ",
+    };
 
     @FXML
     private TextField commandTextField;

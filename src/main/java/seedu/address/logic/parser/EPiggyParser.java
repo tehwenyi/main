@@ -101,18 +101,6 @@ public class EPiggyParser {
         case DeleteAllowanceCommand.COMMAND_ALIAS:
             return new DeleteAllowanceCommandParser().parse(arguments);
 
-        case ViewSavingsCommand.COMMAND_WORD:
-        case ViewSavingsCommand.COMMAND_ALIAS:
-            return new ViewSavingsCommand();
-
-        case AddCommand.COMMAND_WORD:
-        case AddCommand.COMMAND_ALIAS:
-            return new AddCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-        case EditCommand.COMMAND_ALIAS:
-            return new EditCommandParser().parse(arguments);
-
         case FindExpenseCommand.COMMAND_WORD:
         case FindExpenseCommand.COMMAND_ALIAS:
             return new FindExpenseCommandParser().parse(arguments);
@@ -125,21 +113,9 @@ public class EPiggyParser {
         case ReverseListCommand.COMMAND_ALIAS:
             return new ReverseListCommand();
 
-        case SelectCommand.COMMAND_WORD:
-        case SelectCommand.COMMAND_ALIAS:
-            return new SelectCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-        case DeleteCommand.COMMAND_ALIAS:
-            return new DeleteCommandParser().parse(arguments);
-
         case ClearCommand.COMMAND_WORD:
         case ClearCommand.COMMAND_ALIAS:
             return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-        case FindCommand.COMMAND_ALIAS:
-            return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
         case ListCommand.COMMAND_ALIAS:
@@ -172,10 +148,6 @@ public class EPiggyParser {
         case SetGoalCommand.COMMAND_WORD:
         case SetGoalCommand.COMMAND_ALIAS:
             return new SetGoalCommandParser().parse(arguments);
-
-        case ViewGoalCommand.COMMAND_WORD:
-        case ViewGoalCommand.COMMAND_ALIAS:
-            return new ViewGoalCommand();
 
         case UndoCommand.COMMAND_WORD:
         case UndoCommand.COMMAND_ALIAS:

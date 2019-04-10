@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.epiggy.TypicalExpenses.getTypicalEPiggy;
+import static seedu.address.logic.commands.CommandTestUtil.deleteFirstPerson;
+import static seedu.address.testutil.TypicalPersons.getTypicalEPiggy;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -22,11 +24,11 @@ public class UndoCommandTest {
     @Before
     public void setUp() {
         // set up of models' undo/redo history
-        CommandTestUtil.deleteFirstPerson(model);
-        CommandTestUtil.deleteFirstPerson(model);
+        deleteFirstPerson(model);
+        deleteFirstPerson(model);
 
-        CommandTestUtil.deleteFirstPerson(expectedModel);
-        CommandTestUtil.deleteFirstPerson(expectedModel);
+        deleteFirstPerson(expectedModel);
+        deleteFirstPerson(expectedModel);
     }
 
     @Test
@@ -40,6 +42,6 @@ public class UndoCommandTest {
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // no undoable states in model
-        CommandTestUtil.assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
     }
 }

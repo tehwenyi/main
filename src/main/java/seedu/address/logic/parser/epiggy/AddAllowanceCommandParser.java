@@ -17,10 +17,10 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.expense.Allowance;
-import seedu.address.model.expense.item.Cost;
-import seedu.address.model.expense.item.Item;
-import seedu.address.model.expense.item.Name;
+import seedu.address.model.epiggy.Allowance;
+import seedu.address.model.epiggy.item.Cost;
+import seedu.address.model.epiggy.item.Item;
+import seedu.address.model.epiggy.item.Name;
 import seedu.address.model.tag.Tag;
 
 /**

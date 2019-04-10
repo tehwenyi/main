@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_FIRSTEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_SECONDEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_FIRSTEXTRA;
+import static seedu.address.logic.commands.epiggy.EditBudgetCommand.createEditedBudget;
 import static seedu.address.testutil.TypicalBudgets.FIRST_EXTRA;
 
 import java.nio.file.Path;
@@ -25,20 +26,23 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.epiggy.EditBudgetCommand.EditBudgetDetails;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.expense.Allowance;
-import seedu.address.model.expense.Budget;
-import seedu.address.model.expense.Expense;
-import seedu.address.model.expense.Goal;
-import seedu.address.model.expense.item.Cost;
-import seedu.address.model.expense.item.Period;
+import seedu.address.model.epiggy.Allowance;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.item.Cost;
+import seedu.address.model.epiggy.item.Period;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.epiggy.BudgetBuilder;
 import seedu.address.testutil.epiggy.EditBudgetDetailsBuilder;
 
@@ -60,9 +64,9 @@ public class EditBudgetCommandTest {
     public void execute_allFieldsSpecified_success() throws Exception {
         ModelStubWithOneCurrentBudget modelStub = new ModelStubWithOneCurrentBudget();
 
-        EditBudgetCommand.EditBudgetDetails details = DESC_FIRSTEXTRA;
+        EditBudgetDetails details = DESC_FIRSTEXTRA;
         Budget budgetToEdit = new BudgetBuilder().build();
-        Budget editedBudget = EditBudgetCommand.createEditedBudget(budgetToEdit, details);
+        Budget editedBudget = createEditedBudget(budgetToEdit, details);
         CommandResult commandResult = new EditBudgetCommand(details).execute(modelStub, commandHistory);
 
         assertEquals(String.format(EditBudgetCommand.MESSAGE_EDIT_BUDGET_SUCCESS, editedBudget),
@@ -76,12 +80,12 @@ public class EditBudgetCommandTest {
         ModelStubWithOneCurrentBudget modelStub = new ModelStubWithOneCurrentBudget();
 
         Budget budgetToEdit = new BudgetBuilder().build();
-        EditBudgetCommand.EditBudgetDetails details = new EditBudgetCommand.EditBudgetDetails();
+        EditBudgetDetails details = new EditBudgetDetails();
         details.setPeriod(budgetToEdit.getPeriod());
         details.setStartDate(budgetToEdit.getStartDate());
         details.setAmount(new Cost(200));
 
-        Budget editedBudget = EditBudgetCommand.createEditedBudget(budgetToEdit, details);
+        Budget editedBudget = createEditedBudget(budgetToEdit, details);
         CommandResult commandResult = new EditBudgetCommand(details).execute(modelStub, commandHistory);
 
         assertEquals(String.format(EditBudgetCommand.MESSAGE_EDIT_BUDGET_SUCCESS, editedBudget),
@@ -95,12 +99,12 @@ public class EditBudgetCommandTest {
         ModelStubWithOneCurrentBudget modelStub = new ModelStubWithOneCurrentBudget();
 
         Budget budgetToEdit = new BudgetBuilder().build();
-        EditBudgetCommand.EditBudgetDetails details = new EditBudgetCommand.EditBudgetDetails();
+        EditBudgetDetails details = new EditBudgetDetails();
         details.setStartDate(budgetToEdit.getStartDate());
         details.setAmount(budgetToEdit.getBudgetedAmount());
         details.setPeriod(new Period(26));
 
-        Budget editedBudget = EditBudgetCommand.createEditedBudget(budgetToEdit, details);
+        Budget editedBudget = createEditedBudget(budgetToEdit, details);
         CommandResult commandResult = new EditBudgetCommand(details).execute(modelStub, commandHistory);
 
         assertEquals(String.format(EditBudgetCommand.MESSAGE_EDIT_BUDGET_SUCCESS, editedBudget),
@@ -114,14 +118,14 @@ public class EditBudgetCommandTest {
         ModelStubWithOneCurrentBudget modelStub = new ModelStubWithOneCurrentBudget();
 
         Budget budgetToEdit = new BudgetBuilder().build();
-        EditBudgetCommand.EditBudgetDetails details = new EditBudgetCommand.EditBudgetDetails();
+        EditBudgetDetails details = new EditBudgetDetails();
         details.setAmount(budgetToEdit.getBudgetedAmount());
         details.setPeriod(budgetToEdit.getPeriod());
 
         Date newDate = new GregorianCalendar(2010, Calendar.FEBRUARY, 11).getTime();
         details.setStartDate(newDate);
 
-        Budget editedBudget = EditBudgetCommand.createEditedBudget(budgetToEdit, details);
+        Budget editedBudget = createEditedBudget(budgetToEdit, details);
         CommandResult commandResult = new EditBudgetCommand(details).execute(modelStub, commandHistory);
 
         assertEquals(String.format(EditBudgetCommand.MESSAGE_EDIT_BUDGET_SUCCESS, editedBudget),
@@ -132,8 +136,7 @@ public class EditBudgetCommandTest {
 
     @Test
     public void execute_noCurrentBudget_failure() throws Exception {
-        EditBudgetCommand.EditBudgetDetails details =
-                new EditBudgetDetailsBuilder().withAmount(VALID_AMOUNT_FIRSTEXTRA).build();
+        EditBudgetDetails details = new EditBudgetDetailsBuilder().withAmount(VALID_AMOUNT_FIRSTEXTRA).build();
 
         EditBudgetCommand editBudgetCommand = new EditBudgetCommand(details);
         ModelStubWithNoCurrentBudget modelStub = new ModelStubWithNoCurrentBudget();
@@ -153,9 +156,9 @@ public class EditBudgetCommandTest {
         ModelStubWithCurrentBudgetAndAnotherBudget modelStub =
                 new ModelStubWithCurrentBudgetAndAnotherBudget(futureBudget);
 
-        EditBudgetCommand.EditBudgetDetails details = DESC_FIRSTEXTRA;
+        EditBudgetDetails details = DESC_FIRSTEXTRA;
         Budget budgetToEdit = new BudgetBuilder().build();
-        Budget editedBudget = EditBudgetCommand.createEditedBudget(budgetToEdit, details);
+        Budget editedBudget = createEditedBudget(budgetToEdit, details);
         ArrayList<Budget> editedBudgetList = new ArrayList<Budget>();
         editedBudgetList.add(futureBudget);
         editedBudgetList.add(editedBudget);
@@ -177,9 +180,9 @@ public class EditBudgetCommandTest {
         ModelStubWithCurrentBudgetAndAnotherBudget modelStub =
                 new ModelStubWithCurrentBudgetAndAnotherBudget(oldBudget);
 
-        EditBudgetCommand.EditBudgetDetails details = DESC_FIRSTEXTRA;
+        EditBudgetDetails details = DESC_FIRSTEXTRA;
         Budget budgetToEdit = new BudgetBuilder().build();
-        Budget editedBudget = EditBudgetCommand.createEditedBudget(budgetToEdit, details);
+        Budget editedBudget = createEditedBudget(budgetToEdit, details);
         ArrayList<Budget> editedBudgetList = new ArrayList<Budget>();
         editedBudgetList.add(editedBudget);
         editedBudgetList.add(oldBudget);
@@ -201,9 +204,9 @@ public class EditBudgetCommandTest {
         ModelStubWithCurrentBudgetAndAnotherBudget modelStub =
                 new ModelStubWithCurrentBudgetAndAnotherBudget(futureBudget);
 
-        EditBudgetCommand.EditBudgetDetails details = new EditBudgetDetailsBuilder().withDate(cal.getTime()).build();
+        EditBudgetDetails details = new EditBudgetDetailsBuilder().withDate(cal.getTime()).build();
         Budget budgetToEdit = new BudgetBuilder().build();
-        Budget editedBudget = EditBudgetCommand.createEditedBudget(budgetToEdit, details);
+        Budget editedBudget = createEditedBudget(budgetToEdit, details);
         EditBudgetCommand editBudgetCommand = new EditBudgetCommand(details);
 
         thrown.expect(CommandException.class);
@@ -216,9 +219,9 @@ public class EditBudgetCommandTest {
         ModelStubWithCurrentBudgetAndAnotherBudget modelStub =
                 new ModelStubWithCurrentBudgetAndAnotherBudget(FIRST_EXTRA);
 
-        EditBudgetCommand.EditBudgetDetails details = DESC_FIRSTEXTRA;
+        EditBudgetDetails details = DESC_FIRSTEXTRA;
         Budget budgetToEdit = new BudgetBuilder().build();
-        Budget editedBudget = EditBudgetCommand.createEditedBudget(budgetToEdit, details);
+        Budget editedBudget = createEditedBudget(budgetToEdit, details);
         EditBudgetCommand editBudgetCommand = new EditBudgetCommand(details);
 
         thrown.expect(CommandException.class);
@@ -229,8 +232,8 @@ public class EditBudgetCommandTest {
     @Test
     public void isAnyFieldUpdated() {
         // pass in empty EditBudgetDetails object -> return false
-        EditBudgetCommand.EditBudgetDetails details = new EditBudgetCommand.EditBudgetDetails();
-        EditBudgetCommand.EditBudgetDetails detailsHolder = new EditBudgetCommand.EditBudgetDetails(details);
+        EditBudgetDetails details = new EditBudgetDetails();
+        EditBudgetDetails detailsHolder = new EditBudgetDetails(details);
         assertFalse(detailsHolder.isAnyFieldEdited());
 
         // no fields edited in original -> return false
@@ -241,12 +244,12 @@ public class EditBudgetCommandTest {
         assertTrue(details.isAnyFieldEdited());
 
         // period edited -> return true
-        EditBudgetCommand.EditBudgetDetails periodDetailsChange = new EditBudgetCommand.EditBudgetDetails();
+        EditBudgetDetails periodDetailsChange = new EditBudgetDetails();
         periodDetailsChange.setPeriod(new Period(999));
         assertTrue(periodDetailsChange.isAnyFieldEdited());
 
         // date edited -> return true
-        EditBudgetCommand.EditBudgetDetails dateDetailsChange = new EditBudgetCommand.EditBudgetDetails();
+        EditBudgetDetails dateDetailsChange = new EditBudgetDetails();
         dateDetailsChange.setStartDate(new Date());
         assertTrue(dateDetailsChange.isAnyFieldEdited());
 
@@ -256,7 +259,7 @@ public class EditBudgetCommandTest {
         assertTrue(details.isAnyFieldEdited());
 
         // filled EditBudgetDetails object passed in -> return true
-        detailsHolder = new EditBudgetCommand.EditBudgetDetails(details);
+        detailsHolder = new EditBudgetDetails(details);
         assertTrue(detailsHolder.isAnyFieldEdited());
     }
 
@@ -265,7 +268,7 @@ public class EditBudgetCommandTest {
         final EditBudgetCommand standardCommand = new EditBudgetCommand(DESC_FIRSTEXTRA);
 
         // same values -> returns true
-        EditBudgetCommand.EditBudgetDetails copyDetails = new EditBudgetCommand.EditBudgetDetails(DESC_FIRSTEXTRA);
+        EditBudgetDetails copyDetails = new EditBudgetDetails(DESC_FIRSTEXTRA);
         EditBudgetCommand commandWithSameValues = new EditBudgetCommand(copyDetails);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -335,6 +338,12 @@ public class EditBudgetCommandTest {
         public void setEPiggyFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void addExpense(Expense expense) {
             throw new AssertionError("This method should not be called.");
@@ -404,8 +413,29 @@ public class EditBudgetCommandTest {
         public ReadOnlyEPiggy getEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deletePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void setCurrentBudget(Budget editedBudget) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -416,6 +446,11 @@ public class EditBudgetCommandTest {
 
         @Override
         public ObservableList<Expense> getFilteredExpenseList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -455,12 +490,22 @@ public class EditBudgetCommandTest {
         }
 
         @Override
+        public ReadOnlyProperty<Person> selectedPersonProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setExpense(Expense target, Expense editedExpense) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public Expense getSelectedExpense() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSelectedPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
     }

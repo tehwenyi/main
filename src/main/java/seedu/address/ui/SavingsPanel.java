@@ -10,9 +10,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.expense.Expense;
-import seedu.address.model.expense.Goal;
-import seedu.address.model.expense.item.Cost;
+import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.item.Cost;
 
 /**
  * Panel containing savings information.

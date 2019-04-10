@@ -8,7 +8,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.expense.Expense;
+import seedu.address.model.epiggy.Expense;
 
 
 //@@author rahulb99
@@ -44,7 +44,7 @@ public class SortExpenseCommand extends Command {
                 String.format(MESSAGE_SUCCESS, model.getFilteredExpenseList().size()));
     }
 
-    //    public Comparator<expense> getExpenseComparator() {
-    //        return expenseComparator;
-    //    }
+    public Comparator<Expense> getExpenseComparator() {
+        return expenseComparator;
+    }
 }

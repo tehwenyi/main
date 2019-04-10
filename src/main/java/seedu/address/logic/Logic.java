@@ -10,10 +10,12 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyEPiggy;
-import seedu.address.model.expense.Budget;
-import seedu.address.model.expense.Expense;
-import seedu.address.model.expense.Goal;
-import seedu.address.model.expense.item.Cost;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.Expense;
+import seedu.address.model.epiggy.Goal;
+
+import seedu.address.model.epiggy.item.Cost;
+import seedu.address.model.person.Person;
 
 /**
  * API of the Logic component
@@ -30,8 +32,13 @@ public interface Logic {
 
     /**
      * Returns the EPiggy.
+     *
+     * @see seedu.address.model.Model#getEPiggy()
      */
     ReadOnlyEPiggy getEPiggy();
+
+    /** Returns an unmodifiable view of the filtered list of persons */
+    ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Expense> getFilteredExpenseList();
@@ -64,23 +71,46 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
+     * Selected person in the filtered person list.
+     * null if no person is selected.
+     *
+     * @see seedu.address.model.Model#selectedPersonProperty()
+     */
+    ReadOnlyProperty<Person> selectedPersonProperty();
+
+    /**
      * Selected expense in the filtered expense list.
      * null if no expense is selected.
+     *
+     * @see seedu.address.model.Model#selectedExpenseProperty()
      */
     ReadOnlyProperty<Expense> selectedExpenseProperty();
 
     /**
+     * Sets the selected person in the filtered person list.
+     *
+     * @see seedu.address.model.Model#setSelectedPerson(Person)
+     */
+    void setSelectedPerson(Person person);
+
+    /**
      * Sets the current budget.
+     *
+     * @see seedu.address.model.Model#addBudget(Budget)
      */
     void setCurrentBudget(Budget budget);
 
     /**
      * Adds a new budget.
+     *
+     * @see seedu.address.model.Model#addBudget(Budget)
      */
     void addBudget(int index, Budget budget);
 
     /**
      * Sets the selected expense in the filtered person list.
+     *
+     * @see seedu.address.model.Model#setSelectedExpense(Expense)
      */
     void setSelectedExpense(Expense expense);
 }

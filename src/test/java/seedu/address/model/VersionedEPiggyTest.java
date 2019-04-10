@@ -4,8 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.testutil.epiggy.TypicalExpenses.BOWLING;
-import static seedu.address.testutil.epiggy.TypicalExpenses.IPHONE;
+import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CARL;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,8 +20,9 @@ import seedu.address.testutil.EPiggyBuilder;
 @Ignore
 public class VersionedEPiggyTest {
 
-    private final ReadOnlyEPiggy addressBookWithAmy = new EPiggyBuilder().withExpense(BOWLING).build();
-    private final ReadOnlyEPiggy addressBookWithBob = new EPiggyBuilder().withExpense(IPHONE).build();
+    private final ReadOnlyEPiggy addressBookWithAmy = new EPiggyBuilder().withPerson(AMY).build();
+    private final ReadOnlyEPiggy addressBookWithBob = new EPiggyBuilder().withPerson(BOB).build();
+    private final ReadOnlyEPiggy addressBookWithCarl = new EPiggyBuilder().withPerson(CARL).build();
     private final ReadOnlyEPiggy emptyAddressBook = new EPiggyBuilder().build();
 
     @Test
@@ -225,7 +227,7 @@ public class VersionedEPiggyTest {
         assertFalse(versionedAddressBook.equals(1));
 
         // different state list -> returns false
-        VersionedEPiggy differentAddressBookList = prepareAddressBookList(addressBookWithBob, addressBookWithAmy);
+        VersionedEPiggy differentAddressBookList = prepareAddressBookList(addressBookWithBob, addressBookWithCarl);
         assertFalse(versionedAddressBook.equals(differentAddressBookList));
 
         // different current pointer index -> returns false

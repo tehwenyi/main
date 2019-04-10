@@ -30,9 +30,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.Model;
-import seedu.address.model.expense.Allowance;
-import seedu.address.model.expense.Budget;
-import seedu.address.model.expense.Expense;
+import seedu.address.model.epiggy.Allowance;
+import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.Expense;
 
 /**
  * Report Window. Provides report and chart to the user.
@@ -91,8 +91,8 @@ public class ReportWindow {
         areaChart.setTitle("Report for date: " + date);
 
         XYChart.Series seriesExpense = new XYChart.Series();
-        seriesExpense.setName("expense");
-        yAxis.setLabel("expense");
+        seriesExpense.setName("Expense");
+        yAxis.setLabel("Expense");
         xAxis.setLabel("Hours");
         Calendar calExpenseDay = Calendar.getInstance();
         Calendar calSpecifiedDay = Calendar.getInstance();
@@ -181,7 +181,7 @@ public class ReportWindow {
                 .substring(0, 1).toUpperCase() + date.getMonth().toString().substring(1).toLowerCase()
                 + " " + date.getYear()); // Format chart title.
         XYChart.Series seriesExpense = new XYChart.Series();
-        seriesExpense.setName("expense");
+        seriesExpense.setName("Expense");
         XYChart.Series seriesAllowance = new XYChart.Series();
         seriesAllowance.setName("Allowance");
 
@@ -331,7 +331,7 @@ public class ReportWindow {
         XYChart.Series seriesAllowance = new XYChart.Series();
         seriesAllowance.setName("Allowance");
         XYChart.Series seriesExpense = new XYChart.Series();
-        seriesExpense.setName("expense");
+        seriesExpense.setName("Expense");
         XYChart.Series seriesBudget = new XYChart.Series();
         seriesBudget.setName("Budget");
 
@@ -539,7 +539,7 @@ public class ReportWindow {
         series1.setName("Allowance");
 
         XYChart.Series series2 = new XYChart.Series();
-        series2.setName("expense");
+        series2.setName("Expense");
 
         XYChart.Series series3 = new XYChart.Series();
         series3.setName("Budget");

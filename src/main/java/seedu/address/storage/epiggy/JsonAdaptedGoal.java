@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.expense.Goal;
-import seedu.address.model.expense.item.Cost;
-import seedu.address.model.expense.item.Name;
+import seedu.address.model.epiggy.Goal;
+import seedu.address.model.epiggy.item.Cost;
+import seedu.address.model.epiggy.item.Name;
 
 /**
  * Json friendly version of (@Link Goal)

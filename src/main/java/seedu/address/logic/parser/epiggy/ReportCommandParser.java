@@ -1,6 +1,6 @@
 package seedu.address.logic.parser.epiggy;
 
-import static seedu.address.commons.core.Messages.FORMAT_ERROR_MESSAGE;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
@@ -78,7 +78,7 @@ public class ReportCommandParser implements Parser<ReportCommand> {
                         ReportCommand.MESSAGE_USAGE));
             }
         } catch (Exception e) {
-            throw new ParseException(String.format(FORMAT_ERROR_MESSAGE,
+            throw new ParseException(String.format(MESSAGE_INVALID_DATE,
                     ReportCommand.MESSAGE_USAGE));
         }
 

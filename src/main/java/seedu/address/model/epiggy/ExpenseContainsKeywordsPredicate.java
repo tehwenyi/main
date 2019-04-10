@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.CliSyntax;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.epiggy.item.Item;
 
 //@@author rahulb99
@@ -16,7 +15,7 @@ import seedu.address.model.epiggy.item.Item;
  */
 public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
 
-    public static final int LEVENSHTIEN_THRESHOLD = 5;
+    public static final int LEVENSHTIEN_THRESHOLD = 3;
     private final ArgumentMultimap keywords;
 
     public ExpenseContainsKeywordsPredicate(ArgumentMultimap keywords) {
@@ -60,6 +59,7 @@ public class ExpenseContainsKeywordsPredicate implements Predicate<Expense> {
             try {
                 result = result && isWithinDateRange(dateKeywords, expense);
             } catch (java.text.ParseException e) {
+                result = false;
                 e.printStackTrace();
             }
         }

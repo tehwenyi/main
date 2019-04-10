@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.address.logic.commands.epiggy.FindExpenseCommand;
@@ -31,16 +30,12 @@ public class FindExpenseCommandParserTest {
     }
 
     @Test
-    @Ignore
     public void parse_validArgs_returnsFindExpenseCommand() {
         // one keyword
-        ArgumentMultimap keywordsMap = prepareKeywords("n/Stationary ");
+        ArgumentMultimap keywordsMap = prepareKeywords(" n/Stationary ");
         FindExpenseCommand expectedFindExpenseCommand =
                 new FindExpenseCommand(new ExpenseContainsKeywordsPredicate(keywordsMap));
         assertParseSuccess(parser, " n/Stationary ", expectedFindExpenseCommand);
-        assertParseSuccess(parser, " n/ station ", expectedFindExpenseCommand);
-        assertParseSuccess(parser, " n/stat ", expectedFindExpenseCommand);
-        assertParseSuccess(parser, " n/stutionray ", expectedFindExpenseCommand);
 
         // multiple keywords
         keywordsMap = prepareKeywords("n/clothes t/shopping");

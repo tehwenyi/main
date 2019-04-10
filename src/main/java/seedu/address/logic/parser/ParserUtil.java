@@ -19,10 +19,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.epiggy.item.Cost;
+import seedu.address.model.epiggy.item.Name;
 import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -89,6 +89,19 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static seedu.address.model.person.Name parseName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!seedu.address.model.person.Name.isValidName(trimmedName)) {
+            throw new ParseException(seedu.address.model.person.Name.MESSAGE_CONSTRAINTS);
+        }
+        return new seedu.address.model.person.Name(trimmedName);
     }
 
     /**

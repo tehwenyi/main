@@ -70,7 +70,7 @@ This command adds a budget of $500 from 1st February 2019 to 28th February 2019 
 ====
 
 === Basic Features
-
+// tag::autocomplete[]
 ==== Auto complete :
 Enter the first few letters of the command, and then press `Tab` key on the keyboard to auto complete the command. +
 If the completed command is not what you want, delete the command. Enter the same letters again, and press `Tab`. Another command will show if the letters match another command. +
@@ -82,7 +82,7 @@ Delete the command, enter 'a' again and press `Tab`, the addBudget or addAllowan
 [NOTE]
 Enter 'as' and press `Tab`, *nothing will happen* because 'as' does not match any prefix of the command. +
 Enter 'Add' and press `Tab`, *nothing will happen* because auto complete function is *case sensitive*.
-
+// end::autocomplete[]
 ==== Viewing help : `help`
 Lists all the user commands with their syntax and descriptions. +
 Format: `help`
@@ -308,26 +308,53 @@ Budget does not take into account allowances as budget only accounts for expense
 
 ==== Generate report : `report`
 
-Generates a report of the given date, month, or year. The report consists of total inflow, total outflow, and proportion of income
-spent on different categories. +
-Format: `report [d/DD/MM/YYYY]` +
-Format: `report [d/MM/YYYY]` +
-Format: `report [d/YYYY]` +
-Format: `report`
+Generates a report of the given date, month, or year. The report consists of total inflow, total outflow, and proportion of total expense and total allowance. +
+
+Format: `report [d/DD/MM/YYYY]` Generates a report for specified date.
+
+Format: `report [d/MM/YYYY]` Generates a report for specified month.
+
+Format: `report [d/YYYY]` Generates a report for specified year.
+
+Format: `report` Generates a report of all records in ePiggy.
+
+[NOTE]
+The message of conclusion under the chart will show only if you add at least one expense to ePiggy.
 
 Examples:
 
-* `report` +
-View the completed report.
+* Example 1: `report` +
+View the completed report of all the records.
 
-* `report d/21/03/2019` +
-View the daily report of 21 Mar 2019.
+image::report1.png[width="400"]
+Figure of example 1: Completed report part 1.
 
-* `report d/03/2019` +
-View the monthly report of Mar 2019.
+image::report2.png[width="400"]
+Figure of example 1: Completed report part 2.
 
-* `report d/2019` +
-View the yearly report of 2019.
+***
+
+* Example 2: `report d/10/04/2019` +
+View the specified date report of 10 Apr 2019.
+
+image::reportDay.png[width="500"]
+Figure of example 2: Report for specified date.
+
+***
+
+* Example 3: `report d/04/2019` +
+View the specified month report of Apr 2019.
+
+image::reportMonth.png[width="500"]
+Figure of example 3: Report for specified month.
+
+***
+
+* Example 4: `report d/2019` +
+View the specified year report of 2019.
+
+image::reportYear.png[width="500"]
+Figure of example 4: Report for specified year.
 // end::report[]
 
 === Goal Setting

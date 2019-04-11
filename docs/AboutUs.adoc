@@ -25,7 +25,7 @@ image::tehwenyi.png[width="150", align="left"]
 
 Role: Developer
 
-Responsibilities: `budget` feature, documentations
+Responsibilities: `budget` feature, documentation
 
 '''
 

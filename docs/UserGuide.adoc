@@ -427,14 +427,16 @@ Allows you to share your expenses with anyone, by sending them an email
 including an attachment of your personal `ePiggy` data in CSV format. +
 
 
-==== Recommend future spendings : `recommend`
+==== Recommend future spendings `[coming in v2.0]`
 
-Recommends a daily limit you need to have in order to satisfy your budget and the income you need to have if you intend to maintain your current spending habits. +
+Recommends a daily limit you need to have in order to satisfy your budget and the income you need to have if you
+intend to maintain your current spending habits. +
 
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ePiggy folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the
+data of your previous ePiggy folder.
 
 == Command Summary
 

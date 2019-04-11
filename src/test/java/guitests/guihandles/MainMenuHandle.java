@@ -30,11 +30,26 @@ public class MainMenuHandle extends NodeHandle<Node> {
     }
 
     /**
+     * cleans up the {@code Textarea} using the menu bar in {@code MainWindow}.
+     */
+    public void CleanUpTextareaUsingMenu() {
+        clickOnMenuItemsSequentially("Clean", "Clean TextArea");
+    }
+
+    /**
      * Opens the {@code HelpWindow} by pressing the shortcut key associated
      * with the menu bar in {@code MainWindow}.
      */
     public void openHelpWindowUsingAccelerator() {
         guiRobot.push(KeyCode.F1);
+    }
+
+    /**
+     * Cleans up the {@code Textarea} by pressing the shortcut key associated
+     * with the menu bar in {@code MainWindow}.
+     */
+    public void cleanTextareaUsingAccelerator() {
+        guiRobot.push(KeyCode.F2);
     }
 
     /**

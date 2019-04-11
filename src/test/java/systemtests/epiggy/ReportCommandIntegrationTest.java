@@ -118,17 +118,16 @@ public class ReportCommandIntegrationTest extends EPiggySystemTestWithEmptyData 
         assertCommandBoxShowsDefaultStyle();
         assertSelectedCardUnchanged();
 
-
         // check report window for specified day
+        getMainMenu().CleanUpTextareaUsingMenu();
         executeCommand(ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "21/03/2019");
+        getMainWindowHandle().focus();
         assertReportWindowOpen();
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
-//        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-//                + "You: " + ReportCommand.COMMAND_WORD + "\n";
-//        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-//                + "You: " + ReportCommand.COMMAND_WORD + "\n" + messageHistory;
-//        assertEquals(messageHistory, getResultDisplay().getText());
+        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+                + "You: " + ReportCommand.COMMAND_WORD + " d/21/03/2019\n";
+        assertEquals(messageHistory, getResultDisplay().getText());
 
 //        // check report window for specified month
 //        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "03/2019";

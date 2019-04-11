@@ -30,7 +30,6 @@ public class ResultDisplay extends UiPart<Region> {
 
         messages = "========================\n" + "ePiggy: " + feedbackToUser + "\n\n" + "You: " + commandEntered
                 + "\n" + messages;
-
         resultDisplay.setText(messages);
     }
 
@@ -38,6 +37,7 @@ public class ResultDisplay extends UiPart<Region> {
      * Clear all text in the textBox.
      */
     public void clearDisplay() {
+        messages = "";
         resultDisplay.clear();
     }
 }

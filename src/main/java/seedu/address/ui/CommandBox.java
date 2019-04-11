@@ -113,13 +113,6 @@ public class CommandBox extends UiPart<Region> {
             keyEvent.consume();
             autoCompleteText();
             break;
-
-        case ESCAPE:
-            keyEvent.consume();
-            ResultDisplay rd = new ResultDisplay();
-            rd.clearDisplay();
-            break;
-
         default:
             // let JavaFx handle the keypress
         }

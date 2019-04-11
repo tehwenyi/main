@@ -24,7 +24,7 @@ public class AddBudgetCommand extends Command {
     public static final String COMMAND_WORD = "addBudget";
     public static final String COMMAND_ALIAS = "ab";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sets a budget for ePiggy. "
+            + " adds a budget to ePiggy.\n"
             + "Parameters: "
             + PREFIX_COST + "BUDGET_IN_DOLLARS "
             + PREFIX_PERIOD + "TIME_PERIOD_IN_DAYS "
@@ -34,14 +34,14 @@ public class AddBudgetCommand extends Command {
             + PREFIX_PERIOD + "30 "
             + PREFIX_DATE + "01/04/2019";
 
-    public static final String MESSAGE_SUCCESS = "Budget is set at:\n%1$s";
+    public static final String MESSAGE_SUCCESS = "Budget has been added.\nAdded budget's details:\n%1$s";
     public static final String MESSAGE_FAIL = "Budget is too old to be added."
             + " The budget list can only accommodate a maximum of " + MAXIMUM_SIZE
             + " budgets. \nIf you wish to add this budget,"
             + " please delete one of the existing budgets and add this budget again.";
     public static final String MESSAGE_OVERLAPPING_BUDGET = "Budgets should not overlap.\n"
-            + "Please ensure that the start date of the edited budget "
-            + "is later than the end date of the previous budget.";
+            + "Please ensure that the time duration of the budget you have entered "
+            + "does not overlap with any existing budget.";
 
     private final Budget toAdd;
 

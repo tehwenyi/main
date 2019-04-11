@@ -22,11 +22,11 @@ public class DeleteExpenseCommand extends Command {
     public static final String COMMAND_ALIAS = "de";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the expense identified by the index number used in the displayed expense list.\n"
+            + " deletes the expense identified by the index used in the displayed expense list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_EXPENSE_SUCCESS = "Deleted expense: %1$s";
+    public static final String MESSAGE_DELETE_EXPENSE_SUCCESS = "Expense deleted.\nDeleted expense's details:\n%1$s";
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The index does not exist on the expense list.";
     public static final String MESSAGE_ITEM_NOT_EXPENSE = "The item selected is not an expense. "
             + "Please use " + COMMAND_WORD + " to delete expenses and "

@@ -37,8 +37,8 @@ public class EditAllowanceCommand extends Command {
     public static final String COMMAND_WORD = "editAllowance";
     public static final String COMMAND_ALIAS = "eA";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the allowance identified "
-            + "by the index number used in the displayed expense list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " edits the details of the allowance identified "
+            + "by the index in the displayed expense list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -48,12 +48,12 @@ public class EditAllowanceCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_COST + "5 ";
 
-    public static final String MESSAGE_EDIT_ALLOWANCE_SUCCESS = "Edited Allowance: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n"
+    public static final String MESSAGE_EDIT_ALLOWANCE_SUCCESS = "Allowance edited.\nEdited allowance's details:\n%1$s";
+    public static final String MESSAGE_NOT_EDITED = "Allowance not edited as there are no changes.\n"
             + MESSAGE_USAGE;
 
     private static final String MESSAGE_ITEM_NOT_ALLOWANCE = "The item selected is not an allowance. "
-            + "Please use " + EditAllowanceCommand.COMMAND_WORD + " to edit expenses and "
+            + "Please use " + EditExpenseCommand.COMMAND_WORD + " to edit expenses and "
             + COMMAND_WORD + " to edit allowances.";
 
     final Index index;

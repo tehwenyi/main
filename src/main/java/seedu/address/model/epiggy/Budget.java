@@ -12,8 +12,6 @@ import seedu.address.model.epiggy.item.Period;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Budget {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Budgeted amount should be greater than $0.00.";
     public static final String CURRENT_BUDGET = "Current";
     private static final String OLD_BUDGET = "Old";
     private static final String FUTURE_BUDGET = "Future";
@@ -166,21 +164,18 @@ public class Budget {
 
     @Override
     public String toString() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(getEndDate());
+        cal.add(Calendar.DAY_OF_MONTH, -1);
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
         final StringBuilder builder = new StringBuilder();
         builder.append("$")
                 .append(getBudgetedAmount())
-                .append(" for ")
-                .append(getPeriod())
-                .append(" days starting from ")
+                .append(" from ")
                 .append(sdf.format(getStartDate()))
-                .append(" till ")
-                .append(sdf.format(getEndDate()))
-                .append(".\n")
-                .append(getRemainingDays())
-                .append(" days remaining and $")
-                .append(getRemainingAmount())
-                .append(" remaining.");
+                .append(" to ")
+                .append(sdf.format(cal.getTime()))
+                .append(".");
         return builder.toString();
     }
 }

@@ -41,4 +41,18 @@ public class Item {
                 .append(tags);
         return builder.toString();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Item)) {
+            return false;
+        }
+        Item otherItem = (Item) other;
+        return otherItem.getName().equals(getName())
+                && otherItem.getCost().equals(getCost())
+                && otherItem.getTags().equals(getTags());
+    }
 }

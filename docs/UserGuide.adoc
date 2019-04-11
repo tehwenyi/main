@@ -319,6 +319,8 @@ Format: `report [d/YYYY]` Generates a report for specified year.
 
 Format: `report` Generates a report of all records in ePiggy.
 
+Alias: `rp`: `report` can be replaced by `rp`.
+
 [NOTE]
 The message of conclusion under the chart will show only if you add at least one expense to ePiggy.
 

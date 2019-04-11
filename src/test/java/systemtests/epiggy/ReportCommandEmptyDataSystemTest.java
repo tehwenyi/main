@@ -26,8 +26,8 @@ public class ReportCommandEmptyDataSystemTest extends EPiggySystemTestWithEmptyD
 
         //use menu button to open report window
         // TODO: this test case may fail sometime. Comment it if it happens.
-        //getMainMenu().openReportWindowUsingMenu();
-        //assertReportWindowOpen(); // close window if report window open
+        getMainMenu().openReportWindowUsingMenu();
+        assertReportWindowOpen(); // close window if report window open
 
         //use command box
         executeCommand(ReportCommand.COMMAND_WORD);

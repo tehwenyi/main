@@ -42,9 +42,9 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
 
         //use menu button
         //TODO: this test case may fail sometime, comment it if it happens.
-        //getMainMenu().openReportWindowUsingMenu();
-        //assertReportWindowOpen(); // close window if report window open
-        //getMainWindowHandle().focus();
+        getMainMenu().openReportWindowUsingMenu();
+        assertReportWindowOpen(); // close window if report window open
+        getMainWindowHandle().focus();
 
         //use command box
         executeCommand(ReportCommand.COMMAND_WORD);

@@ -25,26 +25,26 @@ public class CommandBox extends UiPart<Region> {
     private ListElementPointer historySnapshot;
 
     private String[] commandArr = {
-        "addAllowance n/ $/",
+        "addAllowance n/ $/ t/ d/",
         "addBudget $/ p/ d/",
         "addExpense n/ $/ t/ d/",
         "clear",
         "deleteAllowance ",
         "deleteBudget ",
         "deleteExpense ",
-        "editAllowance ",
-        "editBudget ",
-        "editExpense ",
+        "editAllowance  n/ $/ d/ t/",
+        "editBudget $/ p/ d/",
+        "editExpense  n/ $/ d/ t/",
         "exit",
         "findExpense n/ t/ d/ $/",
         "help",
-        "list ",
+        "list",
         "redo",
         "report d/",
+        "reverseList",
         "setGoal n/ $/",
-        "sortExpense ",
-        "viewGoal",
-        "viewSavings ",
+        "sortExpense n/ d/ $/",
+        "undo",
     };
 
     @FXML

@@ -129,6 +129,92 @@ public class CommandBoxTest extends GuiUnitTest {
         assertInputHistory(KeyCode.UP, thirdCommand);
     }
 
+    @Test
+    public void handleKeyPress_tab() {
+
+        // test for more than 1 matched commands
+        commandBoxHandle.run("a");
+        assertInputHistory(KeyCode.TAB, "addAllowance n/ $/ t/ d/");
+        commandBoxHandle.run("a");
+        assertInputHistory(KeyCode.TAB, "addBudget $/ p/ d/");
+        commandBoxHandle.run("a");
+        assertInputHistory(KeyCode.TAB, "addExpense n/ $/ t/ d/");
+
+        // test autocomplete with all valid commands
+        commandBoxHandle.run("adda");
+        assertInputHistory(KeyCode.TAB, "addAllowance n/ $/ t/ d/");
+
+        commandBoxHandle.run("addb");
+        assertInputHistory(KeyCode.TAB, "addBudget $/ p/ d/");
+
+        commandBoxHandle.run("adde");
+        assertInputHistory(KeyCode.TAB, "addExpense n/ $/ t/ d/");
+
+        commandBoxHandle.run("c");
+        assertInputHistory(KeyCode.TAB, "clear");
+
+        commandBoxHandle.run("deletea");
+        assertInputHistory(KeyCode.TAB, "deleteAllowance ");
+
+        commandBoxHandle.run("deleteb");
+        assertInputHistory(KeyCode.TAB, "deleteBudget ");
+
+        commandBoxHandle.run("deletee");
+        assertInputHistory(KeyCode.TAB, "deleteExpense ");
+
+        commandBoxHandle.run("edita");
+        assertInputHistory(KeyCode.TAB, "editAllowance  n/ $/ d/ t/");
+
+        commandBoxHandle.run("ex");
+        assertInputHistory(KeyCode.TAB, "exit");
+
+        commandBoxHandle.run("f");
+        assertInputHistory(KeyCode.TAB, "findExpense n/ t/ d/ $/");
+
+        commandBoxHandle.run("h");
+        assertInputHistory(KeyCode.TAB, "help");
+
+        commandBoxHandle.run("l");
+        assertInputHistory(KeyCode.TAB, "list");
+
+        commandBoxHandle.run("red");
+        assertInputHistory(KeyCode.TAB, "redo");
+
+        commandBoxHandle.run("rep");
+        assertInputHistory(KeyCode.TAB, "report d/");
+
+        commandBoxHandle.run("rev");
+        assertInputHistory(KeyCode.TAB, "reverseList");
+
+        commandBoxHandle.run("rev");
+        assertInputHistory(KeyCode.TAB, "reverseList");
+
+        commandBoxHandle.run("se");
+        assertInputHistory(KeyCode.TAB, "setGoal n/ $/");
+
+        commandBoxHandle.run("so");
+        assertInputHistory(KeyCode.TAB, "sortExpense n/ d/ $/");
+
+        commandBoxHandle.run("u");
+        assertInputHistory(KeyCode.TAB, "undo");
+
+        // test for empty string
+        commandBoxHandle.run("");
+        assertInputHistory(KeyCode.TAB, "");
+
+        // test for keyword at the end of user input
+        commandBoxHandle.run("hello adde");
+        assertInputHistory(KeyCode.TAB, "hello addExpense n/ $/ t/ d/");
+
+        // test for keyword at the beginning of user input
+        commandBoxHandle.run("adde hello");
+        assertInputHistory(KeyCode.TAB, "adde hello");
+
+        // test for keyword at the middle of user input
+        commandBoxHandle.run("hello adde hello");
+        assertInputHistory(KeyCode.TAB, "hello adde hello");
+    }
+
     /**
      * Runs a command that fails, then verifies that <br>
      *      - the text remains <br>

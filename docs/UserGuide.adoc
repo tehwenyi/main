@@ -70,12 +70,20 @@ This command adds a budget of $500 from 1st February 2019 to 28th February 2019 
 ====
 
 === Basic Features
-
+// tag::autocomplete[]
 ==== Auto complete :
-Enter the first few letters of the command or tag, and then press `Tab` key on the keyboard to auto complete the command. +
-If the auto complete command is not what you want, delete some letters and press `Tab` again. Another command will show. +
-Example: enter letter 'a' and then press `Tab`, the addExpense will show.
+Enter the first few letters of the command, and then press `Tab` key on the keyboard to auto complete the command. +
+If the completed command is not what you want, delete the command. Enter the same letters again, and press `Tab`. Another command will show if the letters match another command. +
 
+Example: enter letter 'a' and then press `Tab`, the command "addExpense n/ $/ t/ d/ " will show.
+
+Delete the command, enter 'a' again and press `Tab`, the addBudget or addAllowance command will show.
+
+[NOTE]
+Enter 'as' and press `Tab`, *nothing will happen* because 'as' does not match any prefix of the command. Autocomplete is *not support
+alias* and is *non-case sensitive*.
+
+// end::autocomplete[]
 ==== Viewing help : `help`
 Lists all the user commands with their syntax and descriptions. +
 Format: `help`
@@ -92,22 +100,6 @@ Adds an expense for a $5 chicken rice set, tagged as Food with the date as 21/02
 
 * `addExpense n/Chicken rice set $/5 t/Food` +
 Adds an expense for a $5 chicken rice set, tagged as Food dated as the current date, by default.
-
-// tag::addAllowance[]
-==== Adding an allowance: `addAllowance`
-
-Adds a new allowance record to the Expense Tracker. +
-Format: `addAllowance $/AMOUNT`
-
-Example:
-
-* `addAllowance $/10` +
-Adds an allowance entry of $10 to the expense tracker.
-
-==== Listing all expenses : `list`
-
-Lists the expense records from newest to oldest. Use this to return to the default view after search/sort commands +
-Format: `list`
 
 ==== Editing an expense : `editExpense`
 
@@ -134,6 +126,52 @@ Examples:
 * `deleteExpense 1` +
 Deletes the first expense in the displaying expense list from Expense Tracker.
 
+==== Adding an allowance: `addAllowance`
+
+Adds a new allowance record to the Expense Tracker. +
+Format: `addAllowance n/EXPENSE_NAME $/COST [d/DATE] [t/TAG]…`
+
+Examples:
+
+* `addAllowance n/From Mom $/20 t/School d/21/02/2019` +
+Adds an allowance of $20 from Mom, tagged as School with the date as 21/02/2019.
+
+==== Editing an allowance : `editAllowance`
+
+Edits an existing allowance in ePiggy at a specific `*INDEX`* . +
+The *`INDEX`* refers to the number in the displayed Expenses List which is next to the name of the expense. Existing values of
+the expense will be changed according to the value of the parameters. +
+Format: `editAllowance INDEX [n/ALLOWANCE_NAME] [$/COST] [d/DATE] [t/TAG]…`
+
+Examples:
+
+* `editAllowance 1 n/From Mom $10 t/Emergency` +
+Edits the name, cost and tag of the first allowance in ePiggy to ‘From Mom’, ‘$10’ and ‘Emergency’ respectively.
+* `editAllowance 2 $/22` +
+Edits the amount of the second allowance in ePiggy to ‘$22’.
+
+==== Deleting an allowance : `deleteAllowance`
+
+Deletes the allowance at the specified INDEX. The INDEX refers to the number in the displayed Expenses List which is next to
+the name of the allowance. +
+Format: `deleteAllowance INDEX`
+
+Examples:
+
+* `deleteExpense 1` +
+Deletes the first allowance in the displaying expense list from Expense Tracker.
+
+==== Listing all expenses : `list`
+
+Lists the expense records from newest to oldest. Use this to return to the default view after search/sort commands +
+Format: `list`
+
+==== Listing all expenses in reverse : `reverseList`
+
+Lists the expense records from oldest to newest. Use this to return to the default view after search/sort commands +
+Format: `reverseList`
+
+
 ==== Viewing an expense : `view`
 
 View the details of the selected *`INDEX`*. +
@@ -151,24 +189,24 @@ Format: `viewSavings`
 
 === Filtering and Sorting Data
 
-==== Searching for an expense : `search`
+==== Searching for an expense : `findExpense`
 
 You can search for any expense in the list by specifying either its name, tag, date, range of dates, or range of amount. +
 Format: *`findExpense [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
 
 Examples:
 
-* `search n/MCDONALDS` +
+* `fE n/MCDONALDS` +
 Displays all entries with the name “MCDONALDS”.
-* `search t/FOOD` +
+* `fE t/FOOD` +
 Displays all entries with the tag specified (in this case, it’s food).
-* `search d/2019/01/02` +
+* `fE d/2019/01/02` +
 Displays all entries listed on 2nd Jan 2019.
-* `search d/2019/01/02:2020/12/05` +
+* `fE d/2019/01/02:2020/12/05` +
 Displays all entries listed in the range 2nd Jan 2019 to 5th Dec 2020.
-* `search $/250` +
+* `fE $/250` +
 Displays all entries listed with the cost range of $250.
-* `search $/250:500` +
+* `fE $/250:500` +
 Displays all entries listed with the cost range of $250 to $500.
 
 ****
@@ -178,18 +216,18 @@ If the entry is not found, it displays an appropriate error message. +
 Date format is `yyyy/MM/dd` .
 ****
 
-==== Sorting the expenses : `sort`
+==== Sorting the expenses : `sortExpense`
 
 The user can sort the expenses in the list by name, date added, amount in ascending or descending order. +
-Format: `sort -[n/d/$]/`
+Format: `sortExpense -[n/d/$]/`
 
 Examples:
 
-* `sort n/` +
+* `sE n/` +
 Sorts all entries by name (in ascending order).
-* `sort d/` +
+* `sE d/` +
 Sorts all entries by date in descending order.
-* `sort $/` +
+* `sE $/` +
 Sorts all entries by amount in ascending order.
 
 === Budgeting
@@ -211,6 +249,7 @@ Sets a total budget of $10000 every 15 days starting from 1st January 2000.
 
 ****
 *Additional Information:* +
+Time period cannot exceed 1 million days.
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
 
@@ -246,6 +285,7 @@ Edits the current budget to $200 for every 15 days starting from the budget's in
 
 ****
 *Additional Information:* +
+Time period cannot exceed 1 million days.
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
 
@@ -264,52 +304,60 @@ Deletes the first budget in the Budget List.
 *Additional Information:* +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
-
-==== Recommend future spendings : `recommend`
-
-You have to set a budget before you can use this command. +
-This command recommends a daily limit you need to
-have in order to satisfy your budget and the income you need to have if you intend to maintain your current spending
-habits. +
-Format: `recommend`
-
-Example:
-
-* `recommend` +
-Recommends a daily limit and the income you need to maintain current spending habits
-while staying below budget.
-
-****
-*Additional Information:* +
-A budget should be set. +
-The expenses list should have at least one day’s worth of expenses.
-****
-
 // tag::report[]
 === Expense Report
 
 ==== Generate report : `report`
 
-Generates a report of the given date, month, or year. The report consists of total inflow, total outflow, and proportion of income
-spent on different categories. +
-Format: `report [t/DD/MM/YYYY]` +
-Format: `report [t/MM/YYYY]` +
-Format: `report [t/YYYY]` +
-Format: `report`
+Generates a report of the given date, month, or year. The report consists of total inflow, total outflow, and proportion of total expense and total allowance. +
+
+Format: `report [d/DD/MM/YYYY]` Generates a report for specified date.
+
+Format: `report [d/MM/YYYY]` Generates a report for specified month.
+
+Format: `report [d/YYYY]` Generates a report for specified year.
+
+Format: `report` Generates a report of all records in ePiggy.
+
+Alias: `rp`: `report` can be replaced by `rp`.
+
+[NOTE]
+The message of conclusion under the chart will show only if you add at least one expense to ePiggy.
 
 Examples:
 
-* `report` +
-View the completed report.
+* Example 1: `report` +
+View the completed report of all the records.
 
-* `report t/21/03/2019` +
-View the daily report of 21 Mar 2019.
+image::report1.png[width="400"]
+Figure of example 1: Completed report part 1.
 
-* `report t/03/2019` +
-View the monthly report of Mar 2019.
+image::report2.png[width="400"]
+Figure of example 1: Completed report part 2.
 
-* `report t/2019` +
-View the yearly report of 2019.
+***
+
+* Example 2: `report d/10/04/2019` +
+View the specified date report of 10 Apr 2019.
+
+image::reportDay.png[width="500"]
+Figure of example 2: Report for specified date.
+
+***
+
+* Example 3: `report d/04/2019` +
+View the specified month report of Apr 2019.
+
+image::reportMonth.png[width="500"]
+Figure of example 3: Report for specified month.
+
+***
+
+* Example 4: `report d/2019` +
+View the specified year report of 2019.
+
+image::reportYear.png[width="500"]
+Figure of example 4: Report for specified year.
 // end::report[]
 
 === Goal Setting
@@ -360,13 +408,9 @@ Compares between different users.
 Requires multiple accounts in the same network.
 
 // tag::v2.0[]
-==== Login to ePiggy `[coming in v2.0]`
+==== Login and logout to ePiggy `[coming in v2.0]`
 
-Login to ePiggy as an existing user. +
-
-==== Logout to ePiggy `[coming in v2.0]`
-
-Logout ePiggy. +
+Login and logout ePiggy as an existing user. +
 
 ==== Register to ePiggy `[coming in v2.0]`
 
@@ -400,6 +444,8 @@ e.g. `addExpense n/Chicken rice set $/5 t/Food a/HAINAN KITCHEN d/2019-02-21`
 e.g. `addAllowance $/10`
 
 * *List* : `list`
+
+* *Reverse list* : `reverseList`
 
 * *Edit* : `edit INDEX [n/EXPENSE_NAME] [$/COST] [c/CATEGORY] [d/DATE] [t/TAG]…` +
 e.g. `edit 1 n/pen $1 c/supplies`

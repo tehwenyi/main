@@ -21,7 +21,7 @@ import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.Savings;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -114,6 +114,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedExpense);
 
         versionedEPiggy.setExpense(target, editedExpense);
+        setSelectedExpense(editedExpense);
     }
 
     @Override
@@ -136,11 +137,13 @@ public class ModelManager implements Model {
     @Override
     public void addExpense(Expense expense) {
         versionedEPiggy.addExpense(expense);
+        setSelectedExpense(expense);
     }
 
     @Override
     public void addAllowance(Allowance allowance) {
         versionedEPiggy.addAllowance(allowance);
+        setSelectedExpense(allowance);
     }
 
     @Override
@@ -162,6 +165,9 @@ public class ModelManager implements Model {
     @Override
     public void deleteExpense(Expense toDelete) {
         versionedEPiggy.deleteExpense(toDelete);
+        if (selectedExpenseProperty().getValue() == toDelete) {
+            setSelectedExpense(null);
+        }
     }
 
     @Override
@@ -180,7 +186,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public SimpleObjectProperty<Savings> getSavings() {
+    public SimpleObjectProperty<Cost> getSavings() {
         return versionedEPiggy.getSavings();
     }
 
@@ -264,6 +270,15 @@ public class ModelManager implements Model {
     public void updateFilteredBudgetList(Predicate<Budget> predicate) {
         requireNonNull(predicate);
         filteredBudget.setPredicate(predicate);
+    }
+
+    //@@author rahulb99
+
+    /**
+     * Reveres the {@code filteredExpenses} list.
+     */
+    public void reverseFilteredExpensesList() {
+        versionedEPiggy.reverseExpenseList();
     }
 
     //=========== Undo/Redo =================================================================================

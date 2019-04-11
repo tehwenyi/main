@@ -25,7 +25,7 @@ public class SetGoalCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Nike shoe "
             + PREFIX_COST + "79";
-    public static final String MESSAGE_SUCCESS = "Goal set: %1$s";
+    public static final String MESSAGE_SUCCESS = "Goal set.\nGoal's details:\n%1$s";
 
     private final Goal toSet;
 
@@ -40,5 +40,12 @@ public class SetGoalCommand extends Command {
         model.setGoal(toSet);
         model.commitEPiggy();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toSet));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SetGoalCommand // instanceof handles nulls
+                && toSet.equals(((SetGoalCommand) other).toSet));
     }
 }

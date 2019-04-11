@@ -26,6 +26,19 @@ public class Goal {
 
     @Override
     public String toString() {
-        return String.format("%s - $%2s", name, amount);
+        return String.format("%s - %2s", name, amount);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Goal)) {
+            return false;
+        }
+        Goal otherGoal = (Goal) other;
+        return otherGoal.getName().equals(getName())
+                && otherGoal.getAmount().equals(getAmount());
     }
 }

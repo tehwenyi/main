@@ -24,11 +24,28 @@ public class CommandBox extends UiPart<Region> {
     private final List<String> history;
     private ListElementPointer historySnapshot;
 
-    private String[] keywords = { "addExpense n/ $/ t/ d/", "deleteExpense ", "editExpense",
-        "report d/", "list ", "help ", "edit ", "search ", "sort ", "exit", "view ",
-        "editBudget $/ p/ d/", "percentage", "addBudget $/ p/ d/",
-        "addAllowance $/", "deleteBudget ", "setGoal n/ $/",
-        "viewGoal", "viewSavings ", "sE n/"};
+    private String[] commandArr = {
+        "addAllowance n/ $/ t/ d/",
+        "addBudget $/ p/ d/",
+        "addExpense n/ $/ t/ d/",
+        "clear",
+        "deleteAllowance ",
+        "deleteBudget ",
+        "deleteExpense ",
+        "editAllowance  n/ $/ d/ t/",
+        "editBudget $/ p/ d/",
+        "editExpense  n/ $/ d/ t/",
+        "exit",
+        "findExpense n/ t/ d/ $/",
+        "help",
+        "list",
+        "redo",
+        "report d/",
+        "reverseList",
+        "setGoal n/ $/",
+        "sortExpense n/ d/ $/",
+        "undo",
+    };
 
     @FXML
     private TextField commandTextField;
@@ -45,26 +62,28 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Find set of similar prefix keywords.
      *
-     * @param partOfString user enters prefix
-     * @param strings      keywords checklist
-     * @return set of same prefix keywords.
+     * @param stringTryToMatch User enters prefix
+     * @param commandInArray   Command checklist
+     * @return Set of same prefix commands.
      */
-    private static String[] findString(String partOfString, String[] strings) {
+    private static String[] findString(String stringTryToMatch, String[] commandInArray) {
 
-        if (partOfString.length() == 0) {
+        if (stringTryToMatch.length() == 0) {
             // partOfString is null, return empty array
             return new String[0];
         }
-        ArrayList<String> result = new ArrayList<>();
+        ArrayList<String> resultArr = new ArrayList<>();
         // for each elements in strings, compare with part of the string.
-        for (int i = 0; i < strings.length; i++) {
-            if (partOfString.length() > strings[i].length()) {
+        for (int i = 0; i < commandInArray.length; i++) {
+            if (stringTryToMatch.length() > commandInArray[i].length()) {
+                // do nothing if the length of user input string longer than keyword.
                 continue;
-            } else if (partOfString.equals(strings[i].substring(0, partOfString.trim().length()))) {
-                result.add(strings[i]);
+            } else if (stringTryToMatch.equalsIgnoreCase((commandInArray[i]
+                    .substring(0, stringTryToMatch.trim().length())))) {
+                resultArr.add(commandInArray[i]);
             }
         }
-        return result.toArray(new String[result.size()]);
+        return resultArr.toArray(new String[resultArr.size()]);
     }
 
     /**
@@ -96,28 +115,30 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * auto complete text.
+     * autocomplete text.
+     * Compare user input with the commandArr in the commands list.
+     * commandBox shows found command
      */
     private void autoCompleteText() {
         String[] inputString = commandTextField.getText().split(" "); //split with white space
         String partOfString = inputString[inputString.length - 1]; // get the last element of input string
-        String[] results = findString(partOfString, keywords);
+        String[] results = findString(partOfString, commandArr);
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < inputString.length - 1; i++) {
             /* group user inputs */
             stringBuilder.append(inputString[i].trim());
             stringBuilder.append(" ");
         }
+        // updates user + found keyword
         if (results.length == 0) {
             /* if result is null, nothing match */
             stringBuilder.append(inputString[inputString.length - 1]); // adds back last element of input string
         } else {
+            // append match keyword to user input
             if (tabCount >= results.length) {
-                tabCount = 0; // reset tabCount when tabCount bigger than match keywords number
-                stringBuilder.append(results[tabCount]); // adds found keyword
-            } else {
-                stringBuilder.append(results[tabCount]); // adds found keyword
+                tabCount = 0; // reset tabCount when tabCount bigger than the number of match commandArr
             }
+            stringBuilder.append(results[tabCount]); // adds found keyword
         }
         commandTextField.requestFocus(); // set focus back to the textfield
         commandTextField.setText(stringBuilder.toString()); // updates the textfield

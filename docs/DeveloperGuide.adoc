@@ -234,12 +234,12 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the EPiggy data.
+* stores the ePiggy data.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `EPiggy`, which `Person` can reference. This would allow `ePiggy` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
+As a more OOP model, we can store a `Tag` list in `ePiggy`, which `Person` can reference. This would allow `ePiggy` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
 
@@ -274,7 +274,9 @@ This command allows users to add a new budget to monitor their expenses within a
 
 The above command adds a budget with `$500` which starts on `1st March 2019` and lasts for `31` days. +
 
-The budget will compute the end date and provide a status based on the local date. The status will include whether the budget is an old, current or future budget, as well as the `remaining amount` until the budget is exceeded and `remaining days` till the end of the budget. This is so that users are aware about how much they have spent. +
+The budget will compute the end date and provide a status based on the local date.
+The status will include whether the budget is an old, current or future budget, as well as the `remaining amount` until the budget is exceeded and `remaining days` till the end of the budget.
+This is so that users are aware about how much they have spent. +
 
 Adding of overlapping budgets are not allowed in ePiggy.
 [NOTE]
@@ -288,7 +290,7 @@ image::addBudgetSequenceDiagram.png[width="800"]
 Figure: Add Budget Command Sequence Diagram +
 
 The command is first parsed into `AddBudgetCommandParser`, which separates the arguments into their respective fields. A new `Budget` is created and parsed into `AddBudgetCommand`. +
-As long as the `Budget` object created does not overlap with any existing `Budget` objects, the `Budget` will be added with `Model#addBudget()` and saved into the EPiggy storage. +
+As long as the `Budget` object created does not overlap with any existing `Budget` objects, the `Budget` will be added with `Model#addBudget()` and saved into the ePiggy storage. +
 
 *Example usage scenario:* +
 1. User launches application and enters `addBudget $/500 p/31 d/01/03/2019`. +
@@ -336,7 +338,7 @@ follow the `editBudget` command word.
 
 Afterwards, a `budget` object is created from the `EditBudgetDescriptor` object. Then, the `budget` object is passed into address book
 through `Model.#setCurrentBudget()`, which will replace the current `budget` with the new `budget` passed in. +
-Since only the current `budget` can be edited, the `editBudget` command will first check if a current `budget` is present in `EPiggy`’s
+Since only the current `budget` can be edited, the `editBudget` command will first check if a current `budget` is present in `ePiggy`’s
 `budgetList` through `Model#getCurrentBudgetIndex()`. If the current `budget` does not exist, the command will feedback to the user that the
 command entered is invalid. +
 
@@ -353,7 +355,7 @@ present. The index is then used to retrieve the current budget.
 * *Alternative 2*: +
 Using a boolean `hasCurrentBudget` method to check if a current `budget` exists in `budgetList`, then another `getCurrentBudget` method to get the current `budget`.
 
-** Pros: Code will be written in `EPiggy` rather than at `editBudget` command and can be easily used for other commands.
+** Pros: Code will be written in `ePiggy` rather than at `editBudget` command and can be easily used for other commands.
 
 ** Cons: Will need to implement additional methods. Reduces the abstraction has the current `budget` is exposed to the entire project as it is a public method.
 
@@ -370,7 +372,7 @@ The above command deletes the `Budget` with the displayed `index` of #2. +
 The `Budget` to be deleted is identified by its displayed `index` and subsequently deleted. +
 
 ==== Current Implementation
-The command’s current implementation retrieves the `budgetList` from `EPiggy` and removes the
+The command’s current implementation retrieves the `budgetList` from `ePiggy` and removes the
 budget at the zero-based version of the displayed `index`. +
 A `listener` has been added to `budgetList`, so the order in which the budgets are displayed is the same
 as the order of the budgets in `budgetList`. Furthermore, the indexes are unique. +
@@ -492,7 +494,7 @@ If a goal has not been set by the user, the command will use a default goal whic
 ==== Current Implementation
 
 The undo/redo mechanism is facilitated by `VersionedEPiggy`.
-It extends `EPiggy` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
+It extends `ePiggy` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
 Additionally, it implements the following operations:
 
 * `VersionedEPiggy#commit()` -- Saves the current address book state in its history.
@@ -570,6 +572,13 @@ image::UndoRedoActivityDiagram.png[width="650"]
 // tag::report[]
 === Report feature
 This command allows users to view the report within a user-input period of time. +
+
+Given below is a sequence diagram of how the `report` command works: +
+
+image::reportSequenceDiagram.png[width="900"]
+
+Figure: Report Command Sequence Diagram +
+
 This command requires users to specify the `date`, `month` or `year` of the report in the command. +
 
 * `report d/DD/MM/YYYY` +
@@ -599,15 +608,28 @@ Only last tag `d/` is used to generate a report if multiply of `d/` appear.
 
 ==== Current Implementation
 
-The command is first parsed into `ReportCommandParser`, which separates the arguments into their respective fields. A new `localDate` object is created and `type` of the report are generated according to the date format of `d/`. The `model`, `localDate` and `type` are parsed into `ReportCommand`. +
-The reportCommand will initialize `ReportWindow` and the method `displayReportController` of the object `ReportWindow` will be invoked. +
-The `displayReportController` method will select a specified type of report to display the report.
+The command is first parsed into link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/parser/epiggy/ReportCommandParser.java[`ReportCommandParser`],
+which separates the arguments into their respective fields. A new link:https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html[`localDate`]
+object is created and link:[`type`] of the report are generated according to the date format of `d/`.
+The link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/model/Model.java[`model`],
+link:https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html[`localDate`] and link:[`type`] are parsed into
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/ReportCommand.java[`ReportCommand`]. +
+
+The link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/ReportCommand.java[`reportCommand`] will initialize link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`ReportWindow`] and the method
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`displayReportController`] of the object
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`ReportWindow`] will be invoked. +
+
+The link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`displayReportController`] method will select a specified type of report to display the report.
 
 *Example usage scenario:* +
 1. User launches application and enters `Report d/21/03/2019`. +
-2. `ReportCommandParser` takes in the arguments and parses the command to create the appropriate `localDate`. +
-3. The `ReportCommand` is passed back to the `LogicManager`, and the method `execute()` is called. The `ReportWindow` is initialized. +
-4. The method `displayReportController` is called and report will show.
+2. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/parser/epiggy/ReportCommandParser.java[`ReportCommandParser`] takes in the arguments and parses the command to create the appropriate
+link:https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html[`localDate`]. +
+3. The link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`ReportWindow`] is passed back to the
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/LogicManager.java[`LogicManager`], and the method
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/LogicManager.java[`execute()`] is called. The
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`ReportWindow`] is initialized. +
+4. The method link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`displayReportController`] is called and report will show.
 
 ==== Design Considerations
 *Aspect: How to make report more readable?* +
@@ -620,6 +642,59 @@ The `displayReportController` method will select a specified type of report to d
 ** Pros: User can know the details of each records.
 ** Cons: Report feature becomes extra because list command can do the same thing.
 // end::report[]
+
+// tag::autocomplete[]
+=== autocomplete feature
+This feature allows users to reduce the typing time and learning cost of using ePiggy. Any command line application without
+an autocomplete feature is a nightmare for the user. The users not only need to type all the existing commands correctly but
+ also need to remember many different parameters in each commands. EPiggy tries to be user friendly. Autocomplete feature helps the users overcome these problems. +
+
+Given below is an activity diagram of how the link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`autocomplete`]
+feature works: +
+
+image::AutocompleteActivityDiagram.png[width="600"]
+Figure: Autocomplete activity Diagram +
+
+This feature first requires users to enter a few letters on the link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`commandBox`]
+of ePiggy, and then press *Tab* key on the keyboard to autocomplete the command.
+If the completed command is not what you want, delete the command. Enter the same letters, and press *Tab* again. Another command will show if the letters match another command.
+
+Example: enter letter 'a' and then press *Tab*, the command "addExpense n/ $/ t/ d/ " will show.
+Delete the command, enter 'a' again and press *Tab*, the addBudget or addAllowance command will show.
+
+[NOTE]
+The autocomplete feature compares the last part of sub string from user input to the prefix of command in the checklist. It is non-case sensitive.
+
+Example: user types " `hello add` " to the commandBox, the sub string is "add". "add" is used to compare with commands in the checklist such as "setBudget",
+"addExpense", "addAllowance". Two commands "addExpense" and "addAllowance" will return but only one of them will replace "add" in the commandBox.
+The commandBox will show " `hello addExpense n/ $/ t/ d/` " or " `hello addAllowance n/ $/ d/` ".
+
+==== Current Implementation
+
+The code of the autocomplete function is in link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] class.
+The autoCompleteText method is invoked when user presses *Tab*. The sub-string (last part split by white space) of user input text and a checklist of commands pass into
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`].
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`] returns an array of matched commands. One element in the array replaces and shows
+in the commandBox.
+
+*Example usage scenario:* +
+1. User launches application and enters `addE`. +
+2. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`autoCompleteText()`] is invoked. +
+2. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`] takes in the arguments and returns an array of matched commands. +
+3. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`] forms a new string using user input.
+One element in return array is appended at the end of the new string. This new string replaces and shows in the commandBox.
+
+==== Design Considerations
+*Aspect: How to implement such function in UI?* +
+
+* *Alternative 1 (current choice)*: There is not dropdown list appears when user enters letters in commandBox. The matched command shows after user press *Tab*.
+** Pros: Easy to implement. No third party library is used means that all behaviours of this feature is under control and no extra learning cost is needed.
+** Cons: The auto-completed command is not what the user wants something. User needs to delete the command and invokes the function again.
+
+* *Alternative 2*: A dropdown list shows when user is typing letters.
+** Pros: User can see any matched commands and select one of them.
+** Cons: Third party library is needed. There is not such kind of library under MIT licence and school is not allow to use them.
+// end::autocomplete[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
@@ -884,12 +959,12 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 +
 ****
 * Hints
-** The link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/address/model/EPiggy.java[`EPiggy`] API need to be updated.
+** The link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/address/model/ePiggy.java[`ePiggy`] API need to be updated.
 ** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/EPiggy.java[`EPiggy`] and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/EPiggy.java[`EPiggy`] allows you to update a person, and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] allows you to update the tags.
+**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/address/model/ePiggy.java[`ePiggy`] and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/address/model/ePiggy.java[`ePiggy`] allows you to update a person, and link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] allows you to update the tags.
 * Solution
-** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/EPiggy.java[`EPiggy`]. Loop through each person, and remove the `tag` from each person.
-** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should call `EPiggy#removeTag(Tag)`.
+** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/address/model/ePiggy.java[`ePiggy`]. Loop through each person, and remove the `tag` from each person.
+** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should call `ePiggy#removeTag(Tag)`.
 ** Add new tests for each of the new public methods that you have added.
 ** See this https://github.com/se-edu/addressbook-level4/pull/790[PR] for the full solution.
 ****

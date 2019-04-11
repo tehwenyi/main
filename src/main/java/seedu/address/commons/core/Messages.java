@@ -15,6 +15,6 @@ public class Messages {
 
     public static final String MESSAGE_INVALID_BUDGET_DISPLAYED_INDEX = "The budget index provided is invalid.";
 
-    public static final String FORMAT_ERROR_MESSAGE = "Error: Incorrect date format. \nCorrect data format: dd/mm/yyyy";
-
+    public static final String MESSAGE_INVALID_DATE = "Date is invalid. Date format should be dd/mm/yyyy and date "
+            + "should be valid.";
 }

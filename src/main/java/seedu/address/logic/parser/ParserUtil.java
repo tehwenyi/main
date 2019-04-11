@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -11,7 +12,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.person.Address;
@@ -59,9 +59,12 @@ public class ParserUtil {
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static seedu.address.model.epiggy.item.Name parseItemName(String name) {
+    public static seedu.address.model.epiggy.item.Name parseItemName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        if (!seedu.address.model.epiggy.item.Name.isValidName(trimmedName)) {
+            throw new ParseException(seedu.address.model.epiggy.item.Name.MESSAGE_CONSTRAINTS);
+        }
         return new seedu.address.model.epiggy.item.Name(trimmedName);
     }
 
@@ -79,20 +82,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String budgetAmount} into a {@code Cost}.
-     * Leading and trailing whitespaces will be trimmed.
-     */
-    public static Cost parseBudgetAmount(String cost) throws ParseException {
-        requireNonNull(cost);
-        String trimmedCost = cost.trim();
-        int budgetAmount = Integer.parseInt(trimmedCost);
-        if (budgetAmount <= 0) {
-            throw new ParseException(Budget.MESSAGE_CONSTRAINTS);
-        }
-        return new Cost(budgetAmount);
-    }
-
-    /**
      * Parses a {@code String Date} into a {@code Date}.
      * Leading and trailing whitespaces will be trimmed.
      */
@@ -101,10 +90,11 @@ public class ParserUtil {
         Date parsedDate;
         // TODO add more forms of setting date eg. dd.mm.yyyy
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormat.setLenient(false);
         try {
             parsedDate = dateFormat.parse(date.trim());
         } catch (java.text.ParseException parseException) {
-            throw new ParseException("Date should be in the format dd/mm/yyyy.");
+            throw new ParseException(MESSAGE_INVALID_DATE);
         }
         return parsedDate;
     }

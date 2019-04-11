@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleObjectProperty;
@@ -19,8 +20,8 @@ import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.ExpenseList;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.Savings;
 import seedu.address.model.epiggy.UniqueBudgetList;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.epiggy.item.Period;
 import seedu.address.model.person.Person;
@@ -35,7 +36,6 @@ public class EPiggy implements ReadOnlyEPiggy {
     private final ExpenseList expenses;
     private final ObservableList<Item> items;
     private SimpleObjectProperty<Goal> goal;
-    private SimpleObjectProperty<Savings> savings;
     private final UniquePersonList persons;
     private final UniqueBudgetList budgetList;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
@@ -53,7 +53,6 @@ public class EPiggy implements ReadOnlyEPiggy {
         budgetList = new UniqueBudgetList();
         persons = new UniquePersonList();
         goal = new SimpleObjectProperty<>();
-        savings = new SimpleObjectProperty<>(new Savings());
 
     }
 
@@ -83,7 +82,7 @@ public class EPiggy implements ReadOnlyEPiggy {
      * {@code persons} must not contain duplicate persons.
      */
     public void addBudgetList(List<Budget> budgets) {
-        this.budgetList.addBudgetList(budgets);
+        this.budgetList.addBudgetList(budgets.stream().map(Budget::new).collect(Collectors.toList()));
         indicateModified();
     }
 
@@ -103,7 +102,6 @@ public class EPiggy implements ReadOnlyEPiggy {
         requireNonNull(newData);
         setExpenses(newData.getExpenseList());
         setGoal(newData.getGoal().get());
-        setSavings(newData.getSavings().get());
         addBudgetList(newData.getBudgetList());
     }
 
@@ -131,11 +129,6 @@ public class EPiggy implements ReadOnlyEPiggy {
      */
     public void addExpense(Expense expense) {
         expenses.add(expense);
-
-        Savings s = savings.get();
-        s.deductSavings(expense.getItem().getCost().getAmount());
-        this.savings.setValue(new Savings(s));
-
         if (budgetList.getBudgetListSize() > 0) {
             updateBudgetList(expense);
         }
@@ -160,19 +153,14 @@ public class EPiggy implements ReadOnlyEPiggy {
      */
     public void addAllowance(Allowance allowance) {
         expenses.add(allowance);
-        Savings s = savings.get();
-        s.addSavings(allowance.getItem().getCost().getAmount());
-        this.savings.setValue(new Savings(s));
         indicateModified();
     }
 
-    public SimpleObjectProperty<Savings> getSavings() {
-        return savings;
+    public SimpleObjectProperty<Cost> getSavings() {
+        return new SimpleObjectProperty<>(new Cost(expenses.getTotalSavings()));
     }
 
-    public void setSavings(Savings savings) {
-        this.savings.setValue(savings);
-    }
+
 
     /**
      * Adds a budget to the budgetList.
@@ -202,13 +190,6 @@ public class EPiggy implements ReadOnlyEPiggy {
     public void deleteExpense(Expense toDelete) {
         expenses.remove(toDelete);
         updateBudgetList(toDelete);
-        Savings s = savings.get();
-        if (toDelete instanceof Allowance) {
-            s.deductSavings(toDelete.getItem().getCost().getAmount());
-        } else {
-            s.addSavings(toDelete.getItem().getCost().getAmount());
-        }
-        this.savings.setValue(new Savings(s));
         indicateModified();
     }
 
@@ -224,8 +205,7 @@ public class EPiggy implements ReadOnlyEPiggy {
         budget.resetRemainingAmount();
         SortedList<Expense> sortedExpensesByDate = sortExpensesByDate();
         ListIterator<Expense> iterator = sortedExpensesByDate.listIterator();
-        while (iterator.hasNext()) {
-            Expense expense = iterator.next();
+        for (Expense expense : sortedExpensesByDate) {
             if (!expense.getDate().before(budget.getStartDate())) {
                 if (budget.getEndDate().after(expense.getDate())) {
                     if (!(expense instanceof Allowance)) {
@@ -293,26 +273,8 @@ public class EPiggy implements ReadOnlyEPiggy {
         requireNonNull(editedExpense);
         expenses.setExpense(target, editedExpense);
         updateBudgetList(editedExpense);
-        recalculateSavings(target, editedExpense);
+        updateBudgetList(target);
         indicateModified();
-    }
-
-    /**
-     * Calculates the new savings amount when the setExpense function is used.
-     * @param oldExp
-     * @param newExp
-     */
-    public void recalculateSavings(Expense oldExp, Expense newExp) {
-        Savings s = savings.get();
-        double diff = newExp.getItem().getCost().getAmount() - oldExp.getItem().getCost().getAmount();
-        if (oldExp instanceof Allowance) {
-            // positive means increase allowance, negative means decrease allowance.
-            s.addSavings(diff);
-        } else {
-            // positive means increase expense, negative means decrease expense.
-            s.deductSavings(diff);
-        }
-        this.savings.setValue(new Savings(s));
     }
 
     /**
@@ -391,7 +353,8 @@ public class EPiggy implements ReadOnlyEPiggy {
 
     @Override
     public String toString() {
-        return budgetList.asUnmodifiableObservableList() + " budgets";
+        return expenses.asUnmodifiableObservableList() + " expenselist\n"
+            + budgetList.asUnmodifiableObservableList() + " budgets";
         // TODO: refine later
     }
 
@@ -422,11 +385,25 @@ public class EPiggy implements ReadOnlyEPiggy {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EPiggy // instanceof handles nulls
-                && persons.equals(((EPiggy) other).persons));
+                && expenses.equals(((EPiggy) other).expenses));
+//        if (other == this) {
+//            return true;
+//        }
+//        if (!(other instanceof EPiggy)) {
+//            return false;
+//        }
+//        EPiggy otherepiggy = (EPiggy) other;
+//        return otherepiggy.getExpenseList().equals(getExpenseList())
+//                && otherepiggy.getGoal().equals(getGoal())
+//                && otherepiggy.getBudgetList().equals(getBudgetList());
     }
 
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    public void reverseExpenseList() {
+        expenses.reverse();
     }
 }

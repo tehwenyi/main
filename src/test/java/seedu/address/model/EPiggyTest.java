@@ -4,13 +4,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_SECONDEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PERIOD_SECONDEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.testutil.TypicalBudgets.ONE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalEPiggy;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Ignore;
@@ -27,38 +31,39 @@ import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
 
-import seedu.address.model.epiggy.Savings;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.epiggy.BudgetBuilder;
 
-@Ignore
 public class EPiggyTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final EPiggy EPiggy = new EPiggy();
+    private final EPiggy ePiggy = new EPiggy();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), EPiggy.getPersonList());
+        assertEquals(Collections.emptyList(), ePiggy.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        EPiggy.resetData(null);
+        ePiggy.resetData(null);
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
         EPiggy newData = getTypicalEPiggy();
-        EPiggy.resetData(newData);
-        assertEquals(newData, EPiggy);
+        ePiggy.resetData(newData);
+        assertEquals(newData, ePiggy);
     }
 
+    @Ignore
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
@@ -68,46 +73,64 @@ public class EPiggyTest {
         AddressBookStub newData = new AddressBookStub(newPersons);
 
         thrown.expect(DuplicatePersonException.class);
-        EPiggy.resetData(newData);
+        ePiggy.resetData(newData);
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        EPiggy.hasPerson(null);
+        ePiggy.hasPerson(null);
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(EPiggy.hasPerson(ALICE));
+        assertFalse(ePiggy.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        EPiggy.addPerson(ALICE);
-        assertTrue(EPiggy.hasPerson(ALICE));
+        ePiggy.addPerson(ALICE);
+        assertTrue(ePiggy.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        EPiggy.addPerson(ALICE);
+        ePiggy.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(EPiggy.hasPerson(editedAlice));
+        assertTrue(ePiggy.hasPerson(editedAlice));
+    }
+
+    @Test
+    public void setCurrentBudget_nullBudget_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        ePiggy.setCurrentBudget(null);
+    }
+
+    @Test
+    public void setCurrentBudget_success() {
+        Date todaysDate = new Date();
+        Budget currentBudget = new BudgetBuilder(ONE).withDate(todaysDate).build();
+        ePiggy.addBudget(0, currentBudget);
+        Budget editedOne = new BudgetBuilder(ONE).withAmount(VALID_AMOUNT_SECONDEXTRA)
+                .withPeriod(VALID_PERIOD_SECONDEXTRA).build();
+        assertEquals(ePiggy.getCurrentBudgetIndex(), 0);
+        ePiggy.setCurrentBudget(editedOne);
+        assertEquals(ePiggy.getBudgetList(), Arrays.asList(editedOne));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        EPiggy.getPersonList().remove(0);
+        ePiggy.getPersonList().remove(0);
     }
 
     @Test
     public void addListener_withInvalidationListener_listenerAdded() {
         SimpleIntegerProperty counter = new SimpleIntegerProperty();
         InvalidationListener listener = observable -> counter.set(counter.get() + 1);
-        EPiggy.addListener(listener);
-        EPiggy.addPerson(ALICE);
+        ePiggy.addListener(listener);
+        ePiggy.addPerson(ALICE);
         assertEquals(1, counter.get());
     }
 
@@ -115,9 +138,9 @@ public class EPiggyTest {
     public void removeListener_withInvalidationListener_listenerRemoved() {
         SimpleIntegerProperty counter = new SimpleIntegerProperty();
         InvalidationListener listener = observable -> counter.set(counter.get() + 1);
-        EPiggy.addListener(listener);
-        EPiggy.removeListener(listener);
-        EPiggy.addPerson(ALICE);
+        ePiggy.addListener(listener);
+        ePiggy.removeListener(listener);
+        ePiggy.addPerson(ALICE);
         assertEquals(0, counter.get());
     }
 
@@ -130,7 +153,6 @@ public class EPiggyTest {
         private final ObservableList<Item> items = FXCollections.observableArrayList();
         private ObservableList<Budget> budgets; //TODO
         private SimpleObjectProperty<Goal> goal;
-        private SimpleObjectProperty<Savings> savings;
 
 
         AddressBookStub(Collection<Person> persons) {
@@ -163,7 +185,7 @@ public class EPiggyTest {
         }
 
         @Override
-        public SimpleObjectProperty<Savings> getSavings() {
+        public SimpleObjectProperty<Cost> getSavings() {
             return null;
         }
 

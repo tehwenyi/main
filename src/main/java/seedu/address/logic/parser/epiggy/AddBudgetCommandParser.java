@@ -37,7 +37,7 @@ public class AddBudgetCommandParser implements Parser<AddBudgetCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBudgetCommand.MESSAGE_USAGE));
         }
 
-        Cost budgetAmount = ParserUtil.parseBudgetAmount(argMultimap.getValue(PREFIX_COST).get());
+        Cost budgetAmount = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get());
         Period period = ParserUtil.parsePeriod(argMultimap.getValue(PREFIX_PERIOD).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
 

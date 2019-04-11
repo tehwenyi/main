@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -70,12 +71,36 @@ public class CommandTestUtil {
     public static final String VALID_NAME_IPHONE = "IPhone XR from challenger";
     public static final String VALID_COST_IPHONE = "1799.00";
 
-    public static final String VALID_AMOUNT_ONE = "500";
-    public static final String VALID_AMOUNT_TWO = "1000";
-    public static final String VALID_PERIOD_ONE = "7";
-    public static final String VALID_PERIOD_TWO = "28";
-    public static final String VALID_DATE_ONE = "03/03/2019";
-    public static final String VALID_DATE_TWO = "02/01/2019";
+    public static final String VALID_AMOUNT_FIRSTEXTRA = "500";
+    public static final String VALID_AMOUNT_SECONDEXTRA = "1000";
+    public static final String VALID_PERIOD_FIRSTEXTRA = "7";
+    public static final String VALID_PERIOD_SECONDEXTRA = "28";
+    public static final String VALID_DATE_FIRSTEXTRA = "03/03/2019";
+    public static final String VALID_DATE_SECONDEXTRA = "01/02/2019";
+    public static final String VALID_NAME_FIRSTEXTRA = "Apple watch";
+    public static final String VALID_NAME_SECONDEXTRA = "Apple Pineapple";
+    public static final String VALID_TAG_EXPENSE = "Expense";
+    public static final String VALID_TAG_ALLOWANCE = "Allowance";
+    public static final String VALID_TAG_FIRSTEXTRA = "Shopping";
+    public static final String VALID_TAG_SECONDEXTRA = "Fruits";
+
+    public static final String AMOUNT_DESC_FIRSTEXTRA = " " + PREFIX_COST + VALID_AMOUNT_FIRSTEXTRA;
+    public static final String AMOUNT_DESC_SECONDEXTRA = " " + PREFIX_COST + VALID_AMOUNT_SECONDEXTRA;
+    public static final String PERIOD_DESC_FIRSTEXTRA = " " + PREFIX_PERIOD + VALID_PERIOD_FIRSTEXTRA;
+    public static final String PERIOD_DESC_SECONDEXTRA = " " + PREFIX_PERIOD + VALID_PERIOD_SECONDEXTRA;
+    public static final String DATE_DESC_FIRSTEXTRA = " " + PREFIX_DATE + VALID_DATE_FIRSTEXTRA;
+    public static final String DATE_DESC_SECONDEXTRA = " " + PREFIX_DATE + VALID_DATE_SECONDEXTRA;
+    public static final String NAME_DESC_FIRSTEXTRA = " " + PREFIX_NAME + VALID_NAME_FIRSTEXTRA;
+    public static final String NAME_DESC_SECONDEXTRA = " " + PREFIX_NAME + VALID_NAME_SECONDEXTRA;
+    public static final String TAG_DESC_FIRSTEXTRA = " " + PREFIX_TAG + VALID_TAG_FIRSTEXTRA;
+    public static final String TAG_DESC_SECONDEXTRA = " " + PREFIX_TAG + VALID_TAG_SECONDEXTRA;
+    public static final String TAG_DESC_EXPENSE = " " + PREFIX_TAG + VALID_TAG_EXPENSE;
+    public static final String TAG_DESC_ALLOWANCE = " " + PREFIX_TAG + VALID_TAG_ALLOWANCE;
+
+
+    public static final String INVALID_AMOUNT_DESC = " " + PREFIX_COST + "-500.00"; // negative cost is not allowed
+    public static final String INVALID_PERIOD_DESC = " " + PREFIX_PERIOD + "0"; // period of 0 is not allowed
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "12/04"; // year should be mentioned
 
     public static final String NAME_DESC_BOWLING = " " + PREFIX_NAME + VALID_NAME_BOWLING;
     public static final String NAME_DESC_IPHONE = " " + PREFIX_NAME + VALID_NAME_IPHONE;
@@ -87,7 +112,6 @@ public class CommandTestUtil {
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_COST_DESC = " " + PREFIX_COST + "0.00"; // cost of 0 is not allowed
-    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "12/04"; // year should be mentioned
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "food*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -96,8 +120,8 @@ public class CommandTestUtil {
     public static final EditExpenseCommand.EditExpenseDescriptor DESC_BOWLING;
     public static final EditExpenseCommand.EditExpenseDescriptor DESC_IPHONE;
 
-    public static final EditBudgetCommand.EditBudgetDetails DESC_ONE;
-    public static final EditBudgetCommand.EditBudgetDetails DESC_TWO;
+    public static final EditBudgetCommand.EditBudgetDetails DESC_FIRSTEXTRA;
+    public static final EditBudgetCommand.EditBudgetDetails DESC_SECONDEXTRA;
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
@@ -108,10 +132,10 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_FRIENDS).build();
         DESC_IPHONE = new EditExpenseDescriptorBuilder().withName(VALID_NAME_IPHONE)
                 .withCost(VALID_COST_IPHONE).withDate(VALID_DATE_2019).build();
-        DESC_ONE = new EditBudgetDetailsBuilder().withAmount(VALID_AMOUNT_ONE).withPeriod(VALID_PERIOD_ONE)
-                .withDate(VALID_DATE_ONE).build();
-        DESC_TWO = new EditBudgetDetailsBuilder().withAmount(VALID_AMOUNT_TWO).withPeriod(VALID_PERIOD_TWO)
-                .withDate(VALID_DATE_TWO).build();
+        DESC_FIRSTEXTRA = new EditBudgetDetailsBuilder().withAmount(VALID_AMOUNT_FIRSTEXTRA)
+                .withPeriod(VALID_PERIOD_FIRSTEXTRA).withDate(VALID_DATE_FIRSTEXTRA).build();
+        DESC_SECONDEXTRA = new EditBudgetDetailsBuilder().withAmount(VALID_AMOUNT_SECONDEXTRA)
+                .withPeriod(VALID_PERIOD_SECONDEXTRA).withDate(VALID_DATE_SECONDEXTRA).build();
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
@@ -196,8 +220,8 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * Updates {@code model}'s filtered list to show only the budget at the given {@code targetIndex} in the
+     * {@code model}'s epiggy.
      */
     public static void showBudgetAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredBudgetList().size());
@@ -206,6 +230,16 @@ public class CommandTestUtil {
         model.updateFilteredBudgetList(Predicate.isEqual(budget));
 
         assertEquals(1, model.getFilteredBudgetList().size());
+    }
+    /**
+     * Updates {@code model}'s filtered list to show only the expense at the given {@code targetIndex} in the
+     * {@code model}'s epiggy.
+     */
+    public static void showExpenseAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredExpenseList().size());;
+        Expense expense = model.getExpenseList().get(targetIndex.getZeroBased());
+        model.updateFilteredExpensesList(Predicate.isEqual(expense));
+        assertEquals(1, model.getFilteredExpenseList().size());
     }
 
     /**

@@ -19,12 +19,12 @@ import seedu.address.model.epiggy.Expense;
 public class SortExpenseCommand extends Command {
 
     public static final String COMMAND_WORD = "sortExpense";
-    public static final String COMMAND_ALIAS = "sE";
+    public static final String COMMAND_ALIAS = "se";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + " : Sorts the expenses as specified by the user, according to name, cost, date or tag. \n"
+            + " sorts the expenses as specified according to name, cost, date or tag.\n"
             + " Parameters: -[n/d/$]/...\n"
             + " Example: " + COMMAND_WORD + " n/";
-    public static final String MESSAGE_SUCCESS = "Sorted %1$d Expenses...\n";
+    public static final String MESSAGE_SUCCESS = "Sorted %1$d expenses.";
 
     private final Comparator<Expense> expenseComparator;
 

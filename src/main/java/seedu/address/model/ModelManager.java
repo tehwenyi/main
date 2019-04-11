@@ -114,6 +114,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedExpense);
 
         versionedEPiggy.setExpense(target, editedExpense);
+        setSelectedExpense(editedExpense);
     }
 
     @Override
@@ -136,11 +137,13 @@ public class ModelManager implements Model {
     @Override
     public void addExpense(Expense expense) {
         versionedEPiggy.addExpense(expense);
+        setSelectedExpense(expense);
     }
 
     @Override
     public void addAllowance(Allowance allowance) {
         versionedEPiggy.addAllowance(allowance);
+        setSelectedExpense(allowance);
     }
 
     @Override
@@ -162,6 +165,9 @@ public class ModelManager implements Model {
     @Override
     public void deleteExpense(Expense toDelete) {
         versionedEPiggy.deleteExpense(toDelete);
+        if (selectedExpenseProperty().getValue() == toDelete) {
+            setSelectedExpense(null);
+        }
     }
 
     @Override

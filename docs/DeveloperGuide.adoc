@@ -372,15 +372,17 @@ The above command deletes the `Budget` with the displayed `index` of #2. +
 The `Budget` to be deleted is identified by its displayed `index` and subsequently deleted. +
 
 ==== Current Implementation
+Given below is a sequence diagram of how the `deleteBudget` command works: +
+
+image::DeleteBudgetSequenceDiagram.png[width="800"]
+
+Figure: Delete Budget Command Sequence Diagram +
+
 The command’s current implementation retrieves the `budgetList` from `ePiggy` and removes the
 budget at the zero-based version of the displayed `index`. +
 A `listener` has been added to `budgetList`, so the order in which the budgets are displayed is the same
 as the order of the budgets in `budgetList`. Furthermore, the indexes are unique. +
 Hence, if the `index` input by the user is negative or greater than the size of `budgetList`, this would indicate that the budget specified does not exist. The user will receive a feedback that the `index` specified is invalid.
-
-[TIP]
-The sequence diagram for the `deleteExpense` command can be found with the structure of the logic component
-<<DeveloperGuide.adoc#Design-Logic, here>>.
 
 //tag::findexpense[]
 === Find Expense feature

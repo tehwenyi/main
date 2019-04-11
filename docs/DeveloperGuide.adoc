@@ -608,15 +608,28 @@ Only last tag `d/` is used to generate a report if multiply of `d/` appear.
 
 ==== Current Implementation
 
-The command is first parsed into `ReportCommandParser`, which separates the arguments into their respective fields. A new `localDate` object is created and `type` of the report are generated according to the date format of `d/`. The `model`, `localDate` and `type` are parsed into `ReportCommand`. +
-The reportCommand will initialize `ReportWindow` and the method `displayReportController` of the object `ReportWindow` will be invoked. +
-The `displayReportController` method will select a specified type of report to display the report.
+The command is first parsed into link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/parser/epiggy/ReportCommandParser.java[`ReportCommandParser`],
+which separates the arguments into their respective fields. A new link:https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html[`localDate`]
+object is created and link:[`type`] of the report are generated according to the date format of `d/`.
+The link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/model/Model.java[`model`],
+link:https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html[`localDate`] and link:[`type`] are parsed into
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/ReportCommand.java[`ReportCommand`]. +
+
+The link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/ReportCommand.java[`reportCommand`] will initialize link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`ReportWindow`] and the method
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`displayReportController`] of the object
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`ReportWindow`] will be invoked. +
+
+The link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`displayReportController`] method will select a specified type of report to display the report.
 
 *Example usage scenario:* +
 1. User launches application and enters `Report d/21/03/2019`. +
-2. `ReportCommandParser` takes in the arguments and parses the command to create the appropriate `localDate`. +
-3. The `ReportCommand` is passed back to the `LogicManager`, and the method `execute()` is called. The `ReportWindow` is initialized. +
-4. The method `displayReportController` is called and report will show.
+2. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/parser/epiggy/ReportCommandParser.java[`ReportCommandParser`] takes in the arguments and parses the command to create the appropriate
+link:https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html[`localDate`]. +
+3. The link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`ReportWindow`] is passed back to the
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/LogicManager.java[`LogicManager`], and the method
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/LogicManager.java[`execute()`] is called. The
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`ReportWindow`] is initialized. +
+4. The method link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`displayReportController`] is called and report will show.
 
 ==== Design Considerations
 *Aspect: How to make report more readable?* +
@@ -629,6 +642,59 @@ The `displayReportController` method will select a specified type of report to d
 ** Pros: User can know the details of each records.
 ** Cons: Report feature becomes extra because list command can do the same thing.
 // end::report[]
+
+// tag::autocomplete[]
+=== autocomplete feature
+This feature allows users to reduce the typing time and learning cost of using ePiggy. Any command line application without
+an autocomplete feature is a nightmare for the user. The users not only need to type all the existing commands correctly but
+ also need to remember many different parameters in each commands. EPiggy tries to be user friendly. Autocomplete feature helps the users overcome these problems. +
+
+Given below is an activity diagram of how the link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`autocomplete`]
+feature works: +
+
+image::AutocompleteActivityDiagram.png[width="600"]
+Figure: Autocomplete activity Diagram +
+
+This feature first requires users to enter a few letters on the link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`commandBox`]
+of ePiggy, and then press *Tab* key on the keyboard to autocomplete the command.
+If the completed command is not what you want, delete the command. Enter the same letters, and press *Tab* again. Another command will show if the letters match another command.
+
+Example: enter letter 'a' and then press *Tab*, the command "addExpense n/ $/ t/ d/ " will show.
+Delete the command, enter 'a' again and press *Tab*, the addBudget or addAllowance command will show.
+
+[NOTE]
+The autocomplete feature compares the last part of sub string from user input to the prefix of command in the checklist. It is non-case sensitive.
+
+Example: user types " `hello add` " to the commandBox, the sub string is "add". "add" is used to compare with commands in the checklist such as "setBudget",
+"addExpense", "addAllowance". Two commands "addExpense" and "addAllowance" will return but only one of them will replace "add" in the commandBox.
+The commandBox will show " `hello addExpense n/ $/ t/ d/` " or " `hello addAllowance n/ $/ d/` ".
+
+==== Current Implementation
+
+The code of the autocomplete function is in link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] class.
+The autoCompleteText method is invoked when user presses *Tab*. The sub-string (last part split by white space) of user input text and a checklist of commands pass into
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`].
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`] returns an array of matched commands. One element in the array replaces and shows
+in the commandBox.
+
+*Example usage scenario:* +
+1. User launches application and enters `addE`. +
+2. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`autoCompleteText()`] is invoked. +
+2. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`] takes in the arguments and returns an array of matched commands. +
+3. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`] forms a new string using user input.
+One element in return array is appended at the end of the new string. This new string replaces and shows in the commandBox.
+
+==== Design Considerations
+*Aspect: How to implement such function in UI?* +
+
+* *Alternative 1 (current choice)*: There is not dropdown list appears when user enters letters in commandBox. The matched command shows after user press *Tab*.
+** Pros: Easy to implement. No third party library is used means that all behaviours of this feature is under control and no extra learning cost is needed.
+** Cons: The auto-completed command is not what the user wants something. User needs to delete the command and invokes the function again.
+
+* *Alternative 2*: A dropdown list shows when user is typing letters.
+** Pros: User can see any matched commands and select one of them.
+** Cons: Third party library is needed. There is not such kind of library under MIT licence and school is not allow to use them.
+// end::autocomplete[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption

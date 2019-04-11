@@ -353,7 +353,8 @@ public class EPiggy implements ReadOnlyEPiggy {
 
     @Override
     public String toString() {
-        return budgetList.asUnmodifiableObservableList() + " budgets";
+        return expenses.asUnmodifiableObservableList() + " expenselist\n"
+            + budgetList.asUnmodifiableObservableList() + " budgets";
         // TODO: refine later
     }
 
@@ -384,7 +385,17 @@ public class EPiggy implements ReadOnlyEPiggy {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EPiggy // instanceof handles nulls
-                && persons.equals(((EPiggy) other).persons));
+                && expenses.equals(((EPiggy) other).expenses));
+//        if (other == this) {
+//            return true;
+//        }
+//        if (!(other instanceof EPiggy)) {
+//            return false;
+//        }
+//        EPiggy otherepiggy = (EPiggy) other;
+//        return otherepiggy.getExpenseList().equals(getExpenseList())
+//                && otherepiggy.getGoal().equals(getGoal())
+//                && otherepiggy.getBudgetList().equals(getBudgetList());
     }
 
     @Override

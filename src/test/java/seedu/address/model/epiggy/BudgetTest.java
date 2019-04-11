@@ -16,7 +16,6 @@ import static seedu.address.testutil.TypicalBudgets.SECOND_EXTRA;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -136,12 +135,11 @@ public class BudgetTest {
         assertFalse(FIRST_EXTRA.equals(editedOne));
     }
 
-    @Ignore
     @Test
     public void toStringTest() {
         // same values -> returns true
         Budget oneCopy = new BudgetBuilder(FIRST_EXTRA).build();
-        String oneString = "$100 for 7 days starting from 04/02/2019 till 11/02/2019.\n"
+        String oneString = "$100 from 03 Mar 2019 till 09 Mar 2019.\n"
                 + "0 days remaining and $100 remaining.";
 
         // same budget

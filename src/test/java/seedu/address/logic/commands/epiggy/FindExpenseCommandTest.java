@@ -26,6 +26,7 @@ import org.junit.Test;
 
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -72,15 +73,16 @@ public class FindExpenseCommandTest {
     @Test
     public void execute_zeroKeywords_noExpenseFound() {
         model = new ModelManager(getTypicalEPiggy(), new UserPrefs());
-        findExpenseCommandTester(" n/ ", 0,
-                Collections.emptyList(), PREFIX_NAME);
+        findExpenseCommandTester(" n/ ", 8,
+                Arrays.asList(DUMPLING_SOUP, STATIONARY, MOVIE_AVENGERS, KARAOKE, CLOTHES, KFC,
+                        BOWLING, IPHONE), CliSyntax.PREFIX_NAME);
     }
 
     @Test
     public void execute_multipleNameKeywords_multipleExpensesFound() {
         model = new ModelManager(getTypicalEPiggy(), new UserPrefs());
-        findExpenseCommandTester(" n/dumpling avengers clothes ", 3,
-                Arrays.asList(DUMPLING_SOUP, MOVIE_AVENGERS, CLOTHES), PREFIX_NAME);
+        findExpenseCommandTester(" n/dumpling n/avengers n/clothes ", 0,
+                Collections.emptyList(), CliSyntax.PREFIX_NAME);
     }
 
     @Test
@@ -93,15 +95,15 @@ public class FindExpenseCommandTest {
     @Test
     public void execute_tagKeywords_noExpensesFound() {
         model = new ModelManager(getTypicalEPiggy(), new UserPrefs());
-        findExpenseCommandTester(" t/drinks ", 5,
-                Collections.emptyList(), PREFIX_TAG);
+        findExpenseCommandTester(" t/drinks ", 0,
+                Collections.emptyList(), CliSyntax.PREFIX_TAG);
     }
 
     @Test
     public void execute_tagKeywords_multipleExpensesFound() {
         model = new ModelManager(getTypicalEPiggy(), new UserPrefs());
-        findExpenseCommandTester(" t/friends t/food ", 5,
-                Arrays.asList(DUMPLING_SOUP, MOVIE_AVENGERS, KARAOKE, KFC, BOWLING), PREFIX_TAG);
+        findExpenseCommandTester(" t/friends t/food ", 0,
+                Collections.emptyList(), CliSyntax.PREFIX_TAG);
     }
 
     @Test
@@ -114,14 +116,14 @@ public class FindExpenseCommandTest {
     @Test
     public void execute_oneDateKeyword_multipleExpensesFound() {
         model = new ModelManager(getTypicalEPiggy(), new UserPrefs());
-        findExpenseCommandTester(" d/04/26/2019 ", 2,
+        findExpenseCommandTester(" d/26/04/2019 ", 2,
                 Arrays.asList(MOVIE_AVENGERS, KFC), PREFIX_DATE);
     }
 
     @Test
     public void execute_multipleDateKeyword_multipleExpensesFound() {
         model = new ModelManager(getTypicalEPiggy(), new UserPrefs());
-        findExpenseCommandTester(" d/03/01/2019:04/30/2019 ", 6,
+        findExpenseCommandTester(" d/01/03/2019:30/04/2019 ", 6,
                 Arrays.asList(DUMPLING_SOUP, STATIONARY, MOVIE_AVENGERS, CLOTHES, KFC, IPHONE), PREFIX_DATE);
     }
     // Clothes will be counted as long as it entered within the given dates.
@@ -157,8 +159,8 @@ public class FindExpenseCommandTest {
     @Test
     public void execute_multipleKeyword_multipleExpensesFound() {
         model = new ModelManager(getTypicalEPiggy(), new UserPrefs());
-        findExpenseCommandTester(" t/food d/01/01/2019:04/30/2019 ", 2,
-                Arrays.asList(DUMPLING_SOUP, KFC), PREFIX_TAG, PREFIX_DATE);
+        findExpenseCommandTester(" t/food d/01/01/2019:30/04/2019 ", 2,
+                Arrays.asList(DUMPLING_SOUP, KFC), CliSyntax.PREFIX_TAG, CliSyntax.PREFIX_DATE);
     }
 
     /**

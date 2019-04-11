@@ -129,12 +129,15 @@ public class EditAllowanceCommand extends Command {
         return index.equals(e.index)
                 && editAllowanceDescriptor.equals(e.editAllowanceDescriptor);
     }
-
+    /**
+     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * corresponding field value of the person.
+     */
     public static class EditAllowanceDescriptor {
         private Name name;
         private Cost cost;
         private Date date;
-        Set<Tag> tags;
+        private Set<Tag> tags;
 
         public EditAllowanceDescriptor() {}
 

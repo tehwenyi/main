@@ -26,5 +26,4 @@ public class Allowance extends Expense {
                 && otherAllowance.getDate().equals(getDate());
     }
 
-
 }

@@ -70,6 +70,8 @@ public class AllowanceBuilder {
      * Sets the {@code date} of the {@code Expense} that we are building.
      */
     public AllowanceBuilder withDate(String date) {
+        System.out.println(name);
+        System.out.println(date);
         if (date.equals("")) {
             this.date = new Date();
         }

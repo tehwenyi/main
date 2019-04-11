@@ -1,10 +1,5 @@
 package seedu.address.logic.parser.epiggy;
 
-import org.junit.Test;
-import seedu.address.logic.commands.epiggy.AddAllowanceCommand;
-import seedu.address.model.epiggy.Allowance;
-import seedu.address.testutil.epiggy.AllowanceBuilder;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_FIRSTEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_SECONDEXTRA;
@@ -21,6 +16,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ALLOWANCE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SECONDEXTRA;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import org.junit.Test;
+
+import seedu.address.logic.commands.epiggy.AddAllowanceCommand;
+import seedu.address.model.epiggy.Allowance;
+import seedu.address.testutil.epiggy.AllowanceBuilder;
+
+
 
 public class AddAllowanceCommandParserTest {
     private AddAllowanceCommandParser parser = new AddAllowanceCommandParser();

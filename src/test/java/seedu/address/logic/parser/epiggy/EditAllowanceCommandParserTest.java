@@ -1,12 +1,5 @@
 package seedu.address.logic.parser.epiggy;
 
-import org.junit.Test;
-import seedu.address.logic.commands.epiggy.EditAllowanceCommand;
-import seedu.address.logic.commands.epiggy.EditAllowanceCommand.EditAllowanceDescriptor;
-import seedu.address.model.epiggy.item.Cost;
-import seedu.address.model.epiggy.item.Name;
-import seedu.address.testutil.epiggy.EditAllowanceDescriptorBuilder;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_FIRSTEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_SECONDEXTRA;
@@ -17,16 +10,22 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_FIRSTEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_SECONDEXTRA;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FIRSTEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_SECONDEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_SECONDEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_SECONDEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SECONDEXTRA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ALLOWANCE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SECONDEXTRA;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ALLOWANCE;
+
+import org.junit.Test;
+
+import seedu.address.logic.commands.epiggy.EditAllowanceCommand;
+import seedu.address.logic.commands.epiggy.EditAllowanceCommand.EditAllowanceDescriptor;
+import seedu.address.model.epiggy.item.Cost;
+import seedu.address.model.epiggy.item.Name;
+import seedu.address.testutil.epiggy.EditAllowanceDescriptorBuilder;
 
 public class EditAllowanceCommandParserTest {
     private EditAllowanceCommandParser parser = new EditAllowanceCommandParser();
@@ -56,7 +55,8 @@ public class EditAllowanceCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        String userInput = "1" + NAME_DESC_SECONDEXTRA + AMOUNT_DESC_SECONDEXTRA + DATE_DESC_SECONDEXTRA + TAG_DESC_SECONDEXTRA;
+        String userInput = "1" + NAME_DESC_SECONDEXTRA + AMOUNT_DESC_SECONDEXTRA
+                + DATE_DESC_SECONDEXTRA + TAG_DESC_SECONDEXTRA;
 
         EditAllowanceDescriptor descriptor = new EditAllowanceDescriptorBuilder()
                 .withName(VALID_NAME_SECONDEXTRA)
@@ -112,7 +112,8 @@ public class EditAllowanceCommandParserTest {
         String userInput = "1" + NAME_DESC_FIRSTEXTRA + AMOUNT_DESC_FIRSTEXTRA + DATE_DESC_FIRSTEXTRA
                 + NAME_DESC_SECONDEXTRA + AMOUNT_DESC_SECONDEXTRA + DATE_DESC_SECONDEXTRA;
         EditAllowanceDescriptor descriptor = new EditAllowanceDescriptorBuilder()
-                .withName(VALID_NAME_SECONDEXTRA).withCost(VALID_AMOUNT_SECONDEXTRA).withDate(VALID_DATE_SECONDEXTRA).build();
+                .withName(VALID_NAME_SECONDEXTRA).withCost(VALID_AMOUNT_SECONDEXTRA)
+                .withDate(VALID_DATE_SECONDEXTRA).build();
         EditAllowanceCommand expectedCommand = new EditAllowanceCommand(INDEX_FIRST_ALLOWANCE, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -128,7 +129,8 @@ public class EditAllowanceCommandParserTest {
 
         // other valid values specified
         userInput = "1" + AMOUNT_DESC_SECONDEXTRA + INVALID_NAME_DESC + NAME_DESC_SECONDEXTRA;
-        descriptor = new EditAllowanceDescriptorBuilder().withName(VALID_NAME_SECONDEXTRA).withCost(VALID_AMOUNT_SECONDEXTRA).build();
+        descriptor = new EditAllowanceDescriptorBuilder().withName(VALID_NAME_SECONDEXTRA)
+                .withCost(VALID_AMOUNT_SECONDEXTRA).build();
         expectedCommand = new EditAllowanceCommand(INDEX_FIRST_ALLOWANCE, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

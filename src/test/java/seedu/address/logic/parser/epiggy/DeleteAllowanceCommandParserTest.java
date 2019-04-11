@@ -1,12 +1,13 @@
 package seedu.address.logic.parser.epiggy;
 
-import org.junit.Test;
-import seedu.address.logic.commands.epiggy.DeleteAllowanceCommand;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ALLOWANCE;
+
+import org.junit.Test;
+
+import seedu.address.logic.commands.epiggy.DeleteAllowanceCommand;
 
 public class DeleteAllowanceCommandParserTest {
     private DeleteAllowanceCommandParser parser = new DeleteAllowanceCommandParser();

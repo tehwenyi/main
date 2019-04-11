@@ -1,5 +1,10 @@
 package seedu.address.testutil.epiggy;
 
+import java.util.Date;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.epiggy.EditAllowanceCommand.EditAllowanceDescriptor;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -8,11 +13,9 @@ import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Name;
 import seedu.address.model.tag.Tag;
 
-import java.util.Date;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
+/**
+ * A utility class to help with building EditAllowanceDescriptor objects.
+ */
 public class EditAllowanceDescriptorBuilder {
 
     private EditAllowanceDescriptor descriptor;

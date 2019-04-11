@@ -1,7 +1,6 @@
 package seedu.address.logic.parser.epiggy;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -43,7 +42,8 @@ public class EditAllowanceCommandParser implements Parser<EditAllowanceCommand> 
                     pe);
         }
 
-        EditAllowanceCommand.EditAllowanceDescriptor editAllowanceDescriptor = new EditAllowanceCommand.EditAllowanceDescriptor();
+        EditAllowanceCommand.EditAllowanceDescriptor editAllowanceDescriptor = new EditAllowanceCommand
+                .EditAllowanceDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editAllowanceDescriptor.setName(ParserUtil.parseItemName(argMultimap.getValue(PREFIX_NAME).get()));
         }

@@ -134,7 +134,7 @@ public class EditExpenseCommand extends Command {
         private seedu.address.model.epiggy.item.Name name;
         private Cost cost;
         private Date date;
-        Set<Tag> tags;
+        private Set<Tag> tags;
 
         public EditExpenseDescriptor() {}
 

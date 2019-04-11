@@ -94,6 +94,9 @@ public class CommandTestUtil {
     public static final String NAME_DESC_SECONDEXTRA = " " + PREFIX_NAME + VALID_NAME_SECONDEXTRA;
     public static final String TAG_DESC_FIRSTEXTRA = " " + PREFIX_TAG + VALID_TAG_FIRSTEXTRA;
     public static final String TAG_DESC_SECONDEXTRA = " " + PREFIX_TAG + VALID_TAG_SECONDEXTRA;
+    public static final String TAG_DESC_EXPENSE = " " + PREFIX_TAG + VALID_TAG_EXPENSE;
+    public static final String TAG_DESC_ALLOWANCE = " " + PREFIX_TAG + VALID_TAG_ALLOWANCE;
+
 
     public static final String INVALID_AMOUNT_DESC = " " + PREFIX_COST + "-500.00"; // negative cost is not allowed
     public static final String INVALID_PERIOD_DESC = " " + PREFIX_PERIOD + "0"; // period of 0 is not allowed

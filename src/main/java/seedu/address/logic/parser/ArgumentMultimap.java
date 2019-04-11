@@ -61,8 +61,12 @@ public class ArgumentMultimap {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) { return true; }
-        if (o == null || getClass() != o.getClass()) { return false; }
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         ArgumentMultimap that = (ArgumentMultimap) o;
         return Objects.equals(argMultimap, that.argMultimap);
     }

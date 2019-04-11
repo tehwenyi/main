@@ -22,7 +22,6 @@ import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.epiggy.JsonEPiggyStorage;
 
-@Ignore
 /**
  * Contains tests for closing of the {@code MainWindow}.
  */
@@ -55,6 +54,7 @@ public class MainWindowCloseTest extends GuiUnitTest {
         assertEquals(Collections.emptyList(), guiRobot.listWindows());
     }
 
+    @Ignore
     @Test
     public void close_externalRequest_exitAppRequestEventPosted() {
         mainWindowHandle.clickOnMenuHelpButton();

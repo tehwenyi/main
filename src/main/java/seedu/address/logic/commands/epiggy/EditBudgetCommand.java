@@ -31,16 +31,16 @@ public class EditBudgetCommand extends Command {
     public static final String COMMAND_ALIAS = "eb";
 
     // TODO MESSAGE_USAGE should come out
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the current budget. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " edits the current budget. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: [" + PREFIX_COST + "BUDGET_IN_DOLLARS] "
             + "[" + PREFIX_PERIOD + "TIME_PERIOD_IN_DAYS] "
-            + "[" + PREFIX_DATE + "START_DATE_IN_DD/MM/YYYY] "
+            + "[" + PREFIX_DATE + "START_DATE_IN_DD/MM/YYYY]\n"
             + "Example: " + COMMAND_WORD
             + PREFIX_COST + "200 "
             + PREFIX_PERIOD + "7";
 
-    public static final String MESSAGE_EDIT_BUDGET_SUCCESS = "Current budget updated:\n%1$s";
+    public static final String MESSAGE_EDIT_BUDGET_SUCCESS = "Current budget updated.\nEdited budget's details:\n%1$s";
     public static final String MESSAGE_EDIT_BUDGET_DOES_NOT_EXIST_FAIL = "Only the current budget can be edited."
             + " There is no current budget to be edited.";
     public static final String MESSAGE_NOT_EDITED = "Budget not edited as there are no changes.\n"

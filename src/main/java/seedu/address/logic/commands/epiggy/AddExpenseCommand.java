@@ -19,9 +19,9 @@ import seedu.address.model.epiggy.Expense;
 public class AddExpenseCommand extends Command {
 
     public static final String COMMAND_WORD = "addExpense";
-    public static final String COMMAND_ALIAS = "aE";
+    public static final String COMMAND_ALIAS = "ae";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an expense to the expense book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " adds an expense to the expense book.\n"
             + "Parameters: "
             + PREFIX_NAME + "EXPENSE NAME "
             + PREFIX_COST + "COST "
@@ -33,7 +33,7 @@ public class AddExpenseCommand extends Command {
             + PREFIX_TAG + "Lunch"
             + PREFIX_DATE + "31/02/2019 ";
 
-    public static final String MESSAGE_SUCCESS = "New expense added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New expense added.\nAdded expense's details:\n%1$s";
 
     private final Expense toAdd;
 

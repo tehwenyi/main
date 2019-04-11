@@ -21,13 +21,14 @@ public class DeleteAllowanceCommand extends Command {
     public static final String COMMAND_ALIAS = "da";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the allowance identified by the index number used in the displayed expense list.\n"
+            + " deletes the allowance identified by the index number used in the displayed expense list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_ALLOWANCE_SUCCESS = "Deleted allowance: %1$s";
+    public static final String MESSAGE_DELETE_ALLOWANCE_SUCCESS = "Allowance deleted.\nDeleted allowance's details:"
+            + "\n%1$s";
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The index does not exist on the expense list.";
-    public static final String MESSAGE_ITEM_NOT_ALLOWANCE = "The item selected is not an allowance. "
+    public static final String MESSAGE_ITEM_NOT_ALLOWANCE = "The item selected is not an allowance.\n"
             + "Please use " + DeleteExpenseCommand.COMMAND_WORD + " to delete expenses and "
             + COMMAND_WORD + " to delete allowances.";
 

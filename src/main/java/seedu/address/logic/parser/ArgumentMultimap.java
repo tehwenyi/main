@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -56,5 +57,22 @@ public class ArgumentMultimap {
      */
     public String getPreamble() {
         return getValue(new Prefix("")).orElse("");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        ArgumentMultimap that = (ArgumentMultimap) o;
+        return Objects.equals(argMultimap, that.argMultimap);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(argMultimap);
     }
 }

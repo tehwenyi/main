@@ -467,11 +467,11 @@ e.g.`search -n MCDONALDS`
 * *Sort* : `sort -[n/d/$] -[A/D]` +
 e.g.`sort -n`
 
-* *Set Budget* : `addBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS $/START_DATE` +
-e.g.`addBudget $500.00 t/7 d/01/02/2019`
+* *Add Budget* : `addBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS d/START_DATE` +
+e.g.`addBudget $/500.00 p/7 d/01/02/2019`
 
-* *Edit Budget* : `editBudget [$/AMOUNT] [p/TIME_PERIOD_IN_DAYS] [$/START_DATE]` +
-e.g.`editBudget $300.00 t/28`
+* *Edit Budget* : `editBudget [$/AMOUNT] [p/TIME_PERIOD_IN_DAYS] [d/START_DATE]` +
+e.g.`editBudget $/300.00 p/28`
 
 * *Delete Budget* : `deleteBudget INDEX` +
 e.g.`deleteBudget 2`

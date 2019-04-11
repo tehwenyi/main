@@ -55,4 +55,11 @@ public class DeleteAllowanceCommand extends Command {
         model.commitEPiggy();
         return new CommandResult(String.format(MESSAGE_DELETE_ALLOWANCE_SUCCESS, expenseToDelete));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeleteAllowanceCommand // instanceof handles nulls
+                && targetIndex.equals(((DeleteAllowanceCommand) other).targetIndex));
+    }
 }

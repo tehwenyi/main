@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -23,9 +22,8 @@ import seedu.address.model.EPiggy;
 import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.storage.epiggy.JsonEPiggyStorage;
 
-@Ignore
 public class JsonEPiggyStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonEPiggyStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -58,7 +56,7 @@ public class JsonEPiggyStorageTest {
     public void read_notJsonFormat_exceptionThrown() throws Exception {
 
         thrown.expect(DataConversionException.class);
-        readEPiggyBook("notJsonFormatEPiggyBook.json");
+        readEPiggyBook("notJsonFormatAddressBook.json");
 
         // IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
         // That means you should not have more than one exception test in one method
@@ -67,16 +65,15 @@ public class JsonEPiggyStorageTest {
     @Test
     public void readEPiggyBook_invalidPersonEPiggyBook_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readEPiggyBook("invalidPersonEPiggyBook.json");
+        readEPiggyBook("invalidPersonAddressBook.json");
     }
 
     @Test
     public void readEPiggyBook_invalidAndValidPersonEPiggyBook_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readEPiggyBook("invalidAndValidPersonEPiggyBook.json");
+        readEPiggyBook("invalidAndValidPersonAddressBook.json");
     }
 
-    @Ignore
     @Test
     public void readAndSaveEPiggyBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.getRoot().toPath().resolve("TempEPiggyBook.json");

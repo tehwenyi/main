@@ -56,7 +56,6 @@ public class EPiggyTest {
         ePiggy.resetData(null);
     }
 
-    @Ignore
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
         EPiggy newData = getTypicalEPiggy();

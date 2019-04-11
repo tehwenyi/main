@@ -35,4 +35,17 @@ public class Expense {
                 .append(format.format(date));
         return builder.toString();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Expense)) {
+            return false;
+        }
+        Expense otherExpense = (Expense) other;
+        return otherExpense.getItem().equals(getItem())
+                && otherExpense.getDate().equals(getDate());
+    }
 }

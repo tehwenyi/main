@@ -4,9 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Test;
+
 import guitests.GuiRobot;
 import guitests.guihandles.epiggy.ReportWindowHandle;
-import org.junit.Test;
 import seedu.address.logic.commands.epiggy.AddAllowanceCommand;
 import seedu.address.logic.commands.epiggy.AddBudgetCommand;
 import seedu.address.logic.commands.epiggy.AddExpenseCommand;
@@ -15,12 +16,12 @@ import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
 
 public class ReportCommandIntegrationTest extends EPiggySystemTestWithEmptyData {
-    private StringBuilder stringBuilder = new StringBuilder();
     private static final String ERROR_MESSAGE = "ATTENTION!!!! : On some computers, this test may fail when run on "
             + "non-headless mode as FxRobot#clickOn(Node, MouseButton...) clicks on the wrong location. We suspect "
             + "that this is a bug with TestFX library that we are using. If this test fails, you have to run your "
             + "tests on headless mode. See UsingGradle.adoc on how to do so.";
     private static final GuiRobot guiRobot = new GuiRobot();
+    private StringBuilder stringBuilder = new StringBuilder();
 
     @Test
     public void openReportWindow() {
@@ -119,45 +120,52 @@ public class ReportCommandIntegrationTest extends EPiggySystemTestWithEmptyData 
         assertSelectedCardUnchanged();
 
         // check report window for specified day
-        getMainMenu().CleanUpTextareaUsingMenu();
-        executeCommand(ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "21/03/2019");
+        getMainMenu().cleanTextareaUsingAccelerator();
+        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "21/03/2019";
+        executeCommand(command);
         getMainWindowHandle().focus();
         assertReportWindowOpen();
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
         messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + ReportCommand.COMMAND_WORD + " d/21/03/2019\n";
+                + "You: " + command + "\n";
         assertEquals(messageHistory, getResultDisplay().getText());
 
-//        // check report window for specified month
-//        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "03/2019";
-//        executeCommand(command);
-//        assertReportWindowOpen();
-//        assertEquals("", getCommandBox().getInput());
-//        assertCommandBoxShowsDefaultStyle();
-//        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-//                + "You: " + command + "\n" + messageHistory;
-//        assertEquals(messageHistory, getResultDisplay().getText());
-//
-//        // check report window for specified year
-//        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "2019";
-//        executeCommand(command);
-//        assertReportWindowOpen();
-//        assertEquals("", getCommandBox().getInput());
-//        assertCommandBoxShowsDefaultStyle();
-//        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-//                + "You: " + command + "\n" + messageHistory;
-//        assertEquals(messageHistory, getResultDisplay().getText());
-//
-//        // check report window for specified date
-//        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "21/03/2019";
-//        executeCommand(command);
-//        assertReportWindowOpen();
-//        assertEquals("", getCommandBox().getInput());
-//        assertCommandBoxShowsDefaultStyle();
-//        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-//                + "You: " + command + "\n" + messageHistory;
-//        assertEquals(messageHistory, getResultDisplay().getText());
+        // check report window for specified month
+        getMainMenu().cleanTextareaUsingAccelerator();
+        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "03/2019";
+        executeCommand(command);
+        getMainWindowHandle().focus();
+        assertReportWindowOpen();
+        assertEquals("", getCommandBox().getInput());
+        assertCommandBoxShowsDefaultStyle();
+        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+                + "You: " + command + "\n";
+        assertEquals(messageHistory, getResultDisplay().getText());
+
+        // check report window for specified year
+        getMainMenu().cleanTextareaUsingAccelerator();
+        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "2019";
+        executeCommand(command);
+        getMainWindowHandle().focus();
+        assertReportWindowOpen();
+        assertEquals("", getCommandBox().getInput());
+        assertCommandBoxShowsDefaultStyle();
+        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+                + "You: " + command + "\n";
+        assertEquals(messageHistory, getResultDisplay().getText());
+
+        // check report window for specified date
+        getMainMenu().cleanTextareaUsingAccelerator();
+        command = ReportCommand.COMMAND_WORD;
+        executeCommand(command);
+        getMainWindowHandle().focus();
+        assertReportWindowOpen();
+        assertEquals("", getCommandBox().getInput());
+        assertCommandBoxShowsDefaultStyle();
+        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+                + "You: " + command + "\n";
+        assertEquals(messageHistory, getResultDisplay().getText());
     }
 
     /**
@@ -170,24 +178,6 @@ public class ReportCommandIntegrationTest extends EPiggySystemTestWithEmptyData 
         new ReportWindowHandle(guiRobot.getStage(ReportWindowHandle.REPORT_WINDOW_TITLE)).close();
         getMainWindowHandle().focus();
     }
-
-    /**
-     * Check for expected amount of expenses.
-     * Check for commandBox display after executed command.
-     *
-     * @param command Command string
-     * @param expectedModel ePiggy testApp model
-     * @param numOfFound Expected number of found expenses
-     */
-    private void assertCommandSuccess(String command, Model expectedModel, int numOfFound) {
-        executeCommand(command);
-        String Message = "========================\n" + "ePiggy: " + numOfFound + " expenses listed!\n\nYou: "
-                + command + "\n";
-        stringBuilder.insert(0, Message);
-        assertApplicationDisplaysExpected("", stringBuilder.toString(), expectedModel);
-        assertCommandBoxShowsDefaultStyle();
-    }
-
     /**
      * Asserts that the report window isn't open.
      */

@@ -73,8 +73,11 @@ public class EditExpenseCommandParser implements Parser<EditExpenseCommand> {
      */
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
+
+        if (tags.isEmpty()) {
+            return Optional.empty();
+        }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        tagSet.add("Expense");
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 

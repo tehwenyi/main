@@ -103,10 +103,7 @@ public class EditExpenseCommand extends Command {
         Cost updatedCost = editExpenseDescriptor.getCost().orElse(expenseToEdit.getItem().getCost());
         Date updatedDate = editExpenseDescriptor.getDate().orElse(expenseToEdit.getDate());
         Set<Tag> updatedTags = editExpenseDescriptor.getTags().orElse(expenseToEdit.getItem().getTags());
-
-        if (expenseToEdit instanceof Allowance) {
-            return new Allowance(new Item(updatedName, updatedCost, updatedTags), updatedDate);
-        }
+        System.out.println(updatedTags);
         return new Expense(new Item(updatedName, updatedCost, updatedTags), updatedDate);
     }
 
@@ -137,7 +134,7 @@ public class EditExpenseCommand extends Command {
         private seedu.address.model.epiggy.item.Name name;
         private Cost cost;
         private Date date;
-        private Set<Tag> tags;
+        Set<Tag> tags;
 
         public EditExpenseDescriptor() {}
 
@@ -197,7 +194,12 @@ public class EditExpenseCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            if (tags != null) {
+                tags.add(new Tag("Expense"));
+                return Optional.of(Collections.unmodifiableSet(tags));
+            } else {
+                return Optional.empty();
+            }
         }
 
         @Override

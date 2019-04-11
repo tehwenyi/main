@@ -14,7 +14,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.epiggy.EditAllowanceCommand;
-import seedu.address.logic.commands.epiggy.EditExpenseCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -39,28 +38,28 @@ public class EditAllowanceCommandParser implements Parser<EditAllowanceCommand> 
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    String.format(EditAllowanceCommand.MESSAGE_NOT_EDITED,
                             EditAllowanceCommand.MESSAGE_USAGE),
                     pe);
         }
 
-        EditExpenseCommand.EditExpenseDescriptor editExpenseDescriptor = new EditExpenseCommand.EditExpenseDescriptor();
+        EditAllowanceCommand.EditAllowanceDescriptor editAllowanceDescriptor = new EditAllowanceCommand.EditAllowanceDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editExpenseDescriptor.setName(ParserUtil.parseItemName(argMultimap.getValue(PREFIX_NAME).get()));
+            editAllowanceDescriptor.setName(ParserUtil.parseItemName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_COST).isPresent()) {
-            editExpenseDescriptor.setCost(ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get()));
+            editAllowanceDescriptor.setCost(ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get()));
         }
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            editExpenseDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+            editAllowanceDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editExpenseDescriptor::setTags);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editAllowanceDescriptor::setTags);
 
-        if (!editExpenseDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditExpenseCommand.MESSAGE_NOT_EDITED);
+        if (!editAllowanceDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditAllowanceCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditAllowanceCommand(index, editExpenseDescriptor);
+        return new EditAllowanceCommand(index, editAllowanceDescriptor);
     }
 
     /**
@@ -70,8 +69,11 @@ public class EditAllowanceCommandParser implements Parser<EditAllowanceCommand> 
      */
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
+
+        if (tags.isEmpty()) {
+            return Optional.empty();
+        }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        tagSet.add("Allowance");
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 }

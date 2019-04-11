@@ -62,7 +62,8 @@ public class CommandBox extends UiPart<Region> {
             if (stringTryToMatch.length() > commandInArray[i].length()) {
                 // do nothing if the length of user input string longer than keyword.
                 continue;
-            } else if (stringTryToMatch.equals(commandInArray[i].substring(0, stringTryToMatch.trim().length()))) {
+            } else if (stringTryToMatch.equalsIgnoreCase((commandInArray[i]
+                    .substring(0, stringTryToMatch.trim().length())))) {
                 resultArr.add(commandInArray[i]);
             }
         }

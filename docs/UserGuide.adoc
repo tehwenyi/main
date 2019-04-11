@@ -80,8 +80,9 @@ Example: enter letter 'a' and then press `Tab`, the command "addExpense n/ $/ t/
 Delete the command, enter 'a' again and press `Tab`, the addBudget or addAllowance command will show.
 
 [NOTE]
-Enter 'as' and press `Tab`, *nothing will happen* because 'as' does not match any prefix of the command. +
-Enter 'Add' and press `Tab`, *nothing will happen* because auto complete function is *case sensitive*.
+Enter 'as' and press `Tab`, *nothing will happen* because 'as' does not match any prefix of the command. Autocomplete is *not support
+alias* and is *non-case sensitive*.
+
 // end::autocomplete[]
 ==== Viewing help : `help`
 Lists all the user commands with their syntax and descriptions. +

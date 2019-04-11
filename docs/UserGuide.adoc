@@ -86,12 +86,15 @@ alias* and is *non-case sensitive*.
 // end::autocomplete[]
 ==== Viewing help : `help`
 Lists all the user commands with their syntax and descriptions. +
-Format: `help`
+*Format:* `help`
+*Alias:* `hp`
 
 ==== Adding an expense : `addExpense`
 
 Adds a new expense record to the Expense Tracker. +
-Format: `addExpense n/EXPENSE_NAME $/COST [d/DATE] [t/TAG]…`
+*Alias:* `ae` +
+*Format:* `addExpense n/EXPENSE_NAME $/COST [d/DATE] [t/TAG]…` +
+
 
 Examples:
 
@@ -106,7 +109,9 @@ Adds an expense for a $5 chicken rice set, tagged as Food dated as the current d
 Edits an existing expense in ePiggy at a specific `*INDEX`* . +
 The *`INDEX`* refers to the number in the displayed Expenses List which is next to the name of the expense. Existing values of
 the expense will be changed according to the value of the parameters. +
-Format: `editExpense INDEX [n/EXPENSE_NAME] [$/COST] [d/DATE] [t/TAG]…`
+*Alias:* `ee` +
+*Format:* `editExpense INDEX [n/EXPENSE_NAME] [$/COST] [d/DATE] [t/TAG]…` +
+
 
 Examples:
 
@@ -119,7 +124,8 @@ Edits the tag of the second expense in the Expense List to ‘Food’.
 
 Deletes the expense at the specified INDEX. The INDEX refers to the number in the displayed Expenses List which is next to
 the name of the expense. +
-Format: `deleteExpense INDEX`
+*Alias:* `de`
+*Format:* `deleteExpense INDEX` +
 
 Examples:
 
@@ -129,7 +135,8 @@ Deletes the first expense in the displaying expense list from Expense Tracker.
 ==== Adding an allowance: `addAllowance`
 
 Adds a new allowance record to the Expense Tracker. +
-Format: `addAllowance n/EXPENSE_NAME $/COST [d/DATE] [t/TAG]…`
+*Alias:* `aa` +
+*Format:* `addAllowance n/EXPENSE_NAME $/COST [d/DATE] [t/TAG]…`
 
 Examples:
 
@@ -141,7 +148,8 @@ Adds an allowance of $20 from Mom, tagged as School with the date as 21/02/2019.
 Edits an existing allowance in ePiggy at a specific `*INDEX`* . +
 The *`INDEX`* refers to the number in the displayed Expenses List which is next to the name of the expense. Existing values of
 the expense will be changed according to the value of the parameters. +
-Format: `editAllowance INDEX [n/ALLOWANCE_NAME] [$/COST] [d/DATE] [t/TAG]…`
+*Alias:* `ea` +
+*Format:* `editAllowance INDEX [n/ALLOWANCE_NAME] [$/COST] [d/DATE] [t/TAG]…`
 
 Examples:
 
@@ -154,7 +162,8 @@ Edits the amount of the second allowance in ePiggy to ‘$22’.
 
 Deletes the allowance at the specified INDEX. The INDEX refers to the number in the displayed Expenses List which is next to
 the name of the allowance. +
-Format: `deleteAllowance INDEX`
+*Alias:* `da` +
+*Format:* `deleteAllowance INDEX`
 
 Examples:
 
@@ -164,35 +173,27 @@ Deletes the first allowance in the displaying expense list from Expense Tracker.
 ==== Listing all expenses : `list`
 
 Lists the expense records from newest to oldest. Use this to return to the default view after search/sort commands +
-Format: `list`
+*Alias:* `l` +
+*Format:* `list`
 
 ==== Listing all expenses in reverse : `reverseList`
 
 Lists the expense records from oldest to newest. Use this to return to the default view after search/sort commands +
-Format: `reverseList`
-
-
-==== Viewing an expense : `view`
-
-View the details of the selected *`INDEX`*. +
-Format: `view INDEX`
-
-Examples:
-
-* `view 3` +
-View will display more information on item 3 (eg. tags, entry description, etc.)
+*Alias:* `rl` +
+*Format:* `reverseList`
 
 ==== Viewing total savings : `viewSavings`
 
 Show details of the net amount of money recorded in ePiggy. +
-Format: `viewSavings`
+*Format:* `viewSavings`
 
 === Filtering and Sorting Data
 
 ==== Searching for an expense : `findExpense`
 
 You can search for any expense in the list by specifying either its name, tag, date, range of dates, or range of amount. +
-Format: *`findExpense [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
+*Alias:* `fe` +
+*Format:* *`findExpense [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
 
 Examples:
 
@@ -219,7 +220,8 @@ Date format is `yyyy/MM/dd` .
 ==== Sorting the expenses : `sortExpense`
 
 The user can sort the expenses in the list by name, date added, amount in ascending or descending order. +
-Format: `sortExpense -[n/d/$]/`
+*Alias:* `se` +
+*Format:* `sortExpense -[n/d/$]/`
 
 Examples:
 
@@ -242,7 +244,8 @@ Budgets added are not allowed to overlap with existing budgets. +
 [NOTE]
 Budgets are considered to be overlapping if their active dates intersect each other.
 
-Format: `addBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS d/START_DATE`
+*Alias:* `ab` +
+*Format:* `addBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS d/START_DATE`
 
 Examples:
 
@@ -271,7 +274,8 @@ Edited budget cannot overlap with other existing budgets. +
 [NOTE]
 Budgets are considered to be overlapping if their active dates intersect each other.
 
-Format: `editBudget [$/AMOUNT] [p/TIME_PERIOD_IN_DAYS] [d/START_DATE]`
+*Alias:* `eb` +
+*Format:* `editBudget [$/AMOUNT] [p/TIME_PERIOD_IN_DAYS] [d/START_DATE]`
 
 Examples:
 
@@ -293,7 +297,8 @@ Budget does not take into account allowances as budget only accounts for expense
 
 Deletes the budget at the specified `INDEX`. The `INDEX` refers to the number in the displayed Budget List which is next to
 the status of the budget. +
-Format: `deleteBudget INDEX`
+*Alias:* `db` +
+*Format:* `deleteBudget INDEX`
 
 Examples:
 
@@ -313,16 +318,11 @@ Budget does not take into account allowances as budget only accounts for expense
 
 Generates a report of the given date, month, or year. The report consists of total inflow, total outflow, and
 proportion of total expense and total allowance. +
-
-Format: `report [d/DD/MM/YYYY]` Generates a report for specified date.
-
-Format: `report [d/MM/YYYY]` Generates a report for specified month.
-
-Format: `report [d/YYYY]` Generates a report for specified year.
-
-Format: `report` Generates a report of all records in ePiggy.
-
-Alias: `rp`: `report` can be replaced by `rp`.
+*Alias:* `rp` +
+*Format:* `report [d/DD/MM/YYYY]` Generates a report for specified date. +
+*Format:* `report [d/MM/YYYY]` Generates a report for specified month. +
+*Format:* `report [d/YYYY]` Generates a report for specified year. +
+*Format:* `report` Generates a report of all records in ePiggy. +
 
 [NOTE]
 The message of conclusion under the chart will show only if you add at least one expense to ePiggy.
@@ -368,7 +368,8 @@ Figure of example 4: Report for specified year.
 ==== Setting the savings goal : `setGoal`
 
 Sets the item and the amount that the user wishes to save up for. +
-Format: `setGoal n/ITEM_NAME $/AMOUNT`
+*Alias:* `sg` +
+*Format:* `setGoal n/ITEM_NAME $/AMOUNT`
 
 Example:
 
@@ -381,7 +382,7 @@ Sets the goal to a $80 Nike shoe.
 ==== Viewing the savings goal : `viewGoal`
 
 Show details about the current goal set. +
-Format: `viewGoal`
+*Format:* `viewGoal`
 
 // end::viewGoal[]
 
@@ -390,7 +391,8 @@ Format: `viewGoal`
 ==== Exiting the program : `exit`
 
 Exits the program. +
-Format: `exit`
+*Alias:* `ex` +
+*Format:* `exit`
 
 ==== Saving the data
 

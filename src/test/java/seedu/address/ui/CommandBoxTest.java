@@ -169,8 +169,11 @@ public class CommandBoxTest extends GuiUnitTest {
         commandBoxHandle.run("f");
         assertInputHistory(KeyCode.TAB, "findExpense n/ t/ d/ $/");
 
-        commandBoxHandle.run("h");
+        commandBoxHandle.run("he");
         assertInputHistory(KeyCode.TAB, "help");
+
+        commandBoxHandle.run("hi");
+        assertInputHistory(KeyCode.TAB, "history");
 
         commandBoxHandle.run("l");
         assertInputHistory(KeyCode.TAB, "list");

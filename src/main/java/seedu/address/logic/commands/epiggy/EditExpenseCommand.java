@@ -35,10 +35,10 @@ import seedu.address.model.tag.Tag;
 public class EditExpenseCommand extends Command {
 
     public static final String COMMAND_WORD = "editExpense";
-    public static final String COMMAND_ALIAS = "eE";
+    public static final String COMMAND_ALIAS = "ee";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the expense identified "
-            + "by the index number used in the displayed expense list. "
+            + "by the index in the displayed expense list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -49,8 +49,8 @@ public class EditExpenseCommand extends Command {
             + PREFIX_COST + "5 "
             + PREFIX_TAG + "food";
 
-    public static final String MESSAGE_EDIT_EXPENSE_SUCCESS = "Edited Expense: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_EDIT_EXPENSE_SUCCESS = "Expense edited.\nEdited expense's details:\n%1$s";
+    public static final String MESSAGE_NOT_EDITED = "Expense not edited as there are no changes.";
 
     private static final String MESSAGE_ITEM_NOT_EXPENSE = "The item selected is not an expense. "
             + "Please use " + COMMAND_WORD + " to edit expenses and "

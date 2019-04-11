@@ -19,9 +19,9 @@ import seedu.address.model.epiggy.Allowance;
 public class AddAllowanceCommand extends Command {
 
     public static final String COMMAND_WORD = "addAllowance";
-    public static final String COMMAND_ALIAS = "aA";
+    public static final String COMMAND_ALIAS = "aa";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an allowance to the expense book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " adds an allowance to the expense book. "
             + "Parameters: "
             + PREFIX_NAME + "ALLOWANCE NAME "
             + PREFIX_COST + "AMOUNT "
@@ -33,7 +33,7 @@ public class AddAllowanceCommand extends Command {
             + PREFIX_TAG + "Weekly "
             + PREFIX_DATE + "21/03/2019 ";
 
-    public static final String MESSAGE_SUCCESS = "New allowance added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New allowance added.\nAdded allowance's details:\n%1$s";
 
     private final Allowance toAdd;
 

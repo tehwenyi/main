@@ -191,19 +191,19 @@ Format: `viewSavings`
 
 ==== Searching for an expense : `findExpense`
 
-You can search for any expense in the list by specifying either its name, tag, date, range of dates, or range of amount. +
+You can search for any expense in the list by specifying either its name, tag, date, range of dates, amount or range of amount. +
 Format: *`findExpense [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
 
 Examples:
 
-* `fE n/MCDONALDS` +
-Displays all entries with the name “MCDONALDS”.
+* `fE n/McDonalds` +
+Displays all entries with the name “McDonalds”.
 * `fE t/FOOD` +
 Displays all entries with the tag specified (in this case, it’s food).
-* `fE d/2019/01/02` +
+* `fE d/02/01/2019` +
 Displays all entries listed on 2nd Jan 2019.
-* `fE d/2019/01/02:2020/12/05` +
-Displays all entries listed in the range 2nd Jan 2019 to 5th Dec 2020.
+* `fE d/02/01/2019:05/12/2020` +
+Displays all entries listed in the range 2nd Jan 2019 to 5th Dec 2020 (both inclusive).
 * `fE $/250` +
 Displays all entries listed with the cost range of $250.
 * `fE $/250:500` +
@@ -212,14 +212,17 @@ Displays all entries listed with the cost range of $250 to $500.
 ****
 *Additional Information:* +
 Searches and displays the expense along with its information, according to the user-specified command. +
+Searching for names and tags is case-insensitive. Furthermore, it allows you to search for almost similar
+words by applying the concept of Levenshtien distance, hence allowing small typos (limit fixed by an upper bound). +
 If the entry is not found, it displays an appropriate error message. +
-Date format is `yyyy/MM/dd` .
+Date format is `dd/MM/yyyy` .
+'findExpense` and `fE` are equivalent.
 ****
 
 ==== Sorting the expenses : `sortExpense`
 
 The user can sort the expenses in the list by name, date added, amount in ascending or descending order. +
-Format: `sortExpense -[n/d/$]/`
+Format: `sort -[n/d/$]/`
 
 Examples:
 
@@ -229,6 +232,11 @@ Sorts all entries by name (in ascending order).
 Sorts all entries by date in descending order.
 * `sE $/` +
 Sorts all entries by amount in ascending order.
+
+****
+*Additional Information:* +
+'sortExpense` and `sE` are equivalent.
+****
 
 === Budgeting
 

@@ -285,7 +285,7 @@ A `budget` is considered overlapping if *any* of the dates *in between (inclusiv
 ==== Current Implementation
 Given below is a sequence diagram of how the `addBudget` command works: +
 
-image::addBudgetSequenceDiagram.png[width="800"]
+image::AddBudgetSequenceDiagram.png[width="800"]
 
 Figure: Add Budget Command Sequence Diagram +
 

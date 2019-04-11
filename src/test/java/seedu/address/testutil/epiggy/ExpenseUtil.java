@@ -33,7 +33,7 @@ public class ExpenseUtil {
      */
     public static String getExpenseDetails(Expense expense) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + expense.getItem().getName().name + " ");
+        sb.append(PREFIX_NAME + expense.getItem().getName().toString() + " ");
         sb.append(PREFIX_COST + expense.getItem().getCost().toString() + " ");
         sb.append(PREFIX_DATE + expense.getDate().toString() + " ");
         expense.getItem().getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));

@@ -77,6 +77,8 @@ public class CommandTestUtil {
     public static final String VALID_PERIOD_SECONDEXTRA = "28";
     public static final String VALID_DATE_FIRSTEXTRA = "03/03/2019";
     public static final String VALID_DATE_SECONDEXTRA = "01/02/2019";
+    public static final String VALID_NAME_FIRSTEXTRA = "Apple watch";
+    public static final String VALID_NAME_SECONDEXTRA = "Apple Pineapple";
 
     public static final String AMOUNT_DESC_FIRSTEXTRA = " " + PREFIX_COST + VALID_AMOUNT_FIRSTEXTRA;
     public static final String AMOUNT_DESC_SECONDEXTRA = " " + PREFIX_COST + VALID_AMOUNT_SECONDEXTRA;
@@ -84,6 +86,8 @@ public class CommandTestUtil {
     public static final String PERIOD_DESC_SECONDEXTRA = " " + PREFIX_PERIOD + VALID_PERIOD_SECONDEXTRA;
     public static final String DATE_DESC_FIRSTEXTRA = " " + PREFIX_DATE + VALID_DATE_FIRSTEXTRA;
     public static final String DATE_DESC_SECONDEXTRA = " " + PREFIX_DATE + VALID_DATE_SECONDEXTRA;
+    public static final String NAME_DESC_FIRSTEXTRA = " " + PREFIX_NAME + VALID_NAME_FIRSTEXTRA;
+    public static final String NAME_DESC_SECONDEXTRA = " " + PREFIX_NAME + VALID_NAME_SECONDEXTRA;
 
     public static final String INVALID_AMOUNT_DESC = " " + PREFIX_COST + "-500.00"; // negative cost is not allowed
     public static final String INVALID_PERIOD_DESC = " " + PREFIX_PERIOD + "0"; // period of 0 is not allowed

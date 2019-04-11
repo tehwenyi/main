@@ -157,7 +157,8 @@ public class AddBudgetCommandSystemTest extends EPiggySystemTestWithEmptyData {
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);
-        messageHistory = "ePiggy: " + expectedResultMessage + "\n\n" + "You: " + command + "\n\n" + messageHistory;
+        messageHistory = "========================\n" + "ePiggy: " + expectedResultMessage + "\n\n" + "You: " + command
+                + "\n" + messageHistory;
         assertApplicationDisplaysExpected("", messageHistory, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsDefaultStyle();
@@ -180,7 +181,8 @@ public class AddBudgetCommandSystemTest extends EPiggySystemTestWithEmptyData {
         Model expectedModel = getModel();
 
         executeCommand(command);
-        messageHistory = "ePiggy: " + expectedResultMessage + "\n\n" + "You: " + command + "\n\n" + messageHistory;
+        messageHistory = "========================\n" + "ePiggy: " + expectedResultMessage + "\n\n" + "You: " + command
+                + "\n" + messageHistory;
         assertApplicationDisplaysExpected(command, messageHistory, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsErrorStyle();

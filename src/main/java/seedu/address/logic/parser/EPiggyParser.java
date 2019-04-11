@@ -6,18 +6,13 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.epiggy.AddAllowanceCommand;
 import seedu.address.logic.commands.epiggy.AddBudgetCommand;
@@ -33,8 +28,6 @@ import seedu.address.logic.commands.epiggy.ReportCommand;
 import seedu.address.logic.commands.epiggy.ReverseListCommand;
 import seedu.address.logic.commands.epiggy.SetGoalCommand;
 import seedu.address.logic.commands.epiggy.SortExpenseCommand;
-import seedu.address.logic.commands.epiggy.ViewGoalCommand;
-import seedu.address.logic.commands.epiggy.ViewSavingsCommand;
 import seedu.address.logic.parser.epiggy.AddAllowanceCommandParser;
 import seedu.address.logic.parser.epiggy.AddBudgetCommandParser;
 import seedu.address.logic.parser.epiggy.AddExpenseCommandParser;
@@ -101,18 +94,6 @@ public class EPiggyParser {
         case DeleteAllowanceCommand.COMMAND_ALIAS:
             return new DeleteAllowanceCommandParser().parse(arguments);
 
-        case ViewSavingsCommand.COMMAND_WORD:
-        case ViewSavingsCommand.COMMAND_ALIAS:
-            return new ViewSavingsCommand();
-
-        case AddCommand.COMMAND_WORD:
-        case AddCommand.COMMAND_ALIAS:
-            return new AddCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-        case EditCommand.COMMAND_ALIAS:
-            return new EditCommandParser().parse(arguments);
-
         case FindExpenseCommand.COMMAND_WORD:
         case FindExpenseCommand.COMMAND_ALIAS:
             return new FindExpenseCommandParser().parse(arguments);
@@ -125,21 +106,9 @@ public class EPiggyParser {
         case ReverseListCommand.COMMAND_ALIAS:
             return new ReverseListCommand();
 
-        case SelectCommand.COMMAND_WORD:
-        case SelectCommand.COMMAND_ALIAS:
-            return new SelectCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-        case DeleteCommand.COMMAND_ALIAS:
-            return new DeleteCommandParser().parse(arguments);
-
         case ClearCommand.COMMAND_WORD:
         case ClearCommand.COMMAND_ALIAS:
             return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-        case FindCommand.COMMAND_ALIAS:
-            return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
         case ListCommand.COMMAND_ALIAS:
@@ -172,10 +141,6 @@ public class EPiggyParser {
         case SetGoalCommand.COMMAND_WORD:
         case SetGoalCommand.COMMAND_ALIAS:
             return new SetGoalCommandParser().parse(arguments);
-
-        case ViewGoalCommand.COMMAND_WORD:
-        case ViewGoalCommand.COMMAND_ALIAS:
-            return new ViewGoalCommand();
 
         case UndoCommand.COMMAND_WORD:
         case UndoCommand.COMMAND_ALIAS:

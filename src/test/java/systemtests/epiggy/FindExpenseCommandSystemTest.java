@@ -168,7 +168,8 @@ public class FindExpenseCommandSystemTest extends EPiggySystemTestWithDefaultDat
      */
     private void assertCommandSuccess(String command, Model expectedModel, int numOfFound) {
         executeCommand(command);
-        String exceptedMessage = "ePiggy: " + numOfFound + " expenses listed!\n\nYou: " + command + "\n\n";
+        String exceptedMessage = "========================\n" + "ePiggy: " + numOfFound + " expenses listed!\n\nYou: "
+                + command + "\n";
         stringBuilder.insert(0, exceptedMessage);
         assertApplicationDisplaysExpected("", stringBuilder.toString(), expectedModel);
         assertCommandBoxShowsDefaultStyle();

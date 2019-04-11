@@ -206,6 +206,22 @@ public class ParserUtil {
     }
 
     /**
+     * Keywords validation for sort.
+     * @param keywordsMap user input to keyword mapping.
+     * @throws ParseException if any of the keywords are invalid.
+     */
+    public static void validateKeywordsForSort(ArgumentMultimap keywordsMap) throws ParseException {
+        List<String> nameKeywords = keywordsMap.getAllValues(PREFIX_NAME);
+        List<String> tagKeywords = keywordsMap.getAllValues(PREFIX_TAG);
+        List<String> dateKeywords = keywordsMap.getAllValues(PREFIX_DATE);
+        List<String> costKeywords = keywordsMap.getAllValues(PREFIX_COST);
+
+        if (!nameKeywords.isEmpty() && !tagKeywords.isEmpty() && !dateKeywords.isEmpty() && !costKeywords.isEmpty()) {
+            throw new ParseException("Invalid userInput");
+        }
+    }
+
+    /**
      * Name keyword validation.
      * @throws ParseException if name keyword is invalid (not alphanumeric).
      */

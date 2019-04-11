@@ -3,6 +3,7 @@ package seedu.address.logic.commands.epiggy;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
@@ -22,7 +23,7 @@ public class SortExpenseCommand extends Command {
     public static final String COMMAND_ALIAS = "sE";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + " : Sorts the expenses as specified by the user, according to name, cost, date or tag. \n"
-            + " Parameters: -[n/d/$]/...\n"
+            + " Parameters: [n/d/$]/...\n"
             + " Example: " + COMMAND_WORD + " n/";
     public static final String MESSAGE_SUCCESS = "Sorted %1$d Expenses...\n";
 
@@ -46,5 +47,22 @@ public class SortExpenseCommand extends Command {
 
     public Comparator<Expense> getExpenseComparator() {
         return expenseComparator;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        SortExpenseCommand that = (SortExpenseCommand) o;
+        return Objects.equals(expenseComparator, that.expenseComparator);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(expenseComparator);
     }
 }

@@ -29,10 +29,14 @@ import seedu.address.EpiggyTestApp;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.epiggy.DeleteAllowanceCommand;
 import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
+import seedu.address.logic.commands.epiggy.DeleteExpenseCommand;
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
+import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
+import seedu.address.model.epiggy.Expense;
 import seedu.address.testutil.epiggy.TypicalReports;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
@@ -168,6 +172,33 @@ public abstract class EPiggySystemTestWithEmptyData {
                     + messageHistory;
         }
         assertEquals(0, getModel().getEPiggy().getBudgetList().size());
+        return messageHistory;
+    }
+
+    /**
+     * Deletes all expense in the epiggy.
+     */
+    protected String deleteAllExpenses() {
+        String messageHistory = "";
+        List<Expense> expenseList = getModel().getExpenseList();
+        int expenseListSize = expenseList.size();
+        for (int i = 0; i < expenseListSize; i++) {
+            if (expenseList.get(i) instanceof Allowance) {
+                executeCommand(DeleteAllowanceCommand.COMMAND_WORD + " 1");
+                messageHistory = "========================\n" + "ePiggy: "
+                        + String.format(DeleteAllowanceCommand.MESSAGE_DELETE_ALLOWANCE_SUCCESS,
+                        expenseList.get(i)) + "\n\n" + "You: " + DeleteAllowanceCommand.COMMAND_WORD + " 1" + "\n"
+                        + messageHistory;
+            } else {
+                executeCommand(DeleteExpenseCommand.COMMAND_WORD + " 1");
+                messageHistory = "========================\n" + "ePiggy: "
+                        + String.format(DeleteExpenseCommand.MESSAGE_DELETE_EXPENSE_SUCCESS,
+                        expenseList.get(i)) + "\n\n" + "You: " + DeleteExpenseCommand.COMMAND_WORD + " 1" + "\n"
+                        + messageHistory;
+            }
+
+        }
+        assertEquals(0, getModel().getEPiggy().getExpenseList().size());
         return messageHistory;
     }
 

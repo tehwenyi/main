@@ -5,6 +5,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
@@ -50,6 +51,9 @@ public class CommandBox extends UiPart<Region> {
 
     @FXML
     private TextField commandTextField;
+
+    @FXML
+    private TextArea resultDisplay;
 
     public CommandBox(CommandExecutor commandExecutor, List<String> history) {
         super(FXML);
@@ -108,6 +112,12 @@ public class CommandBox extends UiPart<Region> {
         case TAB:
             keyEvent.consume();
             autoCompleteText();
+            break;
+
+        case ESCAPE:
+            keyEvent.consume();
+            ResultDisplay rd = new ResultDisplay();
+            rd.clearDisplay();
             break;
 
         default:

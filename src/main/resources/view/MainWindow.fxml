@@ -34,7 +34,10 @@
                         <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="User Manual" />
                     </Menu>
                     <Menu mnemonicParsing="false" text="Report">
-                        <MenuItem fx:id="summaryMenuItem_daily" mnemonicParsing="false" onAction="#handleDailyReport" text="Completed Report" />
+                        <MenuItem fx:id="summaryMenuItem_daily" mnemonicParsing="false" onAction="#handleReport" text="Completed Report" />
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="Clean">
+                        <MenuItem fx:id="cleanText" mnemonicParsing="false" onAction="#handleClean" text="Clean TextArea" />
                     </Menu>
                 </MenuBar>
 

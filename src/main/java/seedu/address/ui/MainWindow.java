@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -49,6 +50,9 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private MenuItem cleanText;
+
+    @FXML
     private StackPane savingsPanelPlaceholder;
 
     @FXML
@@ -84,6 +88,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(cleanText, KeyCombination.valueOf("F2"));
     }
 
     /**
@@ -187,10 +192,10 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows daily summary to user.
+     * Shows completed summary to user.
      */
     @FXML
-    private void handleDailyReport() {
+    private void handleReport() {
         helpWindow.hide();
         try {
             logic.execute("report");
@@ -200,43 +205,15 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows monthly summary to user.
+     * clean text area.
      */
     @FXML
-    private void handleMonthlyReport() {
+    private void handleClean() {
         helpWindow.hide();
-        try {
-            logic.execute("report type/monthly");
-        } catch (CommandException | ParseException e) {
-            resultDisplay.setFeedbackToUser(e.getMessage(), "report t/monthly");
-        }
+        resultDisplay.clearDisplay();
+
     }
 
-    /**
-     * Shows yearly summary to user.
-     */
-    @FXML
-    private void handleYearlyReport() {
-        helpWindow.hide();
-        try {
-            logic.execute("report type/yearly");
-        } catch (CommandException | ParseException e) {
-            resultDisplay.setFeedbackToUser(e.getMessage(), "report t/yearly");
-        }
-    }
-
-    /**
-     * Shows percentage summary to user.
-     */
-    @FXML
-    private void handlePercentageReport() {
-        helpWindow.hide();
-        try {
-            logic.execute("report type/percentage");
-        } catch (CommandException | ParseException e) {
-            resultDisplay.setFeedbackToUser(e.getMessage(), "report t/percentage");
-        }
-    }
 
     public ExpenseListPanel getExpenseListPanel() {
         return expenseListPanel;

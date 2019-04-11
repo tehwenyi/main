@@ -33,4 +33,11 @@ public class ResultDisplay extends UiPart<Region> {
 
         resultDisplay.setText(messages);
     }
+
+    /**
+     * Clear all text in the textBox.
+     */
+    public void clearDisplay() {
+        resultDisplay.clear();
+    }
 }

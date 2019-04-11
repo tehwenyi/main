@@ -232,11 +232,16 @@ Sorts all entries by amount in ascending order.
 
 === Budgeting
 
-==== Setting the spending budget : `addBudget`
+// tag::addBudget[]
+==== Adding a spending budget : `addBudget`
 
-Sets a total expenses budget for a certain time period. The time period will be in terms of days, and 1 day is the minimum
-a person can set a budget for. +
-This command can only be used if there are no budgets set yet. The addBudget command is case sensitive. +
+Adds a budget for the total expenses within the specified time period. The time period will be in terms of days,
+and 1 day is the minimum a person can set a budget for. +
+Budgets added are not allowed to overlap with existing budgets. +
+
+[NOTE]
+Budgets are considered to be overlapping if their active dates intersect each other.
+
 Format: `addBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS d/START_DATE`
 
 Examples:
@@ -249,31 +254,24 @@ Sets a total budget of $10000 every 15 days starting from 1st January 2000.
 
 ****
 *Additional Information:* +
-Time period cannot exceed 1 million days.
+Time period cannot exceed 1 million days. +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
 
 *Display status of budget:* +
-The Expense Tracker will show the status of the current budget whenever a new expense is added. It will display the following information: +
+ePiggy will show the status of the current budget whenever a new expense is added. +
+// end::addBudget[]
 
-====
-- Status of Budget (Old/Current) +
-- Budgeted Amount($) +
-- Start Date of Budget (date) +
-- End Date of Budget (date) +
-- Period of Budget (days) +
-- Remaining Amount for Budget ($) +
-- Remaining Days before Budget resets (Days) +
-====
+// tag::editBudget[]
+==== Editing the current budget : `editBudget`
 
-image::BudgetUi.png[width="760"]
-_Figure 3: Shows budget status_
+Edits the current budget. A current budget must be present to use this command. +
+Edited budget cannot overlap with other existing budgets. +
 
-==== Editing the spending budget : `editBudget`
+[NOTE]
+Budgets are considered to be overlapping if their active dates intersect each other.
 
-Edits the current budget. Budgets are not allowed to overlap, and at least one budget must already be present. +
-The editBudget command is case sensitive. +
-Format: `editBudget [$/AMOUNT] [p/TIME_PERIOD_IN_DAYS]`
+Format: `editBudget [$/AMOUNT] [p/TIME_PERIOD_IN_DAYS] [d/START_DATE]`
 
 Examples:
 
@@ -285,11 +283,13 @@ Edits the current budget to $200 for every 15 days starting from the budget's in
 
 ****
 *Additional Information:* +
-Time period cannot exceed 1 million days.
+Time period cannot exceed 1 million days. +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
+// end::editBudget[]
 
-==== Editing the spending budget : `deleteBudget`
+// tag::deleteBudget[]
+==== Deleting a budget : `deleteBudget`
 
 Deletes the budget at the specified `INDEX`. The `INDEX` refers to the number in the displayed Budget List which is next to
 the status of the budget. +
@@ -297,19 +297,22 @@ Format: `deleteBudget INDEX`
 
 Examples:
 
-* `delete 1` +
+* `deleteBudget 1` +
 Deletes the first budget in the Budget List.
 
 ****
 *Additional Information:* +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
+// end::deleteBudget[]
+
 // tag::report[]
 === Expense Report
 
 ==== Generate report : `report`
 
-Generates a report of the given date, month, or year. The report consists of total inflow, total outflow, and proportion of total expense and total allowance. +
+Generates a report of the given date, month, or year. The report consists of total inflow, total outflow, and
+proportion of total expense and total allowance. +
 
 Format: `report [d/DD/MM/YYYY]` Generates a report for specified date.
 

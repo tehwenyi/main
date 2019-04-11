@@ -27,7 +27,7 @@ This symbol indicates important information.
            that can be inputted into the command line and executed by the
            application.
 
-_ReportWindow_ | Italic text with grey highlight indicates a component, class or object in
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java['ReportWindow'] | Blue underline text with grey highlight indicates a component, class or object in
                  the architecture of the application.
 
 == Summary of contributions
@@ -64,19 +64,19 @@ https://github.com/CS2103-AY1819S2-W17-4/main/pull/228/commits/84c02d96acd964a1b
 * *Other contributions*:
 
 ** Project management:
-*** manage releases version 1.1 to 1.3 on GitHub
+*** Managed releases version 1.1 to 1.4 on GitHub
 ** Enhancements to existing features:
-*** Updated the ePiggy icon and name
-*** Wrote additional tests for existing features to increase coverage
-*** Fix some old tests to increase coverage
+*** Updated the ePiggy icon and name https://github.com/CS2103-AY1819S2-W17-4/main/pull/35[(#35)]
+*** Wrote additional tests for existing features to increase coverage https://github.com/CS2103-AY1819S2-W17-4/main/issues/159[(#159)] https://github.com/CS2103-AY1819S2-W17-4/main/pull/223[(#223)]
+*** Fixed some old tests to increase coverage
 ** Documentation:
 *** Made cosmetic improvements to the existing User Guide to make it more reader-friendly
-*** Update User Guide and Developer Guide
-*** Add user stories
+*** Updated User Guide and Developer Guide https://github.com/CS2103-AY1819S2-W17-4/main/pull/229[(#229)] https://github.com/CS2103-AY1819S2-W17-4/main/pull/139[(#139)]
+*** Added user stories
 ** Community:
-*** PRs reviewed
-*** Contributed to forum discussions
-*** Reported bugs and suggestions for other teams in the class
+*** PRs reviewed https://github.com/CS2103-AY1819S2-W17-4/main/pull/44[(#44)] https://github.com/CS2103-AY1819S2-W17-4/main/pull/39[(#39)] https://github.com/CS2103-AY1819S2-W17-4/main/pull/224[(#224)]
+*** Contributed to forum discussions https://github.com/CS2103-AY1819S2-W17-4/main/pull/227[(#227)] https://github.com/CS2103-AY1819S2-W17-4/main/issues/195[(#195)] https://github.com/CS2103-AY1819S2-W17-4/main/issues/205[(#205)]
+*** Reported bugs and suggestions for other teams in the class https://github.com/cs2103-ay1819S2-w11-2/main/issues/181[(#181)] https://github.com/cs2103-ay1819S2-w11-2/main/issues/173[(#173)]
 ** Tools:
 *** Setup GitHub home-page and issue template
 *** Setup Travis CI
@@ -89,11 +89,9 @@ we had added. The following is an excerpt from our ePiggy User Guide, showing th
 include::../UserGuide.adoc[tag=report]
 
 == Auto complete:
-Enter the first few letters of the command or tag, and then press Tab key on the keyboard to auto complete the command.
-If the auto complete command is not what you want, delete some letters and press Tab again. Another command will show.
+inculde::../UserGuide.adoc[tag=autocomplete]
 
-Example: Enter letter 'a' and then press Tab, the command `addExpense n/ $/ t/ d/` will show.
-
+== Upcoming features on version 2.0:
 include::../UserGuide.adoc[tag=v2.0]
 
 == Contributions to the Developer Guide

@@ -18,9 +18,9 @@ import seedu.address.model.epiggy.ExpenseContainsKeywordsPredicate;
 public class FindExpenseCommand extends Command {
 
     public static final String COMMAND_WORD = "findExpense";
-    public static final String COMMAND_ALIAS = "fE";
+    public static final String COMMAND_ALIAS = "fe";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + " : Finds the expense as specified by the user. "
+            + " finds the expense as specified by the user. "
             + " The keywords do not need to be in order.\n"
             + " Parameters: [n/NAME] [$/COST:COST] [t/TAG] [d/DATE:DATE]...\n"
             + " Example: " + COMMAND_WORD + " n/Mala Hotpot t/lunch t/food $/7.00:15.00 d/14-03-2019:17-03-2019\n";

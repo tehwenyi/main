@@ -254,7 +254,7 @@ public class ReportWindow {
             labelOfTotalAllowance.setText("The total amount of allowance on this month: S$"
                     + totalAllowance);
             labelOfTotalSaving.setText("The total amount of Saving on this month: S$"
-                    + (totalAllowance - totalExpense));
+                    + String.format("%.2f", totalAllowance - totalExpense));
             labelOfMinExpenseDay.setText("The lowest expense record is S$"
                     + minExpense
                     + " at "
@@ -426,7 +426,7 @@ public class ReportWindow {
             labelOfTotalAllowance.setText("The total amount of allowance on this year: S$"
                     + totalAllowance);
             labelOfTotalSaving.setText("The total amount of saving on this year: S$"
-                    + (totalAllowance - totalExpense));
+                    + String.format ("%.2f", totalAllowance - totalExpense));
             labelOfTotalBudget.setText("The total amount of budget on this year: S$"
                     + totalBudget);
             labelOfMinExpenseDay.setText(monthsLong[monthWithMinExpense]
@@ -582,7 +582,7 @@ public class ReportWindow {
             labelOfTotalAllowance.setText("The total amount of allowance: S$"
                     + totalAllowance);
             labelOfTotalSaving.setText("The total amount of saving: S$"
-                    + (totalAllowance - totalExpense));
+                    + String.format ("%.2f", totalAllowance - totalExpense));
             labelOfTotalBudget.setText("The total amount of budget: S$"
                     + totalBudget);
             labelOfMaxExpenseYear.setText(yearWithMaxExpense

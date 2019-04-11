@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Item;
@@ -68,10 +70,16 @@ public class AllowanceBuilder {
      * Sets the {@code date} of the {@code Expense} that we are building.
      */
     public AllowanceBuilder withDate(String date) {
+        System.out.println(name);
+        System.out.println(date);
         if (date.equals("")) {
             this.date = new Date();
         }
-        this.date = new Date(date);
+        try {
+            this.date = ParserUtil.parseDate(date);
+        } catch (ParseException e) {
+            this.date = new Date();
+        }
         return this;
     }
 

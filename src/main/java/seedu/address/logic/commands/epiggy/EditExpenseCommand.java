@@ -35,10 +35,10 @@ import seedu.address.model.tag.Tag;
 public class EditExpenseCommand extends Command {
 
     public static final String COMMAND_WORD = "editExpense";
-    public static final String COMMAND_ALIAS = "eE";
+    public static final String COMMAND_ALIAS = "ee";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the expense identified "
-            + "by the index number used in the displayed expense list. "
+            + "by the index in the displayed expense list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -49,8 +49,8 @@ public class EditExpenseCommand extends Command {
             + PREFIX_COST + "5 "
             + PREFIX_TAG + "food";
 
-    public static final String MESSAGE_EDIT_EXPENSE_SUCCESS = "Edited Expense: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_EDIT_EXPENSE_SUCCESS = "Expense edited.\nEdited expense's details:\n%1$s";
+    public static final String MESSAGE_NOT_EDITED = "Expense not edited as there are no changes.";
 
     private static final String MESSAGE_ITEM_NOT_EXPENSE = "The item selected is not an expense. "
             + "Please use " + COMMAND_WORD + " to edit expenses and "
@@ -103,10 +103,7 @@ public class EditExpenseCommand extends Command {
         Cost updatedCost = editExpenseDescriptor.getCost().orElse(expenseToEdit.getItem().getCost());
         Date updatedDate = editExpenseDescriptor.getDate().orElse(expenseToEdit.getDate());
         Set<Tag> updatedTags = editExpenseDescriptor.getTags().orElse(expenseToEdit.getItem().getTags());
-
-        if (expenseToEdit instanceof Allowance) {
-            return new Allowance(new Item(updatedName, updatedCost, updatedTags), updatedDate);
-        }
+        System.out.println(updatedTags);
         return new Expense(new Item(updatedName, updatedCost, updatedTags), updatedDate);
     }
 
@@ -197,7 +194,12 @@ public class EditExpenseCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            if (tags != null) {
+                tags.add(new Tag("Expense"));
+                return Optional.of(Collections.unmodifiableSet(tags));
+            } else {
+                return Optional.empty();
+            }
         }
 
         @Override

@@ -26,7 +26,6 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.EPiggyBuilder;
 import seedu.address.testutil.PersonBuilder;
 
-@Ignore
 public class ModelManagerTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -112,6 +111,7 @@ public class ModelManagerTest {
         assertEquals(null, modelManager.getSelectedExpense());
     }
 
+    @Ignore
     @Test
     public void deletePerson_personIsSelectedAndSecondPersonInFilteredPersonList_firstPersonSelected() {
         modelManager.addPerson(ALICE);
@@ -122,6 +122,7 @@ public class ModelManagerTest {
         assertEquals(ALICE, modelManager.getSelectedExpense());
     }
 
+    @Ignore
     @Test
     public void setPerson_personIsSelected_selectedPersonUpdated() {
         modelManager.addPerson(ALICE);
@@ -143,6 +144,7 @@ public class ModelManagerTest {
         modelManager.setSelectedPerson(ALICE);
     }
 
+    @Ignore
     @Test
     public void setSelectedPerson_personInFilteredPersonList_setsSelectedPerson() {
         modelManager.addPerson(ALICE);

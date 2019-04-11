@@ -25,7 +25,7 @@ public class SetGoalCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Nike shoe "
             + PREFIX_COST + "79";
-    public static final String MESSAGE_SUCCESS = "Goal set: %1$s";
+    public static final String MESSAGE_SUCCESS = "Goal set.\nGoal's details:\n%1$s";
 
     private final Goal toSet;
 

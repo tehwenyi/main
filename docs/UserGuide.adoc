@@ -189,6 +189,7 @@ Show details of the net amount of money recorded in ePiggy. +
 
 === Filtering and Sorting Data
 
+// tag::findExpense[]
 ==== Searching for an expense : `findExpense`
 
 You can search for any expense in the list by specifying either its name, tag, date, range of dates, amount or range of amount. +
@@ -197,17 +198,17 @@ You can search for any expense in the list by specifying either its name, tag, d
 
 Examples:
 
-* `fE n/McDonalds` +
+* `fe n/McDonalds` +
 Displays all entries with the name “McDonalds”.
-* `fE t/FOOD` +
+* `fe t/FOOD` +
 Displays all entries with the tag specified (in this case, it’s food).
-* `fE d/02/01/2019` +
+* `fe d/02/01/2019` +
 Displays all entries listed on 2nd Jan 2019.
-* `fE d/02/01/2019:05/12/2020` +
+* `fe d/02/01/2019:05/12/2020` +
 Displays all entries listed in the range 2nd Jan 2019 to 5th Dec 2020 (both inclusive).
-* `fE $/250` +
+* `fe $/250` +
 Displays all entries listed with the cost range of $250.
-* `fE $/250:500` +
+* `fe $/250:500` +
 Displays all entries listed with the cost range of $250 to $500.
 
 ****
@@ -219,7 +220,9 @@ If the entry is not found, it displays an appropriate error message. +
 Date format is `dd/MM/yyyy` .
 'findExpense` and `fE` are equivalent.
 ****
+//end::findExpense[]
 
+//tag::sortExpense[]
 ==== Sorting the expenses : `sortExpense`
 
 The user can sort the expenses in the list by name, date added, amount in ascending or descending order. +
@@ -239,6 +242,7 @@ Sorts all entries by amount in ascending order.
 *Additional Information:* +
 'sortExpense` and `sE` are equivalent.
 ****
+//end::sortExpense[]
 
 === Budgeting
 
@@ -462,22 +466,19 @@ e.g. `addAllowance $/10`
 
 * *Reverse list* : `reverseList`
 
-* *Edit* : `edit INDEX [n/EXPENSE_NAME] [$/COST] [c/CATEGORY] [d/DATE] [t/TAG]…` +
-e.g. `edit 1 n/pen $1 c/supplies`
+* *Edit* : `editExpense INDEX [n/EXPENSE_NAME] [$/COST] [c/CATEGORY] [d/DATE] [t/TAG]…` +
+e.g. `ee 1 n/pen $1 c/supplies`
 
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-
-* *View Expense* : `view INDEX` +
-e.g. `view 3`
+* *Delete Expense* : `de INDEX` +
+e.g. `de 3`
 
 * *View Savings* : `viewSavings`
 
 * *Find* : `findExpense -[n/t/d/$] [NAME/TAG/DATE RANGE/AMOUNT RANGE]` +
-e.g.`fE n/MCDONALDS $/8.50:12`
+e.g.`fe n/MCDONALDS $/8.50:12`
 
 * *Sort* : `sortExpense -[n/d/$]` +
-e.g.`sE -n`
+e.g.`se -n`
 
 * *Add Budget* : `addBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS d/START_DATE` +
 e.g.`addBudget $/500.00 p/7 d/01/02/2019`

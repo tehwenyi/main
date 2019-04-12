@@ -15,7 +15,6 @@ import seedu.address.logic.commands.epiggy.EditAllowanceCommand;
 import seedu.address.logic.commands.epiggy.EditExpenseCommand;
 import seedu.address.logic.commands.epiggy.ReportCommand;
 import seedu.address.logic.parser.CliSyntax;
-import seedu.address.model.Model;
 
 public class ReportCommandIntegrationTest extends EPiggySystemTestWithEmptyData {
     private static final String ERROR_MESSAGE = "ATTENTION!!!! : On some computers, this test may fail when run on "
@@ -27,9 +26,8 @@ public class ReportCommandIntegrationTest extends EPiggySystemTestWithEmptyData 
     @Test
     public void openReportWindowAfterAddNewData() {
 
-        String messageHistory = "";
+        String messageHistory;
         String command;
-        Model expectedModel = getModel();
         // add expense 1
         command = AddExpenseCommand.COMMAND_WORD + " n/expense1 $/100 t/breakfast d/21/03/2019";
         executeCommand(command);

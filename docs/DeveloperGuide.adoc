@@ -698,6 +698,8 @@ One element in return array is appended at the end of the new string. This new s
 ** Cons: Third party library is needed. There is not such kind of library under MIT licence and school is not allow to use them.
 // end::autocomplete[]
 
+
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 

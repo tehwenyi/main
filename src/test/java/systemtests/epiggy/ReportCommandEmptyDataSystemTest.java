@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import guitests.GuiRobot;
 import guitests.guihandles.epiggy.ReportWindowHandle;
+import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.epiggy.ReportCommand;
 import seedu.address.logic.parser.CliSyntax;
 
@@ -17,12 +18,14 @@ public class ReportCommandEmptyDataSystemTest extends EPiggySystemTestWithEmptyD
             + "that this is a bug with TestFX library that we are using. If this test fails, you have to run your "
             + "tests on headless mode. See UsingGradle.adoc on how to do so.";
     private static final GuiRobot guiRobot = new GuiRobot();
-
+    private StringBuilder sb = new StringBuilder();
+    private static final String USER_INPUT_DATE = "21/03/2019";
+    private static final String USER_INPUT_MONTH = "03/2019";
+    private static final String USER_INPUT_YEAR = "2019";
     @Test
     public void openReportWindow() {
 
-        String messageHistory = "";
-        String command = "";
+        String command;
 
         //use menu button to open report window
         // TODO: this test case may fail sometime. Comment it if it happens.
@@ -35,48 +38,24 @@ public class ReportCommandEmptyDataSystemTest extends EPiggySystemTestWithEmptyD
 
         // open report window and give it focus
         executeCommand(ReportCommand.COMMAND_WORD);
+        sb.append("========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+                + "You: " + ReportCommand.COMMAND_WORD + "\n");
         getMainWindowHandle().focus();
+        assertReportWindowOpen();
 
         // check report window for specified day
-        executeCommand(ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "21/03/2019");
-        assertReportWindowOpen();
-        assertEquals("", getCommandBox().getInput());
-        assertCommandBoxShowsDefaultStyle();
-        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + ReportCommand.COMMAND_WORD + "\n";
-        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + ReportCommand.COMMAND_WORD + "\n" + messageHistory;
-        assertEquals(messageHistory, getResultDisplay().getText());
+        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + USER_INPUT_DATE;
+        sb.insert(0, "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+                + "You: " + ReportCommand.COMMAND_WORD + "\n");
+        assertSuccess(command, CliSyntax.PREFIX_DATE + USER_INPUT_DATE);
 
         // check report window for specified month
-        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "03/2019";
-        executeCommand(command);
-        assertReportWindowOpen();
-        assertEquals("", getCommandBox().getInput());
-        assertCommandBoxShowsDefaultStyle();
-        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + command + "\n" + messageHistory;
-        assertEquals(messageHistory, getResultDisplay().getText());
+        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + USER_INPUT_MONTH;
+        assertSuccess(command, CliSyntax.PREFIX_DATE + USER_INPUT_MONTH);
 
         // check report window for specified year
-        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "2019";
-        executeCommand(command);
-        assertReportWindowOpen();
-        assertEquals("", getCommandBox().getInput());
-        assertCommandBoxShowsDefaultStyle();
-        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + command + "\n" + messageHistory;
-        assertEquals(messageHistory, getResultDisplay().getText());
-
-        // check report window for specified date
-        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "21/03/2019";
-        executeCommand(command);
-        assertReportWindowOpen();
-        assertEquals("", getCommandBox().getInput());
-        assertCommandBoxShowsDefaultStyle();
-        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + command + "\n" + messageHistory;
-        assertEquals(messageHistory, getResultDisplay().getText());
+        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + USER_INPUT_YEAR;
+        assertSuccess(command, CliSyntax.PREFIX_DATE + USER_INPUT_YEAR);
     }
 
     /**
@@ -88,6 +67,23 @@ public class ReportCommandEmptyDataSystemTest extends EPiggySystemTestWithEmptyD
 
         new ReportWindowHandle(guiRobot.getStage(ReportWindowHandle.REPORT_WINDOW_TITLE)).close();
         getMainWindowHandle().focus();
+    }
+
+    /**
+     * Checks for report window whether correctly open.
+     * check input.
+     * check textarea.
+     * @param command User input command.
+     * @param specifiedTime User input date/month/year.
+     */
+    private void assertSuccess(String command, String specifiedTime) {
+        executeCommand(command);
+        assertReportWindowOpen();
+        assertEquals("", getCommandBox().getInput());
+        assertCommandBoxShowsDefaultStyle();
+        sb.insert(0,"========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+                + "You: " + ReportCommand.COMMAND_WORD + " " + specifiedTime + "\n");
+        assertEquals(sb.toString(), getResultDisplay().getText());
     }
 
     /**

@@ -9,40 +9,40 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.epiggy.SortExpenseCommand;
+import seedu.address.logic.commands.epiggy.SortCommand;
 import seedu.address.model.epiggy.comparators.CompareExpenseByCost;
 import seedu.address.model.epiggy.comparators.CompareExpenseByDate;
 import seedu.address.model.epiggy.comparators.CompareExpenseByName;
 
-public class SortExpenseCommandParserTest {
+public class SortCommandParserTest {
 
     private SortExpenseCommandParser parser = new SortExpenseCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, " ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                SortExpenseCommand.MESSAGE_USAGE));
+                SortCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsSortExpenseCommand() {
         assertParseSuccess(parser, " " + PREFIX_NAME.toString(),
-                new SortExpenseCommand(new CompareExpenseByName()));
+                new SortCommand(new CompareExpenseByName()));
         assertParseSuccess(parser, " " + PREFIX_COST.toString(),
-                new SortExpenseCommand(new CompareExpenseByCost()));
+                new SortCommand(new CompareExpenseByCost()));
         assertParseSuccess(parser, " " + PREFIX_DATE.toString(),
-                new SortExpenseCommand(new CompareExpenseByDate()));
+                new SortCommand(new CompareExpenseByDate()));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, " -n",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortExpenseCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         assertParseFailure(parser, " /d ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortExpenseCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "/c/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                SortExpenseCommand.MESSAGE_USAGE));
+                SortCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "/c/n/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                SortExpenseCommand.MESSAGE_USAGE));
+                SortCommand.MESSAGE_USAGE));
     }
 }

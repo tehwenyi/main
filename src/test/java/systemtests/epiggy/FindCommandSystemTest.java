@@ -6,17 +6,17 @@ import static seedu.address.testutil.epiggy.TypicalReports.KEYWORD_MATCHING_STAT
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.epiggy.FindExpenseCommand;
+import seedu.address.logic.commands.epiggy.FindCommand;
 import seedu.address.model.Model;
 
-public class FindExpenseCommandSystemTest extends EPiggySystemTestWithDefaultData {
+public class FindCommandSystemTest extends EPiggySystemTestWithDefaultData {
     private StringBuilder stringBuilder = new StringBuilder();
     @Test
     public void find() {
         /* Case: find an expense in ePiggy, command with leading spaces and trailing spaces
          * -> 1 expenses found
          */
-        String command = "   " + FindExpenseCommand.COMMAND_WORD + " n/" + KEYWORD_MATCHING_STATIONARY + "   ";
+        String command = "   " + FindCommand.COMMAND_WORD + " n/" + KEYWORD_MATCHING_STATIONARY + "   ";
         Model expectedModel = getModel();
         assertCommandSuccess(command, expectedModel, 1);
         assertSelectedCardUnchanged();
@@ -24,27 +24,27 @@ public class FindExpenseCommandSystemTest extends EPiggySystemTestWithDefaultDat
         /* Case: repeat previous find command where expense list is displaying the expense we are finding
          * -> 1 expense found
          */
-        command = FindExpenseCommand.COMMAND_WORD + " t/" + KEYWORD_MATCHING_DINNER;
+        command = FindCommand.COMMAND_WORD + " t/" + KEYWORD_MATCHING_DINNER;
         assertCommandSuccess(command, expectedModel, 1);
         assertSelectedCardUnchanged();
 
         /* Case: repeat previous find command where expense list is displaying the expense we are finding
          * -> 0 expense found
          */
-        command = FindExpenseCommand.COMMAND_WORD + " d/" + "7/4/2019";
+        command = FindCommand.COMMAND_WORD + " d/" + "7/4/2019";
         assertCommandSuccess(command, expectedModel, 0);
         assertSelectedCardUnchanged();
 
         /* Case: repeat previous find command where expense list is displaying the expense we are finding
          * -> 0 expense found
          */
-        command = FindExpenseCommand.COMMAND_WORD + " d/"
+        command = FindCommand.COMMAND_WORD + " d/"
                 + KEYWORD_MATCHING_START_DATE + ":" + "26/04/2019";
         assertCommandSuccess(command, expectedModel, 0);
         assertSelectedCardUnchanged();
 
         /* Case: find expense where expense list is not displaying the expense we are finding -> 0 expense found */
-        command = FindExpenseCommand.COMMAND_WORD + " n/" + "Invalid name";
+        command = FindCommand.COMMAND_WORD + " n/" + "Invalid name";
         assertCommandSuccess(command, expectedModel, 0);
         assertSelectedCardUnchanged();
         //        /* Case: find multiple persons in address book, 2 keywords -> 2 persons found */

@@ -35,9 +35,9 @@ import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.ExpenseContainsKeywordsPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindExpenseCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
-public class FindExpenseCommandIntegrationTest {
+public class FindCommandIntegrationTest {
     private Model model = new ModelManager(getTypicalEPiggy(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalEPiggy(), new UserPrefs());
 
@@ -50,14 +50,14 @@ public class FindExpenseCommandIntegrationTest {
         ExpenseContainsKeywordsPredicate secondPredicate =
                 new ExpenseContainsKeywordsPredicate(secondMap);
 
-        FindExpenseCommand findFirstCommand = new FindExpenseCommand(firstPredicate);
-        FindExpenseCommand findSecondCommand = new FindExpenseCommand(secondPredicate);
+        FindCommand findFirstCommand = new FindCommand(firstPredicate);
+        FindCommand findSecondCommand = new FindCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindExpenseCommand findFirstCommandCopy = new FindExpenseCommand(firstPredicate);
+        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -172,7 +172,7 @@ public class FindExpenseCommandIntegrationTest {
         ArgumentMultimap keywordsMap =
                 ArgumentTokenizer.tokenize(userInput, prefixes);
         ExpenseContainsKeywordsPredicate predicate = new ExpenseContainsKeywordsPredicate(keywordsMap);
-        FindExpenseCommand command = new FindExpenseCommand(predicate);
+        FindCommand command = new FindCommand(predicate);
         command.execute(model, null);
         expectedModel.updateFilteredExpensesList(predicate);
         // assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);

@@ -21,7 +21,7 @@ public class AddExpenseCommand extends Command {
     public static final String COMMAND_WORD = "addExpense";
     public static final String COMMAND_ALIAS = "ae";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " adds an expense to the expense book.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an expense to the expense book.\n"
             + "Parameters: "
             + PREFIX_NAME + "EXPENSE NAME "
             + PREFIX_COST + "COST "

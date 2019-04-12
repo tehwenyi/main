@@ -27,8 +27,7 @@ public class ClearCommandSystemTest extends EPiggySystemTest {
 
         /* Case: undo clearing address book -> original address book restored */
         String command = UndoCommand.COMMAND_WORD;
-        String expectedResultMessage = "========================\n" + "ePiggy: " + UndoCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + command + "\n";
+        String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, expectedResultMessage, defaultModel);
         assertSelectedCardUnchanged();
 

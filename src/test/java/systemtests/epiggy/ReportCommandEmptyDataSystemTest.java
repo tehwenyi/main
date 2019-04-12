@@ -8,20 +8,19 @@ import org.junit.Test;
 
 import guitests.GuiRobot;
 import guitests.guihandles.epiggy.ReportWindowHandle;
-import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.epiggy.ReportCommand;
 import seedu.address.logic.parser.CliSyntax;
 
 public class ReportCommandEmptyDataSystemTest extends EPiggySystemTestWithEmptyData {
+    private static final String USER_INPUT_DATE = "21/03/2019";
+    private static final String USER_INPUT_MONTH = "03/2019";
+    private static final String USER_INPUT_YEAR = "2019";
     private static final String ERROR_MESSAGE = "ATTENTION!!!! : On some computers, this test may fail when run on "
             + "non-headless mode as FxRobot#clickOn(Node, MouseButton...) clicks on the wrong location. We suspect "
             + "that this is a bug with TestFX library that we are using. If this test fails, you have to run your "
             + "tests on headless mode. See UsingGradle.adoc on how to do so.";
     private static final GuiRobot guiRobot = new GuiRobot();
     private StringBuilder sb = new StringBuilder();
-    private static final String USER_INPUT_DATE = "21/03/2019";
-    private static final String USER_INPUT_MONTH = "03/2019";
-    private static final String USER_INPUT_YEAR = "2019";
     @Test
     public void openReportWindow() {
 
@@ -81,7 +80,7 @@ public class ReportCommandEmptyDataSystemTest extends EPiggySystemTestWithEmptyD
         assertReportWindowOpen();
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
-        sb.insert(0,"========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+        sb.insert(0, "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
                 + "You: " + ReportCommand.COMMAND_WORD + " " + specifiedTime + "\n");
         assertEquals(sb.toString(), getResultDisplay().getText());
     }

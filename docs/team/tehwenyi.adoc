@@ -94,23 +94,79 @@ _{you can add/remove categories in the list above}_
 == Contributions to the User Guide
 
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_Documented below are my contributions to the User Guide. They showcase my ability to convey clear and coherent
+information for end-users who may not be familiar with computing technicalities._
 |===
 
+Click link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/docs/UserGuide.adoc[here] to view the full User Guide!
+
+=== Overview
+
+==== Standardised and improved the aesthetics of the User Guide
+As I am in-charge of documentation, I designed and added the header and images across the user guide to make it more
+inviting and reader friendly, considering that our target users are students. Below are some examples of my designs:
+
+image::userguide.png[width="200"]
+
+_Figure 1: Header added in the User Guide to better engage our target audience_
+Besides that, I standardised the language and formatting of the user guide to provide greater coherence.
+
+==== Contributed content to the User Guide
+I wrote the *Introduction* of the User Guide, making sure it is clear, concise and engaging.
+Also, I wrote the *Budgeting* feature which teaches users how to use the `budget` commands in a clear and informative
+manner. My contributions for the *Budgeting* feature can be found below, in Section 3.2.
+
+=== Extract from User Guide
+|===
+|_My contribution towards the *Budgeting* feature in the User Guide can be split into 3 segments: `addBudget`,
+`editBudget` and `deleteBudget`. The extracts below are my contributions to the User Guide._
+|===
+
+==== Add Budget Feature: addBudget
 include::../UserGuide.adoc[tag=addbudget]
 
+==== Edit Budget Feature: editBudget
 include::../UserGuide.adoc[tag=editbudget]
 
+==== Delete Budget Feature: deleteBudget
 include::../UserGuide.adoc[tag=deletebudget]
 
 == Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_Documented below are my contributions to the Developer Guide. They showcase the technical depth of my contributions
+to the project and my ability to convey all necessary technical information clearly._
 |===
 
+Click link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/docs/DeveloperGuide.adoc[here] to view the full
+Developer Guide!
+
+=== Overview
+
+==== Standardised and improved the aesthetics of the Developer Guide
+Similar to my contributions to the User Guide, I designed and added the header and images across the developer guide to
+reduce word clutter and make it more readable. Below are some examples of my designs:
+
+image::developerguide.png[width="200"]
+
+_Figure 1: Header added in the Developer Guide_
+Besides that, I standardised the language and formatting of the developer guide to provide greater coherence.
+
+==== Contributed content to the Developer Guide
+I documented the implementation details and design considerations for the *Budgeting* feature.
+I also created diagrams to aid in the explanations. My contributions can be found below, in Section 4.2.
+
+=== Extract of Developer Guide
+|===
+|_My contribution towards the Developer Guide can be split into 3 segments: `addBudget`,
+`editBudget` and `deleteBudget`. The extracts below are my contributions to the Developer Guide._
+|===
+
+=== Add Budget Feature: addBudget
 include::../DeveloperGuide.adoc[tag=addbudget]
 
+=== Edit Budget Feature: editBudget
 include::../DeveloperGuide.adoc[tag=editbudget]
 
+=== Delete Budget Feature: deleteBudget
 include::../DeveloperGuide.adoc[tag=deletebudget]

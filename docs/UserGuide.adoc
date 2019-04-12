@@ -28,13 +28,10 @@ Managing money is made much simpler for you with a simple interface and simple c
 At the same time, *_ePiggy_* offers everything you need to cultivate good spending habits before
 entering the workforce, from tracking expenses and managing budgets to setting goals! +
 
-Interested? Click on the Quick Start to get started!
-
-== About
-This user guide provides a comprehensive view on how to set up ePiggy, the features available, and frequently asked questions.
+Interested? Click on the <<Quick Start>> to get started!
 
 == Quick Start
-To start using ePiggy, simply follow these steps::
+To start using ePiggy, simply follow these steps:::
 1. Ensure you have Java version `9` or later installed on your computer. +
 2. Download the latest *`ePiggy.jar`* file from link:{repoURL}/releases[here]. +
 3. Copy the file to the folder which you want to use as the home folder for your Expense Tracker. +
@@ -46,12 +43,15 @@ _Figure 1. The user interface upon launch of application_
 
 *Some sample commands you can try:*
 
-* `addExpense n/Chicken Rice $/4 t/dinner` +
-This command adds a new expense of $4 for Chicken Rice today.
-* `addAllowance $/20` +
-This command adds a new allowance of $20.
+* `addExpense n/Chicken Rice $/4 t/dinner d/01/02/2019` +
+This command adds a new expense of $4 for Chicken Rice on 1st February.
+* `addAllowance n/From Mum $/20 d/01/02/2019` +
+This command adds a new allowance of $20 tagged as 'From Mum' on 1st February.
 * `addBudget $/500 p/28 d/01/02/2019` +
 This command adds a budget of $500 from 1st February 2019 to 28th February 2019 (28 days).
+
+image::UiFilled.png[width="760"]
+_Figure 2. The user interface after the above commands have been entered._
 
 [[Features]]
 == Features
@@ -281,8 +281,27 @@ Time period cannot exceed 1 million days. +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
 
-*Display status of budget:* +
-ePiggy will show the status of the current budget whenever a new expense is added. +
+*Display of budget:* +
+ePiggy will show the status of the budgets whenever a new expense is added, edited or deleted. +
+
+image::UiFilled.png[width="760"]
+_Figure 3. Example of the status of a current budget._
+
+There will also a reminder for you, depending on the status of your budget. There are 3 different reminders as shown
+below.
+
+image::budgetExceeded.png[width="300"]
+_Figure 4. Reminder shown when budget has exceeded._
+
+image::budgetEmpty.png[width="300"]
+_Figure 5. Reminder shown when you have $0 left in your budget._
+
+image::budget80percent.png[width="300"]
+_Figure 6. Reminder shown when you have spent more than 80% of the budget._
+
+image::budgetNormal.png[width="300"]
+_Figure 7. Quote provided as a reminder when spendings are well within budget._
+
 // end::addBudget[]
 
 // tag::editBudget[]
@@ -330,6 +349,26 @@ Deletes the first budget in the Budget List.
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
 // end::deleteBudget[]
+
+=== Goal Setting
+// tag::setGoal[]
+==== Setting the savings goal : `setGoal`
+
+Sets the item and the amount that the user wishes to save up for. +
+*Alias:* `sg` +
+*Format:* `setGoal n/ITEM_NAME $/AMOUNT`
+
+Example:
+
+* `setGoal n/nike shoes $/80` +
+Sets the goal to a $80 Nike shoe.
+
+****
+*Additional Information:* +
+Details about the current goal and the amount required to save up to hit the current goal
+can be found on the User Interface.
+****
+// end::setGoal[]
 
 // tag::report[]
 === Expense Report
@@ -383,27 +422,6 @@ image::reportYear.png[width="500"]
 Figure of example 4: Report for specified year.
 // end::report[]
 
-=== Goal Setting
-// tag::setGoal[]
-==== Setting the savings goal : `setGoal`
-
-Sets the item and the amount that the user wishes to save up for. +
-*Alias:* `sg` +
-*Format:* `setGoal n/ITEM_NAME $/AMOUNT`
-
-Example:
-
-* `setGoal n/nike shoes $/80` +
-Sets the goal to a $80 Nike shoe.
-
-****
-*Additional Information:* +
-Details about the current goal and the amount required to save up to hit the current goal
-can be found on the User Interface.
-****
-
-// end::setGoal[]
-
 === Miscellaneous
 
 ==== Exiting the program : `exit`
@@ -419,90 +437,89 @@ There is no need to save manually.
 
 === Upcoming Features
 
-// tag::dataencryption[]
+// tag::v2.0[]
+==== Register `[coming in v2.0]`
+
+Allows you to register for an account in ePiggy, so that your account can store your ePiggy information. +
+
+==== Login and Logout `[coming in v2.0]`
+
+Allows you to log in and out of ePiggy using your username and password, if your account exists already.
+This will keep your information safe. +
+This feature will be implemented only after the `register` feature has been added. +
+
 ==== Encrypting data files `[coming in v2.0]`
 
-User can enable/disable data encryption to secure their files.
-// end::dataencryption[]
+You can choose to enable data encryption to secure your ePiggy information.
 
-==== Compare between users `[coming in v2.0]`
+==== Share `[coming in v2.0]`
 
-Compares between different users.
-Requires multiple accounts in the same network.
-
-// tag::v2.0[]
-==== Login and logout to ePiggy `[coming in v2.0]`
-
-Login and logout ePiggy as an existing user. +
-
-==== Register to ePiggy `[coming in v2.0]`
-
-Register a new user in ePiggy. +
-// end::v2.0[]
-
-
-==== Share feature `[coming in v2.0]`
-
-Allows you to share your expenses with anyone, by sending them an email
-including an attachment of your personal `ePiggy` data in CSV format. +
-
+Allows you to share your expenses with others! ePiggy will send an email (which you input)
+with an attachment of your personal `ePiggy` data in CSV format. +
 
 ==== Recommend future spendings `[coming in v2.0]`
 
-Recommends a daily limit you need to have in order to satisfy your budget and the income you need to have if you
-intend to maintain your current spending habits. +
+Recommends steps you can take to keep to your budget. +
+ePiggy will give you 2 recommendations. First, a daily spending limit. Next, the increase in allowance you need
+if you intend to maintain your current spending habits. You can choose to adopt any of the 2 recommendations. +
+// end::v2.0[]
 
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the
-data of your previous ePiggy folder.
+*A*: You can follow the steps below to transfer your data: +
+1. Install _ePiggy_ in the other computer. +
+2. Locate the empty 'data' folder which is in the same folder as the _ePiggy_ jar file. If there is no such folder,
+run the ePiggy jar file and close it. +
+3. Locate the file named _ePiggy.json_ in the _data_ folder from your previous computer. +
+4. Transfer the file mentioned in _Step 3_ into the folder mentioned in _Step 2_. +
+5. Your data should be transferred over successfully. You can run _ePiggy_ in your other computer to see the data.
 
 == Command Summary
-
-* *Help* : `help`
-
-* *Add Expense* : `addExpense n/EXPENSE_NAME $/COST [d/DATE] [t/TAG]…` +
-e.g. `addExpense n/Chicken rice set $/5 t/Food d/21/02/2019`
-
-* *Edit Expense* : `editExpense INDEX [n/EXPENSE_NAME] [$/COST] [d/DATE] [t/TAG]…` +
-e.g. `editExpense 1 n/Pen $/1 t/Supplies`
-
-* *Delete Expense* : `deleteExpense INDEX` +
-e.g. `deleteExpense 3`
 
 * *Add Allowance* : `addAllowance n/ALLOWANCE_NAME $/AMOUNT [d/DATE] [t/TAG]…` +
 e.g. `addAllowance n/From Mom $/20 t/School d/21/02/2019`
 
-* *Edit Allowance* : `editAllowance INDEX [n/ALLOWANCE_NAME] [$/COST] [d/DATE] [t/TAG]…` +
-e.g. `editAllowance 1 n/From Mom $10 t/Emergency`
-
-* *Delete Allowance* : `deleteAllowance INDEX` +
-e.g. `deleteAllowance 3`
-
-* *List* : `list`
-
-* *Reverse list* : `reverseList`
-
-* *Find Expenses* : `findExpense [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]` +
-e.g.`findExpense n/McDonalds`
-
-* *Sort Expenses* : `sortExpense [n/d/$]/` +
-e.g.`sortExpense d/`
-
 * *Add Budget* : `addBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS d/START_DATE` +
 e.g.`addBudget $/500.00 p/7 d/01/02/2019`
 
-* *Edit Budget* : `editBudget [$/AMOUNT] [p/TIME_PERIOD_IN_DAYS] [d/START_DATE]` +
-e.g.`editBudget $/300.00 p/28`
+* *Add Expense* : `addExpense n/EXPENSE_NAME $/COST [d/DATE] [t/TAG]…` +
+e.g. `addExpense n/Chicken rice set $/5 t/Food d/21/02/2019`
+
+* *Delete Allowance* : `deleteAllowance INDEX` +
+e.g. `deleteAllowance 3
 
 * *Delete Budget* : `deleteBudget INDEX` +
 e.g.`deleteBudget 2`
 
+* *Delete Expense* : `deleteExpense INDEX` +
+e.g. `deleteExpense 3`
+
+* *Edit Allowance* : `editAllowance INDEX [n/ALLOWANCE_NAME] [$/COST] [d/DATE] [t/TAG]…` +
+e.g. `editAllowance 1 n/From Mom $10 t/Emergency`
+
+* *Edit Budget* : `editBudget [$/AMOUNT] [p/TIME_PERIOD_IN_DAYS] [d/START_DATE]` +
+e.g.`editBudget $/300.00 p/28`
+
+* *Edit Expense* : `editExpense INDEX [n/EXPENSE_NAME] [$/COST] [d/DATE] [t/TAG]…` +
+e.g. `editExpense 1 n/Pen $/1 t/Supplies`
+
+* *Exit* : `exit`
+
+* *Find Expenses* : `findExpense [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]` +
+e.g.`findExpense n/McDonalds`
+
+* *Help* : `help`
+
+* *List* : `list`
+
 * *Report* : `report d/DD/MM/YYYY` +
 e.g. `report d/21/03/2019`
+
+* *Reverse list* : `reverseList`
 
 * *Set Savings Goal* : `setGoal n/ITEM_NAME $/AMOUNT` +
 e.g. `setGoal n/nike shoes $/80`
 
-* *Exit* : `exit`
+* *Sort Expenses* : `sortExpense [n/d/$]/` +
+e.g.`sortExpense d/`

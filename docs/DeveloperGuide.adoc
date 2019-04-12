@@ -613,6 +613,8 @@ Only last tag `d/` is used to generate a report if multiply of `d/` appear.
 
 ==== Current Implementation
 
+This part shows current implementation of the report feature. It also shows which classes or components are used in the report feature.
+
 The command is first parsed into link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/parser/epiggy/ReportCommandParser.java[`ReportCommandParser`],
 which separates the arguments into their respective fields. A new link:https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html[`localDate`]
 object is created and link:[`type`] of the report are generated according to the date format of `d/`.
@@ -637,6 +639,10 @@ link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/see
 4. The method link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`displayReportController`] is called and report will show.
 
 ==== Design Considerations
+
+This part shows design considerations of the report feature. Multiply design considerations are showed. The pros and cons of each of the
+alternative choice lists below.
+
 *Aspect: How to make report more readable?* +
 
 * *Alternative 1 (current choice)*: the `report` command uses a chart to display different data of expenses, budgets and allowances.
@@ -676,6 +682,8 @@ The commandBox will show " `hello addExpense n/ $/ t/ d/` " or " `hello addAllow
 
 ==== Current Implementation
 
+This part shows current implementation of the autocomplete feature. It also shows which classes or components are used in the autocomplete feature.
+
 The code of the autocomplete function is in link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] class.
 The autoCompleteText method is invoked when user presses *Tab*. The sub-string (last part split by white space) of user input text and a checklist of commands pass into
 link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`].
@@ -690,6 +698,10 @@ in the commandBox.
 One element in return array is appended at the end of the new string. This new string replaces and shows in the commandBox.
 
 ==== Design Considerations
+
+This part shows design considerations of the autocomplete feature. Multiply design considerations are showed. The pros and cons of each of the
+alternative choice lists below.
+
 *Aspect: How to implement such function in UI?* +
 
 * *Alternative 1 (current choice)*: There is not dropdown list appears when user enters letters in commandBox. The matched command shows after user press *Tab*.

@@ -39,6 +39,14 @@ public class ReportCommand extends Command {
     private String type = "ALL";
     private LocalDate date;
 
+    public String getType() {
+        return type;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
     /**
      * Constructor with chart type.
      * @param date

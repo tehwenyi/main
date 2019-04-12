@@ -416,19 +416,7 @@ There is no need to save manually.
 
 === Upcoming Features
 
-// tag::dataencryption[]
-==== Encrypting data files `[coming in v2.0]`
-
-User can enable/disable data encryption to secure their files.
-// end::dataencryption[]
-
-==== Compare between users `[coming in v2.0]`
-
-Compares between different users.
-Requires multiple accounts in the same network.
-
 // tag::v2.0[]
-
 ==== Register `[coming in v2.0]`
 
 Allows you to register for an account in ePiggy, so that your account can store your ePiggy information. +
@@ -439,11 +427,14 @@ Allows you to log in and out of ePiggy using your username and password, if your
 This will keep your information safe. +
 This feature will be implemented only after the `register` feature has been added. +
 
+==== Encrypting data files `[coming in v2.0]`
+
+You can choose to enable data encryption to secure your ePiggy information.
+
 ==== Share `[coming in v2.0]`
 
 Allows you to share your expenses with others! ePiggy will send an email (which you input)
 with an attachment of your personal `ePiggy` data in CSV format. +
-
 
 ==== Recommend future spendings `[coming in v2.0]`
 

@@ -328,6 +328,26 @@ Budget does not take into account allowances as budget only accounts for expense
 ****
 // end::deleteBudget[]
 
+=== Goal Setting
+// tag::setGoal[]
+==== Setting the savings goal : `setGoal`
+
+Sets the item and the amount that the user wishes to save up for. +
+*Alias:* `sg` +
+*Format:* `setGoal n/ITEM_NAME $/AMOUNT`
+
+Example:
+
+* `setGoal n/nike shoes $/80` +
+Sets the goal to a $80 Nike shoe.
+
+****
+*Additional Information:* +
+Details about the current goal and the amount required to save up to hit the current goal
+can be found on the User Interface.
+****
+// end::setGoal[]
+
 // tag::report[]
 === Expense Report
 
@@ -379,27 +399,6 @@ View the specified year report of 2019.
 image::reportYear.png[width="500"]
 Figure of example 4: Report for specified year.
 // end::report[]
-
-=== Goal Setting
-// tag::setGoal[]
-==== Setting the savings goal : `setGoal`
-
-Sets the item and the amount that the user wishes to save up for. +
-*Alias:* `sg` +
-*Format:* `setGoal n/ITEM_NAME $/AMOUNT`
-
-Example:
-
-* `setGoal n/nike shoes $/80` +
-Sets the goal to a $80 Nike shoe.
-
-****
-*Additional Information:* +
-Details about the current goal and the amount required to save up to hit the current goal
-can be found on the User Interface.
-****
-
-// end::setGoal[]
 
 === Miscellaneous
 

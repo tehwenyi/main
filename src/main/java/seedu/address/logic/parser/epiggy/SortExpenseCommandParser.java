@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.ParserUtil.validateKeywordsForSort;
 
 import java.util.Comparator;
 import java.util.stream.Stream;
@@ -54,7 +55,7 @@ public class SortExpenseCommandParser implements Parser<SortExpenseCommand> {
 
         ArgumentMultimap keywordsMap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_COST, PREFIX_DATE);
-
+        validateKeywordsForSort(keywordsMap);
         Comparator<Expense> comparator = null;
 
         if (arePrefixesPresent(keywordsMap, PREFIX_NAME)) {

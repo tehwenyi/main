@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.ParserUtil.validateKeywords;
 
 import seedu.address.logic.commands.epiggy.FindExpenseCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -48,6 +49,7 @@ public class FindExpenseCommandParser implements Parser<FindExpenseCommand> {
 
         ArgumentMultimap keywordsMap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_COST, PREFIX_TAG, PREFIX_DATE);
+        validateKeywords(keywordsMap);
 
         ExpenseContainsKeywordsPredicate predicate = new ExpenseContainsKeywordsPredicate(keywordsMap);
         return new FindExpenseCommand(predicate);

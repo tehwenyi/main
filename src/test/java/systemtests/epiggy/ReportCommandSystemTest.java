@@ -56,7 +56,6 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
         getMainWindowHandle().focus();
 
         // check report window for specified day
-        //TODO: some Java internal error here. Remove this test case will make the error.
         executeCommand(ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "21/03/2019");
         assertReportWindowOpen();
         assertEquals("", getCommandBox().getInput());

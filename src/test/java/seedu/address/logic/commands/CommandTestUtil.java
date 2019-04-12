@@ -65,7 +65,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FOOD = "food";
     public static final String VALID_TAG_FRIENDS = "friends";
     public static final String VALID_DATE_2018 = "10/07/2018";
-    public static final String VALID_DATE_2019 = "03/20/2019";
+    public static final String VALID_DATE_2019 = "02/03/2019";
     public static final String VALID_NAME_BOWLING = "bowling at West Bowl centre";
     public static final String VALID_COST_BOWLING = "4.80";
     public static final String VALID_NAME_IPHONE = "IPhone XR from challenger";
@@ -246,6 +246,15 @@ public class CommandTestUtil {
      * Deletes the first expense in {@code model}'s filtered list from {@code model}'s address book.
      */
     public static void deleteFirstPerson(Model model) {
+        Expense firstExpense = model.getFilteredExpenseList().get(0);
+        model.deleteExpense(firstExpense);
+        model.commitEPiggy();
+    }
+
+    /**
+     * Deletes the first expense in {@code model}'s filtered list from {@code model}'s ePiggy.
+     */
+    public static void deleteFirstExpense(Model model) {
         Expense firstExpense = model.getFilteredExpenseList().get(0);
         model.deleteExpense(firstExpense);
         model.commitEPiggy();

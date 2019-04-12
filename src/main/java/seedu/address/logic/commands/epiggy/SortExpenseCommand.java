@@ -65,4 +65,9 @@ public class SortExpenseCommand extends Command {
     public int hashCode() {
         return Objects.hash(expenseComparator);
     }
+
+    @Override
+    public String toString() {
+        return expenseComparator.toString();
+    }
 }

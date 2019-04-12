@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.address.logic.commands.epiggy.SortExpenseCommand;
@@ -15,7 +14,6 @@ import seedu.address.model.epiggy.comparators.CompareExpenseByCost;
 import seedu.address.model.epiggy.comparators.CompareExpenseByDate;
 import seedu.address.model.epiggy.comparators.CompareExpenseByName;
 
-@Ignore
 public class SortExpenseCommandParserTest {
 
     private SortExpenseCommandParser parser = new SortExpenseCommandParser();

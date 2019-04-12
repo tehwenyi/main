@@ -11,7 +11,7 @@ public class CompareExpenseByCost implements Comparator<Expense> {
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        return obj instanceof CompareExpenseByCost;
     }
 
     @Override

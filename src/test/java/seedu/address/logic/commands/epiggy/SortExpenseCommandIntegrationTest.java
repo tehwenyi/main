@@ -25,7 +25,7 @@ import seedu.address.model.epiggy.comparators.CompareExpenseByName;
 /**
  * Contains integration tests (interaction with the Model) for {@code SortExpenseCommand}.
  */
-public class SortExpenseCommandTest {
+public class SortExpenseCommandIntegrationTest {
     private Model model = new ModelManager(getTypicalEPiggy(), new UserPrefs());
     private Model expectedModel;
 

@@ -1,18 +1,17 @@
-= Teh Wen Yi - Project Portfolio for ePiggy
+= Teh Wen Yi - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
 image::projectportfolioheader.png[width="600"]
----
-
-== Introduction
-=== Purpose
 
 This portfolio aims to document my contributions to *_ePiggy_*.
 
 *_ePiggy_* Github link: https://github.com/CS2103-AY1819S2-W17-4/main
 
+---
+
+== Introduction
 === About
 // what specific project task is, what module it is for, whether it is an indiv or grp proj
 *ePiggy* is a desktop application designed to inculcate good spending habits in students
@@ -98,9 +97,11 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=addbudget]
 
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=editbudget]
+
+include::../UserGuide.adoc[tag=deletebudget]
 
 == Contributions to the Developer Guide
 
@@ -108,6 +109,8 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=addbudget]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
+include::../DeveloperGuide.adoc[tag=editbudget]
+
+include::../DeveloperGuide.adoc[tag=deletebudget]

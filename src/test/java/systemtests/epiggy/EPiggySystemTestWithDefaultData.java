@@ -26,8 +26,6 @@ import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.EpiggyTestApp;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.ListCommand;
 
 import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
 import seedu.address.logic.commands.epiggy.FindExpenseCommand;

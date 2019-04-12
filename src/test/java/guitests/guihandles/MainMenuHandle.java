@@ -32,7 +32,7 @@ public class MainMenuHandle extends NodeHandle<Node> {
     /**
      * cleans up the {@code Textarea} using the menu bar in {@code MainWindow}.
      */
-    public void CleanUpTextareaUsingMenu() {
+    public void cleanUpTextareaUsingMenu() {
         clickOnMenuItemsSequentially("Clean", "Clean TextArea");
     }
 

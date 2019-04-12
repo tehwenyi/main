@@ -70,6 +70,7 @@ public class ExpenseUtil {
      */
     public static String descExpenseTags(Expense expense) {
         return expense.getItem().getTags().stream()
+                .filter(tag -> tag.tagName != "Expense")
                 .map(tag -> PREFIX_TAG + tag.tagName)
                 .collect(Collectors.joining(" "));
     }

@@ -24,7 +24,7 @@ It can be used on both Windows and Mac.
 
 === Project Team
 
-*_ePiggy_* was designed for twin modules CS2101 and CS2103T. It was transformed from the
+*_ePiggy_* is a product of twin modules CS2101 and CS2103T. It was transformed from the
 link:https://github.com/nus-cs2103-AY1819S2/addressbook-level4[AddressBook - Level 4] application.
 My team consists of 5 members, including myself. +
 I contributed the `budget` feature of *_ePiggy_*, which allows users to add, edit and delete budgets to track their
@@ -75,15 +75,9 @@ Allows users to view all the details and real-time status of the budgets they ha
 
 ** Project Management:
 *** Managed the refactoring of AddressBook to ePiggy
-** Documentation:
-*** Standardised and beautified the User Guide
-**** Designed and added the header and images across the user guide to suit our target user
-**** Standardised the language and formatting of the user guide
-**** Checked for grammar and spelling mistakes throughout the user guide
-*** Standardised and beautified the Developer Guide
-**** Designed and added the header
-**** Standardised the language and formatting of the user guide
-**** Checked for grammar and spelling mistakes throughout the developer guide
+** Graphic:
+*** Added graphics to the User Guide and Developer Guide to increase readability.
+*** Refer to Section 3 for more information.
 ** Community:
 *** PRs contributed:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
@@ -92,7 +86,6 @@ Allows users to view all the details and real-time status of the budgets they ha
 *** Set up Coveralls.
 ** All code contributed:
 **** View the codes I contributed here
-_{you can add/remove categories in the list above}_
 
 == Contributions to the User Guide
 

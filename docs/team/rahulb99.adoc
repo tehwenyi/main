@@ -93,17 +93,17 @@ Format: *`findExpense [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
 
 Examples:
 
-* `fE n/McDonalds` +
+* `fe n/McDonalds` +
 Displays all entries with the name “McDonalds”.
-* `fE t/FOOD` +
+* `fe t/FOOD` +
 Displays all entries with the tag specified (in this case, it’s food).
-* `fE d/02/01/2019` +
+* `fe d/02/01/2019` +
 Displays all entries listed on 2nd Jan 2019.
-* `fE d/02/01/2019:05/12/2020` +
+* `fe d/02/01/2019:05/12/2020` +
 Displays all entries listed in the range 2nd Jan 2019 to 5th Dec 2020 (both inclusive).
-* `fE $/250` +
+* `fe $/250` +
 Displays all entries listed with the cost range of $250.
-* `fE $/250:500` +
+* `fe $/250:500` +
 Displays all entries listed with the cost range of $250 to $500.
 
 ****
@@ -119,15 +119,15 @@ Date format is `dd/MM/yyyy` .
 ==== Sorting the expenses : `sortExpense`
 
 The user can sort the expenses in the list by name, date added, amount in ascending or descending order. +
-Format: `sort -[n/d/$]/`
+Format: `sortExpense -[n/d/$]/`
 
 Examples:
 
-* `sE n/` +
+* `se n/` +
 Sorts all entries by name (in ascending order).
-* `sE d/` +
+* `se d/` +
 Sorts all entries by date in descending order.
-* `sE $/` +
+* `se $/` +
 Sorts all entries by amount in ascending order.
 
 ****

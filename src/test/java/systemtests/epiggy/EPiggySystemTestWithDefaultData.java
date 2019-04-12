@@ -26,8 +26,6 @@ import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.EpiggyTestApp;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.ListCommand;
 
 import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
 import seedu.address.logic.commands.epiggy.FindExpenseCommand;
@@ -135,10 +133,10 @@ public abstract class EPiggySystemTestWithDefaultData {
     /**
      * Displays all persons in the address book.
      */
-    protected void showAllPersons() {
-        executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getEPiggy().getPersonList().size(), getModel().getFilteredPersonList().size());
-    }
+    //protected void showAllPersons() {
+    //    executeCommand(ListCommand.COMMAND_WORD);
+    //    assertEquals(getModel().getEPiggy().getPersonList().size(), getModel().getFilteredPersonList().size());
+    //}
 
     /**
      * Displays all persons with any parts of their names matching {@code keyword} (case-insensitive).
@@ -170,10 +168,10 @@ public abstract class EPiggySystemTestWithDefaultData {
     /**
      * Deletes all persons in the address book.
      */
-    protected void deleteAllPersons() {
-        executeCommand(ClearCommand.COMMAND_WORD);
-        assertEquals(0, getModel().getEPiggy().getPersonList().size());
-    }
+    //protected void deleteAllPersons() {
+    //   executeCommand(ClearCommand.COMMAND_WORD);
+    //    assertEquals(0, getModel().getEPiggy().getPersonList().size());
+    //}
 
     /**
      * Deletes all persons in the address book.

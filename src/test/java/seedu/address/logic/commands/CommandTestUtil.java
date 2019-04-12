@@ -251,4 +251,13 @@ public class CommandTestUtil {
         model.commitEPiggy();
     }
 
+    /**
+     * Deletes the first expense in {@code model}'s filtered list from {@code model}'s ePiggy.
+     */
+    public static void deleteFirstExpense(Model model) {
+        Expense firstExpense = model.getFilteredExpenseList().get(0);
+        model.deleteExpense(firstExpense);
+        model.commitEPiggy();
+    }
+
 }

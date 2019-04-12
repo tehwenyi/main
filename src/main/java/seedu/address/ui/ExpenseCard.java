@@ -44,6 +44,8 @@ public class ExpenseCard extends UiPart<Region> {
     @FXML
     private Label date;
     @FXML
+    private FlowPane typeTag;
+    @FXML
     private FlowPane tags;
 
     public ExpenseCard(Expense expense, int displayedIndex) {
@@ -78,7 +80,11 @@ public class ExpenseCard extends UiPart<Region> {
         expense.getItem().getTags().forEach(tag -> {
             Label tagLabel = new Label(tag.tagName);
             tagLabel.getStyleClass().add(getTagColorStyleFor(tag.tagName));
-            tags.getChildren().add(tagLabel);
+            if (tag.tagName.equals("Expense") || tag.tagName.equals("Allowance")) {
+                typeTag.getChildren().add(tagLabel);
+            } else {
+                tags.getChildren().add(tagLabel);
+            }
         });
     }
 

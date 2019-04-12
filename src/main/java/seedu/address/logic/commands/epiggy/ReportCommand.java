@@ -39,14 +39,6 @@ public class ReportCommand extends Command {
     private String type = "ALL";
     private LocalDate date;
 
-    public String getType() {
-        return type;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
     /**
      * Constructor with chart type.
      * @param date
@@ -54,6 +46,13 @@ public class ReportCommand extends Command {
     public ReportCommand(LocalDate date, String type) {
         this.date = date;
         this.type = type;
+    }
+    public String getType() {
+        return type;
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
     @Override
     public CommandResult execute(Model model, CommandHistory history) {

@@ -37,7 +37,7 @@ public class EditAllowanceCommand extends Command {
     public static final String COMMAND_WORD = "editAllowance";
     public static final String COMMAND_ALIAS = "eA";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " edits the details of the allowance identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the allowance identified "
             + "by the index in the displayed expense list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "

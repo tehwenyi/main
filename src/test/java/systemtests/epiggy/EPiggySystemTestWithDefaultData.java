@@ -28,7 +28,7 @@ import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.EpiggyTestApp;
 
 import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
-import seedu.address.logic.commands.epiggy.FindExpenseCommand;
+import seedu.address.logic.commands.epiggy.FindCommand;
 
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
@@ -152,7 +152,7 @@ public abstract class EPiggySystemTestWithDefaultData {
      */
     protected void showExpensesWithName(String keyword) {
         int totalExpensesCount = getModel().getFilteredExpenseList().size();
-        executeCommand(FindExpenseCommand.COMMAND_WORD + " n/" + keyword);
+        executeCommand(FindCommand.COMMAND_WORD + " n/" + keyword);
         int resultExpensesCount = this.testApp.getModelAfterExecution().getFilteredExpenseList().size();
         assertTrue(resultExpensesCount < totalExpensesCount);
     }

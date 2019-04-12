@@ -21,7 +21,7 @@ public class DeleteAllowanceCommand extends Command {
     public static final String COMMAND_ALIAS = "da";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + " deletes the allowance identified by the index number used in the displayed expense list.\n"
+            + ": Deletes the allowance identified by the index number used in the displayed expense list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 

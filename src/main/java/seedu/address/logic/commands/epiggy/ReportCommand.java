@@ -22,7 +22,7 @@ public class ReportCommand extends Command {
     public static final String COMMAND_ALIAS = "rp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + " shows the report.\n"
+            + ": Shows the report.\n"
             + "Parameters: "
             + PREFIX_DATE + "SPECIFY DATE, MONTH OR YEAR \n"
             + "Example: " + COMMAND_WORD + " "

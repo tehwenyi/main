@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -14,15 +15,13 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
-
-import seedu.address.model.epiggy.Savings;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -56,7 +55,6 @@ public class ModelManager implements Model {
 
         filteredExpenses = new FilteredList<>(versionedEPiggy.getExpenseList());
         filteredBudget = new FilteredList<>(versionedEPiggy.getBudgetList());
-        //TODO
     }
 
     public ModelManager() {
@@ -116,6 +114,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedExpense);
 
         versionedEPiggy.setExpense(target, editedExpense);
+        setSelectedExpense(editedExpense);
     }
 
     @Override
@@ -138,11 +137,13 @@ public class ModelManager implements Model {
     @Override
     public void addExpense(Expense expense) {
         versionedEPiggy.addExpense(expense);
+        setSelectedExpense(expense);
     }
 
     @Override
     public void addAllowance(Allowance allowance) {
         versionedEPiggy.addAllowance(allowance);
+        setSelectedExpense(allowance);
     }
 
     @Override
@@ -164,6 +165,9 @@ public class ModelManager implements Model {
     @Override
     public void deleteExpense(Expense toDelete) {
         versionedEPiggy.deleteExpense(toDelete);
+        if (selectedExpenseProperty().getValue() == toDelete) {
+            setSelectedExpense(null);
+        }
     }
 
     @Override
@@ -182,7 +186,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public SimpleObjectProperty<Savings> getSavings() {
+    public SimpleObjectProperty<Cost> getSavings() {
         return versionedEPiggy.getSavings();
     }
 
@@ -255,35 +259,26 @@ public class ModelManager implements Model {
     //@@author rahulb99
     /**
      * Sorts the expenses according to the keyword.
-     * @param keyword
+     * @param comparator expense comparator
      */
-    public void sortExpenses(String keyword) {
-        SortedList<Expense> sortedExpenses;
-        switch(keyword) {
-        case "n": {
-            sortedExpenses = versionedEPiggy.sortExpensesByName();
-            break;
-        }
-        case "d": {
-            sortedExpenses = versionedEPiggy.sortExpensesByDate();
-            break;
-        }
-        case "$": {
-            sortedExpenses = versionedEPiggy.sortExpensesByAmount();
-            break;
-        } default: return;
-        }
-        FilteredList<Expense> fl = new FilteredList<>(sortedExpenses);
-        fl.setPredicate(PREDICATE_SHOW_ALL_EXPENSES);
-        logger.fine("sorted list");
-        versionedEPiggy.getExpenseList();
-        versionedEPiggy.indicateModified();
+    public void sortExpenses(Comparator<Expense> comparator) {
+        requireAllNonNull(comparator);
+        versionedEPiggy.sortExpense(comparator);
     }
 
     @Override
     public void updateFilteredBudgetList(Predicate<Budget> predicate) {
         requireNonNull(predicate);
         filteredBudget.setPredicate(predicate);
+    }
+
+    //@@author rahulb99
+
+    /**
+     * Reveres the {@code filteredExpenses} list.
+     */
+    public void reverseFilteredExpensesList() {
+        versionedEPiggy.reverseExpenseList();
     }
 
     //=========== Undo/Redo =================================================================================
@@ -395,4 +390,16 @@ public class ModelManager implements Model {
                 && Objects.equals(selectedPerson.get(), other.selectedPerson.get());
     }
 
+    @Override
+    public String toString() {
+        return "ModelManager{"
+                + "versionedAddressBook=" + versionedEPiggy
+                + ", userPrefs=" + userPrefs
+                + ", filteredPersons=" + filteredPersons
+                + ", filteredExpenses=" + filteredExpenses
+                + ", filteredBudget=" + filteredBudget
+                + ", selectedPerson=" + selectedPerson
+                + ", selectedExpense=" + selectedExpense
+                + '}';
+    }
 }

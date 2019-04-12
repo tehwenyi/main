@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Item;
@@ -18,7 +20,7 @@ public class ExpensesBuilder {
 
     public static final String DEFAULT_NAME = "Chicken Rice";
     public static final String DEFAULT_COST = "5.0";
-    public static final String DEFAULT_DATE = "01/03/2019";
+    public static final String DEFAULT_DATE = "03/01/2019";
     //public static final Set<Tag> DEFAULT_TAGS = new HashSet<>(Arrays.asList("Food", "Lunch"));
 
     private Name name;
@@ -71,7 +73,14 @@ public class ExpensesBuilder {
      * Sets the {@code date} of the {@code Expense} that we are building.
      */
     public ExpensesBuilder withDate(String date) {
-        this.date = new Date(date);
+        if (date.equals("")) {
+            this.date = new Date();
+        }
+        try {
+            this.date = ParserUtil.parseDate(date);
+        } catch (ParseException e) {
+            this.date = null;
+        }
         return this;
     }
 

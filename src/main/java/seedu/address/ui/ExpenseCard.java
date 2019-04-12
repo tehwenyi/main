@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
 
@@ -45,6 +44,8 @@ public class ExpenseCard extends UiPart<Region> {
     @FXML
     private Label date;
     @FXML
+    private FlowPane typeTag;
+    @FXML
     private FlowPane tags;
 
     public ExpenseCard(Expense expense, int displayedIndex) {
@@ -53,14 +54,13 @@ public class ExpenseCard extends UiPart<Region> {
         this.expense = expense;
         id.setText(displayedIndex + ". ");
         name.setText(expense.getItem().getName().name);
-        DecimalFormat df = new DecimalFormat("#.##");
         if (expense instanceof Allowance) {
-            cost.setText("Amount: " + df.format(expense.getItem().getCost().getAmount()));
+            cost.setText("Amount: " + expense.getItem().getCost().toString());
         } else {
-            cost.setText("Cost: " + df.format(expense.getItem().getCost().getAmount()));
+            cost.setText("Cost: $" + expense.getItem().getCost().toString());
         }
-        SimpleDateFormat formatter = new SimpleDateFormat("EEE, MMM d, ''yy");
-        date.setText(String.format("Added on: %s", formatter.format(expense.getDate())));
+        SimpleDateFormat formatter = new SimpleDateFormat("EEE, MMM d, yyyy");
+        date.setText(String.format("Added on: %s \n", formatter.format(expense.getDate())));
         initialiseTags(expense);
     }
 
@@ -80,7 +80,11 @@ public class ExpenseCard extends UiPart<Region> {
         expense.getItem().getTags().forEach(tag -> {
             Label tagLabel = new Label(tag.tagName);
             tagLabel.getStyleClass().add(getTagColorStyleFor(tag.tagName));
-            tags.getChildren().add(tagLabel);
+            if (tag.tagName.equals("Expense") || tag.tagName.equals("Allowance")) {
+                typeTag.getChildren().add(tagLabel);
+            } else {
+                tags.getChildren().add(tagLabel);
+            }
         });
     }
 

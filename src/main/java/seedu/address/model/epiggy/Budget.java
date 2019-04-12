@@ -1,5 +1,6 @@
 package seedu.address.model.epiggy;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -11,15 +12,15 @@ import seedu.address.model.epiggy.item.Period;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Budget {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Budgeted amount should be more than $0.";
     public static final String CURRENT_BUDGET = "Current";
     private static final String OLD_BUDGET = "Old";
     private static final String FUTURE_BUDGET = "Future";
+
     private final Cost amount;
     private final Date startDate;
     private final Date endDate;
     private final Period period;
+
     private Cost remainingAmount;
     private Period remainingDays;
     private String status = null;
@@ -47,27 +48,17 @@ public class Budget {
     }
 
     /**
-     * Represents a Budget in the expense book.
-     * Guarantees: details are present and not null, field values are validated, immutable.
+     * Clones budget.
      */
-    public Budget() {
-        this.amount = new Cost(0);
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, 2000);
-        cal.set(Calendar.MONTH, Calendar.JANUARY);
-        cal.set(Calendar.DAY_OF_MONTH, 1);
-        this.startDate = cal.getTime();
-        this.period = new Period(0);
-        this.endDate = this.startDate;
-        this.remainingAmount = amount;
-        this.remainingDays = period;
-        if (!todaysDate.before(startDate) && !todaysDate.after(endDate)) {
-            this.status = CURRENT_BUDGET;
-        } else if (todaysDate.before(startDate)) {
-            this.status = FUTURE_BUDGET;
-        } else {
-            this.status = OLD_BUDGET;
-        }
+    public Budget(Budget budget) {
+        this.amount = budget.amount;
+        this.startDate = budget.startDate;
+        this.period = budget.period;
+        this.endDate = budget.endDate;
+        this.remainingAmount = budget.remainingAmount;
+        this.remainingDays = budget.remainingDays;
+        this.todaysDate = budget.todaysDate;
+        this.status = budget.status;
     }
 
     /**
@@ -83,12 +74,12 @@ public class Budget {
         return cal.getTime();
     }
 
-    private void setRemainingAmount(Cost remainingAmount) {
-        this.remainingAmount = remainingAmount;
-    }
-
     public void setRemainingDays(Period remainingDays) {
         this.remainingDays = remainingDays;
+    }
+
+    public void setRemainingAmount(Cost remainingAmount) {
+        this.remainingAmount = remainingAmount;
     }
 
     public void resetRemainingAmount() {
@@ -107,10 +98,17 @@ public class Budget {
         return remainingAmount;
     }
 
+    public Cost getPositiveRemainingAmount() {
+        if (remainingAmount.getAmount() < 0) {
+            return new Cost(-remainingAmount.getAmount());
+        }
+        return remainingAmount;
+    }
+
     public Period getRemainingDays() {
         return remainingDays; }
 
-    public Cost getCost() {
+    public Cost getBudgetedAmount() {
         return this.amount;
     }
 
@@ -126,6 +124,24 @@ public class Budget {
         return this.endDate;
     }
 
+    public int getDay() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.startDate);
+        return cal.get(Calendar.DAY_OF_MONTH);
+    }
+
+    public int getMonth() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.startDate);
+        return cal.get(Calendar.MONTH);
+    }
+
+    public int getYear() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.startDate);
+        return cal.get(Calendar.YEAR);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -137,27 +153,29 @@ public class Budget {
         }
 
         Budget b = (Budget) o;
-        return this.amount == b.getCost()
-                && this.startDate == b.getStartDate()
-                && this.period == b.getPeriod();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.startDate);
+        return this.amount.equals(b.getBudgetedAmount())
+                && cal.get(Calendar.YEAR) == b.getYear()
+                && cal.get(Calendar.MONTH) == b.getMonth()
+                && cal.get(Calendar.DAY_OF_MONTH) == b.getDay()
+                && this.period.equals(b.getPeriod());
     }
 
     @Override
     public String toString() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(getEndDate());
+        cal.add(Calendar.DAY_OF_MONTH, -1);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
         final StringBuilder builder = new StringBuilder();
         builder.append("$")
-                .append(getCost())
-                .append(" for ")
-                .append(getPeriod())
-                .append(" days starting from ")
-                .append(getStartDate())
-                .append(" till ")
-                .append(getEndDate())
-                .append(". ")
-                .append(getRemainingDays())
-                .append(" days remaining and $")
-                .append(getRemainingAmount())
-                .append(" remaining.");
+                .append(getBudgetedAmount())
+                .append(" from ")
+                .append(sdf.format(getStartDate()))
+                .append(" to ")
+                .append(sdf.format(cal.getTime()))
+                .append(".");
         return builder.toString();
     }
 }

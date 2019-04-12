@@ -16,12 +16,13 @@ import seedu.address.ui.ReportWindow;
 /**
  * Shows summary to the user.
  */
+//@@author yunjun199321
 public class ReportCommand extends Command {
     public static final String COMMAND_WORD = "report";
     public static final String COMMAND_ALIAS = "rp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Shows report to the user.\n"
+            + " shows the report.\n"
             + "Parameters: "
             + PREFIX_DATE + "SPECIFY DATE, MONTH OR YEAR \n"
             + "Example: " + COMMAND_WORD + " "
@@ -31,7 +32,7 @@ public class ReportCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DATE + "2019\n";
 
-    public static final String MESSAGE_SUCCESS = "Showed report.";
+    public static final String MESSAGE_SUCCESS = "Report shown!";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -46,13 +47,6 @@ public class ReportCommand extends Command {
         this.date = date;
         this.type = type;
     }
-
-    /**
-     * Default constructor
-     */
-    public ReportCommand() {
-    }
-
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);

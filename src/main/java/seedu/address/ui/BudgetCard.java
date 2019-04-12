@@ -26,9 +26,9 @@ public class BudgetCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label budgetTitle;
+    private Label title;
     @FXML
-    private Label budgetedAmount;
+    private Label amount;
     @FXML
     private Label startDate;
     @FXML
@@ -36,7 +36,7 @@ public class BudgetCard extends UiPart<Region> {
     @FXML
     private Label period;
     @FXML
-    private Label currentStatus;
+    private Label status;
     @FXML
     private Label remainingAmount;
     @FXML
@@ -47,8 +47,8 @@ public class BudgetCard extends UiPart<Region> {
     public BudgetCard(int displayedIndex, Budget budget) {
         super(FXML);
         this.budget = budget;
-        budgetTitle.setText(displayedIndex + ". " + budget.getStatus() + " Budget");
-        budgetedAmount.setText("Amount: $" + budget.getCost().toString());
+        title.setText(displayedIndex + ". " + budget.getStatus() + " Budget");
+        amount.setText("Amount: $" + budget.getBudgetedAmount().toString());
 
         DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy (E)");
         startDate.setText("Start Date: " + dateFormat.format(budget.getStartDate()));
@@ -58,23 +58,27 @@ public class BudgetCard extends UiPart<Region> {
         endDate.setText("End Date: " + dateFormat.format(calendar.getTime()));
         period.setText("Period of Budget: " + budget.getPeriod().toString() + " days");
 
-        currentStatus.setText("Status");
-        remainingAmount.setText("Amount remaining: $" + budget.getRemainingAmount().toString());
+        status.setText("Status");
+        if (budget.getRemainingAmount().getAmount() >= 0) {
+            remainingAmount.setText("Amount remaining: $" + budget.getRemainingAmount().toString());
+        } else {
+            remainingAmount.setText("Amount exceeded: $" + budget.getPositiveRemainingAmount().toString());
+        }
         remainingDays.setText("Days remaining: " + budget.getRemainingDays().toString() + " days");
 
         if (budget.getRemainingAmount().getAmount() < 0) {
             notification.setText("You have exceeded your budget!");
             notification.setStyle("-fx-font-weight: bold; -fx-border-color: firebrick;"
                     + "-fx-text-fill: white; -fx-background-color: crimson;");
-        } else if (budget.getRemainingAmount().getAmount() < (budget.getCost().getAmount() / 5)) {
+        } else if (budget.getRemainingAmount().getAmount() == 0) {
+            notification.setText("You have $0 left of your budget!");
+            notification.setStyle("-fx-font-weight: bold; -fx-border-color: orchid; "
+                    + "-fx-text-fill: white; -fx-background-color: mediumorchid;");
+        } else if (budget.getRemainingAmount().getAmount() < (budget.getBudgetedAmount().getAmount() / 5)) {
             notification.setText("You have spent more than 80% of your budget. \n"
                     + "Please control your expenses!");
             notification.setStyle("-fx-font-weight: bold; -fx-border-color: tomato; "
                     + "-fx-text-fill: white; -fx-background-color: coral;");
-        } else if (budget.getRemainingAmount().getAmount() == 0.00) {
-            notification.setText("You have $0 left of your budget!");
-            notification.setStyle("-fx-font-weight: bold; -fx-border-color: orchid; "
-                    + "-fx-text-fill: white; -fx-background-color: mediumorchid;");
         } else {
             notification.setText("“Save money and money will save you.”\n"
                     + "Remember to spend wisely!");

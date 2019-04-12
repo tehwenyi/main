@@ -49,6 +49,9 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private MenuItem cleanText;
+
+    @FXML
     private StackPane savingsPanelPlaceholder;
 
     @FXML
@@ -84,6 +87,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(cleanText, KeyCombination.valueOf("F2"));
     }
 
     /**
@@ -129,7 +133,7 @@ public class MainWindow extends UiPart<Stage> {
         }); //TODO
         expenseListPanelPlaceholder.getChildren().add(expenseListPanel.getRoot());
 
-        savingsPanel = new SavingsPanel(logic.getSavings(), logic.getGoal());
+        savingsPanel = new SavingsPanel(logic.getFilteredExpenseList(), logic.getGoal(), logic::getSavings);
         savingsPanelPlaceholder.getChildren().add(savingsPanel.getRoot());
 
         budgetPanel = new BudgetPanel(logic.getFilteredBudgetList(), logic::setCurrentBudget);
@@ -187,56 +191,28 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows daily summary to user.
+     * Shows completed summary to user.
      */
     @FXML
-    private void handleDailyReport() {
+    private void handleReport() {
         helpWindow.hide();
         try {
             logic.execute("report");
         } catch (CommandException | ParseException e) {
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultDisplay.setFeedbackToUser(e.getMessage(), "report t/daily");
         }
     }
 
     /**
-     * Shows monthly summary to user.
+     * clean text area.
      */
     @FXML
-    private void handleMonthlyReport() {
+    private void handleClean() {
         helpWindow.hide();
-        try {
-            logic.execute("report type/monthly");
-        } catch (CommandException | ParseException e) {
-            resultDisplay.setFeedbackToUser(e.getMessage());
-        }
+        resultDisplay.clearDisplay();
+
     }
 
-    /**
-     * Shows yearly summary to user.
-     */
-    @FXML
-    private void handleYearlyReport() {
-        helpWindow.hide();
-        try {
-            logic.execute("report type/yearly");
-        } catch (CommandException | ParseException e) {
-            resultDisplay.setFeedbackToUser(e.getMessage());
-        }
-    }
-
-    /**
-     * Shows percentage summary to user.
-     */
-    @FXML
-    private void handlePercentageReport() {
-        helpWindow.hide();
-        try {
-            logic.execute("report type/percentage");
-        } catch (CommandException | ParseException e) {
-            resultDisplay.setFeedbackToUser(e.getMessage());
-        }
-    }
 
     public ExpenseListPanel getExpenseListPanel() {
         return expenseListPanel;
@@ -251,7 +227,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser(), commandText);
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -264,7 +240,7 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            resultDisplay.setFeedbackToUser(e.getMessage(), commandText);
             throw e;
         }
     }

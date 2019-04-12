@@ -1,0 +1,51 @@
+= Phan Duc Nhat Minh - Project Portfolio for ePiggy
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: ePiggy
+
+---
+
+== Introduction
+=== About
+// what specific project task is, what module it is for, whether it is an indiv or grp proj
+*ePiggy* is a desktop application for managing personal finances. It allows users to track expenses, manage budgets and
+savings. +
+
+=== Project Team
+
+*_ePiggy_* was designed for twin modules CS2101 and CS2103T. It was transformed from the link:https://github.com/nus-cs2103-AY1819S2/addressbook-level4[AddressBook - Level 4] application.
+My team consists of 5 members, including myself. +
+I implemented the expense management features (adding, deleting and modifying expense record).
+
+=== Purpose
+
+This portfolio aims to document my contributions to *_ePiggy_*.
+
+*_ePiggy_* Github link: https://github.com/CS2103-AY1819S2-W17-4/main
+
+== Summary of contributions
+
+Implemented the essential commands (`add`, `edit`, `delete`) +
+
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=undoredo]
+
+include::../UserGuide.adoc[tag=dataencryption]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=undoredo]
+
+include::../DeveloperGuide.adoc[tag=dataencryption]

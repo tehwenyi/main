@@ -3,6 +3,7 @@ package seedu.address.logic.commands.epiggy;
 import static org.junit.Assert.assertEquals;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.function.Predicate;
 
@@ -24,7 +25,7 @@ import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
 
-import seedu.address.model.epiggy.Savings;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.epiggy.GoalBuilder;
 
@@ -55,9 +56,12 @@ public class SetGoalCommandTest {
     }
 
     private class ModelStub implements Model {
-
         @Override
-        public void sortExpenses(String keyword) {
+        public void reverseFilteredExpensesList() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void sortExpenses(Comparator<Expense> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -147,7 +151,7 @@ public class SetGoalCommandTest {
         }
 
         @Override
-        public SimpleObjectProperty<Savings> getSavings() {
+        public SimpleObjectProperty<Cost> getSavings() {
             throw new AssertionError("This method should not be called.");
         }
 

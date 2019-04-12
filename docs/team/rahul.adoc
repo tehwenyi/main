@@ -1,0 +1,291 @@
+= Rahul Baid - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: ePiggy
+
+---
+
+== Overview
+
+ePiggy is a desktop application designed to inculcate good spending habits in students.
+ePiggy hopes to make managing money much simpler for you with a simple interface and simple commands!
+At the same time, ePiggy offers everything you need to cultivate good spending habits before entering the workforce,
+from tracking expenses and managing budgets to setting goals! The user interacts with it using a CLI, and it has a GUI created with JavaFX.
+It is written in Java, and has about 10 kLoC.
+
+== Summary of contributions
+
+---
+
+* *Major enhancements*: added *the ability to search and sort for expenses*
+** What it does: +
+ 1. allows the user to search for his/her expenses by either it's `name`, `cost`, `date` and/or `tag` ! +
+ 2. allows the user to sort his/her expenses by either it's `name`, `cost` or `date` !
+** Justification: These features improves the product significantly because: +
+1. It becomes more convenient for the user to find a particular expenses or a set of expenses
+to figure out where he/she has been spending.
+2. It becomes more convenient for the user to sort the expenses according to his/her preferences.
+For example, if the user wants to find out where he/she has been spending more, the user can sort it by cost.
+** Highlights: These enhancements are two of the most user-friendly commands in ePiggy, mainly due to their need and adaptability. +
+1. The search feature enhancement have been built on top of the existing functionality. Now it allows multiple keywords search to filter out the
+expenses. This feature searches for similar words in case the user makes a typo. Furthermore, it allows user to enter a range for date and cost.
+This implementation was quite challenging as it required the complete modification of the existing command.
+2. The sort feature enhancement was built from start to finish. It required an in-depth analysis of design alternatives.
+This new feature greatly adds to the functionality of existing commands (that were modified from address-book level 4).
+
+* *Minor enhancement*: Added reverse list command. Modified existing help and list commands. Refactored the codebase.
+
+* *Functional code contributed*: _{give links to collated code files}_
+
+* *Code contributed*: [https://github.com[RepoSense]] _{https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=rahulb99&sort=displayName&since=2019-02-10&until=2019-04-30&timeframe=day&reverse=false&repoSort=false}_
+
+* *Other contributions*:
+
+** Project management:
+*** Managed product releases on GitHub.
+*** Set up the issue tracker, user stories, and assigned the milestones.
+
+** Enhancements to existing features:
+*** Made `date` an optional keyword while adding an expense.
+   (so now, if the `date` keyword is missing, `date` takes the value of device's date). (Commit: https://github.com/CS2103-AY1819S2-W17-4/main/pull/135/commits/b974cc12cc700d751de34c80307267d26f5e455e[b974cc] )
+*** Wrote base tests for any command related to `expense`, in addition to `FindExpenseCommandTest` and `SortExpenseCommandTest` .
+ (Pull requests https://github.com/CS2103-AY1819S2-W17-4/main/pull/135[#135], https://github.com[#00])
+*** Modified the search engine by make it more powerful by searching for similar words in case user makes a typo, or even when user
+types a part of the keyword he/she wishes to search for.
+*** Modified the storage functionality. (Pull Request https://github.com/CS2103-AY1819S2-W17-4/main/pull/20[#20])
+
+** Documentation:
+*** Did some UI changes to `index.html` (main page of our application).
+
+** Community:
+*** PRs reviewed (https://github.com/CS2103-AY1819S2-W17-4/main/pull/40[#40], https://github.com/CS2103-AY1819S2-W17-4/main/pull/94[#94],
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/97[#97], https://github.com/CS2103-AY1819S2-W17-4/main/pull/115[#115],
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/123[#123], https://github.com/CS2103-AY1819S2-W17-4/main/pull/40[#132],
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/139[#139])
+
+*** Contributed to forum discussion (example:  https://github.com/nus-cs2103-AY1819S2/forum/issues/64[#64])
+
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+
+** Tools:
+*** Set up Travis CI for the team repo.
+*** Set up Netlify for the team repo.
+
+
+== Contributions to the User Guide
+
+---
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc
+
+=== Filtering and Sorting Data
+
+==== Searching for an expense : `findExpense`
+
+You can search for any expense in the list by specifying either its name, tag, date, range of dates, amount or range of amount. +
+Format: *`findExpense [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
+
+Examples:
+
+* `fE n/McDonalds` +
+Displays all entries with the name “McDonalds”.
+* `fE t/FOOD` +
+Displays all entries with the tag specified (in this case, it’s food).
+* `fE d/02/01/2019` +
+Displays all entries listed on 2nd Jan 2019.
+* `fE d/02/01/2019:05/12/2020` +
+Displays all entries listed in the range 2nd Jan 2019 to 5th Dec 2020 (both inclusive).
+* `fE $/250` +
+Displays all entries listed with the cost range of $250.
+* `fE $/250:500` +
+Displays all entries listed with the cost range of $250 to $500.
+
+****
+*Additional Information:* +
+Searches and displays the expense along with its information, according to the user-specified command. +
+Searching for names and tags is case-insensitive. Furthermore, it allows you to search for almost similar
+words by applying the concept of Levenshtien distance, hence allowing small typos (limit fixed by an upper bound). +
+If the entry is not found, it displays an appropriate error message. +
+Date format is `dd/MM/yyyy` .
+'findExpense` and `fE` are equivalent.
+****
+
+==== Sorting the expenses : `sortExpense`
+
+The user can sort the expenses in the list by name, date added, amount in ascending or descending order. +
+Format: `sort -[n/d/$]/`
+
+Examples:
+
+* `sE n/` +
+Sorts all entries by name (in ascending order).
+* `sE d/` +
+Sorts all entries by date in descending order.
+* `sE $/` +
+Sorts all entries by amount in ascending order.
+
+****
+*Additional Information:* +
+'sortExpense` and `sE` are equivalent.
+****
+
+==== Listing all expenses : `list`
+
+Lists the expense records from newest to oldest. Use this to return to the default view after search/sort commands. +
+Format: `list` or `l`
+
+==== Listing all expenses in reverse : `reverseList`
+
+Lists the expense records from oldest to newest. Use this to return to the default view after search/sort commands. +
+Format: `reverseList`
+
+****
+*Additional Information:* +
+One major use of `reverseList` command is executing it after searching/sorting the expense list.
+'reverseList` and `rl` are equivalent.
+****
+
+==== Viewing help : `help`
+Lists all the user commands with their syntax and descriptions. +
+Format: `help`
+
+==== Share feature `[coming in v2.0]`
+
+Allows you to share your expenses with anyone, by sending them an email
+including an attachment of your personal `ePiggy` data in CSV format.
+
+
+== Contributions to the Developer Guide
+
+---
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc
+
+=== Find Expense feature
+*_ePiggy_* allows the user to filter specific expenses by entering multiple keywords. Expenses that satisfy
+all the keywords are displayed in the expense list panel. If user has made a small typo error, we display those expenses as
+well.
+
+* `findExpense n/Nasi Lemak $/4.00 d/01/04/2019 t/lunch`
+
+The above command finds expense(s) with the `Name` Nasi Lemak, `Cost` of $4.00, purchased on
+`Date` 1st April, 2019 and tagged with `Tag` lunch.
+
+[NOTE]
+`Date` format is `dd/MM/yyyy`.
+
+[TIP]
+All keywords in this command are optional, provided that there is at least one input keyword. For
+example, suppose we want to filter out all `Expense` s with `Cost` between $1 and $10.5 (both inclusive),
+then the command should be just `findExpense $/1:10.5`.
+Similarly for other type of keywords.
+
+==== Current Implementation
+Given below is a UML sequence diagram of how the `findExpense` command works along with a step-by-step
+explanation.
+
+image::fEuml.png[witdh="800"]
+
+Figure: FindExpenseCommand UML Sequence Diagram +
+
+Step 1: User enters `findExpense n/Nasi Lemak $/4.00 d/2019/04/01 t/lunch`. The command is
+received by `EPiggyParser` which then creates `FindExpenseCommandParser` object and and calls
+`FindExpenseCommandParser#parse()` method. +
+
+Step 2: `FindExpenseCommandParser#parse()` first checks if input is invalid and throws a
+`ParseException` otherwise it calls `ArgumentTokenizer#tokenize()` to tokenize the `String` input
+ into keywords and store them in an `ArgumentMultimap` Object. +
+
+Step 3: `FindExpenseCommandParser#parse()` method then creates an `ExpenseContainsKeywordsPredicate`
+Object. It implements `Predicate<Expense>` interface. It performs the filtering of expenses. +
+
+Step 4: A `FindExpenseCommand` object is created with `ExpenseContainsKeywordsPredicate` as parameter and
+returned to `LogicManager`. +
+
+Step 5: `LogicManager` calls `FindCommand#execute()`,which then calls `Model#updateFilteredExpenseList()`
+method to update the predicate of `FilteredList<Expense>`. `FilteredList` now contains only a set of
+expenses which was filtered by the new predicate. +
+
+Step 6: Expense List panel is updated by filtered set of expenses. A `CommandResult` is then created and
+returned to `LogicManager`.
+
+[discrete]
+=== Use case: Find expense records
+
+*MSS*
+
+1. User requests to search for an expense record.
+2. ePiggy requests user to enter search command.
+3. User enters search command with specific parameters.
+4. ePiggy searches and displays the record(s).
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Parameter field is empty.
++
+[none]
+** 1a1. ePiggy lists all the expense records.
++
+Use case ends.
+
+[discrete]
+=== Use case: Sort expense records
+
+*MSS*
+
+1. User requests to sort expense records.
+2. ePiggy requests user to enter sort command.
+3. User enters sort command with specific parameters.
+4. ePiggy sorts and displays the record(s).
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Parameter field is empty.
++
+[none]
+** 1a1. ePiggy lists all the expense records sorted by date added.
++
+Use case ends.
+
+[discrete]
+=== Use case: Help
+
+*MSS*
+
+1. User requests for help.
+2. ePiggy displays a list of all the commands - brief description and syntax.
++
+Use case ends.
+
+[discrete]
+=== Use case: Reverse List
+
+*MSS*
+
+1. User requests to display the list in reverse.
+2. ePiggy displays a list of all the expenses in reverse.
++
+Use case ends.
+
+
+== PROJECT:
+
+---
+
+_{To be added.}_

@@ -27,7 +27,9 @@ public class AllowanceUtil {
         sb.append(PREFIX_COST + allowance.getItem().getCost().toString() + " ");
         sb.append(PREFIX_DATE + sdf.format(allowance.getDate()) + " ");
         for (Tag t : allowance.getItem().getTags()) {
-            sb.append(PREFIX_TAG + t.toString().substring(1, t.toString().length() - 1) + " ");
+            if (!(t.toString().equals("[Allowance]") || t.toString().equals("[Expense]"))) {
+                sb.append(PREFIX_TAG + t.toString().substring(1, t.toString().length() - 1) + " ");
+            }
         }
         return sb.toString();
     }

@@ -1,38 +1,42 @@
 package seedu.address.logic;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_SECONDEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_SECONDEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_SECONDEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_SECONDEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_SECONDEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_SECONDEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SECONDEXTRA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_EXPENSE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SECONDEXTRA;
 
 import java.io.IOException;
 import java.nio.file.Path;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.epiggy.AddExpenseCommand;
+import seedu.address.logic.commands.epiggy.DeleteExpenseCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.epiggy.Expense;
 import seedu.address.storage.JsonEPiggyStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.epiggy.ExpensesBuilder;
 
 
 public class LogicManagerTest {
@@ -63,10 +67,9 @@ public class LogicManagerTest {
     }
 
     @Test
-    @Ignore
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        String deleteCommand = "deleteExpense 9";
+        assertCommandException(deleteCommand, DeleteExpenseCommand.MESSAGE_INDEX_OUT_OF_BOUNDS);
         assertHistoryCorrect(deleteCommand);
     }
 
@@ -77,7 +80,6 @@ public class LogicManagerTest {
         assertHistoryCorrect(listCommand);
     }
 
-    @Ignore
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() throws Exception {
         // Setup LogicManager with JsonEPiggyIoExceptionThrowingStub
@@ -87,16 +89,20 @@ public class LogicManagerTest {
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
-        // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        // Execute add expense
+        String addExpenseCommand = AddExpenseCommand.COMMAND_WORD + NAME_DESC_SECONDEXTRA + AMOUNT_DESC_SECONDEXTRA
+                + TAG_DESC_SECONDEXTRA + DATE_DESC_SECONDEXTRA;
+        Expense expectedExpense = new ExpensesBuilder().withName(VALID_NAME_SECONDEXTRA)
+                .withCost(VALID_AMOUNT_SECONDEXTRA)
+                .withTags(VALID_TAG_SECONDEXTRA, VALID_TAG_EXPENSE)
+                .withDate(VALID_DATE_SECONDEXTRA).build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addExpense(expectedExpense);
         expectedModel.commitEPiggy();
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
-        assertCommandBehavior(CommandException.class, addCommand, expectedMessage, expectedModel);
-        assertHistoryCorrect(addCommand);
+        assertCommandBehavior(CommandException.class, addExpenseCommand, expectedMessage, expectedModel);
+        assertHistoryCorrect(addExpenseCommand);
+
     }
 
     @Test
@@ -183,6 +189,9 @@ public class LogicManagerTest {
             super(filePath);
         }
 
-
+        @Override
+        public void saveEPiggy(ReadOnlyEPiggy ePiggy, Path filePath) throws IOException {
+            throw DUMMY_IO_EXCEPTION;
+        }
     }
 }

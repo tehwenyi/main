@@ -2,6 +2,7 @@ package seedu.address.testutil.epiggy;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_2018;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_2019;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ALLOWANCE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FOOD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIENDS;
 
@@ -10,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.EPiggy;
+import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 
@@ -35,10 +37,10 @@ public class TypicalReports {
             .withTags(VALID_TAG_FOOD, "lunch").build();
     public static final Expense STATIONARY = new ExpensesBuilder().withName("Stationary")
             .withCost("3.00")
-            .withDate("04/07/2019")
+            .withDate("07/04/2019")
             .withTags("school", "misc").build();
     public static final Expense MOVIE_AVENGERS = new ExpensesBuilder().withName("Avengers : Endgame movie")
-            .withDate("04/26/2019")
+            .withDate("26/04/2019")
             .withCost("8.50")
             .withTags("movie", "entertainment", VALID_TAG_FRIENDS).build();
     public static final Expense KARAOKE = new ExpensesBuilder().withName("Karaoke: KTV")
@@ -49,9 +51,20 @@ public class TypicalReports {
             .withCost("50.80")
             .withTags("shopping").build();
     public static final Expense KFC = new ExpensesBuilder().withName("KFC")
-            .withDate("04/26/2019")
+            .withDate("26/04/2019")
             .withCost("13.95")
             .withTags(VALID_TAG_FOOD, "dinner").build();
+
+    // test allowance
+    public static final Allowance ALLOWANCE_FROM_MOM = new AllowanceBuilder().withName("From Mom")
+            .withCost("20.00")
+            .withDate(VALID_DATE_2019)
+            .withTags(VALID_TAG_ALLOWANCE).build();
+
+    public static final Allowance ALLOWANCE_FROM_DAD = new AllowanceBuilder().withName("From Mom")
+            .withCost("30.00")
+            .withDate(VALID_DATE_2019)
+            .withTags(VALID_TAG_ALLOWANCE).build();
     public static final String KEYWORD_MATCHING_STATIONARY = "Stationary";
     public static final String KEYWORD_MATCHING_DINNER = "dinner";
     public static final String KEYWORD_MATCHING_DATE = "26/04/2019";
@@ -61,7 +74,6 @@ public class TypicalReports {
     } // prevents instantiation
     /**
      * Returns an {@code EPiggy} with all the typical expenses, allowance and budget.
-     * TODO: allowance are not add to storage.
      */
     public static EPiggy getTypicalEPiggy() {
         // todo: change the method here
@@ -77,6 +89,11 @@ public class TypicalReports {
         //add expenses into ePiggy
         for (Expense expense : getTypicalExpenses()) {
             ePiggy.addExpense(expense);
+        }
+
+        //add allowance into ePiggy
+        for (Allowance allowance: getTypicalAllowance()) {
+            ePiggy.addAllowance(allowance);
         }
         return ePiggy;
     }
@@ -95,6 +112,10 @@ public class TypicalReports {
 
     public static List<Expense> getTypicalExpenses() {
         return new ArrayList<>(Arrays.asList(DUMPLING_SOUP, STATIONARY, MOVIE_AVENGERS, KARAOKE, CLOTHES, KFC));
+    }
+
+    public static List<Allowance> getTypicalAllowance() {
+        return new ArrayList<>(Arrays.asList(ALLOWANCE_FROM_MOM, ALLOWANCE_FROM_DAD));
     }
 }
 

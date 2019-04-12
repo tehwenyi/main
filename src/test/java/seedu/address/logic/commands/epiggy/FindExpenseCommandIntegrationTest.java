@@ -37,7 +37,7 @@ import seedu.address.model.epiggy.ExpenseContainsKeywordsPredicate;
 /**
  * Contains integration tests (interaction with the Model) for {@code FindExpenseCommand}.
  */
-public class FindExpenseCommandTest {
+public class FindExpenseCommandIntegrationTest {
     private Model model = new ModelManager(getTypicalEPiggy(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalEPiggy(), new UserPrefs());
 

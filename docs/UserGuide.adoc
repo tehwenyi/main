@@ -428,78 +428,81 @@ Compares between different users.
 Requires multiple accounts in the same network.
 
 // tag::v2.0[]
-==== Login and logout to ePiggy `[coming in v2.0]`
 
-Login and logout ePiggy as an existing user. +
+==== Register `[coming in v2.0]`
 
-==== Register to ePiggy `[coming in v2.0]`
+Allows you to register for an account in ePiggy, so that your account can store your ePiggy information. +
 
-Register a new user in ePiggy. +
-// end::v2.0[]
+==== Login and Logout `[coming in v2.0]`
 
+Allows you to log in and out of ePiggy using your username and password, if your account exists already.
+This will keep your information safe. +
+This feature will be implemented only after the `register` feature has been added. +
 
-==== Share feature `[coming in v2.0]`
+==== Share `[coming in v2.0]`
 
-Allows you to share your expenses with anyone, by sending them an email
-including an attachment of your personal `ePiggy` data in CSV format. +
+Allows you to share your expenses with others! ePiggy will send an email (which you input)
+with an attachment of your personal `ePiggy` data in CSV format. +
 
 
 ==== Recommend future spendings `[coming in v2.0]`
 
-Recommends a daily limit you need to have in order to satisfy your budget and the income you need to have if you
-intend to maintain your current spending habits. +
+Recommends steps you can take to keep to your budget. +
+ePiggy will give you 2 recommendations. First, a daily spending limit. Next, the increase in allowance you need
+if you intend to maintain your current spending habits. You can choose to adopt any of the 2 recommendations. +
+// end::v2.0[]
 
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the
-data of your previous ePiggy folder.
+*A*: You can install ePiggy in the other computer and overwrite the empty data file it creates with the file that
+contains the data of your previous ePiggy folder.
 
 == Command Summary
-
-* *Help* : `help`
-
-* *Add Expense* : `addExpense n/EXPENSE_NAME $/COST [d/DATE] [t/TAG]…` +
-e.g. `addExpense n/Chicken rice set $/5 t/Food d/21/02/2019`
-
-* *Edit Expense* : `editExpense INDEX [n/EXPENSE_NAME] [$/COST] [d/DATE] [t/TAG]…` +
-e.g. `editExpense 1 n/Pen $/1 t/Supplies`
-
-* *Delete Expense* : `deleteExpense INDEX` +
-e.g. `deleteExpense 3`
 
 * *Add Allowance* : `addAllowance n/ALLOWANCE_NAME $/AMOUNT [d/DATE] [t/TAG]…` +
 e.g. `addAllowance n/From Mom $/20 t/School d/21/02/2019`
 
-* *Edit Allowance* : `editAllowance INDEX [n/ALLOWANCE_NAME] [$/COST] [d/DATE] [t/TAG]…` +
-e.g. `editAllowance 1 n/From Mom $10 t/Emergency`
-
-* *Delete Allowance* : `deleteAllowance INDEX` +
-e.g. `deleteAllowance 3`
-
-* *List* : `list`
-
-* *Reverse list* : `reverseList`
-
-* *Find Expenses* : `findExpense [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]` +
-e.g.`findExpense n/McDonalds`
-
-* *Sort Expenses* : `sortExpense [n/d/$]/` +
-e.g.`sortExpense d/`
-
 * *Add Budget* : `addBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS d/START_DATE` +
 e.g.`addBudget $/500.00 p/7 d/01/02/2019`
 
-* *Edit Budget* : `editBudget [$/AMOUNT] [p/TIME_PERIOD_IN_DAYS] [d/START_DATE]` +
-e.g.`editBudget $/300.00 p/28`
+* *Add Expense* : `addExpense n/EXPENSE_NAME $/COST [d/DATE] [t/TAG]…` +
+e.g. `addExpense n/Chicken rice set $/5 t/Food d/21/02/2019`
+
+* *Delete Allowance* : `deleteAllowance INDEX` +
+e.g. `deleteAllowance 3
 
 * *Delete Budget* : `deleteBudget INDEX` +
 e.g.`deleteBudget 2`
 
+* *Delete Expense* : `deleteExpense INDEX` +
+e.g. `deleteExpense 3`
+
+* *Edit Allowance* : `editAllowance INDEX [n/ALLOWANCE_NAME] [$/COST] [d/DATE] [t/TAG]…` +
+e.g. `editAllowance 1 n/From Mom $10 t/Emergency`
+
+* *Edit Budget* : `editBudget [$/AMOUNT] [p/TIME_PERIOD_IN_DAYS] [d/START_DATE]` +
+e.g.`editBudget $/300.00 p/28`
+
+* *Edit Expense* : `editExpense INDEX [n/EXPENSE_NAME] [$/COST] [d/DATE] [t/TAG]…` +
+e.g. `editExpense 1 n/Pen $/1 t/Supplies`
+
+* *Exit* : `exit`
+
+* *Find Expenses* : `findExpense [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]` +
+e.g.`findExpense n/McDonalds`
+
+* *Help* : `help`
+
+* *List* : `list`
+
 * *Report* : `report d/DD/MM/YYYY` +
 e.g. `report d/21/03/2019`
+
+* *Reverse list* : `reverseList`
 
 * *Set Savings Goal* : `setGoal n/ITEM_NAME $/AMOUNT` +
 e.g. `setGoal n/nike shoes $/80`
 
-* *Exit* : `exit`
+* *Sort Expenses* : `sortExpense [n/d/$]/` +
+e.g.`sortExpense d/`

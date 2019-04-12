@@ -52,6 +52,7 @@ This command adds a budget of $500 from 1st February 2019 to 28th February 2019 
 
 image::UiFilled.png[width="760"]
 _Figure 2. The user interface after the above commands have been entered._
+
 [[Features]]
 == Features
 
@@ -280,8 +281,27 @@ Time period cannot exceed 1 million days. +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
 
-*Display status of budget:* +
-ePiggy will show the status of the current budget whenever a new expense is added. +
+*Display of budget:* +
+ePiggy will show the status of the budgets whenever a new expense is added, edited or deleted. +
+
+image::UiFilled.png[width="760"]
+_Figure 3. Example of the status of a current budget._
+
+There will also a reminder for you, depending on the status of your budget. There are 3 different reminders as shown
+below.
+
+image::budgetExceeded.png[width="300"]
+_Figure 4. Reminder shown when budget has exceeded._
+
+image::budgetEmpty.png[width="300"]
+_Figure 5. Reminder shown when you have $0 left in your budget._
+
+image::budget80percent.png[width="300"]
+_Figure 6. Reminder shown when you have spent more than 80% of the budget._
+
+image::budgetNormal.png[width="300"]
+_Figure 7. Quote provided as a reminder when spendings are well within budget._
+
 // end::addBudget[]
 
 // tag::editBudget[]

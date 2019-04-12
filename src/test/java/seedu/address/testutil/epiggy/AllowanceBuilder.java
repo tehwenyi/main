@@ -78,7 +78,7 @@ public class AllowanceBuilder {
         try {
             this.date = ParserUtil.parseDate(date);
         } catch (ParseException e) {
-            this.date = new Date();
+            this.date = null;
         }
         return this;
     }

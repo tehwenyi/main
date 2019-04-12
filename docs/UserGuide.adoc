@@ -45,8 +45,8 @@ _Figure 1. The user interface upon launch of application_
 
 * `addExpense n/Chicken Rice $/4 t/dinner` +
 This command adds a new expense of $4 for Chicken Rice today.
-* `addAllowance $/20` +
-This command adds a new allowance of $20.
+* `addAllowance n/From Mum $/20` +
+This command adds a new allowance of $20 tagged as 'From Mum'.
 * `addBudget $/500 p/28 d/01/02/2019` +
 This command adds a budget of $500 from 1st February 2019 to 28th February 2019 (28 days).
 
@@ -316,6 +316,21 @@ Budget does not take into account allowances as budget only accounts for expense
 ****
 // end::deleteBudget[]
 
+=== Goal Setting
+// tag::setGoal[]
+==== Setting the savings goal : `setGoal`
+
+Sets the item and the amount that the user wishes to save up for. +
+*Alias:* `sg` +
+*Format:* `setGoal n/ITEM_NAME $/AMOUNT`
+
+Example:
+
+* `setGoal n/nike shoes $/80` +
+Sets the goal to a $80 Nike shoe.
+
+// end::setGoal[]
+
 // tag::report[]
 === Expense Report
 
@@ -367,29 +382,6 @@ View the specified year report of 2019.
 image::reportYear.png[width="500"]
 Figure of example 4: Report for specified year.
 // end::report[]
-
-=== Goal Setting
-// tag::setGoal[]
-==== Setting the savings goal : `setGoal`
-
-Sets the item and the amount that the user wishes to save up for. +
-*Alias:* `sg` +
-*Format:* `setGoal n/ITEM_NAME $/AMOUNT`
-
-Example:
-
-* `setGoal n/nike shoes $/80` +
-Sets the goal to a $80 Nike shoe.
-
-// end::setGoal[]
-
-// tag::viewGoal[]
-==== Viewing the savings goal : `viewGoal`
-
-Show details about the current goal set. +
-*Format:* `viewGoal`
-
-// end::viewGoal[]
 
 === Miscellaneous
 
@@ -449,11 +441,14 @@ data of your previous ePiggy folder.
 
 * *Help* : `help`
 
-* *Add Expense* : `addExpense n/EXPENSE_NAME $/COST [d/DATE] [a/NAME_OF_THE_SHOP] [t/TAG]…` +
-e.g. `addExpense n/Chicken rice set $/5 t/Food a/HAINAN KITCHEN d/2019-02-21`
-
 * *Add Allowance* : `addAllowance $/AMOUNT` +
 e.g. `addAllowance $/10`
+
+* *Add Budget* : `addBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS d/START_DATE` +
+e.g.`addBudget $/500.00 p/7 d/01/02/2019`
+
+* *Add Expense* : `addExpense n/EXPENSE_NAME $/COST [d/DATE] [a/NAME_OF_THE_SHOP] [t/TAG]…` +
+e.g. `addExpense n/Chicken rice set $/5 t/Food a/HAINAN KITCHEN d/2019-02-21`
 
 * *List* : `list`
 
@@ -465,19 +460,11 @@ e.g. `edit 1 n/pen $1 c/supplies`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
 
-* *View Expense* : `view INDEX` +
-e.g. `view 3`
-
-* *View Savings* : `viewSavings`
-
 * *Search* : `search -[n/t/d/$] [NAME/TAG/DATE RANGE/AMOUNT RANGE]` +
 e.g.`search -n MCDONALDS`
 
 * *Sort* : `sort -[n/d/$] -[A/D]` +
 e.g.`sort -n`
-
-* *Add Budget* : `addBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS d/START_DATE` +
-e.g.`addBudget $/500.00 p/7 d/01/02/2019`
 
 * *Edit Budget* : `editBudget [$/AMOUNT] [p/TIME_PERIOD_IN_DAYS] [d/START_DATE]` +
 e.g.`editBudget $/300.00 p/28`
@@ -485,14 +472,10 @@ e.g.`editBudget $/300.00 p/28`
 * *Delete Budget* : `deleteBudget INDEX` +
 e.g.`deleteBudget 2`
 
-* *Recommend* : `recommend`
-
-* *Report* : `report d/DD/MM/YYYY` +
-e.g. `report d/21/03/2019`
-
 * *Set Savings Goal* : `setGoal n/ITEM_NAME $/AMOUNT` +
 e.g. `setGoal n/nike shoes $/80`
 
-* *View Savings Goal* : `viewGoal`
+* *Report* : `report d/DD/MM/YYYY` +
+e.g. `report d/21/03/2019`
 
 * *Exit* : `exit`

@@ -23,12 +23,13 @@ import seedu.address.model.UserPrefs;
 /**
  * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
  */
-@Ignore
+
 public class SelectCommandTest {
     private Model model = new ModelManager(getTypicalEPiggy(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalEPiggy(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
+    @Ignore
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Index lastPersonIndex = Index.fromOneBased(model.getFilteredPersonList().size());
@@ -45,6 +46,7 @@ public class SelectCommandTest {
         assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
+    @Ignore
     @Test
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
@@ -53,6 +55,7 @@ public class SelectCommandTest {
         assertExecutionSuccess(INDEX_FIRST_PERSON);
     }
 
+    @Ignore
     @Test
     public void execute_invalidIndexFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);

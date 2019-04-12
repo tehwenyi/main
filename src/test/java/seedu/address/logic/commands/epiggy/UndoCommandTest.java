@@ -1,34 +1,33 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.epiggy;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.deleteFirstPerson;
-import static seedu.address.testutil.TypicalPersons.getTypicalEPiggy;
+import static seedu.address.logic.commands.CommandTestUtil.deleteFirstExpense;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.testutil.epiggy.TypicalReports;
 
-@Ignore
 public class UndoCommandTest {
 
-    private final Model model = new ModelManager(getTypicalEPiggy(), new UserPrefs());
-    private final Model expectedModel = new ModelManager(getTypicalEPiggy(), new UserPrefs());
-    private final CommandHistory commandHistory = new CommandHistory();
+    private Model model = new ModelManager(TypicalReports.getTypicalEPiggy(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(TypicalReports.getTypicalEPiggy(), new UserPrefs());
+    private CommandHistory commandHistory = new CommandHistory();
 
     @Before
     public void setUp() {
         // set up of models' undo/redo history
-        deleteFirstPerson(model);
-        deleteFirstPerson(model);
+        deleteFirstExpense(model);
+        deleteFirstExpense(model);
 
-        deleteFirstPerson(expectedModel);
-        deleteFirstPerson(expectedModel);
+        deleteFirstExpense(expectedModel);
+        deleteFirstExpense(expectedModel);
     }
 
     @Test

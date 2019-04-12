@@ -473,11 +473,11 @@ e.g. `view 3`
 
 * *View Savings* : `viewSavings`
 
-* *Search* : `search -[n/t/d/$] [NAME/TAG/DATE RANGE/AMOUNT RANGE]` +
-e.g.`search -n MCDONALDS`
+* *Find* : `findExpense -[n/t/d/$] [NAME/TAG/DATE RANGE/AMOUNT RANGE]` +
+e.g.`fE n/MCDONALDS $/8.50:12`
 
-* *Sort* : `sort -[n/d/$] -[A/D]` +
-e.g.`sort -n`
+* *Sort* : `sortExpense -[n/d/$]` +
+e.g.`sE -n`
 
 * *Add Budget* : `addBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS d/START_DATE` +
 e.g.`addBudget $/500.00 p/7 d/01/02/2019`

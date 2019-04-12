@@ -173,6 +173,11 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
+        if (tag.toLowerCase().equals("allowance")) {
+            throw new ParseException("The tag name 'Allowance' is not allowed.");
+        } else if (tag.toLowerCase().equals("expense")) {
+            throw new ParseException("The tag name 'Expense' is not allowed.");
+        }
         return new Tag(trimmedTag);
     }
 

@@ -28,10 +28,7 @@ Managing money is made much simpler for you with a simple interface and simple c
 At the same time, *_ePiggy_* offers everything you need to cultivate good spending habits before
 entering the workforce, from tracking expenses and managing budgets to setting goals! +
 
-Interested? Click on the Quick Start to get started!
-
-== About
-This user guide provides a comprehensive view on how to set up ePiggy, the features available, and frequently asked questions.
+Interested? Click on the <<Quick Start>> to get started!
 
 == Quick Start
 To start using ePiggy, simply follow these steps::

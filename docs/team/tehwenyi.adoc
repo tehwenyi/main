@@ -13,19 +13,22 @@ This portfolio aims to document my contributions to *_ePiggy_*.
 
 == Introduction
 === About
-// what specific project task is, what module it is for, whether it is an indiv or grp proj
 *ePiggy* is a desktop application designed to inculcate good spending habits in students
 through allowing them to track their finances. It includes everything from tracking expenses, managing budgets
 to setting goals. +
 
-It is written in Java. Interactions by users are done through the Command Line Interface (CLI) and it has a Graphical User Interface (GUI) created with JavaFX. +
+It is written in Java. Interactions by users are done through the Command Line Interface (CLI) and it has a
+Graphical User Interface (GUI) created with JavaFX. +
+
 It can be used on both Windows and Mac.
 
 === Project Team
 
-*_ePiggy_* was designed for twin modules CS2101 and CS2103T. It was transformed from the link:https://github.com/nus-cs2103-AY1819S2/addressbook-level4[AddressBook - Level 4] application.
+*_ePiggy_* was designed for twin modules CS2101 and CS2103T. It was transformed from the
+link:https://github.com/nus-cs2103-AY1819S2/addressbook-level4[AddressBook - Level 4] application.
 My team consists of 5 members, including myself. +
-I contributed the `budget` feature of *_ePiggy_*, which allows users to add, edit and delete budgets to track their spendings.
+I contributed the `budget` feature of *_ePiggy_*, which allows users to add, edit and delete budgets to track their
+spendings.
 
 == Summary of contributions
 

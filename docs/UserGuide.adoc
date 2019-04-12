@@ -86,8 +86,8 @@ alias* and is *non-case sensitive*.
 // end::autocomplete[]
 ==== Viewing help : `help`
 Lists all the user commands with their syntax and descriptions. +
+*Alias:* `hp` +
 *Format:* `help`
-*Alias:* `hp`
 
 ==== Adding an expense : `addExpense`
 

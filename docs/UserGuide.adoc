@@ -446,8 +446,13 @@ if you intend to maintain your current spending habits. You can choose to adopt 
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: You can install ePiggy in the other computer and overwrite the empty data file it creates with the file that
-contains the data of your previous ePiggy folder.
+*A*: You can follow the steps below to transfer your data: +
+1. Install _ePiggy_ in the other computer. +
+2. Locate the empty 'data' folder which is in the same folder as the _ePiggy_ jar file. If there is no such folder,
+run the ePiggy jar file and close it. +
+3. Locate the file named _ePiggy.json_ in the _data_ folder from your previous computer. +
+4. Transfer the file mentioned in _Step 3_ into the folder mentioned in _Step 2_. +
+5. Your data should be transferred over successfully. You can run _ePiggy_ in your other computer to see the data.
 
 == Command Summary
 

@@ -5,6 +5,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 
+//@@author rahulb99
 /**
  * Lists all the commands with their brief description and syntax.
  */
@@ -22,7 +23,7 @@ public class HelpCommand extends Command {
      * Execute `help` command.
      * @param model {@code Model} which the command should operate on.
      * @param history {@code CommandHistory} which the command should operate on.
-     * @return
+     * @return {@code CommandResult}
      */
     @Override
     public CommandResult execute(Model model, CommandHistory history) {

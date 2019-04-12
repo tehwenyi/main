@@ -201,11 +201,8 @@ Lists the expense records from oldest to newest. Use this to return to the defau
 
 === Filtering and Sorting Data
 
+// tag::fe[]
 ==== Finding an expense : `findExpense`
-=======
-// tag::findExpense[]
-==== Searching for an expense : `findExpense`
->>>>>>> 96f5e3f3f3475b5ea9b078639c1431583d37e3e8
 
 You can find any expense in the list by specifying either its name, tag, date, range of dates, amount or range of amount. +
 *Alias:* `fe` +
@@ -235,9 +232,9 @@ If the entry is not found, it displays an appropriate error message. +
 Date format is `dd/MM/yyyy` .
 'findExpense` and `fE` are equivalent.
 ****
-//end::findExpense[]
+// end::fe[]
 
-//tag::sortExpense[]
+// tag::se[]
 ==== Sorting the expenses : `sortExpense`
 
 The user can sort the expenses in the list by name, date added, amount in ascending or descending order. +
@@ -257,8 +254,8 @@ Sorts all entries by amount in ascending order.
 *Additional Information:* +
 'sortExpense` and `sE` are equivalent.
 ****
-//end::sortExpense[]
 
+// end::se[]
 === Budgeting
 
 // tag::addBudget[]

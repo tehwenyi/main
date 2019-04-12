@@ -23,11 +23,11 @@ import seedu.address.logic.commands.epiggy.DeleteExpenseCommand;
 import seedu.address.logic.commands.epiggy.EditAllowanceCommand;
 import seedu.address.logic.commands.epiggy.EditBudgetCommand;
 import seedu.address.logic.commands.epiggy.EditExpenseCommand;
-import seedu.address.logic.commands.epiggy.FindExpenseCommand;
+import seedu.address.logic.commands.epiggy.FindCommand;
 import seedu.address.logic.commands.epiggy.ReportCommand;
 import seedu.address.logic.commands.epiggy.ReverseListCommand;
 import seedu.address.logic.commands.epiggy.SetGoalCommand;
-import seedu.address.logic.commands.epiggy.SortExpenseCommand;
+import seedu.address.logic.commands.epiggy.SortCommand;
 import seedu.address.logic.parser.epiggy.AddAllowanceCommandParser;
 import seedu.address.logic.parser.epiggy.AddBudgetCommandParser;
 import seedu.address.logic.parser.epiggy.AddExpenseCommandParser;
@@ -94,12 +94,12 @@ public class EPiggyParser {
         case DeleteAllowanceCommand.COMMAND_ALIAS:
             return new DeleteAllowanceCommandParser().parse(arguments);
 
-        case FindExpenseCommand.COMMAND_WORD:
-        case FindExpenseCommand.COMMAND_ALIAS:
+        case FindCommand.COMMAND_WORD:
+        case FindCommand.COMMAND_ALIAS:
             return new FindExpenseCommandParser().parse(arguments);
 
-        case SortExpenseCommand.COMMAND_WORD:
-        case SortExpenseCommand.COMMAND_ALIAS:
+        case SortCommand.COMMAND_WORD:
+        case SortCommand.COMMAND_ALIAS:
             return new SortExpenseCommandParser().parse(arguments);
 
         case ReverseListCommand.COMMAND_WORD:

@@ -22,7 +22,7 @@ public class DeleteExpenseCommand extends Command {
     public static final String COMMAND_ALIAS = "de";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + " deletes the expense identified by the index used in the displayed expense list.\n"
+            + ": Deletes the expense identified by the index used in the displayed expense list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 

@@ -80,7 +80,7 @@ Example: enter letter 'a' and then press `Tab`, the command "addExpense n/ $/ t/
 Delete the command, enter 'a' again and press `Tab`, the addBudget or addAllowance command will show.
 
 [NOTE]
-Enter 'as' and press `Tab`, *nothing will happen* because 'as' does not match any prefix of the command. Autocomplete is *not support
+Enter 'as' and press `Tab`, *nothing will happen* because 'as' does not match any prefix of the command. Autocomplete does *not support
 alias* and is *non-case sensitive*.
 
 // end::autocomplete[]
@@ -124,7 +124,7 @@ Edits the tag of the second expense in the Expense List to ‘Food’.
 
 Deletes the expense at the specified INDEX. The INDEX refers to the number in the displayed Expenses List which is next to
 the name of the expense. +
-*Alias:* `de`
+*Alias:* `de` +
 *Format:* `deleteExpense INDEX` +
 
 Examples:
@@ -134,22 +134,29 @@ Deletes the first expense in the displaying expense list from Expense Tracker.
 
 ==== Adding an allowance: `addAllowance`
 
-Adds a new allowance record to the Expense Tracker. +
+Adds a new allowance record to ePiggy. +
 *Alias:* `aa` +
-*Format:* `addAllowance n/EXPENSE_NAME $/COST [d/DATE] [t/TAG]…`
+*Format:* `addAllowance n/ALLOWANCE_NAME $/AMOUNT [d/DATE] [t/TAG]…`
 
 Examples:
 
 * `addAllowance n/From Mom $/20 t/School d/21/02/2019` +
 Adds an allowance of $20 from Mom, tagged as School with the date as 21/02/2019.
 
+****
+*Additional Information:* +
+Creating an allowance would automatically tag the entry with an `Allowance` tag. +
+`Name` has to be alphanumeric with a length of less than 50 characters. +
+`AMOUNT` has to be a valid amount greater than $0, and less than $999,999.99. +
+`Date` follows the following format `dd/MM/yyyy`.
+****
 ==== Editing an allowance : `editAllowance`
 
 Edits an existing allowance in ePiggy at a specific `*INDEX`* . +
-The *`INDEX`* refers to the number in the displayed Expenses List which is next to the name of the expense. Existing values of
-the expense will be changed according to the value of the parameters. +
+The *`INDEX`* refers to the number in the displayed Allowance & Expenses List which is next to the name of the allowance. Existing values of
+the allowance will be changed according to the value of the parameters. +
 *Alias:* `ea` +
-*Format:* `editAllowance INDEX [n/ALLOWANCE_NAME] [$/COST] [d/DATE] [t/TAG]…`
+*Format:* `editAllowance INDEX [n/ALLOWANCE_NAME] [$/AMOUNT] [d/DATE] [t/TAG]…`
 
 Examples:
 
@@ -158,9 +165,15 @@ Edits the name, cost and tag of the first allowance in ePiggy to ‘From Mom’,
 * `editAllowance 2 $/22` +
 Edits the amount of the second allowance in ePiggy to ‘$22’.
 
+****
+*Additional Information:* +
+Only allowances can be edited using this command. To edit expenses, use the `editExpense` command.
+****
+
 ==== Deleting an allowance : `deleteAllowance`
 
-Deletes the allowance at the specified INDEX. The INDEX refers to the number in the displayed Expenses List which is next to
+Deletes the allowance at the specified INDEX. The INDEX refers to the number in the displayed Allowance &
+Expenses List which is next to
 the name of the allowance. +
 *Alias:* `da` +
 *Format:* `deleteAllowance INDEX`
@@ -168,8 +181,12 @@ the name of the allowance. +
 Examples:
 
 * `deleteExpense 1` +
-Deletes the first allowance in the displaying expense list from Expense Tracker.
+Deletes the first allowance in the displaying list from Expense Tracker.
 
+****
+*Additional Information:* +
+Only allowances can be deleted using this command. To delete expenses, use the `deleteExpense` command.
+****
 ==== Listing all expenses : `list`
 
 Lists the expense records from newest to oldest. Use this to return to the default view after search/sort commands +
@@ -182,16 +199,11 @@ Lists the expense records from oldest to newest. Use this to return to the defau
 *Alias:* `rl` +
 *Format:* `reverseList`
 
-==== Viewing total savings : `viewSavings`
-
-Show details of the net amount of money recorded in ePiggy. +
-*Format:* `viewSavings`
-
 === Filtering and Sorting Data
 
-==== Searching for an expense : `findExpense`
+==== Finding an expense : `findExpense`
 
-You can search for any expense in the list by specifying either its name, tag, date, range of dates, amount or range of amount. +
+You can find any expense in the list by specifying either its name, tag, date, range of dates, amount or range of amount. +
 *Alias:* `fe` +
 *Format:* *`findExpense [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
 
@@ -384,15 +396,13 @@ Example:
 * `setGoal n/nike shoes $/80` +
 Sets the goal to a $80 Nike shoe.
 
+****
+*Additional Information:* +
+Details about the current goal and the amount required to save up to hit the current goal
+can be found on the User Interface.
+****
+
 // end::setGoal[]
-
-// tag::viewGoal[]
-==== Viewing the savings goal : `viewGoal`
-
-Show details about the current goal set. +
-*Format:* `viewGoal`
-
-// end::viewGoal[]
 
 === Miscellaneous
 
@@ -452,32 +462,33 @@ data of your previous ePiggy folder.
 
 * *Help* : `help`
 
-* *Add Expense* : `addExpense n/EXPENSE_NAME $/COST [d/DATE] [a/NAME_OF_THE_SHOP] [t/TAG]…` +
-e.g. `addExpense n/Chicken rice set $/5 t/Food a/HAINAN KITCHEN d/2019-02-21`
+* *Add Expense* : `addExpense n/EXPENSE_NAME $/COST [d/DATE] [t/TAG]…` +
+e.g. `addExpense n/Chicken rice set $/5 t/Food d/21/02/2019`
 
-* *Add Allowance* : `addAllowance $/AMOUNT` +
-e.g. `addAllowance $/10`
+* *Edit Expense* : `editExpense INDEX [n/EXPENSE_NAME] [$/COST] [d/DATE] [t/TAG]…` +
+e.g. `editExpense 1 n/Pen $/1 t/Supplies`
+
+* *Delete Expense* : `deleteExpense INDEX` +
+e.g. `deleteExpense 3`
+
+* *Add Allowance* : `addAllowance n/ALLOWANCE_NAME $/AMOUNT [d/DATE] [t/TAG]…` +
+e.g. `addAllowance n/From Mom $/20 t/School d/21/02/2019`
+
+* *Edit Allowance* : `editAllowance INDEX [n/ALLOWANCE_NAME] [$/COST] [d/DATE] [t/TAG]…` +
+e.g. `editAllowance 1 n/From Mom $10 t/Emergency`
+
+* *Delete Allowance* : `deleteAllowance INDEX` +
+e.g. `deleteAllowance 3`
 
 * *List* : `list`
 
 * *Reverse list* : `reverseList`
 
-* *Edit* : `edit INDEX [n/EXPENSE_NAME] [$/COST] [c/CATEGORY] [d/DATE] [t/TAG]…` +
-e.g. `edit 1 n/pen $1 c/supplies`
+* *Find Expenses* : `findExpense [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]` +
+e.g.`findExpense n/McDonalds`
 
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-
-* *View Expense* : `view INDEX` +
-e.g. `view 3`
-
-* *View Savings* : `viewSavings`
-
-* *Search* : `search -[n/t/d/$] [NAME/TAG/DATE RANGE/AMOUNT RANGE]` +
-e.g.`search -n MCDONALDS`
-
-* *Sort* : `sort -[n/d/$] -[A/D]` +
-e.g.`sort -n`
+* *Sort Expenses* : `sortExpense [n/d/$]/` +
+e.g.`sortExpense d/`
 
 * *Add Budget* : `addBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS d/START_DATE` +
 e.g.`addBudget $/500.00 p/7 d/01/02/2019`
@@ -488,14 +499,10 @@ e.g.`editBudget $/300.00 p/28`
 * *Delete Budget* : `deleteBudget INDEX` +
 e.g.`deleteBudget 2`
 
-* *Recommend* : `recommend`
-
 * *Report* : `report d/DD/MM/YYYY` +
 e.g. `report d/21/03/2019`
 
 * *Set Savings Goal* : `setGoal n/ITEM_NAME $/AMOUNT` +
 e.g. `setGoal n/nike shoes $/80`
-
-* *View Savings Goal* : `viewGoal`
 
 * *Exit* : `exit`

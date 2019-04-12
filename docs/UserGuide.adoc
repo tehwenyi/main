@@ -31,7 +31,7 @@ entering the workforce, from tracking expenses and managing budgets to setting g
 Interested? Click on the <<Quick Start>> to get started!
 
 == Quick Start
-To start using ePiggy, simply follow these steps::
+To start using ePiggy, simply follow these steps:::
 1. Ensure you have Java version `9` or later installed on your computer. +
 2. Download the latest *`ePiggy.jar`* file from link:{repoURL}/releases[here]. +
 3. Copy the file to the folder which you want to use as the home folder for your Expense Tracker. +
@@ -43,13 +43,15 @@ _Figure 1. The user interface upon launch of application_
 
 *Some sample commands you can try:*
 
-* `addExpense n/Chicken Rice $/4 t/dinner` +
-This command adds a new expense of $4 for Chicken Rice today.
-* `addAllowance n/From Mum $/20` +
-This command adds a new allowance of $20 tagged as 'From Mum'.
+* `addExpense n/Chicken Rice $/4 t/dinner d/01/02/2019` +
+This command adds a new expense of $4 for Chicken Rice on 1st February.
+* `addAllowance n/From Mum $/20 d/01/02/2019` +
+This command adds a new allowance of $20 tagged as 'From Mum' on 1st February.
 * `addBudget $/500 p/28 d/01/02/2019` +
 This command adds a budget of $500 from 1st February 2019 to 28th February 2019 (28 days).
 
+image::UiFilled.png[width="760"]
+_Figure 2. The user interface after the above commands have been entered._
 [[Features]]
 == Features
 

@@ -41,14 +41,14 @@ Added the entire `budget` feature of ePiggy. +
 
 image::whatitdoes.png[width="175"]
 
-Allows users to set a limit on their spendings for a specified time period and provide reminders when they are going to or have exceeded the limit. +
-Unlike typical expense trackers where only one budget is set, ePiggy's `budget` feature consists of a list of budgets. This is because the purpose of ePiggy is to inculcate good spending habits in our users, so users should be able to track their previous spendings.
+* Allows users to set a limit on their spendings for a specified time period and provide reminders when they are going to or have exceeded the limit. +
+* Unlike typical expense trackers where only one budget is set, ePiggy's `budget` feature consists of a list of budgets. This is because the purpose of ePiggy is to inculcate good spending habits in our users, so users should be able to track their previous spendings.
 Being able to view their budget history and plan future budgets would fuel this purpose. +
-The `budget` feature is visible on the GUI and comprises of 3 commands: `addBudget`, `editBudget` and `deleteBudget`.
+* The `budget` feature is visible on the GUI and comprises of 3 commands: `addBudget`, `editBudget` and `deleteBudget`.
 
 image::justification.png[width="175"]
 
-The `budget` feature urges users to be more aware of the amount they spend per time period so that they can better manage their expenses and avoid splurging. It is also a good habit we hope to inculcate in users before they enter the
+* The `budget` feature urges users to be more aware of the amount they spend per time period so that they can better manage their expenses and avoid splurging. It is also a good habit we hope to inculcate in users before they enter the
 workforce and deal with larger sums of money. +
 
 image::highlights.png[width="175"]
@@ -61,7 +61,7 @@ good spending habits in our users. Hence, users should be able to track their pr
 
 image::codecontributed.png[width="175"]
 
-*Functional code:* link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/AddBudgetCommand.java[Add Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/EditBudgetCommand.java[Edit Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/DeleteBudgetCommand.java[Delete Budget]
+*Functional code:* link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/AddBudgetCommand.java[Add Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/EditBudgetCommand.java[Edit Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/DeleteBudgetCommand.java[Delete Budget] +
 *Test code:* link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/AddBudgetCommandTest.java[Add Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/DeleteBudgetCommandTest.java[Delete Budget]
 
 // ability to write code, explain and justify design choices, solve a user problem/fulfil a user need
@@ -80,8 +80,7 @@ image::justification.png[width="175"]
 
 image::codecontributed.png[width="175"]
 
-* *Functional code*: [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetPanel.java[Budget Panel]] | [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetCard.java[Budget Card]] _{give links to collated code files}_
-* *Test code*:
+* *Functional code*: [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetPanel.java[Budget Panel]] | [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetCard.java[Budget Card]]
 
 === Other Contributions
 * *Other contributions*:

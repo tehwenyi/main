@@ -655,9 +655,9 @@ alternative choice lists below.
 // end::report[]
 
 // tag::autocomplete[]
-=== autocomplete feature
+=== Auto-complete feature
 This feature allows users to reduce the typing time and learning cost of using ePiggy. Any command line application without
-an autocomplete feature is a nightmare for the user. The users not only need to type all the existing commands correctly but
+an auto-complete feature is a nightmare for the user. The users not only need to type all the existing commands correctly but
  also need to remember many different parameters in each commands. EPiggy tries to be user friendly. Autocomplete feature helps the users overcome these problems. +
 
 Given below is an activity diagram of how the link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`autocomplete`]
@@ -667,14 +667,14 @@ image::AutocompleteActivityDiagram.png[width="600"]
 Figure: Autocomplete activity Diagram +
 
 This feature first requires users to enter a few letters on the link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`commandBox`]
-of ePiggy, and then press *Tab* key on the keyboard to autocomplete the command.
+of ePiggy, and then press *Tab* key on the keyboard to automatically complete the command.
 If the completed command is not what you want, delete the command. Enter the same letters, and press *Tab* again. Another command will show if the letters match another command.
 
 Example: enter letter 'a' and then press *Tab*, the command "addExpense n/ $/ t/ d/ " will show.
 Delete the command, enter 'a' again and press *Tab*, the addBudget or addAllowance command will show.
 
 [NOTE]
-The autocomplete feature compares the last part of sub string from user input to the prefix of command in the checklist. It is non-case sensitive.
+The auto-complete feature compares the last part of sub string from user input to the prefix of command in the checklist. It is non-case sensitive.
 
 Example: user types " `hello add` " to the commandBox, the sub string is "add". "add" is used to compare with commands in the checklist such as "setBudget",
 "addExpense", "addAllowance". Two commands "addExpense" and "addAllowance" will return but only one of them will replace "add" in the commandBox.
@@ -682,9 +682,9 @@ The commandBox will show " `hello addExpense n/ $/ t/ d/` " or " `hello addAllow
 
 ==== Current Implementation
 
-This part shows current implementation of the autocomplete feature. It also shows which classes or components are used in the autocomplete feature.
+This part shows current implementation of the auto-complete feature. It also shows which classes or components are used in the autocomplete feature.
 
-The code of the autocomplete function is in link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] class.
+The code of the auto-complete function is in link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] class.
 The autoCompleteText method is invoked when user presses *Tab*. The sub-string (last part split by white space) of user input text and a checklist of commands pass into
 link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`].
 link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`] returns an array of matched commands. One element in the array replaces and shows
@@ -699,7 +699,7 @@ One element in return array is appended at the end of the new string. This new s
 
 ==== Design Considerations
 
-This part shows design considerations of the autocomplete feature. Multiply design considerations are showed. The pros and cons of each of the
+This part shows design considerations of the auto-complete feature. Multiply design considerations are showed. The pros and cons of each of the
 alternative choice lists below.
 
 *Aspect: How to implement such function in UI?* +

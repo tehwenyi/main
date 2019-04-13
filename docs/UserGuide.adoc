@@ -57,7 +57,7 @@ _Figure 2. The user interface after the above commands have been entered._
 == Features
 
 ====
-*Command Format*
+image::commandFormat.png[width="300"]
 
 * Words in `UPPER_CASE` are the parameters to be entered by the user. +
 ** E.g. For `addExpense n/EXPENSE_NAME`, `EXPENSE_NAME` is a parameter which can be used as `addExpense n/Chicken Rice`.
@@ -68,6 +68,22 @@ _Figure 2. The user interface after the above commands have been entered._
 * Parameters can be in any order. +
 ** E.g. If the command specifies `n/EXPENSE_NAME $/COST`, `$/COST n/EXPENSE_NAME` is also acceptable.
 ====
+
+image::callouts.png[width="300"]
+
+Callouts are boxes with icons to point out some information. These are the 3 callouts used throughout this developer guide:
+
+[NOTE]
+This represents a *note*. A note indicates important, additional information. Be sure to read these notes as they might be applicable to you!
+
+[TIP]
+This represents a *tip*. A tip denotes something that is often handy, and good for you to know. Tips are often less crucial, and you can choose to skip them.
+
+[WARNING]
+This represents a *warning*. A warning denotes something of crucial importance, and you should be extremely cautious when reading the statement.
+
+{empty} +
+
 
 === Basic Features
 // tag::autocomplete[]

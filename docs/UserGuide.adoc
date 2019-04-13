@@ -310,7 +310,7 @@ Budget does not take into account allowances as budget only accounts for expense
 *Display of budget:* +
 ePiggy will show the status of the budgets whenever a new expense is added, edited or deleted. +
 
-image::UiFilled.png[width="760"]
+image::budgetstatus.png[width="300"]
 _Figure 3. Example of the status of a current budget._
 
 There will also a reminder for you, depending on the status of your budget. There are 3 different reminders as shown

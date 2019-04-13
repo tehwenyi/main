@@ -43,7 +43,7 @@ _Figure 1. The user interface upon launch of application_
 
 {empty} +
 
-image::samplecommands.png[with="175"]
+image::samplecommands.png[width="175"]
 
 * `addExpense n/Chicken Rice $/4 t/dinner d/01/02/2019` +
 This command adds a new expense of $4 for Chicken Rice on 1st February.
@@ -101,10 +101,15 @@ Enter 'as' and press `Tab`, *nothing will happen* because 'as' does not match an
 alias* and is *non-case sensitive*.
 
 // end::autocomplete[]
+
+{empty} +
+
 ==== Viewing help : `help`
 Lists all the user commands with their syntax and descriptions. +
 *Alias:* `hp` +
 *Format:* `help`
+
+{empty} +
 
 ==== Adding an expense : `addExpense`
 
@@ -120,6 +125,8 @@ Adds an expense for a $5 chicken rice set, tagged as Food with the date as 21/02
 
 * `addExpense n/Chicken rice set $/5 t/Food` +
 Adds an expense for a $5 chicken rice set, tagged as Food dated as the current date, by default.
+
+{empty} +
 
 ==== Editing an expense : `editExpense`
 
@@ -137,6 +144,8 @@ Edits the name, cost and tag of the first expense in the Expense List to ‘Pen�
 * `editExpense 2 t/Food` +
 Edits the tag of the second expense in the Expense List to ‘Food’.
 
+{empty} +
+
 ==== Deleting an expense : `deleteExpense`
 
 Deletes the expense at the specified INDEX. The INDEX refers to the number in the displayed Expenses List which is next to
@@ -148,6 +157,8 @@ Examples:
 
 * `deleteExpense 1` +
 Deletes the first expense in the displaying expense list from Expense Tracker.
+
+{empty} +
 
 ==== Adding an allowance: `addAllowance`
 
@@ -161,12 +172,14 @@ Examples:
 Adds an allowance of $20 from Mom, tagged as School with the date as 21/02/2019.
 
 ****
-image::additionalinformation.png[width="200"]
+image::additionalinformation.png[width="175"]
 Creating an allowance would automatically tag the entry with an `Allowance` tag. +
 `Name` has to be alphanumeric with a length of less than 50 characters. +
 `AMOUNT` has to be a valid amount greater than $0, and less than $999,999.99. +
 `Date` follows the following format `dd/MM/yyyy`.
 ****
+{empty} +
+
 ==== Editing an allowance : `editAllowance`
 
 Edits an existing allowance in ePiggy at a specific `*INDEX`* . +
@@ -183,9 +196,11 @@ Edits the name, cost and tag of the first allowance in ePiggy to ‘From Mom’,
 Edits the amount of the second allowance in ePiggy to ‘$22’.
 
 ****
-image::additionalinformation.png[width="200"]
+image::additionalinformation.png[width="175"]
 Only allowances can be edited using this command. To edit expenses, use the `editExpense` command.
 ****
+
+{empty} +
 
 ==== Deleting an allowance : `deleteAllowance`
 
@@ -201,20 +216,28 @@ Examples:
 Deletes the first allowance in the displaying list from Expense Tracker.
 
 ****
-image::additionalinformation.png[width="200"]
+image::additionalinformation.png[width="175"]
 Only allowances can be deleted using this command. To delete expenses, use the `deleteExpense` command.
 ****
+
+{empty} +
+
 ==== Listing all expenses : `list`
 
 Lists the expense records from newest to oldest. Use this to return to the default view after search/sort commands +
 *Alias:* `l` +
 *Format:* `list`
 
+{empty} +
+
 ==== Listing all expenses in reverse : `reverseList`
 
 Lists the expense records from oldest to newest. Use this to return to the default view after search/sort commands +
 *Alias:* `rl` +
 *Format:* `reverseList`
+
+{empty} +
+{empty} +
 
 === Filtering and Sorting Data
 
@@ -240,7 +263,7 @@ Displays all entries listed with the cost range of $250.
 Displays all entries listed with the cost range of $250 to $500.
 
 ****
-image::additionalinformation.png[width="200"]
+image::additionalinformation.png[width="175"]
 Searches and displays the expense along with its information, according to the user-specified command. +
 Searching for names and tags is case-insensitive. Furthermore, it allows you to search for almost similar
 words by applying the concept of Levenshtien distance, hence allowing small typos (limit fixed by an upper bound). +
@@ -248,6 +271,8 @@ If the entry is not found, it displays an appropriate error message. +
 Date format is `dd/MM/yyyy` .
 'findExpense` and `fE` are equivalent.
 ****
+
+{empty} +
 
 ==== Sorting the expenses : `sortExpense`
 
@@ -265,9 +290,12 @@ Sorts all entries by date in descending order.
 Sorts all entries by amount in ascending order.
 
 ****
-image::additionalinformation.png[width="200"]
+image::additionalinformation.png[width="175"]
 'sortExpense` and `sE` are equivalent.
 ****
+
+{empty} +
+{empty} +
 
 === Budgeting
 
@@ -293,7 +321,7 @@ Sets a total budget of $500 for each week starting from 3rd February 2019.
 Sets a total budget of $10000 every 15 days starting from 1st January 2000.
 
 ****
-image::additionalinformation.png[width="200"]
+image::additionalinformation.png[width="175"]
 Time period cannot exceed 1 million days. +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
@@ -320,7 +348,7 @@ image::budgetNormal.png[width="300"]
 _Figure 7. Quote provided as a reminder when spendings are well within budget._
 
 // end::addBudget[]
-
+{empty} +
 // tag::editBudget[]
 ==== Editing the current budget : `editBudget`
 
@@ -342,12 +370,12 @@ Edits the current budget to $1000 for each week starting from 01/01/2000.
 Edits the current budget to $200 for every 15 days starting from the budget's initial start date.
 
 ****
-image::additionalinformation.png[width="200"]
+image::additionalinformation.png[width="175"]
 Time period cannot exceed 1 million days. +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
 // end::editBudget[]
-
+{empty} +
 // tag::deleteBudget[]
 ==== Deleting a budget : `deleteBudget`
 
@@ -362,10 +390,12 @@ Examples:
 Deletes the first budget in the Budget List.
 
 ****
-image::additionalinformation.png[width="200"]
+image::additionalinformation.png[width="175"]
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
 // end::deleteBudget[]
+{empty} +
+{empty} +
 
 === Goal Setting
 // tag::setGoal[]
@@ -381,12 +411,13 @@ Example:
 Sets the goal to a $80 Nike shoe.
 
 ****
-image::additionalinformation.png[width="200"]
+image::additionalinformation.png[width="175"]
 Details about the current goal and the amount required to save up to hit the current goal
 can be found on the User Interface.
 ****
 // end::setGoal[]
-
+{empty} +
+{empty} +
 // tag::report[]
 === Expense Report
 
@@ -439,6 +470,9 @@ image::reportYear.png[width="500"]
 Figure of example 4: Report for specified year.
 // end::report[]
 
+{empty} +
+{empty} +
+
 === Miscellaneous
 
 ==== Exiting the program : `exit`
@@ -447,10 +481,15 @@ Exits the program. +
 *Alias:* `ex` +
 *Format:* `exit`
 
+{empty} +
+
 ==== Saving the data
 
 ePiggy's data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
+
+{empty} +
+{empty} +
 
 === Upcoming Features
 

@@ -42,7 +42,7 @@ This new feature greatly adds to the functionality of existing commands (that we
 * *Functional code contributed*: [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/FindExpenseCommand.java[FindExpense]],
 [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/SortExpenseCommand.java[SortExpense]],
 [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/ReverseListCommand.java[ReverseList]],
-[https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/HelpCommand.java[HelpCommand]] .
+[https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/HelpCommand.java[HelpCommand]] .
 
 * *Test code contributed*: _{give links to collated code files}_
 

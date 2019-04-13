@@ -167,13 +167,10 @@ public class CommandBoxTest extends GuiUnitTest {
         assertInputHistory(KeyCode.TAB, "exit");
 
         commandBoxHandle.run("f");
-        assertInputHistory(KeyCode.TAB, "findExpense n/ t/ d/ $/");
+        assertInputHistory(KeyCode.TAB, "find n/ t/ d/ $/");
 
         commandBoxHandle.run("he");
         assertInputHistory(KeyCode.TAB, "help");
-
-        commandBoxHandle.run("hi");
-        assertInputHistory(KeyCode.TAB, "history");
 
         commandBoxHandle.run("l");
         assertInputHistory(KeyCode.TAB, "list");
@@ -194,7 +191,7 @@ public class CommandBoxTest extends GuiUnitTest {
         assertInputHistory(KeyCode.TAB, "setGoal n/ $/");
 
         commandBoxHandle.run("so");
-        assertInputHistory(KeyCode.TAB, "sortExpense n/ d/ $/");
+        assertInputHistory(KeyCode.TAB, "sort n/ d/ $/");
 
         commandBoxHandle.run("u");
         assertInputHistory(KeyCode.TAB, "undo");

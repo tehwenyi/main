@@ -521,6 +521,9 @@ e.g.`addBudget $/500.00 p/7 d/01/02/2019`
 * *Add Expense* : `addExpense n/EXPENSE_NAME $/COST [d/DATE] [t/TAG]…` +
 e.g. `addExpense n/Chicken rice set $/5 t/Food d/21/02/2019`
 
+* *Clear data* : `clear` +
+e.g. `clear`
+
 * *Delete Allowance* : `deleteAllowance INDEX` +
 e.g. `deleteAllowance 3
 

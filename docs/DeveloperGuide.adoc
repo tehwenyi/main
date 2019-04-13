@@ -388,44 +388,49 @@ Hence, if the `index` input by the user is negative or greater than the size of 
 // end::deletebudget[]
 
 //tag::findexpense[]
-=== Find Expense feature
-*_ePiggy_* allows the user to filter specific expenses by entering multiple keywords. Expenses that satisfy
-all the keywords are displayed in the expense list panel.
+=== Find Expense/Allowance feature
+*_ePiggy_* allows the user to filter specific expenses by entering single or multiple keywords. Expenses that satisfy
+all the keywords are displayed in the expense list panel. Furthermore, it also searches for words similar to the user's
+input, considering that the user might have made a typing error, by applying the concept of Levenshtein distance fixed by a
+upper bound.
 
-* `findExpense n/Nasi Lemak $/4.00 d/2019/04/01 t/lunch`
+* `find n/Nasi Lemak $/4.00 d/01/04/2019 t/lunch`
 
 The above command finds expense(s) with the `Name` Nasi Lemak, `Cost` of $4.00, purchased on
 `Date` 1st April, 2019 and tagged with `Tag` lunch.
 
 [NOTE]
-`Date` format is `YYYY/MM/DD`.
+`Date` format is `dd/MM/yyyy`.
+
+[NOTE]
+Empty input keywords are not allowed and a appropriate error will be shown.
 
 [TIP]
 All keywords in this command are optional, provided that there is at least one input keyword. For
-example, suppose we wabt to filter out all `Expense` s with `Cost` between $1 and $10.5 (both inclusive),
-then the command should be just `findExpense $/1:10.5`.
+example, suppose we want to filter out all `Expense` s with `Cost` between $1 and $10.5 (both inclusive),
+then the command should be just `find $/1:10.5`.
 Similarly for other type of keywords.
 
 ==== Current Implementation
-Given below is a UML sequence diagram of how the `findExpense` command works along with a step-by-step
+Given below is a UML sequence diagram of how the `find` command works along with a step-by-step
 explanation.
 
 image::fEuml.png[witdh="800"]
 
-Figure: FindExpenseCommand UML Sequence Diagram +
+Figure: FindCommand UML Sequence Diagram +
 
-Step 1: User enters `findExpense n/Nasi Lemak $/4.00 d/2019/04/01 t/lunch`. The command is
-received by `EPiggyParser` which then creates `FindExpenseCommandParser` object and and calls
-`FindExpenseCommandParser#parse()` method. +
+Step 1: User enters `find n/Nasi Lemak`. The command is
+received by `EPiggyParser` which then creates `FindCommandParser` object and and calls
+`FindCommandParser#parse()` method. +
 
-Step 2: `FindExpenseCommandParser#parse()` first checks if input is invalid and throws a
+Step 2: `FindCommandParser#parse()` first checks if input is invalid and throws a
 `ParseException` otherwise it calls `ArgumentTokenizer#tokenize()` to tokenize the `String` input
  into keywords and store them in an `ArgumentMultimap` Object. +
 
-Step 3: `FindExpenseCommandParser#parse()` method then creates an `ExpenseContainsKeywordsPredicate`
+Step 3: `FindCommandParser#parse()` method then creates an `ExpenseContainsKeywordsPredicate`
 Object. It implements `Predicate<Expense>` interface. It performs the filtering of expenses. +
 
-Step 4: A `FindExpenseCommand` object is created with `ExpenseContainsKeywordsPredicate` as parameter and
+Step 4: A `FindCommand` object is created with `ExpenseContainsKeywordsPredicate` as parameter and
 returned to `LogicManager`. +
 
 Step 5: `LogicManager` calls `FindCommand#execute()`,which then calls `Model#updateFilteredExpenseList()`
@@ -434,6 +439,19 @@ expenses which was filtered by the new predicate. +
 
 Step 6: Expense List panel is updated by filtered set of expenses. A `CommandResult` is then created and
 returned to `LogicManager`.
+
+==== Design considerations
+This feature can be implemented in different ways in terms of how the target expenses are found.
+
+===== Aspect: how to filter expenses
+* *Alternative 1:* Storing expenses as and when they are added into separate files. +
+** Pros: More efficient as there is no need to check for ALL expenses.
+** Cons: Need to change the original architecture of storage.
+* *Alternative 2 (current choice):* Search through all the expenses and find the ones with matching keywords. +
+** Pros: : Easy to implement as there is no need to change original architecture.
+** Cons: Will take more time as it will search through large number of expenses.
+
+//end::findexpense[]
 
 // tag::setGoal[]
 === Set Goal feature
@@ -469,6 +487,63 @@ The command is first parsed into `SetGoalCommandParser`, which separates the arg
 ** Cons: Makes ePiggy more complicated, not suitable for younger age groups.
 
 // end::setGoal[]
+
+//tag::sortexpense[]
+=== Sort feature
+*_ePiggy_* allows the user to sort expenses (and allowances) by entering the keyword (name, cost or date) to determine
+the sorting sequence. By default, a new expense/allowance entry is placed at the bottom of the list (`ExpensePanel`). This
+sorting mechanism allows the user to sort the expenses/allowances accordingly.
+
+* `sort n/`
+
+The above command sorts expense(s) according to their `Name` in a lexicographical order.
+
+[NOTE]
+Empty user input is not allowed and a appropriate error will be shown. Similarly, multiple keywords (`Prefix`) are also not allowed.
+
+[TIP]
+All keywords in this command are optional, provided that there is at least one input keyword. For
+example, suppose we want to filter out all `Expense` s with `Cost` between $1 and $10.5 (both inclusive),
+then the command should be just `find $/1:10.5`.
+Similarly for other type of keywords.
+
+==== Current Implementation
+Given below is a UML sequence diagram of how the `sort` command works along with a step-by-step
+explanation. +
+
+image::sEuml.png[witdh="800"]
+
+Figure: SortCommand UML Sequence Diagram +
+
+Step 1: User enters `sort $/`.  The command is received by `EPiggyParser` which then creates `SortCommandParser` object
+and calls `SortCommandParser#parse()` method. +
+
+Step 2: `SortCommandParser#parse()` first checks if input is invalid and throws a
+        `ParseException` otherwise it calls `ArgumentTokenizer#tokenize()` to tokenize the `String` input
+         into keywords and store them in an `ArgumentMultimap` Object. +
+
+Step 3: `SortCommandParser#arePrefixesPresent` method is then used to determine the input `Prefix`, and depending on the `Prefix`,
+appropriate Comparator object is created. In this case, `Prefix` is `$/`, so a new `CompareExpensesByCost` object is created.
+It implements the `java.util.Comparator` interface. +
+
+Step 4: A `FindCommand` object is created with `CompareExpensesByCost` object as a parameter and
+returned to `LogicManager`. +
+
+Step 5: `LogicManager` calls `SortCommand#execute()`,which then calls `Model#sortExpenses()`
+method to set the comparator for sorting. +
+
+Step 6: `Model#sortExpenses()` then calls `EPiggy#sortExpense` method with Comparator object as parameter. `EPiggy#sortExpense`
+then calls `ExpenseList#sort` to set the comparator of `internalList`. `ExpenseList#sort` then calls the static `FXCollections#sort`
+method to sort the `internalList`.  +
+
+Step 7: `FindCommand#execute()`,which then calls `Model#updateFilteredExpenseList()`
+        method to update the predicate of `FilteredList<Expense>`. `FilteredList` now contains all
+        expenses in sorted order. +
+
+Step 6: Expense List panel is updated by sorted expenses. A `CommandResult` is then created and
+returned to `LogicManager`.
+
+//end::sortexpense[]
 
 // tag::viewGoal[]
 === View Goal feature

@@ -223,20 +223,20 @@ You can find any expense or allowance in the list by specifying either its name,
 *Alias:* `fd` +
 *Format:* *`find [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
 
-image::examples.png[width="125"]
+image::examples.png[width="125"] +
 
 * `find n/McDonalds` +
-Displays all entries with the name “McDonalds”.
+Displays all entries with the name “McDonalds”. +
 * `find t/FOOD` +
-Displays all entries with the tag specified (in this case, it’s food).
+Displays all entries with the tag specified (in this case, it’s food). +
 * `find d/02/01/2019` +
-Displays all entries listed on 2nd Jan 2019.
+Displays all entries listed on 2nd Jan 2019. +
 * `find d/02/01/2019:05/12/2020` +
-Displays all entries listed in the range 2nd Jan 2019 to 5th Dec 2020 (both inclusive).
+Displays all entries listed in the range 2nd Jan 2019 to 5th Dec 2020 (both inclusive). +
 * `find $/250` +
-Displays all entries listed with the cost range of $250.
+Displays all entries listed with the cost range of $250. +
 * `find $/250:500` +
-Displays all entries listed with the cost range of $250 to $500.
+Displays all entries listed with the cost range of $250 to $500. +
 
 ****
 image::additionalinformation.png[width="175"]
@@ -256,17 +256,20 @@ The user can sort the expenses and allowances in the list by name, date added, a
 *Alias:* `st` +
 *Format:* `sort [n/d/$]/`
 
-image::examples.png[width="125"]
+image::examples.png[width="125"] +
 
 * `sort n/` +
-Sorts all entries by name (in ascending order).
+Sorts all entries by name (in ascending order). +
 * `sort d/` +
-Sorts all entries by date in descending order.
+Sorts all entries by date in descending order. +
 * `sort $/` +
-Sorts all entries by amount in ascending order.
+Sorts all entries by amount in ascending order. +
 
 ****
-image::additionalinformation.png[width="175"]
+
+image::additionalinformation.png[width="175"] +
+
+There should be only one keyword (either `name`, `cost` or `date`) to determine the sorting sequence. +
 'sort` and `st` are equivalent.
 ****
 

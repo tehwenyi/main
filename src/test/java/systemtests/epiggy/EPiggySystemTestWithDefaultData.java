@@ -27,8 +27,9 @@ import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.EpiggyTestApp;
 
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
 import seedu.address.logic.commands.epiggy.FindCommand;
-
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.testutil.epiggy.TypicalReports;
@@ -157,20 +158,36 @@ public abstract class EPiggySystemTestWithDefaultData {
     }
 
     /**
+     * Displays all expense with any parts of their item names matching {@code keyword} (case-insensitive).
+     */
+    protected void showExpensesWithTag(String keyword) {
+        int totalExpensesCount = getModel().getFilteredExpenseList().size();
+        executeCommand(FindCommand.COMMAND_WORD + " t/" + keyword);
+        int resultExpensesCount = this.testApp.getModelAfterExecution().getFilteredExpenseList().size();
+        assertTrue(resultExpensesCount < totalExpensesCount);
+    }
+
+    /**
      * Selects the person at {@code index} of the displayed list.
      */
     //    protected void selectPerson(Index index) {
     //        executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
     //        assertEquals(index.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
     //    }
-
+    protected void deleteAllExpenses() {
+        executeCommand(ClearCommand.COMMAND_WORD);
+        assertEquals(0, getModel().getEPiggy().getExpenseList().size());
+    }
     /**
-     * Deletes all persons in the address book.
+     * Deletes all Budget in the address book.
      */
-    //protected void deleteAllPersons() {
-    //   executeCommand(ClearCommand.COMMAND_WORD);
-    //    assertEquals(0, getModel().getEPiggy().getPersonList().size());
-    //}
+    protected void deleteAllBudgets() {
+        int budgetListSize = getModel().getBudgetList().size();
+        for (int i = 0; i < budgetListSize; i++) {
+            executeCommand(DeleteBudgetCommand.COMMAND_WORD + " 1");
+        }
+        assertEquals(0, getModel().getEPiggy().getBudgetList().size());
+    }
     /**
      * Asserts that the {@code CommandBox} displays {@code expectedCommandInput}, the {@code ResultDisplay} displays
      * {@code expectedResultMessage}, the storage contains the same person objects as {@code expectedModel}

@@ -5,11 +5,8 @@
 
 image::projectportfolioheader.png[width="550"]
 
-This portfolio aims to document my contributions to *_ePiggy_*.
-
+This portfolio aims to document my contributions to *_ePiggy_*. +
 *_ePiggy_* Github link: https://github.com/CS2103-AY1819S2-W17-4/main
-
----
 
 == Introduction
 
@@ -91,14 +88,12 @@ View all the code I contributed link:https://nus-cs2103-ay1819s2.github.io/cs210
 
 === Other Contributions
 
-* Added graphics to the User Guide and Developer Guide to increase readability. Refer to Section 3 and 4 for more information.
-* Standardised the language and formatting of the user guide to provide greater coherence.
 * As of 15th April 2019:
 ** Reviewed over 20 pull requests on ePiggy's Github.
 ** Raised over 10 issues on ePiggy's Github.
 * Refactored Address Book to ePiggy.
 * Created the *.jar file for ePiggy.
-* Set up Coveralls.
+* Standardised the language and formatting of the user and developer guide to provide greater coherence.
 
 == Contributions to the User Guide
 

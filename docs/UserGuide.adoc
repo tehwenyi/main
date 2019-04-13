@@ -304,6 +304,7 @@ image::additionalinformation.png[width="175"]
 Time period cannot exceed 1 million days. +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
+// end::addbudget[]
 
 *Display of budget:* +
 ePiggy will show the status of the budgets whenever a new expense is added, edited or deleted. +
@@ -326,8 +327,6 @@ _Figure 6. Reminder shown when you have spent more than 80% of the budget._
 image::budgetNormal.png[width="300"]
 _Figure 7. Quote provided as a reminder when spendings are well within budget._
 
-// end::addbudget[]
-
 ==== Editing the current budget : `editBudget`
 
 // tag::editbudget[]
@@ -348,13 +347,13 @@ Edits the current budget to $1000 for each week starting from 01/01/2000.
 * `editBudget $/200 p/15` +
 Edits the current budget to $200 for every 15 days starting from the budget's initial start date.
 
+// end::editbudget[]
+
 ****
 image::additionalinformation.png[width="175"]
 Time period cannot exceed 1 million days. +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
-
-// end::editbudget[]
 
 ==== Deleting a budget : `deleteBudget`
 

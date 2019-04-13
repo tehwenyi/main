@@ -34,74 +34,80 @@ I contributed the `budget` feature of *_ePiggy_*, which allows users to add, edi
 spendings.
 
 == Summary of contributions
+|===
+|_This section summarises my contributions to ePiggy's code and showcases my technical abilities._
+|===
 
 === Major Enhancement
 
-Added the entire `budget` feature of ePiggy. +
+I added the entire `budget` feature of ePiggy, which consists of 3 commands: `addBudget`, `editBudget` and `deleteBudget`. +
 
 image::whatitdoes.png[width="150"]
 
-The `budget` feature allows users to set a limit on their spendings for a specified time period and displays to users
+* The `budget` feature allows users to set a limit on their spendings for a specified time period and displays to users
 the status of their spendings in relation to their set budget(s).
-The `budget` feature also provides reminders when users are going to or have spent more than the limit. +
-The `budget` feature comprises of 3 commands: `addBudget`, `editBudget` and `deleteBudget`. +
-The budgets set by the user are viewed as a list. +
+* The budgets set by the user are viewed as a list. +
 
 image::justification.png[width="150"]
 
-The `budget` feature urges users to be more aware of the amount they spend per time period so that they can better
-manage their expenses and avoid splurging. It is also a good habit we hope to inculcate in users before they enter the
-workforce and deal with larger sums of money. +
-Also, unlike typical expense trackers where only one budget is set, ePiggy's `budget` feature consists of a list of
+* The `budget` feature urges users to be more aware of the amount they spend per time period so that they can avoid
+splurging. +
+* Also, unlike typical expense trackers with only one budget, ePiggy's `budget` feature consists of a list of
 budgets so that users can see their past spending habits and plan for future budgets.
 
 image::highlights.png[width="150"]
 
-* This enhancement was built from scratch. It is completely new and hence required the creation of many new objects including `budget`, `period`, `uniqueBudgetList` and a new `budgetPanel` for the UI. This enhancement required the familiarity with
-almost all the different aspects of the code (`commons`, `logic`, `model`, `ui`).
-* Typically, expense trackers only have one budget but I decided it would be better to have a list of budgets instead, so that users can view their budget history and plan future budgets. This is due to the purpose of ePiggy, which is to inculcate
-good spending habits in our users. Hence, users should be able to track their previous spendings.
-* For this enhancement, the UI is important as the purpose is to constantly remind users of the remaining amount they can spend. It was challenging to make the UI simple and concise for our target users whilst conveying the crucial information.
-
-image::codecontributed.png[width="150"]
-
-* *Functional code:* link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/AddBudgetCommand.java[Add Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/EditBudgetCommand.java[Edit Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/DeleteBudgetCommand.java[Delete Budget] +
-* *Test code:* link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/AddBudgetCommandTest.java[Add Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/DeleteBudgetCommandTest.java[Delete Budget]
-
-// ability to write code, explain and justify design choices, solve a user problem/fulfil a user need
+* This enhancement was built from scratch. It is completely new and hence required the creation of many new objects
+including `budget`, `period`, `uniqueBudgetList` and a new `budgetPanel` for the UI. This enhancement required me to be
+familiar with almost all the different aspects of the code (`commons`, `logic`, `model`, `ui`).
+* For this enhancement, the UI is important as the purpose is to constantly remind users of the remaining amount they
+can spend. It was challenging to make the UI simple and concise for our target users whilst conveying the crucial information.
 
 === Minor Enhancement
 * *Minor enhancement 1*:
-Added the UI component for the `budget` feature.
+Added the status and reminder components of the `budget` feature.
 
 image::whatitdoes.png[width="150"]
 
-* Allows users to view all the details and real-time status of the budgets they have added on the GUI. The status of the budgets will update whenever an expense is added, edited or deleted.
+* The `budget` feature will display the status of the budget (remaining amount, remaining days).
+* The `budget` feature provides reminders when users are going to or have spent more than the limit. +
 
 image::justification.png[width="150"]
 
-* *_ePiggy_*'s target audience are students, who may be as young as seven years old. Hence, having a simple and concise GUI to engage them while conveying all the crucial information is very important. +
+* *_ePiggy_*'s objective is to inculcate good spending habits in our users. Hence, users need to be constantly aware of
+their spendings, especially in relation to the budget they have set.
 
-image::codecontributed.png[width="150"]
+image::highlights.png[width="150"]
 
-* *Functional code*: [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetPanel.java[Budget Panel]] | [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetCard.java[Budget Card]]
+* For this enhancement, the UI is important as it should be simple yet contain enough information. It was challenging to
+make the UI simple and concise for our target users whilst conveying the crucial information.
+
+=== Code Contributed
+As of 15th April 2019, I have contributed over 50 Pull Requests and reviewed over 20 Pull Requests.
+
+* *Functional code:* link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/AddBudgetCommand.java[Add Budget]
+| link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/EditBudgetCommand.java[Edit Budget]
+| link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/DeleteBudgetCommand.java[Delete Budget]
+| link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetPanel.java[Budget Panel]
+| link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetCard.java[Budget Card] +
+* *Test code:* link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/AddBudgetCommandTest.java[Add Budget]
+| link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/EditBudgetCommandTest.java[Delete Budget]
+| link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/DeleteBudgetCommandTest.java[Delete Budget]
+| link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/systemtests/epiggy/AddBudgetCommandSystemTest.java[Add Budget Command System Test]
+
+View all the code I contributed link:https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=tehwenyi&sort=displayName&since=2019-02-10&until=2019-04-15&timeframe=day&reverse=false&repoSort=true[here]
 
 === Other Contributions
 * *Other contributions*:
 
 ** Project Management:
 *** Managed the refactoring of AddressBook to ePiggy
-** Graphic:
+** Graphics:
 *** Added graphics to the User Guide and Developer Guide to increase readability.
-*** Refer to Section 3 for more information.
-** Community:
-*** PRs contributed:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Refer to Section 4 and 5 for more information.
 ** Tools:
 *** Created the *.jar file for ePiggy
 *** Set up Coveralls.
-** All code contributed:
-**** View the codes I contributed here
 
 == Contributions to the User Guide
 
@@ -112,7 +118,7 @@ information for end-users who may not be familiar with computing technicalities.
 
 Click link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/docs/UserGuide.adoc[here] to view the full User Guide!
 
-image::overview.png[width="175"]
+image::overview.png[width="140"]
 
 * Standardised and improved the aesthetics of the User Guide
 
@@ -128,9 +134,9 @@ Besides that, I standardised the language and formatting of the user guide to pr
 
 I wrote the *Introduction* of the User Guide, making sure it is clear, concise and engaging.
 Also, I wrote the *Budgeting* feature which teaches users how to use the `budget` commands in a clear and informative
-manner. My contributions for the *Budgeting* feature can be found below, in Sections 3.1 to 3.3.
+manner. My contributions for the *Budgeting* feature can be found below, in Sections 4.1 to 4.3.
 
-image::extract.png[width="175"]
+image::extract.png[width="140"]
 
 |===
 |_My contribution towards the *Budgeting* feature in the User Guide can be split into 3 segments: `addBudget`,
@@ -156,7 +162,7 @@ to the project and my ability to convey all necessary technical information clea
 Click link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/docs/DeveloperGuide.adoc[here] to view the full
 Developer Guide!
 
-image::overview.png[width="175"]
+image::overview.png[width="140"]
 
 * Standardised and improved the aesthetics of the Developer Guide
 
@@ -171,9 +177,9 @@ Besides that, I standardised the language and formatting of the developer guide 
 * Contributed content to the Developer Guide
 
 I documented the implementation details and design considerations for the *Budgeting* feature.
-I also created diagrams to aid in the explanations. My contributions can be found below, in Sections 4.1 to 4.3.
+I also created diagrams to aid in the explanations. My contributions can be found below, in Sections 5.1 to 5.3.
 
-image::extract.png[width="175"]
+image::extract.png[width="140"]
 
 |===
 |_My contribution towards the Developer Guide can be split into 3 segments: `addBudget`,

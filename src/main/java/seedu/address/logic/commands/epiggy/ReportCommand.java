@@ -4,9 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
 import java.time.LocalDate;
-import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -34,7 +32,7 @@ public class ReportCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Report shown!";
 
-    private final Logger logger = LogsCenter.getLogger(getClass());
+    //private final Logger logger = LogsCenter.getLogger(getClass());
 
     private String type = "ALL";
     private LocalDate date;

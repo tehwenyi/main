@@ -21,7 +21,7 @@ import seedu.address.model.tag.Tag;
 //@@author rahulb99
 public class FindCommandParserTest {
 
-    private FindExpenseCommandParser parser = new FindExpenseCommandParser();
+    private FindCommandParser parser = new FindCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {

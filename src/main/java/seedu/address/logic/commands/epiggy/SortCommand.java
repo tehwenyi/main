@@ -22,7 +22,7 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String COMMAND_ALIAS = "st";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + " : Sorts the expenses as specified by the user, according to name, cost, date or tag. \n"
+            + " : Sorts the expenses as specified by the user, according to name, cost, or date. \n"
             + " Parameters: [n/d/$]/...\n"
             + " Example: " + COMMAND_WORD + " n/";
     public static final String MESSAGE_SUCCESS = "Sorted %1$d expenses.";

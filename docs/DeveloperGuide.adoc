@@ -551,7 +551,7 @@ image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-image::UndoRedoActivityDiagram.png[width="650"]
+image::UndoRedoActivityDiagram.png[width="800"]
 
 ==== Design Considerations
 
@@ -580,7 +580,7 @@ This command allows users to view the report within a user-input period of time.
 
 Given below is a sequence diagram of how the `report` command works: +
 
-image::reportSequenceDiagram.png[width="900"]
+image::reportSequenceDiagram.png[width="800"]
 
 Figure: Report Command Sequence Diagram +
 
@@ -663,7 +663,7 @@ an auto-complete feature is a nightmare for the user. The users not only need to
 Given below is an activity diagram of how the link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`autocomplete`]
 feature works: +
 
-image::AutocompleteActivityDiagram.png[width="600"]
+image::AutocompleteActivityDiagram.png[width="800"]
 Figure: Autocomplete activity Diagram +
 
 This feature first requires users to enter a few letters on the link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`commandBox`]

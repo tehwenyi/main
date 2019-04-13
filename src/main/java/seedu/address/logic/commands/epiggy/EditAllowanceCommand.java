@@ -52,7 +52,7 @@ public class EditAllowanceCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "Allowance not edited as there are no changes.\n"
             + MESSAGE_USAGE;
 
-    private static final String MESSAGE_ITEM_NOT_ALLOWANCE = "The item selected is not an allowance. "
+    public static final String MESSAGE_ITEM_NOT_ALLOWANCE = "The item selected is not an allowance. "
             + "Please use " + EditExpenseCommand.COMMAND_WORD + " to edit expenses and "
             + COMMAND_WORD + " to edit allowances.";
 

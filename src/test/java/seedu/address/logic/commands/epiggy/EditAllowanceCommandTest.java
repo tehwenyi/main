@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.epiggy;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EXPENSE_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_SECONDEXTRA;
@@ -13,6 +14,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.showExpenseAtIndex;
 import static seedu.address.logic.commands.epiggy.EditAllowanceCommand.createEditedAllowance;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ALLOWANCE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ALLOWANCE;
 import static seedu.address.testutil.epiggy.TypicalAllowances.getTypicalEPiggy;
 
@@ -29,7 +31,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.epiggy.Allowance;
+import seedu.address.model.epiggy.Expense;
 import seedu.address.testutil.epiggy.EditAllowanceDescriptorBuilder;
+import seedu.address.testutil.epiggy.TypicalExpenses;
 
 class EditAllowanceCommandTest {
 
@@ -137,11 +141,16 @@ class EditAllowanceCommandTest {
 
     @Test
     public void execute_indexIsExpense_failure() {
+        Model tempModel = new ModelManager(TypicalExpenses.getTypicalEPiggy(), new UserPrefs());
+        Expense toEdit = tempModel.getFilteredExpenseList()
+                .get(INDEX_FIRST_EXPENSE.getZeroBased());
+        assertFalse(toEdit instanceof Allowance);
 
-    }
+        EditAllowanceCommand.EditAllowanceDescriptor descriptor = new EditAllowanceDescriptorBuilder().build();
+        EditAllowanceCommand editAllowanceCommand = new EditAllowanceCommand(INDEX_FIRST_EXPENSE, descriptor);
 
-    @Test
-    void createEditedExpense() {
+        assertCommandFailure(editAllowanceCommand, tempModel, commandHistory,
+                EditAllowanceCommand.MESSAGE_ITEM_NOT_ALLOWANCE);
     }
 
 }

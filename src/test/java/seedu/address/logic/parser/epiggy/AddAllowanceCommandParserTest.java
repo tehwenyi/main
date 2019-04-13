@@ -23,7 +23,7 @@ import seedu.address.logic.commands.epiggy.AddAllowanceCommand;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.testutil.epiggy.AllowanceBuilder;
 
-
+//@@author
 
 public class AddAllowanceCommandParserTest {
     private AddAllowanceCommandParser parser = new AddAllowanceCommandParser();

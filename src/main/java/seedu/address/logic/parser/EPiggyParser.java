@@ -37,10 +37,10 @@ import seedu.address.logic.parser.epiggy.DeleteExpenseCommandParser;
 import seedu.address.logic.parser.epiggy.EditAllowanceCommandParser;
 import seedu.address.logic.parser.epiggy.EditBudgetCommandParser;
 import seedu.address.logic.parser.epiggy.EditExpenseCommandParser;
-import seedu.address.logic.parser.epiggy.FindExpenseCommandParser;
+import seedu.address.logic.parser.epiggy.FindCommandParser;
 import seedu.address.logic.parser.epiggy.ReportCommandParser;
 import seedu.address.logic.parser.epiggy.SetGoalCommandParser;
-import seedu.address.logic.parser.epiggy.SortExpenseCommandParser;
+import seedu.address.logic.parser.epiggy.SortCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -96,11 +96,11 @@ public class EPiggyParser {
 
         case FindCommand.COMMAND_WORD:
         case FindCommand.COMMAND_ALIAS:
-            return new FindExpenseCommandParser().parse(arguments);
+            return new FindCommandParser().parse(arguments);
 
         case SortCommand.COMMAND_WORD:
         case SortCommand.COMMAND_ALIAS:
-            return new SortExpenseCommandParser().parse(arguments);
+            return new SortCommandParser().parse(arguments);
 
         case ReverseListCommand.COMMAND_WORD:
         case ReverseListCommand.COMMAND_ALIAS:

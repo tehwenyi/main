@@ -16,7 +16,7 @@ import seedu.address.model.epiggy.comparators.CompareExpenseByName;
 
 public class SortCommandParserTest {
 
-    private SortExpenseCommandParser parser = new SortExpenseCommandParser();
+    private SortCommandParser parser = new SortCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {

@@ -4,7 +4,7 @@
 :sectnums:
 :stylesDir: ../stylesheets
 
-image::ppplogo.png[width="600"]
+image::ppplogo.png[width="300"]
 This portfolio aims to document my contributions to *_ePiggy_*.
 Github link: https://github.com/CS2103-AY1819S2-W17-4/main[*_ePiggy_* ]
 

@@ -57,7 +57,7 @@ _Figure 2. The user interface after the above commands have been entered._
 == Features
 
 ====
-image::commandFormat.png[width="300"]
+image::commandformat.png[width="300"]
 
 * Words in `UPPER_CASE` are the parameters to be entered by the user. +
 ** E.g. For `addExpense n/EXPENSE_NAME`, `EXPENSE_NAME` is a parameter which can be used as `addExpense n/Chicken Rice`.

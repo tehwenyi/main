@@ -277,8 +277,9 @@ There should be only one keyword (either `name`, `cost` or `date`) to determine 
 
 === Budgeting
 
-// tag::addBudget[]
 ==== Adding a spending budget : `addBudget`
+
+// tag::addbudget[]
 
 Adds a budget for the total expenses within the specified time period. The time period will be in terms of days,
 and 1 day is the minimum a person can set a budget for. +
@@ -303,6 +304,7 @@ image::additionalinformation.png[width="175"]
 Time period cannot exceed 1 million days. +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
+// end::addbudget[]
 
 *Display of budget:* +
 ePiggy will show the status of the budgets whenever a new expense is added, edited or deleted. +
@@ -325,11 +327,9 @@ _Figure 6. Reminder shown when you have spent more than 80% of the budget._
 image::budgetNormal.png[width="300"]
 _Figure 7. Quote provided as a reminder when spendings are well within budget._
 
-// end::addBudget[]
-
-// tag::editBudget[]
 ==== Editing the current budget : `editBudget`
 
+// tag::editbudget[]
 Edits the current budget. A current budget must be present to use this command. +
 Edited budget cannot overlap with other existing budgets. +
 
@@ -347,16 +347,17 @@ Edits the current budget to $1000 for each week starting from 01/01/2000.
 * `editBudget $/200 p/15` +
 Edits the current budget to $200 for every 15 days starting from the budget's initial start date.
 
+// end::editbudget[]
+
 ****
 image::additionalinformation.png[width="175"]
 Time period cannot exceed 1 million days. +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
-// end::editBudget[]
 
-// tag::deleteBudget[]
 ==== Deleting a budget : `deleteBudget`
 
+// tag::deletebudget[]
 Deletes the budget at the specified `INDEX`. The `INDEX` refers to the number in the displayed Budget List which is next to
 the status of the budget. +
 *Alias:* `db` +
@@ -371,7 +372,8 @@ Deletes the first budget in the Budget List.
 image::additionalinformation.png[width="175"]
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
-// end::deleteBudget[]
+
+// end::deletebudget[]
 
 === Goal Setting
 // tag::setGoal[]

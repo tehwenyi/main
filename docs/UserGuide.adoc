@@ -112,8 +112,7 @@ Adds a new expense record to the Expense Tracker. +
 *Alias:* `ae` +
 *Format:* `addExpense n/EXPENSE_NAME $/COST [d/DATE] [t/TAG]…` +
 
-
-Examples:
+image::examples.png[width="175"]
 
 * `addExpense n/Chicken rice set $/5 t/Food d/21/02/2019` +
 Adds an expense for a $5 chicken rice set, tagged as Food with the date as 21/02/2019.
@@ -130,7 +129,7 @@ the expense will be changed according to the value of the parameters. +
 *Format:* `editExpense INDEX [n/EXPENSE_NAME] [$/COST] [d/DATE] [t/TAG]…` +
 
 
-Examples:
+image::examples.png[width="175"]
 
 * `editExpense 1 n/Pen $1 t/Supplies` +
 Edits the name, cost and tag of the first expense in the Expense List to ‘Pen’, ‘$1’ and ‘Supplies’ respectively.
@@ -144,7 +143,7 @@ the name of the expense. +
 *Alias:* `de` +
 *Format:* `deleteExpense INDEX` +
 
-Examples:
+image::example.png[width="175"]
 
 * `deleteExpense 1` +
 Deletes the first expense in the displaying expense list from Expense Tracker.
@@ -155,7 +154,7 @@ Adds a new allowance record to ePiggy. +
 *Alias:* `aa` +
 *Format:* `addAllowance n/ALLOWANCE_NAME $/AMOUNT [d/DATE] [t/TAG]…`
 
-Examples:
+image::example.png[width="175"]
 
 * `addAllowance n/From Mom $/20 t/School d/21/02/2019` +
 Adds an allowance of $20 from Mom, tagged as School with the date as 21/02/2019.
@@ -176,7 +175,7 @@ the allowance will be changed according to the value of the parameters. +
 *Alias:* `ea` +
 *Format:* `editAllowance INDEX [n/ALLOWANCE_NAME] [$/AMOUNT] [d/DATE] [t/TAG]…`
 
-Examples:
+image::examples.png[width="175"]
 
 * `editAllowance 1 n/From Mom $10 t/Emergency` +
 Edits the name, cost and tag of the first allowance in ePiggy to ‘From Mom’, ‘$10’ and ‘Emergency’ respectively.
@@ -196,7 +195,7 @@ the name of the allowance. +
 *Alias:* `da` +
 *Format:* `deleteAllowance INDEX`
 
-Examples:
+image::example.png[width="175"]
 
 * `deleteExpense 1` +
 Deletes the first allowance in the displaying list from Expense Tracker.
@@ -229,7 +228,8 @@ You can find any expense or allowance in the list by specifying either its name,
 *Alias:* `fd` +
 *Format:* *`find [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
 
-Examples:
+image::examples.png[width="175"]
+
 * `find n/McDonalds` +
 Displays all entries with the name “McDonalds”.
 * `find t/FOOD` +
@@ -261,7 +261,7 @@ The user can sort the expenses and allowances in the list by name, date added, a
 *Alias:* `st` +
 *Format:* `sort [n/d/$]/`
 
-Examples:
+image::examples.png[width="175"]
 
 * `sort n/` +
 Sorts all entries by name (in ascending order).
@@ -293,7 +293,7 @@ Budgets are considered to be overlapping if their active dates intersect each ot
 *Alias:* `ab` +
 *Format:* `addBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS d/START_DATE`
 
-Examples:
+image::examples.png[width="175"]
 
 * `addBudget $/500 p/7 d/03/02/2019` +
 Sets a total budget of $500 for each week starting from 3rd February 2019.
@@ -342,7 +342,7 @@ Budgets are considered to be overlapping if their active dates intersect each ot
 *Alias:* `eb` +
 *Format:* `editBudget [$/AMOUNT] [p/TIME_PERIOD_IN_DAYS] [d/START_DATE]`
 
-Examples:
+image::examples.png[width="175"]
 
 * `editBudget $/1000 p/7 d/01/01/2000` +
 Edits the current budget to $1000 for each week starting from 01/01/2000.
@@ -365,7 +365,7 @@ the status of the budget. +
 *Alias:* `db` +
 *Format:* `deleteBudget INDEX`
 
-Examples:
+image::example.png[width="175"]
 
 * `deleteBudget 1` +
 Deletes the first budget in the Budget List.
@@ -413,7 +413,7 @@ proportion of total expense and total allowance. +
 [NOTE]
 The message of conclusion under the chart will show only if you add at least one expense to ePiggy.
 
-Examples:
+image::examples.png[width="175"]
 
 * Example 1: `report` +
 View the completed report of all the records.

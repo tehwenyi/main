@@ -41,7 +41,9 @@ To start using ePiggy, simply follow these steps:::
 image::Ui.png[width="760"]
 _Figure 1. The user interface upon launch of application_
 
-*Some sample commands you can try:*
+{empty} +
+
+image::samplecommands.png[with="175"]
 
 * `addExpense n/Chicken Rice $/4 t/dinner d/01/02/2019` +
 This command adds a new expense of $4 for Chicken Rice on 1st February.
@@ -57,7 +59,7 @@ _Figure 2. The user interface after the above commands have been entered._
 == Features
 
 ====
-image::commandformat.png[width="150"]
+image::commandformat.png[width="175"]
 
 * Words in `UPPER_CASE` are the parameters to be entered by the user. +
 ** E.g. For `addExpense n/EXPENSE_NAME`, `EXPENSE_NAME` is a parameter which can be used as `addExpense n/Chicken Rice`.
@@ -69,18 +71,17 @@ image::commandformat.png[width="150"]
 ** E.g. If the command specifies `n/EXPENSE_NAME $/COST`, `$/COST n/EXPENSE_NAME` is also acceptable.
 ====
 
-image::callouts.png[width="150"]
+{empty} +
 
-Callouts are boxes with icons to point out some information. These are the 3 callouts used throughout this developer guide:
+image::callouts.png[width="175"]
+
+Callouts are boxes with icons to point out some information. These are the 2 callouts used throughout this user guide:
 
 [NOTE]
 This represents a *note*. A note indicates important, additional information. Be sure to read these notes as they might be applicable to you!
 
 [TIP]
 This represents a *tip*. A tip denotes something that is often handy, and good for you to know. Tips are often less crucial, and you can choose to skip them.
-
-[WARNING]
-This represents a *warning*. A warning denotes something of crucial importance, and you should be extremely cautious when reading the statement.
 
 {empty} +
 
@@ -452,6 +453,8 @@ ePiggy's data is saved in the hard disk automatically after any command that cha
 There is no need to save manually.
 
 === Upcoming Features
+
+image::cominginv2.png[width="175"]
 
 // tag::v2.0[]
 ==== Register `[coming in v2.0]`

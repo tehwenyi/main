@@ -30,7 +30,7 @@ developers of all levels, allowing them to learn more about the behind the scene
 
 If you want to learn how you can make *_ePiggy_* even better, start here! +
 
-image::callouts.png[width="150"]
+image::callouts.png[width="175"]
 
 Callouts are boxes with icons to point out some information. These are the 3 callouts used throughout this developer guide:
 

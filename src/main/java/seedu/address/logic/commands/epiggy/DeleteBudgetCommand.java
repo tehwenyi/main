@@ -22,7 +22,7 @@ public class DeleteBudgetCommand extends Command {
     public static final String COMMAND_ALIAS = "db";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + " deletes the budget identified by the index number used in the displayed budget list.\n"
+            + ": Deletes the budget identified by the index number used in the displayed budget list.\n"
             + "Parameter: index (positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 

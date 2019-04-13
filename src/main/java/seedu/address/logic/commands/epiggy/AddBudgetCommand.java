@@ -24,7 +24,7 @@ public class AddBudgetCommand extends Command {
     public static final String COMMAND_WORD = "addBudget";
     public static final String COMMAND_ALIAS = "ab";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + " adds a budget to ePiggy.\n"
+            + ": Adds a budget to ePiggy.\n"
             + "Parameters: "
             + PREFIX_COST + "BUDGET_IN_DOLLARS "
             + PREFIX_PERIOD + "TIME_PERIOD_IN_DAYS "

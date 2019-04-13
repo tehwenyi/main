@@ -17,10 +17,10 @@ import seedu.address.model.epiggy.Expense;
  * Finds and lists all expenses in EPiggy whose expense contains any of the argument keywordss.
  * keywords matching is case insensitive.
  */
-public class SortExpenseCommand extends Command {
+public class SortCommand extends Command {
 
-    public static final String COMMAND_WORD = "sortExpense";
-    public static final String COMMAND_ALIAS = "se";
+    public static final String COMMAND_WORD = "sort";
+    public static final String COMMAND_ALIAS = "st";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + " : Sorts the expenses as specified by the user, according to name, cost, date or tag. \n"
             + " Parameters: [n/d/$]/...\n"
@@ -29,7 +29,7 @@ public class SortExpenseCommand extends Command {
 
     private final Comparator<Expense> expenseComparator;
 
-    public SortExpenseCommand(Comparator<Expense> expenseComparator) {
+    public SortCommand(Comparator<Expense> expenseComparator) {
         assert expenseComparator != null : "keywords should not be null.";
         this.expenseComparator = expenseComparator;
     }
@@ -57,7 +57,7 @@ public class SortExpenseCommand extends Command {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SortExpenseCommand that = (SortExpenseCommand) o;
+        SortCommand that = (SortCommand) o;
         return Objects.equals(expenseComparator, that.expenseComparator);
     }
 

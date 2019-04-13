@@ -73,8 +73,6 @@ public class JsonAdaptedExpense {
 
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Expense} object.
-     *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted expense.
      */
     public Expense toModelType() throws IllegalValueException {
         final List<Tag> expenseTags = new ArrayList<>();

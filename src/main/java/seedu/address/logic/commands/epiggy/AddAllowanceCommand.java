@@ -21,7 +21,7 @@ public class AddAllowanceCommand extends Command {
     public static final String COMMAND_WORD = "addAllowance";
     public static final String COMMAND_ALIAS = "aa";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an allowance to the expense book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an allowance to the epiggy. "
             + "Parameters: "
             + PREFIX_NAME + "ALLOWANCE NAME "
             + PREFIX_COST + "AMOUNT "
@@ -38,6 +38,7 @@ public class AddAllowanceCommand extends Command {
     private final Allowance toAdd;
 
     public AddAllowanceCommand(Allowance toAdd) {
+        requireNonNull(toAdd);
         this.toAdd = toAdd;
     }
 

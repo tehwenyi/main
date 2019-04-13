@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_CANNOT_CREATE_ALLOWANCE_TAG;
+import static seedu.address.commons.core.Messages.MESSAGE_CANNOT_CREATE_EXPENSE_TAG;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
@@ -32,6 +34,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -174,9 +177,9 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         if (tag.toLowerCase().equals("allowance")) {
-            throw new ParseException("The tag name 'Allowance' is not allowed.");
+            throw new ParseException(MESSAGE_CANNOT_CREATE_ALLOWANCE_TAG);
         } else if (tag.toLowerCase().equals("expense")) {
-            throw new ParseException("The tag name 'Expense' is not allowed.");
+            throw new ParseException(MESSAGE_CANNOT_CREATE_EXPENSE_TAG);
         }
         return new Tag(trimmedTag);
     }

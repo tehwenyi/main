@@ -52,6 +52,6 @@ public class TypicalAllowances {
     }
 
     public static List<Allowance> getTypicalAllowances() {
-        return new ArrayList<>(Arrays.asList(ALLOWANCE_FROM_MOM, ALLOWANCE_FROM_DAD));
+        return new ArrayList<>(Arrays.asList(FIRST_EXTRA, SECOND_EXTRA));
     }
 }

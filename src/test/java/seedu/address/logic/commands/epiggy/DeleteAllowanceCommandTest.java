@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showExpenseAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ALLOWANCE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXPENSE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXPENSE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ALLOWANCE;
 import static seedu.address.testutil.epiggy.TypicalAllowances.getTypicalEPiggy;
 
 import org.junit.Test;
@@ -59,8 +59,8 @@ public class DeleteAllowanceCommandTest {
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
-        showExpenseAtIndex(model, INDEX_FIRST_EXPENSE);
-        Index outOfBoundIndex = INDEX_SECOND_EXPENSE;
+        showExpenseAtIndex(model, INDEX_FIRST_ALLOWANCE);
+        Index outOfBoundIndex = INDEX_SECOND_ALLOWANCE;
         assertTrue(outOfBoundIndex.getZeroBased() < model.getEPiggy().getExpenseList().size());
         DeleteAllowanceCommand deleteAllowanceCommand = new DeleteAllowanceCommand(outOfBoundIndex);
         assertCommandFailure(deleteAllowanceCommand, model, commandHistory,

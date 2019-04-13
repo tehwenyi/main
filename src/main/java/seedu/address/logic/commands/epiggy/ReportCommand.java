@@ -47,6 +47,13 @@ public class ReportCommand extends Command {
         this.date = date;
         this.type = type;
     }
+    public String getType() {
+        return type;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);

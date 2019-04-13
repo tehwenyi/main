@@ -88,10 +88,7 @@ public class ClearCommandSystemTest extends EPiggySystemTestWithDefaultData {
      * @see EPiggySystemTestWithDefaultData#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
-        Model expectedModel = getModel();
-
         executeCommand(command);
-        //assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsErrorStyle();
         assertStatusBarUnchanged();

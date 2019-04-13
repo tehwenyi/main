@@ -8,7 +8,6 @@ import java.time.LocalDate;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.epiggy.ReportCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -21,24 +20,45 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ReportCommandParserTest {
 
-    private static final String USER_INPUT = " d/21/03/2019";
+    private static final String USER_INPUT_DAY = " d/21/03/2019";
+    private static final String USER_INPUT_MONTH = " d/03/2019";
+    private static final String USER_INPUT_YEAR = " d/2019";
     private ReportCommandParser parser = new ReportCommandParser();
     private LocalDate date = LocalDate.of(2019, 03, 21);
 
     @Test
-    public void parse_validArgs_returnReportCommand() {
+    public void parse_validArgs_returnReportCommandWithCorrectDateAndType() {
         try {
-            Command command = parser.parse(USER_INPUT);
-            assertTrue(command instanceof ReportCommand);
+            ReportCommand command = parser.parse(USER_INPUT_DAY);
+            assertTrue(command.getDate().equals(date));
+            assertTrue(command.getType().equals("DAY"));
         } catch (ParseException pe) {
             throw new IllegalArgumentException("Invalid userInput.", pe);
         }
     }
     @Test
-    public void parse_validEmptyArgs_returnReportCommand() {
+    public void parse_validEmptyArgs_returnReportCommandWithCorrectAllType() {
         try {
-            Command command = parser.parse("");
-            assertTrue(command instanceof ReportCommand);
+            ReportCommand command = parser.parse("");
+            assertTrue(command.getType().equals("ALL"));
+        } catch (ParseException pe) {
+            throw new IllegalArgumentException("Invalid userInput.", pe);
+        }
+    }
+    @Test
+    public void parse_validArgs_returnReportCommandWithMonthType() {
+        try {
+            ReportCommand command = parser.parse(USER_INPUT_MONTH);
+            assertTrue(command.getType().equals("MONTH"));
+        } catch (ParseException pe) {
+            throw new IllegalArgumentException("Invalid userInput.", pe);
+        }
+    }
+    @Test
+    public void parse_validArgs_returnReportCommandWithYearType() {
+        try {
+            ReportCommand command = parser.parse(USER_INPUT_YEAR);
+            assertTrue(command.getType().equals("YEAR"));
         } catch (ParseException pe) {
             throw new IllegalArgumentException("Invalid userInput.", pe);
         }

@@ -38,26 +38,28 @@ To start using ePiggy, simply follow these steps:::
 4. Double-click the *`ePiggy.jar`* file to start the app. +
 5. The GUI will appear as per below upon launch.
 
-image::Ui.png[width="760"]
+image::UiEmpty.png[width="760"]
 _Figure 1. The user interface upon launch of application_
 
-*Some sample commands you can try:*
+image::samplecommands.png[width="175"]
 
-* `addExpense n/Chicken Rice $/4 t/dinner d/01/02/2019` +
+* `addExpense n/Chicken Rice $/4 t/dinner d/01/04/2019` +
 This command adds a new expense of $4 for Chicken Rice on 1st February.
-* `addAllowance n/From Mum $/20 d/01/02/2019` +
+* `addAllowance n/From Mum $/20 d/01/04/2019` +
 This command adds a new allowance of $20 tagged as 'From Mum' on 1st February.
-* `addBudget $/500 p/28 d/01/02/2019` +
+* `addBudget $/500 p/30 d/01/04/2019` +
 This command adds a budget of $500 from 1st February 2019 to 28th February 2019 (28 days).
+* `setGoal n/Apple Watch $/600` +
+This command sets a goal of $600 for an Apple Watch.
 
-image::UiFilled.png[width="760"]
+image::Ui.png[width="760"]
 _Figure 2. The user interface after the above commands have been entered._
 
 [[Features]]
 == Features
 
 ====
-*Command Format*
+image::commandformat.png[width="175"]
 
 * Words in `UPPER_CASE` are the parameters to be entered by the user. +
 ** E.g. For `addExpense n/EXPENSE_NAME`, `EXPENSE_NAME` is a parameter which can be used as `addExpense n/Chicken Rice`.
@@ -68,6 +70,17 @@ _Figure 2. The user interface after the above commands have been entered._
 * Parameters can be in any order. +
 ** E.g. If the command specifies `n/EXPENSE_NAME $/COST`, `$/COST n/EXPENSE_NAME` is also acceptable.
 ====
+
+image::callouts.png[width="175"]
+
+Callouts are boxes with icons to point out some information. These are the 2 callouts used throughout this user guide:
+
+[NOTE]
+This represents a *note*. A note indicates important, additional information. Be sure to read these notes as they might be applicable to you!
+
+[TIP]
+This represents a *tip*. A tip denotes something that is often handy, and good for you to know. Tips are often less crucial, and you can choose to skip them.
+
 
 === Basic Features
 // tag::autocomplete[]
@@ -96,8 +109,7 @@ Adds a new expense record to the Expense Tracker. +
 *Alias:* `ae` +
 *Format:* `addExpense n/EXPENSE_NAME $/COST [d/DATE] [t/TAG]…` +
 
-
-Examples:
+image::examples.png[width="125"]
 
 * `addExpense n/Chicken rice set $/5 t/Food d/21/02/2019` +
 Adds an expense for a $5 chicken rice set, tagged as Food with the date as 21/02/2019.
@@ -114,7 +126,7 @@ the expense will be changed according to the value of the parameters. +
 *Format:* `editExpense INDEX [n/EXPENSE_NAME] [$/COST] [d/DATE] [t/TAG]…` +
 
 
-Examples:
+image::examples.png[width="125"]
 
 * `editExpense 1 n/Pen $1 t/Supplies` +
 Edits the name, cost and tag of the first expense in the Expense List to ‘Pen’, ‘$1’ and ‘Supplies’ respectively.
@@ -128,7 +140,7 @@ the name of the expense. +
 *Alias:* `de` +
 *Format:* `deleteExpense INDEX` +
 
-Examples:
+image::example.png[width="125"]
 
 * `deleteExpense 1` +
 Deletes the first expense in the displaying expense list from Expense Tracker.
@@ -139,18 +151,19 @@ Adds a new allowance record to ePiggy. +
 *Alias:* `aa` +
 *Format:* `addAllowance n/ALLOWANCE_NAME $/AMOUNT [d/DATE] [t/TAG]…`
 
-Examples:
+image::example.png[width="125"]
 
 * `addAllowance n/From Mom $/20 t/School d/21/02/2019` +
 Adds an allowance of $20 from Mom, tagged as School with the date as 21/02/2019.
 
 ****
-*Additional Information:* +
+image::additionalinformation.png[width="175"]
 Creating an allowance would automatically tag the entry with an `Allowance` tag. +
 `Name` has to be alphanumeric with a length of less than 50 characters. +
 `AMOUNT` has to be a valid amount greater than $0, and less than $999,999.99. +
 `Date` follows the following format `dd/MM/yyyy`.
 ****
+
 ==== Editing an allowance : `editAllowance`
 
 Edits an existing allowance in ePiggy at a specific `*INDEX`* . +
@@ -159,7 +172,7 @@ the allowance will be changed according to the value of the parameters. +
 *Alias:* `ea` +
 *Format:* `editAllowance INDEX [n/ALLOWANCE_NAME] [$/AMOUNT] [d/DATE] [t/TAG]…`
 
-Examples:
+image::examples.png[width="125"]
 
 * `editAllowance 1 n/From Mom $10 t/Emergency` +
 Edits the name, cost and tag of the first allowance in ePiggy to ‘From Mom’, ‘$10’ and ‘Emergency’ respectively.
@@ -167,7 +180,7 @@ Edits the name, cost and tag of the first allowance in ePiggy to ‘From Mom’,
 Edits the amount of the second allowance in ePiggy to ‘$22’.
 
 ****
-*Additional Information:* +
+image::additionalinformation.png[width="175"]
 Only allowances can be edited using this command. To edit expenses, use the `editExpense` command.
 ****
 
@@ -179,15 +192,16 @@ the name of the allowance. +
 *Alias:* `da` +
 *Format:* `deleteAllowance INDEX`
 
-Examples:
+image::example.png[width="125"]
 
 * `deleteExpense 1` +
 Deletes the first allowance in the displaying list from Expense Tracker.
 
 ****
-*Additional Information:* +
+image::additionalinformation.png[width="175"]
 Only allowances can be deleted using this command. To delete expenses, use the `deleteExpense` command.
 ****
+
 ==== Listing all expenses : `list`
 
 Lists the expense records from newest to oldest. Use this to return to the default view after search/sort commands +
@@ -209,7 +223,8 @@ You can find any expense or allowance in the list by specifying either its name,
 *Alias:* `fd` +
 *Format:* *`find [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
 
-Examples:
+image::examples.png[width="125"]
+
 * `find n/McDonalds` +
 Displays all entries with the name “McDonalds”.
 * `find t/FOOD` +
@@ -224,7 +239,7 @@ Displays all entries listed with the cost range of $250.
 Displays all entries listed with the cost range of $250 to $500.
 
 ****
-*Additional Information:* +
+image::additionalinformation.png[width="175"]
 Searches and displays the entry along with its information, according to the user-specified command. +
 Searching for names and tags is case-insensitive. Furthermore, it allows you to search for almost similar
 words by applying the concept of Levenshtien distance, hence allowing small typos (limit fixed by an upper bound). +
@@ -241,7 +256,7 @@ The user can sort the expenses and allowances in the list by name, date added, a
 *Alias:* `st` +
 *Format:* `sort [n/d/$]/`
 
-Examples:
+image::examples.png[width="125"]
 
 * `sort n/` +
 Sorts all entries by name (in ascending order).
@@ -251,11 +266,12 @@ Sorts all entries by date in descending order.
 Sorts all entries by amount in ascending order.
 
 ****
-*Additional Information:* +
+image::additionalinformation.png[width="175"]
 'sort` and `st` are equivalent.
 ****
 
 // end::se[]
+
 === Budgeting
 
 // tag::addBudget[]
@@ -271,7 +287,7 @@ Budgets are considered to be overlapping if their active dates intersect each ot
 *Alias:* `ab` +
 *Format:* `addBudget $/AMOUNT p/TIME_PERIOD_IN_DAYS d/START_DATE`
 
-Examples:
+image::examples.png[width="125"]
 
 * `addBudget $/500 p/7 d/03/02/2019` +
 Sets a total budget of $500 for each week starting from 3rd February 2019.
@@ -280,7 +296,7 @@ Sets a total budget of $500 for each week starting from 3rd February 2019.
 Sets a total budget of $10000 every 15 days starting from 1st January 2000.
 
 ****
-*Additional Information:* +
+image::additionalinformation.png[width="175"]
 Time period cannot exceed 1 million days. +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
@@ -288,7 +304,7 @@ Budget does not take into account allowances as budget only accounts for expense
 *Display of budget:* +
 ePiggy will show the status of the budgets whenever a new expense is added, edited or deleted. +
 
-image::UiFilled.png[width="760"]
+image::budgetstatus.png[width="300"]
 _Figure 3. Example of the status of a current budget._
 
 There will also a reminder for you, depending on the status of your budget. There are 3 different reminders as shown
@@ -320,7 +336,7 @@ Budgets are considered to be overlapping if their active dates intersect each ot
 *Alias:* `eb` +
 *Format:* `editBudget [$/AMOUNT] [p/TIME_PERIOD_IN_DAYS] [d/START_DATE]`
 
-Examples:
+image::examples.png[width="125"]
 
 * `editBudget $/1000 p/7 d/01/01/2000` +
 Edits the current budget to $1000 for each week starting from 01/01/2000.
@@ -329,7 +345,7 @@ Edits the current budget to $1000 for each week starting from 01/01/2000.
 Edits the current budget to $200 for every 15 days starting from the budget's initial start date.
 
 ****
-*Additional Information:* +
+image::additionalinformation.png[width="175"]
 Time period cannot exceed 1 million days. +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
@@ -343,13 +359,13 @@ the status of the budget. +
 *Alias:* `db` +
 *Format:* `deleteBudget INDEX`
 
-Examples:
+image::example.png[width="125"]
 
 * `deleteBudget 1` +
 Deletes the first budget in the Budget List.
 
 ****
-*Additional Information:* +
+image::additionalinformation.png[width="175"]
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
 // end::deleteBudget[]
@@ -368,13 +384,13 @@ Example:
 Sets the goal to a $80 Nike shoe.
 
 ****
-*Additional Information:* +
+image::additionalinformation.png[width="175"]
 Details about the current goal and the amount required to save up to hit the current goal
 can be found on the User Interface.
 ****
 // end::setGoal[]
-
 // tag::report[]
+
 === Expense Report
 
 ==== Generate report : `report`
@@ -390,7 +406,7 @@ proportion of total expense and total allowance. +
 [NOTE]
 The message of conclusion under the chart will show only if you add at least one expense to ePiggy.
 
-Examples:
+image::examples.png[width="125"]
 
 * Example 1: `report` +
 View the completed report of all the records.
@@ -449,6 +465,8 @@ There is no need to save manually.
 
 === Upcoming Features
 
+image::cominginv2.png[width="125"]
+
 // tag::v2.0[]
 ==== Register `[coming in v2.0]`
 
@@ -477,6 +495,8 @@ if you intend to maintain your current spending habits. You can choose to adopt 
 // end::v2.0[]
 
 == FAQ
+
+image::frequentlyaskedquestions.png[width="200"]
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: You can follow the steps below to transfer your data: +

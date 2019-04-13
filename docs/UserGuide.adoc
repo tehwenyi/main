@@ -41,8 +41,6 @@ To start using ePiggy, simply follow these steps:::
 image::Ui.png[width="760"]
 _Figure 1. The user interface upon launch of application_
 
-{empty} +
-
 image::samplecommands.png[width="175"]
 
 * `addExpense n/Chicken Rice $/4 t/dinner d/01/02/2019` +
@@ -71,8 +69,6 @@ image::commandformat.png[width="175"]
 ** E.g. If the command specifies `n/EXPENSE_NAME $/COST`, `$/COST n/EXPENSE_NAME` is also acceptable.
 ====
 
-{empty} +
-
 image::callouts.png[width="175"]
 
 Callouts are boxes with icons to point out some information. These are the 2 callouts used throughout this user guide:
@@ -83,7 +79,6 @@ This represents a *note*. A note indicates important, additional information. Be
 [TIP]
 This represents a *tip*. A tip denotes something that is often handy, and good for you to know. Tips are often less crucial, and you can choose to skip them.
 
-{empty} +
 
 === Basic Features
 // tag::autocomplete[]
@@ -217,8 +212,6 @@ Lists the expense records from oldest to newest. Use this to return to the defau
 *Alias:* `rl` +
 *Format:* `reverseList`
 
-{empty} +
-
 === Filtering and Sorting Data
 
 // tag::fe[]
@@ -276,7 +269,6 @@ image::additionalinformation.png[width="175"]
 ****
 
 // end::se[]
-{empty} +
 
 === Budgeting
 
@@ -375,7 +367,6 @@ image::additionalinformation.png[width="175"]
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
 // end::deleteBudget[]
-{empty} +
 
 === Goal Setting
 // tag::setGoal[]
@@ -396,8 +387,8 @@ Details about the current goal and the amount required to save up to hit the cur
 can be found on the User Interface.
 ****
 // end::setGoal[]
-{empty} +
 // tag::report[]
+
 === Expense Report
 
 ==== Generate report : `report`
@@ -449,8 +440,6 @@ image::reportYear.png[width="500"]
 Figure of example 4: Report for specified year.
 // end::report[]
 
-{empty} +
-
 === Miscellaneous
 
 ==== Exiting the program : `exit`
@@ -472,11 +461,9 @@ Message cannot be restored once you clean up the result display area.
 ePiggy's data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-{empty} +
-
 === Upcoming Features
 
-image::cominginv2.png[width="175"]
+image::cominginv2.png[width="125"]
 
 // tag::v2.0[]
 ==== Register `[coming in v2.0]`

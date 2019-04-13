@@ -65,6 +65,7 @@ public class SavingsPanel extends UiPart<Region> {
             Cost goalAmount = goal.getValue().getAmount();
             Cost savingsAmount = onSavingsChange.get().getValue();
             Cost diff = new Cost(goalAmount.getAmount() - savingsAmount.getAmount());
+
             if (diff.getAmount() > 0) {
                 amountDifferenceTitle.setVisible(true);
                 amountDifference.setText("$" + diff);

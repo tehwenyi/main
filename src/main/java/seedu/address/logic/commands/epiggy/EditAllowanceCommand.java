@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
 
 import java.util.Collections;
 import java.util.Date;
@@ -90,10 +90,10 @@ public class EditAllowanceCommand extends Command {
         if (!(toEdit instanceof Allowance)) {
             throw new CommandException(MESSAGE_ITEM_NOT_ALLOWANCE);
         }
-        Allowance editedAllowance = (Allowance) createEditedExpense((Allowance) toEdit, editAllowanceDescriptor);
+        Allowance editedAllowance = createEditedAllowance((Allowance) toEdit, editAllowanceDescriptor);
 
         model.setExpense(toEdit, editedAllowance);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredExpensesList(PREDICATE_SHOW_ALL_EXPENSES);
         model.commitEPiggy();
         return new CommandResult(String.format(MESSAGE_EDIT_ALLOWANCE_SUCCESS, editedAllowance));
     }
@@ -102,7 +102,7 @@ public class EditAllowanceCommand extends Command {
      * Creates and returns a {@code Allowance} with the details of {@code allowanceToEdit}
      * edited with {@code editAllowanceDescriptor}.
      */
-    static Expense createEditedExpense(Allowance allowanceToEdit, EditAllowanceDescriptor editAllowanceDescriptor) {
+    static Allowance createEditedAllowance(Allowance allowanceToEdit, EditAllowanceDescriptor editAllowanceDescriptor) {
         assert allowanceToEdit != null;
 
         Name updatedName = editAllowanceDescriptor.getName().orElse(allowanceToEdit.getItem().getName());

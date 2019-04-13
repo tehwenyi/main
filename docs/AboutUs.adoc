@@ -31,11 +31,16 @@ Responsibilities: `budget` feature, documentation
 
 === Rahul Baid
 image::rahulb99.png[width="150", align="left"]
-{empty}[https://github.com/rahulb99[github]] [<<rahul#, portfolio>>]
+{empty}[https://github.com/rahulb99[github]] [<<rahulb99#, portfolio>>]
 
 Role: Developer
 
-Responsibilities: `sort` feature, `find` feature, data
+Responsibilities: +
+1. `Find` feature +
+2. `Sort` feature +
+3. Refactoring codebase +
+4. Project Manager +
+5. Other minor features include `list`, `reverseList` and `help`.
 
 '''
 

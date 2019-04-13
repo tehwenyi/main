@@ -3,6 +3,8 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
+image::rahulb99.png[width="100", align="left"]
+
 == PROJECT: ePiggy
 
 ---
@@ -30,14 +32,19 @@ to figure out where he/she has been spending.
 For example, if the user wants to find out where he/she has been spending more, the user can sort it by cost.
 ** Highlights: These enhancements are two of the most user-friendly commands in ePiggy, mainly due to their need and adaptability. +
 1. The search feature enhancement have been built on top of the existing functionality. Now it allows multiple keywords search to filter out the
-expenses. This feature searches for similar words in case the user makes a typo. Furthermore, it allows user to enter a range for date and cost.
-This implementation was quite challenging as it required the complete modification of the existing command.
+expenses. This feature searches for similar words in case the user makes a typing error. Furthermore, it allows user to
+enter a range for date and cost. This implementation was quite challenging as it required the complete modification of the existing command.
 2. The sort feature enhancement was built from start to finish. It required an in-depth analysis of design alternatives.
 This new feature greatly adds to the functionality of existing commands (that were modified from address-book level 4).
 
 * *Minor enhancement*: Added reverse list command. Modified existing help and list commands. Refactored the codebase.
 
-* *Functional code contributed*: _{give links to collated code files}_
+* *Functional code contributed*: [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/FindExpenseCommand.java[FindExpense]],
+[https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/SortExpenseCommand.java[SortExpense]],
+[https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/ReverseListCommand.java[ReverseList]],
+[https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/HelpCommand.java[HelpCommand]] .
+
+* *Test code contributed*: _{give links to collated code files}_
 
 * *Code contributed*: [https://github.com[RepoSense]] _{https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=rahulb99&sort=displayName&since=2019-02-10&until=2019-04-30&timeframe=day&reverse=false&repoSort=false}_
 
@@ -82,58 +89,11 @@ https://github.com/CS2103-AY1819S2-W17-4/main/pull/139[#139])
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc
-
 === Filtering and Sorting Data
 
-==== Searching for an expense : `findExpense`
+include::../UserGuide.adoc[tag=fe]
 
-You can search for any expense in the list by specifying either its name, tag, date, range of dates, amount or range of amount. +
-Format: *`findExpense [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
-
-Examples:
-
-* `fE n/McDonalds` +
-Displays all entries with the name “McDonalds”.
-* `fE t/FOOD` +
-Displays all entries with the tag specified (in this case, it’s food).
-* `fE d/02/01/2019` +
-Displays all entries listed on 2nd Jan 2019.
-* `fE d/02/01/2019:05/12/2020` +
-Displays all entries listed in the range 2nd Jan 2019 to 5th Dec 2020 (both inclusive).
-* `fE $/250` +
-Displays all entries listed with the cost range of $250.
-* `fE $/250:500` +
-Displays all entries listed with the cost range of $250 to $500.
-
-****
-*Additional Information:* +
-Searches and displays the expense along with its information, according to the user-specified command. +
-Searching for names and tags is case-insensitive. Furthermore, it allows you to search for almost similar
-words by applying the concept of Levenshtien distance, hence allowing small typos (limit fixed by an upper bound). +
-If the entry is not found, it displays an appropriate error message. +
-Date format is `dd/MM/yyyy` .
-'findExpense` and `fE` are equivalent.
-****
-
-==== Sorting the expenses : `sortExpense`
-
-The user can sort the expenses in the list by name, date added, amount in ascending or descending order. +
-Format: `sort -[n/d/$]/`
-
-Examples:
-
-* `sE n/` +
-Sorts all entries by name (in ascending order).
-* `sE d/` +
-Sorts all entries by date in descending order.
-* `sE $/` +
-Sorts all entries by amount in ascending order.
-
-****
-*Additional Information:* +
-'sortExpense` and `sE` are equivalent.
-****
+include::../UserGuide.adoc[tag=se]
 
 ==== Listing all expenses : `list`
 

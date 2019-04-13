@@ -71,7 +71,7 @@ _Figure 2. The user interface after the above commands have been entered._
 
 === Basic Features
 // tag::autocomplete[]
-==== Auto complete :
+==== Autocomplete :
 Enter the first few letters of the command, and then press `Tab` key on the keyboard to auto complete the command. +
 If the completed command is not what you want, delete the command. Enter the same letters again, and press `Tab`. Another command will show if the letters match another command. +
 

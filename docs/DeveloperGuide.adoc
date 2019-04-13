@@ -694,8 +694,8 @@ in the commandBox.
 *Example usage scenario:* +
 1. User launches application and enters `addE`. +
 2. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`autoCompleteText()`] is invoked. +
-2. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`] takes in the arguments and returns an array of matched commands. +
-3. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`] forms a new string using user input.
+3. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`] takes in the arguments and returns an array of matched commands. +
+4. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`] forms a new string using user input.
 One element in return array is appended at the end of the new string. This new string replaces and shows in the commandBox.
 
 ==== Design Considerations

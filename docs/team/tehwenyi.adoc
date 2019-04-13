@@ -35,21 +35,25 @@ spendings.
 
 == Summary of contributions
 
-=== Major Enhancements
+=== Major Enhancement
 
 Added the entire `budget` feature of ePiggy. +
 
 image::whatitdoes.png[width="150"]
 
-* Allows users to set a limit on their spendings for a specified time period and provide reminders when they are going to or have exceeded the limit. +
-* Unlike typical expense trackers where only one budget is set, ePiggy's `budget` feature consists of a list of budgets. This is because the purpose of ePiggy is to inculcate good spending habits in our users, so users should be able to track their previous spendings.
-Being able to view their budget history and plan future budgets would fuel this purpose. +
-* The `budget` feature is visible on the GUI and comprises of 3 commands: `addBudget`, `editBudget` and `deleteBudget`.
+The `budget` feature allows users to set a limit on their spendings for a specified time period and displays to users
+the status of their spendings in relation to their set budget(s).
+The `budget` feature also provides reminders when users are going to or have spent more than the limit. +
+The `budget` feature comprises of 3 commands: `addBudget`, `editBudget` and `deleteBudget`. +
+The budgets set by the user are viewed as a list. +
 
 image::justification.png[width="150"]
 
-* The `budget` feature urges users to be more aware of the amount they spend per time period so that they can better manage their expenses and avoid splurging. It is also a good habit we hope to inculcate in users before they enter the
+The `budget` feature urges users to be more aware of the amount they spend per time period so that they can better
+manage their expenses and avoid splurging. It is also a good habit we hope to inculcate in users before they enter the
 workforce and deal with larger sums of money. +
+Also, unlike typical expense trackers where only one budget is set, ePiggy's `budget` feature consists of a list of
+budgets so that users can see their past spending habits and plan for future budgets.
 
 image::highlights.png[width="150"]
 
@@ -66,7 +70,7 @@ image::codecontributed.png[width="150"]
 
 // ability to write code, explain and justify design choices, solve a user problem/fulfil a user need
 
-=== Minor Enhancements
+=== Minor Enhancement
 * *Minor enhancement 1*:
 Added the UI component for the `budget` feature.
 

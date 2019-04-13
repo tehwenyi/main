@@ -79,6 +79,9 @@ https://github.com/CS2103-AY1819S2-W17-4/main/pull/139[#139])
 ** Tools:
 *** Set up Travis CI for the team repo.
 *** Set up Netlify for the team repo.
+*** Set up Appveyor for the team repo.
+*** Set up Codacy for the team repo.
+*** Set up Coveralls for the team repo.
 
 
 == Contributions to the User Guide

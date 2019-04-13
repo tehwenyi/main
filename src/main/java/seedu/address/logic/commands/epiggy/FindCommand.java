@@ -23,7 +23,7 @@ public class FindCommand extends Command {
             + ": Finds the expense as specified by the user. "
             + " The keywords do not need to be in order.\n"
             + " Parameters: [n/NAME] [$/COST:COST] [t/TAG] [d/DATE:DATE]...\n"
-            + " Example: " + COMMAND_WORD + " n/Mala Hotpot t/lunch t/food $/7.00:15.00 d/14-03-2019:17-03-2019\n";
+            + " Example: " + COMMAND_WORD + " n/Mala Hotpot t/lunch t/food $/7.00:15.00 d/14/03/2019:17/03/2019\n";
     public static final String MESSAGE_SUCCESS = MESSAGE_EXPENSES_LISTED_OVERVIEW;
 
     private final ExpenseContainsKeywordsPredicate predicate;

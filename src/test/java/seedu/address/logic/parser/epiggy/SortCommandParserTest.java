@@ -44,5 +44,7 @@ public class SortCommandParserTest {
                 SortCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "/c/n/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 SortCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "$/ t/ n/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                SortCommand.MESSAGE_USAGE));
     }
 }

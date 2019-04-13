@@ -391,7 +391,7 @@ Hence, if the `index` input by the user is negative or greater than the size of 
 === Find Expense/Allowance feature
 *_ePiggy_* allows the user to filter specific expenses by entering single or multiple keywords. Expenses that satisfy
 all the keywords are displayed in the expense list panel. Furthermore, it also searches for words similar to the user's
-input, considering that the user might have made a typing error, by applying the concept of Levenshtien distance fixed by a 
+input, considering that the user might have made a typing error, by applying the concept of Levenshtein distance fixed by a
 upper bound.
 
 * `find n/Nasi Lemak $/4.00 d/01/04/2019 t/lunch`

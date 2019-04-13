@@ -39,24 +39,30 @@ spendings.
 
 Added the entire `budget` feature of ePiggy. +
 
-* *What it does:*
+image::whatitdoes.png[width="175"]
+
 Allows users to set a limit on their spendings for a specified time period and provide reminders when they are going to or have exceeded the limit. +
 Unlike typical expense trackers where only one budget is set, ePiggy's `budget` feature consists of a list of budgets. This is because the purpose of ePiggy is to inculcate good spending habits in our users, so users should be able to track their previous spendings.
 Being able to view their budget history and plan future budgets would fuel this purpose. +
 The `budget` feature is visible on the GUI and comprises of 3 commands: `addBudget`, `editBudget` and `deleteBudget`.
 
-* *Justification:*
+image::justification.png[width="175"]
+
 The `budget` feature urges users to be more aware of the amount they spend per time period so that they can better manage their expenses and avoid splurging. It is also a good habit we hope to inculcate in users before they enter the
 workforce and deal with larger sums of money. +
 
-* *Highlights:*
-** This enhancement was built from scratch. It is completely new and hence required the creation of many new objects including `budget`, `period`, `uniqueBudgetList` and a new `budgetPanel` for the UI. This enhancement required the familiarity with
+image::highlights.png[width="175"]
+
+* This enhancement was built from scratch. It is completely new and hence required the creation of many new objects including `budget`, `period`, `uniqueBudgetList` and a new `budgetPanel` for the UI. This enhancement required the familiarity with
 almost all the different aspects of the code (`commons`, `logic`, `model`, `ui`).
-** Typically, expense trackers only have one budget but I decided it would be better to have a list of budgets instead, so that users can view their budget history and plan future budgets. This is due to the purpose of ePiggy, which is to inculcate
+* Typically, expense trackers only have one budget but I decided it would be better to have a list of budgets instead, so that users can view their budget history and plan future budgets. This is due to the purpose of ePiggy, which is to inculcate
 good spending habits in our users. Hence, users should be able to track their previous spendings.
-** For this enhancement, the UI is important as the purpose is to constantly remind users of the remaining amount they can spend. It was challenging to make the UI simple and concise for our target users whilst conveying the crucial information.
-* *Functional code contributed:* link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/AddBudgetCommand.java[Add Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/EditBudgetCommand.java[Edit Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/DeleteBudgetCommand.java[Delete Budget]
-* *Test code contributed*: link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/AddBudgetCommandTest.java[Add Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/DeleteBudgetCommandTest.java[Delete Budget]
+* For this enhancement, the UI is important as the purpose is to constantly remind users of the remaining amount they can spend. It was challenging to make the UI simple and concise for our target users whilst conveying the crucial information.
+
+image::codecontributed.png[width="175"]
+
+*Functional code:* link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/AddBudgetCommand.java[Add Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/EditBudgetCommand.java[Edit Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/DeleteBudgetCommand.java[Delete Budget]
+*Test code:* link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/AddBudgetCommandTest.java[Add Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/DeleteBudgetCommandTest.java[Delete Budget]
 
 // ability to write code, explain and justify design choices, solve a user problem/fulfil a user need
 
@@ -64,14 +70,18 @@ good spending habits in our users. Hence, users should be able to track their pr
 * *Minor enhancement 1*:
 Added the UI component for the `budget` feature.
 
-* *What it does:*
+image::whatitdoes.png[width="175"]
+
 Allows users to view all the details and real-time status of the budgets they have added on the GUI. The status of the budgets will update whenever an expense is added, edited or deleted.
 
-* *Justification:*
+image::justification.png[width="175"]
+
 *_ePiggy_*'s target audience are students, who may be as young as seven years old. Hence, having a simple and concise GUI to engage them while conveying all the crucial information is very important. +
 
-* *Functional code contributed*: [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetPanel.java[Budget Panel]] | [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetCard.java[Budget Card]] _{give links to collated code files}_
-* *Test code contributed*:
+image::codecontributed.png[width="175"]
+
+* *Functional code*: [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetPanel.java[Budget Panel]] | [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetCard.java[Budget Card]] _{give links to collated code files}_
+* *Test code*:
 
 === Other Contributions
 * *Other contributions*:
@@ -106,16 +116,16 @@ image::overview.png[width="175"]
 As I am in-charge of documentation, I designed and added the header and images across the user guide to make it more
 inviting and reader friendly, considering that our target users are students. Below are some examples of my designs:
 
-image::userguide.png[width="200"]
+image::userguideheaders.png[width="400"]
 
-_Figure 1: Header added in the User Guide to better engage our target audience_
+_Figure 1: Header and section headers added in the User Guide to increase readability and better engage our target audience_ +
 Besides that, I standardised the language and formatting of the user guide to provide greater coherence.
 
 * Contributed content to the User Guide
 
 I wrote the *Introduction* of the User Guide, making sure it is clear, concise and engaging.
 Also, I wrote the *Budgeting* feature which teaches users how to use the `budget` commands in a clear and informative
-manner. My contributions for the *Budgeting* feature can be found below, in Section 3.2.
+manner. My contributions for the *Budgeting* feature can be found below, in Sections 3.1 to 3.3.
 
 image::extract.png[width="175"]
 
@@ -152,13 +162,13 @@ reduce word clutter and make it more readable. Below are some examples of my des
 
 image::developerguide.png[width="200"]
 
-_Figure 1: Header added in the Developer Guide_
+_Figure 2: Header added in the Developer Guide_ +
 Besides that, I standardised the language and formatting of the developer guide to provide greater coherence.
 
 * Contributed content to the Developer Guide
 
 I documented the implementation details and design considerations for the *Budgeting* feature.
-I also created diagrams to aid in the explanations. My contributions can be found below, in Section 4.2.
+I also created diagrams to aid in the explanations. My contributions can be found below, in Sections 4.1 to 4.3.
 
 image::extract.png[width="175"]
 

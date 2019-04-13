@@ -347,7 +347,7 @@ Since only the current `budget` can be edited, the `editBudget` command will fir
 command entered is invalid. +
 
 ==== Design Considerations
-===== Aspect: Should we use a boolean `hasCurrentBudget` method or use the `index` of the current `budget` to verify if a current `budget` exists?
+*Aspect: Should we use a boolean `hasCurrentBudget` method or use the `index` of the current `budget` to verify if a current `budget` exists?*
 * *Alternative 1* (current choice): +
 The `index` of the current `budget` is returned to the `editBudgetCommand`. If the returned integer is `-1`, it means that there is no current `budget`
 present. The index is then used to retrieve the current budget.

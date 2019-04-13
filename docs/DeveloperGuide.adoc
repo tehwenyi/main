@@ -265,8 +265,10 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag:addbudget[]
 === Add budget feature
+
+// tag:addbudget[]
+
 This command allows users to add a new budget to monitor their expenses within a user-input period of time. +
 .This command requires users to specify the `amount`, `start date` and `time period (in days)` of the budget in the command. +
 
@@ -309,8 +311,9 @@ As long as the `Budget` object created does not overlap with any existing `Budge
 ** Cons: Could cause users to miss out on certain dates if they want budgets that are recurring (eg. sets a budget from 1st March to 30th March and 1st April to 30th April – 31st March is missed out).
 // end::addbudget[]
 
-// tag::editbudget[]
 === Edit budget feature
+
+// tag::editbudget[]
 ePiggy allows the user to edit the `current budget`, with any of the specified parameters in `addBudget`. +
 
 * `editBudget $/300`
@@ -364,8 +367,10 @@ After much consideration, we decided to choose option 1 as other commands should
 to have a greater level of abstraction. +
 // end::editbudget[]
 
-// tag::deletebudget[]
 === Delete budget feature
+
+// tag::deletebudget[]
+
 *_ePiggy_* allows the user to delete any budget, using the displayed `index` of the specific budget.
 
 * `deleteBudget 2`

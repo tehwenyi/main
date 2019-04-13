@@ -274,8 +274,9 @@ image::additionalinformation.png[width="175"]
 
 === Budgeting
 
-// tag::addBudget[]
 ==== Adding a spending budget : `addBudget`
+
+// tag::addBudget[]
 
 Adds a budget for the total expenses within the specified time period. The time period will be in terms of days,
 and 1 day is the minimum a person can set a budget for. +
@@ -324,9 +325,9 @@ _Figure 7. Quote provided as a reminder when spendings are well within budget._
 
 // end::addBudget[]
 
-// tag::editBudget[]
 ==== Editing the current budget : `editBudget`
 
+// tag::editBudget[]
 Edits the current budget. A current budget must be present to use this command. +
 Edited budget cannot overlap with other existing budgets. +
 
@@ -349,11 +350,12 @@ image::additionalinformation.png[width="175"]
 Time period cannot exceed 1 million days. +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
+
 // end::editBudget[]
 
-// tag::deleteBudget[]
 ==== Deleting a budget : `deleteBudget`
 
+// tag::deleteBudget[]
 Deletes the budget at the specified `INDEX`. The `INDEX` refers to the number in the displayed Budget List which is next to
 the status of the budget. +
 *Alias:* `db` +
@@ -368,6 +370,7 @@ Deletes the first budget in the Budget List.
 image::additionalinformation.png[width="175"]
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
+
 // end::deleteBudget[]
 
 === Goal Setting

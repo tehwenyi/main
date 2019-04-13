@@ -104,7 +104,7 @@ View all the code I contributed link:https://nus-cs2103-ay1819s2.github.io/cs210
 *** Managed the refactoring of AddressBook to ePiggy
 ** Graphics:
 *** Added graphics to the User Guide and Developer Guide to increase readability.
-*** Refer to Section 4 and 5 for more information.
+*** Refer to Section 3 and 4 for more information.
 ** Tools:
 *** Created the *.jar file for ePiggy
 *** Set up Coveralls.
@@ -134,7 +134,7 @@ Besides that, I standardised the language and formatting of the user guide to pr
 
 I wrote the *Introduction* of the User Guide, making sure it is clear, concise and engaging.
 Also, I wrote the *Budgeting* feature which teaches users how to use the `budget` commands in a clear and informative
-manner. My contributions for the *Budgeting* feature can be found below, in Sections 4.1 to 4.3.
+manner. My contributions for the *Budgeting* feature can be found below, in Sections 3.1 to 3.3.
 
 image::extract.png[width="140"]
 
@@ -177,7 +177,7 @@ Besides that, I standardised the language and formatting of the developer guide 
 * Contributed content to the Developer Guide
 
 I documented the implementation details and design considerations for the *Budgeting* feature.
-I also created diagrams to aid in the explanations. My contributions can be found below, in Sections 5.1 to 5.3.
+I also created diagrams to aid in the explanations. My contributions can be found below, in Sections 4.1 to 4.3.
 
 image::extract.png[width="140"]
 

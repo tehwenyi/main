@@ -267,7 +267,7 @@ This section describes some noteworthy details on how certain features are imple
 
 === Add budget feature
 
-// tag:addbudget[]
+// tag::addbudget[]
 
 This command allows users to add a new budget to monitor their expenses within a user-input period of time. +
 .This command requires users to specify the `amount`, `start date` and `time period (in days)` of the budget in the command. +
@@ -309,7 +309,6 @@ As long as the `Budget` object created does not overlap with any existing `Budge
 * *Alternative 2* : the `addBudget` command requires the `amount`, `start date` and `end date` of the budget.
 ** Pros: Easy to make recurring monthly budgets.
 ** Cons: Could cause users to miss out on certain dates if they want budgets that are recurring (eg. sets a budget from 1st March to 30th March and 1st April to 30th April – 31st March is missed out).
-
 // end::addbudget[]
 
 === Edit budget feature

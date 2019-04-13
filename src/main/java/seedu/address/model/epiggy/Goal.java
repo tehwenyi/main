@@ -26,7 +26,7 @@ public class Goal {
 
     @Override
     public String toString() {
-        return String.format("%s - %2s", name, amount);
+        return String.format("%s - $%2s", name, amount);
     }
 
     @Override

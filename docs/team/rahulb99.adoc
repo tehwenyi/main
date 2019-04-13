@@ -57,7 +57,7 @@ This new feature greatly adds to the functionality of existing commands (that we
 ** Enhancements to existing features:
 *** Made `date` an optional keyword while adding an expense.
    (so now, if the `date` keyword is missing, `date` takes the value of device's date). (Commit: https://github.com/CS2103-AY1819S2-W17-4/main/pull/135/commits/b974cc12cc700d751de34c80307267d26f5e455e[b974cc] )
-*** Wrote base tests for any command related to `expense`, in addition to `FindExpenseCommandTest` and `SortExpenseCommandTest` .
+*** Wrote base tests for any command related to `expense`, in addition to `FindCommandTest`, `SortCommandTest` and `ReverseListCommandTest`.
  (Pull requests https://github.com/CS2103-AY1819S2-W17-4/main/pull/135[#135], https://github.com[#00])
 *** Modified the search engine by make it more powerful by searching for similar words in case user makes a typo, or even when user
 types a part of the keyword he/she wishes to search for.

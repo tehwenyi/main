@@ -5,6 +5,7 @@ https://travis-ci.org/CS2103-AY1819S2-W17-4/main[image:https://travis-ci.org/se-
 https://ci.appveyor.com/project/rahulb99/main-3fxt5/branch/master[image:https://ci.appveyor.com/api/projects/status/lli2h4t2ngcwq0ky/branch/master?svg=true[Build Status]]
 https://coveralls.io/github/CS2103-AY1819S2-W17-4/main?branch=master[image:https://coveralls.io/repos/github/CS2103-AY1819S2-W17-4/main/badge.svg?branch=master[Coverage Status]]
 https://www.codacy.com/app/rahulb99/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103-AY1819S2-W17-4/main&amp;utm_campaign=Badge_Grade[image:https://api.codacy.com/project/badge/Grade/678fd7d82cbd4e07a7ca899447c96d45[Codacy Badge]]
+https://app.netlify.com/sites/flamboyant-jennings-fec7ca/deploys[image:https://api.netlify.com/api/v1/badges/bb4108e1-6558-4a6c-aece-24ee9561ce0e/deploy-status[Netlify Status]]
 
 ifdef::env-github[]
 image::docs/images/Ui.png[width="600"]

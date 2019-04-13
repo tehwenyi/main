@@ -32,7 +32,7 @@ My team consists of 5 members, including myself. +
 
 === Major Enhancement
 
-I added the entire `budget` feature of ePiggy, which consists of 3 commands: `addBudget`, `editBudget` and `deleteBudget`. +
+I added the `budget` feature of ePiggy, which consists of 3 commands: `addBudget`, `editBudget` and `deleteBudget`. +
 
 image::whatitdoes.png[width="150"]
 

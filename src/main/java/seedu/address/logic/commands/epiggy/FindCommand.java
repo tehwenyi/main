@@ -15,12 +15,12 @@ import seedu.address.model.epiggy.ExpenseContainsKeywordsPredicate;
  * Finds and lists all expenses in EPiggy whose expense contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindExpenseCommand extends Command {
+public class FindCommand extends Command {
 
-    public static final String COMMAND_WORD = "findExpense";
-    public static final String COMMAND_ALIAS = "fe";
+    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_ALIAS = "fd";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + " finds the expense as specified by the user. "
+            + ": Finds the expense as specified by the user. "
             + " The keywords do not need to be in order.\n"
             + " Parameters: [n/NAME] [$/COST:COST] [t/TAG] [d/DATE:DATE]...\n"
             + " Example: " + COMMAND_WORD + " n/Mala Hotpot t/lunch t/food $/7.00:15.00 d/14-03-2019:17-03-2019\n";
@@ -28,7 +28,7 @@ public class FindExpenseCommand extends Command {
 
     private final ExpenseContainsKeywordsPredicate predicate;
 
-    public FindExpenseCommand(ExpenseContainsKeywordsPredicate predicate) {
+    public FindCommand(ExpenseContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -45,8 +45,8 @@ public class FindExpenseCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindExpenseCommand // instanceof handles nulls
-                && predicate.equals(((FindExpenseCommand) other).predicate)); // state check
+                || (other instanceof FindCommand // instanceof handles nulls
+                && predicate.equals(((FindCommand) other).predicate)); // state check
     }
 
 }

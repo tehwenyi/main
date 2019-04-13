@@ -222,57 +222,60 @@ Lists the expense records from oldest to newest. Use this to return to the defau
 
 === Filtering and Sorting Data
 
-==== Finding an expense : `findExpense`
+// tag::fe[]
+==== Finding an expense or allowance : `find`
 
-You can find any expense in the list by specifying either its name, tag, date, range of dates, amount or range of amount. +
-*Alias:* `fe` +
-*Format:* *`findExpense [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
+You can find any expense or allowance in the list by specifying either its name, tag, date, range of dates, amount or range of amount. +
+*Alias:* `fd` +
+*Format:* *`find [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
 
 Examples:
-
-* `fE n/McDonalds` +
+* `find n/McDonalds` +
 Displays all entries with the name “McDonalds”.
-* `fE t/FOOD` +
+* `find t/FOOD` +
 Displays all entries with the tag specified (in this case, it’s food).
-* `fE d/02/01/2019` +
+* `find d/02/01/2019` +
 Displays all entries listed on 2nd Jan 2019.
-* `fE d/02/01/2019:05/12/2020` +
+* `find d/02/01/2019:05/12/2020` +
 Displays all entries listed in the range 2nd Jan 2019 to 5th Dec 2020 (both inclusive).
-* `fE $/250` +
+* `find $/250` +
 Displays all entries listed with the cost range of $250.
-* `fE $/250:500` +
+* `find $/250:500` +
 Displays all entries listed with the cost range of $250 to $500.
 
 ****
 image::additionalinformation.png[width="175"]
-Searches and displays the expense along with its information, according to the user-specified command. +
+Searches and displays the entry along with its information, according to the user-specified command. +
 Searching for names and tags is case-insensitive. Furthermore, it allows you to search for almost similar
 words by applying the concept of Levenshtien distance, hence allowing small typos (limit fixed by an upper bound). +
 If the entry is not found, it displays an appropriate error message. +
 Date format is `dd/MM/yyyy` .
-'findExpense` and `fE` are equivalent.
+'find` and `fd` are equivalent.
 ****
+// end::fe[]
 
-==== Sorting the expenses : `sortExpense`
+// tag::se[]
+==== Sorting the expenses and allowances : `sort`
 
-The user can sort the expenses in the list by name, date added, amount in ascending or descending order. +
-*Alias:* `se` +
-*Format:* `sortExpense -[n/d/$]/`
+The user can sort the expenses and allowances in the list by name, date added, amount in ascending or descending order. +
+*Alias:* `st` +
+*Format:* `sort [n/d/$]/`
 
 Examples:
 
-* `sE n/` +
+* `sort n/` +
 Sorts all entries by name (in ascending order).
-* `sE d/` +
+* `sort d/` +
 Sorts all entries by date in descending order.
-* `sE $/` +
+* `sort $/` +
 Sorts all entries by amount in ascending order.
 
 ****
 image::additionalinformation.png[width="175"]
-'sortExpense` and `sE` are equivalent.
+'sort` and `st` are equivalent.
 ****
 
+// end::se[]
 {empty} +
 
 === Budgeting
@@ -456,6 +459,14 @@ Exits the program. +
 *Alias:* `ex` +
 *Format:* `exit`
 
+==== Clean up result display area: F2
+
+You can clean up the left side result display area if you feel the result display area is too messy.
+Press *F2* on the keyboard or the button *Clean message* on the dropdown menu allows you to clean up the result display area.
+
+[NOTE]
+Message cannot be restored once you clean up the result display area.
+
 ==== Saving the data
 
 ePiggy's data is saved in the hard disk automatically after any command that changes the data. +
@@ -536,8 +547,8 @@ e.g. `editExpense 1 n/Pen $/1 t/Supplies`
 
 * *Exit* : `exit`
 
-* *Find Expenses* : `findExpense [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]` +
-e.g.`findExpense n/McDonalds`
+* *Find Expenses/Allowances* : `find [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]` +
+e.g.`find n/McDonalds`
 
 * *Help* : `help`
 
@@ -551,5 +562,5 @@ e.g. `report d/21/03/2019`
 * *Set Savings Goal* : `setGoal n/ITEM_NAME $/AMOUNT` +
 e.g. `setGoal n/nike shoes $/80`
 
-* *Sort Expenses* : `sortExpense [n/d/$]/` +
-e.g.`sortExpense d/`
+* *Sort Expenses/Allowances* : `sort [n/d/$]/` +
+e.g.`sort d/`

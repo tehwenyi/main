@@ -31,7 +31,7 @@ public class EditBudgetCommand extends Command {
     public static final String COMMAND_ALIAS = "eb";
 
     // TODO MESSAGE_USAGE should come out
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " edits the current budget. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the current budget. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: [" + PREFIX_COST + "BUDGET_IN_DOLLARS] "
             + "[" + PREFIX_PERIOD + "TIME_PERIOD_IN_DAYS] "

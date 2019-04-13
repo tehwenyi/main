@@ -37,7 +37,6 @@ public class CommandResult {
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
-     * TODO: TO ADD SUMMARY BUTTON TO THE GUI.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean summary) {
         this.feedbackToUser = requireNonNull(feedbackToUser);

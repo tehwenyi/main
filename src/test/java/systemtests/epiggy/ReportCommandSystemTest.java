@@ -3,7 +3,6 @@ package systemtests.epiggy;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DATE;
 
 import org.junit.Test;
 
@@ -24,21 +23,45 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
     private static final String INVALID_DATE_LARGE_YEAR = "21/03/999999999999999";
     private static final String INVALID_DATE_NEGATIVE_DAY = "-21/99/2019";
     private static final String INVALID_DATE_NEGATIVE_MONTH = "21/-03/2019";
-    //private static final String INVALID_DATE_NEGATIVE_YEAR = "21/03/-2019";
 
     private static final String INVALID_MONTH_LARGE_MONTH = "99/2019";
     private static final String INVALID_MONTH_LARGE_YEAR = "99/999999999999999999";
     private static final String INVALID_MONTH_NEGATIVE_MONTH = "-99/2019";
-    //private static final String INVALID_MONTH_NEGATIVE_YEAR = "03/-2019";
 
     private static final String INVALID_YEAR_LARGE_YEAR = "999999999999";
-    //private static final String INVALID_YEAR_NEGATIVE_YEAR = "-2019";
 
+    private static final String USER_INPUT_DATE = "21/03/2019";
+    private static final String USER_INPUT_MONTH = "03/2019";
+    private static final String USER_INPUT_YEAR = "2019";
+
+    private StringBuilder sb = new StringBuilder();
     @Test
     public void openReportWindow() {
 
-        String messageHistory = "";
-        String command = "";
+        String command;
+
+        //use command box
+        executeCommand(ReportCommand.COMMAND_WORD);
+        assertReportWindowOpen();
+
+        // open report window and give it focus
+        executeCommand(ReportCommand.COMMAND_WORD);
+        sb.append("========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+                + "You: " + ReportCommand.COMMAND_WORD + "\n");
+        getMainWindowHandle().focus();
+        assertReportWindowOpen();
+
+        // check report window for specified day
+        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + USER_INPUT_DATE;
+        sb.insert(0, "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+                + "You: " + ReportCommand.COMMAND_WORD + "\n");
+        // adds 1 empty space for output format.
+        assertSuccess(command, CliSyntax.PREFIX_DATE + USER_INPUT_DATE,
+                ReportCommand.COMMAND_WORD + " ");
+
+        // check report window for alias
+        command = ReportCommand.COMMAND_ALIAS;
+        assertSuccess(command, "", ReportCommand.COMMAND_ALIAS);
 
         //use menu button
         //TODO: this test case may fail sometime, comment it if it happens.
@@ -46,173 +69,70 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
         assertReportWindowOpen(); // close window if report window open
         getMainWindowHandle().focus();
 
-        //use command box
-        executeCommand(ReportCommand.COMMAND_WORD);
-        assertReportWindowOpen();
-        getMainWindowHandle().focus();
-
-        // open report window and give it focus
-        executeCommand(ReportCommand.COMMAND_WORD);
-        getMainWindowHandle().focus();
-
-        // check report window for specified day
-        executeCommand(ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "21/03/2019");
-        assertReportWindowOpen();
-        assertEquals("", getCommandBox().getInput());
-        assertCommandBoxShowsDefaultStyle();
-        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n" + "You: "
-                + ReportCommand.COMMAND_WORD + "\n" + messageHistory;
-        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n" + "You: "
-                + ReportCommand.COMMAND_WORD + "\n" + messageHistory;
-        assertEquals(messageHistory, getResultDisplay().getText());
-
         // check report window for specified month
-        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "03/2019";
-        executeCommand(command);
-        assertReportWindowOpen();
-        assertEquals("", getCommandBox().getInput());
-        assertCommandBoxShowsDefaultStyle();
-        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + command + "\n" + messageHistory;
-        assertEquals(messageHistory, getResultDisplay().getText());
+        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + USER_INPUT_MONTH;
+        assertSuccess(command, CliSyntax.PREFIX_DATE + USER_INPUT_MONTH,
+                ReportCommand.COMMAND_WORD + " ");
 
         // check report window for specified year
-        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "2019";
-        executeCommand(command);
-        assertReportWindowOpen();
-        assertEquals("", getCommandBox().getInput());
-        assertCommandBoxShowsDefaultStyle();
-        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + command + "\n" + messageHistory;
-        assertEquals(messageHistory, getResultDisplay().getText());
-
-        // check report window for specified date
-        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + "21/03/2019";
-        executeCommand(command);
-        assertReportWindowOpen();
-        assertEquals("", getCommandBox().getInput());
-        assertCommandBoxShowsDefaultStyle();
-        messageHistory = "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
-                + "You: " + command + "\n" + messageHistory;
-        assertEquals(messageHistory, getResultDisplay().getText());
+        command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + USER_INPUT_YEAR;
+        assertSuccess(command, CliSyntax.PREFIX_DATE + USER_INPUT_YEAR,
+                ReportCommand.COMMAND_WORD + " ");
 
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_DATE_WORD;
-        executeCommand(command);
-        messageHistory = "========================\n" + "ePiggy: " + MESSAGE_INVALID_DATE + "\n\n"
-                + "You: " + command + "\n" + messageHistory;
-        assertEquals(messageHistory, getResultDisplay().getText());
-        assertCommandBoxShowsErrorStyle();
+        assertFail(command, ReportCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_DATE + INVALID_DATE_WORD);
 
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_DATE_LARGE_DAY;
-        executeCommand(command);
-        messageHistory = "========================\n" + "ePiggy: " + MESSAGE_INVALID_DATE + "\n\n"
-                + "You: " + command + "\n" + messageHistory;
-        assertEquals(messageHistory, getResultDisplay().getText());
-        assertCommandBoxShowsErrorStyle();
+        assertFail(command, ReportCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_DATE + INVALID_DATE_LARGE_DAY);
 
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_DATE_LARGE_MONTH;
-        executeCommand(command);
-        messageHistory = "========================\n" + "ePiggy: " + MESSAGE_INVALID_DATE + "\n\n"
-                + "You: " + command + "\n" + messageHistory;
-        assertEquals(messageHistory, getResultDisplay().getText());
-        assertCommandBoxShowsErrorStyle();
+        assertFail(command, ReportCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_DATE + INVALID_DATE_LARGE_MONTH);
 
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_DATE_LARGE_YEAR;
-        executeCommand(command);
-        messageHistory = "========================\n" + "ePiggy: " + MESSAGE_INVALID_DATE + "\n\n"
-                + "You: " + command + "\n" + messageHistory;
-        assertEquals(messageHistory, getResultDisplay().getText());
-        assertCommandBoxShowsErrorStyle();
+        assertFail(command, ReportCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_DATE + INVALID_DATE_LARGE_YEAR);
 
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_DATE_NEGATIVE_DAY;
-        executeCommand(command);
-        messageHistory = "========================\n" + "ePiggy: " + MESSAGE_INVALID_DATE + "\n\n"
-                + "You: " + command + "\n" + messageHistory;
-        assertEquals(messageHistory, getResultDisplay().getText());
-        assertCommandBoxShowsErrorStyle();
+        assertFail(command, ReportCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_DATE + INVALID_DATE_NEGATIVE_DAY);
 
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_DATE_NEGATIVE_MONTH;
-        executeCommand(command);
-        messageHistory = "========================\n" + "ePiggy: " + MESSAGE_INVALID_DATE + "\n\n"
-                + "You: " + command + "\n" + messageHistory;
-        assertEquals(messageHistory, getResultDisplay().getText());
-        assertCommandBoxShowsErrorStyle();
-
-        // check report window for invalid date format
-        /*
-        executeCommand(ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_DATE_NEGATIVE_YEAR);
-        assertEquals(MESSAGE_INVALID_DATE, getResultDisplay().getText());
-        assertCommandBoxShowsErrorStyle();
-        */
+        assertFail(command, ReportCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_DATE + INVALID_DATE_NEGATIVE_MONTH);
 
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_MONTH_LARGE_MONTH;
-        executeCommand(command);
-        messageHistory = "========================\n" + "ePiggy: " + MESSAGE_INVALID_DATE + "\n\n"
-                + "You: " + command + "\n" + messageHistory;
-        assertEquals(messageHistory, getResultDisplay().getText());
-        assertCommandBoxShowsErrorStyle();
+        assertFail(command, ReportCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_DATE + INVALID_MONTH_LARGE_MONTH);
 
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_MONTH_LARGE_YEAR;
-        executeCommand(command);
-        messageHistory = "========================\n" + "ePiggy: " + MESSAGE_INVALID_DATE + "\n\n"
-                + "You: " + command + "\n" + messageHistory;
-        assertEquals(messageHistory, getResultDisplay().getText());
-        assertCommandBoxShowsErrorStyle();
+        assertFail(command, ReportCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_DATE + INVALID_MONTH_LARGE_YEAR);
 
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_MONTH_NEGATIVE_MONTH;
-        executeCommand(command);
-        messageHistory = "========================\n" + "ePiggy: " + MESSAGE_INVALID_DATE + "\n\n"
-                + "You: " + command + "\n" + messageHistory;
-        assertEquals(messageHistory, getResultDisplay().getText());
-        assertCommandBoxShowsErrorStyle();
-
-        /*
-        // check report window for invalid date format
-        executeCommand(ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_MONTH_NEGATIVE_YEAR);
-        assertEquals(MESSAGE_INVALID_DATE, getResultDisplay().getText());
-        assertCommandBoxShowsErrorStyle();
-        */
+        assertFail(command, ReportCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_DATE + INVALID_MONTH_NEGATIVE_MONTH);
 
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_YEAR_LARGE_YEAR;
-        executeCommand(command);
-        messageHistory = "========================\n" + "ePiggy: " + MESSAGE_INVALID_DATE + "\n\n"
-                + "You: " + command + "\n" + messageHistory;
-        assertEquals(messageHistory, getResultDisplay().getText());
-        assertCommandBoxShowsErrorStyle();
-
-        /*
-        // check report window for invalid date format
-        executeCommand(ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_YEAR_NEGATIVE_YEAR);
-        assertEquals(MESSAGE_INVALID_DATE, getResultDisplay().getText());
-        assertCommandBoxShowsErrorStyle();
-        */
+        assertFail(command, ReportCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_DATE + INVALID_YEAR_LARGE_YEAR);
 
         // check report window for invalid date format
         command = ReportCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_DATE + INVALID_MONTH_LARGE_MONTH;
-        executeCommand(command);
-        messageHistory = "========================\n" + "ePiggy: " + MESSAGE_INVALID_DATE + "\n\n"
-                + "You: " + command + "\n" + messageHistory;
-        assertEquals(messageHistory, getResultDisplay().getText());
-        assertCommandBoxShowsErrorStyle();
-
-        // check report window for invalid command
-        command = ReportCommand.COMMAND_WORD + " invalid";
-        executeCommand(command);
-        String s1 = "========================\n" + "ePiggy: Invalid command format! \n" + ReportCommand.MESSAGE_USAGE
-                + "\n\n" + "You: " + command + "\n" + messageHistory;
-        String s2 = getResultDisplay().getText();
-        assertEquals(s1, s2);
-        assertCommandBoxShowsErrorStyle();
+        assertFail(command, ReportCommand.COMMAND_WORD + " "
+                + CliSyntax.PREFIX_DATE + INVALID_MONTH_LARGE_MONTH);
     }
 
     /**
@@ -224,6 +144,39 @@ public class ReportCommandSystemTest extends EPiggySystemTestWithDefaultData {
 
         new ReportWindowHandle(guiRobot.getStage(ReportWindowHandle.REPORT_WINDOW_TITLE)).close();
         getMainWindowHandle().focus();
+    }
+
+    /**
+     * Checks for report window whether correctly open.
+     * check input.
+     * check textarea.
+     *
+     * @param command User input command.
+     * @param specifiedTime User input date/month/year.
+     */
+    private void assertSuccess(String command, String specifiedTime, String commandWord) {
+        executeCommand(command);
+        assertReportWindowOpen();
+        assertEquals("", getCommandBox().getInput());
+        assertCommandBoxShowsDefaultStyle();
+        sb.insert(0, "========================\n" + "ePiggy: " + ReportCommand.MESSAGE_SUCCESS + "\n\n"
+                + "You: " + commandWord + specifiedTime + "\n");
+        assertEquals(sb.toString(), getResultDisplay().getText());
+    }
+
+    /**
+     * Invalid report command checking.
+     *
+     * @param command User input command.
+     * @param userInput User input date/month/year.
+     */
+    private void assertFail(String command, String userInput) {
+        executeCommand(command);
+        assertEquals(userInput, getCommandBox().getInput());
+        sb.insert(0, "========================\n" + "ePiggy: Date is invalid. Date format should "
+                + "be dd/mm/yyyy and date should be valid.\n\nYou: " + command + "\n");
+        assertEquals(sb.toString(), getResultDisplay().getText());
+        assertCommandBoxShowsErrorStyle();
     }
 
     /**

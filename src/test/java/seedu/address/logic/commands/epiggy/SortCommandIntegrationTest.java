@@ -23,16 +23,16 @@ import seedu.address.model.epiggy.comparators.CompareExpenseByDate;
 import seedu.address.model.epiggy.comparators.CompareExpenseByName;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code SortExpenseCommand}.
+ * Contains integration tests (interaction with the Model) for {@code SortCommand}.
  */
-public class SortExpenseCommandIntegrationTest {
+public class SortCommandIntegrationTest {
     private Model model = new ModelManager(getTypicalEPiggy(), new UserPrefs());
     private Model expectedModel;
 
     @Test
     public void execute_sortByName_success() {
         expectedModel = new ModelManager(getTypicalEPiggy(), new UserPrefs());
-        SortExpenseCommand command = new SortExpenseCommand(new CompareExpenseByName());
+        SortCommand command = new SortCommand(new CompareExpenseByName());
         command.execute(model, null);
         expectedModel.sortExpenses(new CompareExpenseByName());
         assertEquals(Arrays.asList(MOVIE_AVENGERS, BOWLING, CLOTHES, DUMPLING_SOUP, IPHONE, KARAOKE, KFC, STATIONARY),
@@ -42,7 +42,7 @@ public class SortExpenseCommandIntegrationTest {
     @Test
     public void execute_sortByCost_success() {
         expectedModel = new ModelManager(getTypicalEPiggy(), new UserPrefs());
-        SortExpenseCommand command = new SortExpenseCommand(new CompareExpenseByCost());
+        SortCommand command = new SortCommand(new CompareExpenseByCost());
         command.execute(model, null);
         expectedModel.sortExpenses(new CompareExpenseByCost());
         assertEquals(Arrays.asList(IPHONE, CLOTHES, KFC, KARAOKE, MOVIE_AVENGERS, DUMPLING_SOUP, BOWLING, STATIONARY),
@@ -52,7 +52,7 @@ public class SortExpenseCommandIntegrationTest {
     @Test
     public void execute_sortByDate_success() {
         expectedModel = new ModelManager(getTypicalEPiggy(), new UserPrefs());
-        SortExpenseCommand command = new SortExpenseCommand(new CompareExpenseByDate());
+        SortCommand command = new SortCommand(new CompareExpenseByDate());
         command.execute(model, null);
         expectedModel.sortExpenses(new CompareExpenseByDate());
         assertEquals(Arrays.asList(MOVIE_AVENGERS, KFC, STATIONARY, DUMPLING_SOUP, IPHONE, CLOTHES, KARAOKE, BOWLING),

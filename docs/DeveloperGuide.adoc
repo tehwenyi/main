@@ -309,6 +309,7 @@ As long as the `Budget` object created does not overlap with any existing `Budge
 * *Alternative 2* : the `addBudget` command requires the `amount`, `start date` and `end date` of the budget.
 ** Pros: Easy to make recurring monthly budgets.
 ** Cons: Could cause users to miss out on certain dates if they want budgets that are recurring (eg. sets a budget from 1st March to 30th March and 1st April to 30th April – 31st March is missed out).
+
 // end::addbudget[]
 
 === Edit budget feature

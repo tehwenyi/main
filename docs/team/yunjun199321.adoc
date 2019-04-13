@@ -48,7 +48,7 @@ team project.
 
 *Minor enhancements*
 
-* I added autocomplete feature for ePiggy +
+* I added auto-complete feature for ePiggy +
 ** What it does: User enters first few letters of the command, and then press ‘Tab’ key on the keyboard. The completed command will show on the text field.
 ** Justification: In case the user forgot some of the commands, he/she can quickly find the correct command format by press the ‘Tab’ key. If user forgot the parameters of the command, he/she can also use it function fill in the correct parameters of the command.
 
@@ -56,7 +56,7 @@ team project.
 
 ** Functional code: https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#=undefined&search=yunjun199321[Code contribution]|
 https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[report feature]|
-https://github.com/yunjun199321/main/commit/fcc384f89b82596b30448aa47c6f4b64151e67c7[Autocomplete function]|
+https://github.com/yunjun199321/main/commit/fcc384f89b82596b30448aa47c6f4b64151e67c7[Auto-complete function]|
 https://github.com/yunjun199321/main/commit/17e48dfc8f152ba857fbe41ac729d03f20c493be[Report command parser and UI button]|
 https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[JavaFX charts]
 ** Test code:
@@ -67,7 +67,7 @@ https://github.com/CS2103-AY1819S2-W17-4/main/pull/228/commits/84c02d96acd964a1b
 https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/parser/epiggy/ReportCommandParserTest.java[Report command parser test]|
 https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/UndoCommandTest.java[Undo command unit test]|
 https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/RedoCommandTest.java[Redo command unit test]|
-https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/ui/CommandBoxTest.java[autocomplete unit test (handleKeyPress_tab)]|
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/ui/CommandBoxTest.java[auto-complete unit test (handleKeyPress_tab)]|
 https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/systemtests/epiggy/ReportCommandIntegrationTest.java[Report command integration test]
 
 

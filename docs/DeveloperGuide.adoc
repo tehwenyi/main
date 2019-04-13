@@ -661,7 +661,7 @@ This feature allows users to reduce the typing time and learning cost of using e
 an auto-complete feature is a nightmare for the user. The users not only need to type all the existing commands correctly but
  also need to remember many different parameters in each commands. EPiggy tries to be user friendly. Auto-complete feature helps the users overcome these problems. +
 
-Given below is an activity diagram of how the link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`autocomplete`]
+Given below is an activity diagram of how the link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`auto-complete`]
 feature works: +
 
 image::AutocompleteActivityDiagram.png[width="800"]

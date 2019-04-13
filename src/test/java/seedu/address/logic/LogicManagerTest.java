@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.Assert.assertEquals;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.AMOUNT_DESC_SECONDEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_SECONDEXTRA;
@@ -11,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_SECONDEXTR
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SECONDEXTRA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_EXPENSE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_SECONDEXTRA;
+import static seedu.address.logic.commands.HistoryCommand.MESSAGE_NO_HISTORY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -22,6 +24,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.epiggy.AddExpenseCommand;
@@ -109,6 +112,15 @@ public class LogicManagerTest {
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         logic.getFilteredPersonList().remove(0);
+    }
+
+    @Test
+    public void execute_emptyCommand_throwsParseException() throws Exception {
+        String invalidCommand = "";
+        assertParseException(invalidCommand,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        CommandResult result = logic.execute(HistoryCommand.COMMAND_WORD);
+        assertEquals(result.getFeedbackToUser(), MESSAGE_NO_HISTORY);
     }
 
     /**

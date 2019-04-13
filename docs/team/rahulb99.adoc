@@ -53,6 +53,7 @@ This new feature greatly adds to the functionality of existing commands (that we
 ** Project management:
 *** Managed product releases on GitHub.
 *** Set up the issue tracker, user stories, and assigned the milestones.
+*** Tested for bugs for all features of `EPiggy`.
 
 ** Enhancements to existing features:
 *** Made `date` an optional keyword while adding an expense.
@@ -70,11 +71,18 @@ types a part of the keyword he/she wishes to search for.
 *** PRs reviewed (https://github.com/CS2103-AY1819S2-W17-4/main/pull/40[#40], https://github.com/CS2103-AY1819S2-W17-4/main/pull/94[#94],
 https://github.com/CS2103-AY1819S2-W17-4/main/pull/97[#97], https://github.com/CS2103-AY1819S2-W17-4/main/pull/115[#115],
 https://github.com/CS2103-AY1819S2-W17-4/main/pull/123[#123], https://github.com/CS2103-AY1819S2-W17-4/main/pull/40[#132],
-https://github.com/CS2103-AY1819S2-W17-4/main/pull/139[#139])
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/139[#139], https://github.com/CS2103-AY1819S2-W17-4/main/pull/150[#150],
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/151[#151], https://github.com/CS2103-AY1819S2-W17-4/main/pull/153[#153],
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/157[#157], https://github.com/CS2103-AY1819S2-W17-4/main/pull/218[#218],
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/257[#257], https://github.com/CS2103-AY1819S2-W17-4/main/pull/258[#258],
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/259[#259], https://github.com/CS2103-AY1819S2-W17-4/main/pull/265[#265])
 
 *** Contributed to forum discussion (example:  https://github.com/nus-cs2103-AY1819S2/forum/issues/64[#64])
 
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2103-AY1819S2-W14-1/main/issues/151[#151],
+https://github.com/CS2103-AY1819S2-W14-1/main/issues/167[#167], https://github.com/CS2103-AY1819S2-W14-1/main/issues/153[#153],
+https://github.com/CS2103-AY1819S2-W14-1/main/issues/160[#160], https://github.com/CS2103-AY1819S2-W14-1/main/issues/157[#157],
+ https://github.com/CS2103-AY1819S2-W14-1/main/issues/155[#155], )
 
 ** Tools:
 *** Set up Travis CI for the team repo.

@@ -27,7 +27,7 @@ public class DeleteBudgetCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_BUDGET_SUCCESS = "Deleted budget. \nDeleted budget's details:\n%1$s";
-    public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The index does not exist on the budget list.";
+    //public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The index does not exist on the budget list.";
 
     private final Index targetIndex;
 

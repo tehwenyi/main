@@ -27,7 +27,6 @@ import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.EpiggyTestApp;
 
-import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
 import seedu.address.logic.commands.epiggy.FindCommand;
 
 import seedu.address.model.EPiggy;
@@ -172,18 +171,6 @@ public abstract class EPiggySystemTestWithDefaultData {
     //   executeCommand(ClearCommand.COMMAND_WORD);
     //    assertEquals(0, getModel().getEPiggy().getPersonList().size());
     //}
-
-    /**
-     * Deletes all persons in the address book.
-     */
-    protected void deleteAllBudgets() {
-        int budgetListSize = getModel().getBudgetList().size();
-        for (int i = 0; i < budgetListSize; i++) {
-            executeCommand(DeleteBudgetCommand.COMMAND_WORD + " 1");
-        }
-        assertEquals(0, getModel().getEPiggy().getBudgetList().size());
-    }
-
     /**
      * Asserts that the {@code CommandBox} displays {@code expectedCommandInput}, the {@code ResultDisplay} displays
      * {@code expectedResultMessage}, the storage contains the same person objects as {@code expectedModel}

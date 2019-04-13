@@ -37,15 +37,14 @@ public class CommandBox extends UiPart<Region> {
         "editBudget $/ p/ d/",
         "editExpense  n/ $/ d/ t/",
         "exit",
-        "findExpense n/ t/ d/ $/",
+        "find n/ t/ d/ $/",
         "help",
-        "history",
         "list",
         "redo",
         "report d/",
         "reverseList",
         "setGoal n/ $/",
-        "sortExpense n/ d/ $/",
+        "sort n/ d/ $/",
         "undo",
     };
 

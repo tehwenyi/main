@@ -1,7 +1,6 @@
 package systemtests.epiggy;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -84,12 +83,4 @@ public class ReportCommandEmptyDataSystemTest extends EPiggySystemTestWithEmptyD
                 + "You: " + ReportCommand.COMMAND_WORD + " " + specifiedTime + "\n");
         assertEquals(sb.toString(), getResultDisplay().getText());
     }
-
-    /**
-     * Asserts that the report window isn't open.
-     */
-    private void assertReportWindowNotOpen() {
-        assertFalse(ERROR_MESSAGE, ReportWindowHandle.isWindowPresent());
-    }
-
 }

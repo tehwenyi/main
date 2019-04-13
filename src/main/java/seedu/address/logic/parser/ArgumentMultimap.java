@@ -70,9 +70,4 @@ public class ArgumentMultimap {
         ArgumentMultimap that = (ArgumentMultimap) o;
         return Objects.equals(argMultimap, that.argMultimap);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(argMultimap);
-    }
 }

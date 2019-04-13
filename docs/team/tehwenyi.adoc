@@ -1,6 +1,7 @@
 = Teh Wen Yi - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
+:sectnums:
 :stylesDir: ../stylesheets
 
 image::projectportfolioheader.png[width="600"]

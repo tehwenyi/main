@@ -161,7 +161,7 @@ Examples:
 Adds an allowance of $20 from Mom, tagged as School with the date as 21/02/2019.
 
 ****
-*Additional Information:* +
+image::additionalinformation.png[width="200"]
 Creating an allowance would automatically tag the entry with an `Allowance` tag. +
 `Name` has to be alphanumeric with a length of less than 50 characters. +
 `AMOUNT` has to be a valid amount greater than $0, and less than $999,999.99. +
@@ -183,7 +183,7 @@ Edits the name, cost and tag of the first allowance in ePiggy to ‘From Mom’,
 Edits the amount of the second allowance in ePiggy to ‘$22’.
 
 ****
-*Additional Information:* +
+image::additionalinformation.png[width="200"]
 Only allowances can be edited using this command. To edit expenses, use the `editExpense` command.
 ****
 
@@ -201,7 +201,7 @@ Examples:
 Deletes the first allowance in the displaying list from Expense Tracker.
 
 ****
-*Additional Information:* +
+image::additionalinformation.png[width="200"]
 Only allowances can be deleted using this command. To delete expenses, use the `deleteExpense` command.
 ****
 ==== Listing all expenses : `list`
@@ -240,7 +240,7 @@ Displays all entries listed with the cost range of $250.
 Displays all entries listed with the cost range of $250 to $500.
 
 ****
-*Additional Information:* +
+image::additionalinformation.png[width="200"]
 Searches and displays the expense along with its information, according to the user-specified command. +
 Searching for names and tags is case-insensitive. Furthermore, it allows you to search for almost similar
 words by applying the concept of Levenshtien distance, hence allowing small typos (limit fixed by an upper bound). +
@@ -265,7 +265,7 @@ Sorts all entries by date in descending order.
 Sorts all entries by amount in ascending order.
 
 ****
-*Additional Information:* +
+image::additionalinformation.png[width="200"]
 'sortExpense` and `sE` are equivalent.
 ****
 
@@ -293,7 +293,7 @@ Sets a total budget of $500 for each week starting from 3rd February 2019.
 Sets a total budget of $10000 every 15 days starting from 1st January 2000.
 
 ****
-*Additional Information:* +
+image::additionalinformation.png[width="200"]
 Time period cannot exceed 1 million days. +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
@@ -342,7 +342,7 @@ Edits the current budget to $1000 for each week starting from 01/01/2000.
 Edits the current budget to $200 for every 15 days starting from the budget's initial start date.
 
 ****
-*Additional Information:* +
+image::additionalinformation.png[width="200"]
 Time period cannot exceed 1 million days. +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
@@ -362,7 +362,7 @@ Examples:
 Deletes the first budget in the Budget List.
 
 ****
-*Additional Information:* +
+image::additionalinformation.png[width="200"]
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
 // end::deleteBudget[]
@@ -381,7 +381,7 @@ Example:
 Sets the goal to a $80 Nike shoe.
 
 ****
-*Additional Information:* +
+image::additionalinformation.png[width="200"]
 Details about the current goal and the amount required to save up to hit the current goal
 can be found on the User Interface.
 ****

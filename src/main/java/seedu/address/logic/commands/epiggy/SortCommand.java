@@ -44,11 +44,11 @@ public class SortCommand extends Command {
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, model.getFilteredExpenseList().size()));
     }
-
+    /*
     public Comparator<Expense> getExpenseComparator() {
         return expenseComparator;
     }
-
+    */
     @Override
     public boolean equals(Object o) {
         if (this == o) {

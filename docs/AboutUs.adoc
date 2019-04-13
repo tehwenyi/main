@@ -48,7 +48,7 @@ Responsibilities: +
 image::yunjun199321.png[width="150", align="left"]
 {empty}[https://github.com/yunjun199321[github]] [<<yunjun199321#, portfolio>>]
 
-Role: Developer, Java Guru
+Role: Developer
 
 Responsibilities: `report` feature, `autocomplete` feature
 

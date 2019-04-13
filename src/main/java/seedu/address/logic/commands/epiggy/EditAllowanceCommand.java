@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENSES;
 
 import java.util.Collections;
 import java.util.Date;
@@ -35,10 +35,10 @@ import seedu.address.model.tag.Tag;
 public class EditAllowanceCommand extends Command {
 
     public static final String COMMAND_WORD = "editAllowance";
-    public static final String COMMAND_ALIAS = "eA";
+    public static final String COMMAND_ALIAS = "ea";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the allowance identified "
-            + "by the index in the displayed expense list. "
+            + "by the index in the displayed list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -52,7 +52,7 @@ public class EditAllowanceCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "Allowance not edited as there are no changes.\n"
             + MESSAGE_USAGE;
 
-    private static final String MESSAGE_ITEM_NOT_ALLOWANCE = "The item selected is not an allowance. "
+    public static final String MESSAGE_ITEM_NOT_ALLOWANCE = "The item selected is not an allowance. "
             + "Please use " + EditExpenseCommand.COMMAND_WORD + " to edit expenses and "
             + COMMAND_WORD + " to edit allowances.";
 
@@ -60,8 +60,8 @@ public class EditAllowanceCommand extends Command {
     final EditAllowanceDescriptor editAllowanceDescriptor;
 
     /**
-     * @param index                 of the person in the filtered person list to edit
-     * @param editAllowanceDescriptor details to edit the person with
+     * @param index                 of the allowance in the filtered expenses list to edit
+     * @param editAllowanceDescriptor details to edit the allowance with
      */
     public EditAllowanceCommand(Index index, EditAllowanceDescriptor editAllowanceDescriptor) {
         requireNonNull(index);
@@ -90,10 +90,10 @@ public class EditAllowanceCommand extends Command {
         if (!(toEdit instanceof Allowance)) {
             throw new CommandException(MESSAGE_ITEM_NOT_ALLOWANCE);
         }
-        Allowance editedAllowance = (Allowance) createEditedExpense((Allowance) toEdit, editAllowanceDescriptor);
+        Allowance editedAllowance = createEditedAllowance((Allowance) toEdit, editAllowanceDescriptor);
 
         model.setExpense(toEdit, editedAllowance);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredExpensesList(PREDICATE_SHOW_ALL_EXPENSES);
         model.commitEPiggy();
         return new CommandResult(String.format(MESSAGE_EDIT_ALLOWANCE_SUCCESS, editedAllowance));
     }
@@ -102,7 +102,7 @@ public class EditAllowanceCommand extends Command {
      * Creates and returns a {@code Allowance} with the details of {@code allowanceToEdit}
      * edited with {@code editAllowanceDescriptor}.
      */
-    static Expense createEditedExpense(Allowance allowanceToEdit, EditAllowanceDescriptor editAllowanceDescriptor) {
+    static Allowance createEditedAllowance(Allowance allowanceToEdit, EditAllowanceDescriptor editAllowanceDescriptor) {
         assert allowanceToEdit != null;
 
         Name updatedName = editAllowanceDescriptor.getName().orElse(allowanceToEdit.getItem().getName());
@@ -130,8 +130,8 @@ public class EditAllowanceCommand extends Command {
                 && editAllowanceDescriptor.equals(e.editAllowanceDescriptor);
     }
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the allowance with. Each non-empty field value will replace the
+     * corresponding field value of the allowance.
      */
     public static class EditAllowanceDescriptor {
         private Name name;

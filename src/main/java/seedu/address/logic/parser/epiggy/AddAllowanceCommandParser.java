@@ -27,6 +27,11 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new AddAllowanceCommand object.
  */
 public class AddAllowanceCommandParser implements Parser<AddAllowanceCommand> {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the AddAllowanceCommand
+     * and returns an AddAllowanceCommand object for execution.
+     */
     @Override
     public AddAllowanceCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

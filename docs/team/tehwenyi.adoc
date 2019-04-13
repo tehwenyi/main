@@ -14,7 +14,7 @@ This portfolio aims to document my contributions to *_ePiggy_*.
 
 == Introduction
 
-image::about.png[width="175"]
+image::about.png[width="140"]
 
 *ePiggy* is a desktop application designed to inculcate good spending habits in students
 through allowing them to track their finances. It includes everything from tracking expenses, managing budgets
@@ -25,7 +25,7 @@ Graphical User Interface (GUI) created with JavaFX. +
 
 It can be used on both Windows and Mac.
 
-image::projectteam.png[width="175"]
+image::projectteam.png[width="140"]
 
 *_ePiggy_* is a product of twin modules CS2101 and CS2103T. It was transformed from the
 link:https://github.com/nus-cs2103-AY1819S2/addressbook-level4[AddressBook - Level 4] application.

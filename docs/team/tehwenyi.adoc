@@ -64,7 +64,6 @@ familiar with almost all the different aspects of the code (`commons`, `logic`, 
 can spend. It was challenging to make the UI simple and concise for our target users whilst conveying the crucial information.
 
 === Minor Enhancement
-* *Minor enhancement 1*:
 Added the status and reminder components of the `budget` feature.
 
 image::whatitdoes.png[width="150"]
@@ -95,7 +94,7 @@ As of 15th April 2019, I have contributed over 50 Pull Requests and reviewed ove
 | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/DeleteBudgetCommandTest.java[Delete Budget]
 | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/systemtests/epiggy/AddBudgetCommandSystemTest.java[Add Budget Command System Test]
 
-View all the code I contributed link:https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=tehwenyi&sort=displayName&since=2019-02-10&until=2019-04-15&timeframe=day&reverse=false&repoSort=true[here]
+View all the code I contributed link:https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=tehwenyi&sort=displayName&since=2019-02-10&until=2019-04-15&timeframe=day&reverse=false&repoSort=true[here]!
 
 === Other Contributions
 * *Other contributions*:

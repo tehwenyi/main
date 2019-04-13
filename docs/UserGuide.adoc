@@ -84,6 +84,7 @@ Enter 'as' and press `Tab`, *nothing will happen* because 'as' does not match an
 alias* and is *non-case sensitive*.
 
 // end::autocomplete[]
+
 ==== Viewing help : `help`
 Lists all the user commands with their syntax and descriptions. +
 *Alias:* `hp` +
@@ -432,6 +433,14 @@ Figure of example 4: Report for specified year.
 Exits the program. +
 *Alias:* `ex` +
 *Format:* `exit`
+
+==== Clean up result display area: F2
+
+You can clean up the left side result display area if you feel the result display area is too messy.
+Press *F2* on the keyboard or the button *Clean message* on the dropdown menu allows you to clean up the result display area.
+
+[NOTE]
+Message cannot be restored once you clean up the result display area.
 
 ==== Saving the data
 

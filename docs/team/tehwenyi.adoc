@@ -143,12 +143,15 @@ image::extract.png[width="140"]
 |===
 
 ==== Add Budget Feature: addBudget
+
 include::../UserGuide.adoc[tag=addbudget]
 
 ==== Edit Budget Feature: editBudget
+
 include::../UserGuide.adoc[tag=editbudget]
 
 ==== Delete Budget Feature: deleteBudget
+
 include::../UserGuide.adoc[tag=deletebudget]
 
 == Contributions to the Developer Guide
@@ -186,10 +189,13 @@ image::extract.png[width="140"]
 |===
 
 === Add Budget Feature: addBudget
+
 include::../DeveloperGuide.adoc[tag=addbudget]
 
 === Edit Budget Feature: editBudget
+
 include::../DeveloperGuide.adoc[tag=editbudget]
 
 === Delete Budget Feature: deleteBudget
+
 include::../DeveloperGuide.adoc[tag=deletebudget]

@@ -494,7 +494,7 @@ if you intend to maintain your current spending habits. You can choose to adopt 
 
 == FAQ
 
-image::frequentlyaskedquestions.png[width="175"]
+image::frequentlyaskedquestions.png[width="200"]
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: You can follow the steps below to transfer your data: +

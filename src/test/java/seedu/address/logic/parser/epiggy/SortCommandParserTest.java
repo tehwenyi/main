@@ -16,7 +16,7 @@ import seedu.address.model.epiggy.comparators.CompareExpenseByName;
 
 public class SortCommandParserTest {
 
-    private SortExpenseCommandParser parser = new SortExpenseCommandParser();
+    private SortCommandParser parser = new SortCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -43,6 +43,8 @@ public class SortCommandParserTest {
         assertParseFailure(parser, "/c/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 SortCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "/c/n/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                SortCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "$/ t/ n/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 SortCommand.MESSAGE_USAGE));
     }
 }

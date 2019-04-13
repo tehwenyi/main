@@ -150,8 +150,8 @@ public class FindCommandSystemTest extends EPiggySystemTestWithDefaultData {
         //        assertSelectedCardUnchanged();
 
         /* Case: mixed case command word -> rejected */
-        //        command = "FiNd Meier";
-        //        assertCommandFailure(command, MESSAGE_UNKNOWN_COMMAND);
+        //       command = "FiNd Meier";
+        //        assertCommandFailure(command, FindCommand.MESSAGE_USAGE);
 
     }
 

@@ -26,10 +26,9 @@ import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.EpiggyTestApp;
-
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.epiggy.DeleteBudgetCommand;
 import seedu.address.logic.commands.epiggy.FindCommand;
-
 import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.testutil.epiggy.TypicalReports;
@@ -158,6 +157,16 @@ public abstract class EPiggySystemTestWithDefaultData {
     }
 
     /**
+     * Displays all expense with any parts of their item names matching {@code keyword} (case-insensitive).
+     */
+    protected void showExpensesWithTag(String keyword) {
+        int totalExpensesCount = getModel().getFilteredExpenseList().size();
+        executeCommand(FindCommand.COMMAND_WORD + " t/" + keyword);
+        int resultExpensesCount = this.testApp.getModelAfterExecution().getFilteredExpenseList().size();
+        assertTrue(resultExpensesCount < totalExpensesCount);
+    }
+
+    /**
      * Selects the person at {@code index} of the displayed list.
      */
     //    protected void selectPerson(Index index) {
@@ -168,11 +177,10 @@ public abstract class EPiggySystemTestWithDefaultData {
     /**
      * Deletes all persons in the address book.
      */
-    //protected void deleteAllPersons() {
-    //   executeCommand(ClearCommand.COMMAND_WORD);
-    //    assertEquals(0, getModel().getEPiggy().getPersonList().size());
-    //}
-
+    protected void deleteAllExpenses() {
+        executeCommand(ClearCommand.COMMAND_WORD);
+        assertEquals(0, getModel().getEPiggy().getExpenseList().size());
+    }
     /**
      * Deletes all persons in the address book.
      */

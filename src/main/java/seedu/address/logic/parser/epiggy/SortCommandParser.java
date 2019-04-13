@@ -25,7 +25,7 @@ import seedu.address.model.epiggy.comparators.CompareExpenseByName;
 /**
  * Parses input arguments and creates a new SortCommand object.
  */
-public class SortExpenseCommandParser implements Parser<SortCommand> {
+public class SortCommandParser implements Parser<SortCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
@@ -49,6 +49,10 @@ public class SortExpenseCommandParser implements Parser<SortCommand> {
         String[] splitTrimmedArgs = trimmedArgs.split("/");
         if (splitTrimmedArgs[0].equals("")) {
             //Ensure args contains at least one prefix
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
+        if (!(splitTrimmedArgs.length == 1)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }

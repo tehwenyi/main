@@ -39,19 +39,19 @@ spendings.
 
 Added the entire `budget` feature of ePiggy. +
 
-image::whatitdoes.png[width="175"]
+image::whatitdoes.png[width="125"]
 
 * Allows users to set a limit on their spendings for a specified time period and provide reminders when they are going to or have exceeded the limit. +
 * Unlike typical expense trackers where only one budget is set, ePiggy's `budget` feature consists of a list of budgets. This is because the purpose of ePiggy is to inculcate good spending habits in our users, so users should be able to track their previous spendings.
 Being able to view their budget history and plan future budgets would fuel this purpose. +
 * The `budget` feature is visible on the GUI and comprises of 3 commands: `addBudget`, `editBudget` and `deleteBudget`.
 
-image::justification.png[width="175"]
+image::justification.png[width="125"]
 
 * The `budget` feature urges users to be more aware of the amount they spend per time period so that they can better manage their expenses and avoid splurging. It is also a good habit we hope to inculcate in users before they enter the
 workforce and deal with larger sums of money. +
 
-image::highlights.png[width="175"]
+image::highlights.png[width="125"]
 
 * This enhancement was built from scratch. It is completely new and hence required the creation of many new objects including `budget`, `period`, `uniqueBudgetList` and a new `budgetPanel` for the UI. This enhancement required the familiarity with
 almost all the different aspects of the code (`commons`, `logic`, `model`, `ui`).
@@ -59,7 +59,7 @@ almost all the different aspects of the code (`commons`, `logic`, `model`, `ui`)
 good spending habits in our users. Hence, users should be able to track their previous spendings.
 * For this enhancement, the UI is important as the purpose is to constantly remind users of the remaining amount they can spend. It was challenging to make the UI simple and concise for our target users whilst conveying the crucial information.
 
-image::codecontributed.png[width="175"]
+image::codecontributed.png[width="125"]
 
 *Functional code:* link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/AddBudgetCommand.java[Add Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/EditBudgetCommand.java[Edit Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/DeleteBudgetCommand.java[Delete Budget] +
 *Test code:* link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/AddBudgetCommandTest.java[Add Budget] | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/DeleteBudgetCommandTest.java[Delete Budget]
@@ -70,15 +70,15 @@ image::codecontributed.png[width="175"]
 * *Minor enhancement 1*:
 Added the UI component for the `budget` feature.
 
-image::whatitdoes.png[width="175"]
+image::whatitdoes.png[width="125"]
 
 Allows users to view all the details and real-time status of the budgets they have added on the GUI. The status of the budgets will update whenever an expense is added, edited or deleted.
 
-image::justification.png[width="175"]
+image::justification.png[width="125"]
 
 *_ePiggy_*'s target audience are students, who may be as young as seven years old. Hence, having a simple and concise GUI to engage them while conveying all the crucial information is very important. +
 
-image::codecontributed.png[width="175"]
+image::codecontributed.png[width="125"]
 
 * *Functional code*: [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetPanel.java[Budget Panel]] | [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetCard.java[Budget Card]]
 

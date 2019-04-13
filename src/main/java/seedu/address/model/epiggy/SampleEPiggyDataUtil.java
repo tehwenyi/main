@@ -47,6 +47,9 @@ public class SampleEPiggyDataUtil {
         };
     }
 
+    /**
+     * Returns a sample ePiggy with expenses, allowances, goal and budgets.
+     */
     public static ReadOnlyEPiggy getSampleEPiggy() {
         EPiggy sampleEp = new EPiggy();
         try {
@@ -69,6 +72,9 @@ public class SampleEPiggyDataUtil {
         return sampleEp;
     }
 
+    /**
+     * Returns a tag set containing the list of strings given.
+     */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)

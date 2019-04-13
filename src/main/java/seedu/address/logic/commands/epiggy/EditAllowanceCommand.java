@@ -35,10 +35,10 @@ import seedu.address.model.tag.Tag;
 public class EditAllowanceCommand extends Command {
 
     public static final String COMMAND_WORD = "editAllowance";
-    public static final String COMMAND_ALIAS = "eA";
+    public static final String COMMAND_ALIAS = "ea";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the allowance identified "
-            + "by the index in the displayed expense list. "
+            + "by the index in the displayed list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -60,8 +60,8 @@ public class EditAllowanceCommand extends Command {
     final EditAllowanceDescriptor editAllowanceDescriptor;
 
     /**
-     * @param index                 of the person in the filtered person list to edit
-     * @param editAllowanceDescriptor details to edit the person with
+     * @param index                 of the allowance in the filtered expenses list to edit
+     * @param editAllowanceDescriptor details to edit the allowance with
      */
     public EditAllowanceCommand(Index index, EditAllowanceDescriptor editAllowanceDescriptor) {
         requireNonNull(index);
@@ -130,8 +130,8 @@ public class EditAllowanceCommand extends Command {
                 && editAllowanceDescriptor.equals(e.editAllowanceDescriptor);
     }
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the allowance with. Each non-empty field value will replace the
+     * corresponding field value of the allowance.
      */
     public static class EditAllowanceDescriptor {
         private Name name;

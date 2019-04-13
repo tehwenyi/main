@@ -18,7 +18,7 @@ public class SetGoalCommand extends Command {
     public static final String COMMAND_WORD = "setGoal";
     public static final String COMMAND_ALIAS = "sg";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sets a goal that you would like to reach. "
+            + ": Sets a goal that you would like to save up to. "
             + "Parameters: "
             + PREFIX_NAME + "GOAL NAME "
             + PREFIX_COST + "GOAL AMOUNT\n"

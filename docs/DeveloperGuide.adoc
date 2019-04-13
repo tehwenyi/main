@@ -655,7 +655,7 @@ alternative choice lists below.
 // end::report[]
 
 // tag::autocomplete[]
-=== autocomplete feature
+=== Autocomplete feature
 This feature allows users to reduce the typing time and learning cost of using ePiggy. Any command line application without
 an autocomplete feature is a nightmare for the user. The users not only need to type all the existing commands correctly but
  also need to remember many different parameters in each commands. EPiggy tries to be user friendly. Autocomplete feature helps the users overcome these problems. +
@@ -712,8 +712,6 @@ alternative choice lists below.
 ** Pros: User can see any matched commands and select one of them.
 ** Cons: Third party library is needed. There is not such kind of library under MIT licence and school is not allow to use them.
 // end::autocomplete[]
-
-
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption

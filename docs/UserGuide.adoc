@@ -85,7 +85,6 @@ This represents a *tip*. A tip denotes something that is often handy, and good f
 
 {empty} +
 
-
 === Basic Features
 // tag::autocomplete[]
 ==== Auto complete :
@@ -102,14 +101,10 @@ alias* and is *non-case sensitive*.
 
 // end::autocomplete[]
 
-{empty} +
-
 ==== Viewing help : `help`
 Lists all the user commands with their syntax and descriptions. +
 *Alias:* `hp` +
 *Format:* `help`
-
-{empty} +
 
 ==== Adding an expense : `addExpense`
 
@@ -125,8 +120,6 @@ Adds an expense for a $5 chicken rice set, tagged as Food with the date as 21/02
 
 * `addExpense n/Chicken rice set $/5 t/Food` +
 Adds an expense for a $5 chicken rice set, tagged as Food dated as the current date, by default.
-
-{empty} +
 
 ==== Editing an expense : `editExpense`
 
@@ -144,8 +137,6 @@ Edits the name, cost and tag of the first expense in the Expense List to ‘Pen�
 * `editExpense 2 t/Food` +
 Edits the tag of the second expense in the Expense List to ‘Food’.
 
-{empty} +
-
 ==== Deleting an expense : `deleteExpense`
 
 Deletes the expense at the specified INDEX. The INDEX refers to the number in the displayed Expenses List which is next to
@@ -157,8 +148,6 @@ Examples:
 
 * `deleteExpense 1` +
 Deletes the first expense in the displaying expense list from Expense Tracker.
-
-{empty} +
 
 ==== Adding an allowance: `addAllowance`
 
@@ -178,7 +167,6 @@ Creating an allowance would automatically tag the entry with an `Allowance` tag.
 `AMOUNT` has to be a valid amount greater than $0, and less than $999,999.99. +
 `Date` follows the following format `dd/MM/yyyy`.
 ****
-{empty} +
 
 ==== Editing an allowance : `editAllowance`
 
@@ -200,8 +188,6 @@ image::additionalinformation.png[width="175"]
 Only allowances can be edited using this command. To edit expenses, use the `editExpense` command.
 ****
 
-{empty} +
-
 ==== Deleting an allowance : `deleteAllowance`
 
 Deletes the allowance at the specified INDEX. The INDEX refers to the number in the displayed Allowance &
@@ -220,15 +206,11 @@ image::additionalinformation.png[width="175"]
 Only allowances can be deleted using this command. To delete expenses, use the `deleteExpense` command.
 ****
 
-{empty} +
-
 ==== Listing all expenses : `list`
 
 Lists the expense records from newest to oldest. Use this to return to the default view after search/sort commands +
 *Alias:* `l` +
 *Format:* `list`
-
-{empty} +
 
 ==== Listing all expenses in reverse : `reverseList`
 
@@ -236,7 +218,6 @@ Lists the expense records from oldest to newest. Use this to return to the defau
 *Alias:* `rl` +
 *Format:* `reverseList`
 
-{empty} +
 {empty} +
 
 === Filtering and Sorting Data
@@ -272,8 +253,6 @@ Date format is `dd/MM/yyyy` .
 'findExpense` and `fE` are equivalent.
 ****
 
-{empty} +
-
 ==== Sorting the expenses : `sortExpense`
 
 The user can sort the expenses in the list by name, date added, amount in ascending or descending order. +
@@ -294,7 +273,6 @@ image::additionalinformation.png[width="175"]
 'sortExpense` and `sE` are equivalent.
 ****
 
-{empty} +
 {empty} +
 
 === Budgeting
@@ -348,7 +326,7 @@ image::budgetNormal.png[width="300"]
 _Figure 7. Quote provided as a reminder when spendings are well within budget._
 
 // end::addBudget[]
-{empty} +
+
 // tag::editBudget[]
 ==== Editing the current budget : `editBudget`
 
@@ -375,7 +353,7 @@ Time period cannot exceed 1 million days. +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
 // end::editBudget[]
-{empty} +
+
 // tag::deleteBudget[]
 ==== Deleting a budget : `deleteBudget`
 
@@ -394,7 +372,6 @@ image::additionalinformation.png[width="175"]
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
 // end::deleteBudget[]
-{empty} +
 {empty} +
 
 === Goal Setting
@@ -416,7 +393,6 @@ Details about the current goal and the amount required to save up to hit the cur
 can be found on the User Interface.
 ****
 // end::setGoal[]
-{empty} +
 {empty} +
 // tag::report[]
 === Expense Report
@@ -471,7 +447,6 @@ Figure of example 4: Report for specified year.
 // end::report[]
 
 {empty} +
-{empty} +
 
 === Miscellaneous
 
@@ -481,14 +456,11 @@ Exits the program. +
 *Alias:* `ex` +
 *Format:* `exit`
 
-{empty} +
-
 ==== Saving the data
 
 ePiggy's data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-{empty} +
 {empty} +
 
 === Upcoming Features

@@ -160,6 +160,7 @@ image::example.png[width="125"]
 * `deleteExpense 1` +
 Deletes the first expense in the displaying expense list from Expense Tracker.
 
+// tag::aa[]
 ==== Adding an allowance: `addAllowance`
 
 Adds a new allowance record to ePiggy. +
@@ -178,7 +179,8 @@ Creating an allowance would automatically tag the entry with an `Allowance` tag.
 `AMOUNT` has to be a valid amount greater than $0, and less than $999,999.99. +
 `Date` follows the following format `dd/MM/yyyy`.
 ****
-
+// end::aa[]
+// tag::ea[]
 ==== Editing an allowance : `editAllowance`
 
 Edits an existing allowance in ePiggy at a specific `*INDEX`* . +
@@ -198,7 +200,8 @@ Edits the amount of the second allowance in ePiggy to ‘$22’.
 image::additionalinformation.png[width="175"]
 Only allowances can be edited using this command. To edit expenses, use the `editExpense` command.
 ****
-
+// end::ea[]
+// tag::da[]
 ==== Deleting an allowance : `deleteAllowance`
 
 Deletes the allowance at the specified `*INDEX`*. +
@@ -211,12 +214,12 @@ image::example.png[width="125"]
 
 * `deleteExpense 1` +
 Deletes the first allowance in the displaying list from Expense Tracker.
-// end::aed[]
 
 ****
 image::additionalinformation.png[width="175"]
 Only allowances can be deleted using this command. To delete expenses, use the `deleteExpense` command.
 ****
+// end::da[]
 
 ==== Listing all expenses : `list`
 

@@ -103,6 +103,7 @@ Lists all the user commands with their syntax and descriptions. +
 *Alias:* `hp` +
 *Format:* `help`
 
+// tag::aed[]
 ==== Adding an expense : `addExpense`
 
 Adds a new expense record to the Expense Tracker. +
@@ -196,6 +197,7 @@ image::example.png[width="125"]
 
 * `deleteExpense 1` +
 Deletes the first allowance in the displaying list from Expense Tracker.
+// end::aed[]
 
 ****
 image::additionalinformation.png[width="175"]

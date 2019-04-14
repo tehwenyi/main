@@ -85,16 +85,25 @@ This represents a *tip*. A tip denotes something that is often handy, and good f
 === Basic Features
 // tag::autocomplete[]
 ==== Auto-complete :
-Enter the first few letters of the command, and then press `Tab` key on the keyboard to auto complete the command. +
-If the completed command is not what you want, delete the command. Enter the same letters again, and press `Tab`. Another command will show if the letters match another command. +
-
-Example: enter letter 'a' and then press `Tab`, the command "addExpense n/ $/ t/ d/ " will show.
-
-Delete the command, enter 'a' again and press `Tab`, the addBudget or addAllowance command will show.
+Automatically completes your input without requiring you to type them in full. +
+To use this feature, enter the first few letters of your intended command and press `Tab`.
 
 [NOTE]
-Enter 'as' and press `Tab`, *nothing will happen* because 'as' does not match any prefix of the command. Auto-complete does *not support
-alias* and is *non-case sensitive*.
+If the completed command is not your intended command, you can delete the command, enter the same letters again and press `Tab`.
+Another command will show if their letters match. +
+
+image::examples.png[width="125"]
+* *Enter letter 'a', then press `Tab`*
+The command "addExpense n/ $/ t/ d/ " will show.
+
+* *Delete the command above, enter 'a' again and press `Tab`*
+The `addBudget` or `addAllowance` command will show.
+
+****
+image::additionalinformation.png[width="175"]
+Entering 'as' and pressing `Tab` will cause *nothing* to happen because 'as' does not match any commands.
+Auto-complete does *not support alias* and is *non-case sensitive*.
+****
 
 // end::autocomplete[]
 
@@ -187,9 +196,9 @@ Only allowances can be edited using this command. To edit expenses, use the `edi
 
 ==== Deleting an allowance : `deleteAllowance`
 
-Deletes the allowance at the specified INDEX. The INDEX refers to the number in the displayed Allowance &
-Expenses List which is next to
-the name of the allowance. +
+Deletes the allowance at the specified `*INDEX`*. +
+The INDEX refers to the number in the displayed Allowance &
+Expenses List which is next to the name of the allowance. +
 *Alias:* `da` +
 *Format:* `deleteAllowance INDEX`
 
@@ -221,7 +230,7 @@ Lists the expense records from oldest to newest. Use this to return to the defau
 // tag::fe[]
 ==== Finding an expense or allowance : `find`
 
-You can find any expense or allowance in the list by specifying either its name, tag, date, range of dates, amount or range of amount. +
+Finds any expense or allowance in the list by specifying either its name, tag, date, range of dates, amount or range of amount. +
 *Alias:* `fd` +
 *Format:* *`find [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
 
@@ -254,7 +263,7 @@ Date format is `dd/MM/yyyy` .
 // tag::se[]
 ==== Sorting the expenses and allowances : `sort`
 
-The user can sort the expenses and allowances in the list by name, date added, amount in ascending or descending order. +
+Sorts the expenses and allowances in the list by name, date added, amount in ascending or descending order. +
 *Alias:* `st` +
 *Format:* `sort [n/d/$]/`
 
@@ -269,7 +278,7 @@ Sorts all entries by amount in ascending order. +
 
 ****
 
-image::additionalinformation.png[width="175"] +
+image::additionalinformation.png[width="175"]
 
 There should be only one keyword (either `name`, `cost` or `date`) to determine the sorting sequence. +
 'sort` and `st` are equivalent.
@@ -451,19 +460,20 @@ Figure of example 4: Report for specified year.
 
 === Miscellaneous
 
+==== Clean up result display area: F2
+
+Cleans the result display area (leftmost panel). This removes all text in the box.
+Press *F2* on the keyboard or the button *Clean Message* on the dropdown menu to clean the result display area.
+
+[NOTE]
+Messages cannot be restored once you clean the result display area.
+Command history and other information will not be affected.
+
 ==== Exiting the program : `exit`
 
 Exits the program. +
 *Alias:* `ex` +
 *Format:* `exit`
-
-==== Clean up result display area: F2
-
-You can clean up the left side result display area if you feel the result display area is too messy.
-Press *F2* on the keyboard or the button *Clean message* on the dropdown menu allows you to clean up the result display area.
-
-[NOTE]
-Message cannot be restored once you clean up the result display area.
 
 ==== Saving the data
 
@@ -487,7 +497,7 @@ This feature will be implemented only after the `register` feature has been adde
 
 ==== Encrypting data files `[coming in v2.0]`
 
-You can choose to enable data encryption to secure your ePiggy information.
+Allows you to choose to enable data encryption to secure your ePiggy information.
 
 ==== Share `[coming in v2.0]`
 

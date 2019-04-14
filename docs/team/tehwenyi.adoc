@@ -125,7 +125,7 @@ image::extract.png[width="130"]
 
 |===
 |_My contribution towards the *Budgeting* feature in the User Guide can be split into 3 segments: `addBudget`,
-`editBudget` and `deleteBudget`. The extracts below are my contributions to the User Guide._
+`editBudget` and `deleteBudget`. The extracts in Sections 3.1 to 3.3 below are my contributions to the User Guide._
 |===
 
 ==== Add Budget Feature: addBudget
@@ -170,7 +170,7 @@ image::extract.png[width="130"]
 
 |===
 |_My contribution towards the Developer Guide can be split into 3 segments: `addBudget`,
-`editBudget` and `deleteBudget`. The extracts below are my contributions to the Developer Guide._
+`editBudget` and `deleteBudget`. The extracts in Sections 4.1 to 4.3 below are my contributions to the Developer Guide._
 |===
 
 === Add Budget Feature: addBudget

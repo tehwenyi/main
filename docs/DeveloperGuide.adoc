@@ -320,13 +320,13 @@ As long as the `Budget` object created does not overlap with any existing `Budge
 === Edit budget feature
 
 // tag::editbudget[]
-ePiggy allows the user to edit the `current budget`, with any of the specified parameters in `addBudget`. +
+ePiggy allows the user to edit the `current budget`, with any of the specified parameters in `addBudget` (above). +
 
 * `editBudget $/300`
 * `editBudget $/400 p/7`
 
 The above commands edit the current budget to $300 and $400 with a period of 7 days respectively. +
-Similarly to the `addBudget` command, budgets’ dates should not overlap each other.  Hence, the budget cannot be edited
+Similar to the `addBudget` command, budgets’ dates should not overlap each other.  Hence, the budget cannot be edited
 such that the edited budget overlaps with another budget. +
 
 [NOTE]
@@ -334,11 +334,11 @@ A `budget` is considered overlapping if *any* of the dates *in between (inclusiv
 *same* as the dates *in between (inclusive)* another `budget`’s start *and* end dates.
 
 [TIP]
-If the current budget is edited until it is no longer a current budget, it can no longer be edited. Instead, simply add a new current
-budget using the `addBudget` command.
+If the current budget is edited such that it is no longer a current budget, it can no longer be edited. Hence, users
+should delete that budget and add a new budget using the `addBudget` command should they wish to edit that budget.
 
 ==== Current Implementation
-The command’s current implementation uses part of the legacy implementation to update the budget. The arguments are first parsed into
+The command’s current implementation uses parts of the legacy implementation to update the budget. The arguments are first parsed into
 `EditBudgetCommandParser`, which separates the arguments into their respective fields. +
 An `EditBudgetDescriptor` object is then created to temporarily hold this new information. +
 
@@ -353,8 +353,10 @@ Since only the current `budget` can be edited, the `editBudget` command will fir
 command entered is invalid. +
 
 ==== Design Considerations
-*Aspect: Should we use a boolean `hasCurrentBudget` method or use the `index` of the current `budget` to verify if a current `budget` exists?*
-* *Alternative 1* (current choice): +
+*Aspect: Should we use a boolean `hasCurrentBudget` method or use the `index` of the current `budget` to verify if a
+current `budget` exists?* +
+
+* *Alternative 1* (current choice): 
 The `index` of the current `budget` is returned to the `editBudgetCommand`. If the returned integer is `-1`, it means that there is no current `budget`
 present. The index is then used to retrieve the current budget.
 

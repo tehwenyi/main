@@ -111,7 +111,7 @@ image::overview.png[width="130"]
 I designed and added the header and images across the user guide to make it more
 inviting and reader friendly, considering that our target users are students. Below are some examples of my designs:
 
-image::userguideheaders.png[width="400"]
+image::userguideheaders.png[width="500"]
 
 _Figure 1: Header and section headers added in the User Guide to increase readability and better engage our target audience_ +
 
@@ -157,7 +157,7 @@ image::overview.png[width="130"]
 I designed and added the header and images across the developer guide to
 reduce clutter of words and make it more readable. Below are some examples of my designs:
 
-image::developerguideheaders.png[width="200"]
+image::developerguideheaders.png[width="500"]
 
 _Figure 2: Header and images added in the Developer Guide_ +
 

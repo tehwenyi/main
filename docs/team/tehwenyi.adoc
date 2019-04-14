@@ -128,15 +128,15 @@ image::extract.png[width="130"]
 `editBudget` and `deleteBudget`. The extracts in Sections 3.1 to 3.3 below are my contributions to the User Guide._
 |===
 
-==== Add Budget Feature: addBudget
+=== Add Budget Feature: addBudget
 
 include::../UserGuide.adoc[tag=addbudget]
 
-==== Edit Budget Feature: editBudget
+=== Edit Budget Feature: editBudget
 
 include::../UserGuide.adoc[tag=editbudget]
 
-==== Delete Budget Feature: deleteBudget
+=== Delete Budget Feature: deleteBudget
 
 include::../UserGuide.adoc[tag=deletebudget]
 

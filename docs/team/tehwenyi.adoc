@@ -10,7 +10,7 @@ This portfolio aims to document my contributions to *_ePiggy_*. +
 
 == Introduction
 
-image::about.png[width="140"]
+image::about.png[width="130"]
 
 *ePiggy* is a desktop application designed to inculcate good spending habits in students
 through allowing them to track their finances. It includes everything from tracking expenses, managing budgets
@@ -19,7 +19,7 @@ to setting goals. +
 It is written in Java. Interactions by users are done through the Command Line Interface (CLI) and it has a
 Graphical User Interface (GUI) created with JavaFX. It can be used on both Windows and Mac. +
 
-image::projectteam.png[width="140"]
+image::projectteam.png[width="130"]
 
 *_ePiggy_* is a product of twin modules CS2101 and CS2103T. It was transformed from the
 link:https://github.com/nus-cs2103-AY1819S2/addressbook-level4[AddressBook - Level 4] application.
@@ -104,14 +104,14 @@ information for end-users who may not be familiar with computing technicalities.
 
 Click link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/docs/UserGuide.adoc[here] to view the full User Guide!
 
-image::overview.png[width="140"]
+image::overview.png[width="130"]
 
 * Standardised and improved the aesthetics of the User Guide
 
 I designed and added the header and images across the user guide to make it more
 inviting and reader friendly, considering that our target users are students. Below are some examples of my designs:
 
-image::userguideheaders.png[width="400"]
+image::userguideheaders.png[width="500"]
 
 _Figure 1: Header and section headers added in the User Guide to increase readability and better engage our target audience_ +
 
@@ -121,22 +121,22 @@ I wrote the *Introduction* of the User Guide, making sure it is clear, concise a
 Also, I wrote the *Budgeting* feature which teaches users how to use the `budget` commands in a clear and informative
 manner. My contributions for the *Budgeting* feature can be found below, in Sections 3.1 to 3.3.
 
-image::extract.png[width="140"]
+image::extract.png[width="130"]
 
 |===
 |_My contribution towards the *Budgeting* feature in the User Guide can be split into 3 segments: `addBudget`,
-`editBudget` and `deleteBudget`. The extracts below are my contributions to the User Guide._
+`editBudget` and `deleteBudget`. The extracts in Sections 3.1 to 3.3 below are my contributions to the User Guide._
 |===
 
-==== Add Budget Feature: addBudget
+=== Add Budget Feature: addBudget
 
 include::../UserGuide.adoc[tag=addbudget]
 
-==== Edit Budget Feature: editBudget
+=== Edit Budget Feature: editBudget
 
 include::../UserGuide.adoc[tag=editbudget]
 
-==== Delete Budget Feature: deleteBudget
+=== Delete Budget Feature: deleteBudget
 
 include::../UserGuide.adoc[tag=deletebudget]
 
@@ -150,27 +150,27 @@ to the project and my ability to convey all necessary technical information clea
 Click link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/docs/DeveloperGuide.adoc[here] to view the full
 Developer Guide!
 
-image::overview.png[width="140"]
+image::overview.png[width="130"]
 
 * Standardised and improved the aesthetics of the Developer Guide
 
 I designed and added the header and images across the developer guide to
 reduce clutter of words and make it more readable. Below are some examples of my designs:
 
-image::developerguide.png[width="200"]
+image::developerguideheaders.png[width="500"]
 
-_Figure 2: Header added in the Developer Guide_ +
+_Figure 2: Header and images added in the Developer Guide_ +
 
 * Contributed content to the Developer Guide
 
 I documented the implementation details and design considerations for the *Budgeting* feature.
 I also created diagrams to aid in the explanations. My contributions can be found below, in Sections 4.1 to 4.3.
 
-image::extract.png[width="140"]
+image::extract.png[width="130"]
 
 |===
 |_My contribution towards the Developer Guide can be split into 3 segments: `addBudget`,
-`editBudget` and `deleteBudget`. The extracts below are my contributions to the Developer Guide._
+`editBudget` and `deleteBudget`. The extracts in Sections 4.1 to 4.3 below are my contributions to the Developer Guide._
 |===
 
 === Add Budget Feature: addBudget

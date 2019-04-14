@@ -51,6 +51,8 @@ toc::[]
 
 == Setting up
 
+image::developerguidesettingup.png[width="350"]
+
 === Prerequisites
 
 . *JDK `9`* or later
@@ -136,6 +138,8 @@ When you are ready to start coding,
 2. Take a look at <<GetStartedProgramming>>.
 
 == Design
+
+image::developerguidedesign.png[width="350"]
 
 [[Design-Architecture]]
 === Architecture
@@ -267,14 +271,16 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 == Implementation
 
+image::developerguideimplementation.png[width="350"]
+
 This section describes some noteworthy details on how certain features are implemented.
 
 === Add budget feature
 
 // tag::addbudget[]
 
-This command allows users to add a new budget to monitor their expenses within a user-input period of time. +
-.This command requires users to specify the `amount`, `start date` and `time period (in days)` of the budget in the command. +
+*_ePiggy_* allows users to add a new budget to monitor their expenses within a user-input period of time. +
+This command requires users to specify the `amount`, `start date` and `time period (in days)` of the budget in the command. +
 
 * `addBudget $/500 p/31 d/01/03/2019` +
 
@@ -318,13 +324,13 @@ As long as the `Budget` object created does not overlap with any existing `Budge
 === Edit budget feature
 
 // tag::editbudget[]
-ePiggy allows the user to edit the `current budget`, with any of the specified parameters in `addBudget`. +
+*_ePiggy_* allows the user to edit the `current budget`, with any of the specified parameters in `addBudget` (above). +
 
 * `editBudget $/300`
 * `editBudget $/400 p/7`
 
 The above commands edit the current budget to $300 and $400 with a period of 7 days respectively. +
-Similarly to the `addBudget` command, budgets’ dates should not overlap each other.  Hence, the budget cannot be edited
+Similar to the `addBudget` command, budgets’ dates should not overlap each other.  Hence, the budget cannot be edited
 such that the edited budget overlaps with another budget. +
 
 [NOTE]
@@ -332,11 +338,11 @@ A `budget` is considered overlapping if *any* of the dates *in between (inclusiv
 *same* as the dates *in between (inclusive)* another `budget`’s start *and* end dates.
 
 [TIP]
-If the current budget is edited until it is no longer a current budget, it can no longer be edited. Instead, simply add a new current
-budget using the `addBudget` command.
+If the current budget is edited such that it is no longer a current budget, it can no longer be edited. Hence, users
+should delete that budget and add a new budget using the `addBudget` command should they wish to edit that budget.
 
 ==== Current Implementation
-The command’s current implementation uses part of the legacy implementation to update the budget. The arguments are first parsed into
+The command’s current implementation uses parts of the legacy implementation to update the budget. The arguments are first parsed into
 `EditBudgetCommandParser`, which separates the arguments into their respective fields. +
 An `EditBudgetDescriptor` object is then created to temporarily hold this new information. +
 
@@ -351,8 +357,10 @@ Since only the current `budget` can be edited, the `editBudget` command will fir
 command entered is invalid. +
 
 ==== Design Considerations
-*Aspect: Should we use a boolean `hasCurrentBudget` method or use the `index` of the current `budget` to verify if a current `budget` exists?*
-* *Alternative 1* (current choice): +
+*Aspect: Should we use a boolean `hasCurrentBudget` method or use the `index` of the current `budget` to verify if a
+current `budget` exists?* +
+
+* *Alternative 1* (current choice):
 The `index` of the current `budget` is returned to the `editBudgetCommand`. If the returned integer is `-1`, it means that there is no current `budget`
 present. The index is then used to retrieve the current budget.
 
@@ -367,7 +375,7 @@ Using a boolean `hasCurrentBudget` method to check if a current `budget` exists 
 
 ** Cons: Will need to implement additional methods. Reduces the abstraction has the current `budget` is exposed to the entire project as it is a public method.
 
-After much consideration, we decided to choose option 1 as other commands should not need to access the current `budget` specifically. Hence, it will be better
+After much consideration, we decided to choose option 1 as other commands should not need to access the current `budget` specifically. It will be better
 to have a greater level of abstraction. +
 // end::editbudget[]
 
@@ -399,8 +407,8 @@ Hence, if the `index` input by the user is negative or greater than the size of 
 //tag::findexpense[]
 === Find Expense/Allowance feature
 *_ePiggy_* allows the user to filter specific expenses by entering single or multiple keywords. Expenses that satisfy
-all the keywords are displayed in the expense list panel. Furthermore, it also searches for words similar to the user's
-input, considering that the user might have made a typing error, by applying the concept of Levenshtein distance fixed by a
+all the keywords are displayed in the expense list panel. Furthermore, it searches for words similar to the user's
+input, considering that the user might have made a typing error, by applying the concept of _Levenshtein distance_ fixed by a
 upper bound.
 
 * `find n/Nasi Lemak $/4.00 d/01/04/2019 t/lunch`
@@ -426,7 +434,7 @@ explanation.
 
 image::fEuml.png[witdh="800"]
 
-Figure: FindCommand UML Sequence Diagram +
+Figure: Find Command Sequence Diagram +
 
 Step 1: User enters `find n/Nasi Lemak`. The command is
 received by `EPiggyParser` which then creates `FindCommandParser` object and and calls
@@ -450,9 +458,9 @@ Step 6: Expense List panel is updated by filtered set of expenses. A `CommandRes
 returned to `LogicManager`.
 
 ==== Design considerations
-This feature can be implemented in different ways in terms of how the target expenses are found.
+This feature can be implemented in different ways depending on how the target expenses are found.
 
-===== Aspect: how to filter expenses
+*Aspect: How should the expenses be filtered?*
 * *Alternative 1:* Storing expenses as and when they are added into separate files. +
 ** Pros: More efficient as there is no need to check for ALL expenses.
 ** Cons: Need to change the original architecture of storage.
@@ -464,7 +472,7 @@ This feature can be implemented in different ways in terms of how the target exp
 
 // tag::setGoal[]
 === Set Goal feature
-This command allows users to set a savings goal that they would like to save up to. +
+*_ePiggy_* allows users to set a savings goal that they would like to save up to. +
 It requires the user to specify the name of the goal, as well as the amount they would like to hit.
 
 * `setGoal n/Nintendo Switch $/499`
@@ -476,7 +484,7 @@ Given below is a sequence diagram of how the `setGoal` command works:
 
 image::setGoalSequenceDiagram.png[width="800"]
 
-Figure: SetGoalCommand Sequence Diagram.
+Figure: Set Goal Command Sequence Diagram
 
 The command is first parsed into `SetGoalCommandParser`, which separates the arguments into their respective fields. A new `Goal` is created and parsed into `SetGoalCommand`.
 `Goal` will then be set with `Model#setGoal()` and saved into the ePiggy `Storage`.
@@ -487,7 +495,7 @@ The command is first parsed into `SetGoalCommandParser`, which separates the arg
 3.	The `SetGoalCommand` is passed back to the `LogicManager`, and the method `execute()` is called. `Goal` is then set to the `model`.
 
 ==== Design considerations
-===== Aspect: `setGoal` (1 goal) VS `addGoal` (multiple goals)
+*Aspect: `setGoal` (1 goal) VS `addGoal` (multiple goals)*
 * *Alternative 1 (current choice):* `setGoal` (1 goal) +
 ** Pros: Easier to implement. Makes ePiggy easier to use.
 ** Cons: Limits the user experience by allowing only 1 savings goal.
@@ -660,7 +668,7 @@ image::UndoRedoActivityDiagram.png[width="800"]
 
 // tag::report[]
 === Report feature
-This command allows users to view the report within a user-input period of time. +
+*_ePiggy_* allows users to view the report within a user-input period of time. +
 
 Given below is a sequence diagram of how the `report` command works: +
 
@@ -697,7 +705,7 @@ Only last tag `d/` is used to generate a report if multiply of `d/` appear.
 
 ==== Current Implementation
 
-This part shows current implementation of the report feature. It also shows which classes or components are used in the report feature.
+This section shows the current implementation of the report feature. It also shows the classes or components used in the report feature.
 
 The command is first parsed into link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/parser/epiggy/ReportCommandParser.java[`ReportCommandParser`],
 which separates the arguments into their respective fields. A new link:https://docs.oracle.com/javase/8/docs/api/java/time/LocalDate.html[`localDate`]
@@ -724,10 +732,10 @@ link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/see
 
 ==== Design Considerations
 
-This part shows design considerations of the report feature. Multiply design considerations are showed. The pros and cons of each of the
-alternative choice lists below.
+This section shows the design considerations of the report feature. The design considerations are shown below together
+with their pros and cons.
 
-*Aspect: How to make report more readable?* +
+*Aspect: How should we make the report more readable?* +
 
 * *Alternative 1 (current choice)*: the `report` command uses a chart to display different data of expenses, budgets and allowances.
 ** Pros: Easy to know how much a user have spend on that date, that month or that year. Easy to compare with previous month or year.
@@ -741,9 +749,8 @@ alternative choice lists below.
 // tag::autocomplete[]
 === Auto-complete feature
 
-This feature allows users to reduce the typing time and learning cost of using ePiggy. Any command line application without
-an auto-complete feature is a nightmare for the user. The users not only need to type all the existing commands correctly but
- also need to remember many different parameters in each commands. EPiggy tries to be user friendly. Auto-complete feature helps the users overcome these problems. +
+*_ePiggy_* allows users to reduce the time spent typing and time spent learning ePiggy's commands, especially because ePiggy
+uses the Command Line Interface. The auto-complete feature allows ePiggy to be more user-friendly. +
 
 Given below is an activity diagram of how the link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`auto-complete`]
 feature works: +
@@ -751,25 +758,29 @@ feature works: +
 image::AutocompleteActivityDiagram.png[width="800"]
 Figure: Auto-complete activity Diagram +
 
-This feature first requires users to enter a few letters on the link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`commandBox`]
-of ePiggy, and then press *Tab* key on the keyboard to automatically complete the command.
-If the completed command is not what you want, delete the command. Enter the same letters, and press *Tab* again. Another command will show if the letters match another command.
+This feature first requires users to enter the first few letters of their intended command on the
+link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`commandBox`]
+of ePiggy. Afterwards, users can simply press the *Tab* key to automatically complete their command.
+If the completed command is not the user's intended command, they can delete the command before entering the same letters and pressing *Tab* again.
+Another command will show if the letters match it. +
 
-Example: enter letter 'a' and then press *Tab*, the command "addExpense n/ $/ t/ d/ " will show.
-Delete the command, enter 'a' again and press *Tab*, the addBudget or addAllowance command will show.
+For example, the user can enter letter 'a', press *Tab* and "addExpense n/ $/ t/ d/ " will show. The user can then
+delete the command, enter 'a' again and press *Tab*. The `addBudget` or `addAllowance` command will show.
 
 [NOTE]
-The auto-complete feature compares the last part of sub string from user input to the prefix of command in the checklist. It is non-case sensitive.
+The auto-complete feature compares the last part of the sub-string from the user input to the prefix of command in the
+checklist. It is non-case sensitive.
 
-Example: user types " `hello add` " to the commandBox, the sub string is "add". "add" is used to compare with commands in the checklist such as "setBudget",
-"addExpense", "addAllowance". Two commands "addExpense" and "addAllowance" will return but only one of them will replace "add" in the commandBox.
-The commandBox will show " `hello addExpense n/ $/ t/ d/` " or " `hello addAllowance n/ $/ d/` ".
+For example, the user can type " `hello add` " to the commandBox, so the sub-string is "add". "add" is used to compare
+with commands in the checklist such as "setBudget", "addExpense", "addAllowance". The two commands "addExpense" and
+"addAllowance" will be returned but only one of them will replace "add" in the commandBox.
+The commandBox will show either " `hello addExpense n/ $/ t/ d/` " or " `hello addAllowance n/ $/ d/` ".
 
 ==== Current Implementation
 
-This part shows current implementation of the auto-complete feature. It also shows which classes or components are used in the auto-complete feature.
+This section shows the current implementation of the auto-complete feature. It also shows the classes or components used in the auto-complete feature.
 
-The code of the auto-complete function is in link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] class.
+The auto-complete function's code is in the link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] class.
 The link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`autoCompleteText()`] method is invoked when user presses *Tab*. The sub-string (last part split by white space) of user input text and a checklist of commands pass into
 link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`].
 link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`] returns an array of matched commands. One element in the array replaces and shows
@@ -779,23 +790,26 @@ in the commandBox.
 1. User launches application and enters `addE`. +
 2. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`autoCompleteText()`] is invoked. +
 3. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`] takes in the arguments and returns an array of matched commands. +
-4. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`] forms a new string using user input.
-One element in return array is appended at the end of the new string. This new string replaces and shows in the commandBox.
+4. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`] forms a new string using the user's input.
+One element in the return array is appended at the end of the new string. This new string replaces the user's input of `addE` and shows in the commandBox.
 
 ==== Design Considerations
 
-This part shows design considerations of the auto-complete feature. Multiply design considerations are showed. The pros and cons of each of the
-alternative choice lists below.
+This section shows the design considerations of the auto-complete feature. The design considerations are shown below together
+with their pros and cons.
 
-*Aspect: How to implement such function in UI?* +
+*Aspect: How should we implement such a function in the UI?* +
 
-* *Alternative 1 (current choice)*: There is not dropdown list appears when user enters letters in commandBox. The matched command shows after user press *Tab*.
-** Pros: Easy to implement. No third party library is used means that all behaviours of this feature is under control and no extra learning cost is needed.
-** Cons: The auto-completed command is not what the user wants something. User needs to delete the command and invokes the function again.
+* *Alternative 1 (current choice)*: The matched command shows after users press *Tab*.
+** Pros: Easy to implement. No third party library is used, which means that all behaviours of this feature is under
+control and no extra learning cost is needed.
+** Cons: The auto-complete command matched may not be what the user wants. Users will then need to delete the command
+and invoke the function again.
 
-* *Alternative 2*: A dropdown list shows when user is typing letters.
-** Pros: User can see any matched commands and select one of them.
-** Cons: Third party library is needed. There is not such kind of library under MIT licence and school is not allow to use them.
+* *Alternative 2*: A dropdown list of matched commands shows as the user is typing.
+** Pros: User can see all the matched commands and select one of them.
+** Cons: A third party library is needed. However, there is no such library under the MIT licence and hence we are unable
+to do this.
 // end::autocomplete[]
 
 // tag::dataencryption[]
@@ -807,7 +821,7 @@ _{Explain here how the data encryption feature will be implemented}_
 
 === Logging
 
-We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
+We are using the `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
 
 * The logging level can be controlled using the `logLevel` setting in the configuration file (See <<Implementation-Configuration>>)
 * The `Logger` for a class can be obtained using `LogsCenter.getLogger(Class)` which will log messages according to the specified logging level
@@ -827,6 +841,7 @@ Certain properties of the application can be controlled (e.g user prefs file loc
 
 == Documentation
 
+image::developerguidedocumentation.png[width="350"]
 We use asciidoc for writing documentation.
 
 [NOTE]
@@ -932,6 +947,8 @@ The SE-EDU team does not provide support for modified template files.
 [[Testing]]
 == Testing
 
+image::developerguidetesting.png[width="350"]
+
 === Running Tests
 
 There are three ways to run tests.
@@ -980,6 +997,8 @@ e.g. `seedu.address.logic.LogicManagerTest`
 * Solution: Execute Gradle task `processResources`.
 
 == Dev Ops
+
+image::developerguidedevops.png[width="350"]
 
 === Build Automation
 
@@ -1312,39 +1331,38 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |user |add a new expense record |Track my usage of the expense
+|`* * *` |user |add a new expense record |track my expenses
 
-|`* * *` |user |delete my expense records |remove the wrong expenses records
+|`* * *` |user |delete expense records |remove wrongly entered expense records
 
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |new user |see usage instructions |refer to a full list of instructions when I forget how to use ePiggy
 
-|`* * *` |user |see my total expenditure till date or by time period |know the total amount I have spent
+|`* * *` |user |view my total expenditure within specified dates or by time period |know the total amount I have spent with a certain time period
 
-|`* *` |user |see the report of my spending on specified year|know how much I spend on that year
+|`* *` |user |see the report of my spending on a specified year|analyse and be aware of my spending habits for that year
 
-|`* *` |user |see the date of my spending |know when I spend a certain item
+|`* *` |user |see the report of my spending on specified date |know how much I spend on certain days
 
-|`* *` |user |see the percentage of the amount I spent out of my set budget |track my expenses
-
-|`* *` |user |receive reminders when I am approaching my budget |cut down on my expenses
-
-|`* *` |user |set a monthly budget |know whether I'm keeping to the budget
+|`* *` |user |see the report of my spending on specified month of the year |know how much I spend on a certain month of a year
 
 |`* *` |user |see the statistics of my spendings till date |see my spending habits
 
-|`* *` |new user |create my personal account |make my personal expense records confidential
+|`* *` |user |see the date of my spending |know when I spend a certain item
 
-|`* *` |user |login to my personal account |manage my personal expense records
+|`* *` |user |set a budget based on a time period |know whether I am keeping to the budget
 
-|`* *` |user |get notification when budget finishing |manage the rest of the budget well
+|`* *` |user |see how much more I can spend out of my set budget |be aware of how much I am spending
 
-|`* *` |user |see the report of my spending on specified date |know how much I spend on that day
+|`* *` |user |receive reminders when I am approaching my budget |cut down on my expenses for the remaining time period
 
-|`* *` |user |see the report of my spending on specified month of the year |know how much I spend on that month of the year
+|`* *` |user |get reminders when I have exceeded my budget |aware that I have not kept to my set budget
 
 |`* *` |user |type a command with auto-complete |speed up the typing
 
-|`*` | (fill in here) |(fill in here)
+|`*` |user |login to my personal account |manage my personal expense records
+
+|`*` |new user |create my personal account |make my personal expense records confidential
+
 |=======================================================================
 
 [appendix]
@@ -1425,104 +1443,89 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: Set budget
+=== Use case: Add budget
 
 *MSS*
 
-1.  User requests to set budget
-2.  ePiggy sets the input number as the budget
+1.  User requests to add budget.
+2.  User enters the `addBudget` command with the budgeted amount, time period and start date of budget.
+3. ePiggy saves the record.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. The given amount is invalid.
+* 2a. The given amount, time period and/or start date are empty or invalid.
 +
 [none]
-** 3a1. ePiggy shows an error message.
+** 2a1. ePiggy shows an error message.
 +
 Use case resumes at step 1.
 
-* 1b. User already has a budget set.
+* 2b. User already has a budget set which overlaps with the new budget.
 +
 [none]
-** 1b1. ePiggy asks if user would like to overwrite old budget.
+** 2b1. ePiggy shows can error message
 +
-[none]
-*** 1b1a. ePiggy sets a new budget based on user's new input.
-*** 1b1b. ePiggy keeps the old budget.
-+
-Use case resumes at step 2.
+Use case resumes at step 1.
 
 [discrete]
-=== Use case: Recommend
+=== Use case: Edit budget
 
 *MSS*
 
-1.  User requests ePiggy to recommend
-2.  ePiggy recommends future spendings
+1.  User requests to edit budget.
+2.  User enters the `editBudget` command with the budgeted amount, time period and/or start date of budget.
+3. ePiggy saves the record.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. The period of expenses is less than a week.
+* 2a. The given amount, time period and/or start date are invalid or all are empty.
 +
 [none]
-** 1a1. ePiggy shows an error message.
+** 2a1. ePiggy shows an error message.
 +
-Use case ends.
+Use case resumes at step 1.
+
+* 2b. User already has a budget set which overlaps with the edited budget.
++
+[none]
+** 2b1. ePiggy shows can error message
++
+Use case resumes at step 1.
 
 [discrete]
-=== Use case: Forecast
+=== Use case: Delete budget
 
 *MSS*
 
-1.  User requests ePiggy to forecast future spendings
-2.  ePiggy gives a forecast of future spendings
+1. User requests to delete a budget.
+2. User enters the `deleteBudget` command with the index of the budget.
+3. ePiggy performs the delete action.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. The period of expenses is less than a week.
+* 1a. Index of budget does not exist in the budget list.
 +
 [none]
 ** 1a1. ePiggy shows an error message.
 +
-Use case ends.
-
-[discrete]
-=== Use case: Create new account
-
-*MSS*
-
-1. User requests create a new account
-2. ePiggy requests username and password
-3. ePiggy creates new user account
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a. Username exists on the database.
-+
-[none]
-** 1a1. ePiggy shows an error message.
-+
-Use case ends.
+Use case resumes at step 1.
 
 [discrete]
 === Use case: Add new expense record
 
 *MSS*
 
-1. User requests the create a new record.
-2. User enters a add command with the name of item, cost, categories and date
+1. User requests to create a new record.
+2. User enters an add command with the name of item, cost, categories and date.
 3. ePiggy saves the record.
 +
 Use case ends.
@@ -1636,12 +1639,12 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: Notify when budget finishing
+=== Use case: Display a reminder when a budget is finishing
 
 *MSS*
 
 1. User budget is finishing soon
-2. ePiggy shows warning message
+2. ePiggy's reminder message turns to a darker colour and warns the user that their budget is finishing.
 +
 Use case ends.
 
@@ -1658,6 +1661,15 @@ Use case ends.
 Use case ends.
 
 _{More to be added}_
+[discrete]
+=== Use case: Display a reminder when a budget has exceeded
+
+*MSS*
+
+1. User budget is finishing soon
+2. ePiggy's reminder message turns red and the alerts the user that budget has exceeded.
++
+Use case ends.
 
 [appendix]
 == Non Functional Requirements
@@ -1673,26 +1685,6 @@ _{More to be added}_
 
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
-
-[[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
-
-[appendix]
-== Product Survey
-
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
 
 [appendix]
 == Instructions for Manual Testing
@@ -1731,6 +1723,58 @@ _{ more test cases ... }_
    Expected: Similar to previous.
 
 _{ more test cases ... }_
+
+=== Adding a Budget
+
+. Adding a budget while there are no budgets
+
+.. Prerequisites: Make sure the budget list is empty.
+.. Test case: `addBudget $/500 p/28 d/01/02/2019` +
+   Expected: Budget is added to the list. Details of the added budget is shown. Budget added can be seen in the budget list.
+.. Test case: `addBudget $/500 p/28` +
+   Expected: Budget is not added. Error details shown in the status message.
+.. Other incorrect addBudget commands to try: `addBudget`, `addBudget $/ p/ d/ `, `addBudget p/1 d/01/02/2019` +
+   Expected: Similar to previous.
+
+. Adding a budget while there are existing budgets
+
+.. Prerequisites: Multiple budgets in the budget list.
+.. Test case: `addBudget $/100 p/1 d/01/02/2019` (does not overlap with any existing budgets) +
+   Expected: Budget is added to the list. Details of the added budget is shown. Budget added can be seen in the budget list.
+.. Test case: `addBudget $/10000 p/365 d/01/01/2019` +
+   Expected: Budget is not added. Error details shown in the status message (overlapping budgets).
+
+=== Editing a Budget
+
+. Editing a budget while there is an existing current budget and no other budgets
+
+.. Prerequisites: No other budgets in the budget list besides a current budget.
+.. Test case: `editBudget $/100` +
+   Expected: Current budget is updated to be $100. Details of the edited budget is shown. Edited budget can be seen in the budget list.
+.. Test case: `editBudget` +
+   Expected: Budget is not edited. Error details shown in the status message.
+.. Other incorrect addBudget commands to try: `editBudget $/ `, `editBudget $/ p/ d/ ` +
+   Expected: Similar to previous.
+
+. Editing a budget while there is no current budget
+
+.. Prerequisites: Make sure there are no current budgets present in the budget list.
+.. Test case: `editBudget $/500` +
+   Expected: Budget is not edited. Error details shown in the status message.
+.. Other incorrect addBudget commands to try: `addBudget`, `addBudget $/ p/ d/ `, `addBudget p/1 d/01/02/2019` +
+   Expected: Similar to previous.
+
+=== Deleting a Budget
+
+. Deleting a budget from the budget list
+
+.. Prerequisites: List all expenses using the `list` command. Multiple expenses in the list.
+.. Test case: `deleteBudget 1` +
+   Expected: First budget is deleted from the list. Details of the deleted budget shown.
+.. Test case: `deleteBudget 0` +
+   Expected: No budget is deleted. Error details shown.
+.. Other incorrect deleteExpense commands to try: `deleteBudget`, `deleteBudget x` (where x is larger than the list size) +
+   Expected: Similar to previous.
 
 === Saving data
 

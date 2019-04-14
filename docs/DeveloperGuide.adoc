@@ -1705,6 +1705,58 @@ _{ more test cases ... }_
 
 _{ more test cases ... }_
 
+=== Adding a Budget
+
+. Adding a budget while there are no budgets
+
+.. Prerequisites: Make sure the budget list is empty.
+.. Test case: `addBudget $/500 p/28 d/01/02/2019` +
+   Expected: Budget is added to the list. Details of the added budget is shown. Budget added can be seen in the budget list.
+.. Test case: `addBudget $/500 p/28` +
+   Expected: Budget is not added. Error details shown in the status message.
+.. Other incorrect addBudget commands to try: `addBudget`, `addBudget $/ p/ d/ `, `addBudget p/1 d/01/02/2019` +
+   Expected: Similar to previous.
+
+. Adding a budget while there are existing budgets
+
+.. Prerequisites: Multiple budgets in the budget list.
+.. Test case: `addBudget $/100 p/1 d/01/02/2019` (does not overlap with any existing budgets) +
+   Expected: Budget is added to the list. Details of the added budget is shown. Budget added can be seen in the budget list.
+.. Test case: `addBudget $/10000 p/365 d/01/01/2019` +
+   Expected: Budget is not added. Error details shown in the status message (overlapping budgets).
+
+=== Editing a Budget
+
+. Editing a budget while there is an existing current budget and no other budgets
+
+.. Prerequisites: No other budgets in the budget list besides a current budget.
+.. Test case: `editBudget $/100` +
+   Expected: Current budget is updated to be $100. Details of the edited budget is shown. Edited budget can be seen in the budget list.
+.. Test case: `editBudget` +
+   Expected: Budget is not edited. Error details shown in the status message.
+.. Other incorrect addBudget commands to try: `editBudget $/ `, `editBudget $/ p/ d/ ` +
+   Expected: Similar to previous.
+
+. Editing a budget while there is no current budget
+
+.. Prerequisites: Make sure there are no current budgets present in the budget list.
+.. Test case: `editBudget $/500` +
+   Expected: Budget is not edited. Error details shown in the status message.
+.. Other incorrect addBudget commands to try: `addBudget`, `addBudget $/ p/ d/ `, `addBudget p/1 d/01/02/2019` +
+   Expected: Similar to previous.
+
+=== Deleting a Budget
+
+. Deleting a budget from the budget list
+
+.. Prerequisites: List all expenses using the `list` command. Multiple expenses in the list.
+.. Test case: `deleteBudget 1` +
+   Expected: First budget is deleted from the list. Details of the deleted budget shown.
+.. Test case: `deleteBudget 0` +
+   Expected: No budget is deleted. Error details shown.
+.. Other incorrect deleteExpense commands to try: `deleteBudget`, `deleteBudget x` (where x is larger than the list size) +
+   Expected: Similar to previous.
+
 === Saving data
 
 . Dealing with missing/corrupted data files

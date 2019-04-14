@@ -275,6 +275,116 @@ image::developerguideimplementation.png[width="350"]
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::aa[]
+=== Add allowance feature
+Besides the tracking of expenses, *_ePiggy_* also allows the tracking of allowances, by adding
+allowances into the expenses list. This helps in calculating the net amount of money the user has. +
+Similar to expenses, the user will have to specify the `name` and the  `amount`,
+with optional fields for  `date`, and `tag`.
+
+* `addAllowance n/From Dad $/30 d/04/02/2019 t/School`
+
+_The command above adds a new allowance entry of `$30` with the title `From Dad`, on `4th February 2019`
+with the `School` tag._
+
+[NOTE]
+`Allowance` and `Expense` are shown in the same list because we made `Allowance` a subclass of
+`Expense`. We consider an `Allowance` to be a type of negative expense which makes calculating
+the total savings in *ePiggy* easier.
+
+==== Current Implementation:
+The figure below shows the sequence diagram for the `addAllowance` command:
+
+image::AddAllowanceSequenceDiagram.png[widith="800]
+_Figure: Add Allowance Sequence Diagram_
+
+The command is first parsed into `AddAllowanceCommandParser`, which separates the arguments into
+their respective fields. A new `Item` is created and this `Item` is used in creating the
+`Allowance` object, which is parsed into the `AddAllowanceCommand`. +
+`AddAllowanceCommand` is then executed and `addAllowance()` is called from the model, which
+add the `Allowance` into the `ExpenseList`.
+
+==== Design Considerations
+*Aspect: Should `Allowance` be a subclass of `Expense`?*
+
+* *Alternative 1 (current choice):* `Allowance` should be a subclass of `Expense`.
+** Pros: `Allowance` and `Expense` are very similar, the only difference being whether to
+add or subtract when calculating total savings. Extending `Expense` would reduce a lot of
+repeated code. This way we can place allowances and expenses in the same list.
+** Cons: This `Allowance` IS-A `Expense` relationship does not necessarily hold in real life.
+
+* *Alternative 2:* `Allowance` and `Expense` should both be subclasses of the same parent class
+** Pros: Makes more logical sense.
+** Cons: Requires more code in determining which object is which.
+// end::aa[]
+
+// tag::ea[]
+=== Edit allowance feature
+The `editAllowance` command allows users to edit previously entered allowances.
+It requires the `INDEX` of the allowance, as well as the fields to be modified.
+
+* `editAllowance 1 $/50 d/06/03/2019`
+
+_The command above edits the allowance with index `1` on the allowance and expense list,
+to change the amount to `$50` and the date to `06/03/2019`._
+
+[NOTE]
+While allowances and expenses are shown on the same list, the `INDEX` specified must belong
+to an `Allowance`, otherwise the command would not work.
+
+==== Current Implementation
+The command's implementation uses part of the legacy implementation to update the allowance. +
+Arguments are first parsed by the `EditAllowanceCommandParser`, which separates the arguments into
+their respective fields. +
+An `EditAllowanceDescriptor` object is created to temporarily hold the new information to update
+the allowance with. +
+The `EditAllowanceDescriptor` object is then passed to the `EditAllowanceCommand` where it
+creates an updated `Allowance` object with the updated details. The updated `Allowance` object
+will then replace the old `Allowance` object in the expenses list.  +
+Since only allowances can be edited with the `editAllowance` command, the `EditAllowanceCommand`
+will first check if the `INDEX` specified points to an `Allowance`. If `INDEX` points to an
+`Expense`, a `CommandException` will be thrown.
+
+==== Design Considerations
+*Aspect: Should the edit command for `Allowance` and `Expense` be combined?*
+
+* *Alternative 1 (current version):* Edits for `Allowance` and `Expense` should have their own
+dedicated commands.
+** Pros: It is easier for the user to understand the function of the command.
+** Cons: More commands means more coding required. The long list of allowance and expense
+specific commands also means a longer list of commands.
+
+* *Alternative 2:* Combine `editAllowance` and `editExpense` commands into 1 `edit` command.
+** Pros: Easier to implement, lesser commands for the user to remember.
+** Cons: Using `edit` might be too vague, as it does not specify what it is editing (could be
+mistaken with editing budget or goal).
+
+// end::ea[]
+// tag::da[]
+=== Delete allowance feature
+When an incorrect allowance has been entered, it can be deleted from the list using the
+`deleteAllowance` command, by specifying the `INDEX` of the allowance to be deleted.
+
+* `deleteAllowance 2`
+
+_The command above deletes the allowance with index `2` on the allowance and expense list._
+
+==== Current Implementation
+The figure below shows the sequence diagram for the `deleteAllowance` command:
+
+image::DeleteAllowanceSequenceDiagram.png[width="800"]
+
+_Figure : Delete Allowance Command Sequence Diagram_
+
+The command is first parsed into the `DeleteAllowanceCommandParser`, which retrieves the `INDEX`
+of the allowance to be deleted. The `INDEX` is passed to `DeleteAllowanceCommand` where it finds
+the allowance to be deleted from the list of allowances and expenses. The allowance is then
+passed to `Model` where it deletes it from the list. +
+Since `deleteAllowance` only works for allowances, `DeleteAllowanceCommand` checks if the
+the entry `INDEX` points to is an `Allowance` or not. If it is an expense, a `CommandException` will be thrown.
+
+// end::da[]
+
 === Add budget feature
 
 // tag::addbudget[]
@@ -561,30 +671,6 @@ Step 6: Expense List panel is updated by sorted expenses. A `CommandResult` is t
 returned to `LogicManager`.
 
 //end::sortexpense[]
-
-// tag::viewGoal[]
-=== View Goal feature
-This command allows users to view their goal set, as well as to check how much more the user has to save in order to reach the goal. +
-
-* `viewGoal`
-
-Based on the amount of savings the user has, the command will output 2 different types of messages.
-
-Firstly, the command will first output the current goal that the user has set.
-
-Next, if the user has not reached the goal amount (savings less than goal), it will output the difference of the savings and the goal, indicating how much more the user has to save to reach the goal. +
-However, if the user has reached the goal amount (savings greater than goal), it will output a message congratulating the user for reaching their goal.
-
-==== Current Implementation
-The command will first obtain the current `savings` and current `goal` from the `model` that the user has set. +
-Taking `goal` minus `savings`,  the result is stored in a temporary float `diff`. +
-If `diff` is positive, `diff` is passed to `CommandResult`, and the amount is displayed to show the user how much more they have to save.
-If `diff` is negative, the congratulation message is passed to `CommandResult`.
-
-[NOTE]
-If a goal has not been set by the user, the command will use a default goal which has an empty name and $0 for the amount.
-
-// end::viewGoal[]
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -1315,13 +1401,13 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* has a need to manage their expenses
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: manage expenses faster than a typical mouse/GUI driven app
 
 [appendix]
 == User Stories
@@ -1334,6 +1420,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |user |add a new expense record |track my expenses
 
 |`* * *` |user |delete expense records |remove wrongly entered expense records
+
+|`* * *` |user |add my allowances received |know my total savings
 
 |`* * *` |new user |see usage instructions |refer to a full list of instructions when I forget how to use ePiggy
 
@@ -1357,6 +1445,10 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user |get reminders when I have exceeded my budget |aware that I have not kept to my set budget
 
+|`* *` |user |set a savings goal |be more motivated to save up enough money to buy the item specified in the goal
+
+|`* *` |user |know how much more I have to save before I reach my savings goal |know I am making progress in saving up to reach the goal
+
 |`* *` |user |type a command with auto-complete |speed up the typing
 
 |`*` |user |login to my personal account |manage my personal expense records
@@ -1371,7 +1463,28 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 (For all use cases below, the *System* is the `ePiggy` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Edit
+=== Use case: Add expense record
+
+*MSS*
+
+1. User requests to create a new record.
+2. User enters an add command with the name of item, cost, categories and date.
+3. ePiggy saves the record.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The name and date are empty.
++
+[none]
+** 2a1. ePiggy shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Edit expense records
 
 *MSS*
 
@@ -1397,14 +1510,100 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: View expense entry
+=== Use case: Delete expense records
 
 *MSS*
 
-1.  User requests to list expenses.
-2.  ePiggy shows list of expenses.
-3.  User requests to view a specific expense in the list.
-4.  ePiggy displays the details of the specified expense.
+1. User requests to delete expense record.
+2. ePiggy requests user to enter delete command.
+3. User enters delete command with index of the expense record.
+4. ePiggy perform delete action
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The period of expenses is less than a week.
++
+[none]
+** 1a1. ePiggy shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: Add allowance records
+*MSS*
+
+1. User request to create a new allowance record.
+2. User enters command with the item name, cost, tags and date.
+3. ePiggy saves the record.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The name or cost fields are empty
++
+[none]
+** 2a1. ePiggy shows an error message.
++
+Use case ends.
+
+[none]
+* 2b. The name, cost, tag or date are invalid.
++
+[none]
+** 2b1. ePiggy shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: Edit allowance records
+*MSS*
+
+1. User request to list expenses and allowances.
+2. ePiggy shows the list.
+3. User requests to edit a specific allowance in the list.
+4. User enters edit allowance command with index of the allowance record.
+5. ePiggy edits the record.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty
++
+Use case ends.
+
+[none]
+* 4a. The given index is invalid.
++
+[none]
+** 4a1. ePiggy shows an error message.
++
+Use case resumes at step 2.
+
+[none]
+* 4b. The given index points to an allowance.
++
+[none]
+** 4b1. ePiggy shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Delete allowance records
+
+*MSS*
+
+1. User request to list expenses and allowances.
+2. ePiggy shows the list.
+3. User requests to delete an allowance record.
+4. User enters delete allowance command with index of the allowance record.
+5. ePiggy deletes the specified allowance.
 +
 Use case ends.
 
@@ -1415,32 +1614,66 @@ Use case ends.
 +
 Use case ends.
 
-* 3a. The given index is invalid.
+[none]
+* 4a. The given index is invalid.
 +
 [none]
-** 3a1. ePiggy shows an error message.
+** 4a1. ePiggy shows an error message.
++
+Use case resumes at step 2.
+
+[none]
+* 4b. The given index points to an allowance.
++
+[none]
+** 4b1. ePiggy shows an error message.
 +
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: View report
+=== Use case: Search expense records
 
 *MSS*
 
-1.  User requests to view expenditure report of a day/month/year.
-2.  ePiggy shows the expenditure report for that day/month/year.
+1. User requests to search for an expense record.
+2. ePiggy requests user to enter search command.
+3. User enters search command with specific parameters.
+4. ePiggy searches and displays the record(s).
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. The given date is invalid.
+* 1a. Parameter field is empty.
 +
 [none]
-** 1a1. ePiggy shows an error message.
+** 1a1. ePiggy lists all the expense records.
 +
 Use case ends.
+
+[discrete]
+=== Use case: Sort expense records
+
+*MSS*
+
+1. User requests to sort expense records.
+2. ePiggy requests user to enter sort command.
+3. User enters sort command with specific parameters.
+4. ePiggy sorts and displays the record(s).
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Parameter field is empty.
++
+[none]
+** 1a1. ePiggy lists all the expense records sorted by date added.
++
+Use case ends.
+
 
 [discrete]
 === Use case: Add budget
@@ -1520,86 +1753,73 @@ Use case ends.
 Use case resumes at step 1.
 
 [discrete]
-=== Use case: Add new expense record
+=== Use case: Display a reminder when a budget is finishing
 
 *MSS*
 
-1. User requests to create a new record.
-2. User enters an add command with the name of item, cost, categories and date.
-3. ePiggy saves the record.
+1. User budget is finishing soon
+2. ePiggy's reminder message turns to a darker colour and warns the user that their budget is finishing.
++
+Use case ends.
+
+[discrete]
+=== Use case: Auto-complete command when user press Tab key
+
+*MSS*
+
+1. User types some letters in the commandBox
+2. User presses Tab key
+3. ePiggy auto-complete the command according to the letters which user typed in the commandBox
+
++
+Use case ends.
+
+_{More to be added}_
+[discrete]
+=== Use case: Display a reminder when a budget has exceeded
+
+*MSS*
+
+1. User budget is finishing soon
+2. ePiggy's reminder message turns red and the alerts the user that budget has exceeded.
++
+Use case ends.
+
+[discrete]
+=== Use case: Set a savings goal
+
+*MSS*
+
+1. User request to set a savings goal.
+2. User sets a savings goal with the goal name and amount.
+3. ePiggy saves the goal.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. The name and date are empty.
+* 2a. Name or amount specified are invalid.
 +
 [none]
 ** 2a1. ePiggy shows an error message.
 +
-Use case resumes at step 2.
+Use case ends.
 
 [discrete]
-=== Use case: Search expense records
+=== Use case: View report
 
 *MSS*
 
-1. User requests to search for an expense record.
-2. ePiggy requests user to enter search command.
-3. User enters search command with specific parameters.
-4. ePiggy searches and displays the record(s).
+1.  User requests to view expenditure report of a day/month/year.
+2.  ePiggy shows the expenditure report for that day/month/year.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. Parameter field is empty.
-+
-[none]
-** 1a1. ePiggy lists all the expense records.
-+
-Use case ends.
-
-[discrete]
-=== Use case: Sort expense records
-
-*MSS*
-
-1. User requests to sort expense records.
-2. ePiggy requests user to enter sort command.
-3. User enters sort command with specific parameters.
-4. ePiggy sorts and displays the record(s).
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a. Parameter field is empty.
-+
-[none]
-** 1a1. ePiggy lists all the expense records sorted by date added.
-+
-Use case ends.
-
-[discrete]
-=== Use case: Delete expense records
-
-*MSS*
-
-1. User requests to delete expense record.
-2. ePiggy requests user to enter delete command.
-3. User enters delete command with index of the expense record.
-4. ePiggy perform delete action
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a. The period of expenses is less than a week.
+* 1a. The given date is invalid.
 +
 [none]
 ** 1a1. ePiggy shows an error message.
@@ -1638,38 +1858,6 @@ Use case ends.
 +
 Use case ends.
 
-[discrete]
-=== Use case: Display a reminder when a budget is finishing
-
-*MSS*
-
-1. User budget is finishing soon
-2. ePiggy's reminder message turns to a darker colour and warns the user that their budget is finishing.
-+
-Use case ends.
-
-[discrete]
-=== Use case: Auto-complete command when user press Tab key
-
-*MSS*
-
-1. User types some letters in the commandBox
-2. User presses Tab key
-3. ePiggy auto-complete the command according to the letters which user typed in the commandBox
-
-+
-Use case ends.
-
-_{More to be added}_
-[discrete]
-=== Use case: Display a reminder when a budget has exceeded
-
-*MSS*
-
-1. User budget is finishing soon
-2. ePiggy's reminder message turns red and the alerts the user that budget has exceeded.
-+
-Use case ends.
 
 [appendix]
 == Non Functional Requirements
@@ -1709,6 +1897,43 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: The most recent window size and location is retained.
 
 _{ more test cases ... }_
+
+=== Adding an allowance
+
+. Adding an allowance to the list of allowances and expenses.
+
+.. Test case: `addAllowance n/From Mom $/50 t/School d/04/02/2019` +
+   Expected: Allowance added to the list. Details of allowance shown in the command box
+   as well as on the list. An `allowance` tag is automatically added to the entry.
+.. Test case: `addAllowance $/200` +
+   Expected: Allowance not added to the list. Error details shown in the command box.
+.. Other incorrect `addAllowance` commands to try: `addAllowance`, `addAllowance n/NameOnly`,
+`addAllowance n/From Dad $/30 t/Expense`, `addAllowance n/From Brother $/0`
+
+=== Editing an allowance
+
+. Editing an allowance while there are allowances in the list of allowances and expenses.
+.. Prerequisite: There is an allowance record in the first index of the list.
+.. Test case: `editAllowance 1 $/20` +
+   Expected: Allowance at index 1 updated to be $20. Details of the updated allowance is shown
+   in the command box and on the list.
+.. Test case: `editAllowance 2 $/40` +
+   Expected: Assuming the entry at index 2 is an expense, entry at index 2 is not edited.
+   Error message is shown in the command box.
+.. Other incorrect `editAllowance` commands to try: `editAllowance $/40`, `editAllowance 1 t/Expense`,
+   `editAllowance 1 $/0`
+
+=== Deleting an allowance
+. Deleting an allowance while there are allowances in the list of allowances and expenses.
+.. Prerequisite: There is an allowance record in the first index of the list.
+.. Test case: `deleteAllowance 1` +
+   Expected: Allowance at index 1 is deleted. Details of the deleted allowance is shown in the
+   command box, and removed from the list.
+.. Test case: `deleteAllowance 2` +
+   Expected: Assuming the entry at index 2 is an expense, it is not deleted. Details to the
+   error message is shown in the command box.
+.. Other incorrect `deleteAllowance` commands to try: `deleteAllowance`, `deleteAllowance b`,
+   `deleteAllowance 99999` (assuming the list is shorter than 99999)
 
 === Deleting an expense
 
@@ -1775,6 +2000,16 @@ _{ more test cases ... }_
    Expected: No budget is deleted. Error details shown.
 .. Other incorrect deleteExpense commands to try: `deleteBudget`, `deleteBudget x` (where x is larger than the list size) +
    Expected: Similar to previous.
+
+=== Setting a savings goal
+. Setting a savings goal to ePiggy.
+.. Test case: `setGoal n/iPad $/599`
+   Expected: Goal successfully set. Details of the goal is found in the command box and on the
+   user interface.
+.. Test case: `setGoal $/999`
+   Expected: Goal is not set. Error message shown in the command box.
+.. Other incorrect `setGoal` commands to try: `setGoal`, `setGoal n/@pple watch $/499`,
+   `setGoal n/No Goal $/0`
 
 === Saving data
 

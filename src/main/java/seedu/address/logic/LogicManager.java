@@ -57,7 +57,9 @@ public class LogicManager implements Logic {
             Command command = ePiggyParser.parseCommand(commandText);
             commandResult = command.execute(model, history);
         } finally {
-            history.add(commandText);
+            if (!commandText.isEmpty()) {
+                history.add(commandText);
+            }
         }
 
         if (addressBookModified) {

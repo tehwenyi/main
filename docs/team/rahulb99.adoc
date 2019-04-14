@@ -5,6 +5,13 @@
 
 image::rahulb99.png[width="100", align="left"]
 
+
+This portfolio aims to document my contributions to *_ePiggy_*.
+
+*_ePiggy_* Github link: https://github.com/CS2103-AY1819S2-W17-4/main
+
+---
+
 == PROJECT: ePiggy
 
 ---
@@ -14,8 +21,12 @@ image::rahulb99.png[width="100", align="left"]
 ePiggy is a desktop application designed to inculcate good spending habits in students.
 ePiggy hopes to make managing money much simpler for you with a simple interface and simple commands!
 At the same time, ePiggy offers everything you need to cultivate good spending habits before entering the workforce,
-from tracking expenses and managing budgets to setting goals! The user interacts with it using a CLI, and it has a GUI created with JavaFX.
-It is written in Java, and has about 10 kLoC.
+from tracking expenses and managing budgets to setting goals! +
+
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. +
+
+*_ePiggy_* is a product of twin modules CS2101 and CS2103T. It was transformed from the
+link:https://github.com/nus-cs2103-AY1819S2/addressbook-level4[AddressBook - Level 4] application.
 
 == Summary of contributions
 
@@ -44,20 +55,23 @@ This new feature greatly adds to the functionality of existing commands (that we
 [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/ReverseListCommand.java[ReverseList]],
 [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/HelpCommand.java[HelpCommand]] .
 
-* *Test code contributed*: _{give links to collated code files}_
+* *Test code contributed*: [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/FindCommandTest.java[FindCommandTest]],
+[https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/ReverseListCommandTest.java[ReverseListCommandTest]],
+[https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/SortCommandTest.java[SortCommandTest]] .
 
-* *Code contributed*: [https://github.com[RepoSense]] _{https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=rahulb99&sort=displayName&since=2019-02-10&until=2019-04-30&timeframe=day&reverse=false&repoSort=false}_
+* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=rahulb99&sort=displayName&since=2019-02-10&until=2019-04-30&timeframe=day&reverse=false&repoSort=false[Reposense]]
 
 * *Other contributions*:
 
 ** Project management:
 *** Managed product releases on GitHub.
 *** Set up the issue tracker, user stories, and assigned the milestones.
+*** Tested for bugs for all features of `EPiggy`.
 
 ** Enhancements to existing features:
 *** Made `date` an optional keyword while adding an expense.
    (so now, if the `date` keyword is missing, `date` takes the value of device's date). (Commit: https://github.com/CS2103-AY1819S2-W17-4/main/pull/135/commits/b974cc12cc700d751de34c80307267d26f5e455e[b974cc] )
-*** Wrote base tests for any command related to `expense`, in addition to `FindExpenseCommandTest` and `SortExpenseCommandTest` .
+*** Wrote base tests for any command related to `expense`, in addition to `FindCommandTest`, `SortCommandTest` and `ReverseListCommandTest`.
  (Pull requests https://github.com/CS2103-AY1819S2-W17-4/main/pull/135[#135], https://github.com[#00])
 *** Modified the search engine by make it more powerful by searching for similar words in case user makes a typo, or even when user
 types a part of the keyword he/she wishes to search for.
@@ -70,11 +84,18 @@ types a part of the keyword he/she wishes to search for.
 *** PRs reviewed (https://github.com/CS2103-AY1819S2-W17-4/main/pull/40[#40], https://github.com/CS2103-AY1819S2-W17-4/main/pull/94[#94],
 https://github.com/CS2103-AY1819S2-W17-4/main/pull/97[#97], https://github.com/CS2103-AY1819S2-W17-4/main/pull/115[#115],
 https://github.com/CS2103-AY1819S2-W17-4/main/pull/123[#123], https://github.com/CS2103-AY1819S2-W17-4/main/pull/40[#132],
-https://github.com/CS2103-AY1819S2-W17-4/main/pull/139[#139])
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/139[#139], https://github.com/CS2103-AY1819S2-W17-4/main/pull/150[#150],
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/151[#151], https://github.com/CS2103-AY1819S2-W17-4/main/pull/153[#153],
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/157[#157], https://github.com/CS2103-AY1819S2-W17-4/main/pull/218[#218],
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/257[#257], https://github.com/CS2103-AY1819S2-W17-4/main/pull/258[#258],
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/259[#259], https://github.com/CS2103-AY1819S2-W17-4/main/pull/265[#265])
 
 *** Contributed to forum discussion (example:  https://github.com/nus-cs2103-AY1819S2/forum/issues/64[#64])
 
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2103-AY1819S2-W14-1/main/issues/151[#151],
+https://github.com/CS2103-AY1819S2-W14-1/main/issues/167[#167], https://github.com/CS2103-AY1819S2-W14-1/main/issues/153[#153],
+https://github.com/CS2103-AY1819S2-W14-1/main/issues/160[#160], https://github.com/CS2103-AY1819S2-W14-1/main/issues/157[#157],
+ https://github.com/CS2103-AY1819S2-W14-1/main/issues/155[#155], https://github.com/CS2103-AY1819S2-W14-1/main/issues/148[#148])
 
 ** Tools:
 *** Set up Travis CI for the team repo.

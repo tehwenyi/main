@@ -1759,6 +1759,7 @@ _{ more test cases ... }_
     Error message shows in the result display textBox.
 .. Other incorrect report commands to try: `report invalid`, `report d/x` (where x is not in dd/mm/yyyy or mm/yyyy or yyyy format),
  `report d/x` (where x is not a correct date) _{give more}_ +
+
    Expected: Similar to previous.
 
 _{ more test cases ... }_

@@ -15,7 +15,7 @@ image::pdnm.png[width="150", align="left"]
 
 Role: Team Leader, Developer
 
-Responsibilities:
+Responsibilities: +
 1. Basic features +
 2. Java expert +
 
@@ -27,7 +27,7 @@ image::tehwenyi.png[width="150", align="left"]
 
 Role: Developer
 
-Responsibilities:
+Responsibilities: +
 1. `budget` feature +
 2. Documentations +
 3. Testing +
@@ -54,7 +54,7 @@ image::yunjun199321.png[width="150", align="left"]
 
 Role: Developer
 
-Responsibilities:
+Responsibilities: +
 1. `report` feature +
 2. `autocomplete` feature +
 3. Bug Finder +
@@ -68,10 +68,11 @@ image::kev-inc.png[width="150", align="left"]
 
 Role: Developer
 
-Responsibilities:
-1. `goal` feature +
-2. `savings` feature +
-3. Storage +
-4. Testing +
+Responsibilities: +
+1. `allowance` feature +
+2. `goal` feature +
+3. `savings` feature +
+4. Storage +
+5. Testing +
 
 '''

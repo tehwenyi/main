@@ -275,6 +275,66 @@ image::developerguideimplementation.png[width="350"]
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::ae[]
+=== Add Expense feature
+This basic feature allows users to add an expense record to the system.
+To use this feature, the users need to enter the `addExpense` command,
+with fields `name` and `amount`, and optional fields `date` and `tag`.
+If `date` is not specified, the current date will be used.
+
+* `addExpense n/Chicken rice set $/5 t/Food d/21/02/2019`
+
+_The command above adds an expense record for a $5 chicken rice set, tagged as Food with the date as 21/02/2019._
+
+==== Current Implementation:
+The figure below shows the sequence diagram for the `addExpense` command:
+
+image::AddExpenseSequenceDiagram.png[widith="800]
+_Figure: Add Expense Sequence Diagram_
+
+The command is recognized by `parseCommand` and an `AddExpenseCommandParser` is created,
+which is used to parse the command with the separated input arguments.
+An `Expense` is created from the arguments, which is used to create an `AddExpenseCommand`. +
+`AddExpenseCommand` is then executed by `Logic` and it calls `addExpense` of the model, which
+add the `Expense` into the `ExpenseList`.
+// end::ae[]
+
+
+// tag::ee[]
+=== Edit Expense feature
+This feature allows users to edit an existing expense record in the expense list.
+To use this feature, the users need to enter the `editExpense` command,
+with the `INDEX` (in the displaying list) of the expense to be edited, along with
+the fields that are to be modified.
+
+* `editExpense 1 n/Pen $1 t/Supplies`
+
+_The command above edits the name, cost and tag of the
+first expense in the displaying list to ‘Pen’, ‘$1’ and ‘Supplies’ respectively._
+
+The command is recognized by `parseCommand` and an `EditExpenseCommandParser` is created,
+Then it create an `EditExpenseCommand` object with the `EditExpenseDescriptor` specifying the fields to be edited. +
+The command object is then executed by `Logic` and it calls `setExpense` of the model, which
+replaces the old `Expense` by the edited one.
+// end::ee[]
+
+// tag::de[]
+=== Delete Expense feature
+This feature allows users to remove an expense record from the expense list.
+To use this feature, the users need to enter the `deleteExpense` command,
+with the `INDEX` (in the displaying list) of the expense to be deleted.
+
+* `deleteExpense 1`
+
+_The command above deletes the first expense in the displaying expense list._
+
+The command is recognized by `parseCommand` and an `DeleteExpenseCommandParser` is created,
+Then it create an`DeleteExpenseCommand` object with the parsed index. +
+The command object is then executed by `Logic` and it calls `deleteExpense` of the model, which
+removes the `Expense` from the `ExpenseList`.
+// end::de[]
+
+
 // tag::aa[]
 === Add allowance feature
 Besides the tracking of expenses, *_ePiggy_* also allows the tracking of allowances, by adding

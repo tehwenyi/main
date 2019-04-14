@@ -432,11 +432,8 @@ image::examples.png[width="125"]
 * Example 1: `report` +
 View the completed report of all the records.
 
-image::report1.png[width="400"]
-Figure of example 1: Completed report part 1.
-
-image::report2.png[width="400"]
-Figure of example 1: Completed report part 2.
+image::completeReport.png[width="600"]
+Figure of example 1: Completed report.
 
 ***
 

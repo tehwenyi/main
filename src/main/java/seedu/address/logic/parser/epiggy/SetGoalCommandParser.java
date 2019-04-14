@@ -22,7 +22,10 @@ import seedu.address.model.epiggy.item.Name;
  */
 public class SetGoalCommandParser implements Parser<SetGoalCommand> {
 
-
+    /**
+     * Parses the given {@code String} of arguments in the context of the SetGoalCommand
+     * and returns a SetGoalCommand object for execution.
+     */
     @Override
     public SetGoalCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

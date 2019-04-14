@@ -1,5 +1,7 @@
 package seedu.address.model.epiggy.item;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents an Item's name in the expense book.
  * Guarantees: immutable}
@@ -12,11 +14,12 @@ public class Name {
     public final String name;
 
     public Name(String name) {
+        requireNonNull(name);
         this.name = name;
     }
 
     public static boolean isValidName(String name) {
-        return name.matches(VALIDATION_REGEX);
+        return name.trim().matches(VALIDATION_REGEX);
     }
 
     @Override

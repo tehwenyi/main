@@ -25,6 +25,11 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new EditAllowanceCommand object
  */
 public class EditAllowanceCommandParser implements Parser<EditAllowanceCommand> {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the EditAllowanceCommand
+     * and returns an EditAllowanceCommand object for execution.
+     */
     @Override
     public EditAllowanceCommand parse(String args) throws ParseException {
         requireNonNull(args);

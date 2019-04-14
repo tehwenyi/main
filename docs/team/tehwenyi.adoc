@@ -1,37 +1,29 @@
-= Teh Wen Yi - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :sectnums:
 :stylesDir: ../stylesheets
 
-image::projectportfolioheader.png[width="600"]
+image::projectportfolioheader.png[width="550"]
 
-This portfolio aims to document my contributions to *_ePiggy_*.
-
+This portfolio aims to document my contributions to *_ePiggy_*. +
 *_ePiggy_* Github link: https://github.com/CS2103-AY1819S2-W17-4/main
-
----
 
 == Introduction
 
-image::about.png[width="140"]
+image::about.png[width="130"]
 
 *ePiggy* is a desktop application designed to inculcate good spending habits in students
 through allowing them to track their finances. It includes everything from tracking expenses, managing budgets
 to setting goals. +
 
 It is written in Java. Interactions by users are done through the Command Line Interface (CLI) and it has a
-Graphical User Interface (GUI) created with JavaFX. +
+Graphical User Interface (GUI) created with JavaFX. It can be used on both Windows and Mac. +
 
-It can be used on both Windows and Mac.
-
-image::projectteam.png[width="140"]
+image::projectteam.png[width="130"]
 
 *_ePiggy_* is a product of twin modules CS2101 and CS2103T. It was transformed from the
 link:https://github.com/nus-cs2103-AY1819S2/addressbook-level4[AddressBook - Level 4] application.
 My team consists of 5 members, including myself. +
-I contributed the `budget` feature of *_ePiggy_*, which allows users to add, edit and delete budgets to track their
-spendings.
 
 == Summary of contributions
 |===
@@ -40,7 +32,7 @@ spendings.
 
 === Major Enhancement
 
-I added the entire `budget` feature of ePiggy, which consists of 3 commands: `addBudget`, `editBudget` and `deleteBudget`. +
+I added the `budget` feature of ePiggy, which consists of 3 commands: `addBudget`, `editBudget` and `deleteBudget`. +
 
 image::whatitdoes.png[width="150"]
 
@@ -60,16 +52,14 @@ image::highlights.png[width="150"]
 * This enhancement was built from scratch. It is completely new and hence required the creation of many new objects
 including `budget`, `period`, `uniqueBudgetList` and a new `budgetPanel` for the UI. This enhancement required me to be
 familiar with almost all the different aspects of the code (`commons`, `logic`, `model`, `ui`).
-* For this enhancement, the UI is important as the purpose is to constantly remind users of the remaining amount they
-can spend. It was challenging to make the UI simple and concise for our target users whilst conveying the crucial information.
 
 === Minor Enhancement
 Added the status and reminder components of the `budget` feature.
 
 image::whatitdoes.png[width="150"]
 
-* The `budget` feature will display the status of the budget (remaining amount, remaining days).
-* The `budget` feature provides reminders when users are going to or have spent more than the limit. +
+* The `budget` feature will display the status of the budget (remaining amount, remaining days) and provide reminders
+when users are going to or have spent more than the limit. +
 
 image::justification.png[width="150"]
 
@@ -90,23 +80,20 @@ As of 15th April 2019, I have contributed over 50 Pull Requests and reviewed ove
 | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetPanel.java[Budget Panel]
 | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/BudgetCard.java[Budget Card] +
 * *Test code:* link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/AddBudgetCommandTest.java[Add Budget]
-| link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/EditBudgetCommandTest.java[Delete Budget]
+| link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/EditBudgetCommandTest.java[Edit Budget Budget]
 | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/DeleteBudgetCommandTest.java[Delete Budget]
-| link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/systemtests/epiggy/AddBudgetCommandSystemTest.java[Add Budget Command System Test]
+| link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/systemtests/epiggy/AddBudgetCommandSystemTest.java[Budget System Test]
 
 View all the code I contributed link:https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=tehwenyi&sort=displayName&since=2019-02-10&until=2019-04-15&timeframe=day&reverse=false&repoSort=true[here]!
 
 === Other Contributions
-* *Other contributions*:
 
-** Project Management:
-*** Managed the refactoring of AddressBook to ePiggy
-** Graphics:
-*** Added graphics to the User Guide and Developer Guide to increase readability.
-*** Refer to Section 3 and 4 for more information.
-** Tools:
-*** Created the *.jar file for ePiggy
-*** Set up Coveralls.
+* As of 15th April 2019:
+** Reviewed over 20 pull requests on ePiggy's Github.
+** Raised over 10 issues on ePiggy's Github.
+* Refactored Address Book to ePiggy.
+* Created the *.jar file for ePiggy.
+* Standardised the language and formatting of the user and developer guide to provide greater coherence.
 
 == Contributions to the User Guide
 
@@ -117,17 +104,16 @@ information for end-users who may not be familiar with computing technicalities.
 
 Click link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/docs/UserGuide.adoc[here] to view the full User Guide!
 
-image::overview.png[width="140"]
+image::overview.png[width="130"]
 
 * Standardised and improved the aesthetics of the User Guide
 
-As I am in-charge of documentation, I designed and added the header and images across the user guide to make it more
+I designed and added the header and images across the user guide to make it more
 inviting and reader friendly, considering that our target users are students. Below are some examples of my designs:
 
-image::userguideheaders.png[width="400"]
+image::userguideheaders.png[width="500"]
 
 _Figure 1: Header and section headers added in the User Guide to increase readability and better engage our target audience_ +
-Besides that, I standardised the language and formatting of the user guide to provide greater coherence.
 
 * Contributed content to the User Guide
 
@@ -135,20 +121,23 @@ I wrote the *Introduction* of the User Guide, making sure it is clear, concise a
 Also, I wrote the *Budgeting* feature which teaches users how to use the `budget` commands in a clear and informative
 manner. My contributions for the *Budgeting* feature can be found below, in Sections 3.1 to 3.3.
 
-image::extract.png[width="140"]
+image::extract.png[width="130"]
 
 |===
 |_My contribution towards the *Budgeting* feature in the User Guide can be split into 3 segments: `addBudget`,
-`editBudget` and `deleteBudget`. The extracts below are my contributions to the User Guide._
+`editBudget` and `deleteBudget`. The extracts in Sections 3.1 to 3.3 below are my contributions to the User Guide._
 |===
 
-==== Add Budget Feature: addBudget
+=== Add Budget Feature: addBudget
+
 include::../UserGuide.adoc[tag=addbudget]
 
-==== Edit Budget Feature: editBudget
+=== Edit Budget Feature: editBudget
+
 include::../UserGuide.adoc[tag=editbudget]
 
-==== Delete Budget Feature: deleteBudget
+=== Delete Budget Feature: deleteBudget
+
 include::../UserGuide.adoc[tag=deletebudget]
 
 == Contributions to the Developer Guide
@@ -161,35 +150,37 @@ to the project and my ability to convey all necessary technical information clea
 Click link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/docs/DeveloperGuide.adoc[here] to view the full
 Developer Guide!
 
-image::overview.png[width="140"]
+image::overview.png[width="130"]
 
 * Standardised and improved the aesthetics of the Developer Guide
 
-Similar to my contributions to the User Guide, I designed and added the header and images across the developer guide to
-reduce word clutter and make it more readable. Below are some examples of my designs:
+I designed and added the header and images across the developer guide to
+reduce clutter of words and make it more readable. Below are some examples of my designs:
 
-image::developerguide.png[width="200"]
+image::developerguideheaders.png[width="500"]
 
-_Figure 2: Header added in the Developer Guide_ +
-Besides that, I standardised the language and formatting of the developer guide to provide greater coherence.
+_Figure 2: Header and images added in the Developer Guide_ +
 
 * Contributed content to the Developer Guide
 
 I documented the implementation details and design considerations for the *Budgeting* feature.
 I also created diagrams to aid in the explanations. My contributions can be found below, in Sections 4.1 to 4.3.
 
-image::extract.png[width="140"]
+image::extract.png[width="130"]
 
 |===
 |_My contribution towards the Developer Guide can be split into 3 segments: `addBudget`,
-`editBudget` and `deleteBudget`. The extracts below are my contributions to the Developer Guide._
+`editBudget` and `deleteBudget`. The extracts in Sections 4.1 to 4.3 below are my contributions to the Developer Guide._
 |===
 
 === Add Budget Feature: addBudget
+
 include::../DeveloperGuide.adoc[tag=addbudget]
 
 === Edit Budget Feature: editBudget
+
 include::../DeveloperGuide.adoc[tag=editbudget]
 
 === Delete Budget Feature: deleteBudget
+
 include::../DeveloperGuide.adoc[tag=deletebudget]

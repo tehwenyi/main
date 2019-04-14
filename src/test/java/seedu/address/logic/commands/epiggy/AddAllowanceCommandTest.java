@@ -2,6 +2,8 @@ package seedu.address.logic.commands.epiggy;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -40,6 +42,13 @@ public class AddAllowanceCommandTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private CommandHistory commandHistory = new CommandHistory();
+
+    @Test
+    public void constructor_nullAllowance_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        new AddAllowanceCommand(null);
+    }
+
     @Test
     public void execute_allowanceAcceptedByModel_addSuccessful() throws CommandException {
         ModelStubAcceptingAllowanceAdded modelStub = new ModelStubAcceptingAllowanceAdded();
@@ -49,6 +58,32 @@ public class AddAllowanceCommandTest {
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validAllowance), modelStub.allowanceAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+    }
+
+    @Test
+    public void equals() {
+        Allowance fromMom = new AllowanceBuilder().withName("From Mom").build();
+        Allowance fromDad = new AllowanceBuilder().withName("From Dad").build();
+
+        AddAllowanceCommand addMom = new AddAllowanceCommand(fromMom);
+        AddAllowanceCommand addDad = new AddAllowanceCommand(fromDad);
+
+        // same object -> returns true
+        assertTrue(addMom.equals(addMom));
+
+        // same values -> returns true
+        AddAllowanceCommand momCopy = new AddAllowanceCommand(fromMom);
+        assertTrue(addMom.equals(momCopy));
+
+        // different types -> returns false
+        assertFalse(addMom.equals(1));
+
+        // null -> returns false
+        assertFalse(addMom.equals(null));
+
+        // different allowance -> returns false
+        assertFalse(addMom.equals(addDad));
+
     }
 
     /**

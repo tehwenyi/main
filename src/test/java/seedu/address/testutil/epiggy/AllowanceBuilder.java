@@ -13,7 +13,6 @@ import seedu.address.model.epiggy.item.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
-
 /**
  * A utility class to help with building Allowance objects.
  */
@@ -70,8 +69,6 @@ public class AllowanceBuilder {
      * Sets the {@code date} of the {@code Expense} that we are building.
      */
     public AllowanceBuilder withDate(String date) {
-        System.out.println(name);
-        System.out.println(date);
         if (date.equals("")) {
             this.date = new Date();
         }

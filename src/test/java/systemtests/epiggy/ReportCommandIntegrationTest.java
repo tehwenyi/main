@@ -1,7 +1,6 @@
 package systemtests.epiggy;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -279,11 +278,4 @@ public class ReportCommandIntegrationTest extends EPiggySystemTestWithEmptyData 
         new ReportWindowHandle(guiRobot.getStage(ReportWindowHandle.REPORT_WINDOW_TITLE)).close();
         getMainWindowHandle().focus();
     }
-    /**
-     * Asserts that the report window isn't open.
-     */
-    private void assertReportWindowNotOpen() {
-        assertFalse(ERROR_MESSAGE, ReportWindowHandle.isWindowPresent());
-    }
-
 }

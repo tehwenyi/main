@@ -1437,104 +1437,89 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: Set budget
+=== Use case: Add budget
 
 *MSS*
 
-1.  User requests to set budget
-2.  ePiggy sets the input number as the budget
+1.  User requests to add budget.
+2.  User enters the `addBudget` command with the budgeted amount, time period and start date of budget.
+3. ePiggy saves the record.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. The given amount is invalid.
+* 2a. The given amount, time period and/or start date are empty or invalid.
 +
 [none]
-** 3a1. ePiggy shows an error message.
+** 2a1. ePiggy shows an error message.
 +
 Use case resumes at step 1.
 
-* 1b. User already has a budget set.
+* 2b. User already has a budget set which overlaps with the new budget.
 +
 [none]
-** 1b1. ePiggy asks if user would like to overwrite old budget.
+** 2b1. ePiggy shows can error message
 +
-[none]
-*** 1b1a. ePiggy sets a new budget based on user's new input.
-*** 1b1b. ePiggy keeps the old budget.
-+
-Use case resumes at step 2.
+Use case resumes at step 1.
 
 [discrete]
-=== Use case: Recommend
+=== Use case: Edit budget
 
 *MSS*
 
-1.  User requests ePiggy to recommend
-2.  ePiggy recommends future spendings
+1.  User requests to edit budget.
+2.  User enters the `editBudget` command with the budgeted amount, time period and/or start date of budget.
+3. ePiggy saves the record.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. The period of expenses is less than a week.
+* 2a. The given amount, time period and/or start date are invalid or all are empty.
 +
 [none]
-** 1a1. ePiggy shows an error message.
+** 2a1. ePiggy shows an error message.
 +
-Use case ends.
+Use case resumes at step 1.
+
+* 2b. User already has a budget set which overlaps with the edited budget.
++
+[none]
+** 2b1. ePiggy shows can error message
++
+Use case resumes at step 1.
 
 [discrete]
-=== Use case: Forecast
+=== Use case: Delete budget
 
 *MSS*
 
-1.  User requests ePiggy to forecast future spendings
-2.  ePiggy gives a forecast of future spendings
+1. User requests to delete a budget.
+2. User enters the `deleteBudget` command with the index of the budget.
+3. ePiggy performs the delete action.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. The period of expenses is less than a week.
+* 1a. Index of budget does not exist in the budget list.
 +
 [none]
 ** 1a1. ePiggy shows an error message.
 +
-Use case ends.
-
-[discrete]
-=== Use case: Create new account
-
-*MSS*
-
-1. User requests create a new account
-2. ePiggy requests username and password
-3. ePiggy creates new user account
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a. Username exists on the database.
-+
-[none]
-** 1a1. ePiggy shows an error message.
-+
-Use case ends.
+Use case resumes at step 1.
 
 [discrete]
 === Use case: Add new expense record
 
 *MSS*
 
-1. User requests the create a new record.
-2. User enters a add command with the name of item, cost, categories and date
+1. User requests to create a new record.
+2. User enters an add command with the name of item, cost, categories and date.
 3. ePiggy saves the record.
 +
 Use case ends.
@@ -1648,16 +1633,24 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: Notify when budget finishing
+=== Use case: Display a reminder when a budget is finishing
 
 *MSS*
 
 1. User budget is finishing soon
-2. ePiggy shows warning message
+2. ePiggy's reminder message turns to a darker colour and warns the user that their budget is finishing.
 +
 Use case ends.
 
-_{More to be added}_
+[discrete]
+=== Use case: Display a reminder when a budget has exceeded
+
+*MSS*
+
+1. User budget is finishing soon
+2. ePiggy's reminder message turns red and the alerts the user that budget has exceeded.
++
+Use case ends.
 
 [appendix]
 == Non Functional Requirements
@@ -1673,26 +1666,6 @@ _{More to be added}_
 
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
-
-[[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
-
-[appendix]
-== Product Survey
-
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
 
 [appendix]
 == Instructions for Manual Testing

@@ -1342,6 +1342,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user |see the report of my spending on specified month of the year |know how much I spend on that month of the year
 
+|`* *` |user |type a command with auto-complete |speed up the typing
+
 |`*` | (fill in here) |(fill in here)
 |=======================================================================
 
@@ -1643,6 +1645,18 @@ Use case ends.
 +
 Use case ends.
 
+[discrete]
+=== Use case: Auto-complete command when user press Tab key
+
+*MSS*
+
+1. User types some letters in the commandBox
+2. User presses Tab key
+3. ePiggy auto-complete the command according to the letters which user typed in the commandBox
+
++
+Use case ends.
+
 _{More to be added}_
 
 [appendix]
@@ -1723,5 +1737,29 @@ _{ more test cases ... }_
 . Dealing with missing/corrupted data files
 
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+
+_{ more test cases ... }_
+
+=== Generating a report
+
+. Generating a report on specified date
+
+.. Prerequisites: There are some expense or allowance records in ePiggy.
+.. Test case: `report` +
+   Expected: New window pop-up. Details of the expense, allowance and budget list in the new window.
+    Success message shows in the result display textBox.
+.. Test case: `report d/21/03/2019` +
+   Expected: New window pop-up. Details of the expense, allowance and budget list in the new window.
+    Success message shows in the result display textBox.
+.. Test case: `report d/invalid text` +
+   Expected: New window doesn't pop-up.
+    Error message shows in the result display textBox.
+.. Test case: `report d/1000/03/2019` +
+   Expected: New window doesn't pop-up.
+    Error message shows in the result display textBox.
+.. Other incorrect report commands to try: `report invalid`, `report d/x` (where x is not in dd/mm/yyyy or mm/yyyy or yyyy format),
+ `report d/x` (where x is not a correct date) _{give more}_ +
+
+   Expected: Similar to previous.
 
 _{ more test cases ... }_

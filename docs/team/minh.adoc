@@ -5,47 +5,97 @@
 
 == PROJECT: ePiggy
 
+This portfolio aims to document my contributions to *_ePiggy_*.
+*_ePiggy_* Github link: https://github.com/CS2103-AY1819S2-W17-4/main
+
 ---
 
 == Introduction
 === About
 // what specific project task is, what module it is for, whether it is an indiv or grp proj
-*ePiggy* is a desktop application for managing personal finances. It allows users to track expenses, manage budgets and
-savings. +
+*ePiggy* is a desktop application for managing personal finances. It allows users to track expenses and allowances,
+manage budgets and saving goals. The app is designed specially for students to encourage them to establish
+good spending habits. +
+
+*ePiggy* features a minimalist Graphical User Interface, and interacts with users through a Command Line Interface.
+Written in Java, it can be used on all major desktop operating systems, including Windows, Mac OS, and Linux.
 
 === Project Team
 
-*_ePiggy_* was designed for twin modules CS2101 and CS2103T. It was transformed from the link:https://github.com/nus-cs2103-AY1819S2/addressbook-level4[AddressBook - Level 4] application.
+*ePiggy* was developed as a group project for the twin modules
+_CS2101 - Effective Communication for Computing Professionals_
+and _CS2103T - Software Engineering_. It was transformed from
+the link:https://github.com/nus-cs2103-AY1819S2/addressbook-level4[AddressBook - Level 4] application.
 My team consists of 5 members, including myself. +
-I implemented the expense management features (adding, deleting and modifying expense record).
-
-=== Purpose
-
-This portfolio aims to document my contributions to *_ePiggy_*.
-
-*_ePiggy_* Github link: https://github.com/CS2103-AY1819S2-W17-4/main
+I implemented the expense tracking features (adding, deleting and modifying expense records).
 
 == Summary of contributions
 
-Implemented the essential commands (`add`, `edit`, `delete`) +
+=== Features implemented
 
+I implemented the expense management features.
+
+image::whatitdoes.png[width="150"]
+
+These features allow users to manage expenses by adding, modifying and deleting expenses.
+It provides a panel in the User Interface for viewing the expenses.
+
+image::justification.png[width="150"]
+
+These features provide the essential functionality for an expense tracker application.
+The users have flexible control over the records, as they can modifying existing records and remove
+them. With the clean expense list in the UI, they can view any past records easily.
+
+image::highlights.png[width="150"]
+
+As these are the essential features of the product, I was also responsible for designing the model that
+forms the basis for other features to be implemented.
+The implementation involved changes in all components of the system, requiring me to have
+a thorough understanding of the whole codebase.
+
+=== Code Contributed
+As of 15th April 2019, I have contributed over 50 Pull Requests and reviewed over 20 Pull Requests.
+
+* *Functional code:* link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/AddExpenseCommand.java[Add Expense]
+| link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/EditExpenseCommand.java[Edit Expense]
+| link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/DeleteExpenseCommand.java[Delete Expense]
+| link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ExpenseListPanel.java[Expense Panel]
+| link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ExpenseCard.java[Expense Card] +
+* *Test code:* link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/systemtests/epiggy/AddExpenseCommandSystemTest.java[Add Expense]
+
+View all the code I contributed link:https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=pdnm&sort=displayName&since=2019-02-10&until=2019-04-14&timeframe=day&reverse=false&repoSort=true[here]!
+
+
+=== Other Contributions
+
+* Project Management:
+As I am team leader, I am in charge of the approach and direction for our project.
+This includes deciding how we go about morphing the product, and how we work collaboratively. +
+
+* Undo / Redo: I am in charge of the Undo / Redo feature. Since the feature was already implemented
+in AddressBook 4, my task was to help others integrate their features with Undo / Redo.
 
 == Contributions to the User Guide
 
-|===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
-|===
+Click link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/docs/UserGuide.adoc[here] to view the full User Guide!
 
-include::../UserGuide.adoc[tag=undoredo]
+I am responsible for the user guide of the commands that I implemented, which are
+`addExpense`, `editExpense` and `deleteExpense`.
 
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=report]
 
 == Contributions to the Developer Guide
 
-|===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
-|===
+Click link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/docs/DeveloperGuide.adoc[here] to view the full
+Developer Guide!
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+The following section shows my additions to the developer guide for the model component design and
+the expense tracking features.
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
+include::../DeveloperGuide.adoc[tag=model]
+
+include::../DeveloperGuide.adoc[tag=ae]
+
+include::../DeveloperGuide.adoc[tag=ee]
+
+include::../DeveloperGuide.adoc[tag=de]

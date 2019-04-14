@@ -227,6 +227,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 .Interactions Inside the Logic Component for the `de 1` Command
 image::DeleteExpenseSdForLogic.png[width="800"]
 
+// tag::model[]
 [[Design-Model]]
 === Model component
 
@@ -250,6 +251,8 @@ This would allow `ePiggy` to only require one `Item` object per unique `Item`,
 instead of each `Expense` needing their own `Item` object. An example of how such a model may look like is given below. +
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
+
+// end::model[]
 
 [[Design-Storage]]
 === Storage component

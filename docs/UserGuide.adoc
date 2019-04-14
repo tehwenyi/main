@@ -38,8 +38,11 @@ To start using ePiggy, simply follow these steps:::
 4. Double-click the *`ePiggy.jar`* file to start the app. +
 5. The GUI will appear as per below upon launch.
 
-image::UiEmpty.png[width="760"]
+image::Firstlaunch.png[width="760"]
 _Figure 1. The user interface upon launch of application_
+
+[NOTE]
+ePiggy launches with some sample data preloaded. To start afresh, use the `clear` command to reset everything.
 
 image::samplecommands.png[width="175"]
 

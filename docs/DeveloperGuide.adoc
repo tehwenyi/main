@@ -592,7 +592,7 @@ The command above sets a goal with the name `Nintendo Switch` and with the amoun
 ==== Current Implementation
 Given below is a sequence diagram of how the `setGoal` command works:
 
-image::setGoalSequenceDiagram.PNG[width="800"]
+image::setGoalSequenceDiagram.png[width="800"]
 
 Figure: Set Goal Command Sequence Diagram
 

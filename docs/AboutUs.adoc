@@ -15,7 +15,9 @@ image::pdnm.png[width="150", align="left"]
 
 Role: Team Leader, Developer
 
-Responsibilities: basic features
+Responsibilities:
+1. Basic features +
+2. Java expert +
 
 '''
 
@@ -25,7 +27,10 @@ image::tehwenyi.png[width="150", align="left"]
 
 Role: Developer
 
-Responsibilities: `budget` feature, documentation
+Responsibilities:
+1. `budget` feature +
+2. Documentations +
+3. Testing +
 
 '''
 
@@ -36,11 +41,10 @@ image::rahulb99.png[width="150", align="left"]
 Role: Developer
 
 Responsibilities: +
-1. `Find` feature +
-2. `Sort` feature +
+1. `find` feature +
+2. `sort` feature +
 3. Refactoring codebase +
-4. Project Manager +
-5. Other minor features include `list`, `reverseList` and `help`.
+4. Other minor features include `list`, `reverseList` and `help`.
 
 '''
 
@@ -50,7 +54,11 @@ image::yunjun199321.png[width="150", align="left"]
 
 Role: Developer
 
-Responsibilities: `report` feature, `autocomplete` feature
+Responsibilities:
+1. `report` feature +
+2. `autocomplete` feature +
+3. Bug Finder +
+4. Testing +
 
 '''
 
@@ -60,6 +68,10 @@ image::kev-inc.png[width="150", align="left"]
 
 Role: Developer
 
-Responsibilities: Storage, `goal` and `savings` features
+Responsibilities:
+1. `goal` feature +
+2. `savings` feature +
+3. Storage +
+4. Testing +
 
 '''

@@ -276,7 +276,7 @@ This section describes some noteworthy details on how certain features are imple
 // tag::addbudget[]
 
 This command allows users to add a new budget to monitor their expenses within a user-input period of time. +
-.This command requires users to specify the `amount`, `start date` and `time period (in days)` of the budget in the command. +
+This command requires users to specify the `amount`, `start date` and `time period (in days)` of the budget in the command. +
 
 * `addBudget $/500 p/31 d/01/03/2019` +
 

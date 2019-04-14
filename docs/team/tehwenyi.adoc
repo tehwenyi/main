@@ -157,9 +157,9 @@ image::overview.png[width="130"]
 I designed and added the header and images across the developer guide to
 reduce clutter of words and make it more readable. Below are some examples of my designs:
 
-image::developerguide.png[width="200"]
+image::developerguideheaders.png[width="200"]
 
-_Figure 2: Header added in the Developer Guide_ +
+_Figure 2: Header and images added in the Developer Guide_ +
 
 * Contributed content to the Developer Guide
 

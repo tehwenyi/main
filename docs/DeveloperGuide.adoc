@@ -51,6 +51,8 @@ toc::[]
 
 == Setting up
 
+image::developerguidesettingup.png[width="350"]
+
 === Prerequisites
 
 . *JDK `9`* or later
@@ -136,6 +138,8 @@ When you are ready to start coding,
 2. Take a look at <<GetStartedProgramming>>.
 
 == Design
+
+image::developerguidedesign.png[width="350"]
 
 [[Design-Architecture]]
 === Architecture
@@ -262,6 +266,8 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 == Implementation
+
+image::developerguideimplementation.png[width="350"]
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -823,7 +829,7 @@ Certain properties of the application can be controlled (e.g user prefs file loc
 
 == Documentation
 
-image::developerguidedocumentation.png[width="200"]
+image::developerguidedocumentation.png[width="350"]
 We use asciidoc for writing documentation.
 
 [NOTE]
@@ -929,6 +935,8 @@ The SE-EDU team does not provide support for modified template files.
 [[Testing]]
 == Testing
 
+image::developerguidetesting.png[width="350"]
+
 === Running Tests
 
 There are three ways to run tests.
@@ -977,6 +985,8 @@ e.g. `seedu.address.logic.LogicManagerTest`
 * Solution: Execute Gradle task `processResources`.
 
 == Dev Ops
+
+image::developerguidedevops.png[width="350"]
 
 === Build Automation
 

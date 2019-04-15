@@ -292,7 +292,7 @@ If `date` is not specified, the current date will be used.
 
 _The command above adds an expense record for a $5 chicken rice set, tagged as Food with the date as 21/02/2019._
 
-===== Current Implementation:
+===== Current Implementation
 The figure below shows the sequence diagram for the `addExpense` command:
 
 image::AddExpenseSequenceDiagram.png[widith="800]
@@ -357,7 +357,7 @@ with the `School` tag._
 `Expense`. We consider an `Allowance` to be a type of negative expense which makes calculating
 the total savings in *ePiggy* easier.
 
-===== Current Implementation:
+===== Current Implementation
 The figure below shows the sequence diagram for the `addAllowance` command:
 
 image::AddAllowanceSequenceDiagram.png[widith="800]
@@ -398,7 +398,7 @@ to change the amount to `$50` and the date to `06/03/2019`._
 While allowances and expenses are shown on the same list, the `INDEX` specified must belong
 to an `Allowance`, otherwise the command would not work.
 
-==== Current Implementation
+===== Current Implementation
 The command is recognised by `parseCommand` and an `EditAllowanceCommandParser`
 is created. It then creates an `EditAllowanceCommand` object with an
 `EditAllowanceDescriptor` specifying the fields to be edited.
@@ -432,7 +432,7 @@ When an incorrect allowance has been entered, it can be deleted from the list us
 
 _The command above deletes the allowance with index `2` on the allowance and expense list._
 
-==== Current Implementation
+===== Current Implementation
 The figure below shows the sequence diagram for the `deleteAllowance` command:
 
 image::DeleteAllowanceSequenceDiagram.png[width="800"]
@@ -455,7 +455,7 @@ This makes viewing of expenses more customisable and convenient for the user.
 
 The above command lists the expenses in reverse.
 
-==== Current Implementation
+===== Current Implementation
 Given below is a UML sequence diagram of how the `reverseList` command works along with a step-by-step
 explanation. +
 
@@ -500,7 +500,7 @@ example, suppose we want to filter out all `Expense` s with `Cost` between $1 an
 then the command should be just `find $/1:10.5`.
 Similarly for other type of keywords.
 
-==== Current Implementation
+===== Current Implementation
 Given below is a UML sequence diagram of how the `find` command works along with a step-by-step
 explanation.
 
@@ -555,7 +555,7 @@ The above command sorts expense(s) according to their `Name` in a lexicographica
 [NOTE]
 Empty user input is not allowed and a appropriate error will be shown. Similarly, multiple keywords (`Prefix`) are also not allowed.
 
-==== Current Implementation
+===== Current Implementation
 Given below is a UML sequence diagram of how the `sort` command works along with a step-by-step
 explanation. +
 
@@ -611,7 +611,7 @@ Adding of overlapping budgets are not allowed in ePiggy.
 [NOTE]
 A `budget` is considered overlapping if *any* of the dates *in between (inclusive)* one `budget`’s start *and* end dates is the *same* as the dates *in between (inclusive)* another `budget`’s start *and* end dates.
 
-==== Current Implementation
+===== Current Implementation
 Given below is a sequence diagram of how the `addBudget` command works: +
 
 image::addBudgetSequenceDiagram.png[width="800"]
@@ -658,7 +658,7 @@ A `budget` is considered overlapping if *any* of the dates *in between (inclusiv
 If the current budget is edited such that it is no longer a current budget, it can no longer be edited. Hence, users
 should delete that budget and add a new budget using the `addBudget` command should they wish to edit that budget.
 
-==== Current Implementation
+===== Current Implementation
 The command’s current implementation uses parts of the legacy implementation to update the budget. The arguments are first parsed into
 `EditBudgetCommandParser`, which separates the arguments into their respective fields. +
 An `EditBudgetDescriptor` object is then created to temporarily hold this new information. +
@@ -707,7 +707,7 @@ to have a greater level of abstraction. +
 The above command deletes the `Budget` with the displayed `index` of #2. +
 The `Budget` to be deleted is identified by its displayed `index` and subsequently deleted. +
 
-==== Current Implementation
+===== Current Implementation
 Given below is a sequence diagram of how the `deleteBudget` command works: +
 
 image::DeleteBudgetSequenceDiagram.png[width="800"]
@@ -730,7 +730,7 @@ It requires the user to specify the name of the goal, as well as the amount they
 
 The command above sets a goal with the name `Nintendo Switch` and with the amount `$499`
 
-==== Current Implementation
+===== Current Implementation
 Given below is a sequence diagram of how the `setGoal` command works:
 
 image::setGoalSequenceDiagram.PNG[width="800"]
@@ -793,7 +793,7 @@ The above report command will generate a report of 21 Mar 2019 with AreaChart.
 [NOTE]
 Only last tag `d/` is used to generate a report if multiply of `d/` appear.
 
-==== Current Implementation
+===== Current Implementation
 
 This section shows the current implementation of the report feature. It also shows the classes or components used in the report feature.
 

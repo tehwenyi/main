@@ -280,7 +280,6 @@ Searching for names and tags is case-insensitive. Furthermore, it allows you to 
 words by applying the concept of Levenshtien distance, hence allowing small typos (limit fixed by an upper bound). +
 If the entry is not found, it displays an appropriate error message. +
 Date format is `dd/MM/yyyy` .
-'find` and `fd` are equivalent.
 ****
 // end::fe[]
 

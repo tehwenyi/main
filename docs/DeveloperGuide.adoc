@@ -1776,13 +1776,123 @@ _{ more test cases ... }_
 .. Other incorrect deleteExpense commands to try: `deleteBudget`, `deleteBudget x` (where x is larger than the list size) +
    Expected: Similar to previous.
 
-=== Saving data
+=== Finding an Expense
 
-. Dealing with missing/corrupted data files
+[NOTE]
+Please input the following commands below (in order). +
+1. `clear` +
+2. `ae n/KFC $/4.5 d/04/05/2019 t/food` +
+3. `ae n/Chicken rice $/6 d/08/05/2019 t/food t/lunch` +
+4. `ae n/Movie $/13 d/10/05/2019 t/movie t/friends` +
+5. `ae n/KFC $/4.5 d/10/05/2019 t/food t/friends` +
 
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
+Prerequisites: Make sure the expense list is NOT empty and you have typed in the commands
+above.
 
-_{ more test cases ... }_
+. Find by `name`
+
+.. Test case: `find n/kfc` +
+   Expected: 2 expenses will be shown in the expense list panel.
+.. Test case: `find n/rice` +
+   Expected: 1 expense will be shown.
+.. Test case: `find n/movei` +
+   Expected: 1 expense will be shown.
+.. Test case: `find n/mee goreng` +
+   Expected: 0 expenses will be shown.
+.. Test case: `find n/` +
+  Expected: invalid command error.
+
+. Find by `cost`
+
+.. Test case: `find $/1:10` +
+   Expected: 3 expenses will be shown in the expense list panel.
+.. Test case: `find $/6` +
+   Expected: 1 expense will be shown.
+.. Test case: `find $/1` +
+   Expected: 0 expenses will be shown.
+.. Test case: `find $/10:1` +
+   Expected: invalid cost error.
+.. Test case: `find $/` +
+   Expected: invalid cost error.
+
+. Find by `date`
+
+.. Test case: `find d/10/05/2019` +
+   Expected: 2 expenses will be shown in the expense list panel.
+.. Test case: `find d/04/05/2019:09/05/2019` +
+   Expected: 2 expenses will be shown.
+.. Test case: `find d/04/03/2019` +
+   Expected: 0 expenses will be shown.
+.. Test case: `find d/2019/05/04` +
+   Expected: invalid date error.
+.. Test case: `find d/10/05/2019:04/05/2019` +
+   Expected: invalid date error.
+.. Test case: `find d/` +
+   Expected: invalid date error.
+
+
+. Find by `tag`
+
+.. Test case: `find t/friends` +
+   Expected: 2 expenses will be shown in the expense list panel.
+.. Test case: `find t/freinds` +
+   Expected: same as previous.
+.. Test case: `find t/friends t/food` +
+   Expected: 1 expense will be shown.
+.. Test case: `find t/` +
+   Expected: invalid tag error.
+
+. Find using multiple keywords
+
+.. Test case: `find $/1:10 d/10/05/2019` +
+   Expected: 1 expense will be shown in the expense list panel.
+.. Test case: `find n/kfc t/friends` +
+   Expected: 1 expense1 will be shown.
+.. Test case: `find n/kfc d/05/05/2019:08/05/2019` +
+   Expected: 0 expenses will be shown.
+
+=== Sorting Expenses
+
+[NOTE]
+Please input the following commands below (in order). +
+1. `clear` +
+2. `ae n/KFC $/4.5 d/04/05/2019 t/food` +
+3. `ae n/Chicken rice $/6 d/08/05/2019 t/food t/lunch` +
+4. `ae n/Movie $/13 d/10/05/2019 t/movie t/friends` +
+5. `ae n/KFC $/4.5 d/10/05/2019 t/food t/friends` +
+
+Prerequisites: Make sure the expense list is NOT empty and you have typed in the commands
+above.
+
+. Sort by `name`
+
+.. Test case: `sort n/` +
+   Expected: all expenses ordered in ascending order (of name) will be shown in the expense list panel.
+.. Test case: `sort n/kfc` +
+   Expected: invalid command error.
+
+. Sort by `cost`
+
+.. Test case: `sort $/` +
+   Expected: all expenses ordered in descending order (of cost) will be shown in the expense list panel.
+.. Test case: `sort $/` and then 'rl' +
+   Expected: all expenses ordered in ascending order (of cost) will be shown in the expense list panel.
+.. Test case: `sort $/10 +
+   Expected: invalid command error.
+
+. Sort by `date`
+
+.. Test case: `sort d/` +
+   Expected: all expenses ordered in descending order (of date) will be shown in the expense list panel.
+.. Test case: `sort d/` and then 'rl' +
+   Expected: all expenses ordered in ascending order (of date) will be shown in the expense list panel.
+.. Test case: `sort d/10/05/2019` +
+   Expected: invalid command error.
+
+. Sort using multiple keywords
+
+.. Test case: `find $/ d/` +
+   Expected: Invalid command error.
 
 === Generating a report
 
@@ -1805,5 +1915,3 @@ _{ more test cases ... }_
  `report d/x` (where x is not a correct date) _{give more}_ +
 
    Expected: Similar to previous.
-
-_{ more test cases ... }_

@@ -276,12 +276,10 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 image::developerguideimplementation.png[width="350"]
 
-This section describes some noteworthy details on how certain features are implemented. It is ordered the same way
-our User Guide.
-****
-Some content here
-****
+This section describes some noteworthy details on how certain features are implemented. It contains 6 sections:
+_basic_, _find and sort_, _budget_, _set goal_, _expense report_ and _miscellaneous_.
 
+=== Basic Features
 // tag::ae[]
 === Add expense feature
 This basic feature allows users to add an expense record to the system.
@@ -722,6 +720,8 @@ as the order of the budgets in `budgetList`. Furthermore, the indexes are unique
 Hence, if the `index` input by the user is negative or greater than the size of `budgetList`, this would indicate that the budget specified does not exist. The user will receive a feedback that the `index` specified is invalid.
 // end::deletebudget[]
 
+=== Set Goal Feature
+
 // tag::setGoal[]
 === Set goal feature
 *_ePiggy_* allows users to set a savings goal that they would like to save up to. +
@@ -837,8 +837,9 @@ with their pros and cons.
 ** Cons: Report feature becomes extra because list command can do the same thing.
 // end::report[]
 
+=== Miscellaneous
 // tag::autocomplete[]
-=== Auto-complete feature
+==== Auto-complete feature
 
 *_ePiggy_* allows users to reduce the time spent typing and time spent learning ePiggy's commands, especially because ePiggy
 uses the Command Line Interface. The auto-complete feature allows ePiggy to be more user-friendly. +
@@ -904,7 +905,7 @@ to do this.
 // end::autocomplete[]
 
 // tag::undoredo[]
-=== Undo/Redo feature
+==== Undo/Redo feature
 
 ==== Current Implementation
 
@@ -965,7 +966,7 @@ image::UndoRedoActivityDiagram.png[width="800"]
 
 ==== Design Considerations
 
-===== Aspect: How undo and redo executes
+===== Aspect: How undo & redo executes
 
 * **Alternative 1 (current choice):** Saves the entire ePiggy.
 ** Pros: Easy to implement.

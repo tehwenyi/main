@@ -44,7 +44,7 @@ Responsibilities: +
 1. `find` feature +
 2. `sort` feature +
 3. Refactoring codebase +
-4. Other minor features include `list`, `reverseList` and `help`.
+4. Other minor features include `list`, `reverseList` and `help`. +
 5. Testing 
 
 '''

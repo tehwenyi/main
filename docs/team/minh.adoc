@@ -14,10 +14,10 @@ This portfolio aims to document my contributions to *_ePiggy_*.
 === About
 // what specific project task is, what module it is for, whether it is an indiv or grp proj
 *ePiggy* is a desktop application for managing personal finances. It allows users to track expenses and allowances,
-manage budgets and saving goals. The app is designed specially for students to encourage them to establish
+manage budgets and saving goals. The app is designed specifically for students to encourage them to establish
 good spending habits. +
 
-*ePiggy* features a minimalist Graphical User Interface, and interacts with users through a Command Line Interface.
+*ePiggy* features a minimalist Graphical User Interface, and it interacts with users through a Command Line Interface.
 Written in Java, it can be used on all major desktop operating systems, including Windows, Mac OS, and Linux.
 
 === Project Team
@@ -54,7 +54,7 @@ The implementation involved changes in all components of the system, requiring m
 a thorough understanding of the whole codebase.
 
 === Code Contributed
-As of 15th April 2019, I have contributed over 50 Pull Requests and reviewed over 20 Pull Requests.
+As of 15th April 2019, I have contributed 20 Pull Requests and reviewed many Pull Requests.
 
 * *Functional code:* link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/AddExpenseCommand.java[Add Expense]
 | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/EditExpenseCommand.java[Edit Expense]
@@ -69,7 +69,7 @@ View all the code I contributed link:https://nus-cs2103-ay1819s2.github.io/cs210
 === Other Contributions
 
 * Project Management:
-As I am team leader, I am in charge of the approach and direction for our project.
+As I am the team leader, I am in charge of the approach and direction for our project.
 This includes deciding how we go about morphing the product, and how we work collaboratively. +
 
 * Undo / Redo: I am in charge of the Undo / Redo feature. Since the feature was already implemented
@@ -82,7 +82,7 @@ Click link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/docs/UserGu
 I am responsible for the user guide of the commands that I implemented, which are
 `addExpense`, `editExpense` and `deleteExpense`.
 
-include::../UserGuide.adoc[tag=report]
+include::../UserGuide.adoc[tag=aed]
 
 == Contributions to the Developer Guide
 

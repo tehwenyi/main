@@ -247,8 +247,8 @@ The `Model`,
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Item` list in `ePiggy`, which `Expense` can reference.
-This would allow `ePiggy` to only require one `Item` object per unique `Item`,
+As a more OOP model, we store an `Item` list in `ePiggy`, which `Expense` can reference to.
+This allows `ePiggy` to only require one `Item` object per unique `Item`,
 instead of each `Expense` needing their own `Item` object. An example of how such a model may look like is given below. +
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
@@ -277,20 +277,19 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 image::developerguideimplementation.png[width="350"]
 
-This section describes some noteworthy details on how certain features are implemented. It contains 6 sections:
+This section describes some noteworthy details on how certain features are implemented. It is split into 6 sections:
 _basic_, _find and sort_, _budget_, _goal_, _report_ and _miscellaneous_.
 
 === Basic Features
 // tag::ae[]
 ==== Add expense feature
-This basic feature allows users to add an expense record to the system.
-To use this feature, the users need to enter the `addExpense` command,
+*_ePiggy_* allows users to add an expense record to the system.
+To use this feature, users need to enter the `addExpense` command,
 with fields `name` and `amount`, and optional fields `date` and `tag`.
 If `date` is not specified, the current date will be used.
 
-* `addExpense n/Chicken rice set $/5 t/Food d/21/02/2019`
-
-_The command above adds an expense record for a $5 chicken rice set, tagged as Food with the date as 21/02/2019._
+* `addExpense n/Chicken rice set $/5 t/Food d/21/02/2019` +
+The command above adds an expense record for a $5 chicken rice set, tagged as Food with the date as 21/02/2019. +
 
 ===== Current Implementation
 The figure below shows the sequence diagram for the `addExpense` command:
@@ -307,15 +306,14 @@ add the `Expense` into the `ExpenseList`.
 
 // tag::ee[]
 ==== Edit expense feature
-This feature allows users to edit an existing expense record in the expense list.
-To use this feature, the users need to enter the `editExpense` command,
+*_ePiggy_* allows users to edit an existing expense record in the expense list.
+To use this feature, users need to enter the `editExpense` command,
 with the `INDEX` (in the displaying list) of the expense to be edited, along with
 the fields that are to be modified.
 
-* `editExpense 1 n/Pen $1 t/Supplies`
-
-_The command above edits the name, cost and tag of the
-first expense in the displaying list to ‘Pen’, ‘$1’ and ‘Supplies’ respectively._
+* `editExpense 1 n/Pen $1 t/Supplies` +
+The command above edits the name, cost and tag of the
+first expense in the displaying list to ‘Pen’, ‘$1’ and ‘Supplies’ respectively. +
 
 The command is recognized by `parseCommand` and an `EditExpenseCommandParser` is created,
 Then it create an `EditExpenseCommand` object with the `EditExpenseDescriptor` specifying the fields to be edited. +
@@ -325,13 +323,12 @@ replaces the old `Expense` by the edited one.
 
 // tag::de[]
 ==== Delete expense feature
-This feature allows users to remove an expense record from the expense list.
-To use this feature, the users need to enter the `deleteExpense` command,
+*_ePiggy_* allows users to remove an expense record from the expense list.
+To use this feature, users need to enter the `deleteExpense` command,
 with the `INDEX` (in the displaying list) of the expense to be deleted.
 
-* `deleteExpense 1`
-
-_The command above deletes the first expense in the displaying expense list._
+* `deleteExpense 1` +
+The command above deletes the first expense in the displaying expense list. +
 
 The command is recognized by `parseCommand` and an `DeleteExpenseCommandParser` is created,
 Then it create an`DeleteExpenseCommand` object with the parsed index. +
@@ -342,15 +339,14 @@ removes the `Expense` from the `ExpenseList`.
 
 // tag::aa[]
 ==== Add allowance feature
-Besides the tracking of expenses, *_ePiggy_* also allows the tracking of allowances, by adding
+*_ePiggy_* allows the tracking of allowances by adding
 allowances into the expenses list. This helps in calculating the net amount of money the user has. +
 Similar to expenses, the user will have to specify the `name` and the  `amount`,
 with optional fields for  `date`, and `tag`.
 
-* `addAllowance n/From Dad $/30 d/04/02/2019 t/School`
-
-_The command above adds a new allowance entry of `$30` with the title `From Dad`, on `4th February 2019`
-with the `School` tag._
+* `addAllowance n/From Dad $/30 d/04/02/2019 t/School` +
+The command above adds a new allowance entry of `$30` with the title `From Dad`, on `4th February 2019`
+with the `School` tag. +
 
 [NOTE]
 `Allowance` and `Expense` are shown in the same list because we made `Allowance` a subclass of
@@ -368,7 +364,7 @@ which is used to separate the arguments into their respective fields.
 A new `Item` is created and this `Item` is used in creating the
 `Allowance` object, which is used to create an `AddAllowanceCommand`. +
 `AddAllowanceCommand` is then executed by `Logic` and `addAllowance()` is called from the model,
-which add the `Allowance` into the `ExpenseList`.
+which adds the `Allowance` into the `ExpenseList`.
 
 ===== Design Considerations
 *Aspect: Should `Allowance` be a subclass of `Expense`?*
@@ -386,7 +382,7 @@ repeated code. This way we can place allowances and expenses in the same list.
 
 // tag::ea[]
 ==== Edit allowance feature
-The `editAllowance` command allows users to edit previously entered allowances.
+*_ePiggy_* allows users to edit previously entered allowances.
 It requires the `INDEX` of the allowance, as well as the fields to be modified.
 
 * `editAllowance 1 $/50 d/06/03/2019`
@@ -425,12 +421,11 @@ mistaken with editing budget or goal).
 // end::ea[]
 // tag::da[]
 ==== Delete allowance feature
-When an incorrect allowance has been entered, it can be deleted from the list using the
-`deleteAllowance` command, by specifying the `INDEX` of the allowance to be deleted.
+*_ePiggy_* allows users to delete an allowance from the list using the
+`deleteAllowance` command by specifying the `INDEX` of the allowance to be deleted.
 
-* `deleteAllowance 2`
-
-_The command above deletes the allowance with index `2` on the allowance and expense list._
+* `deleteAllowance 2` +
+The command above deletes the allowance with index `2` on the allowance and expense list. +
 
 ===== Current Implementation
 The figure below shows the sequence diagram for the `deleteAllowance` command:
@@ -451,9 +446,8 @@ is created. Then, it creates a `DeleteAllowanceCommand` object with the given
 *_ePiggy_* allows the user to list the expenses in any order they want by using the 'list' feature and this `reverseList` feature.
 This makes viewing of expenses more customisable and convenient for the user.
 
-* `reverseList`
-
-The above command lists the expenses in reverse.
+* `reverseList` +
+The command above lists the expenses in reverse. +
 
 ===== Current Implementation
 Given below is a UML sequence diagram of how the `reverseList` command works along with a step-by-step
@@ -533,7 +527,8 @@ returned to `LogicManager`.
 ===== Design considerations
 This feature can be implemented in different ways depending on how the target expenses are found.
 
-*Aspect: How should the expenses be filtered?* +
+*Aspect: How should the expenses be filtered?*
+
 * *Alternative 1:* Storing expenses as and when they are added into separate files. +
 ** Pros: More efficient as there is no need to check for ALL expenses. +
 ** Cons: Need to change the original architecture of storage. +
@@ -549,9 +544,8 @@ This feature can be implemented in different ways depending on how the target ex
 the sorting sequence. By default, a new expense/allowance entry is placed at the bottom of the list (`ExpensePanel`). This
 sorting mechanism allows the user to sort the expenses/allowances accordingly.
 
-* `sort n/`
-
-The above command sorts expense(s) according to their `Name` in a lexicographical order.
+* `sort n/` +
+The above command sorts expense(s) according to their `Name` in a lexicographical order. +
 
 [NOTE]
 Empty user input is not allowed and a appropriate error will be shown. Similarly, multiple keywords (`Prefix`) are also not allowed.
@@ -598,12 +592,11 @@ returned to `LogicManager`.
 
 // tag::addbudget[]
 
-*_ePiggy_* allows users to add a new budget to monitor their expenses within a user-input period of time. +
-This command requires users to specify the `amount`, `start date` and `time period (in days)` of the budget in the command. +
+*_ePiggy_* allows users to add a new budget to monitor their expenses within a user-input period of time. This command
+requires users to specify the `amount`, `start date` and `time period (in days)` of the budget in the command. +
 
 * `addBudget $/500 p/31 d/01/03/2019` +
-
-The above command adds a budget with `$500` which starts on `1st March 2019` and lasts for `31` days. +
+The command above adds a budget with `$500` which starts on `1st March 2019` and lasts for `31` days. +
 
 The budget will compute the end date and provide a status based on the local date.
 The status will include whether the budget is an old, current or future budget, as well as the `remaining amount` until the budget is exceeded and `remaining days` till the end of the budget.
@@ -620,8 +613,10 @@ image::addBudgetSequenceDiagram.png[width="800"]
 
 Figure: Add Budget Command Sequence Diagram +
 
-The command is first parsed into `AddBudgetCommandParser`, which separates the arguments into their respective fields. A new `Budget` is created and parsed into `AddBudgetCommand`. +
-As long as the `Budget` object created does not overlap with any existing `Budget` objects, the `Budget` will be added with `Model#addBudget()` and saved into the ePiggy storage. +
+The command is first recognised by `parseCommand` and an `AddBudgetCommandParser` is created, which is used to separate the
+arguments into their respective fields. A new `Budget` is created, and is used to create an `AddBudgetCommand`. +
+As long as the `Budget` object created does not overlap with any existing `Budget` objects, the `Budget` will be added
+with `Model#addBudget()` and saved into the ePiggy storage. +
 
 *Example usage scenario:* +
 1. User launches application and enters `addBudget $/500 p/31 d/01/03/2019`. +
@@ -646,9 +641,9 @@ As long as the `Budget` object created does not overlap with any existing `Budge
 *_ePiggy_* allows the user to edit the `current budget`, with any of the specified parameters in `addBudget` (above). +
 
 * `editBudget $/300`
-* `editBudget $/400 p/7`
+* `editBudget $/400 p/7` +
+The above commands edit the current budget to $300 and $400 with a period of 7 days respectively.
 
-The above commands edit the current budget to $300 and $400 with a period of 7 days respectively. +
 Similar to the `addBudget` command, budgets’ dates should not overlap each other.  Hence, the budget cannot be edited
 such that the edited budget overlaps with another budget. +
 
@@ -704,9 +699,9 @@ to have a greater level of abstraction. +
 
 *_ePiggy_* allows the user to delete any budget, using the displayed `index` of the specific budget.
 
-* `deleteBudget 2`
+* `deleteBudget 2` +
+The above command deletes the `Budget` with the displayed `index` of *2*.
 
-The above command deletes the `Budget` with the displayed `index` of #2. +
 The `Budget` to be deleted is identified by its displayed `index` and subsequently deleted. +
 
 ===== Current Implementation
@@ -749,14 +744,15 @@ The command is first parsed into `SetGoalCommandParser`, which separates the arg
 2.	`SetGoalCommandParser` takes in the arguments and parses the command to create the appropriate `Goal`. +
 3.	The `SetGoalCommand` is passed back to the `LogicManager`, and the method `execute()` is called. `Goal` is then set to the `model`.
 
-==== Design considerations
+===== Design considerations
 *Aspect: `setGoal` (1 goal) VS `addGoal` (multiple goals)*
+
 * *Alternative 1 (current choice):* `setGoal` (1 goal) +
-** Pros: Easier to implement. Makes ePiggy easier to use.
-** Cons: Limits the user experience by allowing only 1 savings goal.
-* *Alternative 2:* `addGoal` (multiple goals)
-** Pros: Gives user freedom to set more than 1 goal.
-** Cons: Makes ePiggy more complicated, not suitable for younger age groups.
+** Pros: Easier to implement. Makes ePiggy easier to use. +
+** Cons: Limits the user experience by allowing only 1 savings goal. +
+* *Alternative 2:* `addGoal` (multiple goals) +
+** Pros: Gives user freedom to set more than 1 goal. +
+** Cons: Makes ePiggy more complicated, not suitable for younger age groups. +
 
 // end::setGoal[]
 
@@ -765,14 +761,12 @@ The command is first parsed into `SetGoalCommandParser`, which separates the arg
 
 ==== Expense report feature
 *_ePiggy_* allows users to view the report within a user-input period of time. +
-
+This command requires users to specify the `date`, `month` or `year` of the report in the command.
 Given below is a sequence diagram of how the `report` command works: +
 
 image::reportSequenceDiagram.png[width="800"]
 
 Figure: Report Command Sequence Diagram +
-
-This command requires users to specify the `date`, `month` or `year` of the report in the command. +
 
 * `report d/DD/MM/YYYY` +
 
@@ -1264,7 +1258,7 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 [discrete]
 ==== `Ui` component
 
-*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your ePiggy application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last expense in the list. Your job is to implement improvements to the UI to solve all these problems.
+*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how users use your ePiggy application. You realize that one of users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last expense in the list. Your job is to implement improvements to the UI to solve all these problems.
 
 [TIP]
 Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
@@ -1995,8 +1989,6 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
-
 // tag::manualtestingallowance[]
 === Adding an allowance
 
@@ -2047,8 +2039,6 @@ _{ more test cases ... }_
    Expected: No expense is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect deleteExpense commands to try: `deleteExpense`, `deleteExpense x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
-
-_{ more test cases ... }_
 
 === Adding a budget
 

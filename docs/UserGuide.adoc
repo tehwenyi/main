@@ -485,6 +485,20 @@ Press *F2* on the keyboard or the button *"Clean Message"* on the dropdown menu 
 Messages cannot be restored once you clean the result display area.
 Command history and other information will not be affected.
 
+==== Undoing previous commands : `undo`
+// tag::undo[]
+Returns ePiggy to the previous state. Use this if you wish to undo previous commands. +
+
+*Format:* `undo`
+// end::undo[]
+
+==== Redoing commands : `redo`
+// tag::redo[]
+Returns ePiggy to a previously undone state. Use this if you wish to undo an undone command (ie. get back the command). +
+
+*Format:* `redo`
+// end::redo[]
+
 ==== Exiting the program : `exit`
 
 Exits the program. +
@@ -583,6 +597,8 @@ e.g.`find n/McDonalds`
 
 * *List* : `list`
 
+* *Redo* : `redo`
+
 * *Report* : `report d/DD/MM/YYYY` +
 e.g. `report d/21/03/2019`
 
@@ -593,3 +609,5 @@ e.g. `setGoal n/nike shoes $/80`
 
 * *Sort Expenses/Allowances* : `sort [n/d/$]/` +
 e.g.`sort d/`
+
+* *Undo* : `undo`

@@ -294,8 +294,8 @@ The command above adds an expense record for a $5 chicken rice set, tagged as Fo
 ===== Current Implementation
 The figure below shows the sequence diagram for the `addExpense` command:
 
+.Add Expense Sequence Diagram
 image::AddExpenseSequenceDiagram.png[widith="800]
-_Figure: Add Expense Sequence Diagram_
 
 The command is recognized by `parseCommand` and an `AddExpenseCommandParser` is created,
 which is used to parse the command with the separated input arguments.
@@ -356,8 +356,8 @@ the total savings in *ePiggy* easier.
 ===== Current Implementation
 The figure below shows the sequence diagram for the `addAllowance` command:
 
+.Add Allowance Sequence Diagram
 image::AddAllowanceSequenceDiagram.png[widith="800]
-_Figure: Add Allowance Sequence Diagram_
 
 The command is recognised by `parseCommand` and an `AddAllowanceCommandParser` is created,
 which is used to separate the arguments into their respective fields.
@@ -430,9 +430,8 @@ The command above deletes the allowance with index `2` on the allowance and expe
 ===== Current Implementation
 The figure below shows the sequence diagram for the `deleteAllowance` command:
 
+.Delete Allowance Sequence Diagram
 image::DeleteAllowanceSequenceDiagram.png[width="800"]
-
-_Figure : Delete Allowance Command Sequence Diagram_
 
 The command is recognised by `parseCommand` and an `DeleteAllowanceCommandParser`
 is created. Then, it creates a `DeleteAllowanceCommand` object with the given
@@ -453,9 +452,8 @@ The command above lists the expenses in reverse. +
 Given below is a UML sequence diagram of how the `reverseList` command works along with a step-by-step
 explanation. +
 
+.Reverse List Sequence Diagram
 image::rLuml.png[witdh="750"]
-
-Figure: ReverseListCommand UML Sequence Diagram +
 
 Step 1: User enters `rl`.  The command is received by `EPiggyParser` which then creates `ReverseListCommand` object
 and returned to `LogicManager`. +
@@ -499,9 +497,8 @@ Similarly for other type of keywords.
 Given below is a UML sequence diagram of how the `find` command works along with a step-by-step
 explanation.
 
+.Find Sequence Diagram
 image::fEuml.png[witdh="750"]
-
-Figure: Find Command Sequence Diagram +
 
 Step 1: User enters `find n/Nasi Lemak`. The command is
 received by `EPiggyParser` which then creates `FindCommandParser` object and and calls
@@ -554,9 +551,8 @@ Empty user input is not allowed and a appropriate error will be shown. Similarly
 Given below is a UML sequence diagram of how the `sort` command works along with a step-by-step
 explanation. +
 
+.Sort Sequence Diagram
 image::sEuml.png[witdh="750"]
-
-Figure: SortCommand UML Sequence Diagram +
 
 Step 1: User enters `sort $/`.  The command is received by `EPiggyParser` which then creates `SortCommandParser` object
 and calls `SortCommandParser#parse()` method. +
@@ -609,9 +605,8 @@ A `budget` is considered overlapping if *any* of the dates *in between (inclusiv
 ===== Current Implementation
 Given below is a sequence diagram of how the `addBudget` command works: +
 
+.Add Budget Sequence Diagram
 image::addBudgetSequenceDiagram.png[width="800"]
-
-Figure: Add Budget Command Sequence Diagram +
 
 The command is first recognised by `parseCommand` and an `AddBudgetCommandParser` is created, which is used to separate the
 arguments into their respective fields. A new `Budget` is created, and is used to create an `AddBudgetCommand`. +
@@ -707,9 +702,8 @@ The `Budget` to be deleted is identified by its displayed `index` and subsequent
 ===== Current Implementation
 Given below is a sequence diagram of how the `deleteBudget` command works: +
 
+.Delete Budget Sequence Diagram
 image::DeleteBudgetSequenceDiagram.png[width="800"]
-
-Figure: Delete Budget Command Sequence Diagram +
 
 The command’s current implementation retrieves the `budgetList` from `ePiggy` and removes the
 budget at the zero-based version of the displayed `index`. +
@@ -732,9 +726,8 @@ The command above sets a goal with the name `Nintendo Switch` and with the amoun
 ===== Current Implementation
 Given below is a sequence diagram of how the `setGoal` command works:
 
+.Set Goal Sequence Diagram
 image::setGoalSequenceDiagram.PNG[width="800"]
-
-Figure: Set Goal Command Sequence Diagram
 
 The command is first parsed into `SetGoalCommandParser`, which separates the arguments into their respective fields. A new `Goal` is created and parsed into `SetGoalCommand`.
 `Goal` will then be set with `Model#setGoal()` and saved into the ePiggy `Storage`.
@@ -764,9 +757,8 @@ The command is first parsed into `SetGoalCommandParser`, which separates the arg
 This command requires users to specify the `date`, `month` or `year` of the report in the command.
 Given below is a sequence diagram of how the `report` command works: +
 
+.Report Sequence Diagram
 image::reportSequenceDiagram.png[width="800"]
-
-Figure: Report Command Sequence Diagram +
 
 * `report d/DD/MM/YYYY` +
 
@@ -846,8 +838,8 @@ uses the Command Line Interface. The auto-complete feature allows ePiggy to be m
 Given below is an activity diagram of how the link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`auto-complete`]
 feature works: +
 
+.Auto-Complete Activity Diagram
 image::AutocompleteActivityDiagram.png[width="800"]
-Figure: Auto-complete activity Diagram +
 
 This feature first requires users to enter the first few letters of their intended command on the
 link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`commandBox`]

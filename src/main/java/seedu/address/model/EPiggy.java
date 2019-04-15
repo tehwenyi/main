@@ -355,7 +355,6 @@ public class EPiggy implements ReadOnlyEPiggy {
     public String toString() {
         return expenses.asUnmodifiableObservableList() + " expenselist\n"
             + budgetList.asUnmodifiableObservableList() + " budgets";
-        // TODO: refine later
     }
 
     @Override

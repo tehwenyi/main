@@ -336,7 +336,7 @@ public class ModelManager implements Model {
     @Override
     public void setSelectedExpense(Expense expense) {
         if (expense != null && !filteredExpenses.contains(expense)) {
-            throw new PersonNotFoundException(); //TODO
+            throw new PersonNotFoundException();
         }
         selectedExpense.setValue(expense);
     }

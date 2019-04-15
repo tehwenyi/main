@@ -35,6 +35,8 @@ import seedu.address.model.epiggy.Expense;
 import seedu.address.testutil.epiggy.EditAllowanceDescriptorBuilder;
 import seedu.address.testutil.epiggy.TypicalExpenses;
 
+//@@author kev-inc
+
 class EditAllowanceCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();

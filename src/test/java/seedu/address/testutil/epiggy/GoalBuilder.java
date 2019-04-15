@@ -4,6 +4,8 @@ import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Name;
 
+//@@author kev-inc
+
 /**
  * A utility class to help with building Goal objects.
  */

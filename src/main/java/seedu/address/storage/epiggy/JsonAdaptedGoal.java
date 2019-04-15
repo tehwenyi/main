@@ -8,6 +8,8 @@ import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Name;
 
+//@@author kev-inc
+
 /**
  * Json friendly version of (@Link Goal)
  */

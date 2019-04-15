@@ -27,6 +27,8 @@ import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.person.Person;
 
+//@@author kev-inc
+
 public class ViewSavingsCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();

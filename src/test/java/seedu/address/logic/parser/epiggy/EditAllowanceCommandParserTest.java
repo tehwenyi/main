@@ -27,6 +27,8 @@ import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Name;
 import seedu.address.testutil.epiggy.EditAllowanceDescriptorBuilder;
 
+//@@author kev-inc
+
 public class EditAllowanceCommandParserTest {
     private EditAllowanceCommandParser parser = new EditAllowanceCommandParser();
 

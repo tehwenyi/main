@@ -13,7 +13,7 @@ import guitests.guihandles.HelpWindowHandle;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.epiggy.DeleteExpenseCommand;
 import seedu.address.ui.StatusBarFooter;
-
+//@@author yunjun199321
 /**
  * A system test class for the help window, which contains interaction with other UI components.
  */

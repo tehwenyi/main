@@ -278,7 +278,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 image::developerguideimplementation.png[width="350"]
 
 This section describes some noteworthy details on how certain features are implemented. It contains 6 sections:
-_basic_, _find and sort_, _budget_, _set goal_, _expense report_ and _miscellaneous_.
+_basic_, _find and sort_, _budget_, _goal_, _report_ and _miscellaneous_.
 
 === Basic Features
 // tag::ae[]

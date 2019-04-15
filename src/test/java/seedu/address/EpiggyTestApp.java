@@ -24,6 +24,7 @@ import systemtests.ModelHelper;
  * This class is meant to override some properties of MainApp so that it will be suited for
  * testing
  */
+//@@author yunjun199321
 public class EpiggyTestApp extends MainApp {
 
     public static final Path SAVE_LOCATION_FOR_TESTING = TestUtil

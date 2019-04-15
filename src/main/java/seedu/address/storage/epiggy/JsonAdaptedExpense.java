@@ -20,7 +20,7 @@ import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.epiggy.item.Name;
 import seedu.address.model.tag.Tag;
 
-
+//@@author kev-inc
 
 /**
  * Json friendly version of (@Link Expense)

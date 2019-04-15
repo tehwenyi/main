@@ -13,6 +13,8 @@ import seedu.address.model.Model;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Expense;
 
+//@@author kev-inc
+
 /**
  * Deletes an allowance in epiggy.
  */

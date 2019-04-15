@@ -11,6 +11,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.epiggy.Goal;
 
+//@@author kev-inc
+
 /**
  * Set goal amount and name.
  */

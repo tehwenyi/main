@@ -1594,6 +1594,7 @@ Use case ends.
 +
 Use case ends.
 
+// tag::allowanceusecases[]
 [discrete]
 === Use case: Add allowance records
 *MSS*
@@ -1692,6 +1693,7 @@ Use case resumes at step 2.
 ** 4b1. ePiggy shows an error message.
 +
 Use case resumes at step 2.
+// end::allowanceusecases[]
 
 [discrete]
 === Use case: Search expense records
@@ -1848,6 +1850,7 @@ _{More to be added}_
 +
 Use case ends.
 
+// tag::goalusecases[]
 [discrete]
 === Use case: Set a savings goal
 
@@ -1868,6 +1871,7 @@ Use case ends.
 ** 2a1. ePiggy shows an error message.
 +
 Use case ends.
+// end::goalusecases[]
 
 [discrete]
 === Use case: View report
@@ -1961,6 +1965,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 _{ more test cases ... }_
 
+// tag::manualtestingallowance[]
 === Adding an allowance
 
 . Adding an allowance to the list of allowances and expenses.
@@ -1997,6 +2002,7 @@ _{ more test cases ... }_
    error message is shown in the command box.
 .. Other incorrect `deleteAllowance` commands to try: `deleteAllowance`, `deleteAllowance b`,
    `deleteAllowance 99999` (assuming the list is shorter than 99999)
+// end::manualtestingallowance[]
 
 === Deleting an expense
 
@@ -2063,7 +2069,8 @@ _{ more test cases ... }_
    Expected: No budget is deleted. Error details shown.
 .. Other incorrect deleteExpense commands to try: `deleteBudget`, `deleteBudget x` (where x is larger than the list size) +
    Expected: Similar to previous.
-   
+
+// tag::manualtestinggoal[]
 === Setting a savings goal
 . Setting a savings goal to ePiggy.
 .. Test case: `setGoal n/iPad $/599`
@@ -2073,6 +2080,7 @@ _{ more test cases ... }_
    Expected: Goal is not set. Error message shown in the command box.
 .. Other incorrect `setGoal` commands to try: `setGoal`, `setGoal n/@pple watch $/499`,
    `setGoal n/No Goal $/0`
+// end::manualtestinggoal[]
 
 === Finding an Expense
 

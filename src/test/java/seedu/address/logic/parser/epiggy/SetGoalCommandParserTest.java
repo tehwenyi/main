@@ -17,6 +17,8 @@ import seedu.address.logic.commands.epiggy.SetGoalCommand;
 import seedu.address.model.epiggy.Goal;
 import seedu.address.testutil.epiggy.GoalBuilder;
 
+//@@author kev-inc
+
 public class SetGoalCommandParserTest {
     private SetGoalCommandParser parser = new SetGoalCommandParser();
 

@@ -361,11 +361,12 @@ The figure below shows the sequence diagram for the `addAllowance` command:
 image::AddAllowanceSequenceDiagram.png[widith="800]
 _Figure: Add Allowance Sequence Diagram_
 
-The command is first parsed into `AddAllowanceCommandParser`, which separates the arguments into
-their respective fields. A new `Item` is created and this `Item` is used in creating the
-`Allowance` object, which is parsed into the `AddAllowanceCommand`. +
-`AddAllowanceCommand` is then executed and `addAllowance()` is called from the model, which
-add the `Allowance` into the `ExpenseList`.
+The command is recognised by `parseCommand` and an `AddAllowanceCommandParser` is created,
+which is used to separate the arguments into their respective fields.
+A new `Item` is created and this `Item` is used in creating the
+`Allowance` object, which is used to create an `AddAllowanceCommand`. +
+`AddAllowanceCommand` is then executed by `Logic` and `addAllowance()` is called from the model,
+which add the `Allowance` into the `ExpenseList`.
 
 ==== Design Considerations
 *Aspect: Should `Allowance` be a subclass of `Expense`?*
@@ -655,7 +656,7 @@ The command above sets a goal with the name `Nintendo Switch` and with the amoun
 ==== Current Implementation
 Given below is a sequence diagram of how the `setGoal` command works:
 
-image::setGoalSequenceDiagram.png[width="800"]
+image::setGoalSequenceDiagram.PNG[width="800"]
 
 Figure: Set Goal Command Sequence Diagram
 

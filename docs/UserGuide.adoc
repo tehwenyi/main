@@ -129,6 +129,14 @@ Adds an expense for a $5 chicken rice set, tagged as Food with the date as 21/02
 * `addExpense n/Chicken rice set $/5 t/Food` +
 Adds an expense for a $5 chicken rice set, tagged as Food dated as the current date, by default.
 
+****
+image::additionalinformation.png[width="175"]
+Creating an expense would automatically tag the entry with an `Expense` tag. +
+`Name` has to be alphanumeric with a length of less than 50 characters. +
+`AMOUNT` has to be a valid amount greater than $0, and less than $999,999.99. +
+`Date` follows the format `dd/MM/yyyy`.
+****
+
 ==== Editing an expense : `editExpense`
 
 Edits an existing expense in ePiggy at a specific `*INDEX`* . +
@@ -334,6 +342,8 @@ Sets a total budget of $10000 for 15 days starting from 1st January 2000.
 ****
 image::additionalinformation.png[width="175"]
 Time period cannot exceed 1 million days. +
+Budgeted amount has to be a valid amount greater than $0, and less than $999,999.99. +
+Date follows the format `dd/MM/yyyy`. +
 Budget does not take into account allowances as budget only accounts for expenses.
 ****
 // end::addbudget[]

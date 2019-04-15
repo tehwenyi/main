@@ -21,6 +21,7 @@ import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Period;
 
+//@@author tehwenyi
 
 /**
  * Edits the current budget in ePiggy.
@@ -120,8 +121,8 @@ public class EditBudgetCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the budget with. Each non-empty field value will replace the
+     * corresponding field value of the budget.
      */
     public static class EditBudgetDetails {
         private Cost amount;
@@ -132,7 +133,6 @@ public class EditBudgetCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public EditBudgetDetails(EditBudgetDetails toCopy) {
             setAmount(toCopy.amount);

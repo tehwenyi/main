@@ -11,6 +11,8 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.epiggy.Budget;
 
+//@@author tehwenyi
+
 /**
  * Panel containing the budgets and their information.
  */

@@ -60,8 +60,8 @@ public class EditExpenseCommand extends Command {
     final EditExpenseDescriptor editExpenseDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editExpenseDescriptor details to edit the person with
+     * @param index of the expense in the filtered expense list to edit
+     * @param editExpenseDescriptor details to edit the expense with
      */
     public EditExpenseCommand(Index index, EditExpenseDescriptor editExpenseDescriptor) {
         requireNonNull(index);

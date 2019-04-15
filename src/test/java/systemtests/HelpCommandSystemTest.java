@@ -40,10 +40,6 @@ public class HelpCommandSystemTest extends EPiggySystemTest {
         getMainMenu().openHelpWindowUsingAccelerator();
         assertHelpWindowOpen();
 
-        //        getPersonListPanel().click();
-        //        getMainMenu().openHelpWindowUsingAccelerator();
-        //        assertHelpWindowOpen();
-
         getBrowserPanel().click();
         getMainMenu().openHelpWindowUsingAccelerator();
         assertHelpWindowNotOpen();

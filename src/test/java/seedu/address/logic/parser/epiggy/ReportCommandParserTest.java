@@ -13,11 +13,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
- * outside of the DeleteBudgetCommand code. For example, inputs "1" and "1 abc" take the
- * same path through the DeleteBudgetCommand, and therefore we test only one of them.
+ * outside of the ReportCommand code.
  * The path variation for those two cases occur inside the ParserUtil, and
  * therefore should be covered by the ParserUtilTest.
  */
+//@@author yunjun199321
 public class ReportCommandParserTest {
 
     private static final String USER_INPUT_DAY = " d/21/03/2019";

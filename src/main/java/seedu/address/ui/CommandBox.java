@@ -62,7 +62,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = new ListElementPointer(history);
     }
-
+    //@@author yunjun199321
     /**
      * Find set of similar prefix keywords.
      *
@@ -89,7 +89,7 @@ public class CommandBox extends UiPart<Region> {
         }
         return resultArr.toArray(new String[resultArr.size()]);
     }
-
+    //@@author
     /**
      * Handles the key press event, {@code keyEvent}.
      */
@@ -116,7 +116,7 @@ public class CommandBox extends UiPart<Region> {
             // let JavaFx handle the keypress
         }
     }
-
+    //@@author yunjun199321
     /**
      * autocomplete text.
      * Compare user input with the commandArr in the commands list.
@@ -148,7 +148,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.positionCaret(stringBuilder.length()); // set caret after the new text
         tabCount++;
     }
-
+    //@@author
     /**
      * Updates the text field with the previous input in {@code historySnapshot},
      * if there exists a previous input in {@code historySnapshot}

@@ -10,7 +10,7 @@ import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-
+//@@author yunjun199321
 public class ClearCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();

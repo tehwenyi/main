@@ -24,34 +24,31 @@ By: `Team A+ for CS2103T`       Since: `Feb 2019`      Last Updated: `April 2019
 image::userguideintroduction.gif[width="200", role="center"]
 
 Welcome to *_ePiggy_*! *_ePiggy_* is a desktop application designed to inculcate good spending habits in students. +
-Managing money is made much simpler for you with a simple interface and simple commands!
+Managing money is made much simpler with a simple interface and simple commands!
 At the same time, *_ePiggy_* offers everything you need to cultivate good spending habits before
 entering the workforce, from tracking expenses and managing budgets to setting goals! +
 
-Interested? Click on the <<Quick Start>> to get started!
+Interested? Click on <<Quick Start>> to get started!
 
 == Quick Start
 To start using ePiggy, simply follow these steps:::
 1. Ensure you have Java version `9` or later installed on your computer. +
-2. Download the latest *`ePiggy.jar`* file from link:{repoURL}/releases[here]. +
-3. Copy the file to the folder which you want to use as the home folder for your Expense Tracker. +
+2. Download the latest *`ePiggy.jar`* file link:{repoURL}/releases[here]. +
+3. Copy the file to the folder you wish to use as the home folder for ePiggy. +
 4. Double-click the *`ePiggy.jar`* file to start the app. +
-5. The GUI will appear as per below upon launch.
+5. The GUI will appear with some sample data upon launch, as per below.
 
 image::Firstlaunch.png[width="760"]
 _Figure 1. The user interface upon launch of application_
 
-[NOTE]
-ePiggy launches with some sample data preloaded. To start afresh, use the `clear` command to reset everything.
-
 image::samplecommands.png[width="175"]
 
 * `addExpense n/Chicken Rice $/4 t/dinner d/14/04/2019` +
-This command adds a new expense of $4 for Chicken Rice on 1st February.
+This command adds a new expense of $4 for Chicken Rice on 14th April.
 * `addAllowance n/Monthly Allowance $/600 d/01/04/2019` +
-This command adds a new allowance of $20 tagged as 'From Mum' on 1st February.
+This command adds a new allowance of $600 tagged as 'Monthly Allowance' on 1st April.
 * `addBudget $/500 p/30 d/01/04/2019` +
-This command adds a budget of $500 from 1st February 2019 to 28th February 2019 (28 days).
+This command adds a budget of $500 from 1st April 2019 to 30th April 2019 (30 days).
 * `setGoal n/Apple Watch $/600` +
 This command sets a goal of $600 for an Apple Watch.
 * `sort d/` +
@@ -89,7 +86,7 @@ This represents a *tip*. A tip denotes something that is often handy, and good f
 
 === Basic Features
 // tag::autocomplete[]
-==== Auto-complete :
+==== Using auto-complete : tab
 Automatically completes your input without requiring you to type them in full. +
 To use this feature, enter the first few letters of your intended command and press `Tab`.
 
@@ -98,10 +95,10 @@ If the completed command is not your intended command, you can delete the comman
 Another command will show if their letters match. +
 
 image::examples.png[width="125"]
-* *Enter letter 'a', then press `Tab`*
+* *Enter letter 'a', then press `Tab`* +
 The command "addExpense n/ $/ t/ d/ " will show.
 
-* *Delete the command above, enter 'a' again and press `Tab`*
+* *Delete the command above, enter 'a' again and press `Tab`* +
 The `addBudget` or `addAllowance` command will show.
 
 ****
@@ -120,7 +117,7 @@ Lists all the user commands with their syntax and descriptions. +
 // tag::aed[]
 ==== Adding an expense : `addExpense`
 
-Adds a new expense record to the Expense Tracker. +
+Adds a new expense record to ePiggy. +
 *Alias:* `ae` +
 *Format:* `addExpense n/EXPENSE_NAME $/COST [d/DATE] [t/TAG]…` +
 
@@ -150,7 +147,8 @@ Edits the tag of the second expense in the Expense List to ‘Food’.
 
 ==== Deleting an expense : `deleteExpense`
 
-Deletes the expense at the specified INDEX. The INDEX refers to the number in the displayed Expenses List which is next to
+Deletes the expense at the specified `*INDEX`*. +
+The `*INDEX`* refers to the number in the displayed Expenses List which is next to
 the name of the expense. +
 *Alias:* `de` +
 *Format:* `deleteExpense INDEX` +
@@ -158,7 +156,7 @@ the name of the expense. +
 image::example.png[width="125"]
 
 * `deleteExpense 1` +
-Deletes the first expense in the displaying expense list from Expense Tracker.
+Deletes the first expense in the displaying expense list from ePiggy.
 
 // tag::aa[]
 ==== Adding an allowance: `addAllowance`
@@ -177,14 +175,14 @@ image::additionalinformation.png[width="175"]
 Creating an allowance would automatically tag the entry with an `Allowance` tag. +
 `Name` has to be alphanumeric with a length of less than 50 characters. +
 `AMOUNT` has to be a valid amount greater than $0, and less than $999,999.99. +
-`Date` follows the following format `dd/MM/yyyy`.
+`Date` follows the format `dd/MM/yyyy`.
 ****
 // end::aa[]
 // tag::ea[]
 ==== Editing an allowance : `editAllowance`
 
 Edits an existing allowance in ePiggy at a specific `*INDEX`* . +
-The *`INDEX`* refers to the number in the displayed Allowance & Expenses List which is next to the name of the allowance. Existing values of
+The *`INDEX`* refers to the number next to the name of the allowance in the displayed allowances and expenses list. Existing values of
 the allowance will be changed according to the value of the parameters. +
 *Alias:* `ea` +
 *Format:* `editAllowance INDEX [n/ALLOWANCE_NAME] [$/AMOUNT] [d/DATE] [t/TAG]…`
@@ -198,38 +196,38 @@ Edits the amount of the second allowance in ePiggy to ‘$22’.
 
 ****
 image::additionalinformation.png[width="175"]
-Only allowances can be edited using this command. To edit expenses, use the `editExpense` command.
+Only allowances can be edited using this command. To edit expenses, please use the `editExpense` command.
 ****
 // end::ea[]
 // tag::da[]
 ==== Deleting an allowance : `deleteAllowance`
 
 Deletes the allowance at the specified `*INDEX`*. +
-The INDEX refers to the number in the displayed Allowance &
-Expenses List which is next to the name of the allowance. +
+The `*INDEX`* refers to the number next to the name of the allowance in the displayed allowances and
+expenses list. +
 *Alias:* `da` +
 *Format:* `deleteAllowance INDEX`
 
 image::example.png[width="125"]
 
 * `deleteExpense 1` +
-Deletes the first allowance in the displaying list from Expense Tracker.
+Deletes the first allowance in the displaying list from ePiggy.
 
 ****
 image::additionalinformation.png[width="175"]
-Only allowances can be deleted using this command. To delete expenses, use the `deleteExpense` command.
+Only allowances can be deleted using this command. To delete expenses, please use the `deleteExpense` command.
 ****
 // end::da[]
 
 ==== Listing all expenses : `list`
 
-Lists the expense records from newest to oldest. Use this to return to the default view after search/sort commands +
+Lists the expense records from newest to oldest. You can use this to return to the default view after search/sort commands +
 *Alias:* `l` +
 *Format:* `list`
 
 ==== Listing all expenses in reverse : `reverseList`
 
-Lists the expense records from oldest to newest. Use this to return to the default view after search/sort commands +
+Lists the expense records from oldest to newest. You can use this to return to the default view after search/sort commands +
 *Alias:* `rl` +
 *Format:* `reverseList`
 
@@ -259,12 +257,11 @@ Displays all entries listed with the cost range of $250 to $500. +
 
 ****
 image::additionalinformation.png[width="175"]
-Searches and displays the entry along with its information, according to the user-specified command. +
-Searching for names and tags is case-insensitive. Furthermore, it allows you to search for almost similar
-words by applying the concept of Levenshtien distance, hence allowing small typos (limit fixed by an upper bound). +
-If the entry is not found, it displays an appropriate error message. +
-Date format is `dd/MM/yyyy` .
-'find` and `fd` are equivalent.
+`find` searches and displays the entry along with its information, according to the user-specified command. +
+Searching for names and tags is case-insensitive and allows you to search for almost similar
+words (i.e. small typos are allowed). +
+If the entry is not found, ePiggy will display an appropriate error message. +
+Date format is `dd/MM/yyyy`. +
 ****
 // end::fe[]
 
@@ -289,14 +286,13 @@ Sorts all entries by amount in ascending order. +
 image::additionalinformation.png[width="175"]
 
 There should be only one keyword (either `name`, `cost` or `date`) to determine the sorting sequence. +
-'sort` and `st` are equivalent.
 ****
 
 // end::se[]
 
 === Budgeting
 
-==== Adding a spending budget : `addBudget`
+==== Adding a budget : `addBudget`
 
 // tag::addbudget[]
 
@@ -313,10 +309,10 @@ Budgets are considered to be overlapping if their active dates intersect each ot
 image::examples.png[width="125"]
 
 * `addBudget $/500 p/7 d/03/02/2019` +
-Sets a total budget of $500 for each week starting from 3rd February 2019.
+Sets a total budget of $500 for 7 days starting from 3rd February 2019.
 
 * `addBudget $/10000 p/15 d/01/01/2000` +
-Sets a total budget of $10000 every 15 days starting from 1st January 2000.
+Sets a total budget of $10000 for 15 days starting from 1st January 2000.
 
 ****
 image::additionalinformation.png[width="175"]
@@ -331,11 +327,11 @@ ePiggy will show the status of the budgets whenever a new expense is added, edit
 image::budgetstatus.png[width="300"]
 _Figure 3. Example of the status of a current budget._
 
-There will also a reminder for you, depending on the status of your budget. There are 3 different reminders as shown
+There will also a reminder for you, depending on the status of your budget. There are 4 different reminders, as shown
 below.
 
 image::budgetExceeded.png[width="300"]
-_Figure 4. Reminder shown when budget has exceeded._
+_Figure 4. Reminder shown when you have exceeded your budget._
 
 image::budgetEmpty.png[width="300"]
 _Figure 5. Reminder shown when you have $0 left in your budget._
@@ -349,7 +345,8 @@ _Figure 7. Quote provided as a reminder when spendings are well within budget._
 ==== Editing the current budget : `editBudget`
 
 // tag::editbudget[]
-Edits the current budget. A current budget must be present to use this command. +
+Edits the current budget. A current budget must be present to use this command. If your budget has been edited such
+that it is no longer the current budget, you can no longer edit that budget. +
 Edited budget cannot overlap with other existing budgets. +
 
 [NOTE]
@@ -360,11 +357,11 @@ Budgets are considered to be overlapping if their active dates intersect each ot
 
 image::examples.png[width="125"]
 
-* `editBudget $/1000 p/7 d/01/01/2000` +
-Edits the current budget to $1000 for each week starting from 01/01/2000.
+* `editBudget $/1000 p/7 d/01/01/2019` +
+Edits the current budget to $1000 for 7 days starting from 1st January 2019.
 
 * `editBudget $/200 p/15` +
-Edits the current budget to $200 for every 15 days starting from the budget's initial start date.
+Edits the current budget to $200 for 15 days starting from the origin budget's start date.
 
 // end::editbudget[]
 
@@ -377,8 +374,8 @@ Budget does not take into account allowances as budget only accounts for expense
 ==== Deleting a budget : `deleteBudget`
 
 // tag::deletebudget[]
-Deletes the budget at the specified `INDEX`. The `INDEX` refers to the number in the displayed Budget List which is next to
-the status of the budget. +
+Deletes the budget at the specified `INDEX`. The `INDEX` refers to the number next to the status of the budget
+in the displayed budget list. +
 *Alias:* `db` +
 *Format:* `deleteBudget INDEX`
 
@@ -386,17 +383,11 @@ image::example.png[width="125"]
 
 * `deleteBudget 1` +
 Deletes the first budget in the Budget List.
-
-****
-image::additionalinformation.png[width="175"]
-Budget does not take into account allowances as budget only accounts for expenses.
-****
-
 // end::deletebudget[]
 
 === Goal Setting
 // tag::setGoal[]
-==== Setting the savings goal : `setGoal`
+==== Setting a savings goal : `setGoal`
 
 Sets the item and the amount that the user wishes to save up for. +
 *Alias:* `sg` +
@@ -417,58 +408,61 @@ can be found on the User Interface.
 
 === Expense Report
 
-==== Generate report : `report`
+==== Generating a report : `report`
 
 Generates a report of the given date, month, or year. The report consists of total inflow, total outflow, and
 proportion of total expense and total allowance. +
 *Alias:* `rp` +
-*Format:* `report [d/DD/MM/YYYY]` Generates a report for specified date. +
-*Format:* `report [d/MM/YYYY]` Generates a report for specified month. +
-*Format:* `report [d/YYYY]` Generates a report for specified year. +
-*Format:* `report` Generates a report of all records in ePiggy. +
+*Formats:*
+
+* `report [d/DD/MM/YYYY]` +
+Generates a report for specified date.
+
+* `report [d/MM/YYYY]` +
+Generates a report for specified month.
+
+* `report [d/YYYY]` +
+Generates a report for specified year.
+
+* `report` +
+Generates a report of all records in ePiggy.
 
 [NOTE]
-The message of conclusion under the chart will show only if you add at least one expense to ePiggy.
+The message under the chart will appear only if you have at least one existing expense.
 
 image::examples.png[width="125"]
 
-* Example 1: `report` +
-View the completed report of all the records.
+* `report` +
+Views the completed report of all the records.
 
 image::completeReport.png[width="600"]
-Figure of example 1: Completed report.
+_Figure 8: An example of a completed report._ +
 
-***
-
-* Example 2: `report d/10/04/2019` +
-View the specified date report of 10 Apr 2019.
+* `report d/10/04/2019` +
+Views the specified date report of 10 Apr 2019.
 
 image::reportDay.png[width="500"]
-Figure of example 2: Report for specified date.
+_Figure 9: An example of a report for the specified date._
 
-***
-
-* Example 3: `report d/04/2019` +
-View the specified month report of Apr 2019.
+* `report d/04/2019` +
+Views the specified month report for April 2019.
 
 image::reportMonth.png[width="500"]
-Figure of example 3: Report for specified month.
+_Figure 10: An example of a report for the specified month._
 
-***
-
-* Example 4: `report d/2019` +
-View the specified year report of 2019.
+* `report d/2019` +
+Views the specified year report for 2019.
 
 image::reportYear.png[width="500"]
-Figure of example 4: Report for specified year.
+_Figure 11: An example of a report for the specified year._
 // end::report[]
 
 === Miscellaneous
 
-==== Clean up result display area: F2
+==== Cleaning the result display area: F2
 
 Cleans the result display area (leftmost panel). This removes all text in the box.
-Press *F2* on the keyboard or the button *Clean Message* on the dropdown menu to clean the result display area.
+Press *F2* on the keyboard or the button *"Clean Message"* on the dropdown menu to clean the result display area.
 
 [NOTE]
 Messages cannot be restored once you clean the result display area.
@@ -490,11 +484,11 @@ There is no need to save manually.
 image::cominginv2.png[width="125"]
 
 // tag::v2.0[]
-==== Register `[coming in v2.0]`
+==== Registering `[coming in v2.0]`
 
-Allows you to register for an account in ePiggy, so that your account can store your ePiggy information. +
+Allows you to register for an account in ePiggy, so that you can store your ePiggy information. +
 
-==== Login and Logout `[coming in v2.0]`
+==== Logging in and out `[coming in v2.0]`
 
 Allows you to log in and out of ePiggy using your username and password, if your account exists already.
 This will keep your information safe. +
@@ -504,12 +498,12 @@ This feature will be implemented only after the `register` feature has been adde
 
 Allows you to choose to enable data encryption to secure your ePiggy information.
 
-==== Share `[coming in v2.0]`
+==== Sharing `[coming in v2.0]`
 
-Allows you to share your expenses with others! ePiggy will send an email (which you input)
-with an attachment of your personal `ePiggy` data in CSV format. +
+Allows you to share your expenses with others. ePiggy will send an email (which you input)
+with an attachment of your personal ePiggy data in CSV format. +
 
-==== Recommend future spendings `[coming in v2.0]`
+==== Recommending future spendings `[coming in v2.0]`
 
 Recommends steps you can take to keep to your budget. +
 ePiggy will give you 2 recommendations. First, a daily spending limit. Next, the increase in allowance you need
@@ -540,7 +534,7 @@ e.g.`addBudget $/500.00 p/7 d/01/02/2019`
 * *Add Expense* : `addExpense n/EXPENSE_NAME $/COST [d/DATE] [t/TAG]…` +
 e.g. `addExpense n/Chicken rice set $/5 t/Food d/21/02/2019`
 
-* *Clear data* : `clear` +
+* *Clear Data* : `clear` +
 e.g. `clear`
 
 * *Delete Allowance* : `deleteAllowance INDEX` +
@@ -573,7 +567,7 @@ e.g.`find n/McDonalds`
 * *Report* : `report d/DD/MM/YYYY` +
 e.g. `report d/21/03/2019`
 
-* *Reverse list* : `reverseList`
+* *Reverse List* : `reverseList`
 
 * *Set Savings Goal* : `setGoal n/ITEM_NAME $/AMOUNT` +
 e.g. `setGoal n/nike shoes $/80`

@@ -627,13 +627,13 @@ returned to `LogicManager`.
 ==== Design considerations
 This feature can be implemented in different ways depending on how the target expenses are found.
 
-*Aspect: How should the expenses be filtered?*
+*Aspect: How should the expenses be filtered?* +
 * *Alternative 1:* Storing expenses as and when they are added into separate files. +
-** Pros: More efficient as there is no need to check for ALL expenses.
-** Cons: Need to change the original architecture of storage.
+** Pros: More efficient as there is no need to check for ALL expenses. +
+** Cons: Need to change the original architecture of storage. +
 * *Alternative 2 (current choice):* Search through all the expenses and find the ones with matching keywords. +
-** Pros: : Easy to implement as there is no need to change original architecture.
-** Cons: Will take more time as it will search through large number of expenses.
+** Pros: : Easy to implement as there is no need to change original architecture. +
+** Cons: Will take more time as it will search through large number of expenses. +
 
 //end::findexpense[]
 
@@ -684,12 +684,6 @@ The above command sorts expense(s) according to their `Name` in a lexicographica
 
 [NOTE]
 Empty user input is not allowed and a appropriate error will be shown. Similarly, multiple keywords (`Prefix`) are also not allowed.
-
-[TIP]
-All keywords in this command are optional, provided that there is at least one input keyword. For
-example, suppose we want to filter out all `Expense` s with `Cost` between $1 and $10.5 (both inclusive),
-then the command should be just `find $/1:10.5`.
-Similarly for other type of keywords.
 
 ==== Current Implementation
 Given below is a UML sequence diagram of how the `sort` command works along with a step-by-step

@@ -1,6 +1,9 @@
 package seedu.address.testutil.epiggy;
 
 import seedu.address.model.epiggy.Goal;
+
+//@@author kev-inc
+
 /**
  * A utility class containing a list of {@code Goal} objects to be used in tests.
  */

@@ -17,6 +17,8 @@ import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Name;
 
+//@@author kev-inc
+
 /**
  * Parses input arguments and creates a new SetGoalCommand object
  */

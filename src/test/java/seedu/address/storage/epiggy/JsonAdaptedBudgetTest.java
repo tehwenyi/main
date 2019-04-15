@@ -16,6 +16,8 @@ import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Period;
 import seedu.address.testutil.epiggy.BudgetBuilder;
 
+//@@author kev-inc
+
 public class JsonAdaptedBudgetTest {
 
     private static final String INVALID_AMOUNT = "-42";

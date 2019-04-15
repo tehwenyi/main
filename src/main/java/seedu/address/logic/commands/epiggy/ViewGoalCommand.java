@@ -11,6 +11,8 @@ import seedu.address.model.Model;
 import seedu.address.model.epiggy.Goal;
 import seedu.address.model.epiggy.item.Cost;
 
+//@@author kev-inc
+
 /**
  * Views the current goal set.
  */

@@ -30,6 +30,8 @@ import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Name;
 import seedu.address.testutil.epiggy.AllowanceUtil;
 
+//@@author kev-inc
+
 public class AddAllowanceCommandSystemTest extends EPiggySystemTestWithEmptyData {
 
     private String messageHistory = "";

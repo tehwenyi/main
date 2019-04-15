@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.epiggy.DeleteAllowanceCommand;
 
+//@@author kev-inc
+
 public class DeleteAllowanceCommandParserTest {
     private DeleteAllowanceCommandParser parser = new DeleteAllowanceCommandParser();
 

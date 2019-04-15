@@ -29,6 +29,8 @@ import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.epiggy.GoalBuilder;
 
+//@@author kev-inc
+
 public class SetGoalCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();

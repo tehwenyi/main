@@ -73,7 +73,7 @@ https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/ad
 https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/EditAllowanceCommandTest.java[EditAllowanceCommandTest]
 https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/SetGoalCommandTest.java[SetGoalCommandTest]
 https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/systemtests/epiggy/AddAllowanceCommandSystemTest.java[AddAllowanceCommandSystemTest]
-* All my contributions can be viewed https://github.com/CS2103-AY1819S2-W17-4/main/commits?after=7ac611eef4c79a46513ff55843f752a83099fe76+69&author=kev-inc[here]
+* All my contributions can be viewed https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#=undefined&search=kev-inc[here]
 
 === Other Contributions
 
@@ -81,7 +81,7 @@ https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/systemte
 * Shifted the command box and command result box to the side of the layout to mimic a chatbot.
 * Incorporated a panel dedicated to savings and goals into the user interface.
 * Added command aliases.
-* Helped to fix bugs in classes created by other teammates https://github.com/CS2103-AY1819S2-W17-4/main/commit/f0d99ad433d3741491aafcc6798527407b4f5191[{#97)]
+* Helped to fix bugs in classes created by other teammates https://github.com/CS2103-AY1819S2-W17-4/main/commit/f0d99ad433d3741491aafcc6798527407b4f5191[(#97)]
 * Compiled and made formatting changes to the user guide to make it more reader-friendly https://github.com/CS2103-AY1819S2-W17-4/main/commit/5046afedac24c4da8a391b84a5a767604efa2155[(#85)]
 * Set up auto-publishing of documentation for the team
 * Set up reposense for the team
@@ -91,18 +91,24 @@ We had to write a new User Guide as most of the sections in the AddressBook User
 Below is an excerpt from the *ePiggy User Guide*, showing additions I made for the `addAllowance`, `deleteAllowance`, `editAllowance` and `setGoal` commands.
 
 include::../UserGuide.adoc[tag=aa]
+
 include::../UserGuide.adoc[tag=da]
+
 include::../UserGuide.adoc[tag=ea]
+
 include::../UserGuide.adoc[tag=setGoal]
 
 == Contributions to the Developer Guide
 The following section shows my addition to the developer guide for the `addAllowance`, `deleteAllowance`, `editAllowance` and `setGoal` commands.
 
 include::../DeveloperGuide.adoc[tag=aa]
+
 include::../DeveloperGuide.adoc[tag=da]
+
 include::../DeveloperGuide.adoc[tag=ea]
+
 include::../DeveloperGuide.adoc[tag=setGoal]
-include::../DeveloperGuide.adoc[tag=allowanceusecases]
-include::../DeveloperGuide.adoc[tag=goalusecases]
+
 include::../DeveloperGuide.adoc[tag=manualtestingallowance]
+
 include::../DeveloperGuide.adoc[tag=manualtestinggoal]

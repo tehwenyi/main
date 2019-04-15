@@ -588,7 +588,7 @@ returned to `LogicManager`.
 
 // tag::addbudget[]
 
-*_ePiggy_* allows users to add a new budget to monitor their expenses within a user-input period of time. This command
+*_ePiggy_* allows users to add new budgets to monitor their expenses within a user specified period of time. This command
 requires users to specify the `amount`, `start date` and `time period (in days)` of the budget in the command. +
 
 * `addBudget $/500 p/31 d/01/03/2019` +
@@ -1153,7 +1153,7 @@ e.g. `seedu.address.logic.LogicManagerTest`
 * Reason: One of its dependencies, `HelpWindow.html` in `src/main/resources/docs` is missing.
 * Solution: Execute Gradle task `processResources`.
 
-== Dev Ops
+== Development and Operations
 
 image::developerguidedevops.png[width="350"]
 

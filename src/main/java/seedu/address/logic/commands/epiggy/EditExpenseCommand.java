@@ -103,7 +103,6 @@ public class EditExpenseCommand extends Command {
         Cost updatedCost = editExpenseDescriptor.getCost().orElse(expenseToEdit.getItem().getCost());
         Date updatedDate = editExpenseDescriptor.getDate().orElse(expenseToEdit.getDate());
         Set<Tag> updatedTags = editExpenseDescriptor.getTags().orElse(expenseToEdit.getItem().getTags());
-        System.out.println(updatedTags);
         return new Expense(new Item(updatedName, updatedCost, updatedTags), updatedDate);
     }
 

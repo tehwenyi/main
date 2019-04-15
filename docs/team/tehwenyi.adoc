@@ -108,7 +108,7 @@ Click link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/docs/UserGu
 
 image::overview.png[width="130"]
 
-* Standardised and improved the aesthetics of the User Guide
+* *Standardised and improved the aesthetics of the User Guide*
 
 I designed and added the header and images across the user guide to make it more
 inviting and reader friendly, considering that our target users are students. Below are some examples of my designs:
@@ -117,7 +117,7 @@ image::userguideheaders.png[width="500"]
 
 _Figure 1: Header and section headers added in the User Guide to increase readability and better engage our target audience_ +
 
-* Contributed content to the User Guide
+* *Contributed content to the User Guide*
 
 I wrote the *Introduction* of the User Guide, making sure it is clear, concise and engaging.
 Also, I wrote the *Budgeting* feature which teaches users how to use the `budget` commands in a clear and informative
@@ -154,7 +154,7 @@ Developer Guide!
 
 image::overview.png[width="130"]
 
-* Standardised and improved the aesthetics of the Developer Guide
+* *Standardised and improved the aesthetics of the Developer Guide*
 
 I designed and added the header and images across the developer guide to
 reduce clutter of words and make it more readable. Below are some examples of my designs:
@@ -163,7 +163,7 @@ image::developerguideheaders.png[width="500"]
 
 _Figure 2: Header and images added in the Developer Guide_ +
 
-* Contributed content to the Developer Guide
+* *Contributed content to the Developer Guide*
 
 I documented the implementation details and design considerations for the *Budgeting* feature.
 I also created diagrams to aid in the explanations. My contributions can be found below, in Sections 4.1 to 4.3.

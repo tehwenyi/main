@@ -4,49 +4,76 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-ePiggy - It was developed by the https://github.com/CS2103-AY1819S2-W17-4[A+ for 2103T] team.
-We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
+ePiggy is developed by https://github.com/CS2103-AY1819S2-W17-4[A+ for 2103T] team.
+We are a team of Year 2 Computer Science undergraduates based in http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
 
 === Phan Duc Nhat Minh
 image::pdnm.png[width="150", align="left"]
-{empty}[https://github.com/pdnm[github]]
+{empty}[https://github.com/pdnm[github]] [<<minh#, portfolio>>]
 
 Role: Team Leader, Developer
+
+Responsibilities: +
+1. Basic features +
+2. Java expert +
 
 '''
 
 === Teh Wen Yi
 image::tehwenyi.png[width="150", align="left"]
-{empty}[https://github.com/tehwenyi[github]]
+{empty}[https://github.com/tehwenyi[github]] [<<tehwenyi#, portfolio>>]
 
 Role: Developer
 
-'''
-
-=== Wu Yunjun
-image::yunjun199321.png[width="150", align="left"]
-{empty}[https://github.com/yunjun199321[github]]
-
-Role: Developer
-
-'''
-
-=== Kevin
-image::kev-inc.png[width="150", align="left"]
-{empty}[https://github.com/kev-inc[github]]
-
-Role: Developer
+Responsibilities: +
+1. `budget` feature +
+2. Documentations +
+3. Testing +
 
 '''
 
 === Rahul Baid
 image::rahulb99.png[width="150", align="left"]
-{empty}[https://github.com/rahulb99[github]]
+{empty}[https://github.com/rahulb99[github]] [<<rahulb99#, portfolio>>]
 
 Role: Developer
 
-Responsibilities: Data
+Responsibilities: +
+1. `find` feature +
+2. `sort` feature +
+3. Refactoring codebase +
+4. Other minor features include `list`, `reverseList` and `help`. +
+5. Testing 
+
+'''
+
+=== Wu Yunjun
+image::yunjun199321.png[width="150", align="left"]
+{empty}[https://github.com/yunjun199321[github]] [<<yunjun199321#, portfolio>>]
+
+Role: Developer
+
+Responsibilities: +
+1. `report` feature +
+2. `autocomplete` feature +
+3. Bug Finder +
+4. Testing +
+
+'''
+
+=== Kevin
+image::kev-inc.png[width="150", align="left"]
+{empty}[https://github.com/kev-inc[github]] [<<kevin#, portfolio>>]
+
+Role: Developer
+
+Responsibilities: +
+1. `allowance` feature +
+2. `goal` feature +
+3. `savings` feature +
+4. Storage +
+5. Testing +
 
 '''

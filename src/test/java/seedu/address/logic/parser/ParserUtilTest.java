@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -16,9 +15,9 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.epiggy.item.Name;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
@@ -29,6 +28,8 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG_EXPENSE = "expense";
+    private static final String INVALID_TAG_ALLOWANCE = "allowance";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -65,26 +66,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseName_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+    public void parseItemName_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseItemName((String) null));
     }
 
     @Test
-    public void parseName_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseName(INVALID_NAME));
+    public void parseItemName_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseItemName(INVALID_NAME));
     }
 
     @Test
-    public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
+    public void parseItemName_validValueWithoutWhitespace_returnsName() throws Exception {
         Name expectedName = new Name(VALID_NAME);
-        assertEquals(expectedName, ParserUtil.parseName(VALID_NAME));
+        assertEquals(expectedName, ParserUtil.parseItemName(VALID_NAME));
     }
 
     @Test
-    public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+    public void parseItemName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
         Name expectedName = new Name(VALID_NAME);
-        assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
+        assertEquals(expectedName, ParserUtil.parseItemName(nameWithWhitespace));
     }
 
     @Test
@@ -166,6 +167,18 @@ public class ParserUtilTest {
     public void parseTag_invalidValue_throwsParseException() throws Exception {
         thrown.expect(ParseException.class);
         ParserUtil.parseTag(INVALID_TAG);
+    }
+
+    @Test
+    public void parseTag_containsExpenseKeyword_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parseTag(INVALID_TAG_EXPENSE);
+    }
+
+    @Test
+    public void parseTag_containsAllowanceKeyword_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parseTag(INVALID_TAG_ALLOWANCE);
     }
 
     @Test

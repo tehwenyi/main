@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.function.Predicate;
 
@@ -21,16 +22,15 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.model.AddressBook;
+import seedu.address.model.EPiggy;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 import seedu.address.model.epiggy.Goal;
-import seedu.address.model.epiggy.Savings;
+import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -101,6 +101,25 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
+        public void reverseFilteredExpensesList() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void sortExpenses(Comparator<Expense> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Expense> getExpenseList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Budget> getBudgetList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
@@ -121,12 +140,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getEPiggyFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setEPiggyFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -166,7 +185,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deleteExpenseAtIndex(int index) {
+        public void deleteExpense(Expense toDelete) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -176,7 +195,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public SimpleObjectProperty<Savings> getSavings() {
+        public SimpleObjectProperty<Cost> getSavings() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -196,12 +215,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setEPiggy(ReadOnlyEPiggy newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyEPiggy getEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -256,32 +275,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public void sortExpenses(ArgumentMultimap keywords) {
+        public boolean canUndoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canRedoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public void undoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void redoEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void commitAddressBook() {
+        public void commitEPiggy() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -296,7 +310,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Person getSelectedPerson() {
+        public Expense getSelectedExpense() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -343,13 +357,13 @@ public class AddCommandTest {
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitEPiggy() {
             // called by {@code AddCommand#execute()}
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyEPiggy getEPiggy() {
+            return new EPiggy();
         }
     }
 

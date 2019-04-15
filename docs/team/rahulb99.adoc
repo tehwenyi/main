@@ -1,0 +1,230 @@
+= Rahul Baid - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+image::rahulb99.png[width="100", align="left"]
+
+
+This portfolio aims to document my contributions to *_ePiggy_*.
+
+*_ePiggy_* Github link: https://github.com/CS2103-AY1819S2-W17-4/main
+
+---
+
+== PROJECT: ePiggy
+
+---
+
+== Overview
+
+ePiggy is a desktop application designed to inculcate good spending habits in students.
+ePiggy hopes to make managing money much simpler for you with a simple interface and simple commands!
+At the same time, ePiggy offers everything you need to cultivate good spending habits before entering the workforce,
+from tracking expenses and managing budgets to setting goals! +
+
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. +
+
+*_ePiggy_* is a product of twin modules CS2101 and CS2103T. It was transformed from the
+link:https://github.com/nus-cs2103-AY1819S2/addressbook-level4[AddressBook - Level 4] application.
+
+== Summary of contributions
+
+---
+
+* *Major enhancements*: added *the ability to search and sort for expenses*
+** What it does: +
+ 1. allows the user to search for his/her expenses by either it's `name`, `cost`, `date` and/or `tag` ! +
+ 2. allows the user to sort his/her expenses by either it's `name`, `cost` or `date` !
+** Justification: These features improves the product significantly because: +
+1. It becomes more convenient for the user to find a particular expenses or a set of expenses
+to figure out where he/she has been spending.
+2. It becomes more convenient for the user to sort the expenses according to his/her preferences.
+For example, if the user wants to find out where he/she has been spending more, the user can sort it by cost.
+** Highlights: These enhancements are two of the most user-friendly commands in ePiggy, mainly due to their need and adaptability. +
+1. The search feature enhancement have been built on top of the existing functionality. Now it allows multiple keywords search to filter out the
+expenses. This feature searches for similar words in case the user makes a typing error. Furthermore, it allows user to
+enter a range for date and cost. This implementation was quite challenging as it required the complete modification of the existing command.
+2. The sort feature enhancement was built from start to finish. It required an in-depth analysis of design alternatives.
+This new feature greatly adds to the functionality of existing commands (that were modified from address-book level 4).
+
+* *Minor enhancement*: Added reverse list command. Modified existing help and list commands. Refactored the codebase.
+
+* *Functional code contributed*: [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/FindExpenseCommand.java[FindExpense]],
+[https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/SortExpenseCommand.java[SortExpense]],
+[https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/ReverseListCommand.java[ReverseList]],
+[https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/HelpCommand.java[HelpCommand]] .
+
+* *Test code contributed*: [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/FindCommandTest.java[FindCommandTest]],
+[https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/ReverseListCommandTest.java[ReverseListCommandTest]],
+[https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/SortCommandTest.java[SortCommandTest]] .
+
+* *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=rahulb99&sort=displayName&since=2019-02-10&until=2019-04-30&timeframe=day&reverse=false&repoSort=false[Reposense]]
+
+* *Other contributions*:
+
+** Project management:
+*** Managed product releases on GitHub.
+*** Set up the issue tracker, user stories, and assigned the milestones.
+*** Tested for bugs for all features of `EPiggy`.
+
+** Enhancements to existing features:
+*** Made `date` an optional keyword while adding an expense.
+   (so now, if the `date` keyword is missing, `date` takes the value of device's date). (Commit: https://github.com/CS2103-AY1819S2-W17-4/main/pull/135/commits/b974cc12cc700d751de34c80307267d26f5e455e[b974cc] )
+*** Wrote base tests for any command related to `expense`, in addition to `FindCommandTest`, `SortCommandTest` and `ReverseListCommandTest`.
+ (Pull requests https://github.com/CS2103-AY1819S2-W17-4/main/pull/135[#135], https://github.com[#00])
+*** Modified the search engine by make it more powerful by searching for similar words in case user makes a typo, or even when user
+types a part of the keyword he/she wishes to search for.
+*** Modified the storage functionality. (Pull Request https://github.com/CS2103-AY1819S2-W17-4/main/pull/20[#20])
+
+** Documentation:
+*** Did some UI changes to `index.html` (main page of our application).
+
+** Community:
+*** PRs reviewed (https://github.com/CS2103-AY1819S2-W17-4/main/pull/40[#40], https://github.com/CS2103-AY1819S2-W17-4/main/pull/94[#94],
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/97[#97], https://github.com/CS2103-AY1819S2-W17-4/main/pull/115[#115],
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/123[#123], https://github.com/CS2103-AY1819S2-W17-4/main/pull/40[#132],
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/139[#139], https://github.com/CS2103-AY1819S2-W17-4/main/pull/150[#150],
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/151[#151], https://github.com/CS2103-AY1819S2-W17-4/main/pull/153[#153],
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/157[#157], https://github.com/CS2103-AY1819S2-W17-4/main/pull/218[#218],
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/257[#257], https://github.com/CS2103-AY1819S2-W17-4/main/pull/258[#258],
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/259[#259], https://github.com/CS2103-AY1819S2-W17-4/main/pull/265[#265])
+
+*** Contributed to forum discussion (example:  https://github.com/nus-cs2103-AY1819S2/forum/issues/64[#64])
+
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2103-AY1819S2-W14-1/main/issues/151[#151],
+https://github.com/CS2103-AY1819S2-W14-1/main/issues/167[#167], https://github.com/CS2103-AY1819S2-W14-1/main/issues/153[#153],
+https://github.com/CS2103-AY1819S2-W14-1/main/issues/160[#160], https://github.com/CS2103-AY1819S2-W14-1/main/issues/157[#157],
+ https://github.com/CS2103-AY1819S2-W14-1/main/issues/155[#155], https://github.com/CS2103-AY1819S2-W14-1/main/issues/148[#148])
+
+** Tools:
+*** Set up Travis CI for the team repo.
+*** Set up Netlify for the team repo.
+*** Set up Appveyor for the team repo.
+*** Set up Codacy for the team repo.
+*** Set up Coveralls for the team repo.
+
+
+== Contributions to the User Guide
+
+---
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+=== Filtering and Sorting Data
+
+include::../UserGuide.adoc[tag=fe]
+
+include::../UserGuide.adoc[tag=se]
+
+==== Listing all expenses : `list`
+
+Lists the expense records from newest to oldest. Use this to return to the default view after search/sort commands. +
+Format: `list` or `l`
+
+==== Listing all expenses in reverse : `reverseList`
+
+Lists the expense records from oldest to newest. Use this to return to the default view after search/sort commands. +
+Format: `reverseList`
+
+****
+*Additional Information:* +
+One major use of `reverseList` command is executing it after searching/sorting the expense list.
+'reverseList` and `rl` are equivalent.
+****
+
+==== Viewing help : `help`
+Lists all the user commands with their syntax and descriptions. +
+Format: `help`
+
+==== Share feature `[coming in v2.0]`
+
+Allows you to share your expenses with anyone, by sending them an email
+including an attachment of your personal `ePiggy` data in CSV format.
+
+
+== Contributions to the Developer Guide
+
+---
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=findexpense]
+
+include::../DeveloperGuide.adoc[tag=sortexpense]
+
+
+[discrete]
+=== Use case: Find expense records
+
+*MSS*
+
+1. User requests to search for an expense record.
+2. ePiggy requests user to enter search command.
+3. User enters search command with specific parameters.
+4. ePiggy searches and displays the record(s).
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Parameter field is empty.
++
+[none]
+** 1a1. ePiggy lists all the expense records.
++
+Use case ends.
+
+[discrete]
+=== Use case: Sort expense records
+
+*MSS*
+
+1. User requests to sort expense records.
+2. ePiggy requests user to enter sort command.
+3. User enters sort command with specific parameters.
+4. ePiggy sorts and displays the record(s).
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Parameter field is empty.
++
+[none]
+** 1a1. ePiggy lists all the expense records sorted by date added.
++
+Use case ends.
+
+[discrete]
+=== Use case: Help
+
+*MSS*
+
+1. User requests for help.
+2. ePiggy displays a list of all the commands - brief description and syntax.
++
+Use case ends.
+
+[discrete]
+=== Use case: Reverse List
+
+*MSS*
+
+1. User requests to display the list in reverse.
+2. ePiggy displays a list of all the expenses in reverse.
++
+Use case ends.
+
+
+== PROJECT:
+
+---
+
+_{To be added.}_

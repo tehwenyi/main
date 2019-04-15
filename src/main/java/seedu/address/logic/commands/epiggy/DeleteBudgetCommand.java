@@ -23,11 +23,11 @@ public class DeleteBudgetCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the budget identified by the index number used in the displayed budget list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameter: index (positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_BUDGET_SUCCESS = "Deleted budget: %1$s";
-    public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The index does not exist on the budget list.";
+    public static final String MESSAGE_DELETE_BUDGET_SUCCESS = "Deleted budget. \nDeleted budget's details:\n%1$s";
+    //public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The index does not exist on the budget list.";
 
     private final Index targetIndex;
 
@@ -46,7 +46,7 @@ public class DeleteBudgetCommand extends Command {
 
         Budget budgetToDelete = lastShownBudgetList.get(this.targetIndex.getZeroBased());
         model.deleteBudgetAtIndex(this.targetIndex.getZeroBased());
-        model.commitAddressBook();
+        model.commitEPiggy();
         return new CommandResult(String.format(MESSAGE_DELETE_BUDGET_SUCCESS, budgetToDelete));
     }
 

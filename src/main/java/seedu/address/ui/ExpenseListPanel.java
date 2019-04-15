@@ -21,11 +21,13 @@ public class ExpenseListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(ExpenseListPanel.class);
 
     @FXML
+
     private ListView<Expense> expenseListView;
 
     public ExpenseListPanel(ObservableList<Expense> expenseList, ObservableValue<Expense> selectedExpense,
             Consumer<Expense> onSelectedExpenseChange) {
         super(FXML);
+
         expenseListView.setItems(expenseList);
         expenseListView.setCellFactory(listView -> new ExpenseListViewCell());
         expenseListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {

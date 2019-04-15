@@ -15,17 +15,17 @@ public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
     public static final String COMMAND_ALIAS = "u";
     public static final String MESSAGE_SUCCESS = "Undo success!";
-    public static final String MESSAGE_FAILURE = "No more commands to undo!";
+    public static final String MESSAGE_FAILURE = "Can't undo!";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (!model.canUndoAddressBook()) {
+        if (!model.canUndoEPiggy()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        model.undoAddressBook();
+        model.undoEPiggy();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

@@ -29,10 +29,23 @@ public class Expense {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        SimpleDateFormat format = new SimpleDateFormat("h:mma, dd MMM YYYY");
+        SimpleDateFormat format = new SimpleDateFormat("EEE, MMM d, ''yy");
         builder.append(item)
                 .append("\nAdded on: ")
                 .append(format.format(date));
         return builder.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Expense)) {
+            return false;
+        }
+        Expense otherExpense = (Expense) other;
+        return otherExpense.getItem().equals(getItem())
+                && otherExpense.getDate().equals(getDate());
     }
 }

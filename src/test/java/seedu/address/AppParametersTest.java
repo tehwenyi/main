@@ -1,6 +1,7 @@
 package seedu.address;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -35,6 +36,16 @@ public class AppParametersTest {
         parametersStub.namedParameters.put("config", "a\0");
         expected.setConfigPath(null);
         assertEquals(expected, AppParameters.parse(parametersStub));
+    }
+
+    @Test
+    public void equal_sameObject_success() {
+        assertEquals(expected, expected);
+    }
+
+    @Test
+    public void equal_objectNotAppParameters_failure() {
+        assertNotEquals(expected, parametersStub);
     }
 
     private static class ParametersStub extends Application.Parameters {

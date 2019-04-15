@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalEPiggy;
 
 import java.nio.file.Path;
 
@@ -12,9 +12,11 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.EPiggy;
+import seedu.address.model.ReadOnlyEPiggy;
 import seedu.address.model.UserPrefs;
+
+import seedu.address.storage.epiggy.JsonEPiggyStorage;
 
 public class StorageManagerTest {
 
@@ -25,7 +27,7 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonEPiggyStorage addressBookStorage = new JsonEPiggyStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
     }
@@ -53,18 +55,18 @@ public class StorageManagerTest {
     public void addressBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonEPiggyStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonEPiggyStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        EPiggy original = getTypicalEPiggy();
+        storageManager.saveEPiggy(original);
+        ReadOnlyEPiggy retrieved = storageManager.readEPiggy().get();
+        assertEquals(original, new EPiggy(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getEPiggyFilePath() {
+        assertNotNull(storageManager.getEPiggyFilePath());
     }
 
 }

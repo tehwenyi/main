@@ -37,9 +37,9 @@ public class DeleteBudgetCommandTest {
 
         String expectedMessage = String.format(DeleteBudgetCommand.MESSAGE_DELETE_BUDGET_SUCCESS, budgetToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getEPiggy(), new UserPrefs());
         expectedModel.deleteBudgetAtIndex(INDEX_FIRST_BUDGET.getZeroBased());
-        expectedModel.commitAddressBook();
+        expectedModel.commitEPiggy();
 
         assertCommandSuccess(deleteBudgetCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -62,9 +62,9 @@ public class DeleteBudgetCommandTest {
 
         String expectedMessage = String.format(DeleteBudgetCommand.MESSAGE_DELETE_BUDGET_SUCCESS, budgetToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getEPiggy(), new UserPrefs());
         expectedModel.deleteBudgetAtIndex(INDEX_FIRST_BUDGET.getZeroBased());
-        expectedModel.commitAddressBook();
+        expectedModel.commitEPiggy();
         showNoBudget(expectedModel);
 
         assertCommandSuccess(deleteBudgetCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -76,7 +76,7 @@ public class DeleteBudgetCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_BUDGET;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getBudgetList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getEPiggy().getBudgetList().size());
 
         DeleteBudgetCommand deleteBudgetCommand = new DeleteBudgetCommand(outOfBoundIndex);
 
@@ -88,19 +88,19 @@ public class DeleteBudgetCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Budget budgetToDelete = model.getFilteredBudgetList().get(INDEX_FIRST_BUDGET.getZeroBased());
         DeleteBudgetCommand deleteBudgetCommand = new DeleteBudgetCommand(INDEX_FIRST_BUDGET);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getEPiggy(), new UserPrefs());
         expectedModel.deleteBudgetAtIndex(INDEX_FIRST_BUDGET.getZeroBased());
-        expectedModel.commitAddressBook();
+        expectedModel.commitEPiggy();
 
         // delete -> first budget deleted
         deleteBudgetCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered budget list to show all persons
-        expectedModel.undoAddressBook();
+        expectedModel.undoEPiggy();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first budget deleted again
-        expectedModel.redoAddressBook();
+        expectedModel.redoEPiggy();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

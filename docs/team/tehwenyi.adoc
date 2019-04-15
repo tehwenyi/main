@@ -72,7 +72,7 @@ image::highlights.png[width="150"]
 make the UI simple and concise for our target users whilst conveying the crucial information.
 
 === Code Contributed
-As of 15th April 2019, I have contributed over 50 Pull Requests and reviewed over 20 Pull Requests.
+As of 15th April 2019, I have contributed over 60 Pull Requests.
 
 * *Functional code:* link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/AddBudgetCommand.java[Add Budget]
 | link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/EditBudgetCommand.java[Edit Budget]
@@ -88,11 +88,13 @@ View all the code I contributed link:https://nus-cs2103-ay1819s2.github.io/cs210
 
 === Other Contributions
 
-* As of 15th April 2019:
-** Reviewed over 20 pull requests on ePiggy's Github.
+* Managed releases v1.3 and v1.4.
+* As of *15th April 2019*:
+** Reviewed over 25 pull requests on ePiggy's Github.
 ** Raised over 10 issues on ePiggy's Github.
 * Refactored Address Book to ePiggy.
-* Created the *.jar file for ePiggy.
+* Set up Coveralls for the team.
+* Identified bugs in ePiggy and raised them as issues (https://github.com/CS2103-AY1819S2-W17-4/main/issues/109[#109], https://github.com/CS2103-AY1819S2-W17-4/main/issues/167[#167], https://github.com/CS2103-AY1819S2-W17-4/main/issues/242[#242]).
 * Standardised the language and formatting of the user and developer guide to provide greater coherence.
 
 == Contributions to the User Guide

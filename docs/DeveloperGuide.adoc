@@ -2,6 +2,7 @@
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
+:toclevels: 4
 :toc-placement: macro
 :sectnums:
 :imagesDir: images

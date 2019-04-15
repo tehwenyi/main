@@ -6,7 +6,7 @@
 
 image::ppplogo.png[width="300"]
 This portfolio aims to document my contributions to *_ePiggy_*.
-Github link: https://github.com/CS2103-AY1819S2-W17-4/main[*_ePiggy_* ]
+Github link: https://github.com/CS2103-AY1819S2-W17-4/main
 
 ---
 == About the project
@@ -30,7 +30,7 @@ This symbol indicates important information.
            application.
 
 link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`ReportWindow`]
-| Blue underline text with grey highlight indicates a component, class or object in
+| Underline text with grey highlight indicates a component, class or object in
                  the architecture of the application.
 
 == Summary of contributions

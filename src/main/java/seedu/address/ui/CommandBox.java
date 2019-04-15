@@ -39,6 +39,7 @@ public class CommandBox extends UiPart<Region> {
         "exit",
         "find n/ t/ d/ $/",
         "help",
+        "history",
         "list",
         "redo",
         "report d/",

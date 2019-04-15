@@ -218,17 +218,32 @@ image::additionalinformation.png[width="175"]
 Only allowances can be deleted using this command. To delete expenses, use the `deleteExpense` command.
 ****
 
-==== Listing all expenses : `list`
+==== Listing the entered commands : `history`
 
-Lists the expense records from newest to oldest. Use this to return to the default view after search/sort commands +
+// tag::history[]
+
+Lists all the user entered commands in reverse order (except empty commands). +
+*Alias:* `hs` +
+*Format:* `history`
+
+// end::history[]
+
+==== Listing all expenses : `list`
+// tag::list[]
+
+Lists the expense records from newest to oldest. Use this to return to the default view after search/sort commands. +
 *Alias:* `l` +
 *Format:* `list`
+// end::list[]
 
 ==== Listing all expenses in reverse : `reverseList`
+// tag::reverse[]
 
-Lists the expense records from oldest to newest. Use this to return to the default view after search/sort commands +
+Lists the expense records from oldest to newest. Use this to return to the default view after search/sort commands. +
 *Alias:* `rl` +
 *Format:* `reverseList`
+
+// end::reverse[]
 
 === Filtering and Sorting Data
 
@@ -239,7 +254,7 @@ Finds any expense or allowance in the list by specifying either its name, tag, d
 *Alias:* `fd` +
 *Format:* *`find [n/NAME] [t/TAG] [d/DATE_RANGE] [$/AMOUNT RANGE]`* +
 
-image::examples.png[width="125"]
+** Examples:
 
 * `find n/McDonalds` +
 Displays all entries with the name “McDonalds”. +
@@ -255,7 +270,7 @@ Displays all entries listed with the cost range of $250. +
 Displays all entries listed with the cost range of $250 to $500. +
 
 ****
-image::additionalinformation.png[width="175"]
+*Additional Information:* +
 Searches and displays the entry along with its information, according to the user-specified command. +
 Searching for names and tags is case-insensitive. Furthermore, it allows you to search for almost similar
 words by applying the concept of Levenshtien distance, hence allowing small typos (limit fixed by an upper bound). +
@@ -272,7 +287,7 @@ Sorts the expenses and allowances in the list by name, date added, amount in asc
 *Alias:* `st` +
 *Format:* `sort [n/d/$]/`
 
-image::examples.png[width="125"]
+** Examples:
 
 * `sort n/` +
 Sorts all entries by name (in ascending order). +
@@ -283,8 +298,7 @@ Sorts all entries by amount in ascending order. +
 
 ****
 
-image::additionalinformation.png[width="175"]
-
+*Additional Information:* +
 There should be only one keyword (either `name`, `cost` or `date`) to determine the sorting sequence. +
 'sort` and `st` are equivalent.
 ****
@@ -506,7 +520,7 @@ Allows you to choose to enable data encryption to secure your ePiggy information
 Allows you to share your expenses with others! ePiggy will send an email (which you input)
 with an attachment of your personal `ePiggy` data in CSV format. +
 
-==== Recommend future spendings `[coming in v2.0]`
+==== Recommend future spending `[coming in v2.0]`
 
 Recommends steps you can take to keep to your budget. +
 ePiggy will give you 2 recommendations. First, a daily spending limit. Next, the increase in allowance you need
@@ -564,6 +578,8 @@ e.g. `editExpense 1 n/Pen $/1 t/Supplies`
 e.g.`find n/McDonalds`
 
 * *Help* : `help`
+
+* *History* : `history`
 
 * *List* : `list`
 

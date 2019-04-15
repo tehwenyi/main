@@ -116,7 +116,7 @@ If you plan to develop this fork as a separate product (i.e. instead of contribu
 
 . Replace the URL in the attribute `repoURL` in link:{repoURL}/docs/DeveloperGuide.adoc[`DeveloperGuide.adoc`] and link:{repoURL}/docs/UserGuide.adoc[`UserGuide.adoc`] with the URL of your fork.
 
-==== Setting up CI
+=== Setting up CI
 
 Set up Travis to perform Continuous Integration (CI) for your fork. See <<UsingTravis#, UsingTravis.adoc>> to learn how to set it up.
 
@@ -281,7 +281,7 @@ _basic_, _find and sort_, _budget_, _set goal_, _expense report_ and _miscellane
 
 === Basic Features
 // tag::ae[]
-==== Add expense feature
+=== Add expense feature
 This basic feature allows users to add an expense record to the system.
 To use this feature, the users need to enter the `addExpense` command,
 with fields `name` and `amount`, and optional fields `date` and `tag`.
@@ -291,7 +291,7 @@ If `date` is not specified, the current date will be used.
 
 _The command above adds an expense record for a $5 chicken rice set, tagged as Food with the date as 21/02/2019._
 
-===== Current Implementation:
+==== Current Implementation:
 The figure below shows the sequence diagram for the `addExpense` command:
 
 image::AddExpenseSequenceDiagram.png[widith="800]
@@ -305,7 +305,7 @@ add the `Expense` into the `ExpenseList`.
 // end::ae[]
 
 // tag::ee[]
-==== Edit expense feature
+=== Edit expense feature
 This feature allows users to edit an existing expense record in the expense list.
 To use this feature, the users need to enter the `editExpense` command,
 with the `INDEX` (in the displaying list) of the expense to be edited, along with
@@ -323,7 +323,7 @@ replaces the old `Expense` by the edited one.
 // end::ee[]
 
 // tag::de[]
-==== Delete expense feature
+=== Delete expense feature
 This feature allows users to remove an expense record from the expense list.
 To use this feature, the users need to enter the `deleteExpense` command,
 with the `INDEX` (in the displaying list) of the expense to be deleted.
@@ -340,7 +340,7 @@ removes the `Expense` from the `ExpenseList`.
 
 
 // tag::aa[]
-==== Add allowance feature
+=== Add allowance feature
 Besides the tracking of expenses, *_ePiggy_* also allows the tracking of allowances, by adding
 allowances into the expenses list. This helps in calculating the net amount of money the user has. +
 Similar to expenses, the user will have to specify the `name` and the  `amount`,
@@ -356,7 +356,7 @@ with the `School` tag._
 `Expense`. We consider an `Allowance` to be a type of negative expense which makes calculating
 the total savings in *ePiggy* easier.
 
-===== Current Implementation:
+==== Current Implementation:
 The figure below shows the sequence diagram for the `addAllowance` command:
 
 image::AddAllowanceSequenceDiagram.png[widith="800]
@@ -369,7 +369,7 @@ A new `Item` is created and this `Item` is used in creating the
 `AddAllowanceCommand` is then executed by `Logic` and `addAllowance()` is called from the model,
 which add the `Allowance` into the `ExpenseList`.
 
-===== Design Considerations
+==== Design Considerations
 *Aspect: Should `Allowance` be a subclass of `Expense`?*
 
 * *Alternative 1 (current choice):* `Allowance` should be a subclass of `Expense`.
@@ -384,7 +384,7 @@ repeated code. This way we can place allowances and expenses in the same list.
 // end::aa[]
 
 // tag::ea[]
-==== Edit allowance feature
+=== Edit allowance feature
 The `editAllowance` command allows users to edit previously entered allowances.
 It requires the `INDEX` of the allowance, as well as the fields to be modified.
 
@@ -397,7 +397,7 @@ to change the amount to `$50` and the date to `06/03/2019`._
 While allowances and expenses are shown on the same list, the `INDEX` specified must belong
 to an `Allowance`, otherwise the command would not work.
 
-===== Current Implementation
+==== Current Implementation
 The command is recognised by `parseCommand` and an `EditAllowanceCommandParser`
 is created. It then creates an `EditAllowanceCommand` object with an
 `EditAllowanceDescriptor` specifying the fields to be edited.
@@ -407,7 +407,7 @@ Since only allowances can be edited with the `editAllowance` command, the `EditA
 will first check if the `INDEX` specified points to an `Allowance`. If `INDEX` points to an
 `Expense`, a `CommandException` will be thrown.
 
-===== Design Considerations
+==== Design Considerations
 *Aspect: Should the edit command for `Allowance` and `Expense` be combined?*
 
 * *Alternative 1 (current version):* Edits for `Allowance` and `Expense` should have their own
@@ -423,7 +423,7 @@ mistaken with editing budget or goal).
 
 // end::ea[]
 // tag::da[]
-==== Delete allowance feature
+=== Delete allowance feature
 When an incorrect allowance has been entered, it can be deleted from the list using the
 `deleteAllowance` command, by specifying the `INDEX` of the allowance to be deleted.
 
@@ -431,7 +431,7 @@ When an incorrect allowance has been entered, it can be deleted from the list us
 
 _The command above deletes the allowance with index `2` on the allowance and expense list._
 
-===== Current Implementation
+==== Current Implementation
 The figure below shows the sequence diagram for the `deleteAllowance` command:
 
 image::DeleteAllowanceSequenceDiagram.png[width="800"]
@@ -446,7 +446,7 @@ is created. Then, it creates a `DeleteAllowanceCommand` object with the given
 // end::da[]
 
 //tag::reverse[]
-==== Reverse list feature
+=== Reverse list feature
 *_ePiggy_* allows the user to list the expenses in any order they want by using the 'list' feature and this `reverseList` feature.
 This makes viewing of expenses more customisable and convenient for the user.
 
@@ -454,7 +454,7 @@ This makes viewing of expenses more customisable and convenient for the user.
 
 The above command lists the expenses in reverse.
 
-===== Current Implementation
+==== Current Implementation
 Given below is a UML sequence diagram of how the `reverseList` command works along with a step-by-step
 explanation. +
 
@@ -477,10 +477,8 @@ returned to `LogicManager`.
 
 //end::reverse[]
 
-=== Find and Sort Features
-
 //tag::findexpense[]
-==== Find feature
+=== Find feature
 *_ePiggy_* allows the user to filter specific expenses by entering single or multiple keywords. Expenses that satisfy
 all the keywords are displayed in the expense list panel. Furthermore, it searches for words similar to the user's
 input, considering that the user might have made a typing error, by applying the concept of _Levenshtein distance_ fixed by a
@@ -501,7 +499,7 @@ example, suppose we want to filter out all `Expense` s with `Cost` between $1 an
 then the command should be just `find $/1:10.5`.
 Similarly for other type of keywords.
 
-===== Current Implementation
+==== Current Implementation
 Given below is a UML sequence diagram of how the `find` command works along with a step-by-step
 explanation.
 
@@ -530,7 +528,7 @@ expenses which was filtered by the new predicate. +
 Step 6: Expense List panel is updated by filtered set of expenses. A `CommandResult` is then created and
 returned to `LogicManager`.
 
-===== Design considerations
+==== Design considerations
 This feature can be implemented in different ways depending on how the target expenses are found.
 
 *Aspect: How should the expenses be filtered?* +
@@ -556,7 +554,7 @@ The above command sorts expense(s) according to their `Name` in a lexicographica
 [NOTE]
 Empty user input is not allowed and a appropriate error will be shown. Similarly, multiple keywords (`Prefix`) are also not allowed.
 
-===== Current Implementation
+==== Current Implementation
 Given below is a UML sequence diagram of how the `sort` command works along with a step-by-step
 explanation. +
 
@@ -593,10 +591,7 @@ Step 6: Expense List panel is updated by sorted expenses. A `CommandResult` is t
 returned to `LogicManager`.
 
 //end::sortexpense[]
-
-=== Budget Features
-
-==== Add budget feature
+=== Add budget feature
 
 // tag::addbudget[]
 
@@ -615,7 +610,7 @@ Adding of overlapping budgets are not allowed in ePiggy.
 [NOTE]
 A `budget` is considered overlapping if *any* of the dates *in between (inclusive)* one `budget`’s start *and* end dates is the *same* as the dates *in between (inclusive)* another `budget`’s start *and* end dates.
 
-===== Current Implementation
+==== Current Implementation
 Given below is a sequence diagram of how the `addBudget` command works: +
 
 image::addBudgetSequenceDiagram.png[width="800"]
@@ -630,7 +625,7 @@ As long as the `Budget` object created does not overlap with any existing `Budge
 2. `AddBudgetCommandParser` takes in the arguments and parses the command to create the appropriate `Budget`. +
 3. The `AddBudgetCommand` is passed back to the `LogicManager`, and the method `execute()` is called. The `Budget` is then added to the model.
 
-===== Design Considerations
+==== Design Considerations
 *Aspect: What user input should `addBudget` require?* +
 
 * *Alternative 1 (current choice)*: the `addBudget` command requires the `amount`, `start date` and `time period (in days)` of the budget.
@@ -642,7 +637,7 @@ As long as the `Budget` object created does not overlap with any existing `Budge
 ** Cons: Could cause users to miss out on certain dates if they want budgets that are recurring (eg. sets a budget from 1st March to 30th March and 1st April to 30th April – 31st March is missed out).
 // end::addbudget[]
 
-==== Edit budget feature
+=== Edit budget feature
 
 // tag::editbudget[]
 *_ePiggy_* allows the user to edit the `current budget`, with any of the specified parameters in `addBudget` (above). +
@@ -662,7 +657,7 @@ A `budget` is considered overlapping if *any* of the dates *in between (inclusiv
 If the current budget is edited such that it is no longer a current budget, it can no longer be edited. Hence, users
 should delete that budget and add a new budget using the `addBudget` command should they wish to edit that budget.
 
-===== Current Implementation
+==== Current Implementation
 The command’s current implementation uses parts of the legacy implementation to update the budget. The arguments are first parsed into
 `EditBudgetCommandParser`, which separates the arguments into their respective fields. +
 An `EditBudgetDescriptor` object is then created to temporarily hold this new information. +
@@ -677,7 +672,7 @@ Since only the current `budget` can be edited, the `editBudget` command will fir
 `budgetList` through `Model#getCurrentBudgetIndex()`. If the current `budget` does not exist, the command will feedback to the user that the
 command entered is invalid. +
 
-===== Design Considerations
+==== Design Considerations
 *Aspect: Should we use a boolean `hasCurrentBudget` method or use the `index` of the current `budget` to verify if a
 current `budget` exists?* +
 
@@ -700,7 +695,7 @@ After much consideration, we decided to choose option 1 as other commands should
 to have a greater level of abstraction. +
 // end::editbudget[]
 
-==== Delete budget feature
+=== Delete budget feature
 
 // tag::deletebudget[]
 
@@ -711,7 +706,7 @@ to have a greater level of abstraction. +
 The above command deletes the `Budget` with the displayed `index` of #2. +
 The `Budget` to be deleted is identified by its displayed `index` and subsequently deleted. +
 
-===== Current Implementation
+==== Current Implementation
 Given below is a sequence diagram of how the `deleteBudget` command works: +
 
 image::DeleteBudgetSequenceDiagram.png[width="800"]
@@ -728,7 +723,7 @@ Hence, if the `index` input by the user is negative or greater than the size of 
 === Set Goal Feature
 
 // tag::setGoal[]
-==== Set goal feature
+=== Set goal feature
 *_ePiggy_* allows users to set a savings goal that they would like to save up to. +
 It requires the user to specify the name of the goal, as well as the amount they would like to hit.
 
@@ -736,7 +731,7 @@ It requires the user to specify the name of the goal, as well as the amount they
 
 The command above sets a goal with the name `Nintendo Switch` and with the amount `$499`
 
-===== Current Implementation
+==== Current Implementation
 Given below is a sequence diagram of how the `setGoal` command works:
 
 image::setGoalSequenceDiagram.PNG[width="800"]
@@ -751,7 +746,7 @@ The command is first parsed into `SetGoalCommandParser`, which separates the arg
 2.	`SetGoalCommandParser` takes in the arguments and parses the command to create the appropriate `Goal`. +
 3.	The `SetGoalCommand` is passed back to the `LogicManager`, and the method `execute()` is called. `Goal` is then set to the `model`.
 
-===== Design considerations
+==== Design considerations
 *Aspect: `setGoal` (1 goal) VS `addGoal` (multiple goals)*
 * *Alternative 1 (current choice):* `setGoal` (1 goal) +
 ** Pros: Easier to implement. Makes ePiggy easier to use.
@@ -799,7 +794,7 @@ The above report command will generate a report of 21 Mar 2019 with AreaChart.
 [NOTE]
 Only last tag `d/` is used to generate a report if multiply of `d/` appear.
 
-===== Current Implementation
+==== Current Implementation
 
 This section shows the current implementation of the report feature. It also shows the classes or components used in the report feature.
 
@@ -826,7 +821,7 @@ link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/see
 link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`ReportWindow`] is initialized. +
 4. The method link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ReportWindow.java[`displayReportController`] is called and report will show.
 
-===== Design Considerations
+==== Design Considerations
 
 This section shows the design considerations of the report feature. The design considerations are shown below together
 with their pros and cons.
@@ -873,7 +868,7 @@ with commands in the checklist such as "setBudget", "addExpense", "addAllowance"
 "addAllowance" will be returned but only one of them will replace "add" in the commandBox.
 The commandBox will show either " `hello addExpense n/ $/ t/ d/` " or " `hello addAllowance n/ $/ d/` ".
 
-===== Current Implementation
+==== Current Implementation
 
 This section shows the current implementation of the auto-complete feature. It also shows the classes or components used in the auto-complete feature.
 
@@ -890,7 +885,7 @@ in the commandBox.
 4. link:https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/CommandBox.java[`findString()`] forms a new string using the user's input.
 One element in the return array is appended at the end of the new string. This new string replaces the user's input of `addE` and shows in the commandBox.
 
-===== Design Considerations
+==== Design Considerations
 
 This section shows the design considerations of the auto-complete feature. The design considerations are shown below together
 with their pros and cons.
@@ -912,7 +907,7 @@ to do this.
 // tag::undoredo[]
 ==== Undo/Redo feature
 
-===== Current Implementation
+==== Current Implementation
 
 The undo/redo mechanism is facilitated by `VersionedEPiggy`.
 It extends `ePiggy` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
@@ -969,7 +964,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 image::UndoRedoActivityDiagram.png[width="800"]
 
-===== Design Considerations
+==== Design Considerations
 
 ===== Aspect: How undo & redo executes
 

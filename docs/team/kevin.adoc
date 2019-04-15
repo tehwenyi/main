@@ -1,19 +1,20 @@
 = Kevin Chan - Project Portfolio for ePiggy
 :site-section: AboutUs
 :imagesDir: ../images
+:sectnums:
 :stylesDir: ../stylesheets
 
 image::ppplogo.png[width="300"]
 This portfolio serves to document my contributions to *_ePiggy_*. +
 *_ePiggy_* Github link: https://github.com/CS2103-AY1819S2-W17-4/main
 
-== Overview of ePiggy
-ePiggy is a simplified expense tracker for students.
-It can be used to record their allowance, expenses, savings, and budgets.
+== Overview of *_ePiggy_*
+*_ePiggy_* is a simplified expense tracker for students.
+It is used to record allowances, expenses, goals, and budgets.
 It has student-centric features that makes managing their money easier.
 
-ePiggy was build based of a basic command line interface addressbook for a software engineering project.
-My team and I decided to build ePiggy because we wanted to teach students to start managing their expenses from young, through the use of basic coding, in a manner that relates to them.
+*_ePiggy_* was build based of a basic command line interface AddressBook for a software engineering project.
+My team and I decided to build ePiggy because we wanted to teach students to start managing their expenses from young, through the use of basic coding, and in a manner that relates to them.
 
 My primary role was to develop the allowance and goal setting feature.
 The following sections show these enhancements in more detail, as well as
@@ -78,17 +79,27 @@ https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/systemte
 === Other Contributions
 
 * Refactored `Storage` to include `Expense`, `Goal`, `Savings` and `Budget`.
-* Shifted the command box and command result box to the side of the layout to mimic a chatbot.
-* Incorporated a panel dedicated to savings and goals into the user interface.
+https://github.com/CS2103-AY1819S2-W17-4/main/commit/beee7c5ca1e6431496a45a2040b80d209cb47d6b[(#132)]
+https://github.com/CS2103-AY1819S2-W17-4/main/commit/4cf13e8e226c780e645646b4805fa59739d9fafd[(#168)]
+* Shifted the `CommandBox` and `ResultDisplay` to the side of the layout to achieve a chatbot layout.
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/218[(#218)]
+* Created a `SavingsPanel` for users to view current savings and goals in the user interface.
+https://github.com/CS2103-AY1819S2-W17-4/main/commit/d7de3ec090cfd9a698e85e869554237cf1fb3788[(#9)]
 * Added command aliases.
-* Helped to fix bugs in classes created by other teammates https://github.com/CS2103-AY1819S2-W17-4/main/commit/f0d99ad433d3741491aafcc6798527407b4f5191[(#97)]
+https://github.com/CS2103-AY1819S2-W17-4/main/pull/3/commits/0a5ae592242acf47490f200b5efe034373e8aac8[(#3)]
+* Helped to fix bugs in classes created by other teammates.
+https://github.com/CS2103-AY1819S2-W17-4/main/commit/f0d99ad433d3741491aafcc6798527407b4f5191[(#97)]
 * Compiled and made formatting changes to the user guide to make it more reader-friendly https://github.com/CS2103-AY1819S2-W17-4/main/commit/5046afedac24c4da8a391b84a5a767604efa2155[(#85)]
 * Set up auto-publishing of documentation for the team
 * Set up reposense for the team
+https://github.com/CS2103-AY1819S2-W17-4/main/commit/351dcddd54343100950d9ad359f92b9ce98ba91a[(#6)]
 
 == Contributions to the User Guide
 We had to write a new User Guide as most of the sections in the AddressBook User Guide was not applicable to our application.
 Below is an excerpt from the *ePiggy User Guide*, showing additions I made for the `addAllowance`, `deleteAllowance`, `editAllowance` and `setGoal` commands.
+They showcase my ability to write user manuals targeting end-users.
+
+The full User Guide for *_ePiggy_* can be found https://cs2103-ay1819s2-w17-4.github.io/main/UserGuide.html[here].
 
 include::../UserGuide.adoc[tag=aa]
 
@@ -99,7 +110,13 @@ include::../UserGuide.adoc[tag=ea]
 include::../UserGuide.adoc[tag=setGoal]
 
 == Contributions to the Developer Guide
-The following section shows my addition to the developer guide for the `addAllowance`, `deleteAllowance`, `editAllowance` and `setGoal` commands.
+The following section shows my additions to the developer guide for the `addAllowance`, `deleteAllowance`, `editAllowance` and `setGoal` commands.
+They showcase the technical depth of my contributions as well as to convey technical information to other developers clearly.
+
+The full developer guide for *_ePiggy_* can be found https://cs2103-ay1819s2-w17-4.github.io/main/DeveloperGuide.html[here].
+
+[none]
+=== Feature Implementation
 
 include::../DeveloperGuide.adoc[tag=aa]
 
@@ -108,6 +125,9 @@ include::../DeveloperGuide.adoc[tag=da]
 include::../DeveloperGuide.adoc[tag=ea]
 
 include::../DeveloperGuide.adoc[tag=setGoal]
+
+[none]
+=== Instructions for Manual Testing
 
 include::../DeveloperGuide.adoc[tag=manualtestingallowance]
 

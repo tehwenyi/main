@@ -20,8 +20,7 @@ This portfolio aims to document my contributions to *_ePiggy_*.
 
 _ePiggy_ is a desktop application designed to inculcate good spending habits in students.
 _ePiggy_ hopes to make managing money much simpler for you with a simple interface and simple commands!
-At the same time, _ePiggy_ offers everything you need to cultivate good spending habits before entering the workforce,
-from tracking expenses and managing budgets to setting goals! +
+At the same time, _ePiggy_ offers everything from tracking expenses and managing budgets to setting goals! +
 
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. It can be used on both Windows and Mac. +
 

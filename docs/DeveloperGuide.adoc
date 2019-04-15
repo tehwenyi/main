@@ -442,7 +442,6 @@ is created. Then, it creates a `DeleteAllowanceCommand` object with the given
 `INDEX`. `DeleteAllowanceCommand` is then executed by `Logic` and it calls
 `deleteAllowance()` of the model, which removes the `Allowance` from the
 `ExpenseList`.
-
 // end::da[]
 
 === Add budget feature

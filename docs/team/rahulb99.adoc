@@ -18,12 +18,12 @@ This portfolio aims to document my contributions to *_ePiggy_*.
 
 == Overview
 
-ePiggy is a desktop application designed to inculcate good spending habits in students.
-ePiggy hopes to make managing money much simpler for you with a simple interface and simple commands!
-At the same time, ePiggy offers everything you need to cultivate good spending habits before entering the workforce,
+_ePiggy_ is a desktop application designed to inculcate good spending habits in students.
+_ePiggy_ hopes to make managing money much simpler for you with a simple interface and simple commands!
+At the same time, _ePiggy_ offers everything you need to cultivate good spending habits before entering the workforce,
 from tracking expenses and managing budgets to setting goals! +
 
-The user interacts with it using a CLI, and it has a GUI created with JavaFX. +
+The user interacts with it using a CLI, and it has a GUI created with JavaFX. It can be used on both Windows and Mac. +
 
 *_ePiggy_* is a product of twin modules CS2101 and CS2103T. It was transformed from the
 link:https://github.com/nus-cs2103-AY1819S2/addressbook-level4[AddressBook - Level 4] application.
@@ -31,6 +31,8 @@ link:https://github.com/nus-cs2103-AY1819S2/addressbook-level4[AddressBook - Lev
 == Summary of contributions
 
 ---
+This section summarises my contribution to _ePiggy_'s codebase including the newly added features and improvements over
+_Address Book - Level 4_ application.
 
 * *Major enhancements*: added *the ability to search and sort for expenses*
 ** What it does: +
@@ -41,23 +43,30 @@ link:https://github.com/nus-cs2103-AY1819S2/addressbook-level4[AddressBook - Lev
 to figure out where he/she has been spending.
 2. It becomes more convenient for the user to sort the expenses according to his/her preferences.
 For example, if the user wants to find out where he/she has been spending more, the user can sort it by cost.
-** Highlights: These enhancements are two of the most user-friendly commands in ePiggy, mainly due to their need and adaptability. +
+** Highlights: These enhancements are two of the most user-friendly commands in _ePiggy_, mainly due to their need and adaptability. +
 1. The search feature enhancement have been built on top of the existing functionality. Now it allows multiple keywords search to filter out the
-expenses. This feature searches for similar words in case the user makes a typing error. Furthermore, it allows user to
+expenses. This feature even searches for similar words in case the user makes a typing error. Furthermore, it allows user to
 enter a range for date and cost. This implementation was quite challenging as it required the complete modification of the existing command.
-2. The sort feature enhancement was built from start to finish. It required an in-depth analysis of design alternatives.
+2. The sort feature enhancement was built from scratch. It required an in-depth analysis of design alternatives.
 This new feature greatly adds to the functionality of existing commands (that were modified from address-book level 4).
 
-* *Minor enhancement*: Added reverse list command. Modified existing help and list commands. Refactored the codebase.
+* *Minor enhancement*: Added reverse list command. Modified existing `help`, `history` and `list` commands. Refactored the codebase.
+Added UI features for `expense`. [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ExpenseCard.java[1]],
+[https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/ExpenseListPanel.java[2]],
+https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/ui/HelpWindow.java[3]] .
 
 * *Functional code contributed*: [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/FindExpenseCommand.java[FindExpense]],
 [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/SortExpenseCommand.java[SortExpense]],
-[https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/ReverseListCommand.java[ReverseList]],
-[https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/HelpCommand.java[HelpCommand]] .
+[https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/main/java/seedu/address/logic/commands/epiggy/ReverseListCommand.java[ReverseList]] .
 
 * *Test code contributed*: [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/FindCommandTest.java[FindCommandTest]],
 [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/ReverseListCommandTest.java[ReverseListCommandTest]],
-[https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/SortCommandTest.java[SortCommandTest]] .
+[https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/SortCommandTest.java[SortCommandTest]],
+ [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/commands/epiggy/ReverseListCommandTest.java[ReverseListCommandTest]],
+ [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/systemtests/epiggy/FindCommandSystemTest.java[FindCommandSystemTest]],
+ [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/systemtests/epiggy/SortCommandSystemTest.java[SortCommandSystemTest]],
+ Parser Tests - [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/parser/epiggy/FindCommandParserTest.java[1]],
+ [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/logic/parser/epiggy/SortCommandParserTest.java[2]].
 
 * *Code contributed*: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=rahulb99&sort=displayName&since=2019-02-10&until=2019-04-30&timeframe=day&reverse=false&repoSort=false[Reposense]]
 
@@ -65,20 +74,24 @@ This new feature greatly adds to the functionality of existing commands (that we
 
 ** Project management:
 *** Managed product releases on GitHub.
-*** Set up the issue tracker, user stories, and assigned the milestones.
-*** Tested for bugs for all features of `EPiggy`.
+*** Set up the issue tracker, user stories, and milestones.
+*** Assigned bugs from other teams to respective team members.
+*** Extensively tested for bugs for all features of `EPiggy`.
 
 ** Enhancements to existing features:
 *** Made `date` an optional keyword while adding an expense.
    (so now, if the `date` keyword is missing, `date` takes the value of device's date). (Commit: https://github.com/CS2103-AY1819S2-W17-4/main/pull/135/commits/b974cc12cc700d751de34c80307267d26f5e455e[b974cc] )
-*** Wrote base tests for any command related to `expense`, in addition to `FindCommandTest`, `SortCommandTest` and `ReverseListCommandTest`.
- (Pull requests https://github.com/CS2103-AY1819S2-W17-4/main/pull/135[#135], https://github.com[#00])
+*** Wrote base tests for any command related to `expense` such as [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/testutil/epiggy/ExpenseUtil.java[1]],
+ [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/testutil/epiggy/ExpensesBuilder.java[2]],
+ [https://github.com/CS2103-AY1819S2-W17-4/main/blob/master/src/test/java/seedu/address/testutil/epiggy/TypicalExpenses.java[3]] in addition to `FindCommandTest`, `SortCommandTest` and `ReverseListCommandTest`.
+ (Pull requests https://github.com/CS2103-AY1819S2-W17-4/main/pull/135[#135], https://github.com/CS2103-AY1819S2-W17-4/main/pull/160[#160])
 *** Modified the search engine by make it more powerful by searching for similar words in case user makes a typo, or even when user
 types a part of the keyword he/she wishes to search for.
 *** Modified the storage functionality. (Pull Request https://github.com/CS2103-AY1819S2-W17-4/main/pull/20[#20])
 
 ** Documentation:
 *** Did some UI changes to `index.html` (main page of our application).
+*** Formalised the documentation of _ePiggy_'s Developer Guide.
 
 ** Community:
 *** PRs reviewed (https://github.com/CS2103-AY1819S2-W17-4/main/pull/40[#40], https://github.com/CS2103-AY1819S2-W17-4/main/pull/94[#94],
@@ -227,4 +240,4 @@ Use case ends.
 
 ---
 
-_{To be added.}_
+Check out my _GitHub_ profile [https://www.github.com/rahulb99[rahulb99]] .

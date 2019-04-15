@@ -220,16 +220,6 @@ Only allowances can be deleted using this command. To delete expenses, please us
 ****
 // end::da[]
 
-==== Listing the entered commands : `history`
-
-// tag::history[]
-
-Lists all the user entered commands in reverse order (except empty commands). +
-*Alias:* `hs` +
-*Format:* `history`
-
-// end::history[]
-
 ==== Listing all expenses : `list`
 // tag::list[]
 
@@ -248,6 +238,16 @@ Lists the expense records from oldest to newest. Use this to return to the defau
 *Format:* `reverseList`
 
 // end::reverse[]
+
+==== Listing entered commands : `history`
+
+// tag::history[]
+
+Lists all the user entered commands from newest to oldest. This command does not list empty commands. +
+*Alias:* `hs` +
+*Format:* `history`
+
+// end::history[]
 
 === Filtering and Sorting Data
 

@@ -157,6 +157,7 @@ image::example.png[width="125"]
 
 * `deleteExpense 1` +
 Deletes the first expense in the displaying expense list from ePiggy.
+// end::aed[]
 
 // tag::aa[]
 ==== Adding an allowance: `addAllowance`

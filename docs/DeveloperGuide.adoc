@@ -442,7 +442,6 @@ is created. Then, it creates a `DeleteAllowanceCommand` object with the given
 `INDEX`. `DeleteAllowanceCommand` is then executed by `Logic` and it calls
 `deleteAllowance()` of the model, which removes the `Allowance` from the
 `ExpenseList`.
-
 // end::da[]
 
 === Add budget feature
@@ -587,9 +586,7 @@ The above command finds expense(s) with the `Name` Nasi Lemak, `Cost` of $4.00, 
 `Date` 1st April, 2019 and tagged with `Tag` lunch.
 
 [NOTE]
-`Date` format is `dd/MM/yyyy`.
-
-[NOTE]
+`Date` format is `dd/MM/yyyy`. +
 Empty input keywords are not allowed and a appropriate error will be shown.
 
 [TIP]
@@ -602,7 +599,7 @@ Similarly for other type of keywords.
 Given below is a UML sequence diagram of how the `find` command works along with a step-by-step
 explanation.
 
-image::fEuml.png[witdh="800"]
+image::fEuml.png[witdh="750"]
 
 Figure: Find Command Sequence Diagram +
 
@@ -630,13 +627,13 @@ returned to `LogicManager`.
 ==== Design considerations
 This feature can be implemented in different ways depending on how the target expenses are found.
 
-*Aspect: How should the expenses be filtered?*
+*Aspect: How should the expenses be filtered?* +
 * *Alternative 1:* Storing expenses as and when they are added into separate files. +
-** Pros: More efficient as there is no need to check for ALL expenses.
-** Cons: Need to change the original architecture of storage.
+** Pros: More efficient as there is no need to check for ALL expenses. +
+** Cons: Need to change the original architecture of storage. +
 * *Alternative 2 (current choice):* Search through all the expenses and find the ones with matching keywords. +
-** Pros: : Easy to implement as there is no need to change original architecture.
-** Cons: Will take more time as it will search through large number of expenses.
+** Pros: : Easy to implement as there is no need to change original architecture. +
+** Cons: Will take more time as it will search through large number of expenses. +
 
 //end::findexpense[]
 
@@ -688,17 +685,11 @@ The above command sorts expense(s) according to their `Name` in a lexicographica
 [NOTE]
 Empty user input is not allowed and a appropriate error will be shown. Similarly, multiple keywords (`Prefix`) are also not allowed.
 
-[TIP]
-All keywords in this command are optional, provided that there is at least one input keyword. For
-example, suppose we want to filter out all `Expense` s with `Cost` between $1 and $10.5 (both inclusive),
-then the command should be just `find $/1:10.5`.
-Similarly for other type of keywords.
-
 ==== Current Implementation
 Given below is a UML sequence diagram of how the `sort` command works along with a step-by-step
 explanation. +
 
-image::sEuml.png[witdh="800"]
+image::sEuml.png[witdh="750"]
 
 Figure: SortCommand UML Sequence Diagram +
 
@@ -713,7 +704,7 @@ Step 3: `SortCommandParser#arePrefixesPresent` method is then used to determine 
 appropriate Comparator object is created. In this case, `Prefix` is `$/`, so a new `CompareExpensesByCost` object is created.
 It implements the `java.util.Comparator` interface. +
 
-Step 4: A `FindCommand` object is created with `CompareExpensesByCost` object as a parameter and
+Step 4: A `SortCommand` object is created with `CompareExpensesByCost` object as a parameter and
 returned to `LogicManager`. +
 
 Step 5: `LogicManager` calls `SortCommand#execute()`,which then calls `Model#sortExpenses()`
@@ -723,7 +714,7 @@ Step 6: `Model#sortExpenses()` then calls `EPiggy#sortExpense` method with Compa
 then calls `ExpenseList#sort` to set the comparator of `internalList`. `ExpenseList#sort` then calls the static `FXCollections#sort`
 method to sort the `internalList`.  +
 
-Step 7: `FindCommand#execute()`,which then calls `Model#updateFilteredExpenseList()`
+Step 7: `SortCommand#execute()`,which then calls `Model#updateFilteredExpenseList()`
         method to update the predicate of `FilteredList<Expense>`. `FilteredList` now contains all
         expenses in sorted order. +
 
@@ -731,6 +722,39 @@ Step 6: Expense List panel is updated by sorted expenses. A `CommandResult` is t
 returned to `LogicManager`.
 
 //end::sortexpense[]
+
+//tag::reverse[]
+=== Reverse List feature
+*_ePiggy_* allows the user to list the expenses in any order they want by using the 'list' feature and this `reverseList` feature.
+This makes viewing of expenses more customisable and convenient for the user.
+
+* `reverseList`
+
+The above command lists the expenses in reverse.
+
+==== Current Implementation
+Given below is a UML sequence diagram of how the `reverseList` command works along with a step-by-step
+explanation. +
+
+image::rLuml.png[witdh="750"]
+
+Figure: ReverseListCommand UML Sequence Diagram +
+
+Step 1: User enters `rl`.  The command is received by `EPiggyParser` which then creates `ReverseListCommand` object
+and returned to `LogicManager`. +
+
+Step 2: `LogicManager` calls `ReverseListCommand#execute()`,which then calls `Model#reverseFilteredExpensesList()`
+method to set the comparator for sorting. +
+
+Step 3: `Model#reverseFilteredExpensesList()` then calls `EPiggy#reverseExpenseList()` method. `EPiggy#reverseExpenseList`
+then calls `ExpenseList#reverse`. `ExpenseList#reverse` then calls the static `FXCollections#reverse`
+method to reverse the `internalList`.  +
+
+Step 4: Expense List panel is updated by expenses listed in reverse order. A `CommandResult` is then created and
+returned to `LogicManager`.
+
+//end::reverse[]
+
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -1919,6 +1943,16 @@ Use case ends.
 
 1. User requests for help.
 2. ePiggy displays a list of all the commands - brief description and syntax.
++
+Use case ends.
+
+[discrete]
+=== Use case: History
+
+*MSS*
+
+1.  User requests to list all the entered commands.
+2.  ePiggy shows all the commands entered (except empty commands) in reverse.
 +
 Use case ends.
 

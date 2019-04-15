@@ -20,8 +20,7 @@ This portfolio aims to document my contributions to *_ePiggy_*.
 
 _ePiggy_ is a desktop application designed to inculcate good spending habits in students.
 _ePiggy_ hopes to make managing money much simpler for you with a simple interface and simple commands!
-At the same time, _ePiggy_ offers everything you need to cultivate good spending habits before entering the workforce,
-from tracking expenses and managing budgets to setting goals! +
+At the same time, _ePiggy_ offers everything from tracking expenses and managing budgets to setting goals! +
 
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. It can be used on both Windows and Mac. +
 
@@ -134,23 +133,19 @@ include::../UserGuide.adoc[tag=se]
 
 ==== Listing all expenses : `list`
 
-Lists the expense records from newest to oldest. Use this to return to the default view after search/sort commands. +
-Format: `list` or `l`
+include::../UserGuide.adoc[tag=list]
 
 ==== Listing all expenses in reverse : `reverseList`
 
-Lists the expense records from oldest to newest. Use this to return to the default view after search/sort commands. +
-Format: `reverseList`
-
-****
-*Additional Information:* +
-One major use of `reverseList` command is executing it after searching/sorting the expense list.
-'reverseList` and `rl` are equivalent.
-****
+include::../UserGuide.adoc[tag=reverse]
 
 ==== Viewing help : `help`
 Lists all the user commands with their syntax and descriptions. +
 Format: `help`
+
+==== Listing the entered commands : `history`
+
+include::../UserGuide.adoc[tag=history]
 
 ==== Share feature `[coming in v2.0]`
 
@@ -170,70 +165,7 @@ include::../DeveloperGuide.adoc[tag=findexpense]
 
 include::../DeveloperGuide.adoc[tag=sortexpense]
 
-
-[discrete]
-=== Use case: Find expense records
-
-*MSS*
-
-1. User requests to search for an expense record.
-2. ePiggy requests user to enter search command.
-3. User enters search command with specific parameters.
-4. ePiggy searches and displays the record(s).
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a. Parameter field is empty.
-+
-[none]
-** 1a1. ePiggy lists all the expense records.
-+
-Use case ends.
-
-[discrete]
-=== Use case: Sort expense records
-
-*MSS*
-
-1. User requests to sort expense records.
-2. ePiggy requests user to enter sort command.
-3. User enters sort command with specific parameters.
-4. ePiggy sorts and displays the record(s).
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a. Parameter field is empty.
-+
-[none]
-** 1a1. ePiggy lists all the expense records sorted by date added.
-+
-Use case ends.
-
-[discrete]
-=== Use case: Help
-
-*MSS*
-
-1. User requests for help.
-2. ePiggy displays a list of all the commands - brief description and syntax.
-+
-Use case ends.
-
-[discrete]
-=== Use case: Reverse List
-
-*MSS*
-
-1. User requests to display the list in reverse.
-2. ePiggy displays a list of all the expenses in reverse.
-+
-Use case ends.
+include::../DeveloperGuide.adoc[tag=reverse]
 
 
 == PROJECT:

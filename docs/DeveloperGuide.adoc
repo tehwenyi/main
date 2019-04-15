@@ -478,6 +478,7 @@ returned to `LogicManager`.
 
 //end::reverse[]
 
+=== Find and Sort Features
 //tag::findexpense[]
 ==== Find feature
 *_ePiggy_* allows the user to filter specific expenses by entering single or multiple keywords. Expenses that satisfy
@@ -529,7 +530,7 @@ expenses which was filtered by the new predicate. +
 Step 6: Expense List panel is updated by filtered set of expenses. A `CommandResult` is then created and
 returned to `LogicManager`.
 
-==== Design considerations
+===== Design considerations
 This feature can be implemented in different ways depending on how the target expenses are found.
 
 *Aspect: How should the expenses be filtered?* +
@@ -591,6 +592,7 @@ Step 7: `SortCommand#execute()`,which then calls `Model#updateFilteredExpenseLis
 Step 6: Expense List panel is updated by sorted expenses. A `CommandResult` is then created and
 returned to `LogicManager`.
 
+=== Budget Features
 //end::sortexpense[]
 ==== Add budget feature
 
@@ -721,8 +723,10 @@ as the order of the budgets in `budgetList`. Furthermore, the indexes are unique
 Hence, if the `index` input by the user is negative or greater than the size of `budgetList`, this would indicate that the budget specified does not exist. The user will receive a feedback that the `index` specified is invalid.
 // end::deletebudget[]
 
+=== Goal Feature
+
 // tag::setGoal[]
-=== Set Goal Feature
+==== Set goal feature
 *_ePiggy_* allows users to set a savings goal that they would like to save up to. +
 It requires the user to specify the name of the goal, as well as the amount they would like to hit.
 
@@ -758,6 +762,8 @@ The command is first parsed into `SetGoalCommandParser`, which separates the arg
 
 // tag::report[]
 === Report Feature
+
+==== Expense report feature
 *_ePiggy_* allows users to view the report within a user-input period of time. +
 
 Given below is a sequence diagram of how the `report` command works: +

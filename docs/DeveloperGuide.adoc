@@ -361,11 +361,12 @@ The figure below shows the sequence diagram for the `addAllowance` command:
 image::AddAllowanceSequenceDiagram.png[widith="800]
 _Figure: Add Allowance Sequence Diagram_
 
-The command is first parsed into `AddAllowanceCommandParser`, which separates the arguments into
-their respective fields. A new `Item` is created and this `Item` is used in creating the
-`Allowance` object, which is parsed into the `AddAllowanceCommand`. +
-`AddAllowanceCommand` is then executed and `addAllowance()` is called from the model, which
-add the `Allowance` into the `ExpenseList`.
+The command is recognised by `parseCommand` and an `AddAllowanceCommandParser` is created,
+which is used to separate the arguments into their respective fields.
+A new `Item` is created and this `Item` is used in creating the
+`Allowance` object, which is used to create an `AddAllowanceCommand`. +
+`AddAllowanceCommand` is then executed by `Logic` and `addAllowance()` is called from the model,
+which add the `Allowance` into the `ExpenseList`.
 
 ==== Design Considerations
 *Aspect: Should `Allowance` be a subclass of `Expense`?*
@@ -396,14 +397,11 @@ While allowances and expenses are shown on the same list, the `INDEX` specified 
 to an `Allowance`, otherwise the command would not work.
 
 ==== Current Implementation
-The command's implementation uses part of the legacy implementation to update the allowance. +
-Arguments are first parsed by the `EditAllowanceCommandParser`, which separates the arguments into
-their respective fields. +
-An `EditAllowanceDescriptor` object is created to temporarily hold the new information to update
-the allowance with. +
-The `EditAllowanceDescriptor` object is then passed to the `EditAllowanceCommand` where it
-creates an updated `Allowance` object with the updated details. The updated `Allowance` object
-will then replace the old `Allowance` object in the expenses list.  +
+The command is recognised by `parseCommand` and an `EditAllowanceCommandParser`
+is created. It then creates an `EditAllowanceCommand` object with an
+`EditAllowanceDescriptor` specifying the fields to be edited.
+`EditAllowanceCommand` is the executed by `Logic` and calls `setExpense()`
+of the model, which replaces the old `Allowance` with the updated one. +
 Since only allowances can be edited with the `editAllowance` command, the `EditAllowanceCommand`
 will first check if the `INDEX` specified points to an `Allowance`. If `INDEX` points to an
 `Expense`, a `CommandException` will be thrown.
@@ -439,12 +437,11 @@ image::DeleteAllowanceSequenceDiagram.png[width="800"]
 
 _Figure : Delete Allowance Command Sequence Diagram_
 
-The command is first parsed into the `DeleteAllowanceCommandParser`, which retrieves the `INDEX`
-of the allowance to be deleted. The `INDEX` is passed to `DeleteAllowanceCommand` where it finds
-the allowance to be deleted from the list of allowances and expenses. The allowance is then
-passed to `Model` where it deletes it from the list. +
-Since `deleteAllowance` only works for allowances, `DeleteAllowanceCommand` checks if the
-the entry `INDEX` points to is an `Allowance` or not. If it is an expense, a `CommandException` will be thrown.
+The command is recognised by `parseCommand` and an `DeleteAllowanceCommandParser`
+is created. Then, it creates a `DeleteAllowanceCommand` object with the given
+`INDEX`. `DeleteAllowanceCommand` is then executed by `Logic` and it calls
+`deleteAllowance()` of the model, which removes the `Allowance` from the
+`ExpenseList`.
 
 // end::da[]
 
@@ -655,7 +652,7 @@ The command above sets a goal with the name `Nintendo Switch` and with the amoun
 ==== Current Implementation
 Given below is a sequence diagram of how the `setGoal` command works:
 
-image::setGoalSequenceDiagram.png[width="800"]
+image::setGoalSequenceDiagram.PNG[width="800"]
 
 Figure: Set Goal Command Sequence Diagram
 

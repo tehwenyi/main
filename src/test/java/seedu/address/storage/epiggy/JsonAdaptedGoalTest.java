@@ -11,6 +11,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Name;
 
+//@@author kev-inc
+
 public class JsonAdaptedGoalTest {
     private static final String INVALID_NAME = "@pple";
     private static final String INVALID_COST = "10.12345";

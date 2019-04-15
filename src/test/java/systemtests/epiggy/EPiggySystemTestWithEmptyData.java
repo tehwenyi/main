@@ -42,6 +42,7 @@ import systemtests.ClockRule;
  * A system test class for EPiggy, which provides access to handles of GUI components and helper methods
  * for test verification.
  */
+//@@author yunjun199321
 public abstract class EPiggySystemTestWithEmptyData {
     @ClassRule
     public static ClockRule clockRule = new ClockRule();
@@ -128,7 +129,7 @@ public abstract class EPiggySystemTestWithEmptyData {
 
         waitUntilBrowserLoaded(getBrowserPanel());
     }
-
+    //@@author
     /**
      * Deletes all persons in the address book.
      */

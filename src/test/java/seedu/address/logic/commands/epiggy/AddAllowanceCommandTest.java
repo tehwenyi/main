@@ -34,6 +34,8 @@ import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.epiggy.AllowanceBuilder;
 
+//@@author kev-inc
+
 public class AddAllowanceCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();

@@ -15,6 +15,7 @@ import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Budget;
 import seedu.address.model.epiggy.Expense;
 
+//@@author kev-inc
 
 /**
  * An Immutable epiggy that is serializable to JSON format.

@@ -38,13 +38,14 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
+    //@@author yunjun199321
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean summary) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.showSummary = summary;
     }
-
+    //@@author
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.

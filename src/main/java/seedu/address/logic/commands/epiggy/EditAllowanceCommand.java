@@ -29,6 +29,8 @@ import seedu.address.model.epiggy.item.Item;
 import seedu.address.model.epiggy.item.Name;
 import seedu.address.model.tag.Tag;
 
+//@@author kev-inc
+
 /**
  * Edits the details of an existing allowance.
  */

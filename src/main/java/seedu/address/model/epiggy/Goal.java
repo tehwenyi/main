@@ -3,6 +3,8 @@ package seedu.address.model.epiggy;
 import seedu.address.model.epiggy.item.Cost;
 import seedu.address.model.epiggy.item.Name;
 
+//@@author kev-inc
+
 /**
  * Represents a Goal in the expense book.
  * Guarantees: details are present and not null, field values are validated, immutable.

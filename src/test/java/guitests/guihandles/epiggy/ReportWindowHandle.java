@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 /**
  * This class is used to handle report window.
  */
+//@@author yunjun199321
 public class ReportWindowHandle extends StageHandle {
     public static final String REPORT_WINDOW_TITLE = "Report";
 

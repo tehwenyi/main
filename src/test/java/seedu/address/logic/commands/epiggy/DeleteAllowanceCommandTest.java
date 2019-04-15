@@ -20,6 +20,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.epiggy.Allowance;
 import seedu.address.model.epiggy.Expense;
 
+//@@author kev-inc
+
 public class DeleteAllowanceCommandTest {
     private Model model = new ModelManager(getTypicalEPiggy(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();

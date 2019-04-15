@@ -4,6 +4,8 @@ import java.util.Date;
 
 import seedu.address.model.epiggy.item.Item;
 
+//@@author kev-inc
+
 /**
  * Represents an allowance in the epiggy.
  * Guarantees: details are present and not null, field values are validated, immutable.
